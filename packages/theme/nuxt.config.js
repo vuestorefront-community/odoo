@@ -48,11 +48,11 @@ export default {
       // @core-development-only-end
       useRawSource: {
         dev: [
-          '@vue-storefront/boilerplate',
+          '@vue-storefront/odoo',
           '@vue-storefront/core'
         ],
         prod: [
-          '@vue-storefront/boilerplate',
+          '@vue-storefront/odoo',
           '@vue-storefront/core'
         ]
       }
@@ -61,8 +61,8 @@ export default {
     ['@vue-storefront/nuxt-theme', {
       generate: {
         replace: {
-          apiClient: '@vue-storefront/boilerplate-api',
-          composables: '@vue-storefront/boilerplate'
+          apiClient: '@vue-storefront/odoo-api',
+          composables: '@vue-storefront/odoo'
         }
       }
     }],
@@ -70,7 +70,7 @@ export default {
     /* project-only-start
     ['@vue-storefront/nuxt-theme'],
     project-only-end */
-    ['@vue-storefront/boilerplate/nuxt', {}]
+    ['@vue-storefront/odoo/nuxt', {}]
   ],
   modules: [
     'nuxt-i18n',

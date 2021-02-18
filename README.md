@@ -1,14 +1,9 @@
 ![Vue Storefront](https://camo.githubusercontent.com/48c886ac0703e3a46bc0ec963e20f126337229fc/68747470733a2f2f643968687267346d6e767a6f772e636c6f756466726f6e742e6e65742f7777772e76756573746f726566726f6e742e696f2f32383062313964302d6c6f676f2d76735f3062793032633062793032633030303030302e6a7067)
 
-# Boilerplate for Vue Storefront Next
+# odoo for Vue Storefront Next
 
-<a href="https://slack.vuestorefront.io">![Branch Develop](https://img.shields.io/badge/community%20chat-slack-FF1493.svg)</a>
 
 > **Disclaimer:** This project is still in beta phase.
-
-This repository is a starting point for creating new integrations for [Vue Storefront Next](https://github.com/DivanteLtd/vue-storefront/tree/next).
-
-* [Documentation](https://docs-next.vuestorefront.io/integrate/ecommerce.html#scope) (WIP)
 
 
 This repository is a monorepo containing three projects:
@@ -19,7 +14,7 @@ This repository is a monorepo containing three projects:
 
 ## How to start?
 
-1. Change all `@vue-storefront/boilerplate` strings to your integration name (eg `@vue-storefront/super-ecomm`)
+1. git clone 
 
 2. Install all required dependencies:
 

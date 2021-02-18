@@ -1,6 +1,6 @@
 # theme
 
-> Boilerplate theme
+> odoo theme
 
 ## Build Setup
 

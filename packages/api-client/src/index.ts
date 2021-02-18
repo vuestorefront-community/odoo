@@ -13,7 +13,7 @@ const onSetup = (settings) => ({
 });
 
 const { createApiClient } = apiClientFactory<any, any>({
-  tag: 'boilerplate',
+  tag: 'odoo',
   onSetup,
   api: {
     getProduct,

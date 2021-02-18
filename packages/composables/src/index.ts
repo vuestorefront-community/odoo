@@ -12,7 +12,7 @@ import useUserBilling from './useUserBilling';
 import useUserOrders from './useUserOrders';
 import useUserShipping from './useUserShipping';
 import useWishlist from './useWishlist';
-import { createApiClient } from '@vue-storefront/boilerplate-api';
+import { createApiClient } from '@vue-storefront/odoo-api';
 import { integrationPluginFactory } from '@vue-storefront/core';
 
 const integrationPlugin = integrationPluginFactory(createApiClient);

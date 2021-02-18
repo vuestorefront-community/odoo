@@ -1,5 +1,5 @@
 import { CartGetters, AgnosticPrice, AgnosticTotals, AgnosticCoupon, AgnosticDiscount } from '@vue-storefront/core';
-import { Cart, LineItem } from '@vue-storefront/boilerplate-api/src/types';
+import { Cart, LineItem } from '@vue-storefront/odoo-api/src/types';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getCartItems = (cart: Cart): LineItem[] => [
