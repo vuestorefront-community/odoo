@@ -39,11 +39,53 @@ class Partner(OdooObjectType):
         return root.child_ids
 
 
+class AllCategory(OdooObjectType):
+    id = graphene.ID()
+    name = graphene.String(required=True)
+    slug = name
+    complete_name = graphene.String()
+    parent_path = graphene.String()
+    child_category = graphene.List(graphene.NonNull(lambda: AllCategory), required=True)
+
+    @staticmethod
+    def resolve_slug(root, info):
+        return root.name
+
+    @staticmethod
+    def resolve_child_category(root, info):
+        return root.child_id
+
+
+class Product(OdooObjectType):
+    id = graphene.ID()
+    name = graphene.String()
+    default_code = graphene.String()
+    list_price = graphene.Float()
+    categ_id = graphene.Field(AllCategory)
+
+    @staticmethod
+    def resolve_categ_id(root, info):
+        return root.categ_id or None
+
+
 class Query(graphene.ObjectType):
     all_partners = graphene.List(
         graphene.NonNull(Partner),
         required=True,
         companies_only=graphene.Boolean(),
+        limit=graphene.Int(),
+        offset=graphene.Int(),
+    )
+
+    all_categories = graphene.List(
+        graphene.NonNull(AllCategory),
+        required=True,
+        limit=graphene.Int(),
+    )
+
+    all_products = graphene.List(
+        graphene.NonNull(Product),
+        required=True,
         limit=graphene.Int(),
         offset=graphene.Int(),
     )
@@ -62,6 +104,19 @@ class Query(graphene.ObjectType):
         if companies_only:
             domain.append(("is_company", "=", True))
         return info.context["env"]["res.partner"].search(
+            domain, limit=limit, offset=offset
+        )
+
+    @staticmethod
+    def resolve_all_categories(root, info, limit=None):
+        return info.context["env"]["product.category"].search(
+            [('parent_id', '=', None)], limit=limit
+        )
+
+    @staticmethod
+    def resolve_all_products(root, info, limit=None, offset=None):
+        domain = []
+        return info.context["env"]["product.product"].search(
             domain, limit=limit, offset=offset
         )
 
