@@ -78,6 +78,8 @@ class Query(graphene.ObjectType):
     all_categories = graphene.List(
         graphene.NonNull(Category),
         required=True,
+        id=graphene.ID(),
+        name=graphene.String(),
         parents_only=graphene.Boolean(),
         limit=graphene.Int(),
         offset=graphene.Int(),
@@ -108,13 +110,17 @@ class Query(graphene.ObjectType):
         )
 
     @staticmethod
-    def resolve_all_categories(root, info, parents_only=False, limit=None, offset=None):
+    def resolve_all_categories(root, info, id=None, name=False, parents_only=False, limit=None, offset=None):
         domain = []
+        if id:
+            domain.append(("id", '=', id))
+        if name:
+            domain.append(("name", '=', name))
         if parents_only:
             domain.append(("parent_id", "=", None))
         return info.context["env"]["product.category"].search(
-                   domain, limit=limit, offset=offset
-               )
+            domain, limit=limit, offset=offset
+        )
 
     @staticmethod
     def resolve_all_products(root, info, limit=None, offset=None):
