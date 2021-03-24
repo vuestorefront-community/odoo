@@ -12,7 +12,9 @@
     'website': 'https://www.odoogap.com/',
     'depends': ['graphql_base', 'website_sale'],
     'data': [],
-    'demo': [],
+    'demo': [
+        'data/demo.xml'
+    ],
     'installable': True,
     'auto_install': False
 }

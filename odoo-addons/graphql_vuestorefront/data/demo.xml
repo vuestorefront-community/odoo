@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!-- product.public.category -->
+
+    <record id="public_category_women" model="product.public.category">
+      <field name="name">Women</field>
+      <field name="sequence">27</field>
+    </record>
+    <record id="public_category_men" model="product.public.category">
+      <field name="name">Men</field>
+      <field name="sequence">32</field>
+    </record>
+    <record id="public_category_kids" model="product.public.category">
+      <field name="name">Kids</field>
+      <field name="sequence">34</field>
+    </record>
+
+    <!-- subcategories -->
+
+    <record id="public_category_women_women_jackets" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women')"/>
+      <field name="name">Women jackets</field>
+      <field name="sequence">28</field>
+    </record>
+    <record id="public_category_women_skirts" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women')"/>
+      <field name="name">Skirts</field>
+      <field name="sequence">31</field>
+    </record>
+    <record id="public_category_men_men_t-shirts" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men')"/>
+      <field name="name">Men T-shirts</field>
+      <field name="sequence">33</field>
+    </record>
+    <record id="public_category_kids_toys" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_kids')"/>
+      <field name="name">Toys</field>
+      <field name="sequence">35</field>
+    </record>
+
+    <!-- sub-subcategories -->
+
+    <record id="public_category_women_women_jackets_winter_jackets" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_women_jackets')"/>
+      <field name="name">Winter jackets</field>
+      <field name="sequence">29</field>
+    </record>
+     <record id="public_category_women_women_jackets_autumn_jackets" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_women_jackets')"/>
+      <field name="name">Autumn jackets</field>
+      <field name="sequence">30</field>
+    </record>
+    <record id="public_category_kids_toys_toy_cars" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_kids_toys')"/>
+      <field name="name">Toy cars</field>
+      <field name="sequence">36</field>
+    </record>
+    <record id="public_category_kids_toys_dolls" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_kids_toys')"/>
+      <field name="name">Dolls</field>
+      <field name="sequence">37</field>
+    </record>
+
+    <!-- products -->
+
+    <record id="product_black_jacket" model="product.product">
+        <field name="name">Black jacket</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">12.34</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">10.00</field>
+        <field name="type">consu</field>
+        <field name="weight">0.30</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">Some Description</field>
+        <field name="default_code">123DE_WD</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_men')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/img/product_product_jacket.jpg"/>
+    </record>
+
+    <record id="product_white_shirt" model="product.product">
+        <field name="name">White shirt</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">15.11</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">11.00</field>
+        <field name="type">consu</field>
+        <field name="weight">0.20</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">Some different description</field>
+        <field name="default_code">234SA_VX</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_men')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/img/product_product_jacket.jpg"/>
+    </record>
+
+</odoo>

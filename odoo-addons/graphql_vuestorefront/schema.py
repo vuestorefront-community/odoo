@@ -42,28 +42,79 @@ class Partner(OdooObjectType):
 class Category(OdooObjectType):
     id = graphene.ID()
     name = graphene.String(required=True)
-    slug = name
+    slug = graphene.String()
     items = graphene.List(graphene.NonNull(lambda: Category), required=True)
 
     @staticmethod
     def resolve_slug(root, info):
-        return root.name
+        name = root.name
+        new_name = name.lower()
+        new_name = new_name.replace("-", "")
+        new_name = new_name.replace(" ", "-")
+        return new_name
 
     @staticmethod
     def resolve_items(root, info):
         return root.child_id
 
 
+class Attribute(OdooObjectType):
+    id = graphene.ID()
+    name = graphene.String()
+    display_name = graphene.String()
+
+    @staticmethod
+    def resolve_display_name(root, info):
+        return root.product_attribute_value_id.display_name
+
+
+class Currency(OdooObjectType):
+    id = graphene.ID()
+    name = graphene.String()
+    symbol = graphene.String()
+
+
 class Product(OdooObjectType):
     id = graphene.ID()
     name = graphene.String()
+    sku = graphene.String()
+    description = graphene.String()
+    image = graphene.String()
     default_code = graphene.String()
     list_price = graphene.Float()
-    categ_id = graphene.Field(Category)
+    lst_price = graphene.Float()
+    currency = graphene.Field(Currency)
+    categories_ref = graphene.List(graphene.NonNull(lambda: Category))
+    attributes = graphene.List(graphene.NonNull(lambda: Attribute))
 
     @staticmethod
-    def resolve_categ_id(root, info):
-        return root.categ_id or None
+    def resolve_sku(root, info):
+        name = root.name
+        new_name = name.lower()
+        new_name = new_name.replace("-", "")
+        new_name = new_name.replace(" ", "-")
+        return new_name
+
+    @staticmethod
+    def resolve_description(root, info):
+        return root.description_sale or None
+
+    @staticmethod
+    def resolve_image(root, info):
+        base_url = info.context["env"]['ir.config_parameter'].sudo().get_param('web.base.url')
+        return str(base_url)+"/web/image?model=product.product&id="+str(root.id)+"&field=image_1920" or None
+
+    @staticmethod
+    def resolve_currency(root, info):
+        return root.currency_id or None
+
+    @staticmethod
+    def resolve_categories_ref(root, info):
+        return root.public_categ_ids or None
+
+    @staticmethod
+    def resolve_attributes(root, info):
+        return root.product_template_attribute_value_ids or None
 
 
 class Query(graphene.ObjectType):
@@ -88,6 +139,9 @@ class Query(graphene.ObjectType):
     all_products = graphene.List(
         graphene.NonNull(Product),
         required=True,
+        id=graphene.ID(),
+        name=graphene.String(),
+        website_published=graphene.Boolean(),
         limit=graphene.Int(),
         offset=graphene.Int(),
     )
@@ -104,8 +158,8 @@ class Query(graphene.ObjectType):
     def resolve_all_partners(root, info, companies_only=False, limit=None, offset=None):
         domain = []
         if companies_only:
-            domain.append(("is_company", "=", True))
-        return info.context["env"]["res.partner"].search(
+            domain.append(('is_company', '=', True))
+        return info.context['env']['res.partner'].search(
             domain, limit=limit, offset=offset
         )
 
@@ -113,19 +167,25 @@ class Query(graphene.ObjectType):
     def resolve_all_categories(root, info, id=None, name=False, parents_only=False, limit=None, offset=None):
         domain = []
         if id:
-            domain.append(("id", '=', id))
+            domain.append(('id', '=', id))
         if name:
-            domain.append(("name", '=', name))
+            domain.append(('name', '=', name))
         if parents_only:
-            domain.append(("parent_id", "=", None))
-        return info.context["env"]["product.category"].search(
+            domain.append(('parent_id', '=', None))
+        return info.context['env']['product.public.category'].search(
             domain, limit=limit, offset=offset
         )
 
     @staticmethod
-    def resolve_all_products(root, info, limit=None, offset=None):
+    def resolve_all_products(root, info, id=None, name=False, website_published=False, limit=None, offset=None):
         domain = []
-        return info.context["env"]["product.product"].search(
+        if id:
+            domain.append(('id', '=', id))
+        if name:
+            domain.append(('name', '=', name))
+        if website_published:
+            domain.append(('website_published', '=', True))
+        return info.context['env']['product.product'].search(
             domain, limit=limit, offset=offset
         )
 
