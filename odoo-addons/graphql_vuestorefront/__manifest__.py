@@ -10,7 +10,7 @@
     'license': 'LGPL-3',
     'author': 'Odoo Gap',
     'website': 'https://www.odoogap.com/',
-    'depends': ['graphql_base', 'website_sale'],
+    'depends': ['graphql_base', 'website_sale', 'contacts'],
     'data': [],
     'demo': [
         'data/demo.xml'

@@ -78,11 +78,14 @@ class Product(OdooObjectType):
     id = graphene.ID()
     name = graphene.String()
     sku = graphene.String()
+    display_name = graphene.String()
     description = graphene.String()
     image = graphene.String()
     default_code = graphene.String()
     list_price = graphene.Float()
     lst_price = graphene.Float()
+    rating_count = graphene.Int()
+    rating_avg = graphene.Float()
     currency = graphene.Field(Currency)
     categories_ref = graphene.List(graphene.NonNull(lambda: Category))
     attributes = graphene.List(graphene.NonNull(lambda: Attribute))
@@ -117,6 +120,35 @@ class Product(OdooObjectType):
         return root.product_template_attribute_value_ids or None
 
 
+class Item(OdooObjectType):
+    id = graphene.ID()
+    name = graphene.String()
+    product_tmpl_id = graphene.Field(Product)
+    min_quantity = graphene.Float()
+    applied_on = graphene.String()
+    price_discount = graphene.Float()
+
+
+class CountryGroup(OdooObjectType):
+    id = graphene.ID()
+    name = graphene.String()
+
+
+class Pricelist(OdooObjectType):
+    id = graphene.ID()
+    name = graphene.String(required=True)
+    active = graphene.Boolean()
+    item_ids = graphene.List(graphene.NonNull(lambda: Item))
+    currency_id = graphene.Field(Currency)
+    country_group_ids = graphene.List(graphene.NonNull(lambda: CountryGroup))
+    website = graphene.String()
+    selectable = graphene.Boolean()
+
+    @staticmethod
+    def resolve_website(root, info):
+        return root.website_id.name or None
+
+
 class Query(graphene.ObjectType):
     all_partners = graphene.List(
         graphene.NonNull(Partner),
@@ -142,6 +174,13 @@ class Query(graphene.ObjectType):
         id=graphene.ID(),
         name=graphene.String(),
         website_published=graphene.Boolean(),
+        limit=graphene.Int(),
+        offset=graphene.Int(),
+    )
+
+    all_pricelists = graphene.List(
+        graphene.NonNull(Pricelist),
+        required=True,
         limit=graphene.Int(),
         offset=graphene.Int(),
     )
@@ -186,6 +225,13 @@ class Query(graphene.ObjectType):
         if website_published:
             domain.append(('website_published', '=', True))
         return info.context['env']['product.product'].search(
+            domain, limit=limit, offset=offset
+        )
+
+    @staticmethod
+    def resolve_all_pricelists(root, info, limit=None, offset=None):
+        domain = []
+        return info.context['env']['product.pricelist'].search(
             domain, limit=limit, offset=offset
         )
 
