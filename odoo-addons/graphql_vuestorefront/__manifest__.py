@@ -8,7 +8,7 @@
     'description': """VueStorefront Api integration""",
     'category': 'Productivity',
     'license': 'LGPL-3',
-    'author': 'Odoo Gap',
+    'author': 'OdooGap',
     'website': 'https://www.odoogap.com/',
     'depends': ['graphql_base', 'website_sale', 'contacts'],
     'data': [],

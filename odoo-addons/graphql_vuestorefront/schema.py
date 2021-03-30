@@ -18,6 +18,13 @@ class Country(OdooObjectType):
     name = graphene.String(required=True)
 
 
+class User(OdooObjectType):
+    name = graphene.String(required=True)
+    login = graphene.String()
+    password = graphene.String()
+    new_password = graphene.String()
+
+
 class Partner(OdooObjectType):
     name = graphene.String(required=True)
     street = graphene.String()
@@ -256,16 +263,42 @@ class CreatePartner(graphene.Mutation):
     @staticmethod
     def mutate(self, info, name, email, is_company=False, raise_after_create=False):
         env = info.context["env"]
-        partner = env["res.partner"].create(
-            {"name": name, "email": email, "is_company": is_company}
-        )
+        exist_email = env["res.partner"].search([('email', '=', email)])
+        if exist_email:
+            raise UserError(_("Email already exist, please verify if you already have a account"))
+        else:
+            partner = env["res.partner"].create(
+                {"name": name, "email": email, "is_company": is_company}
+            )
         if raise_after_create:
             raise UserError(_("as requested"))
         return partner
 
 
+class SignupUser(graphene.Mutation):
+    class Arguments:
+        name = graphene.String(required=True)
+        login = graphene.String(required=True)
+        password = graphene.String(required=True)
+        sel_groups_1_9_10 = graphene.Int()
+        raise_after_create = graphene.Boolean()
+
+    Output = User
+
+    @staticmethod
+    def mutate(self, info, name, login, password, raise_after_create=False):
+        env = info.context["env"]
+        user = env["res.users"].create(
+            {"name": name, "login": login, "password": password, "sel_groups_1_9_10": 9}
+        )
+        if raise_after_create:
+            raise UserError(_("as requested"))
+        return user
+
+
 class Mutation(graphene.ObjectType):
     create_partner = CreatePartner.Field(description="Documentation of CreatePartner")
+    signup_user = SignupUser.Field(description="Documentation of SignupUser")
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
