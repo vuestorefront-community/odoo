@@ -1,4 +1,4 @@
 [submodule "odoo-addons/external/rest-framework"]
 	path = odoo-addons/external/rest-framework
 	url = https://github.com/OCA/rest-framework.git
-	branch = 14.0
+	branch = 13.0
