@@ -2,100 +2,653 @@
 <odoo noupdate="1">
 
     <!-- product.public.category -->
-
     <record id="public_category_women" model="product.public.category">
       <field name="name">Women</field>
       <field name="sequence">27</field>
     </record>
     <record id="public_category_men" model="product.public.category">
       <field name="name">Men</field>
-      <field name="sequence">32</field>
-    </record>
-    <record id="public_category_kids" model="product.public.category">
-      <field name="name">Kids</field>
-      <field name="sequence">34</field>
+      <field name="sequence">61</field>
     </record>
 
-    <!-- subcategories -->
-
-    <record id="public_category_women_women_jackets" model="product.public.category">
+    <!-- subcategories Women -->
+    <record id="public_category_women_clothing" model="product.public.category">
       <field name="parent_id" eval="ref('public_category_women')"/>
-      <field name="name">Women jackets</field>
+      <field name="name">Clothing</field>
       <field name="sequence">28</field>
     </record>
-    <record id="public_category_women_skirts" model="product.public.category">
+    <record id="public_category_women_shoes" model="product.public.category">
       <field name="parent_id" eval="ref('public_category_women')"/>
-      <field name="name">Skirts</field>
-      <field name="sequence">31</field>
+      <field name="name">Shoes</field>
+      <field name="sequence">40</field>
     </record>
-    <record id="public_category_men_men_t-shirts" model="product.public.category">
-      <field name="parent_id" eval="ref('public_category_men')"/>
-      <field name="name">Men T-shirts</field>
-      <field name="sequence">33</field>
+    <record id="public_category_women_bags" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women')"/>
+      <field name="name">bags</field>
+      <field name="sequence">51</field>
     </record>
-    <record id="public_category_kids_toys" model="product.public.category">
-      <field name="parent_id" eval="ref('public_category_kids')"/>
-      <field name="name">Toys</field>
-      <field name="sequence">35</field>
+    <record id="public_category_women_looks" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women')"/>
+      <field name="name">Looks</field>
+      <field name="sequence">59</field>
     </record>
 
-    <!-- sub-subcategories -->
-
-    <record id="public_category_women_women_jackets_winter_jackets" model="product.public.category">
-      <field name="parent_id" eval="ref('public_category_women_women_jackets')"/>
-      <field name="name">Winter jackets</field>
+    <!-- sub-subcategories Women-Clothing -->
+    <record id="public_category_women_clothing_all" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_clothing')"/>
+      <field name="name">All</field>
       <field name="sequence">29</field>
     </record>
-     <record id="public_category_women_women_jackets_autumn_jackets" model="product.public.category">
-      <field name="parent_id" eval="ref('public_category_women_women_jackets')"/>
-      <field name="name">Autumn jackets</field>
+    <record id="public_category_women_clothing_jackets" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_clothing')"/>
+      <field name="name">Jackets</field>
       <field name="sequence">30</field>
     </record>
-    <record id="public_category_kids_toys_toy_cars" model="product.public.category">
-      <field name="parent_id" eval="ref('public_category_kids_toys')"/>
-      <field name="name">Toy cars</field>
+    <record id="public_category_women_clothing_blazer" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_clothing')"/>
+      <field name="name">Blazer</field>
+      <field name="sequence">31</field>
+    </record>
+    <record id="public_category_women_clothing_tops" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_clothing')"/>
+      <field name="name">Tops</field>
+      <field name="sequence">32</field>
+    </record>
+    <record id="public_category_women_clothing_shirts" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_clothing')"/>
+      <field name="name">Shirts</field>
+      <field name="sequence">33</field>
+    </record>
+    <record id="public_category_women_clothing_t-shirts" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_clothing')"/>
+      <field name="name">T-shirts</field>
+      <field name="sequence">33</field>
+    </record>
+    <record id="public_category_women_clothing_jeans" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_clothing')"/>
+      <field name="name">Jeans</field>
+      <field name="sequence">35</field>
+    </record>
+    <record id="public_category_women_clothing_trouser" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_clothing')"/>
+      <field name="name">Trouser</field>
       <field name="sequence">36</field>
     </record>
-    <record id="public_category_kids_toys_dolls" model="product.public.category">
-      <field name="parent_id" eval="ref('public_category_kids_toys')"/>
-      <field name="name">Dolls</field>
+    <record id="public_category_women_clothing_skirts" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_clothing')"/>
+      <field name="name">Skirts</field>
       <field name="sequence">37</field>
     </record>
-
-    <!-- products -->
-
-    <record id="product_black_jacket" model="product.product">
-        <field name="name">Black jacket</field>
-        <field name="categ_id" ref="product.product_category_consumable"/>
-        <field name="list_price">12.34</field>
-        <field name="is_published" eval="True"/>
-        <field name="standard_price">10.00</field>
-        <field name="type">consu</field>
-        <field name="weight">0.30</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">Some Description</field>
-        <field name="default_code">123DE_WD</field>
-        <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_men')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/img/product_product_jacket.jpg"/>
+    <record id="public_category_women_clothing_dresses" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_clothing')"/>
+      <field name="name">Dresses</field>
+      <field name="sequence">38</field>
+    </record>
+    <record id="public_category_women_clothing_swimwear" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_clothing')"/>
+      <field name="name">Swimwear</field>
+      <field name="sequence">39</field>
     </record>
 
-    <record id="product_white_shirt" model="product.product">
-        <field name="name">White shirt</field>
+    <!-- sub-subcategories Women-Shoes -->
+    <record id="public_category_women_shoes_all" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_shoes')"/>
+      <field name="name">All</field>
+      <field name="sequence">41</field>
+    </record>
+    <record id="public_category_women_shoes_sneakers" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_shoes')"/>
+      <field name="name">Sneakers</field>
+      <field name="sequence">42</field>
+    </record>
+    <record id="public_category_women_shoes_boots" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_shoes')"/>
+      <field name="name">Boots</field>
+      <field name="sequence">43</field>
+    </record>
+    <record id="public_category_women_shoes_ankle_boots" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_shoes')"/>
+      <field name="name">Ankle boots</field>
+      <field name="sequence">44</field>
+    </record>
+    <record id="public_category_women_shoes_pumps" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_shoes')"/>
+      <field name="name">Pumps</field>
+      <field name="sequence">45</field>
+    </record>
+    <record id="public_category_women_shoes_ballerinas" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_shoes')"/>
+      <field name="name">Ballerinas</field>
+      <field name="sequence">46</field>
+    </record>
+    <record id="public_category_women_shoes_lace-up_shoes" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_shoes')"/>
+      <field name="name">Lace-up shoes</field>
+      <field name="sequence">47</field>
+    </record>
+    <record id="public_category_women_shoes_loafers" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_shoes')"/>
+      <field name="name">Loafers</field>
+      <field name="sequence">48</field>
+    </record>
+    <record id="public_category_women_shoes_sandals" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_shoes')"/>
+      <field name="name">Sandals</field>
+      <field name="sequence">49</field>
+    </record>
+    <record id="public_category_women_shoes_winterboots" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_shoes')"/>
+      <field name="name">Winterboots</field>
+      <field name="sequence">50</field>
+    </record>
+
+    <!-- sub-subcategories Women-Bags -->
+    <record id="public_category_women_bags_all" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_bags')"/>
+      <field name="name">All</field>
+      <field name="sequence">52</field>
+    </record>
+    <record id="public_category_women_bags_clutches" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_bags')"/>
+      <field name="name">Clutches</field>
+      <field name="sequence">53</field>
+    </record>
+    <record id="public_category_women_bags_shoulder_bags" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_bags')"/>
+      <field name="name">Shoulder Bags</field>
+      <field name="sequence">54</field>
+    </record>
+    <record id="public_category_women_bags_shopper" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_bags')"/>
+      <field name="name">Shopper</field>
+      <field name="sequence">55</field>
+    </record>
+    <record id="public_category_women_bags_handbag" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_bags')"/>
+      <field name="name">Handbag</field>
+      <field name="sequence">56</field>
+    </record>
+    <record id="public_category_women_bags_wallets" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_bags')"/>
+      <field name="name">Wallets</field>
+      <field name="sequence">57</field>
+    </record>
+    <record id="public_category_women_bags_bucketbag_packbag" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_bags')"/>
+      <field name="name">Bucketbag/packbag</field>
+      <field name="sequence">58</field>
+    </record>
+
+    <!-- sub-subcategories Women-Looks -->
+    <record id="public_category_women_looks_all" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_women_looks')"/>
+      <field name="name">All</field>
+      <field name="sequence">60</field>
+    </record>
+
+    <!-- subcategories Man -->
+    <record id="public_category_men_clothing" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men')"/>
+      <field name="name">Clothing</field>
+      <field name="sequence">62</field>
+    </record>
+    <record id="public_category_men_shoes" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men')"/>
+      <field name="name">Shoes</field>
+      <field name="sequence">72</field>
+    </record>
+    <record id="public_category_men_bags" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men')"/>
+      <field name="name">Bags</field>
+      <field name="sequence">79</field>
+    </record>
+    <record id="public_category_men_looks" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men')"/>
+      <field name="name">Looks</field>
+      <field name="sequence">87</field>
+    </record>
+
+    <!-- sub-subcategories Men-Clothing -->
+    <record id="public_category_men_clothing_all" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_clothing')"/>
+      <field name="name">All</field>
+      <field name="sequence">63</field>
+    </record>
+    <record id="public_category_men_clothing_jackets" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_clothing')"/>
+      <field name="name">Jackets</field>
+      <field name="sequence">64</field>
+    </record>
+    <record id="public_category_men_clothing_tops" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_clothing')"/>
+      <field name="name">Tops</field>
+      <field name="sequence">65</field>
+    </record>
+    <record id="public_category_men_clothing_shirts" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_clothing')"/>
+      <field name="name">Shirts</field>
+      <field name="sequence">66</field>
+    </record>
+    <record id="public_category_men_clothing_trousers" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_clothing')"/>
+      <field name="name">Trousers</field>
+      <field name="sequence">67</field>
+    </record>
+    <record id="public_category_men_clothing_jeans" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_clothing')"/>
+      <field name="name">Jeans</field>
+      <field name="sequence">68</field>
+    </record>
+    <record id="public_category_men_clothing_blazer" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_clothing')"/>
+      <field name="name">Blazer</field>
+      <field name="sequence">69</field>
+    </record>
+    <record id="public_category_men_clothing_suits" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_clothing')"/>
+      <field name="name">Suits</field>
+      <field name="sequence">70</field>
+    </record>
+    <record id="public_category_men_clothing_t-shirts" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_clothing')"/>
+      <field name="name">T-shirts</field>
+      <field name="sequence">71</field>
+    </record>
+
+    <!-- sub-subcategories Men-Shoes -->
+    <record id="public_category_men_shoes_all" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_shoes')"/>
+      <field name="name">All</field>
+      <field name="sequence">73</field>
+    </record>
+    <record id="public_category_men_shoes_sneakers" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_shoes')"/>
+      <field name="name">Sneakers</field>
+      <field name="sequence">74</field>
+    </record>
+    <record id="public_category_men_shoes_boots" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_shoes')"/>
+      <field name="name">Boots</field>
+      <field name="sequence">75</field>
+    </record>
+    <record id="public_category_men_shoes_lace-up_shoes" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_shoes')"/>
+      <field name="name">Lace-up shoes</field>
+      <field name="sequence">76</field>
+    </record>
+    <record id="public_category_men_shoes_loafers" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_shoes')"/>
+      <field name="name">Loafers</field>
+      <field name="sequence">77</field>
+    </record>
+    <record id="public_category_men_shoes_sandals" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_shoes')"/>
+      <field name="name">Sandals</field>
+      <field name="sequence">78</field>
+    </record>
+
+    <!-- sub-subcategories Men-Bags -->
+    <record id="public_category_men_bags_all" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_bags')"/>
+      <field name="name">All</field>
+      <field name="sequence">80</field>
+    </record>
+    <record id="public_category_men_bags_clutches" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_bags')"/>
+      <field name="name">Clutches</field>
+      <field name="sequence">81</field>
+    </record>
+    <record id="public_category_men_bags_shoulder_bags" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_bags')"/>
+      <field name="name">Shoulder bags</field>
+      <field name="sequence">82</field>
+    </record>
+    <record id="public_category_men_bags_shopper" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_bags')"/>
+      <field name="name">Shopper</field>
+      <field name="sequence">83</field>
+    </record>
+    <record id="public_category_men_bags_handbag" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_bags')"/>
+      <field name="name">Handbag</field>
+      <field name="sequence">84</field>
+    </record>
+    <record id="public_category_men_bags_wallets" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_bags')"/>
+      <field name="name">Wallets</field>
+      <field name="sequence">85</field>
+    </record>
+    <record id="public_category_men_bags_bucketbag_packbag" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_bags')"/>
+      <field name="name">Bucketbag/packbag</field>
+      <field name="sequence">86</field>
+    </record>
+
+    <!-- sub-subcategories Men-Looks -->
+    <record id="public_category_men_looks_all" model="product.public.category">
+      <field name="parent_id" eval="ref('public_category_men_looks')"/>
+      <field name="name">All</field>
+      <field name="sequence">88</field>
+    </record>
+
+    <!-- Products women-clothing-jackets -->
+    <record id="women_clothing_jackets_1" model="product.product">
+        <field name="name">Leather jacket Bully grey</field>
         <field name="categ_id" ref="product.product_category_consumable"/>
-        <field name="list_price">15.11</field>
+        <field name="list_price">372.50</field>
         <field name="is_published" eval="True"/>
-        <field name="standard_price">11.00</field>
+        <field name="standard_price">372.50</field>
         <field name="type">consu</field>
-        <field name="weight">0.20</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">Some different description</field>
-        <field name="default_code">234SA_VX</field>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_men')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/img/product_product_jacket.jpg"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/jackets/jacket-1.jpg"/>
+    </record>
+    <record id="women_clothing_jackets_2" model="product.product">
+        <field name="name">Leather jacket Bully brown</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">372.50</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">372.50</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/jackets/jacket-2.jpg"/>
+    </record>
+
+    <!-- Products women-clothing-blazer -->
+    <record id="women_clothing_blazer_1" model="product.product">
+        <field name="name">Blazer Michael Kors brown</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">281.25</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">281.25</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_blazer')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/blazer/blazer-1.jpg"/>
+    </record>
+    <record id="women_clothing_blazer_2" model="product.product">
+        <field name="name">Blazer Pinko yellow</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">337.50</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">337.50</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_blazer')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/blazer/blazer-2.jpg"/>
+    </record>
+
+    <!-- Products women-clothing-tops -->
+    <record id="women_clothing_tops_1" model="product.product">
+        <field name="name">Pullover Moschino Cheap And Chic black</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">247.50</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">247.50</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_tops')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/tops/tops-1.jpg"/>
+    </record>
+    <record id="women_clothing_tops_2" model="product.product">
+        <field name="name">Pullover Moschino Cheap And Chic black</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">247.50</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">247.50</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_tops')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/tops/tops-2.jpg"/>
+    </record>
+
+    <!-- Products women-clothing-shirts -->
+    <record id="women_clothing_shirts_1" model="product.product">
+        <field name="name">Shirt Aspesi white test</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">200.00</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">200.00</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_shirts')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/shirts/shirts-1.jpg"/>
+    </record>
+    <record id="women_clothing_shirts_2" model="product.product">
+        <field name="name">Shirt Himons multi</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">148.75</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">148.75</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_shirts')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/shirts/shirts-2.jpg"/>
+    </record>
+
+    <!-- Products women-clothing-tshirts -->
+    <record id="women_clothing_t-shirts_1" model="product.product">
+        <field name="name">Shirt ”Paola” MU blue</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">231.25</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">231.25</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_t-shirts')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/t-shirts/t-shirts-1.jpg"/>
+    </record>
+    <record id="women_clothing_t-shirts_2" model="product.product">
+        <field name="name">Shirt Himons light blue</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">123.75</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">123.75</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_t-shirts')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/t-shirts/t-shirts-2.jpg"/>
+    </record>
+
+    <!-- Products women-clothing-jeans -->
+    <record id="women_clothing_jeans_1" model="product.product">
+        <field name="name">Biker jeans Pinko white</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">247.50</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">247.50</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_jeans')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/jeans/jeans-1.jpg"/>
+    </record>
+    <record id="women_clothing_jeans_2" model="product.product">
+        <field name="name">jeans Michael Kors black</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">193.75</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">193.75</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_jeans')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/jeans/jeans-2.jpg"/>
+    </record>
+
+    <!-- Products women-clothing-trouser -->
+    <record id="women_clothing_trouser_1" model="product.product">
+        <field name="name">Jogging Pants Moschino Cheap And Chic black</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">286.25</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">286.25</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_trouser')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/trouser/trouser-1.jpg"/>
+    </record>
+    <record id="women_clothing_trouser_2" model="product.product">
+        <field name="name">Chino Pinko multi</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">287.50</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">287.50</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_trouser')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/trouser/trouser-2.jpg"/>
+    </record>
+
+    <!-- Products women-clothing-skirts -->
+    <record id="women_clothing_skirts_1" model="product.product">
+        <field name="name">Skirt Ki 6? Who are you? blue </field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">185.00</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">185.00</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_skirts')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/skirts/skirts-1.jpg"/>
+    </record>
+    <record id="women_clothing_skirts_2" model="product.product">
+        <field name="name">Skirt Pinko beige</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">185.00</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">185.00</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_skirts')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/skirts/skirts-2.jpg"/>
+    </record>
+
+    <!-- Products women-clothing-dresses -->
+    <record id="women_clothing_dresses_1" model="product.product">
+        <field name="name">Dress Ki 6? Who are you? black</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">206.25</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">206.25</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_dresses')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/dresses/dresses-1.jpg"/>
+    </record>
+    <record id="women_clothing_dresses_2" model="product.product">
+        <field name="name">Dress Moschino Cheap And Chic multi</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">320.00</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">320.00</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_clothing_all'), ref('graphql_vuestorefront.public_category_women_clothing_dresses')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/clothing/dresses/dresses-2.jpg"/>
+    </record>
+
+    <!-- Products women-shoes-sneakers -->
+    <record id="women_shoes_sneakers_1" model="product.product">
+        <field name="name">Sneakers “Jazz“ Saucony grey-green</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">118.75</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">118.75</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_sneakers')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/sneakers/sneakers-1.jpg"/>
+    </record>
+    <record id="women_shoes_sneakers_2" model="product.product">
+        <field name="name">Sneakers Philippe Model grey</field>
+        <field name="categ_id" ref="product.product_category_consumable"/>
+        <field name="list_price">327.50</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">327.50</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_sneakers')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/sneakers/sneakers-2.jpg"/>
     </record>
 
 </odoo>
