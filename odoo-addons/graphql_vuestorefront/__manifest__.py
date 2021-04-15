@@ -13,7 +13,11 @@
     'depends': ['graphql_base', 'website_sale', 'contacts'],
     'data': [],
     'demo': [
-        'data/demo.xml'
+        'data/demo.xml',
+        'data/demo1.xml',
+        'data/demo2.xml',
+        'data/demo3.xml',
+        'data/demo4.xml'
     ],
     'installable': True,
     'auto_install': False
