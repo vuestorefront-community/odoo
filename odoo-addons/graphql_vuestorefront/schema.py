@@ -50,6 +50,8 @@ class Category(OdooObjectType):
     id = graphene.ID()
     name = graphene.String(required=True)
     slug = graphene.String()
+    display_name = graphene.String()
+    product_tmpl_ids = graphene.List(graphene.NonNull(lambda: Product))
     items = graphene.List(graphene.NonNull(lambda: Category), required=True)
 
     @staticmethod
@@ -87,13 +89,18 @@ class Product(OdooObjectType):
     sku = graphene.String()
     display_name = graphene.String()
     description = graphene.String()
+    categ_id = graphene.Field(Category)
     image = graphene.String()
+    website_url = graphene.String()
     default_code = graphene.String()
     list_price = graphene.Float()
     lst_price = graphene.Float()
+    standard_price = graphene.Float()
     rating_count = graphene.Int()
     rating_avg = graphene.Float()
     currency = graphene.Field(Currency)
+    product_variant_id = graphene.Field(graphene.NonNull(lambda: Product))
+    product_variant_ids = graphene.List(graphene.NonNull(lambda: Product))
     categories_ref = graphene.List(graphene.NonNull(lambda: Category))
     attributes = graphene.List(graphene.NonNull(lambda: Attribute))
 
@@ -113,6 +120,11 @@ class Product(OdooObjectType):
     def resolve_image(root, info):
         base_url = info.context["env"]['ir.config_parameter'].sudo().get_param('web.base.url')
         return str(base_url)+"/web/image?model=product.product&id="+str(root.id)+"&field=image_1920" or None
+
+    @staticmethod
+    def resolve_website_url(root, info):
+        base_url = info.context["env"]['ir.config_parameter'].sudo().get_param('web.base.url')
+        return str(base_url) + str(root.website_url) or None
 
     @staticmethod
     def resolve_currency(root, info):
@@ -165,7 +177,7 @@ class Query(graphene.ObjectType):
         offset=graphene.Int(),
     )
 
-    all_categories = graphene.List(
+    all_ecommerce_categories = graphene.List(
         graphene.NonNull(Category),
         required=True,
         id=graphene.ID(),
@@ -210,14 +222,14 @@ class Query(graphene.ObjectType):
         )
 
     @staticmethod
-    def resolve_all_categories(root, info, id=None, name=False, parents_only=False, limit=None, offset=None):
+    def resolve_all_ecommerce_categories(root, info, id=None, name=False, parents_only=False, limit=None, offset=None):
         domain = []
         if id:
             domain.append(('id', '=', id))
         if name:
             domain.append(('name', '=', name))
         if parents_only:
-            domain.append(('parent_id', '=', None))
+            domain.append(('parent_id', '=', False))
         return info.context['env']['product.public.category'].search(
             domain, limit=limit, offset=offset
         )
