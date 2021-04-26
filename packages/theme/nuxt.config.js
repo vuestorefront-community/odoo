@@ -1,7 +1,6 @@
 import webpack from 'webpack';
 
 export default {
-  mode: 'universal',
   server: {
     port: 3000,
     host: '0.0.0.0'
@@ -14,7 +13,8 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon',
+      {
+        rel: 'icon',
         type: 'image/x-icon',
         href: '/favicon.ico'
       },
@@ -78,19 +78,55 @@ export default {
     'vue-scrollto/nuxt'
   ],
   i18n: {
-    locales: ['en'],
+    currency: 'USD',
+    country: 'US',
+    countries: [
+      { name: 'US', label: 'United States' },
+      { name: 'DE', label: 'Germany' }
+    ],
+    currencies: [
+      { name: 'EUR', label: 'Euro' },
+      { name: 'USD', label: 'Dollar' }
+    ],
+    locales: [
+      {
+        code: 'en',
+        label: 'English',
+        file: 'en.js',
+        iso: 'en'
+      },
+      {
+        code: 'de',
+        label: 'German',
+        file: 'de.js',
+        iso: 'de'
+      }
+    ],
     defaultLocale: 'en',
-    strategy: 'no_prefix',
+    lazy: true,
+    seo: true,
+    langDir: 'lang/',
     vueI18n: {
       fallbackLocale: 'en',
-      messages: {
+      numberFormats: {
         en: {
-          welcome: 'Welcome 1'
+          currency: {
+            style: 'currency',
+            currency: 'USD',
+            currencyDisplay: 'symbol'
+          }
         },
         de: {
-          welcome: 'Welcome 2'
+          currency: {
+            style: 'currency',
+            currency: 'EUR',
+            currencyDisplay: 'symbol'
+          }
         }
       }
+    },
+    detectBrowserLanguage: {
+      cookieKey: 'vsf-locale'
     }
   },
   styleResources: {
@@ -100,6 +136,11 @@ export default {
     transpile: [
       'vee-validate/dist/rules'
     ],
+    extend (config, ctx) {
+      if (ctx.isDev) {
+        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map';
+      }
+    },
     plugins: [
       new webpack.DefinePlugin({
         'process.VERSION': JSON.stringify({

@@ -11,7 +11,7 @@ from ..schema import schema
 class GraphQLController(http.Controller, GraphQLControllerMixin):
 
     # The GraphiQL route, providing an IDE for developers
-    @http.route("/graphiql/vuestore", auth="user")
+    @http.route("/graphiql/vuestore", auth="public")
     def graphiql(self, **kwargs):
         return self._handle_graphiql_request(schema)
 

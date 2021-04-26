@@ -16,7 +16,7 @@
     "dev:theme": "cd packages/theme && yarn dev",
     "test": "yarn test:api-client && yarn test:composables && yarn test:theme",
     "test:api-client": "cd packages/api-client && yarn test --passWithNoTests",
-    "test:composables": "cd packages/composables && yarn test --passWithNoTests",
+    "test:composables": "cd packages/composables && yarn test",
     "test:theme": "cd packages/theme && yarn test --passWithNoTests",
     "lint": "eslint . --ext .ts,.vue",
     "start": "cd packages/theme && yarn start"
@@ -37,7 +37,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^7.0.1",
     "husky": "^4.2.3",
-    "jest": "^24.9.0",
+    "jest": "^26.6.3",
     "lerna": "^3.15.0",
     "lint-staged": "^10.0.7",
     "rimraf": "^3.0.2",

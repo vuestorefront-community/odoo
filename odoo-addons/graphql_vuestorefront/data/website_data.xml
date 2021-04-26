@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Enable sign up and reset password on default website -->
+    <function model="website" name="enable_b2c_reset_password"/>
+
+</odoo>

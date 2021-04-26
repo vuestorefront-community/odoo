@@ -10,11 +10,12 @@
     "build": "rimraf lib && rollup -c",
     "dev": "rollup -c -w",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "prepublish": "yarn build"
   },
   "dependencies": {
-    "@vue-storefront/odoo-api": "0.0.1",
-    "@vue-storefront/core": "^2.2.1"
+    "@vue-storefront/core": "^2.2.1",
+    "@vue-storefront/odoo-api": "0.0.1"
   },
   "peerDependencies": {
     "@vue/composition-api": "1.0.0-beta.21"

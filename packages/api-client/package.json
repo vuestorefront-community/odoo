@@ -13,7 +13,17 @@
     "prepublish": "yarn build"
   },
   "dependencies": {
-    "@vue-storefront/core": "^2.2.1"
+    "@vue-storefront/core": "^2.2.1",
+    "apollo-client": "^2.6.10",
+    "axios": "^0.21.1",
+    "graphql": "^15.5.0",
+    "isomorphic-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-graphql": "^1.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "graphql-tools": "^7.0.5"
   },
   "files": [
     "lib/**/*"
