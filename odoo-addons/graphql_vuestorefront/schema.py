@@ -27,7 +27,7 @@ class Country(OdooObjectType):
 class User(OdooObjectType):
     id = graphene.ID()
     name = graphene.String(required=True)
-    login = graphene.String()
+    login = graphene.String(required=True)
 
 
 class Partner(OdooObjectType):
@@ -42,7 +42,7 @@ class Partner(OdooObjectType):
     email = graphene.String()
     phone = graphene.String()
     is_company = graphene.Boolean(required=True)
-    contacts = graphene.List(graphene.NonNull(lambda: Partner), required=True)
+    contacts = graphene.List(graphene.NonNull(lambda: Partner))
 
     @staticmethod
     def resolve_state(root, info):
@@ -92,7 +92,6 @@ class Product(OdooObjectType):
     slug = graphene.String()
     default_code = graphene.String()
     list_price = graphene.Float()
-    lst_price = graphene.Float()
     standard_price = graphene.Float()
     currency = graphene.Field(Currency)
     ecommerce_categories = graphene.List(graphene.NonNull(lambda: EcommerceCategory))
@@ -125,30 +124,6 @@ class Product(OdooObjectType):
         return root.public_categ_ids or None
 
 
-class PricelistItem(OdooObjectType):
-    id = graphene.ID()
-    name = graphene.String()
-    product_tmpl_id = graphene.Field(Product)
-    min_quantity = graphene.Float()
-    applied_on = graphene.String()
-    price_discount = graphene.Float()
-
-
-class CountryGroup(OdooObjectType):
-    id = graphene.ID()
-    name = graphene.String()
-
-
-class Pricelist(OdooObjectType):
-    id = graphene.ID()
-    name = graphene.String(required=True)
-    active = graphene.Boolean()
-    item_ids = graphene.List(graphene.NonNull(lambda: PricelistItem))
-    currency_id = graphene.Field(Currency)
-    country_group_ids = graphene.List(graphene.NonNull(lambda: CountryGroup))
-    selectable = graphene.Boolean()
-
-
 class SaleOrderLine(OdooObjectType):
     id = graphene.ID()
     name = graphene.String(required=True)
@@ -164,15 +139,11 @@ class SaleOrderLine(OdooObjectType):
 class SaleOrder(OdooObjectType):
     id = graphene.ID()
     name = graphene.String(required=True)
-    origin = graphene.String()
-    client_order_ref = graphene.String()
     state = graphene.String()
     date_order = graphene.DateTime()
-    validity_date = graphene.DateTime()
     partner_id = graphene.Field(Partner)
     partner_invoice_id = graphene.Field(Partner)
     partner_shipping_id = graphene.Field(Partner)
-    pricelist_id = graphene.Field(Pricelist)
     currency_id = graphene.Field(Currency)
     order_line = graphene.List(graphene.NonNull(lambda: SaleOrderLine))
     invoice_status = graphene.String()
@@ -217,18 +188,10 @@ class Query(graphene.ObjectType):
         offset=graphene.Int(),
     )
 
-    all_pricelists = graphene.List(
-        graphene.NonNull(Pricelist),
-        required=True,
-        limit=graphene.Int(),
-        offset=graphene.Int(),
-    )
-
     all_sale_orders = graphene.List(
         graphene.NonNull(SaleOrder),
         required=True,
         id=graphene.ID(),
-        name=graphene.String(),
         limit=graphene.Int(),
         offset=graphene.Int(),
     )
@@ -242,7 +205,7 @@ class Query(graphene.ObjectType):
             domain.append(('name', '=', name))
         if parents_only:
             domain.append(('parent_id', '=', False))
-        return info.context['env']['product.public.category'].search(domain, limit=limit, offset=offset)
+        return info.context['env']['product.public.category'].sudo().search(domain, limit=limit, offset=offset)
 
     @staticmethod
     def resolve_all_products_template(root, info, id=None, name=False, website_published=False, limit=None,
@@ -251,7 +214,7 @@ class Query(graphene.ObjectType):
         if id:
             domain.append(('id', '=', id))
         if name:
-            domain.append(('name', '=', name))
+            domain.append(('name', 'ilike', name))
         if website_published:
             domain.append(('website_published', '=', True))
         return info.context['env']['product.template'].sudo().search(domain, limit=limit, offset=offset)
@@ -268,17 +231,11 @@ class Query(graphene.ObjectType):
         return info.context['env']['product.product'].sudo().search(domain, limit=limit, offset=offset)
 
     @staticmethod
-    def resolve_all_pricelists(root, info, limit=None, offset=None):
-        domain = []
-        return info.context['env']['product.pricelist'].sudo().search(domain, limit=limit, offset=offset)
-
-    @staticmethod
-    def resolve_all_sale_orders(root, info, id=None, name=False, limit=None, offset=None):
+    def resolve_all_sale_orders(root, info, id=None, limit=None, offset=None):
+        # TODO: security issue, should only be able to read public sale orders or sale orders that the user owns
         domain = []
         if id:
             domain.append(('id', '=', id))
-        if name:
-            domain.append(('name', '=', name))
         return info.context['env']['sale.order'].sudo().search(domain, limit=limit, offset=offset)
 
 

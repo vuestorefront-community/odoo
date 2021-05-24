@@ -11,7 +11,7 @@ from ..schema import schema
 class GraphQLController(http.Controller, GraphQLControllerMixin):
 
     # The GraphiQL route, providing an IDE for developers
-    @http.route("/graphiql/vuestore", auth="public")
+    @http.route("/graphiql/vsf", auth="user")
     def graphiql(self, **kwargs):
         return self._handle_graphiql_request(schema)
 
@@ -19,11 +19,11 @@ class GraphQLController(http.Controller, GraphQLControllerMixin):
     # requests. If you only need to accept GET requests or POST
     # with application/x-www-form-urlencoded content,
     # this is not necessary.
-    GraphQLControllerMixin.patch_for_json("^/graphql/vuestore/?$")
+    GraphQLControllerMixin.patch_for_json("^/graphql/vsf/?$")
 
     # The graphql route, for applications.
     # Note csrf=False: you may want to apply extra security
     # (such as origin restrictions) to this route.
-    @http.route("/graphql/vuestore", auth="public", csrf=False)
+    @http.route("/graphql/vsf", auth="public", csrf=False)
     def graphql(self, **kwargs):
         return self._handle_graphql_request(schema)

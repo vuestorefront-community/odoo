@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+<pre>
+axios.post('https://vsfdemo.labs.odoogap.com/graphql/vuestore', {
+    query: `query {
+        allCategories {
+            name
+        }
+    }`,
+})
+.then((result) => {
+    console.log(result.data)
+});
+</pre>
+
+<br/>
+<br/>
+<br/>
+
+<pre>
+axios.post('https://vsfdemo.labs.odoogap.com/web/session/authenticate', {
+    "jsonrpc": "2.0",
+    "method": "call",
+    "params": {
+        "db": "v14_vsfdemo",
+        "login": "admin",
+        "password": "-qaZXsw2",
+}})
+</pre>
+
+</body>
+</html>
