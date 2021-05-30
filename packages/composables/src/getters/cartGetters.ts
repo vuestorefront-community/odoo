@@ -2,46 +2,45 @@
 import { CartGetters, AgnosticPrice, AgnosticTotals, AgnosticCoupon, AgnosticDiscount } from '@vue-storefront/core';
 import { Product, SaleOrderLine, SaleOrder as Cart, LineItem } from '@vue-storefront/odoo-api/src/types';
 
-export const getCartItems = (cart: Cart): Product[] => {
+export const getCartItems = (cart: Cart): SaleOrderLine[] => {
   if (!cart || !cart.orderLine) {
     return [];
   }
 
-  return cart.orderLine.map(line => line.product);
-
+  return cart.orderLine
 };
 
-export const getCartItemName = (product: any): string => product?.name || 'Product\'s name';
+export const getCartItemName = (saleOrderLine: SaleOrderLine): string => saleOrderLine?.product.name || 'Product\'s name';
 
-export const getCartItemImage = (product: any): string => product?.image || 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_large.jpg';
+export const getCartItemImage = (saleOrderLine: SaleOrderLine): string => saleOrderLine?.product.image
 
-export const getCartItemPrice = (product: any): AgnosticPrice => {
+export const getCartItemPrice = (saleOrderLine: SaleOrderLine): AgnosticPrice => {
   return {
-    regular: product?.listPrice || 12,
-    special: product?.listPrice || 10
+    regular: saleOrderLine?.product?.listPrice || 12,
+    special: saleOrderLine?.product?.listPrice || 10
   };
 };
 
-export const getCartItemQty = (product: LineItem): number => 1;
+export const getCartItemQty = (saleOrderLine: SaleOrderLine): number => saleOrderLine.productUomQty;
 
 export const getCartItemAttributes = (product: Product, filterByAttributeName?: Array<string>) => {
   const attributesList = {};
   return attributesList;
 };
 
-export const getCartItemSku = (product: any): string => product?.sku || 'some-sku';
+export const getCartItemSku = (product: any): string => product?.id || 'some-sku';
 
 export const getCartTotals = (cart: Cart): AgnosticTotals => {
 
   return {
-    total: cart.amountTotal,
-    subtotal: cart.amountTotal
+    total: cart?.amountTotal || 0,
+    subtotal: cart?.amountTotal || 0
   };
 };
 
 export const getCartShippingPrice = (cart: Cart): number => 0;
 
-export const getCartTotalItems = (cart: Cart): number => 1;
+export const getCartTotalItems = (cart: Cart): number => cart?.orderLine?.length;
 
 export const getFormattedPrice = (price: number) => String(price);
 

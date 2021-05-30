@@ -136,10 +136,7 @@ export default {
     transpile: [
       'vee-validate/dist/rules'
     ],
-    extend (config, ctx) {
-      if (ctx.isDev) {
-        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map';
-      }
+    extend(config, ctx) {
     },
     plugins: [
       new webpack.DefinePlugin({
@@ -152,7 +149,7 @@ export default {
     ]
   },
   router: {
-    scrollBehavior (_to, _from, savedPosition) {
+    scrollBehavior(_to, _from, savedPosition) {
       if (savedPosition) {
         return savedPosition;
       } else {

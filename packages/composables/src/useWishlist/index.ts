@@ -4,40 +4,50 @@ import {
   useWishlistFactory,
   UseWishlistFactoryParams
 } from '@vue-storefront/core';
+import { Wishlist } from '@vue-storefront/odoo-api/src/types';
 import { ref, Ref } from '@vue/composition-api';
-import { Wishlist, WishlistProduct, Product } from '../types';
+import { WishlistProduct, Product } from '../types';
 
 export const wishlist: Ref<Wishlist> = ref(null);
 
 const params: UseWishlistFactoryParams<Wishlist, WishlistProduct, Product> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context) => {
-    console.log('Mocked: loadWishlist');
-    return {};
+
+    const response = await context.$odoo.api.wishlistLoad()
+
+    return response;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   addItem: async (context: Context, { currentWishlist, product }) => {
-    console.log('Mocked: addToWishlist');
-    return {};
+
+    await context.$odoo.api.wishlistAddItem(product)
+
+    const response = await context.$odoo.api.wishlistLoad()
+
+    return response;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   removeItem: async (context: Context, { currentWishlist, product }) => {
-    console.log('Mocked: removeFromWishlist');
-    return {};
+
+    await context.$odoo.api.wishlistRemoveItem(product)
+
+    const response = await context.$odoo.api.wishlistLoad()
+
+    return response;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   clear: async (context: Context, { currentWishlist }) => {
     console.log('Mocked: clearWishlist');
-    return {};
+    return { items: null };
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  isOnWishlist: (context: Context, { currentWishlist }) => {
-    console.log('Mocked: isOnWishlist');
-    return false;
+  isOnWishlist: (context: Context, { currentWishlist, product }) => {
+    return currentWishlist?.items?.some(item => item.id == product.id) || false;
   }
 };
 

@@ -9,7 +9,7 @@ import fetch from 'isomorphic-fetch';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const createOddoLink = (settings: Config): any => {
 
-  const link = onError(({ graphQLErrors, networkError }) => {
+  const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
       graphQLErrors.map(({ message, locations, path }) =>
         console.warn(
@@ -22,11 +22,12 @@ const createOddoLink = (settings: Config): any => {
 
   const httpLink = createHttpLink({
     uri: settings.graphqlBaseUrl,
+    credentials: 'include',
     fetch
   });
 
   const apolloLink = ApolloLink.from([
-    link.concat(httpLink)
+    httpLink
   ]);
 
   return {

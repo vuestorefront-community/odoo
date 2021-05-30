@@ -1,9 +1,13 @@
-export type Wishlist = Record<string, unknown>
-
-export type User = {
+export declare type Wishlist = {
+  items: [Product]
+};
+export type AgnosticUser = {
   email: string
   name: string
-  password: string
+  password: string,
+  is_admin: boolean
+  uid: number
+  username: string
 }
 
 export type Attribute = {

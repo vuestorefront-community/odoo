@@ -3,14 +3,12 @@
 import { CustomQuery } from '@vue-storefront/core';
 import gql from 'graphql-tag';
 
-export default async function logOutUser (context, customQuery?: CustomQuery) {
+export default async function logOutUser(context, customQuery?: CustomQuery) {
 
-  const response = await context.client.axios.post('web/session/logout', {
+  const response = await context.client.axios.post('web/session/destroy', {
+    withCredentials: true,
     jsonrpc: '2.0',
-    method: 'call',
-    params: {
-      db: 'v13_vsfdemo'
-    }
+    method: 'call'
   });
 
   return response;

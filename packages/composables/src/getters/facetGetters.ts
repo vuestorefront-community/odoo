@@ -39,13 +39,15 @@ const getProducts = (searchData): any => {
   return products as any;
 };
 
-const getPagination = (searchData): AgnosticPagination => ({
-  currentPage: 1,
-  totalPages: 1,
-  totalItems: 0,
-  itemsPerPage: 10,
-  pageOptions: []
-});
+const getPagination = (searchData): AgnosticPagination => {
+  return {
+    currentPage: 1,
+    totalPages: 1,
+    totalItems: searchData.data?.products.length,
+    itemsPerPage: 10,
+    pageOptions: []
+  }
+};
 
 const getBreadcrumbs = (searchData): AgnosticBreadcrumb[] => [];
 

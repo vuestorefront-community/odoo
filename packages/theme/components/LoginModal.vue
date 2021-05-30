@@ -1,9 +1,5 @@
 <template>
-  <SfModal
-    :visible="isLoginModalOpen"
-    class="modal"
-    @close="toggleLoginModal"
-  >
+  <SfModal :visible="isLoginModalOpen" class="modal" @close="toggleLoginModal">
     <template #modal-bar>
       <SfBar
         class="sf-modal__bar smartphone-only"
@@ -14,8 +10,22 @@
     </template>
     <transition name="sf-fade" mode="out-in">
       <div v-if="isLogin">
+        <p class="reset-pass-text" v-show="isForgottenPassword">
+          {{
+            $t(
+              'Enter your email to receive instructions on how to reset your password'
+            )
+          }}
+        </p>
         <ValidationObserver v-slot="{ handleSubmit }" key="log-in">
-          <form class="form" @submit.prevent="handleSubmit(handleLogin)">
+          <form
+            class="form"
+            @submit.prevent="
+              handleSubmit(
+                isForgottenPassword ? handlePasswordRecovery : handleLogin
+              )
+            "
+          >
             <ValidationProvider rules="required|email" v-slot="{ errors }">
               <SfInput
                 data-cy="login-input_email"
@@ -27,51 +37,74 @@
                 class="form__element"
               />
             </ValidationProvider>
-            <ValidationProvider rules="required" v-slot="{ errors }">
-              <SfInput
-                data-cy="login-input_password"
-                v-model="form.password"
-                :valid="!errors[0]"
-                :errorMessage="errors[0]"
-                name="password"
-                label="Password"
-                type="password"
-                class="form__element"
+            <template v-if="!isForgottenPassword">
+              <ValidationProvider rules="required" v-slot="{ errors }">
+                <SfInput
+                  data-cy="login-input_password"
+                  v-model="form.password"
+                  :valid="!errors[0]"
+                  :errorMessage="errors[0]"
+                  name="password"
+                  label="Password"
+                  type="password"
+                  class="form__element"
+                />
+              </ValidationProvider>
+              <SfCheckbox
+                data-cy="login-checkbox-remember-me"
+                v-model="rememberMe"
+                name="remember-me"
+                label="Remember me"
+                class="form__element checkbox"
               />
-            </ValidationProvider>
-            <SfCheckbox
-              data-cy="login-checkbox-remember-me"
-              v-model="rememberMe"
-              name="remember-me"
-              label="Remember me"
-              class="form__element checkbox"
+            </template>
+            <li-user-error
+              :errors="mapGraphQLErrorToArray(errorPassword)"
+              v-if="isForgottenPassword"
             />
-            <SfButton data-cy="login-btn_submit"
+            <li-user-error v-else :errors="error.login" key="log-in" />
+
+            <SfButton
+              data-cy="login-btn_submit"
               type="submit"
               class="sf-button--full-width form__button"
               :disabled="loading"
             >
               <SfLoader :class="{ loader: loading }" :loading="loading">
-                <div>{{ $t('Login') }}</div>
+                <div>
+                  {{ isForgottenPassword ? $t('Reset password') : $t('Login') }}
+                </div>
               </SfLoader>
             </SfButton>
           </form>
         </ValidationObserver>
         <div class="action">
-          <SfButton data-cy="login-btn_forgot-password" class="sf-button--text">
-            {{ $t('Forgotten password?') }}
+          <SfButton
+            data-cy="login-btn_forgot-password"
+            class="sf-button--text"
+            @click="isForgottenPassword = !isForgottenPassword"
+          >
+            {{ isForgottenPassword ? $t('Login?') : $t('Forgotten password?') }}
           </SfButton>
         </div>
         <div class="bottom">
           <p class="bottom__paragraph">{{ $t('No account') }}</p>
-          <SfButton data-cy="login-btn_sign-up" class="sf-button--text" @click="isLogin = false">
+          <SfButton
+            data-cy="login-btn_sign-up"
+            class="sf-button--text"
+            @click="isLogin = false"
+          >
             {{ $t('Register today') }}
           </SfButton>
         </div>
       </div>
       <div v-else class="form">
         <ValidationObserver v-slot="{ handleSubmit }" key="sign-up">
-          <form class="form" @submit.prevent="handleSubmit(handleRegister)" autocomplete="off">
+          <form
+            class="form"
+            @submit.prevent="handleSubmit(handleRegister)"
+            autocomplete="off"
+          >
             <ValidationProvider rules="required|email" v-slot="{ errors }">
               <SfInput
                 data-cy="login-input_email"
@@ -106,7 +139,10 @@
                 class="form__element"
               />
             </ValidationProvider>
-            <ValidationProvider :rules="{ required: { allowFalse: false } }" v-slot="{ errors }">
+            <ValidationProvider
+              :rules="{ required: { allowFalse: false } }"
+              v-slot="{ errors }"
+            >
               <SfCheckbox
                 v-model="createAccount"
                 :valid="!errors[0]"
@@ -116,11 +152,12 @@
                 class="form__element"
               />
             </ValidationProvider>
-            <div class="sf-input__error-message">
-              <ul>
-                <li v-for="(error, index) in errors" :key="index">{{error}}</li>
-              </ul>
-            </div>
+
+            <li-user-error
+              :errors="mapGraphQLErrorToArray(error.register)"
+              key="sign-up"
+            />
+
             <SfButton
               data-cy="login-btn_submit"
               type="submit"
@@ -135,7 +172,11 @@
         </ValidationObserver>
         <div class="action">
           {{ $t('or') }}
-          <SfButton data-cy="login-btn_login-into-account" class="sf-button--text" @click="isLogin = true">
+          <SfButton
+            data-cy="login-btn_login-into-account"
+            class="sf-button--text"
+            @click="isLogin = true"
+          >
             {{ $t('login in to your account') }}
           </SfButton>
         </div>
@@ -144,21 +185,31 @@
   </SfModal>
 </template>
 <script>
-import { ref, watch, computed } from '@vue/composition-api';
-import { SfModal, SfInput, SfButton, SfCheckbox, SfLoader, SfAlert, SfBar } from '@storefront-ui/vue';
+import { ref, watch, watchEffect } from '@vue/composition-api';
+
+import {
+  SfModal,
+  SfInput,
+  SfButton,
+  SfCheckbox,
+  SfLoader,
+  SfAlert,
+  SfBar,
+} from '@storefront-ui/vue';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { required, email } from 'vee-validate/dist/rules';
-import { useUser } from '@vue-storefront/odoo';
+import { useUser, usePassword } from '@vue-storefront/odoo';
+import LiUserError from '~/components/LiUserError';
 import { useUiState } from '~/composables';
 
 extend('email', {
   ...email,
-  message: 'Invalid email'
+  message: 'Invalid email',
 });
 
 extend('required', {
   ...required,
-  message: 'This field is required'
+  message: 'This field is required',
 });
 
 export default {
@@ -172,54 +223,73 @@ export default {
     SfAlert,
     ValidationProvider,
     ValidationObserver,
-    SfBar
+    SfBar,
+    LiUserError,
   },
   setup() {
     const { isLoginModalOpen, toggleLoginModal } = useUiState();
-    const form = ref({ });
+    const form = ref({});
 
     const isLogin = ref(false);
+    const error = ref({});
+    const isForgottenPassword = ref(false);
     const createAccount = ref(false);
     const rememberMe = ref(false);
-    const { register, login, loading, error } = useUser();
+    const { register, login, loading, error: errorUser, user } = useUser();
+    const {
+      sendResetPassword,
+      errors: errorPassword,
+      resetPasswordErrors,
+    } = usePassword();
 
     watch(isLoginModalOpen, () => {
       if (isLoginModalOpen) {
         form.value = {};
+        error.value = {};
+        resetPasswordErrors();
       }
     });
 
+    const mapGraphQLErrorToArray = (errors) =>
+      errors?.graphQLErrors.map((item) => item.message);
+
     const handleForm = (fn) => async () => {
       await fn({ user: form.value });
-      if (!error.value.register) {
+      error.value = errorUser.value;
+      if (user.value !== null) {
         toggleLoginModal();
       }
     };
 
     const handleRegister = async () => handleForm(register)();
-
     const handleLogin = async () => handleForm(login)();
-
-    const errors = computed(() => error?.value?.register?.graphQLErrors.map(({ message }) => message));
+    const handlePasswordRecovery = async () => handleForm(sendResetPassword)();
 
     return {
       form,
       loading,
+      errorPassword,
       isLogin,
       error,
-      errors,
+      handlePasswordRecovery,
       createAccount,
+      isForgottenPassword,
       rememberMe,
       isLoginModalOpen,
       toggleLoginModal,
       handleLogin,
-      handleRegister
+      handleRegister,
+      mapGraphQLErrorToArray,
     };
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+.reset-pass-text {
+  margin-bottom: var(--spacer-xl);
+}
+
 .form {
   margin-top: var(--spacer-sm);
   &__element {
@@ -231,7 +301,8 @@ export default {
   align-items: center;
   justify-content: center;
   margin: var(--spacer-xl) 0 var(--spacer-xl) 0;
-  font: var(--font-weight--light) var(--font-size--base) / 1.6 var(--font-family--secondary);
+  font: var(--font-weight--light) var(--font-size--base) / 1.6
+    var(--font-family--secondary);
   & > * {
     margin: 0 0 0 var(--spacer-xs);
   }

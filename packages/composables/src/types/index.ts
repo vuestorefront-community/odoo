@@ -6,7 +6,14 @@ export type User = {
   firstName?: string;
   lastName?: string;
   email?: string;
+  password?: string;
 };
+
+export interface UsePassword<USER> {
+  sendResetPassword: (params: {
+    email: string;
+  }) => Promise<void>;
+}
 
 export type UserAddress = Record<string, unknown>;
 

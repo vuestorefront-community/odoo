@@ -18,6 +18,7 @@ const onSetup = (settings: Config): { config: Config; client: ClientInstance } =
   });
 
   const axiosClient = axios.create({
+    withCredentials: true,
     baseURL: settings.odooBaseUrl
   });
 

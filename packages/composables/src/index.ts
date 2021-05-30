@@ -8,6 +8,7 @@ import useFacet from './useFacet';
 import useProduct from './useProduct';
 import useReview from './useReview';
 import useUser from './useUser';
+import usePassword from './usePassword';
 import useUserBilling from './useUserBilling';
 import useUserOrders from './useUserOrders';
 import useUserShipping from './useUserShipping';
@@ -29,6 +30,7 @@ export {
   useUser,
   useUserBilling,
   useUserOrders,
+  usePassword,
   useUserShipping,
   useWishlist
 };

@@ -188,12 +188,9 @@ class Query(graphene.ObjectType):
         offset=graphene.Int(),
     )
 
-    all_sale_orders = graphene.List(
+    partner_shopping_cart = graphene.List(
         graphene.NonNull(SaleOrder),
         required=True,
-        id=graphene.ID(),
-        limit=graphene.Int(),
-        offset=graphene.Int(),
     )
 
     @staticmethod
@@ -231,12 +228,13 @@ class Query(graphene.ObjectType):
         return info.context['env']['product.product'].sudo().search(domain, limit=limit, offset=offset)
 
     @staticmethod
-    def resolve_all_sale_orders(root, info, id=None, limit=None, offset=None):
-        # TODO: security issue, should only be able to read public sale orders or sale orders that the user owns
-        domain = []
-        if id:
-            domain.append(('id', '=', id))
-        return info.context['env']['sale.order'].sudo().search(domain, limit=limit, offset=offset)
+    def resolve_partner_shopping_cart(root, info):
+        env = info.context['env']
+
+        request.website = env.ref('website.default_website')
+        order = request.website.sale_get_order()
+
+        return order or env['sale.order']
 
 
 class SignUpUser(graphene.Mutation):

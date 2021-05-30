@@ -1,10 +1,12 @@
 import gql from 'graphql-tag';
 
 export default gql`
-    query {
-    allEcommerceCategories {
-      id, name, slug
+    query ($term: String){
+      allEcommerceCategories(name: $term) {
+        id
+        name
+        slug
+      }
     }
-  }
 `;
 

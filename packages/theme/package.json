@@ -8,14 +8,16 @@
     "build:analyze": "nuxt build -a -m",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "test": "jest"
+    "test": "jest",
+    "cypress:open": "cypress open",
+    "test:e2e": "cypress open --config-file tests/e2e/cypress.json"
   },
   "dependencies": {
+    "@nuxtjs/style-resources": "^1.0.0",
     "@storefront-ui/vue": "^0.9.1",
-    "@vue-storefront/odoo": "0.0.1",
     "@vue-storefront/nuxt": "^2.2.1",
     "@vue-storefront/nuxt-theme": "^2.2.1",
-    "@nuxtjs/style-resources": "^1.0.0",
+    "@vue-storefront/odoo": "0.0.1",
     "cookie-universal-nuxt": "^2.1.3",
     "core-js": "^2.6.5",
     "nuxt": "^2.13.3",
@@ -28,6 +30,7 @@
     "@nuxt/typescript-build": "^2.0.0",
     "@vue/test-utils": "^1.0.0-beta.27",
     "babel-jest": "^24.1.0",
+    "cypress": "^7.4.0",
     "jest": "^24.1.0",
     "vue-jest": "^4.0.0-0"
   }

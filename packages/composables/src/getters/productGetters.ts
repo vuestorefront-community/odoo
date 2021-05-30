@@ -27,7 +27,7 @@ export const getProductPrice = (product: Product): AgnosticPrice => {
   };
 };
 
-export const getProductGallery = (product: Product): AgnosticMediaGalleryItem[] =>{
+export const getProductGallery = (product: Product): AgnosticMediaGalleryItem[] => {
   if (!product) {
     return [];
   }
@@ -44,6 +44,8 @@ export const getProductGallery = (product: Product): AgnosticMediaGalleryItem[] 
 };
 
 export const getProductCoverImage = (product: Product): string => product.image;
+
+export const getProductSku = (product: Product): string => product.sku;
 
 export const getProductFiltered = (products: Product[], filters: ProductFilters | any = {}): Product[] => {
   if (!products) {
@@ -86,7 +88,8 @@ const productGetters: ProductGetters<Product, ProductFilters> = {
   getTotalReviews: getProductTotalReviews,
   getAverageRating: getProductAverageRating,
   getProperties: getProductProperties,
-  getCode: getProductCode
+  getCode: getProductCode,
+  getSku: getProductSku
 };
 
 export default productGetters;
