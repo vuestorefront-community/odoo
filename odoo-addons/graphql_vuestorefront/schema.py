@@ -136,6 +136,20 @@ class SaleOrderLine(OdooObjectType):
         return root.product_id or None
 
 
+class Wishlist(OdooObjectType):
+    id = graphene.ID()
+    active = graphene.Boolean()
+    partner_id = graphene.List(graphene.NonNull(lambda: Partner))
+    product_id = graphene.List(graphene.NonNull(lambda: Product))
+    currency_id = graphene.List(graphene.NonNull(lambda: Currency))
+    website = graphene.String()
+    price = graphene.Float()
+
+    @staticmethod
+    def resolve_website(root, info):
+        return root.website_id.name or None
+
+
 class SaleOrder(OdooObjectType):
     id = graphene.ID()
     name = graphene.String(required=True)
@@ -193,6 +207,11 @@ class Query(graphene.ObjectType):
         required=True,
     )
 
+    wishlist = graphene.List(
+        graphene.NonNull(Wishlist),
+        required=True
+    )
+
     @staticmethod
     def resolve_all_ecommerce_categories(root, info, id=None, name=False, parents_only=False, limit=None, offset=None):
         domain = []
@@ -235,6 +254,13 @@ class Query(graphene.ObjectType):
         order = request.website.sale_get_order()
 
         return order or env['sale.order']
+
+    @staticmethod
+    def resolve_wishlist(root, info):
+        env = info.context['env']
+        request.website = env.ref('website.default_website')
+
+        return request.env['product.wishlist'].with_context(display_default_code=False).current()
 
 
 class SignUpUser(graphene.Mutation):

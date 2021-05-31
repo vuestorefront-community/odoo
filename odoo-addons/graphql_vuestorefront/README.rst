@@ -41,3 +41,26 @@ axios.post('<domain>/shop/cart/update_json', {
 }}, {
     "withCredentials": true
 })
+
+Add to wishlist
+===========
+
+axios.post('<domain>/shop/wishlist/add', {
+    "jsonrpc": "2.0",
+    "method": "call",
+    "params": {
+        "product_id": <product_id>,
+}}, {
+    "withCredentials": true
+})
+
+Remove from wishlist
+===========
+
+axios.post('<domain>/shop/wishlist/remove/<product_wishlist_id)>', {
+    "jsonrpc": "2.0",
+    "method": "call"
+}, {
+    "withCredentials": true
+})
+
