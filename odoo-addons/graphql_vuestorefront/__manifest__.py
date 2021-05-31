@@ -9,7 +9,12 @@
     'license': 'LGPL-3',
     'author': 'OdooGap',
     'website': 'https://www.odoogap.com/',
-    'depends': ['graphql_base', 'website', 'website_sale', 'auth_signup', 'contacts'],
+    'depends': [
+        'graphql_base',
+        'website_sale_wishlist',
+        'auth_signup',
+        'contacts',
+    ],
     'data': [
         'data/website_data.xml',
     ],
