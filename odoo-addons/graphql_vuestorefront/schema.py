@@ -139,11 +139,23 @@ class SaleOrderLine(OdooObjectType):
 class Wishlist(OdooObjectType):
     id = graphene.ID()
     active = graphene.Boolean()
-    partner_id = graphene.List(graphene.NonNull(lambda: Partner))
-    product_id = graphene.List(graphene.NonNull(lambda: Product))
-    currency_id = graphene.List(graphene.NonNull(lambda: Currency))
+    partner = graphene.List(graphene.NonNull(lambda: Partner))
+    product = graphene.List(graphene.NonNull(lambda: Product))
+    currency = graphene.List(graphene.NonNull(lambda: Currency))
     website = graphene.String()
     price = graphene.Float()
+
+    @staticmethod
+    def resolve_partner(root, info):
+        return root.partner_id or None
+
+    @staticmethod
+    def resolve_product(root, info):
+        return root.product_id or None
+
+    @staticmethod
+    def resolve_currency(root, info):
+        return root.currency_id or None
 
     @staticmethod
     def resolve_website(root, info):
