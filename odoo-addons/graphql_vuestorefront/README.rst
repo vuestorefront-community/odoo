@@ -64,3 +64,15 @@ axios.post('<domain>/shop/wishlist/remove/<product_wishlist_id)>', {
     "withCredentials": true
 })
 
+Get the rate for a shipping method
+===========
+
+axios.post('<domain>/shop/carrier_rate_shipment)>', {
+    "jsonrpc": "2.0",
+    "method": "call"
+    "params": {
+        "carrier_id": <ShippingMethod.ID>,
+}}, {
+    "withCredentials": true
+})
+

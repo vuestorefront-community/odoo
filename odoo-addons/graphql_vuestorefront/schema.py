@@ -42,6 +42,7 @@ class Partner(OdooObjectType):
     email = graphene.String()
     phone = graphene.String()
     is_company = graphene.Boolean(required=True)
+    type = graphene.String()
     contacts = graphene.List(graphene.NonNull(lambda: Partner))
 
     @staticmethod
@@ -183,6 +184,12 @@ class SaleOrder(OdooObjectType):
         return root.order_line or None
 
 
+class ShippingMethod(OdooObjectType):
+    id = graphene.ID()
+    name = graphene.String()
+    active = graphene.Boolean()
+
+
 class Query(graphene.ObjectType):
     all_ecommerce_categories = graphene.List(
         graphene.NonNull(EcommerceCategory),
@@ -221,6 +228,22 @@ class Query(graphene.ObjectType):
 
     wishlist = graphene.List(
         graphene.NonNull(Wishlist),
+        required=True
+    )
+
+    all_countries = graphene.List(
+        graphene.NonNull(Country),
+        required=True
+    )
+
+    country_states = graphene.List(
+        graphene.NonNull(State),
+        required=True,
+        country_id=graphene.ID(required=True)
+    )
+
+    all_delivery_methods = graphene.List(
+        graphene.NonNull(ShippingMethod),
         required=True
     )
 
@@ -273,6 +296,24 @@ class Query(graphene.ObjectType):
         request.website = env.ref('website.default_website')
 
         return request.env['product.wishlist'].with_context(display_default_code=False).current()
+
+    @staticmethod
+    def resolve_all_countries(root, info):
+        return info.context['env']['res.country'].sudo().search([])
+
+    @staticmethod
+    def resolve_country_states(root, info, country_id):
+        domain = [('id', '=', country_id)]
+        return info.context['env']['res.country'].sudo().search(domain).state_ids
+
+    @staticmethod
+    def resolve_all_delivery_methods(root, info):
+        env = info.context['env']
+
+        request.website = env.ref('website.default_website')
+        order = request.website.sale_get_order()
+
+        return order._get_delivery_methods()
 
 
 class SignUpUser(graphene.Mutation):
@@ -335,10 +376,90 @@ class ResetPassword(graphene.Mutation):
         return True
 
 
+class AddShippingAddress(graphene.Mutation):
+    class Arguments:
+        delivery_method_id = graphene.ID(required=True)
+        first_name = graphene.String(required=True)
+        last_name = graphene.String(required=True)
+        street = graphene.String(required=True)
+        house_number = graphene.String(required=True)
+        city = graphene.String(required=True)
+        state = graphene.ID()
+        country = graphene.ID(required=True)
+        zip_code = graphene.String(required=True)
+        phone = graphene.String(required=True)
+
+    ok = graphene.Boolean()
+
+    @staticmethod
+    def mutate(self, info, first_name, last_name, street, city, state, country, zip_code, phone,
+               house_number, delivery_method_id, ):
+        env = info.context['env']
+
+        request.website = env.ref('website.default_website')
+        order = request.website.sale_get_order()
+
+        values = {
+            'name': '%s %s' % (first_name, last_name),
+            'street': '%s, %s' % (street, house_number),
+            'city': city,
+            'state': state,
+            'country': country,
+            'zip': zip_code,
+            'phone': phone
+        }
+
+        # Get contact from sale order
+        partner_id = order.partner_id.id
+
+        # check if is public user
+        if partner_id == request.website.user_id.sudo().partner_id.id:
+            # create main contact
+            values['type'] = 'contact'
+            partner_id = env['res.partner'].sudo().with_context(tracking_disable=True).create(values).id
+            order.partner_id = partner_id
+            order.with_context(not_self_saleperson=True).onchange_partner_id()
+
+        values['type'] = 'delivery'
+        values['parent_id'] = partner_id
+
+        # update order with the new shipping id
+        order.partner_shipping_id = env['res.partner'].sudo().with_context(tracking_disable=True).create(values).id
+
+        # update order with the delivery line
+        order._check_carrier_quotation(force_carrier_id=delivery_method_id)
+
+        return True
+
+
+class SelectShippingAddress(graphene.Mutation):
+    class Arguments:
+        shipping_id = graphene.ID(required=True)
+        delivery_method_id = graphene.ID(required=True)
+
+    ok = graphene.Boolean()
+
+    @staticmethod
+    def mutate(self, info, shipping_id, delivery_method_id):
+        env = info.context['env']
+
+        request.website = env.ref('website.default_website')
+        order = request.website.sale_get_order()
+
+        # update order with the new shipping id
+        order.partner_shipping_id = shipping_id
+
+        # update order with the delivery line
+        order._check_carrier_quotation(force_carrier_id=delivery_method_id)
+
+        return True
+
+
 class Mutation(graphene.ObjectType):
     sign_up_user = SignUpUser.Field(description='Documentation of SignUpUser')
     send_reset_password = SendResetPassword.Field(description='Documentation of SendResetPassword')
     reset_password = ResetPassword.Field(description='Documentation of ResetPassword')
-
+    select_shipping_address = SelectShippingAddress.Field(description='Documentation of SelectShippingAddress')
+    add_shipping_address = AddShippingAddress.Field(description='Documentation of AddShippingAddress')
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
