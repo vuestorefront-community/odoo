@@ -377,6 +377,9 @@ class ResetPassword(graphene.Mutation):
         return True
 
 
+# ===============================#
+#       Shipping Mutations       #
+# ===============================#
 class AddShippingAddress(graphene.Mutation):
     class Arguments:
         delivery_method_id = graphene.ID(required=True)
@@ -456,11 +459,115 @@ class SelectShippingAddress(graphene.Mutation):
         return True
 
 
+# ===============================#
+#       Billing Mutations        #
+# ===============================#
+class AddBillingAddress(graphene.Mutation):
+    class Arguments:
+        first_name = graphene.String()
+        last_name = graphene.String()
+        street = graphene.String()
+        house_number = graphene.String()
+        city = graphene.String()
+        state = graphene.ID()
+        country = graphene.ID()
+        zip_code = graphene.String()
+        phone = graphene.String()
+
+    ok = graphene.Boolean()
+
+    @staticmethod
+    def mutate(self, info, first_name, last_name, street, city, state, country, zip_code, phone, house_number):
+        env = info.context['env']
+
+        request.website = env.ref('website.default_website')
+        order = request.website.sale_get_order()
+
+        # Get contact from sale order
+        partner_id = order.partner_id.id
+
+        values = {
+            'name': '%s %s' % (first_name, last_name),
+            'street': '%s, %s' % (street, house_number),
+            'city': city,
+            'state': state,
+            'country': country,
+            'zip': zip_code,
+            'phone': phone,
+            'type': 'invoice',
+            'parent_id': partner_id
+        }
+
+        # update order with the new bill id
+        order.partner_invoice_id = env['res.partner'].sudo().with_context(tracking_disable=True).create(values).id
+
+        return True
+
+
+class UseShippingAsBillingAddress(graphene.Mutation):
+    ok = graphene.Boolean()
+
+    @staticmethod
+    def mutate(self, info):
+        env = info.context['env']
+
+        request.website = env.ref('website.default_website')
+        order = request.website.sale_get_order()
+
+        # Get contact from sale order
+        partner_id = order.partner_id.id
+
+        # Get shipping address from sale order
+        shipping_partner = order.partner_shipping_id
+
+        values = {
+            'name': shipping_partner.name,
+            'street': shipping_partner.street,
+            'city': shipping_partner.city,
+            'state': shipping_partner.state,
+            'country': shipping_partner.country,
+            'zip': shipping_partner.zip,
+            'phone': shipping_partner.phone,
+            'type': 'invoice',
+            'parent_id': partner_id
+        }
+
+        # update order with the new bill id
+        order.partner_invoice_id = env['res.partner'].sudo().with_context(tracking_disable=True).create(values).id
+
+        return True
+
+
+class SelectBillingAddress(graphene.Mutation):
+    class Arguments:
+        billing_id = graphene.ID()
+        use_shipping_data = graphene.Boolean()
+
+    ok = graphene.Boolean()
+
+    @staticmethod
+    def mutate(self, info, billing_id):
+        env = info.context['env']
+
+        request.website = env.ref('website.default_website')
+        order = request.website.sale_get_order()
+
+        # update order with the new bill id
+        order.partner_invoice_id = billing_id
+
+        return True
+
+
 class Mutation(graphene.ObjectType):
     sign_up_user = SignUpUser.Field(description='Documentation of SignUpUser')
     send_reset_password = SendResetPassword.Field(description='Documentation of SendResetPassword')
     reset_password = ResetPassword.Field(description='Documentation of ResetPassword')
     select_shipping_address = SelectShippingAddress.Field(description='Documentation of SelectShippingAddress')
     add_shipping_address = AddShippingAddress.Field(description='Documentation of AddShippingAddress')
+    add_billing_address = AddBillingAddress.Field(description='Documentation of AddBillingAddress')
+    use_shipping_as_billing_address = UseShippingAsBillingAddress.Field(description='Documentation of '
+                                                                                    'UseShippingAsBillingAddress')
+    select_billing_address = SelectBillingAddress.Field(description='Documentation of SelectBillingAddress')
+
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
