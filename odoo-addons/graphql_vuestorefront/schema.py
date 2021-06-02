@@ -137,13 +137,12 @@ class SaleOrderLine(OdooObjectType):
         return root.product_id or None
 
 
-class Wishlist(OdooObjectType):
+class WishlistItem(OdooObjectType):
     id = graphene.ID()
     active = graphene.Boolean()
-    partner = graphene.List(graphene.NonNull(lambda: Partner))
-    product = graphene.List(graphene.NonNull(lambda: Product))
-    currency = graphene.List(graphene.NonNull(lambda: Currency))
-    website = graphene.String()
+    partner = graphene.Field(Partner)
+    product = graphene.Field(Product)
+    currency = graphene.Field(Currency)
     price = graphene.Float()
 
     @staticmethod
@@ -157,10 +156,6 @@ class Wishlist(OdooObjectType):
     @staticmethod
     def resolve_currency(root, info):
         return root.currency_id or None
-
-    @staticmethod
-    def resolve_website(root, info):
-        return root.website_id.name or None
 
 
 class SaleOrder(OdooObjectType):
@@ -226,8 +221,8 @@ class Query(graphene.ObjectType):
         required=True,
     )
 
-    wishlist = graphene.List(
-        graphene.NonNull(Wishlist),
+    all_wishlist_items = graphene.List(
+        graphene.NonNull(WishlistItem),
         required=True
     )
 
@@ -291,7 +286,7 @@ class Query(graphene.ObjectType):
         return order or env['sale.order']
 
     @staticmethod
-    def resolve_wishlist(root, info):
+    def resolve_all_wishlist_items(root, info):
         env = info.context['env']
         request.website = env.ref('website.default_website')
 
