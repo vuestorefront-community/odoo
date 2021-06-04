@@ -12,6 +12,7 @@
     'depends': [
         'graphql_base',
         'website_sale_wishlist',
+        'website_sale_delivery',
         'auth_signup',
         'contacts',
     ],

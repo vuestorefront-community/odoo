@@ -398,8 +398,8 @@ class AddShippingAddress(graphene.Mutation):
             'name': '%s %s' % (first_name, last_name),
             'street': '%s, %s' % (street, house_number),
             'city': city,
-            'state': state,
-            'country': country,
+            'state_id': state,
+            'country_id': country,
             'zip': zip_code,
             'phone': phone
         }
