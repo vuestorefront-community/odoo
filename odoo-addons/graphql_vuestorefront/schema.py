@@ -22,7 +22,11 @@ class Country(OdooObjectType):
     id = graphene.ID()
     code = graphene.String(required=True)
     name = graphene.String(required=True)
+    states = graphene.List(graphene.NonNull(lambda: State))
 
+    @staticmethod
+    def resolve_states(root, info):
+        return root.state_ids or None
 
 class User(OdooObjectType):
     id = graphene.ID()
@@ -228,13 +232,10 @@ class Query(graphene.ObjectType):
 
     all_countries = graphene.List(
         graphene.NonNull(Country),
-        required=True
-    )
-
-    country_states = graphene.List(
-        graphene.NonNull(State),
         required=True,
-        country_id=graphene.ID(required=True)
+        country_id=graphene.ID(),
+        limit=graphene.Int(),
+        offset=graphene.Int(),
     )
 
     all_delivery_methods = graphene.List(
@@ -293,12 +294,12 @@ class Query(graphene.ObjectType):
         return request.env['product.wishlist'].with_context(display_default_code=False).current()
 
     @staticmethod
-    def resolve_all_countries(root, info):
-        return info.context['env']['res.country'].sudo().search([])
+    def resolve_all_countries(root, info, country_id=False, limit=None, offset=None):
+        domain = []
+        if country_id:
+            domain.append(('id', '=', country_id))
 
-    @staticmethod
-    def resolve_country_states(root, info, country_id):
-        return info.context['env']['res.country'].sudo().browse(country_id).state_ids
+        return info.context['env']['res.country'].sudo().search(domain, limit=limit, offset=offset)
 
     @staticmethod
     def resolve_all_delivery_methods(root, info):
