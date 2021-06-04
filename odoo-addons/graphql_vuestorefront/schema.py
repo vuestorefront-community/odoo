@@ -298,8 +298,7 @@ class Query(graphene.ObjectType):
 
     @staticmethod
     def resolve_country_states(root, info, country_id):
-        domain = [('id', '=', country_id)]
-        return info.context['env']['res.country'].sudo().search(domain).state_ids
+        return info.context['env']['res.country'].sudo().browse(country_id).state_ids
 
     @staticmethod
     def resolve_all_delivery_methods(root, info):
