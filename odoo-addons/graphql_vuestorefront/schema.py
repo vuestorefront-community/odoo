@@ -379,16 +379,16 @@ class AddShippingAddress(graphene.Mutation):
         street = graphene.String(required=True)
         house_number = graphene.String(required=True)
         city = graphene.String(required=True)
-        state = graphene.ID()
-        country = graphene.ID(required=True)
+        state_id = graphene.Int()
+        country_id = graphene.Int(required=True)
         zip_code = graphene.String(required=True)
         phone = graphene.String(required=True)
 
     ok = graphene.Boolean()
 
     @staticmethod
-    def mutate(self, info, first_name, last_name, street, city, state, country, zip_code, phone,
-               house_number, delivery_method_id, ):
+    def mutate(self, info, first_name, last_name, street, city, country_id, zip_code, phone,
+               house_number, delivery_method_id, state_id=False):
         env = info.context['env']
 
         request.website = env.ref('website.default_website')
@@ -398,8 +398,8 @@ class AddShippingAddress(graphene.Mutation):
             'name': '%s %s' % (first_name, last_name),
             'street': '%s, %s' % (street, house_number),
             'city': city,
-            'state_id': state,
-            'country_id': country,
+            'state_id': state_id,
+            'country_id': country_id,
             'zip': zip_code,
             'phone': phone
         }
