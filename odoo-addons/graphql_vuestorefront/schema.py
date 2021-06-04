@@ -162,6 +162,12 @@ class WishlistItem(OdooObjectType):
         return root.currency_id or None
 
 
+class ShippingMethod(OdooObjectType):
+    id = graphene.ID()
+    name = graphene.String()
+    active = graphene.Boolean()
+
+
 class SaleOrder(OdooObjectType):
     id = graphene.ID()
     name = graphene.String(required=True)
@@ -177,16 +183,16 @@ class SaleOrder(OdooObjectType):
     amount_tax = graphene.Float()
     amount_total = graphene.Float()
     currency_rate = graphene.String()
+    shipping_method = graphene.Field(ShippingMethod)
 
     @staticmethod
     def resolve_order_line(root, info):
         return root.order_line or None
 
+    @staticmethod
+    def resolve_shipping_method(root, info):
+        return root.carrier_id or None
 
-class ShippingMethod(OdooObjectType):
-    id = graphene.ID()
-    name = graphene.String()
-    active = graphene.Boolean()
 
 
 class Query(graphene.ObjectType):
