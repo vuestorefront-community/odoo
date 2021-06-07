@@ -464,20 +464,20 @@ class SelectShippingAddress(graphene.Mutation):
 # ===============================#
 class AddBillingAddress(graphene.Mutation):
     class Arguments:
-        first_name = graphene.String()
-        last_name = graphene.String()
-        street = graphene.String()
-        house_number = graphene.String()
-        city = graphene.String()
-        state = graphene.ID()
-        country = graphene.ID()
-        zip_code = graphene.String()
-        phone = graphene.String()
+        first_name = graphene.String(required=True)
+        last_name = graphene.String(required=True)
+        street = graphene.String(required=True)
+        house_number = graphene.String(required=True)
+        city = graphene.String(required=True)
+        state = graphene.Int()
+        country = graphene.Int(required=True)
+        zip_code = graphene.String(required=True)
+        phone = graphene.String(required=True)
 
     ok = graphene.Boolean()
 
     @staticmethod
-    def mutate(self, info, first_name, last_name, street, city, state, country, zip_code, phone, house_number):
+    def mutate(self, info, first_name, last_name, street, city, country_id, zip_code, phone, house_number, state_id=False):
         env = info.context['env']
 
         request.website = env.ref('website.default_website')
@@ -490,8 +490,8 @@ class AddBillingAddress(graphene.Mutation):
             'name': '%s %s' % (first_name, last_name),
             'street': '%s, %s' % (street, house_number),
             'city': city,
-            'state_id': state,
-            'country_id': country,
+            'state_id': state_id,
+            'country_id': country_id,
             'zip': zip_code,
             'phone': phone,
             'type': 'invoice',
@@ -524,8 +524,8 @@ class UseShippingAsBillingAddress(graphene.Mutation):
             'name': shipping_partner.name,
             'street': shipping_partner.street,
             'city': shipping_partner.city,
-            'state_id': shipping_partner.state,
-            'country_id': shipping_partner.country,
+            'state_id': shipping_partner.state_id,
+            'country_id': shipping_partner.country_id,
             'zip': shipping_partner.zip,
             'phone': shipping_partner.phone,
             'type': 'invoice',
