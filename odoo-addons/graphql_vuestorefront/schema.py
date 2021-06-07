@@ -469,8 +469,8 @@ class AddBillingAddress(graphene.Mutation):
         street = graphene.String(required=True)
         house_number = graphene.String(required=True)
         city = graphene.String(required=True)
-        state = graphene.Int()
-        country = graphene.Int(required=True)
+        state_id = graphene.Int()
+        country_id = graphene.Int(required=True)
         zip_code = graphene.String(required=True)
         phone = graphene.String(required=True)
 
