@@ -2,8 +2,9 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo import http
-
 from odoo.addons.graphql_base import GraphQLControllerMixin
+from odoo.addons.sale.controllers.variant import VariantController
+from odoo.http import request
 
 from ..schema import schema
 
@@ -27,3 +28,22 @@ class GraphQLController(http.Controller, GraphQLControllerMixin):
     @http.route("/graphql/vsf", auth="public", csrf=False)
     def graphql(self, **kwargs):
         return self._handle_graphql_request(schema)
+
+
+class WebsiteSaleVariantController(VariantController):
+    @http.route(['/sale/get_combination/<int:product_template_id>'], type='json', auth='public', website=True)
+    def get_combination(self, product_template_id, **kw):
+        res = {}
+
+        product_template = request.env['product.template'].browse(int(product_template_id))
+        if product_template.exists():
+            for ptal in product_template.valid_product_template_attribute_line_ids:
+                for ptav in ptal.product_template_value_ids._only_active():
+                    res.update({
+                        'attribute_value_id': ptav.id,
+                        'attribute_value_name': ptav.name,
+                        'attribute_id': ptav.attribute_id.name,
+                        'price_extra': ptav.price_extra,
+                    })
+
+        return res

@@ -122,7 +122,7 @@ class Product(OdooObjectType):
 
     @staticmethod
     def resolve_attributes(root, info):
-        return root.product_template_attribute_value_ids or None
+        return root.valid_product_template_attribute_line_ids or None
 
     @staticmethod
     def resolve_ecommerce_categories(root, info):

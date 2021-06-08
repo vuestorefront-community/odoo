@@ -43,7 +43,7 @@ axios.post('<domain>/shop/cart/update_json', {
 })
 
 Add to wishlist
-===========
+===============
 
 axios.post('<domain>/shop/wishlist/add', {
     "jsonrpc": "2.0",
@@ -55,9 +55,9 @@ axios.post('<domain>/shop/wishlist/add', {
 })
 
 Remove from wishlist
-===========
+====================
 
-axios.post('<domain>/shop/wishlist/remove/<product_wishlist_id)>', {
+axios.post('<domain>/shop/wishlist/remove/<product_wishlist_id>', {
     "jsonrpc": "2.0",
     "method": "call"
 }, {
@@ -65,9 +65,9 @@ axios.post('<domain>/shop/wishlist/remove/<product_wishlist_id)>', {
 })
 
 Get the rate for a shipping method
-===========
+==================================
 
-axios.post('<domain>/shop/carrier_rate_shipment)>', {
+axios.post('<domain>/shop/carrier_rate_shipment', {
     "jsonrpc": "2.0",
     "method": "call"
     "params": {
@@ -76,3 +76,16 @@ axios.post('<domain>/shop/carrier_rate_shipment)>', {
     "withCredentials": true
 })
 
+Get variant id and price after selecting the combination on product page
+========================================================================
+
+axios.post('<domain>/sale/get_combination_info_website', {
+    "jsonrpc": "2.0",
+    "method": "call"
+    "params": {
+        "product_template_id": <product_template_id>,
+        "combination": <combination>,
+        "add_qty": <add_qty>,
+}}, {
+    "withCredentials": true
+})
