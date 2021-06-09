@@ -33,13 +33,15 @@ class GraphQLController(http.Controller, GraphQLControllerMixin):
 class WebsiteSaleVariantController(VariantController):
     @http.route(['/sale/get_combination/<int:product_template_id>'], type='json', auth='public', website=True)
     def get_combination(self, product_template_id, **kw):
-        res = {}
+        res = {
+            'attribute_values': [],
+        }
 
         product_template = request.env['product.template'].browse(int(product_template_id))
         if product_template.exists():
             for ptal in product_template.valid_product_template_attribute_line_ids:
                 for ptav in ptal.product_template_value_ids._only_active():
-                    res.update({
+                    res['attribute_values'].append({
                         'attribute_value_id': ptav.id,
                         'attribute_value_name': ptav.name,
                         'attribute_name': ptav.attribute_id.name,
