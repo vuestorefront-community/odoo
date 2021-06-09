@@ -254,6 +254,14 @@ class Query(graphene.ObjectType):
         required=True
     )
 
+    all_product_attributes = graphene.List(
+        graphene.NonNull(ProductAttribute),
+        required=True,
+        product_template_ids=graphene.List(graphene.Int),
+        limit=graphene.Int(),
+        offset=graphene.Int(),
+    )
+
     @staticmethod
     def resolve_all_ecommerce_categories(root, info, id=None, name=False, parents_only=False, limit=None, offset=None):
         domain = []
@@ -320,6 +328,15 @@ class Query(graphene.ObjectType):
         order = request.website.sale_get_order()
 
         return order._get_delivery_methods()
+
+    @staticmethod
+    def resolve_all_product_attributes(root, info, product_template_ids=[], limit=None, offset=None):
+        domain = []
+
+        if product_template_ids:
+            domain.append(('product_tmpl_ids', 'in', product_template_ids))
+
+        return info.context['env']['product.attribute'].sudo().search(domain, limit=limit, offset=offset)
 
 
 class SignUpUser(graphene.Mutation):
