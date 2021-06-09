@@ -28,6 +28,7 @@ class Country(OdooObjectType):
     def resolve_states(root, info):
         return root.state_ids or None
 
+
 class User(OdooObjectType):
     id = graphene.ID()
     name = graphene.String(required=True)
@@ -101,6 +102,7 @@ class Product(OdooObjectType):
     currency = graphene.Field(Currency)
     ecommerce_categories = graphene.List(graphene.NonNull(lambda: EcommerceCategory))
     attributes = graphene.List(graphene.NonNull(lambda: ProductAttribute))
+    first_variant_id = graphene.Int()
 
     @staticmethod
     def resolve_description(root, info):
@@ -127,6 +129,10 @@ class Product(OdooObjectType):
     @staticmethod
     def resolve_ecommerce_categories(root, info):
         return root.public_categ_ids or None
+
+    @staticmethod
+    def resolve_first_variant_id(root, info):
+        return root.product_variant_id.id or None
 
 
 class SaleOrderLine(OdooObjectType):
@@ -192,7 +198,6 @@ class SaleOrder(OdooObjectType):
     @staticmethod
     def resolve_shipping_method(root, info):
         return root.carrier_id or None
-
 
 
 class Query(graphene.ObjectType):
