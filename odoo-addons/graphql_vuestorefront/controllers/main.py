@@ -50,3 +50,36 @@ class WebsiteSaleVariantController(VariantController):
                     })
 
         return res
+
+    @http.route(['/shop/get_combination/<int:product_template_id>'], type='json', auth='public', website=True)
+    def get_combination(self, product_template_id, **kw):
+        """ Get all attributes from product template """
+        res = {
+            'attribute_values': [],
+        }
+
+        product_template = request.env['product.template'].browse(int(product_template_id))
+        if product_template.exists():
+            for ptal in product_template.valid_product_template_attribute_line_ids:
+                for ptav in ptal.product_template_value_ids._only_active():
+                    res['attribute_values'].append({
+                        'attribute_value_id': ptav.id,
+                        'attribute_value_name': ptav.name,
+                        'attribute_name': ptav.attribute_id.name,
+                        'price_extra': ptav.price_extra,
+                        'display_type': ptav.attribute_id.display_type,
+                    })
+
+        return res
+
+    @http.route(['/shop/get_combination_info/<int:product_template_id>'], type='json', auth='public', website=True)
+    def get_combination_info(self, product_template_id, combination_ids=[], add_qty=1, pricelist=None, **kw):
+        """ Get variant id and price after selecting the combination on product page """
+        env = request.env
+
+        product_template = env['product.template'].browse(int(product_template_id))
+        if product_template.exists():
+            combination = env['product.template.attribute.value'].browse(combination_ids)
+            return product_template._get_combination_info(combination, add_qty=add_qty, pricelist=pricelist)
+
+        return {}

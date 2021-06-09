@@ -75,17 +75,3 @@ axios.post('<domain>/shop/carrier_rate_shipment', {
 }}, {
     "withCredentials": true
 })
-
-Get variant id and price after selecting the combination on product page
-========================================================================
-
-axios.post('<domain>/sale/get_combination_info_website', {
-    "jsonrpc": "2.0",
-    "method": "call"
-    "params": {
-        "product_template_id": <product_template_id>,
-        "combination": <combination>,
-        "add_qty": <add_qty>,
-}}, {
-    "withCredentials": true
-})
