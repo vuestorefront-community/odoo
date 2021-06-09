@@ -42,8 +42,9 @@ class WebsiteSaleVariantController(VariantController):
                     res.update({
                         'attribute_value_id': ptav.id,
                         'attribute_value_name': ptav.name,
-                        'attribute_id': ptav.attribute_id.name,
+                        'attribute_name': ptav.attribute_id.name,
                         'price_extra': ptav.price_extra,
+                        'display_type': ptav.attribute_id.display_type,
                     })
 
         return res
