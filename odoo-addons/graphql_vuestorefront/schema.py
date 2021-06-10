@@ -11,6 +11,7 @@ from odoo.addons.http_routing.models.ir_http import slug
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 from odoo.http import request
 import requests
+from odoo.osv import expression
 
 
 class State(OdooObjectType):
@@ -200,6 +201,32 @@ class SaleOrder(OdooObjectType):
         return root.carrier_id or None
 
 
+class PaymentIcon(OdooObjectType):
+    id = graphene.ID()
+    name = graphene.String(required=True)
+    image = graphene.String()
+
+    @staticmethod
+    def resolve_image(root, info):
+        env = info.context['env']
+        base_url = env['ir.config_parameter'].sudo().get_param('web.base.url', '')
+        return '{}/web/image/payment.icon/{}/image'.format(base_url, root.id)
+
+
+class PaymentAcquirer(OdooObjectType):
+    id = graphene.ID()
+    name = graphene.String(required=True)
+    payment_icons = graphene.List(graphene.NonNull(lambda: PaymentIcon))
+
+    @staticmethod
+    def resolve_name(root, info):
+        return root.display_as or root.name or None
+
+    @staticmethod
+    def resolve_payment_icons(root, info):
+        return root.payment_icon_ids or None
+
+
 class Query(graphene.ObjectType):
     all_ecommerce_categories = graphene.List(
         graphene.NonNull(EcommerceCategory),
@@ -260,6 +287,11 @@ class Query(graphene.ObjectType):
         product_template_ids=graphene.List(graphene.Int),
         limit=graphene.Int(),
         offset=graphene.Int(),
+    )
+    
+    all_payment_acquirer = graphene.List(
+        graphene.NonNull(PaymentAcquirer),
+        required=True
     )
 
     @staticmethod
@@ -337,6 +369,20 @@ class Query(graphene.ObjectType):
             domain.append(('product_tmpl_ids', 'in', product_template_ids))
 
         return info.context['env']['product.attribute'].sudo().search(domain, limit=limit, offset=offset)
+    
+    def resolve_all_payment_acquirer(root, info):
+        env = info.context['env']
+
+        request.website = env.ref('website.default_website')
+        order = request.website.sale_get_order()
+
+        domain = expression.AND([
+            ['&', ('state', 'in', ['enabled']), ('company_id', '=', order.company_id.id)],
+            ['|', ('website_id', '=', False), ('website_id', '=', request.website.id)],
+            ['|', ('country_ids', '=', False), ('country_ids', 'in', [order.partner_id.country_id.id])]
+        ])
+
+        return env['payment.acquirer'].sudo().search(domain)
 
 
 class SignUpUser(graphene.Mutation):
@@ -499,7 +545,8 @@ class AddBillingAddress(graphene.Mutation):
     ok = graphene.Boolean()
 
     @staticmethod
-    def mutate(self, info, first_name, last_name, street, city, country_id, zip_code, phone, house_number, state_id=False):
+    def mutate(self, info, first_name, last_name, street, city, country_id, zip_code, phone, house_number,
+               state_id=False):
         env = info.context['env']
 
         request.website = env.ref('website.default_website')

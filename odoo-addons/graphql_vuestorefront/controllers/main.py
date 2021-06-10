@@ -4,6 +4,7 @@
 from odoo import http
 from odoo.addons.graphql_base import GraphQLControllerMixin
 from odoo.addons.sale.controllers.variant import VariantController
+from odoo.addons.website_sale.controllers.main import WebsiteSale
 from odoo.http import request
 
 from ..schema import schema
@@ -83,3 +84,9 @@ class WebsiteSaleVariantController(VariantController):
             return product_template._get_combination_info(combination, add_qty=add_qty, pricelist=pricelist)
 
         return {}
+
+class WebsiteSaleController(WebsiteSale):
+
+    @http.route(['/shop/register_payment/<int:token_id>'], type='json', auth='public', website=True)
+    def json_rpc_to_register_payment(self, pm_id):
+        self.payment_token(pm_id)
