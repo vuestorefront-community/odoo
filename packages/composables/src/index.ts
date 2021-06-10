@@ -1,38 +1,20 @@
-/* istanbul ignore file */
+export { default as useBilling } from './composables/useBilling';
+export { default as useCart } from './composables/useCart';
+export { default as useCategory } from './composables/useCategory';
+export { default as useContent } from './composables/useContent';
+export { default as useFacet } from './composables/useFacet';
+export { default as useMakeOrder } from './composables/useMakeOrder';
+export { default as useProduct } from './composables/useProduct';
+export { default as useReview } from './composables/useReview';
+export { default as useShipping } from './composables/useShipping';
+export { useShippingProvider } from './composables/useShippingProvider';
+export { default as useUser } from './composables/useUser';
+export { default as useUserBilling } from './composables/useUserBilling';
+export { default as useUserOrder } from './composables/useUserOrder';
+export { default as useUserShipping } from './composables/useUserShipping';
+export { default as useWishlist } from './composables/useWishlist';
+export { default as useCountrySearch } from './composables/useCountrySearch';
+export { default as usePassword } from './composables/usePassword';
+export { default as useProductVariant } from './composables/useProductVariant';
 
-import useCart from './useCart';
-import useCategory from './useCategory';
-import useCheckout from './useCheckout';
-import useContent from './useContent';
-import useFacet from './useFacet';
-import useProduct from './useProduct';
-import useReview from './useReview';
-import useUser from './useUser';
-import usePassword from './usePassword';
-import useUserBilling from './useUserBilling';
-import useUserOrders from './useUserOrders';
-import useUserShipping from './useUserShipping';
-import useWishlist from './useWishlist';
-import { createApiClient } from '@vue-storefront/odoo-api';
-import { integrationPluginFactory } from '@vue-storefront/core';
-
-const integrationPlugin = integrationPluginFactory(createApiClient);
-
-export {
-  integrationPlugin,
-  useCart,
-  useCategory,
-  useCheckout,
-  useContent,
-  useFacet,
-  useProduct,
-  useReview,
-  useUser,
-  useUserBilling,
-  useUserOrders,
-  usePassword,
-  useUserShipping,
-  useWishlist
-};
-
-export * from './getters';
+export * from './composables/getters';

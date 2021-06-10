@@ -1,7 +1,6 @@
 import { getCurrentInstance } from '@vue/composition-api';
-import { Category } from '@vue-storefront/odoo/src/types';
 import { AgnosticCategoryTree } from '@vue-storefront/core';
-
+import { Category } from '~/../api-client/src/types';
 const getInstance = () => {
   const vm = getCurrentInstance();
   return vm.$root as any;

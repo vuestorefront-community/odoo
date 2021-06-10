@@ -1,24 +1,12 @@
 <template>
   <div>
     <SfHeader
-      data-cy="app-header"
-      @click:cart="toggleCartSidebar"
-      @click:wishlist="toggleWishlistSidebar"
-      @click:account="handleAccountClick"
-      @enter:search="changeSearchTerm"
-      @change:search="(p) => (term = p)"
-      :searchValue="term"
-      :cartItemsQty="cartTotalItems"
-      :accountIcon="accountIcon"
       class="sf-header--has-mobile-search"
+      :class="{ 'header-on-top': isSearchOpen }"
     >
       <!-- TODO: add mobile view buttons after SFUI team PR -->
       <template #logo>
-        <nuxt-link
-          data-cy="app-header-url_logo"
-          :to="localePath('/')"
-          class="sf-header__logo"
-        >
+        <nuxt-link :to="localePath('/')" class="sf-header__logo">
           <SfImage
             src="/icons/logo.svg"
             alt="Vue Storefront Next"
@@ -29,13 +17,11 @@
       <template #navigation>
         <SfHeaderNavigationItem
           class="nav-item"
-          data-cy="app-header-url_women"
           label="WOMEN"
           :link="localePath('/c/women')"
         />
         <SfHeaderNavigationItem
           class="nav-item"
-          data-cy="app-header-url_men"
           label="MEN"
           :link="localePath('/c/men')"
         />
@@ -43,18 +29,47 @@
       <template #aside>
         <LocaleSelector class="smartphone-only" />
       </template>
+      <template #header-icons>
+        <div class="sf-header__icons">
+          <SfButton
+            class="sf-button--pure sf-header__action"
+            @click="handleAccountClick"
+          >
+            <SfIcon :icon="accountIcon" size="1.25rem" />
+          </SfButton>
+          <SfButton
+            class="sf-button--pure sf-header__action"
+            @click="toggleWishlistSidebar"
+          >
+            <SfIcon class="sf-header__icon" icon="heart" size="1.25rem" />
+          </SfButton>
+          <SfButton
+            class="sf-button--pure sf-header__action"
+            @click="toggleCartSidebar"
+          >
+            <SfIcon class="sf-header__icon" icon="empty_cart" size="1.25rem" />
+            <no-ssr>
+              <SfBadge
+                v-if="cartTotalItems"
+                class="sf-badge--number cart-badge"
+                >{{ cartTotalItems }}</SfBadge
+              >
+            </no-ssr>
+          </SfButton>
+        </div>
+      </template>
       <template #search>
         <SfSearchBar
           ref="searchBarRef"
-          v-click-outside="closeSearch"
           :placeholder="$t('Search for items')"
           aria-label="Search"
           class="sf-header__search"
           :value="term"
           @input="handleSearch"
-          @keydown.enter.stop="handleSearch($event)"
+          @keydown.enter="handleSearch($event)"
           @focus="isSearchOpen = true"
           @keydown.esc="closeSearch"
+          v-click-outside="closeSearch"
         >
           <template #icon>
             <SfButton
@@ -87,6 +102,7 @@
       @close="closeSearch"
       @removeSearchResults="removeSearchResults"
     />
+    <SfOverlay :visible="isSearchOpen" />
   </div>
 </template>
 
@@ -97,6 +113,8 @@ import {
   SfSearchBar,
   SfIcon,
   SfButton,
+  SfOverlay,
+  SfBadge,
 } from '@storefront-ui/vue';
 import { useUiState } from '~/composables';
 import {
@@ -110,7 +128,7 @@ import {
   useCategory,
 } from '@vue-storefront/odoo';
 import { clickOutside } from '@storefront-ui/vue/src/utilities/directives/click-outside/click-outside-directive.js';
-import { computed, ref, watch } from '@vue/composition-api';
+import { computed, ref, watch, onMounted } from '@vue/composition-api';
 import { onSSR } from '@vue-storefront/core';
 import { useUiHelpers } from '~/composables';
 import LocaleSelector from './LocaleSelector';
@@ -127,14 +145,13 @@ export default {
     SfSearchBar,
     LocaleSelector,
     SearchResults,
+    SfOverlay,
+    SfBadge,
   },
   directives: { clickOutside },
   setup(props, { root }) {
-    const {
-      toggleCartSidebar,
-      toggleWishlistSidebar,
-      toggleLoginModal,
-    } = useUiState();
+    const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal } =
+      useUiState();
     const { changeSearchTerm, getFacetsFromURL } = useUiHelpers();
     const { isAuthenticated, load: loadUser } = useUser();
     const { cart, load: loadCart } = useCart();
@@ -200,20 +217,24 @@ export default {
     watch(
       () => term.value,
       (newVal, oldVal) => {
-        isSearchOpen.value = true;
         const shouldSearchBeOpened =
           !isMobile.value &&
           term.value.length > 0 &&
           ((!oldVal && newVal) ||
             (newVal.length !== oldVal.length && isSearchOpen.value === false));
-        if (shouldSearchBeOpened) isSearchOpen.value = true;
+        if (shouldSearchBeOpened) {
+          isSearchOpen.value = true;
+        }
       }
     );
 
     onSSR(async () => {
       await loadUser();
-      await loadCart();
       await loadWishlist();
+    });
+
+    onMounted(() => {
+      loadCart();
     });
 
     return {
@@ -237,7 +258,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped >
 .sf-header {
   --header-padding: var(--spacer-sm);
   @include for-desktop {
@@ -247,8 +268,19 @@ export default {
     height: 100%;
   }
 }
-
+.header-on-top {
+  z-index: 2;
+}
 .nav-item {
   --header-navigation-item-margin: 0 var(--spacer-base);
+  .sf-header-navigation-item__item--mobile {
+    display: none;
+  }
 }
+.cart-badge {
+  position: absolute;
+  bottom: 40%;
+  left: 40%;
+}
+</style>
 </style>

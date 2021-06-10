@@ -13,6 +13,6 @@ export default async function cartAddItem(context, params, customQuery?: CustomQ
     }
   });
 
-  return response.data.result;
+  return response;
 
 }

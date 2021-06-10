@@ -85,6 +85,7 @@ class WebsiteSaleVariantController(VariantController):
 
         return {}
 
+
 class WebsiteSaleController(WebsiteSale):
 
     @http.route(['/shop/register_payment/<int:token_id>'], type='json', auth='public', website=True)

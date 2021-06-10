@@ -1,9 +1,9 @@
 import { CustomQuery } from '@vue-storefront/core';
 import gql from 'graphql-tag';
 import ApolloClient from 'apollo-client';
-import query from './categoryListQuery';
+import query from './getCategoryQuery';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default async function getCategory (context, params, customQuery?: CustomQuery) {
+export default async function getCategory(context, params, customQuery?: CustomQuery) {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   const response = await apolloClient.query(

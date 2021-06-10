@@ -1,5 +1,5 @@
 import { CustomQuery } from '@vue-storefront/core';
-import mutation from './signUpMutation';
+import mutation from './signUpUserMutation';
 import ApolloClient from 'apollo-client';
 import { AgnosticUser } from '@vue-storefront/odoo-api/src/types';
 

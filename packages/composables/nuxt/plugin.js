@@ -1,14 +1,9 @@
-import { integrationPlugin } from '@vue-storefront/odoo';
-
-const odooBaseUrl = 'https://vsfdemo.labs.odoogap.com/';
+import { integrationPlugin } from '@vue-storefront/core';
 const moduleOptions = JSON.parse('<%= JSON.stringify(options) %>');
-
-moduleOptions.odooBaseUrl = odooBaseUrl;
-moduleOptions.graphqlBaseUrl = `${odooBaseUrl}graphql/vsf`;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
 export default integrationPlugin(({ app, integration }) => {
-  integration.configure({
+  integration.configure('odoo', {
     app,
     ...moduleOptions
     // other options

@@ -73,6 +73,8 @@ export default {
     ['@vue-storefront/odoo/nuxt', {}]
   ],
   modules: [
+    '@vue-storefront/middleware/nuxt',
+    '@nuxtjs/axios',
     'nuxt-i18n',
     'cookie-universal-nuxt',
     'vue-scrollto/nuxt'
@@ -137,6 +139,9 @@ export default {
       'vee-validate/dist/rules'
     ],
     extend(config, ctx) {
+      if (ctx.isDev) {
+        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+      }
     },
     plugins: [
       new webpack.DefinePlugin({
@@ -148,6 +153,7 @@ export default {
       })
     ]
   },
+
   router: {
     scrollBehavior(_to, _from, savedPosition) {
       if (savedPosition) {

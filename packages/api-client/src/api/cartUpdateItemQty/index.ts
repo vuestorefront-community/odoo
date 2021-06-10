@@ -13,6 +13,6 @@ export default async function cartUpdateItemQty(context, params, customQuery?: C
     }
   });
 
-  return response.data.result;
+  return response
 
 }

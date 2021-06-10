@@ -1,6 +1,29 @@
-export declare type Wishlist = {
-  items: [Product]
-};
+
+export declare type Address = {
+  city: string
+  countryId: number
+  deliveryMethodId: number
+  firstName: string
+  houseNumber: string
+  lastName: string
+  phone: string
+  stateId: number
+  street: string
+  zipCode: string
+}
+
+export declare type ShippingInfo = {
+
+}
+
+export declare type WishlistItem = {
+  product: Product
+  id: number
+  price: number
+}
+
+export declare type Wishlist = WishlistItem[];
+
 export type AgnosticUser = {
   email: string
   name: string
@@ -48,6 +71,8 @@ export type Product = {
   sku: string
   image: string
   listPrice: number
+  realProduct: any
+  firstVariantId: string
   attributes: Attribute[]
 }
 export type SaleOrderLine = {

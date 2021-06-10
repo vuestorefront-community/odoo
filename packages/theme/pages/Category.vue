@@ -76,7 +76,7 @@
             role="button"
             aria-label="Change to grid view"
             :aria-pressed="isCategoryGridView"
-            @click="toggleCategoryGridView"
+            @click="changeToCategoryGridView"
           />
           <SfIcon
             data-cy="category-icon_list-view"
@@ -87,7 +87,7 @@
             role="button"
             aria-label="Change to list view"
             :aria-pressed="!isCategoryGridView"
-            @click="toggleCategoryGridView"
+            @click="changeToCategoryGridView"
           />
         </div>
       </div>
@@ -178,8 +178,8 @@
               :max-rating="5"
               :score-rating="productGetters.getAverageRating(product)"
               :show-add-to-cart-button="true"
-              :isOnWishlist="isOnWishlist({ product })"
-              :isAddedToCart="isOnCart({ product })"
+              :isOnWishlist="isInWishlist({ product })"
+              :isAddedToCart="isInCart({ product })"
               :link="
                 localePath(
                   `/p/${productGetters.getId(product)}/${productGetters.getSlug(
@@ -407,8 +407,8 @@ export default {
   setup(props, context) {
     const th = useUiHelpers();
     const uiState = useUiState();
-    const { addItem: addItemToCart, isOnCart } = useCart();
-    const { addItem: addItemToWishlist, isOnWishlist } = useWishlist();
+    const { addItem: addItemToCart, isInCart } = useCart();
+    const { addItem: addItemToWishlist, isInWishlist } = useWishlist();
     const { result, search, loading } = useFacet();
 
     const products = computed(() => facetGetters.getProducts(result.value));
@@ -501,8 +501,8 @@ export default {
       breadcrumbs,
       addItemToWishlist,
       addItemToCart,
-      isOnWishlist,
-      isOnCart,
+      isInWishlist,
+      isInCart,
       isFacetColor,
       selectFilter,
       isFilterSelected,

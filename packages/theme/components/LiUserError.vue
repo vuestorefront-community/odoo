@@ -9,7 +9,7 @@
 export default {
   props: {
     errors: {
-      type: Array,
+      type: [Array, Error],
       default: () => [],
     },
   },

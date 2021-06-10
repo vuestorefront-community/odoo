@@ -369,7 +369,8 @@ class Query(graphene.ObjectType):
             domain.append(('product_tmpl_ids', 'in', product_template_ids))
 
         return info.context['env']['product.attribute'].sudo().search(domain, limit=limit, offset=offset)
-    
+
+    @staticmethod
     def resolve_all_payment_acquirer(root, info):
         env = info.context['env']
 

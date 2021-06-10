@@ -1,10 +1,15 @@
+const odooBaseUrl = 'https://vsfdemo.labs.odoogap.com/';
+const graphqlBaseUrl = `${odooBaseUrl}graphql/vsf`;
+
 module.exports = {
   integrations: {
     odoo: {
-      location: '@vue-storefront/odoo-api',
+      location: '@vue-storefront/odoo-api/server',
       configuration: {
-        api: 'https://vsfdemo.labs.odoogap.com/graphql/vsf'
-      }
+        odooBaseUrl,
+        graphqlBaseUrl
+      },
+
     }
   }
 };

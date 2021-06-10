@@ -12,8 +12,6 @@ export default async function logInUser(context, { username, password }, customQ
       login: username,
       password: password
     }
-  }, {
-    withCredentials: true,
   });
 
   return response;

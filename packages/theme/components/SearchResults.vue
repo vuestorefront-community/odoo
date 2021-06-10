@@ -62,6 +62,7 @@
                   :alt="productGetters.getName(product)"
                   :title="productGetters.getName(product)"
                   :link="localePath(goToProduct(product))"
+                  @click:wishlist="addItemToWishlist({ product })"
                   @click="$emit('close')"
                 />
               </div>
@@ -129,7 +130,11 @@ import {
   SfImage,
 } from '@storefront-ui/vue';
 import { ref, watch, computed } from '@vue/composition-api';
-import { productGetters, categoryGetters } from '@vue-storefront/odoo';
+import {
+  productGetters,
+  categoryGetters,
+  useWishlist,
+} from '@vue-storefront/odoo';
 import { useUiHelpers } from '~/composables';
 
 export default {
@@ -164,6 +169,7 @@ export default {
     const isSearchOpen = ref(props.visible);
     const products = computed(() => props.result?.products);
     const categories = computed(() => props.result?.categories);
+    const { addItem: addItemToWishlist } = useWishlist();
 
     const goToProduct = (product) => {
       return `/p/${productGetters.getId(product)}/${productGetters.getSlug(
@@ -183,6 +189,7 @@ export default {
       }
     );
     return {
+      addItemToWishlist,
       goToProduct,
       uiHelper,
       isSearchOpen,

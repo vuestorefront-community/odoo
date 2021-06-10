@@ -1,192 +1,213 @@
+
 <template>
-  <div>
+  <ValidationObserver v-slot="{ handleSubmit, invalid }" ref="formRef">
     <SfHeading
       :level="3"
-      title="Shipping"
+      :title="$t('Shipping Details')"
       class="sf-heading--left sf-heading--no-underline title"
     />
-    <div class="form">
-        <UserShippingAddresses
-          v-if="isAuthenticated && shippingAddresses && shippingAddresses.length"
-          :setAsDefault="setAsDefault"
-          :shippingAddresses="shippingAddresses"
-          :currentAddressId="currentAddressId"
-          @setCurrentAddress="setCurrentAddress($event); addressIsModified = true;"
-          @changeSetAsDefault="setAsDefault = $event"
-        />
-        <SfButton
-          v-if="!canAddNewAddress"
-          class="form__action-button form__action-button--margin-bottom"
-          type="submit"
-          @click.native="canAddNewAddress = true"
+    <form @submit.prevent="handleSubmit(handleFormSubmit)">
+      <UserShippingAddresses
+        v-if="isAuthenticated && hasSavedShippingAddress"
+        v-model="defaultShippingAddress"
+        :current-address-id="currentAddressId || ''"
+        @setCurrentAddress="handleSetCurrentAddress"
+      />
+      <div class="form" v-if="canAddNewAddress">
+        <ValidationProvider
+          name="firstName"
+          rules="required|min:2"
+          v-slot="{ errors }"
+          slim
         >
-          Add new address
-        </SfButton>
-
-        <template v-if="canAddNewAddress">
           <SfInput
-            data-cy="shipping-details-input_firstName"
-            v-model="shippingDetails.firstName"
+            v-model="form.firstName"
             label="First name"
             name="firstName"
-            class="form__element form__element--half"
-            @input="afterModifiedAddress"
+            class="form__element"
             required
+            :valid="!errors[0]"
+            :errorMessage="errors[0]"
           />
+        </ValidationProvider>
+        <ValidationProvider
+          name="streetName"
+          rules="required|min:2"
+          v-slot="{ errors }"
+          slim
+        >
           <SfInput
-            data-cy="shipping-details-input_lastName"
-            v-model="shippingDetails.lastName"
-            label="Last name"
-            name="lastName"
-            class="form__element form__element--half form__element--half-even"
-            @input="afterModifiedAddress"
-            required
-          />
-          <SfInput
-            data-cy="shipping-details-input_streetName"
-            v-model="shippingDetails.streetName"
+            v-model="form.streetName"
             label="Street name"
             name="streetName"
             class="form__element"
-            @input="afterModifiedAddress"
             required
+            :valid="!errors[0]"
+            :errorMessage="errors[0]"
           />
+        </ValidationProvider>
+
+        <ValidationProvider
+          name="city"
+          rules="required|min:2"
+          v-slot="{ errors }"
+          slim
+        >
           <SfInput
-            data-cy="shipping-details-input_apartmanet"
-            v-model="shippingDetails.apartment"
-            label="House/Apartment number"
-            name="apartment"
-            class="form__element"
-            @input="afterModifiedAddress"
-            required
-          />
-          <SfInput
-            data-cy="shipping-details-input_city"
-            v-model="shippingDetails.city"
+            v-model="form.city"
             label="City"
             name="city"
             class="form__element form__element--half"
-            @input="afterModifiedAddress"
             required
+            :valid="!errors[0]"
+            :errorMessage="errors[0]"
           />
+        </ValidationProvider>
+        <ValidationProvider
+          name="zipCode"
+          rules="required|min:2"
+          v-slot="{ errors }"
+          slim
+        >
           <SfInput
-            data-cy="shipping-details-input_state"
-            v-model="shippingDetails.state"
-            label="State/Province"
-            name="state"
-            class="form__element form__element--half form__element--half-even"
-            @input="afterModifiedAddress"
-            required
-          />
-          <SfInput
-            data-cy="shipping-details-input_postalCode"
-            v-model="shippingDetails.postalCode"
+            v-model="form.postalCode"
             label="Zip-code"
             name="zipCode"
-            class="form__element form__element--half"
-            @input="afterModifiedAddress"
+            class="form__element form__element--half form__element--half-even"
             required
+            :valid="!errors[0]"
+            :errorMessage="errors[0]"
           />
+        </ValidationProvider>
+        <ValidationProvider
+          name="country"
+          rules="required"
+          v-slot="{ errors }"
+          slim
+        >
           <SfSelect
-            data-cy="shipping-details-select_country"
-            v-model="shippingDetails.country"
+            v-model="form.country"
             label="Country"
-            class="form__element form__element--half form__element--half-even form__select sf-select--underlined"
-            @input="afterModifiedAddress"
+            name="country"
+            class="
+              form__element form__element--half form__select
+              sf-select--underlined
+            "
             required
+            :valid="!errors[0]"
+            :errorMessage="errors[0]"
           >
             <SfSelectOption
-              v-for="countryOption in COUNTRIES"
-              :key="countryOption.key"
-              :value="countryOption.key"
+              v-for="countryOption in countries"
+              :key="countryOption.id"
+              :value="countryOption.id"
             >
-              {{ countryOption.label }}
+              {{ countryOption.name }}
             </SfSelectOption>
           </SfSelect>
+        </ValidationProvider>
+
+        <ValidationProvider
+          name="state"
+          rules="required"
+          v-slot="{ errors }"
+          slim
+        >
+          <SfSelect
+            v-model="form.state"
+            label="State/Province"
+            name="state"
+            class="
+              form__element form__element--half form__select
+              sf-select--underlined
+              form__element--half-even
+            "
+            required
+            :valid="!errors[0]"
+            :errorMessage="errors[0]"
+          >
+            <SfSelectOption
+              v-for="countryStateOption in countryStates"
+              :key="countryStateOption.id"
+              :value="countryStateOption.id"
+            >
+              {{ countryStateOption.name }}
+            </SfSelectOption>
+          </SfSelect>
+        </ValidationProvider>
+
+        <ValidationProvider
+          name="phone"
+          rules="required|digits:9"
+          v-slot="{ errors }"
+          slim
+        >
           <SfInput
-            data-cy="shipping-details-input_phone"
-            v-model="shippingDetails.phone"
+            v-model="form.phone"
             label="Phone number"
             name="phone"
-            class="form__element"
-            @input="afterModifiedAddress"
+            class="form__element form__element--half"
             required
+            :valid="!errors[0]"
+            :errorMessage="errors[0]"
           />
-        </template>
-    </div>
-    <SfHeading
-      :level="3"
-      title="Shipping method"
-      class="sf-heading--left sf-heading--no-underline title"
-      v-if="canContinueToPayment"
-    />
-    <div class="form">
-      <div class="form__radio-group">
-        <SfRadio
-          data-cy="shipping-details-radio_shippingMethod"
-          v-for="item in shippingMethods"
-          :key="checkoutGetters.getShippingMethodName(item)"
-          :label="checkoutGetters.getShippingMethodName(item)"
-          :value="checkoutGetters.getShippingMethodId(item)"
-          :selected="checkoutGetters.getShippingMethodId(chosenShippingMethod)"
-          @input="() => chosenShippingMethod = item"
-          name="shippingMethod"
-          :description="checkoutGetters.getShippingMethodDescription(item)"
-          class="form__radio shipping"
-        >
-          <template #label="{label}">
-            <div class="sf-radio__label shipping__label">
-              <div>{{ label }}</div>
-              <div>${{ checkoutGetters.getShippingMethodPrice(item) }}</div>
-            </div>
-          </template>
-          <template #description="{description}">
-            <div class="sf-radio__description shipping__description">
-              <div class="shipping__info">
-                {{ description }}
-              </div>
-            </div>
-          </template>
-        </SfRadio>
+        </ValidationProvider>
       </div>
-      <div class="form__action">
-        <!-- TODO: add nuxt link for returning to personal details -->
-        <SfButton data-cy="shipping-btn_go-back" class="color-secondary form__back-button">
-          Go back
-        </SfButton>
-        <SfButton data-cy="shipping-btn_continue" class="form__action-button" @click="$emit('nextStep')" v-if="canContinueToPayment">
-          Continue to payment
-        </SfButton>
-        <SfButton data-cy="shipping-btn_continue" class="form__action-button" @click="saveShippingDetails" v-else>
-          Select shipping method
-        </SfButton>
-      </div>
-    </div>
-  </div>
+      <SfButton
+        v-if="!canAddNewAddress"
+        class="color-light form__action-button form__action-button--add-address"
+        type="button"
+        @click.native="handleAddNewAddressBtnClick"
+      >
+        {{ $t('Add new address') }}
+      </SfButton>
+
+      <SfHeading
+        :level="3"
+        :title="$t('Select shipping method')"
+        class="sf-heading--left sf-heading--no-underline title"
+      />
+      <VsfShippingProvider
+        :selectedMethodShipping="form.selectedMethodShipping"
+        @submit="$router.push('/checkout/billing')"
+        @selectedMethod="handleSelectedMethodShipping"
+      />
+      <SfButton
+        type="submit"
+        :disabled="invalid || !form.selectedMethodShipping"
+      >
+        {{ $t('Continue to billing') }}
+      </SfButton>
+    </form>
+  </ValidationObserver>
 </template>
 
 <script>
+import { SfHeading, SfInput, SfButton, SfSelect } from '@storefront-ui/vue';
+import { ref, watch, onMounted, computed } from '@vue/composition-api';
+import { onSSR } from '@vue-storefront/core';
 import {
-  SfHeading,
-  SfInput,
-  SfButton,
-  SfSelect,
-  SfRadio
-} from '@storefront-ui/vue';
-import { useCheckout, useUser, useUserShipping, checkoutGetters, userShippingGetters } from '@vue-storefront/odoo';
-import { ref, onMounted, computed } from '@vue/composition-api';
+  useCountrySearch,
+  useUser,
+  useUserShipping,
+  userShippingGetters,
+  useShipping,
+} from '@vue-storefront/odoo';
+import { required, min, digits } from 'vee-validate/dist/rules';
+import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 
-const COUNTRIES = [
-  { key: 'US',
-    label: 'United States' },
-  { key: 'UK',
-    label: 'United Kingdom' },
-  { key: 'IT',
-    label: 'Italy' },
-  { key: 'PL',
-    label: 'Poland' }
-];
-
+extend('required', {
+  ...required,
+  message: 'This field is required',
+});
+extend('min', {
+  ...min,
+  message: 'The field should have at least {length} characters',
+});
+extend('digits', {
+  ...digits,
+  message: 'Please provide a valid phone number',
+});
 export default {
   name: 'Shipping',
   components: {
@@ -194,117 +215,121 @@ export default {
     SfInput,
     SfButton,
     SfSelect,
-    SfRadio,
-    UserShippingAddresses: () => import('~/components/Checkout/UserShippingAddresses')
+    ValidationProvider,
+    ValidationObserver,
+    UserShippingAddresses: () =>
+      import('~/components/Checkout/UserShippingAddresses.vue'),
+    VsfShippingProvider: () =>
+      import('~/components/Checkout/VsfShippingProvider'),
   },
-  setup(props, context) {
-    context.emit('changeStep', 1);
-    const {
-      shippingDetails,
-      chosenShippingMethod,
-      shippingMethods
-    } = useCheckout();
+  setup(props, { root }) {
+    const isFormSubmitted = ref(false);
+    const formRef = ref(false);
+    const currentAddressId = ref('');
+    const defaultShippingAddress = ref(false);
+    const isShippingDetailsStepCompleted = ref(false);
+    const canAddNewAddress = ref(true);
 
-    const { shipping, load: loadUserShipping, setDefault } = useUserShipping();
+    const {
+      save,
+      loading,
+      addAddress,
+      shipping: userShipping,
+    } = useUserShipping();
+    const { shippingAddress, load: loadShipping } = useShipping();
+
     const { isAuthenticated } = useUser();
 
-    const canAddNewAddress = ref(true);
-    const addressIsModified = ref(false);
-    const currentAddressId = ref(-1);
-    const setAsDefault = ref(false);
-    const isShippingAddressCompleted = ref(false);
+    const { search, searchCountryStates, countries, countryStates } =
+      useCountrySearch();
 
-    const setShippingDetails = address => {
-      shippingDetails.value = {
-        ...shippingDetails.value,
-        ...address
-      };
+    const form = ref({
+      firstName: '',
+      lastName: '',
+      streetName: '',
+      city: '',
+      state: '',
+      country: '',
+      postalCode: '',
+      phone: '',
+      selectedMethodShipping: '',
+    });
+    const handleFormSubmit = async () => {
+      await addAddress({
+        address: form.value,
+      });
+      isFormSubmitted.value = true;
+      root.$router.push('/checkout/billing');
     };
 
-    const mapAbstractAddressToIntegrationAddress = address => ({
-      ...shippingDetails.value,
-      city: address.city,
-      country: address.country,
-      firstName: address.firstName,
-      lastName: address.lastName,
-      streetName: address.streetName,
-      postalCode: address.zipCode,
-      state: address.state,
-      phone: address.phoneNumber,
-      apartment: address.apartment
-    });
-
-    const setCurrentAddress = async (addressId) => {
-      const chosenAddress = userShippingGetters.getAddresses(shipping.value, { id: addressId });
-      if (!chosenAddress || !chosenAddress.length) {
-        return;
+    const hasSavedShippingAddress = computed(() => {
+      if (!isAuthenticated.value || !userShipping.value) {
+        return false;
       }
-      currentAddressId.value = addressId;
-      setShippingDetails(mapAbstractAddressToIntegrationAddress(chosenAddress[0]));
-      addressIsModified.value = true;
+
+      const addresses = userShippingGetters.getAddresses(userShipping.value);
+      return Boolean(addresses?.length);
+    });
+    const handleAddNewAddressBtnClick = () => {
+      currentAddressId.value = '';
+      form.value = {};
+      canAddNewAddress.value = true;
+      isShippingDetailsStepCompleted.value = false;
+    };
+
+    const handleSetCurrentAddress = (addr) => {
+      form.value = addr;
+      currentAddressId.value = addr?.id;
+      canAddNewAddress.value = false;
+      isShippingDetailsStepCompleted.value = false;
+    };
+
+    const handleSelectedMethodShipping = (method) => {
+      form.value.selectedMethodShipping = method;
     };
 
     onMounted(async () => {
-      if (isAuthenticated.value) {
-        await loadUserShipping();
-        const shippingAddresses = userShippingGetters.getAddresses(shipping.value);
-        if (!shippingAddresses || !shippingAddresses.length) {
-          return;
-        }
-        canAddNewAddress.value = false;
-        if (shippingAddresses[0].isDefault) {
-          setCurrentAddress(shippingAddresses[0].id);
-        }
+      await search();
+      await loadShipping();
+      if (shippingAddress) {
+        form.value = shippingAddress.value;
       }
+      formRef.value.validate({ silent: true });
     });
 
-    const saveShippingDetails = async () => {
-      if (currentAddressId.value > -1 && setAsDefault.value) {
-        const chosenAddress = userShippingGetters.getAddresses(shipping.value, { id: currentAddressId.value });
-        if (!chosenAddress || !chosenAddress.length) {
-          return;
-        }
-        await setDefault(chosenAddress[0]);
+    watch(
+      () => form.value.country,
+      async () => {
+        await searchCountryStates(form.value.country);
       }
-      isShippingAddressCompleted.value = true;
-      addressIsModified.value = false;
-    };
-
-    const afterModifiedAddress = () => {
-      addressIsModified.value = true;
-      currentAddressId.value = -1;
-    };
-
-    const canContinueToPayment = computed(() => isShippingAddressCompleted.value && !addressIsModified.value);
+    );
 
     return {
-      shippingDetails,
-      chosenShippingMethod,
-      shippingMethods,
-      checkoutGetters,
-      COUNTRIES,
-      isAuthenticated,
-      shippingAddresses: computed(() => userShippingGetters.getAddresses(shipping.value)),
-      setAsDefault,
-      currentAddressId,
-      setCurrentAddress,
+      formRef,
+      handleSelectedMethodShipping,
+      isShippingDetailsStepCompleted,
       canAddNewAddress,
-      canContinueToPayment,
-      isShippingAddressCompleted,
-      addressIsModified,
-      saveShippingDetails,
-      afterModifiedAddress
+      handleAddNewAddressBtnClick,
+      defaultShippingAddress,
+      handleSetCurrentAddress,
+      currentAddressId,
+      userShipping,
+      hasSavedShippingAddress,
+      isAuthenticated,
+      loading,
+      isFormSubmitted,
+      form,
+      countries,
+      countryStates,
+      handleFormSubmit,
     };
-  }
+  },
 };
-
 </script>
 
 <style lang="scss" scoped>
-.title {
-  margin: var(--spacer-xl) 0 var(--spacer-base) 0;
-}
 .form {
+  --button-width: 100%;
   &__select {
     display: flex;
     align-items: center;
@@ -312,6 +337,7 @@ export default {
     ::v-deep .sf-select__dropdown {
       font-size: var(--font-size--lg);
       margin: 0;
+      color: var(--c-text);
       font-family: var(--font-family--secondary);
       font-weight: var(--font-weight--normal);
     }
@@ -320,9 +346,10 @@ export default {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    --button-width: auto;
   }
   &__element {
-    margin: 0 0 var(--spacer-base) 0;
+    margin: 0 0 var(--spacer-xl) 0;
     @include for-desktop {
       flex: 0 0 100%;
     }
@@ -337,46 +364,50 @@ export default {
       }
     }
   }
-  &__group {
-    display: flex;
-    align-items: center;
-  }
   &__action {
     @include for-desktop {
       flex: 0 0 100%;
       display: flex;
     }
   }
-  &__action-button, &__back-button {
-    --button-width: 100%;
-    @include for-desktop {
-      --button-width: auto;
+  &__action-button {
+    &--secondary {
+      @include for-desktop {
+        order: -1;
+        text-align: left;
+      }
+    }
+    &--add-address {
+      width: 100%;
+      margin: 0;
+      @include for-desktop {
+        margin: 0 0 var(--spacer-lg) 0;
+        width: auto;
+      }
     }
   }
-  &__action-button {
-    margin: 0 var(--spacer-xl) 0 0;
-  }
   &__back-button {
-    margin: 0 0 var(--spacer-sm) 0;
+    margin: var(--spacer-xl) 0 var(--spacer-sm);
+    &:hover {
+      color: var(--c-white);
+    }
     @include for-desktop {
       margin: 0 var(--spacer-xl) 0 0;
     }
   }
-  &__radio-group {
-    flex: 0 0 100%;
-    margin: 0 0 var(--spacer-2xl) 0;
-  }
 }
 .shipping {
-  margin: 0 calc(var(--spacer-xl) * -1);
   &__label {
     display: flex;
     justify-content: space-between;
   }
   &__description {
     --radio-description-margin: 0;
-    --radio-description-font-size: var(--font-size--xs);
+    --radio-description-font-size: var(--font-xs);
   }
 }
-
+.title,
+button {
+  margin: var(--spacer-xl) 0 var(--spacer-base) 0;
+}
 </style>

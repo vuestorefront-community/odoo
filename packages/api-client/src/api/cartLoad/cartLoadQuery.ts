@@ -1,10 +1,13 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query ($id: ID) {
-    allSaleOrders(id: $id){
+  query {
+    partnerShoppingCart{
       name
       amountTotal
+      shippingMethod{
+        id
+      }
       orderLine {
         id
         product {
@@ -12,12 +15,15 @@ export default gql`
           name,
           image
           listPrice 
-          attributes {
-            id, name
-          }
         }
         productUomQty
         priceTotal
+      },
+      partnerInvoiceId{
+        id, name, street, city,phone,zip, country{id},state{id}
+      },
+      partnerShippingId{
+        id, name, street, city,phone,zip, country{id},state{id}
       }
     }
   }

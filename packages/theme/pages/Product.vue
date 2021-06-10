@@ -26,55 +26,90 @@
         <div class="product__price-and-rating">
           <SfPrice
             :regular="$n(productGetters.getPrice(product).regular, 'currency')"
-            :special="productGetters.getPrice(product).special && $n(productGetters.getPrice(product).special, 'currency')"
+            :special="
+              productGetters.getPrice(product).special &&
+              $n(productGetters.getPrice(product).special, 'currency')
+            "
           />
           <div>
             <div class="product__rating">
-              <SfRating
-                :score="averageRating"
-                :max="5"
-              />
+              <SfRating :score="averageRating" :max="5" />
               <a v-if="!!totalReviews" href="#" class="product__count">
                 ({{ totalReviews }})
               </a>
             </div>
-            <SfButton data-cy="product-btn_read-all" class="sf-button--text">{{ $t('Read all reviews') }}</SfButton>
+            <SfButton data-cy="product-btn_read-all" class="sf-button--text">{{
+              $t('Read all reviews')
+            }}</SfButton>
           </div>
         </div>
         <div>
           <p class="product__description desktop-only">
             {{ description }}
           </p>
-          <SfButton data-cy="product-btn_size-guide" class="sf-button--text desktop-only product__guide">
+          <SfButton
+            data-cy="product-btn_size-guide"
+            class="sf-button--text desktop-only product__guide"
+          >
             {{ $t('Size guide') }}
           </SfButton>
-          <SfSelect
-            data-cy="product-select_size"
-            v-if="options.size"
-            :value="configuration.size"
-            @input="size => updateFilter({ size })"
-            label="Size"
-            class="sf-select--underlined product__select-size"
-            :required="true"
-          >
-            <SfSelectOption
-              v-for="size in options.size"
-              :key="size.value"
-              :value="size.value"
+
+          <div v-for="(name, key) in elementNames" :key="key">
+            <template v-if="groupedVariants[name].type == 'radio'">
+              {{ name }}
+              <SfRadio
+                class="sf-radio--transparent"
+                v-for="(item, itemKey) in groupedVariants[name].items"
+                :key="itemKey"
+                :name="name"
+                :value="item.value"
+                :label="item.label"
+                v-model="groupedVariants[name].model"
+                @input="updateFilter({ [name]: groupedVariants[name].model })"
+              />
+            </template>
+
+            <SfSelect
+              class="sf-select--underlined"
+              v-if="groupedVariants[name].type == 'select'"
+              :label="name"
+              v-model="groupedVariants[name].model"
+              @input="updateFilter({ [name]: groupedVariants[name].model })"
             >
-              {{size.label}}
-            </SfSelectOption>
-          </SfSelect>
-          <div v-if="options.color && options.color.length > 1" class="product__colors desktop-only">
-            <p class="product__color-label">{{ $t('Color') }}:</p>
-            <SfColor
-              data-cy="product-color_update"
-              v-for="(color, i) in options.color"
-              :key="i"
-              :color="color.value"
-              class="product__color"
-              @click="updateFilter({color})"
-            />
+              <SfSelectOption
+                :key="itemKey"
+                :value="item.value"
+                :label="item.label"
+                v-for="(item, itemKey) in groupedVariants[name].items"
+              >
+              </SfSelectOption>
+            </SfSelect>
+
+            <div
+              v-if="groupedVariants[name].type == 'color'"
+              class="product__colors desktop-only"
+            >
+              <SfColorPicker isOpen label="Choose color">
+                <SfColor color="#EDCBB9" :selected="false" />
+                <SfColor color="#ABD9D8" :selected="false" />
+                <SfColor color="#F1F2F3" :selected="false" />
+                <SfColor color="#DB5593" :selected="false" />
+                <SfColor color="#F59F93" :selected="false" />
+                <SfColor color="#FFEE97" :selected="false" />
+              </SfColorPicker>
+
+              <SfColorPicker isOpen :label="name">
+                <SfColor
+                  :key="itemKey"
+                  :selected="groupedVariants[name].model"
+                  :value="item.value"
+                  :color="item.label"
+                  v-for="(item, itemKey) in groupedVariants[name].items"
+                  @onClick:toggle="toggleColor(name)"
+                >
+                </SfColor>
+              </SfColorPicker>
+            </div>
           </div>
           <SfAddToCart
             data-cy="product-cart_add"
@@ -91,7 +126,7 @@
           <SfTabs :open-tab="1" class="product__tabs">
             <SfTab data-cy="product-tab_description" title="Description">
               <div class="product__description">
-                  {{ $t('Product description') }}
+                {{ $t('Product description') }}
               </div>
 
               <SfProperty
@@ -140,18 +175,20 @@
               data-cy="product-tab_additional"
               class="product__additional-info"
             >
-            <div class="product__additional-info">
-              <p class="product__additional-info__title">{{ $t('Brand') }}</p>
-              <p>{{ brand }}</p>
-              <p class="product__additional-info__title">{{ $t('Instruction1') }}</p>
-              <p class="product__additional-info__paragraph">
-                {{ $t('Instruction2') }}
-              </p>
-              <p class="product__additional-info__paragraph">
-                {{ $t('Instruction3') }}
-              </p>
-              <p>{{ careInstructions }}</p>
-            </div>
+              <div class="product__additional-info">
+                <p class="product__additional-info__title">{{ $t('Brand') }}</p>
+                <p>{{ brand }}</p>
+                <p class="product__additional-info__title">
+                  {{ $t('Instruction1') }}
+                </p>
+                <p class="product__additional-info__paragraph">
+                  {{ $t('Instruction2') }}
+                </p>
+                <p class="product__additional-info__paragraph">
+                  {{ $t('Instruction3') }}
+                </p>
+                <p>{{ careInstructions }}</p>
+              </div>
             </SfTab>
           </SfTabs>
         </LazyHydrate>
@@ -173,7 +210,6 @@
     <LazyHydrate when-visible>
       <MobileStoreBanner />
     </LazyHydrate>
-
   </div>
 </template>
 <script>
@@ -186,6 +222,7 @@ import {
   SfAddToCart,
   SfTabs,
   SfGallery,
+  SfRadio,
   SfIcon,
   SfImage,
   SfBanner,
@@ -194,13 +231,29 @@ import {
   SfReview,
   SfBreadcrumbs,
   SfButton,
-  SfColor
+  SfColor,
+  SfColorPicker,
 } from '@storefront-ui/vue';
 
 import InstagramFeed from '~/components/InstagramFeed.vue';
 import RelatedProducts from '~/components/RelatedProducts.vue';
-import { ref, computed } from '@vue/composition-api';
-import { useProduct, useCart, productGetters, useReview, reviewGetters } from '@vue-storefront/odoo';
+import {
+  ref,
+  computed,
+  watch,
+  onMounted,
+  reactive,
+} from '@vue/composition-api';
+import {
+  useProduct,
+  useCart,
+  productGetters,
+  useReview,
+  useProductVariant,
+  reviewGetters,
+} from '@vue-storefront/odoo';
+import { ssrRef } from '@nuxtjs/composition-api';
+
 import { onSSR } from '@vue-storefront/core';
 import MobileStoreBanner from '~/components/MobileStoreBanner.vue';
 import LazyHydrate from 'vue-lazy-hydration';
@@ -208,49 +261,93 @@ import LazyHydrate from 'vue-lazy-hydration';
 export default {
   name: 'Product',
   transition: 'fade',
-  setup(props, context) {
+  setup(props, { root }) {
     const qty = ref(1);
-    const { id } = context.root.$route.params;
+    const { id } = root.$route.params;
+    const { size, color } = root.$route.query;
+    const configuration = ref({ size, color });
     const { products, search } = useProduct('products');
-    const { products: relatedProducts, search: searchRelatedProducts, loading: relatedLoading } = useProduct('relatedProducts');
+    const {
+      searchVariants,
+      searchRealProduct,
+      productVariants,
+      realProduct,
+      groupedVariants,
+      getGroupedVariants,
+      elementNames,
+    } = useProductVariant();
+    const {
+      products: relatedProducts,
+      search: searchRelatedProducts,
+      loading: relatedLoading,
+    } = useProduct('relatedProducts');
     const { addItem, loading } = useCart();
-    const { reviews: productReviews, search: searchReviews } = useReview('productReviews');
+    const { reviews: productReviews, search: searchReviews } =
+      useReview('productReviews');
 
-    const product = computed(() => productGetters.getFiltered(products.value, { master: true, attributes: context.root.$route.query })[0]);
-    const options = computed(() => productGetters.getAttributes(products.value, ['color', 'size']));
-    const configuration = computed(() => productGetters.getAttributes(product.value, ['color', 'size']));
-    const description = computed(() => productGetters.getDescription(product.value));
-    const properties = computed(() => productGetters.getProperties(product.value));
+    const product = computed(() => {
+      const productTemplate =
+        Array.isArray(products.value) && products.value[0]
+          ? products.value[0]
+          : {};
+
+      return {
+        ...productTemplate,
+        realProduct: realProduct.value,
+      };
+    });
+
+    const options = computed(() =>
+      productGetters.getAttributes(products.value, ['color', 'size'])
+    );
+    const description = computed(() =>
+      productGetters.getDescription(product.value)
+    );
+    const properties = computed(() =>
+      productGetters.getProperties(product.value)
+    );
     const code = computed(() => productGetters.getCode(product.value));
 
-    const categories = computed(() => productGetters.getCategoryIds(product.value));
-    const reviews = computed(() => reviewGetters.getItems(productReviews.value));
+    const categories = computed(() =>
+      productGetters.getCategoryIds(product.value)
+    );
+    const reviews = computed(() =>
+      reviewGetters.getItems(productReviews.value)
+    );
 
     // TODO: Breadcrumbs are temporary disabled because productGetters return undefined. We have a mocks in data
     // const breadcrumbs = computed(() => productGetters.getBreadcrumbs ? productGetters.getBreadcrumbs(product.value) : props.fallbackBreadcrumbs);
-    const productGallery = computed(() => productGetters.getGallery(product.value).map(img => ({
-      mobile: { url: img.small },
-      desktop: { url: img.normal },
-      big: { url: img.big }
-    })));
+    const productGallery = computed(() =>
+      productGetters.getGallery(product.value).map((img) => ({
+        mobile: { url: img.small },
+        desktop: { url: img.normal },
+        big: { url: img.big },
+        alt: product.value.name,
+      }))
+    );
 
     onSSR(async () => {
+      await searchRealProduct({
+        productId: id,
+        combinationIds: Object.values(root.$route.query),
+      });
+      await searchVariants({ id });
       await search({ id });
-      await searchRelatedProducts({ catId: [categories.value[0]], limit: 8 });
-      await searchReviews({ productId: id });
+      getGroupedVariants(root.$route.query);
+      // await searchRelatedProducts({ catId: [categories.value[0]], limit: 8 });
+      // await searchReviews({ productId: id });
     });
 
     const updateFilter = (filter) => {
-      context.root.$router.push({
-        path: context.root.$route.path,
-        query: {
-          ...configuration.value,
-          ...filter
-        }
+      root.$router.replace({
+        path: root.$route.path,
+        query: { ...root.$route.query, ...filter },
       });
     };
 
     return {
+      elementNames,
+      groupedVariants,
       updateFilter,
       configuration,
       product,
@@ -259,22 +356,30 @@ export default {
       properties,
       reviews,
       reviewGetters,
-      averageRating: computed(() => productGetters.getAverageRating(product.value)),
-      totalReviews: computed(() => productGetters.getTotalReviews(product.value)),
-      relatedProducts: computed(() => productGetters.getFiltered(relatedProducts.value, { master: true })),
+      averageRating: computed(() =>
+        productGetters.getAverageRating(product.value)
+      ),
+      totalReviews: computed(() =>
+        productGetters.getTotalReviews(product.value)
+      ),
+      relatedProducts: computed(() =>
+        productGetters.getFiltered(relatedProducts.value, { master: true })
+      ),
       relatedLoading,
       options,
       qty,
       addItem,
       loading,
       productGetters,
-      productGallery
+      productVariants,
+      productGallery,
     };
   },
   components: {
     SfAlert,
     SfColor,
     SfProperty,
+    SfRadio,
     SfHeading,
     SfPrice,
     SfRating,
@@ -292,37 +397,38 @@ export default {
     InstagramFeed,
     RelatedProducts,
     MobileStoreBanner,
-    LazyHydrate
+    SfColorPicker,
+    LazyHydrate,
   },
   data() {
     return {
       stock: 5,
       detailsIsActive: false,
       brand:
-          'Brand name is the perfect pairing of quality and design. This label creates major everyday vibes with its collection of modern brooches, silver and gold jewellery, or clips it back with hair accessories in geo styles.',
+        'Brand name is the perfect pairing of quality and design. This label creates major everyday vibes with its collection of modern brooches, silver and gold jewellery, or clips it back with hair accessories in geo styles.',
       careInstructions: 'Do not wash!',
       breadcrumbs: [
         {
           text: 'Home',
           route: {
-            link: '#'
-          }
+            link: '#',
+          },
         },
         {
           text: 'Category',
           route: {
-            link: '#'
-          }
+            link: '#',
+          },
         },
         {
           text: 'Pants',
           route: {
-            link: '#'
-          }
-        }
-      ]
+            link: '#',
+          },
+        },
+      ],
     };
-  }
+  },
 };
 </script>
 

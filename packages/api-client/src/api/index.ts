@@ -1,4 +1,5 @@
 export { default as getCategory } from './getCategory';
+export { default as getProductTemplate } from './getProductTemplate';
 export { default as getProduct } from './getProduct';
 export { default as cartLoad } from './cartLoad';
 export { default as cartAddItem } from './cartAddItem';
@@ -12,3 +13,11 @@ export { default as cartUpdateItemQty } from './cartUpdateItemQty';
 export { default as wishlistLoad } from './wishlistLoad';
 export { default as wishlistAddItem } from './wishlistAddItem';
 export { default as wishlistRemoveItem } from './wishlistRemoveItem';
+export { default as getCountries } from './getCountries';
+export { default as getCountryStates } from './getCountryStates';
+export { default as shippingAddAdress } from './shippingAddAddress';
+export { default as shippingGetDeliveryMethods } from './shippingGetDeliveryMethods';
+export { default as getPriceShippingMethod } from './getPriceShippingMethod';
+export { default as billingUseShippingAsBillingAddress } from './billingUseShippingAsBillingAddress';
+export { default as billingAddAddress } from './billingAddAddress';
+export { default as getProductVariants } from './getProductVariants';

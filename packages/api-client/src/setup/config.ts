@@ -19,6 +19,7 @@ export interface CookiesConfig {
 }
 
 export interface Config<T = any> {
+    app: object;
     graphqlBaseUrl: string;
     odooBaseUrl: string;
     cookies: CookiesConfig;

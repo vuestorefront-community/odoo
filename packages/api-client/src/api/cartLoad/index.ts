@@ -8,10 +8,9 @@ export default async function cartLoad(context, params, customQuery?: CustomQuer
 
   const response = await apolloClient.query({
     fetchPolicy: "no-cache",
-    query,
-    variables: params
+    query
   });
 
-  return response.data.allSaleOrders.length > 0 ? response.data.allSaleOrders[0] : [];
+  return response.data.partnerShoppingCart.length > 0 ? response.data.partnerShoppingCart[0] : [];
 
 }

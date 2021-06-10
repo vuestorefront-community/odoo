@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CustomQuery } from '@vue-storefront/core';
-import mutation from './sendResetPasswordQuery';
+import mutation from './sendResetPasswordMutation';
 import ApolloClient from 'apollo-client';
 
 export default async function sendResetPassword(context, params, customQuery?: CustomQuery) {

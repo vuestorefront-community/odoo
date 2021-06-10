@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "sideEffects": false,
+  "server": "server/index.js",
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
   "types": "lib/index.d.ts",
@@ -13,7 +14,7 @@
     "prepublish": "yarn build"
   },
   "dependencies": {
-    "@vue-storefront/core": "^2.2.1",
+    "@vue-storefront/core": "2.3.0",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.14",

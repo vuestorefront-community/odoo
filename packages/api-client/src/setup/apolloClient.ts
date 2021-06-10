@@ -3,7 +3,6 @@ import { createHttpLink } from 'apollo-link-http';
 import { ApolloLink } from 'apollo-link';
 import { Config } from './config';
 import { onError } from 'apollo-link-error';
-
 import fetch from 'isomorphic-fetch';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -20,14 +19,30 @@ const createOddoLink = (settings: Config): any => {
     if (networkError) console.warn(`[Network error]: ${networkError}`);
   });
 
+
+  const afterwareLink = new ApolloLink((operation, forward) => {
+    return forward(operation).map((response) => {
+      const context = operation.getContext()
+      const authHeader = context.response.headers.get('set-cookie')
+
+      response.data.cookie = authHeader
+
+      return response
+    })
+  })
+
   const httpLink = createHttpLink({
     uri: settings.graphqlBaseUrl,
     credentials: 'include',
-    fetch
+    fetch,
+    headers: {
+      'Cookie': settings['auth']
+    }
   });
 
   const apolloLink = ApolloLink.from([
-    httpLink
+    errorLink,
+    afterwareLink.concat(httpLink)
   ]);
 
   return {
