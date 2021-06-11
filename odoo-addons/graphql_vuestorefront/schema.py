@@ -6,11 +6,11 @@
 # pylint: disable=E0602
 
 import graphene
+import requests
 from odoo.addons.graphql_base import OdooObjectType
 from odoo.addons.http_routing.models.ir_http import slug
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 from odoo.http import request
-import requests
 from odoo.osv import expression
 
 
@@ -61,12 +61,7 @@ class Partner(OdooObjectType):
 
     @staticmethod
     def resolve_contacts(root, info):
-        return root.child_ids
-
-
-class Category(OdooObjectType):
-    id = graphene.ID()
-    name = graphene.String(required=True)
+        return root.child_ids or None
 
 
 class EcommerceCategory(OdooObjectType):
@@ -81,20 +76,20 @@ class EcommerceCategory(OdooObjectType):
 
 class ProductAttribute(OdooObjectType):
     id = graphene.ID()
-    name = graphene.String()
+    name = graphene.String(required=True)
 
 
 class Currency(OdooObjectType):
     id = graphene.ID()
-    name = graphene.String()
-    symbol = graphene.String()
+    name = graphene.String(required=True)
+    symbol = graphene.String(required=True)
 
 
-class Product(OdooObjectType):
+class ProductTemplate(OdooObjectType):
     id = graphene.ID()
-    name = graphene.String()
+    name = graphene.String(required=True)
+    display_name = graphene.String()
     description = graphene.String()
-    categ = graphene.Field(Category)
     image = graphene.String()
     slug = graphene.String()
     default_code = graphene.String()
@@ -113,7 +108,7 @@ class Product(OdooObjectType):
     def resolve_image(root, info):
         env = info.context['env']
         base_url = env['ir.config_parameter'].sudo().get_param('web.base.url', '')
-        return '{}/web/image/product.product/{}/image_1920'.format(base_url, root.id)
+        return '{}/web/image/product.template/{}/image_1920'.format(base_url, root.id)
 
     @staticmethod
     def resolve_slug(root, info):
@@ -136,21 +131,56 @@ class Product(OdooObjectType):
         return root.product_variant_id.id or None
 
 
-class SaleOrderLine(OdooObjectType):
+class Product(OdooObjectType):
     id = graphene.ID()
     name = graphene.String(required=True)
-    product = graphene.Field(Product)
-    product_uom_qty = graphene.Float()
-    price_total = graphene.Float()
+    description = graphene.String()
+    image = graphene.String()
+    slug = graphene.String()
+    default_code = graphene.String()
+    list_price = graphene.Float()
+    standard_price = graphene.Float()
+    currency = graphene.Field(Currency)
+    ecommerce_categories = graphene.List(graphene.NonNull(lambda: EcommerceCategory))
+    attributes = graphene.List(graphene.NonNull(lambda: ProductAttribute))
 
     @staticmethod
-    def resolve_product(root, info):
-        return root.product_id or None
+    def resolve_name(root, info):
+        return root.display_name
+
+    @staticmethod
+    def resolve_description(root, info):
+        return root.description_sale or None
+
+    @staticmethod
+    def resolve_image(root, info):
+        env = info.context['env']
+        base_url = env['ir.config_parameter'].sudo().get_param('web.base.url', '')
+        return '{}/web/image/product.product/{}/image_1920'.format(base_url, root.id)
+
+    @staticmethod
+    def resolve_slug(root, info):
+        return slug(root).replace('-{}'.format(root.id), '')
+
+    @staticmethod
+    def resolve_currency(root, info):
+        return root.currency_id or None
+
+    @staticmethod
+    def resolve_attributes(root, info):
+        return root.product_template_attribute_value_ids or None
+
+    @staticmethod
+    def resolve_ecommerce_categories(root, info):
+        return root.public_categ_ids or None
+
+    @staticmethod
+    def resolve_first_variant_id(root, info):
+        return root.product_variant_id.id or None
 
 
 class WishlistItem(OdooObjectType):
     id = graphene.ID()
-    active = graphene.Boolean()
     partner = graphene.Field(Partner)
     product = graphene.Field(Product)
     currency = graphene.Field(Currency)
@@ -172,18 +202,28 @@ class WishlistItem(OdooObjectType):
 class ShippingMethod(OdooObjectType):
     id = graphene.ID()
     name = graphene.String()
-    active = graphene.Boolean()
+
+
+class SaleOrderLine(OdooObjectType):
+    id = graphene.ID()
+    name = graphene.String(required=True)
+    product = graphene.Field(Product)
+    product_uom_qty = graphene.Float()
+    price_total = graphene.Float()
+
+    @staticmethod
+    def resolve_product(root, info):
+        return root.product_id or None
 
 
 class SaleOrder(OdooObjectType):
     id = graphene.ID()
     name = graphene.String(required=True)
-    state = graphene.String()
     date_order = graphene.DateTime()
-    partner_id = graphene.Field(Partner)
-    partner_invoice_id = graphene.Field(Partner)
-    partner_shipping_id = graphene.Field(Partner)
-    currency_id = graphene.Field(Currency)
+    partner = graphene.Field(Partner)
+    partner_invoice = graphene.Field(Partner)
+    partner_shipping = graphene.Field(Partner)
+    currency = graphene.Field(Currency)
     order_line = graphene.List(graphene.NonNull(lambda: SaleOrderLine))
     invoice_status = graphene.String()
     amount_untaxed = graphene.Float()
@@ -191,6 +231,22 @@ class SaleOrder(OdooObjectType):
     amount_total = graphene.Float()
     currency_rate = graphene.String()
     shipping_method = graphene.Field(ShippingMethod)
+
+    @staticmethod
+    def resolve_partner(root, info):
+        return root.partner_id or None
+
+    @staticmethod
+    def resolve_partner_invoice(root, info):
+        return root.partner_invoice_id or None
+
+    @staticmethod
+    def resolve_partner_shipping(root, info):
+        return root.partner_shipping_id or None
+
+    @staticmethod
+    def resolve_currency(root, info):
+        return root.currency_id or None
 
     @staticmethod
     def resolve_order_line(root, info):
@@ -229,36 +285,25 @@ class PaymentAcquirer(OdooObjectType):
 
 class Query(graphene.ObjectType):
     all_ecommerce_categories = graphene.List(
-        graphene.NonNull(EcommerceCategory),
+        graphene.NonNull(ProductAttribute),
         required=True,
         id=graphene.ID(),
         name=graphene.String(),
-        parents_only=graphene.Boolean(),
+        top_category=graphene.Boolean(),
         limit=graphene.Int(),
         offset=graphene.Int(),
     )
 
-    all_products_template = graphene.List(
-        graphene.NonNull(Product),
+    all_product_templates = graphene.List(
+        graphene.NonNull(ProductTemplate),
         required=True,
         id=graphene.ID(),
         name=graphene.String(),
-        website_published=graphene.Boolean(),
         limit=graphene.Int(),
         offset=graphene.Int(),
     )
 
-    all_products = graphene.List(
-        graphene.NonNull(Product),
-        required=True,
-        id=graphene.ID(),
-        name=graphene.String(),
-        website_published=graphene.Boolean(),
-        limit=graphene.Int(),
-        offset=graphene.Int(),
-    )
-
-    partner_shopping_cart = graphene.List(
+    user_shopping_cart = graphene.List(
         graphene.NonNull(SaleOrder),
         required=True,
     )
@@ -281,55 +326,45 @@ class Query(graphene.ObjectType):
         required=True
     )
 
-    all_product_attributes = graphene.List(
-        graphene.NonNull(ProductAttribute),
-        required=True,
-        product_template_ids=graphene.List(graphene.Int),
-        limit=graphene.Int(),
-        offset=graphene.Int(),
-    )
-    
-    all_payment_acquirer = graphene.List(
+    all_payment_acquirers = graphene.List(
         graphene.NonNull(PaymentAcquirer),
         required=True
     )
 
     @staticmethod
-    def resolve_all_ecommerce_categories(root, info, id=None, name=False, parents_only=False, limit=None, offset=None):
+    def resolve_all_ecommerce_categories(root, info, id=None, name=None, top_category=False, limit=None, offset=None):
+        """
+        Get all ecommerce categories, use top_category to get categories without parent which is useful to list
+        categories on the navigation header
+        """
+        env = info.context['env']
+
         domain = []
         if id:
             domain.append(('id', '=', id))
         if name:
-            domain.append(('name', '=', name))
-        if parents_only:
+            domain.append(('name', 'ilike', name))
+        if top_category:
             domain.append(('parent_id', '=', False))
-        return info.context['env']['product.public.category'].sudo().search(domain, limit=limit, offset=offset)
+
+        return env['product.public.category'].sudo().search(domain, limit=limit, offset=offset)
 
     @staticmethod
-    def resolve_all_products_template(root, info, id=None, name=False, website_published=False, limit=None,
-                                      offset=None):
-        domain = []
+    def resolve_all_product_templates(root, info, id=None, name=None, limit=None, offset=None):
+        """ Get all product templates published on the website """
+        env = info.context['env']
+
+        domain = [('website_published', '=', True)]
         if id:
             domain.append(('id', '=', id))
         if name:
             domain.append(('name', 'ilike', name))
-        if website_published:
-            domain.append(('website_published', '=', True))
-        return info.context['env']['product.template'].sudo().search(domain, limit=limit, offset=offset)
+
+        return env['product.template'].sudo().search(domain, limit=limit, offset=offset)
 
     @staticmethod
-    def resolve_all_products(root, info, id=None, name=False, website_published=False, limit=None, offset=None):
-        domain = []
-        if id:
-            domain.append(('id', '=', id))
-        if name:
-            domain.append(('name', 'ilike', name))
-        if website_published:
-            domain.append(('website_published', '=', True))
-        return info.context['env']['product.product'].sudo().search(domain, limit=limit, offset=offset)
-
-    @staticmethod
-    def resolve_partner_shopping_cart(root, info):
+    def resolve_user_shopping_cart(root, info):
+        """ Get current user shopping cart """
         env = info.context['env']
 
         request.website = env.ref('website.default_website')
@@ -339,21 +374,27 @@ class Query(graphene.ObjectType):
 
     @staticmethod
     def resolve_all_wishlist_items(root, info):
+        """ Get current user wishlist items """
         env = info.context['env']
+
         request.website = env.ref('website.default_website')
 
-        return request.env['product.wishlist'].with_context(display_default_code=False).current()
+        return env['product.wishlist'].with_context(display_default_code=False).current()
 
     @staticmethod
     def resolve_all_countries(root, info, country_id=False, limit=None, offset=None):
+        """ Get all countries """
+        env = info.context['env']
+
         domain = []
         if country_id:
             domain.append(('id', '=', country_id))
 
-        return info.context['env']['res.country'].sudo().search(domain, limit=limit, offset=offset)
+        return env['res.country'].sudo().search(domain, limit=limit, offset=offset)
 
     @staticmethod
     def resolve_all_delivery_methods(root, info):
+        """ Get all delivery methods """
         env = info.context['env']
 
         request.website = env.ref('website.default_website')
@@ -362,16 +403,8 @@ class Query(graphene.ObjectType):
         return order._get_delivery_methods()
 
     @staticmethod
-    def resolve_all_product_attributes(root, info, product_template_ids=[], limit=None, offset=None):
-        domain = []
-
-        if product_template_ids:
-            domain.append(('product_tmpl_ids', 'in', product_template_ids))
-
-        return info.context['env']['product.attribute'].sudo().search(domain, limit=limit, offset=offset)
-
-    @staticmethod
-    def resolve_all_payment_acquirer(root, info):
+    def resolve_all_payment_acquirers(root, info):
+        """ Get all payment acquirers """
         env = info.context['env']
 
         request.website = env.ref('website.default_website')
@@ -396,6 +429,7 @@ class SignUpUser(graphene.Mutation):
 
     @staticmethod
     def mutate(self, info, name, email, password):
+        """ Sign up user with name, email and password """
         env = info.context['env']
 
         env['res.users'].sudo().signup({
@@ -415,6 +449,7 @@ class SendResetPassword(graphene.Mutation):
 
     @staticmethod
     def mutate(self, info, email):
+        """ Send reset password to email """
         env = info.context['env']
 
         env['res.users'].sudo().reset_password(email)
@@ -431,6 +466,7 @@ class ResetPassword(graphene.Mutation):
 
     @staticmethod
     def mutate(self, info, token, password):
+        """ Reset password using token sent by email """
         env = info.context['env']
 
         # signup with a token: find the corresponding partner id
@@ -446,9 +482,6 @@ class ResetPassword(graphene.Mutation):
         return True
 
 
-# ===============================#
-#       Shipping Mutations       #
-# ===============================#
 class AddShippingAddress(graphene.Mutation):
     class Arguments:
         delivery_method_id = graphene.ID(required=True)
@@ -465,8 +498,9 @@ class AddShippingAddress(graphene.Mutation):
     ok = graphene.Boolean()
 
     @staticmethod
-    def mutate(self, info, first_name, last_name, street, city, country_id, zip_code, phone,
-               house_number, delivery_method_id, state_id=False):
+    def mutate(self, info, first_name, last_name, street, city, country_id, zip_code, phone, house_number,
+               delivery_method_id, state_id=False):
+        """ Add shipping address on checkout """
         env = info.context['env']
 
         request.website = env.ref('website.default_website')
@@ -514,6 +548,7 @@ class SelectShippingAddress(graphene.Mutation):
 
     @staticmethod
     def mutate(self, info, shipping_id, delivery_method_id):
+        """ Select shipping address on checkout """
         env = info.context['env']
 
         request.website = env.ref('website.default_website')
@@ -528,9 +563,6 @@ class SelectShippingAddress(graphene.Mutation):
         return True
 
 
-# ===============================#
-#       Billing Mutations        #
-# ===============================#
 class AddBillingAddress(graphene.Mutation):
     class Arguments:
         first_name = graphene.String(required=True)
@@ -548,6 +580,7 @@ class AddBillingAddress(graphene.Mutation):
     @staticmethod
     def mutate(self, info, first_name, last_name, street, city, country_id, zip_code, phone, house_number,
                state_id=False):
+        """ Add billing address on checkout """
         env = info.context['env']
 
         request.website = env.ref('website.default_website')
@@ -579,6 +612,7 @@ class UseShippingAsBillingAddress(graphene.Mutation):
 
     @staticmethod
     def mutate(self, info):
+        """ Use shipping as billing address on checkout """
         env = info.context['env']
 
         request.website = env.ref('website.default_website')
@@ -617,6 +651,7 @@ class SelectBillingAddress(graphene.Mutation):
 
     @staticmethod
     def mutate(self, info, billing_id):
+        """ Select billing address """
         env = info.context['env']
 
         request.website = env.ref('website.default_website')
@@ -629,15 +664,15 @@ class SelectBillingAddress(graphene.Mutation):
 
 
 class Mutation(graphene.ObjectType):
-    sign_up_user = SignUpUser.Field(description='Documentation of SignUpUser')
-    send_reset_password = SendResetPassword.Field(description='Documentation of SendResetPassword')
-    reset_password = ResetPassword.Field(description='Documentation of ResetPassword')
-    select_shipping_address = SelectShippingAddress.Field(description='Documentation of SelectShippingAddress')
-    add_shipping_address = AddShippingAddress.Field(description='Documentation of AddShippingAddress')
-    add_billing_address = AddBillingAddress.Field(description='Documentation of AddBillingAddress')
-    use_shipping_as_billing_address = UseShippingAsBillingAddress.Field(description='Documentation of '
-                                                                                    'UseShippingAsBillingAddress')
-    select_billing_address = SelectBillingAddress.Field(description='Documentation of SelectBillingAddress')
+    sign_up_user = SignUpUser.Field(description='Sign up user with name, email and password')
+    send_reset_password = SendResetPassword.Field(description='Send reset password to email')
+    reset_password = ResetPassword.Field(description='Reset password using token sent by email')
+    select_shipping_address = SelectShippingAddress.Field(description='Select shipping address on checkout')
+    add_shipping_address = AddShippingAddress.Field(description='Add shipping address on checkout')
+    add_billing_address = AddBillingAddress.Field(description='Add billing address on checkout')
+    use_shipping_as_billing_address = UseShippingAsBillingAddress.Field(
+        description='Use shipping as billing address on checkout')
+    select_billing_address = SelectBillingAddress.Field(description='Select billing address on checkout')
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

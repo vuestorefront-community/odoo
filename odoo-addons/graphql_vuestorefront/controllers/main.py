@@ -4,7 +4,6 @@
 from odoo import http
 from odoo.addons.graphql_base import GraphQLControllerMixin
 from odoo.addons.sale.controllers.variant import VariantController
-from odoo.addons.website_sale.controllers.main import WebsiteSale
 from odoo.http import request
 
 from ..schema import schema
@@ -32,8 +31,9 @@ class GraphQLController(http.Controller, GraphQLControllerMixin):
 
 
 class WebsiteSaleVariantController(VariantController):
-    @http.route(['/sale/get_combination/<int:product_template_id>'], type='json', auth='public', website=True)
-    def get_combination(self, product_template_id, **kw):
+    @http.route(['/shop/get_combinations/<int:product_template_id>'], type='json', auth='public', website=True)
+    def shop_get_combination(self, product_template_id, **kw):
+        """ Get all product template attributes for product template page """
         res = {
             'attribute_values': [],
         }
@@ -43,39 +43,19 @@ class WebsiteSaleVariantController(VariantController):
             for ptal in product_template.valid_product_template_attribute_line_ids:
                 for ptav in ptal.product_template_value_ids._only_active():
                     res['attribute_values'].append({
+                        'attribute_name': ptav.attribute_id.name,
+                        'attribute_display_type': ptav.attribute_id.display_type,
                         'attribute_value_id': ptav.id,
                         'attribute_value_name': ptav.name,
-                        'attribute_name': ptav.attribute_id.name,
-                        'price_extra': ptav.price_extra,
-                        'display_type': ptav.attribute_id.display_type,
-                    })
-
-        return res
-
-    @http.route(['/shop/get_combination/<int:product_template_id>'], type='json', auth='public', website=True)
-    def get_combination(self, product_template_id, **kw):
-        """ Get all attributes from product template """
-        res = {
-            'attribute_values': [],
-        }
-
-        product_template = request.env['product.template'].browse(int(product_template_id))
-        if product_template.exists():
-            for ptal in product_template.valid_product_template_attribute_line_ids:
-                for ptav in ptal.product_template_value_ids._only_active():
-                    res['attribute_values'].append({
-                        'attribute_value_id': ptav.id,
-                        'attribute_value_name': ptav.name,
-                        'attribute_name': ptav.attribute_id.name,
-                        'price_extra': ptav.price_extra,
-                        'display_type': ptav.attribute_id.display_type,
+                        'attribute_value_html_color': ptav.html_color,
+                        'attribute_value_price_extra': ptav.price_extra,
                     })
 
         return res
 
     @http.route(['/shop/get_combination_info/<int:product_template_id>'], type='json', auth='public', website=True)
-    def get_combination_info(self, product_template_id, combination_ids=[], add_qty=1, pricelist=None, **kw):
-        """ Get variant id and price after selecting the combination on product page """
+    def shop_get_combination_info(self, product_template_id, combination_ids=[], add_qty=1, pricelist=None, **kw):
+        """ Get product id and price after selecting the combination on the product template page """
         env = request.env
 
         product_template = env['product.template'].browse(int(product_template_id))
@@ -84,10 +64,3 @@ class WebsiteSaleVariantController(VariantController):
             return product_template._get_combination_info(combination, add_qty=add_qty, pricelist=pricelist)
 
         return {}
-
-
-class WebsiteSaleController(WebsiteSale):
-
-    @http.route(['/shop/register_payment/<int:token_id>'], type='json', auth='public', website=True)
-    def json_rpc_to_register_payment(self, pm_id):
-        self.payment_token(pm_id)
