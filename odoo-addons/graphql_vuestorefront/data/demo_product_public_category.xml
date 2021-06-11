@@ -8,11 +8,11 @@
 
     <!-- product.public.category -->
     <record id="public_category_women" model="product.public.category">
-      <field name="name">Women</field>
+      <field name="name">WOMEN</field>
       <field name="sequence">27</field>
     </record>
     <record id="public_category_men" model="product.public.category">
-      <field name="name">Men</field>
+      <field name="name">MEN</field>
       <field name="sequence">61</field>
     </record>
 
