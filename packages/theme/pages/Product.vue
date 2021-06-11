@@ -56,7 +56,7 @@
 
           <div v-for="(name, key) in elementNames" :key="key">
             <template v-if="groupedVariants[name].type == 'radio'">
-              {{ name }}
+              <p class="product__size-label">{{ name }}:</p>
               <SfRadio
                 class="sf-radio--transparent"
                 v-for="(item, itemKey) in groupedVariants[name].items"
@@ -89,26 +89,19 @@
               v-if="groupedVariants[name].type == 'color'"
               class="product__colors desktop-only"
             >
-              <SfColorPicker isOpen label="Choose color">
-                <SfColor color="#EDCBB9" :selected="false" />
-                <SfColor color="#ABD9D8" :selected="false" />
-                <SfColor color="#F1F2F3" :selected="false" />
-                <SfColor color="#DB5593" :selected="false" />
-                <SfColor color="#F59F93" :selected="false" />
-                <SfColor color="#FFEE97" :selected="false" />
-              </SfColorPicker>
+              <p class="product__color-label">{{ name }}:</p>
 
-              <SfColorPicker isOpen :label="name">
-                <SfColor
-                  :key="itemKey"
-                  :selected="groupedVariants[name].model"
-                  :value="item.value"
-                  :color="item.label"
-                  v-for="(item, itemKey) in groupedVariants[name].items"
-                  @onClick:toggle="toggleColor(name)"
-                >
-                </SfColor>
-              </SfColorPicker>
+              <SfColor
+                class="sf-color-picker--vertical product__color"
+                :key="itemKey"
+                :value="item.value"
+                :color="item.label"
+                :selected="groupedVariants[name].model == item.value"
+                v-for="(item, itemKey) in groupedVariants[name].items"
+                @click="updateFilter({ [name]: item.value })"
+              >
+                z
+              </SfColor>
             </div>
           </div>
           <SfAddToCart
@@ -265,7 +258,7 @@ export default {
     const qty = ref(1);
     const { id } = root.$route.params;
     const { size, color } = root.$route.query;
-    const configuration = ref({ size, color });
+    const configuration = reactive({ size, color });
     const { products, search } = useProduct('products');
     const {
       searchVariants,
