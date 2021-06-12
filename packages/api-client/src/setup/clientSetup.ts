@@ -20,17 +20,9 @@ const onCreate = (settings: Config): { config: Config; client: ClientInstance } 
     withCredentials: true,
     baseURL: settings.odooBaseUrl,
     headers: {
-      Cookie: settings['auth']
+      Cookie: settings.auth
     }
   });
-  // axiosClient.interceptors.request.use((config) => {
-  //   /** In dev, intercepts request and logs it into console for dev */
-  //   console.info("✉️ ", config)
-  //   return config;
-  // }, (error) => {
-  //   console.error("✉️ ", error);
-  //   return Promise.reject(error);
-  // });
 
   return {
     config,

@@ -263,7 +263,6 @@ export default {
       productVariants,
       realProduct,
       groupedVariants,
-      getGroupedVariants,
       elementNames,
     } = useProductVariant();
     const {

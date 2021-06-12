@@ -87,7 +87,7 @@
             role="button"
             aria-label="Change to list view"
             :aria-pressed="!isCategoryGridView"
-            @click="changeToCategoryGridView"
+            @click="changeToCategoryListView"
           />
         </div>
       </div>
@@ -200,7 +200,7 @@
             class="products__list"
           >
             <SfProductCardHorizontal
-              data-cy="category-product-cart_wishlist"
+              v-e2e="'category-product-card'"
               v-for="(product, i) in products"
               :key="productGetters.getSlug(product)"
               :style="{ '--index': i }"
@@ -216,7 +216,7 @@
               "
               :max-rating="5"
               :score-rating="3"
-              :is-on-wishlist="false"
+              :isOnWishlist="isInWishlist({ product })"
               class="products__product-card-horizontal"
               @click:wishlist="addItemToWishlist({ product })"
               @click:add-to-cart="addItemToCart({ product, quantity: 1 })"

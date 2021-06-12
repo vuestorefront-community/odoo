@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 
 import {
-  Context, useUserFactory, UseUserFactoryParams,
+  Context, useUserFactory, UseUserFactoryParams
 } from '@vue-storefront/core';
 import { User } from '../types';
 import { getUserFromAgnosticUser, getAgnosticUserFromUser } from '../getters/userGetters';
@@ -12,7 +12,7 @@ const factoryParams: UseUserFactoryParams<User, any, any> = {
     const user = context.$odoo.config.app.$cookies.get('odoo-user');
 
     if (user) {
-      return getUserFromAgnosticUser(user)
+      return getUserFromAgnosticUser(user);
     }
     return null;
   },
@@ -21,7 +21,7 @@ const factoryParams: UseUserFactoryParams<User, any, any> = {
     context.$odoo.config.app.$cookies.remove('odoo-user');
     const response = await context.$odoo.api.logOutUser();
 
-    return response
+    return response;
   },
 
   updateUser: async (context: Context, { currentUser, updatedUserData }) => {
@@ -30,13 +30,14 @@ const factoryParams: UseUserFactoryParams<User, any, any> = {
   },
 
   register: async (context: Context, user) => {
-    const agonisticUser = getAgnosticUserFromUser(user)
+    const agonisticUser = getAgnosticUserFromUser(user);
 
     const response = await context.$odoo.api.signUpUser(agonisticUser);
+    console.log(response);
 
     context.$odoo.config.app.$cookies.set('odoo-user', response.result);
 
-    //@todo need api endpoint to return user info after register
+    // @todo need api endpoint to return user info after register
     return response;
   },
 
@@ -44,7 +45,7 @@ const factoryParams: UseUserFactoryParams<User, any, any> = {
     const response = await context.$odoo.api.logInUser(params);
 
     if (response.error) {
-      throw response.error.data.arguments
+      throw response.error.data.arguments;
     }
 
     context.$odoo.config.app.$cookies.set('odoo-user', response.result);
