@@ -5,7 +5,7 @@ const factoryParams = {
   search: async (context: Context, params: FacetSearchResult<any>) => {
 
     const categories = await context.$odoo.api.getCategory(params);
-    const products = await context.$odoo.api.getProductTemplate({ ...params, published: true });
+    const products = await context.$odoo.api.getProductTemplates({ ...params, published: true });
     return {
       categories,
       products

@@ -13,30 +13,30 @@ export const wishlist: Ref<Wishlist> = ref(null);
 const params: UseWishlistFactoryParams<Wishlist, WishlistProduct, Product> = {
   load: async (context: Context) => {
 
-    const wishlist = await context.$odoo.api.wishlistLoad()
+    const wishlist = await context.$odoo.api.wishlistLoad();
 
-    return wishlist.data.allWishlistItems.length > 0 ? wishlist.data.allWishlistItems : null;
+    return wishlist.data.allWishlistItems.length > 0 ? wishlist.data.allWishlistItems : [];
   },
 
   addItem: async (context: Context, { currentWishlist, product }) => {
 
     if (!params.isInWishlist(context, { currentWishlist, product })) {
 
-      await context.$odoo.api.wishlistAddItem(product)
-      const wishlist = params.load(context, {})
+      await context.$odoo.api.wishlistAddItem(product);
+      const wishlist = params.load(context, {});
 
       return wishlist;
     }
 
-    return currentWishlist
+    return currentWishlist;
 
   },
 
   removeItem: async (context: Context, { currentWishlist, product }) => {
 
-    await context.$odoo.api.wishlistRemoveItem(product)
+    await context.$odoo.api.wishlistRemoveItem(product);
 
-    const wishlist = params.load(context, {})
+    const wishlist = params.load(context, {});
 
     return wishlist;
   },
@@ -47,7 +47,7 @@ const params: UseWishlistFactoryParams<Wishlist, WishlistProduct, Product> = {
   },
 
   isInWishlist: (context: Context, { currentWishlist, product }) => {
-    return currentWishlist?.some(item => item.product.id == product.id)
+    return currentWishlist?.some(item => item.product.id == product.id);
   }
 };
 

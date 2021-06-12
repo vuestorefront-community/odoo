@@ -54,55 +54,59 @@
             {{ $t('Size guide') }}
           </SfButton>
 
-          <div v-for="(name, key) in elementNames" :key="key">
-            <template v-if="groupedVariants[name].type == 'radio'">
-              <p class="product__size-label">{{ name }}:</p>
-              <SfRadio
-                class="sf-radio--transparent"
-                v-for="(item, itemKey) in groupedVariants[name].items"
-                :key="itemKey"
-                :name="name"
-                :value="item.value"
-                :label="item.label"
-                v-model="groupedVariants[name].model"
-                @input="updateFilter({ [name]: groupedVariants[name].model })"
-              />
-            </template>
-
+          <div v-if="options.select">
             <SfSelect
+              v-for="(select, selectKey) in options.select"
+              :key="selectKey"
               class="sf-select--underlined"
-              v-if="groupedVariants[name].type == 'select'"
-              :label="name"
-              v-model="groupedVariants[name].model"
-              @input="updateFilter({ [name]: groupedVariants[name].model })"
+              :value="$route.query[select.label]"
+              :label="select.label"
+              @input="(selected) => updateFilter({ [select.label]: selected })"
             >
               <SfSelectOption
-                :key="itemKey"
+                :key="`${selectKey}_${itemKey}`"
                 :value="item.value"
                 :label="item.label"
-                v-for="(item, itemKey) in groupedVariants[name].items"
+                v-for="(item, itemKey) in select.values"
               >
               </SfSelectOption>
             </SfSelect>
+          </div>
 
-            <div
-              v-if="groupedVariants[name].type == 'color'"
-              class="product__colors desktop-only"
-            >
-              <p class="product__color-label">{{ name }}:</p>
+          <div v-if="options.radio">
+            <template v-for="(radio, radioKey) in options.radio">
+              <p class="product__size-label" :key="radioKey">
+                {{ radio.label }}:
+              </p>
+              <SfRadio
+                class="sf-radio--transparent"
+                v-for="(item, itemKey) in radio.values"
+                :key="`${radioKey}_${itemKey}`"
+                :selected="$route.query[radio.label]"
+                :name="radio.label"
+                :value="item.value"
+                :label="item.label"
+                @input="updateFilter({ [radio.label]: item.value })"
+              />
+            </template>
+          </div>
+
+          <div v-if="options.color" class="product__colors desktop-only">
+            <template v-for="(option, colorKey) in options.color">
+              <p class="product__color-label" :key="colorKey">
+                {{ $t('Color') }}:
+              </p>
 
               <SfColor
-                class="sf-color-picker--vertical product__color"
-                :key="itemKey"
-                :value="item.value"
-                :color="item.label"
-                :selected="groupedVariants[name].model == item.value"
-                v-for="(item, itemKey) in groupedVariants[name].items"
-                @click="updateFilter({ [name]: item.value })"
+                v-for="(color, itemKey) in option.values"
+                :key="`${colorKey}_${itemKey}`"
+                :color="color.label"
+                class="product__color"
+                :selected="checkSelected(option.label, color.value)"
+                @click="updateFilter({ [option.label]: color.value })"
               >
-                z
               </SfColor>
-            </div>
+            </template>
           </div>
           <SfAddToCart
             data-cy="product-cart_add"
@@ -230,13 +234,7 @@ import {
 
 import InstagramFeed from '~/components/InstagramFeed.vue';
 import RelatedProducts from '~/components/RelatedProducts.vue';
-import {
-  ref,
-  computed,
-  watch,
-  onMounted,
-  reactive,
-} from '@vue/composition-api';
+import { ref, computed, reactive } from '@vue/composition-api';
 import {
   useProduct,
   useCart,
@@ -245,7 +243,6 @@ import {
   useProductVariant,
   reviewGetters,
 } from '@vue-storefront/odoo';
-import { ssrRef } from '@nuxtjs/composition-api';
 
 import { onSSR } from '@vue-storefront/core';
 import MobileStoreBanner from '~/components/MobileStoreBanner.vue';
@@ -291,7 +288,7 @@ export default {
     });
 
     const options = computed(() =>
-      productGetters.getAttributes(products.value, ['color', 'size'])
+      productGetters.getAttributes(productVariants.value, ['color', 'size'])
     );
     const description = computed(() =>
       productGetters.getDescription(product.value)
@@ -320,25 +317,29 @@ export default {
     );
 
     onSSR(async () => {
+      await searchVariants({ productId: id });
       await searchRealProduct({
         productId: id,
         combinationIds: Object.values(root.$route.query),
       });
-      await searchVariants({ id });
       await search({ id });
-      getGroupedVariants(root.$route.query);
       // await searchRelatedProducts({ catId: [categories.value[0]], limit: 8 });
       // await searchReviews({ productId: id });
     });
 
     const updateFilter = (filter) => {
-      root.$router.replace({
+      root.$router.push({
         path: root.$route.path,
         query: { ...root.$route.query, ...filter },
       });
     };
 
+    const checkSelected = (attribute, value) => {
+      return root.$route.query[attribute] == value;
+    };
+
     return {
+      checkSelected,
       elementNames,
       groupedVariants,
       updateFilter,

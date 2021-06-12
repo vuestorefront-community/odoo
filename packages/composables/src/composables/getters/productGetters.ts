@@ -5,7 +5,7 @@ import {
   AgnosticPrice,
   ProductGetters
 } from '@vue-storefront/core';
-import { Product, Attribute } from '@vue-storefront/odoo-api/src/types';
+import { Product, ProductVariant, Attribute } from '@vue-storefront/odoo-api/src/types';
 
 type ProductFilters = any
 
@@ -47,7 +47,7 @@ export const getProductCoverImage = (product: Product): string => product.image;
 
 export const getProductSku = (product: Product): string => product.sku;
 
-export const getProductFiltered = (products: Product[], filters: ProductFilters | any = {}): Product[] => {
+export const getProductFiltered = (products: Product[], filters: ProductFilters | Product[] = {}) => {
   if (!products) {
     return [];
   }
@@ -55,8 +55,45 @@ export const getProductFiltered = (products: Product[], filters: ProductFilters 
   return products;
 };
 // es
-export const getProductAttributes = (products: Product[] | Product, filterByAttributeName?: string[]): Record<string, AgnosticAttribute | string> => {
-  return {};
+export const getProductAttributes = (productVariants: ProductVariant[], filterByAttributeName?: string[]): Record<string, AgnosticAttribute | string> => {
+
+  const attributes = {};
+  const groupedByName = {};
+
+  productVariants.forEach((option) => {
+    groupedByName[option.attribute_name] = {
+      type: option.attribute_display_type,
+      variantId: option.attribute_value_id,
+      label: option.attribute_name,
+      values: []
+    };
+  });
+  productVariants.forEach((option) => {
+    groupedByName[option.attribute_name].values.push({
+      value: String(option.attribute_value_id),
+      label: option.attribute_value_name
+    });
+  });
+
+  productVariants.forEach((option) => {
+    if (!attributes[option.attribute_display_type]) {
+      attributes[option.attribute_display_type] = [];
+    }
+    if (
+      groupedByName[option.attribute_name].type ===
+      option.attribute_display_type &&
+      !attributes[option.attribute_display_type].some(
+        (item) =>
+          item.variantId === groupedByName[option.attribute_name].variantId
+      )
+    ) {
+      attributes[option.attribute_display_type].push(
+        groupedByName[option.attribute_name]
+      );
+    }
+  });
+
+  return attributes;
 };
 
 export const getProductDescription = (product: Product): any => (product as any)?.description || '';
@@ -73,7 +110,7 @@ export const getProductTotalReviews = (product: Product): number => 0;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getProductAverageRating = (product: Product): number => 0;
 
-const productGetters: ProductGetters<Product, ProductFilters> = {
+const productGetters: ProductGetters<Product | ProductVariant, ProductFilters> = {
   getName: getProductName,
   getSlug: getProductSlug,
   getPrice: getProductPrice,
