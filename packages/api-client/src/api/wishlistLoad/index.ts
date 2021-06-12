@@ -7,7 +7,7 @@ export default async function wishlistLoad(context, params, customQuery?: Custom
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   const response = await apolloClient.query({
-    fetchPolicy: "no-cache",
+    fetchPolicy: 'no-cache',
     query
   });
 

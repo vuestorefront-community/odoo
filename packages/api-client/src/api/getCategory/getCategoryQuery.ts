@@ -5,7 +5,6 @@ export default gql`
       allEcommerceCategories(name: $term) {
         id
         name
-        slug
       }
     }
 `;

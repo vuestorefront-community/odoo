@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export default gql`
   query {
-    partnerShoppingCart{
+    userShoppingCart{
       name
       amountTotal
       shippingMethod{
@@ -19,10 +19,10 @@ export default gql`
         productUomQty
         priceTotal
       },
-      partnerInvoiceId{
+      partnerInvoice{
         id, name, street, city,phone,zip, country{id},state{id}
       },
-      partnerShippingId{
+      partnerShipping{
         id, name, street, city,phone,zip, country{id},state{id}
       }
     }

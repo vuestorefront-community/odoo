@@ -1,5 +1,5 @@
 export { default as getCategory } from './getCategory';
-export { default as getProductTemplate } from './getProductTemplate';
+export { default as getProductTemplates } from './getProductTemplates';
 export { default as getProduct } from './getProduct';
 export { default as cartLoad } from './cartLoad';
 export { default as cartAddItem } from './cartAddItem';

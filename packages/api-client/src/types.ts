@@ -75,6 +75,14 @@ export type Product = {
   firstVariantId: string
   attributes: Attribute[]
 }
+export type ProductVariant = {
+  attribute_name: string
+  attribute_display_type: string
+  attribute_value_id: number
+  attribute_value_name: string
+  attribute_value_html_color: any
+  attribute_value_price_extra: number
+}
 export type SaleOrderLine = {
   id: number
   name: string
