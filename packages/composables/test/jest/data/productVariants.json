@@ -1,0 +1,82 @@
+[
+    {
+        "attribute_name": "Color",
+        "attribute_display_type": "color",
+        "attribute_value_id": 1,
+        "attribute_value_name": "Red",
+        "attribute_value_html_color": false,
+        "attribute_value_price_extra": 0.0
+    },
+    {
+        "attribute_name": "Color",
+        "attribute_display_type": "color",
+        "attribute_value_id": 2,
+        "attribute_value_name": "Blue",
+        "attribute_value_html_color": false,
+        "attribute_value_price_extra": 0.0
+    },
+    {
+        "attribute_name": "Size",
+        "attribute_display_type": "radio",
+        "attribute_value_id": 3,
+        "attribute_value_name": "M",
+        "attribute_value_html_color": false,
+        "attribute_value_price_extra": 0.0
+    },
+    {
+        "attribute_name": "Size",
+        "attribute_display_type": "radio",
+        "attribute_value_id": 4,
+        "attribute_value_name": "L",
+        "attribute_value_html_color": false,
+        "attribute_value_price_extra": 0.0
+    },
+    {
+        "attribute_name": "Size",
+        "attribute_display_type": "radio",
+        "attribute_value_id": 5,
+        "attribute_value_name": "XL",
+        "attribute_value_html_color": false,
+        "attribute_value_price_extra": 0.0
+    },
+    {
+        "attribute_name": "Border",
+        "attribute_display_type": "radio",
+        "attribute_value_id": 6,
+        "attribute_value_name": "V",
+        "attribute_value_html_color": false,
+        "attribute_value_price_extra": 0.0
+    },
+    {
+        "attribute_name": "Border",
+        "attribute_display_type": "radio",
+        "attribute_value_id": 7,
+        "attribute_value_name": "O",
+        "attribute_value_html_color": false,
+        "attribute_value_price_extra": 0.0
+    },
+    {
+        "attribute_name": "Types",
+        "attribute_display_type": "select",
+        "attribute_value_id": 8,
+        "attribute_value_name": "Chiffon",
+        "attribute_value_html_color": false,
+        "attribute_value_price_extra": 0.0
+    },
+    {
+        "attribute_name": "Types",
+        "attribute_display_type": "select",
+        "attribute_value_id": 10,
+        "attribute_value_name": "Cotton",
+        "attribute_value_html_color": false,
+        "attribute_value_price_extra": 0.0
+    },
+    {
+        "attribute_name": "Types",
+        "attribute_display_type": "select",
+        "attribute_value_id": 9,
+        "attribute_value_name": "Crêpe",
+        "attribute_value_html_color": false,
+        "attribute_value_price_extra": 0.0
+    }
+]

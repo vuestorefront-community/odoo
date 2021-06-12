@@ -1,0 +1,76 @@
+{
+    "color": [
+        {
+            "type": "color",
+            "variantId": 2,
+            "label": "Color",
+            "values": [
+                {
+                    "value": "1",
+                    "label": "Red"
+                },
+                {
+                    "value": "2",
+                    "label": "Blue"
+                }
+            ]
+        }
+    ],
+    "radio": [
+        {
+            "type": "radio",
+            "variantId": 5,
+            "label": "Size",
+            "values": [
+                {
+                    "value": "3",
+                    "label": "M"
+                },
+                {
+                    "value": "4",
+                    "label": "L"
+                },
+                {
+                    "value": "5",
+                    "label": "XL"
+                }
+            ]
+        },
+        {
+            "type": "radio",
+            "variantId": 7,
+            "label": "Border",
+            "values": [
+                {
+                    "value": "6",
+                    "label": "V"
+                },
+                {
+                    "value": "7",
+                    "label": "O"
+                }
+            ]
+        }
+    ],
+    "select": [
+        {
+            "type": "select",
+            "variantId": 9,
+            "label": "Types",
+            "values": [
+                {
+                    "value": "8",
+                    "label": "Chiffon"
+                },
+                {
+                    "value": "10",
+                    "label": "Cotton"
+                },
+                {
+                    "value": "9",
+                    "label": "Crêpe"
+                }
+            ]
+        }
+    ]
+}

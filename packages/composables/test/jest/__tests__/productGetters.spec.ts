@@ -1,6 +1,7 @@
-import { getProductProperties, getProductGallery, getProductFiltered } from '../../../src/getters/productGetters';
+import { getProductProperties, getProductGallery, getProductFiltered, getProductAttributes } from '../../../src/composables/getters/productGetters';
 import { Product } from '@vue-storefront/odoo-api/src/types';
-
+import productVariants from '../data/productVariants.json';
+import productVariantsCorrectResponse from '../data/getProductAttributesResponse.json';
 test('get empty product attributes', () => {
   const propertiesWithNull = getProductProperties(null);
   const propertiesWithUndefined = getProductProperties(undefined);
@@ -12,8 +13,8 @@ test('get list of Attributes', () => {
   const product = {
     id: 1,
     attributes: [
-      { id: 1, name: 'size', displayName: 'Size'},
-      { id: 1, name: 'category', displayName: 'Category'}
+      { id: 1, name: 'size', displayName: 'Size' },
+      { id: 1, name: 'category', displayName: 'Category' }
     ]
   } as Product;
   const properties = getProductProperties(product);
@@ -65,3 +66,9 @@ test('get empty filtered product', () => {
   expect(productsWithUndefined).toStrictEqual([]);
 });
 
+test('get grouped attribute list', () => {
+
+  const result = getProductAttributes(productVariants, []);
+
+  expect(result).toStrictEqual(productVariantsCorrectResponse);
+});

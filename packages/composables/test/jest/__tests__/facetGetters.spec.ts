@@ -1,4 +1,4 @@
-import facetGetters from '../../../src/getters/facetGetters';
+import facetGetters from '../../../src/composables/getters/facetGetters';
 
 test('category tree response any empty', () => {
   const categoryTree = facetGetters.getCategoryTree({ data: null, input: null });
@@ -36,8 +36,8 @@ test('get correct pagination', () => {
       products: [{}, {}, {}]
     },
     input: null
-  }
-  const pagination = facetGetters.getPagination(searchData)
+  };
+  const pagination = facetGetters.getPagination(searchData);
 
   expect(pagination).toStrictEqual({
     currentPage: 1,
