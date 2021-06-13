@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-    query ($term: String){
-      allEcommerceCategories(name: $term) {
+    query ($term: String, $topCategory: Boolean){
+      allEcommerceCategories(name: $term, topCategory: $topCategory) {
         id
         name
       }

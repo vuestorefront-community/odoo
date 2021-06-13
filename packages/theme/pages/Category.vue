@@ -429,7 +429,6 @@ export default {
       if (!items) {
         return '';
       }
-
       const category = items.find(
         ({ isCurrent, items }) =>
           isCurrent || items.find(({ isCurrent }) => isCurrent)

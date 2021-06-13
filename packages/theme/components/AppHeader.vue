@@ -16,14 +16,12 @@
       </template>
       <template #navigation>
         <SfHeaderNavigationItem
+          v-for="(category, index) in topCategories"
+          :key="index"
+          v-e2e="'app-header-top-categories'"
           class="nav-item"
-          label="WOMEN"
-          :link="localePath('/c/women')"
-        />
-        <SfHeaderNavigationItem
-          class="nav-item"
-          label="MEN"
-          :link="localePath('/c/men')"
+          :label="category.name"
+          :link="localePath(`/c/${category.name}`)"
         />
       </template>
       <template #aside>
@@ -123,7 +121,6 @@ import {
   useUser,
   cartGetters,
   categoryGetters,
-  useFacet,
   useProduct,
   useCategory,
 } from '@vue-storefront/odoo';
@@ -161,7 +158,11 @@ export default {
 
     const { load: loadWishlist } = useWishlist();
     const { products, search: searchProductApi } = useProduct();
-    const { categories, search: searchCategoryApi } = useCategory();
+    const { categories, search: searchCategoryApi } = useCategory(
+      'AppHeader:LeftCategories'
+    );
+    const { categories: topCategories, search: searchTopCategoryApi } =
+      useCategory('AppHeader:TopCategories');
 
     const term = ref(getFacetsFromURL().term);
     const isSearchOpen = ref(false);
@@ -231,6 +232,7 @@ export default {
     onSSR(async () => {
       await loadUser();
       await loadWishlist();
+      await searchTopCategoryApi({ topCategory: true });
     });
 
     onMounted(() => {
@@ -238,6 +240,7 @@ export default {
     });
 
     return {
+      topCategories,
       accountIcon,
       closeOrFocusSearchBar,
       cartTotalItems,

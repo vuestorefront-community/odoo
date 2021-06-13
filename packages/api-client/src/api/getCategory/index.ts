@@ -7,7 +7,10 @@ export default async function getCategory(context, params, customQuery?: CustomQ
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   const response = await apolloClient.query(
-    { query: gql`${query}` }
+    {
+      query: gql`${query}`,
+      variables: params
+    }
   );
 
   return response.data.allEcommerceCategories;
