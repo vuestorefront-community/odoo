@@ -376,7 +376,7 @@
     </record>
 
 
-    <!-- Products women-bags-shopper -->
+    <!-- Products women-bags-shopper 1 -->
     <record id="women_bags_shopper_1" model="product.template">
         <field name="name">Moschino Love – Shopper</field>
         <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
@@ -432,6 +432,7 @@
     </record>
 
 
+    <!-- Products women-bags-shopper 2 -->
     <record id="women_bags_shopper_2" model="product.template">
         <field name="name">Michael Kors – Shopper “Jet Set Travel”</field>
         <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
@@ -484,6 +485,89 @@
     <record id="women_bags_shopper_2a" model="product.product">
         <field name="default_code">578902-00</field>
         <field name="standard_price">343.75</field>
+    </record>
+
+
+    <!-- Products women-bags-shopper 3 -->
+    <record id="women_bags_shopper_3" model="product.template">
+        <field name="name">Bag “Jet Set Travel” Michael Kors</field>
+        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
+        <field name="list_price">368.75</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">368.75</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">This is the product: Bag “Jet Set Travel” Michael Kors</field>
+        <field name="default_code">578902-00</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_shopper')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/bags/shopper/shopper-3-black.jpg"/>
+    </record>
+
+    <!-- Attribute Values -->
+    <record id="women_bags_shopper_3_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="women_bags_shopper_3"/>
+        <field name="attribute_id" ref="product_attribute_material"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
+    </record>
+    <record id="women_bags_shopper_3_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="women_bags_shopper_3"/>
+        <field name="attribute_id" ref="product_attribute_size"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_one_size')])]"/>
+    </record>
+    <record id="women_bags_shopper_3_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="women_bags_shopper_3"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_black'), ref('product_attribute_color_white')])]"/>
+    </record>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.women_bags_shopper_3_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.women_bags_shopper_3_attribute_1').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.women_bags_shopper_3_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.women_bags_shopper_3_attribute_2').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.women_bags_shopper_3_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.women_bags_shopper_3_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.women_bags_shopper_3_attribute_3_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.women_bags_shopper_3_attribute_3').product_template_value_ids[1],
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.women_bags_shopper_3a',
+            'record': obj().env.ref('graphql_vuestorefront.women_bags_shopper_3')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.women_bags_shopper_3_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.women_bags_shopper_3_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.women_bags_shopper_3_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.women_bags_shopper_3b',
+            'record': obj().env.ref('graphql_vuestorefront.women_bags_shopper_3')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.women_bags_shopper_3_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.women_bags_shopper_3_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.women_bags_shopper_3_attribute_3_value_2')),
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <!-- Default Code product -->
+    <record id="women_bags_shopper_3a" model="product.product">
+        <field name="default_code">BJSTMK-01</field>
+        <field name="standard_price">368.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/bags/shopper/shopper-3-black.jpg"/>
+    </record>
+    <record id="women_bags_shopper_3b" model="product.product">
+        <field name="default_code">BJSTMK-01</field>
+        <field name="standard_price">368.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/bags/shopper/shopper-3-white.jpg"/>
+    </record>
+
+    <record id="graphql_vuestorefront.women_bags_shopper_3_attribute_3_value_2" model="product.template.attribute.value">
+        <field name="price_extra">26.00</field>
     </record>
 
 

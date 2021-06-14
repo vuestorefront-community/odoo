@@ -186,8 +186,8 @@
         <field name="html_color">#000000</field>
         <field name="sequence">1</field>
     </record>
-    <record id="product_attribute_color_gray" model="product.attribute.value">
-        <field name="name">Gray</field>
+    <record id="product_attribute_color_grey" model="product.attribute.value">
+        <field name="name">Grey</field>
         <field name="attribute_id" ref="product_attribute_color"/>
         <field name="html_color">#bfbfbf</field>
         <field name="sequence">2</field>
@@ -233,6 +233,12 @@
         <field name="attribute_id" ref="product_attribute_color"/>
         <field name="html_color">#FFC0CB</field>
         <field name="sequence">9</field>
+    </record>
+    <record id="product_attribute_color_beige" model="product.attribute.value">
+        <field name="name">Beige</field>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="html_color">#faecdc</field>
+        <field name="sequence">10</field>
     </record>
 
 </odoo>

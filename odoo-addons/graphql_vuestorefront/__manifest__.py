@@ -27,6 +27,8 @@
         'data/demo_products_women_bags.xml',
         'data/demo_products_men_clothing_1.xml',
         'data/demo_products_men_clothing_2.xml',
+        'data/demo_products_men_clothing_3.xml',
+        'data/demo_products_men_clothing_4.xml',
         'data/demo_products_men_shoes.xml'
     ],
     'installable': True,

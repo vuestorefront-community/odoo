@@ -14,7 +14,7 @@
         <field name="description_sale">This is the product: Daniele Alessandrini - Vest</field>
         <field name="invoice_policy">delivery</field>
         <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-1-gray.jpg"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-1-grey.jpg"/>
     </record>
 
     <!-- Attribute Values -->
@@ -31,7 +31,7 @@
     <record id="men_clothing_jackets_1_attribute_3" model="product.template.attribute.line">
         <field name="product_tmpl_id" ref="men_clothing_jackets_1"/>
         <field name="attribute_id" ref="product_attribute_color"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_gray'), ref('product_attribute_color_blue')])]"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_grey'), ref('product_attribute_color_blue')])]"/>
     </record>
 
     <function model="ir.model.data" name="_update_xmlids">
@@ -94,7 +94,7 @@
     <record id="men_clothing_jackets_1a" model="product.product">
         <field name="default_code">DA01-01</field>
         <field name="standard_price">165.00</field>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-1-gray.jpg"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-1-grey.jpg"/>
     </record>
     <record id="men_clothing_jackets_1b" model="product.product">
         <field name="default_code">DA01-02</field>
@@ -104,7 +104,7 @@
     <record id="men_clothing_jackets_1c" model="product.product">
         <field name="default_code">DA01-03</field>
         <field name="standard_price">165.00</field>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-1-gray.jpg"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-1-grey.jpg"/>
     </record>
     <record id="men_clothing_jackets_1d" model="product.product">
         <field name="default_code">DA01-04</field>
@@ -115,7 +115,7 @@
         <field name="default_code">DA01-05</field>
         <field name="standard_price">165.00</field>
         <field name="list_price">170.00</field>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-1-gray.jpg"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-1-grey.jpg"/>
     </record>
     <record id="men_clothing_jackets_1f" model="product.product">
         <field name="default_code">DA01-06</field>
@@ -504,6 +504,412 @@
         <field name="default_code">VNMR01-04</field>
         <field name="standard_price">662.50</field>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-5-red.jpg"/>
+    </record>
+
+
+    <!-- Products men-clothing-jackets 6 -->
+    <record id="men_clothing_jackets_6" model="product.template">
+        <field name="name">Moncler – Down Jacket “Jacob”</field>
+        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
+        <field name="list_price">1218.75</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">1218.75</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">This is the product: Moncler – Down Jacket “Jacob” </field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-6-brown.jpg"/>
+    </record>
+
+    <!-- Attribute Values -->
+    <record id="men_clothing_jackets_6_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_6"/>
+        <field name="attribute_id" ref="product_attribute_material"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
+    </record>
+    <record id="men_clothing_jackets_6_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_6"/>
+        <field name="attribute_id" ref="product_attribute_size"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_9'), ref('product_attribute_size_10'), ref('product_attribute_size_11')])]"/>
+    </record>
+    <record id="men_clothing_jackets_6_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_6"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_brown')])]"/>
+    </record>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_6_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6_attribute_1').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_6_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6_attribute_2').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_6_attribute_2_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6_attribute_2').product_template_value_ids[1],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_6_attribute_2_value_3',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6_attribute_2').product_template_value_ids[2],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_6_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_6a',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_6b',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6_attribute_2_value_2') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_6c',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6_attribute_2_value_3') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_6_attribute_3_value_1')),
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <!-- Default Code product -->
+    <record id="men_clothing_jackets_6a" model="product.product">
+        <field name="default_code">MDJ01-01</field>
+        <field name="standard_price">1218.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-6-brown.jpg"/>
+    </record>
+    <record id="men_clothing_jackets_6b" model="product.product">
+        <field name="default_code">MDJ01-02</field>
+        <field name="standard_price">1218.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-6-brown.jpg"/>
+    </record>
+    <record id="men_clothing_jackets_6c" model="product.product">
+        <field name="default_code">MDJ01-03</field>
+        <field name="standard_price">1218.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-6-brown.jpg"/>
+        <field name="active" eval="False"/>
+    </record>
+
+
+    <!-- Products men-clothing-jackets 7 -->
+    <record id="men_clothing_jackets_7" model="product.template">
+        <field name="name">Casual jacket Aspesi blue</field>
+        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
+        <field name="list_price">430.00</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">430.00</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">This is the product: Casual jacket Aspesi blue</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-7-blue.jpg"/>
+    </record>
+
+    <!-- Attribute Values -->
+    <record id="men_clothing_jackets_7_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_7"/>
+        <field name="attribute_id" ref="product_attribute_material"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
+    </record>
+    <record id="men_clothing_jackets_7_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_7"/>
+        <field name="attribute_id" ref="product_attribute_size"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_50'), ref('product_attribute_size_51')])]"/>
+    </record>
+    <record id="men_clothing_jackets_7_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_7"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_blue')])]"/>
+    </record>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_7_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_7_attribute_1').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_7_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_7_attribute_2').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_7_attribute_2_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_7_attribute_2').product_template_value_ids[1],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_7_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_7_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_7a',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_7')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_7_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_7_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_7_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_7b',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_7')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_7_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_7_attribute_2_value_2') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_7_attribute_3_value_1')),
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <!-- Default Code product -->
+    <record id="men_clothing_jackets_7a" model="product.product">
+        <field name="default_code">CJB01-01</field>
+        <field name="standard_price">430.00</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-7-blue.jpg"/>
+    </record>
+    <record id="men_clothing_jackets_7b" model="product.product">
+        <field name="default_code">CJB01-02</field>
+        <field name="standard_price">430.00</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-7-blue.jpg"/>
+    </record>
+
+
+    <!-- Products men-clothing-jackets 8 -->
+    <record id="men_clothing_jackets_8" model="product.template">
+        <field name="name">Casual jacket “Mahakali“ Peuterey blue</field>
+        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
+        <field name="list_price">423.75</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">423.75</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">This is the product: Casual jacket “Mahakali“ Peuterey blue</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-8-blue.jpg"/>
+    </record>
+
+    <!-- Attribute Values -->
+    <record id="men_clothing_jackets_8_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_8"/>
+        <field name="attribute_id" ref="product_attribute_material"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
+    </record>
+    <record id="men_clothing_jackets_8_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_8"/>
+        <field name="attribute_id" ref="product_attribute_size"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_47'), ref('product_attribute_size_49')])]"/>
+    </record>
+    <record id="men_clothing_jackets_8_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_8"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_blue')])]"/>
+    </record>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_8_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_8_attribute_1').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_8_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_8_attribute_2').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_8_attribute_2_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_8_attribute_2').product_template_value_ids[1],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_8_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_8_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_8a',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_8')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_8_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_8_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_8_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_8b',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_8')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_8_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_8_attribute_2_value_2') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_8_attribute_3_value_1')),
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <!-- Default Code product -->
+    <record id="men_clothing_jackets_8a" model="product.product">
+        <field name="default_code">Mahakali-01</field>
+        <field name="standard_price">423.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-8-blue.jpg"/>
+    </record>
+    <record id="men_clothing_jackets_8b" model="product.product">
+        <field name="default_code">Mahakali-02</field>
+        <field name="standard_price">423.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-8-blue.jpg"/>
+    </record>
+
+
+    <!-- Products men-clothing-jackets 9 -->
+    <record id="men_clothing_jackets_9" model="product.template">
+        <field name="name">Casual jacket Invicta blue</field>
+        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
+        <field name="list_price">173.75</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">173.75</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">This is the product: Casual jacket Invicta blue</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-9-blue.jpg"/>
+    </record>
+
+    <!-- Attribute Values -->
+    <record id="men_clothing_jackets_9_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_9"/>
+        <field name="attribute_id" ref="product_attribute_material"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
+    </record>
+    <record id="men_clothing_jackets_9_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_9"/>
+        <field name="attribute_id" ref="product_attribute_size"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_35'), ref('product_attribute_size_36')])]"/>
+    </record>
+    <record id="men_clothing_jackets_9_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_9"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_blue')])]"/>
+    </record>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_9_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_9_attribute_1').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_9_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_9_attribute_2').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_9_attribute_2_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_9_attribute_2').product_template_value_ids[1],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_9_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_9_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_9a',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_9')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_9_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_9_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_9_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_9b',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_9')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_9_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_9_attribute_2_value_2') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_9_attribute_3_value_1')),
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <!-- Default Code product -->
+    <record id="men_clothing_jackets_9a" model="product.product">
+        <field name="default_code">Invicta-01</field>
+        <field name="standard_price">423.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-9-blue.jpg"/>
+    </record>
+    <record id="men_clothing_jackets_9b" model="product.product">
+        <field name="default_code">Invicta-02</field>
+        <field name="standard_price">423.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-9-blue.jpg"/>
+        <field name="active" eval="False"/>
+    </record>
+
+
+    <!-- Products men-clothing-jackets 10 -->
+    <record id="men_clothing_jackets_10" model="product.template">
+        <field name="name">Casual jacket ”Lyon” Moncler black</field>
+        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
+        <field name="list_price">656.25</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">656.25</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">This is the product: Casual jacket ”Lyon” Moncler black</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-10-black.jpg"/>
+    </record>
+
+    <!-- Attribute Values -->
+    <record id="men_clothing_jackets_10_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_10"/>
+        <field name="attribute_id" ref="product_attribute_material"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
+    </record>
+    <record id="men_clothing_jackets_10_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_10"/>
+        <field name="attribute_id" ref="product_attribute_size"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_37'), ref('product_attribute_size_38')])]"/>
+    </record>
+    <record id="men_clothing_jackets_10_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_10"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_black')])]"/>
+    </record>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_10_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_10_attribute_1').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_10_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_10_attribute_2').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_10_attribute_2_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_10_attribute_2').product_template_value_ids[1],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_10_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_10_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_10a',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_10')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_10_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_10_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_10_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_10b',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_10')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_10_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_10_attribute_2_value_2') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_10_attribute_3_value_1')),
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <!-- Default Code product -->
+    <record id="men_clothing_jackets_10a" model="product.product">
+        <field name="default_code">LYON-01</field>
+        <field name="standard_price">656.25</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-10-black.jpg"/>
+    </record>
+    <record id="men_clothing_jackets_10b" model="product.product">
+        <field name="default_code">LYON-02</field>
+        <field name="standard_price">656.25</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-10-black.jpg"/>
+        <field name="active" eval="False"/>
     </record>
 
 </odoo>

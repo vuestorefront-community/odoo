@@ -1,886 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
 
-    <!-- Products men-clothing-tops -->
-    <record id="men_clothing_tops_1" model="product.template">
-        <field name="name">Cardigan Kangra green</field>
-        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
-        <field name="list_price">200.00</field>
-        <field name="is_published" eval="True"/>
-        <field name="standard_price">200.00</field>
-        <field name="type">consu</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
-        <field name="default_code">578902-00</field>
-        <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_tops')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/tops/tops-1.jpg"/>
-    </record>
-
-    <!-- Attribute Values -->
-    <record id="men_clothing_tops_1_attribute_1" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_tops_1"/>
-        <field name="attribute_id" ref="product_attribute_material"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
-    </record>
-    <record id="men_clothing_tops_1_attribute_2" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_tops_1"/>
-        <field name="attribute_id" ref="product_attribute_size"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_40')])]"/>
-    </record>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_tops_1_attribute_1_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_tops_1_attribute_1').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_tops_1_attribute_2_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_tops_1_attribute_2').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_tops_1_attribute_2_value_2',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_tops_1_attribute_2').product_template_value_ids[1],
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_tops_1a',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_tops_1')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_tops_1_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_tops_1_attribute_2_value_1')),
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_tops_1b',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_tops_1')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_tops_1_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_tops_1_attribute_2_value_2')),
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <!-- Default Code product -->
-    <record id="men_clothing_tops_1a" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">200.00</field>
-    </record>
-    <record id="men_clothing_tops_1b" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">200.00</field>
-    </record>
-
-
-    <record id="men_clothing_tops_2" model="product.template">
-        <field name="name">Vest Tagliatore blue</field>
-        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
-        <field name="list_price">206.25</field>
-        <field name="is_published" eval="True"/>
-        <field name="standard_price">206.25</field>
-        <field name="type">consu</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
-        <field name="default_code">578902-00</field>
-        <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_tops')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/tops/tops-2.jpg"/>
-    </record>
-
-    <!-- Attribute Values -->
-    <record id="men_clothing_tops_2_attribute_1" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_tops_2"/>
-        <field name="attribute_id" ref="product_attribute_material"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
-    </record>
-    <record id="men_clothing_tops_2_attribute_2" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_tops_2"/>
-        <field name="attribute_id" ref="product_attribute_size"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_40')])]"/>
-    </record>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_tops_2_attribute_1_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_tops_2_attribute_1').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_tops_2_attribute_2_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_tops_2_attribute_2').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_tops_2_attribute_2_value_2',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_tops_2_attribute_2').product_template_value_ids[1],
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_tops_2a',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_tops_2')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_tops_2_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_tops_2_attribute_2_value_1')),
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_tops_2b',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_tops_2')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_tops_2_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_tops_2_attribute_2_value_2')),
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <!-- Default Code product -->
-    <record id="men_clothing_tops_2a" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">206.25</field>
-    </record>
-    <record id="men_clothing_tops_2b" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">206.25</field>
-    </record>
-
-
-    <!-- Products men-clothing-shirts -->
-    <record id="men_clothing_shirts_1" model="product.template">
-        <field name="name">Shirt Barba blue</field>
-        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
-        <field name="list_price">248.75</field>
-        <field name="is_published" eval="True"/>
-        <field name="standard_price">248.75</field>
-        <field name="type">consu</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
-        <field name="default_code">578902-00</field>
-        <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_shirts')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/shirts/shirts-1.jpg"/>
-    </record>
-
-    <!-- Attribute Values -->
-    <record id="men_clothing_shirts_1_attribute_1" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_shirts_1"/>
-        <field name="attribute_id" ref="product_attribute_material"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
-    </record>
-    <record id="men_clothing_shirts_1_attribute_2" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_shirts_1"/>
-        <field name="attribute_id" ref="product_attribute_size"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_40')])]"/>
-    </record>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_shirts_1_attribute_1_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_shirts_1_attribute_1').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_shirts_1_attribute_2_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_shirts_1_attribute_2').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_shirts_1_attribute_2_value_2',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_shirts_1_attribute_2').product_template_value_ids[1],
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_shirts_1a',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_shirts_1')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_shirts_1_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_shirts_1_attribute_2_value_1')),
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_shirts_1b',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_shirts_1')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_shirts_1_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_shirts_1_attribute_2_value_2')),
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <!-- Default Code product -->
-    <record id="men_clothing_shirts_1a" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">248.75</field>
-    </record>
-    <record id="men_clothing_shirts_1b" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">248.75</field>
-    </record>
-
-
-    <record id="men_clothing_shirts_2" model="product.template">
-        <field name="name">Shirt Himons multi</field>
-        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
-        <field name="list_price">148.75</field>
-        <field name="is_published" eval="True"/>
-        <field name="standard_price">148.75</field>
-        <field name="type">consu</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
-        <field name="default_code">578902-00</field>
-        <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_shirts')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/shirts/shirts-2.jpg"/>
-    </record>
-
-    <!-- Attribute Values -->
-    <record id="men_clothing_shirts_2_attribute_1" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_shirts_2"/>
-        <field name="attribute_id" ref="product_attribute_material"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
-    </record>
-    <record id="men_clothing_shirts_2_attribute_2" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_shirts_2"/>
-        <field name="attribute_id" ref="product_attribute_size"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_40')])]"/>
-    </record>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_shirts_2_attribute_1_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_shirts_2_attribute_1').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_shirts_2_attribute_2_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_shirts_2_attribute_2').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_shirts_2_attribute_2_value_2',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_shirts_2_attribute_2').product_template_value_ids[1],
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_shirts_2a',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_shirts_2')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_shirts_2_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_shirts_2_attribute_2_value_1')),
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_shirts_2b',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_shirts_2')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_shirts_2_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_shirts_2_attribute_2_value_2')),
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <!-- Default Code product -->
-    <record id="men_clothing_shirts_2a" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">148.75</field>
-    </record>
-    <record id="men_clothing_shirts_2b" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">148.75</field>
-    </record>
-
-
-    <!-- Products men-clothing-trousers -->
-    <record id="men_clothing_trousers_1" model="product.template">
-        <field name="name">Chino Paolo Pecora grey</field>
-        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
-        <field name="list_price">281.25</field>
-        <field name="is_published" eval="True"/>
-        <field name="standard_price">281.25</field>
-        <field name="type">consu</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
-        <field name="default_code">578902-00</field>
-        <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_trousers')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/trousers/trousers-1.jpg"/>
-    </record>
-
-    <!-- Attribute Values -->
-    <record id="men_clothing_trousers_1_attribute_1" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_trousers_1"/>
-        <field name="attribute_id" ref="product_attribute_material"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
-    </record>
-    <record id="men_clothing_trousers_1_attribute_2" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_trousers_1"/>
-        <field name="attribute_id" ref="product_attribute_size"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_40')])]"/>
-    </record>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_trousers_1_attribute_1_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_trousers_1_attribute_1').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_trousers_1_attribute_2_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_trousers_1_attribute_2').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_trousers_1_attribute_2_value_2',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_trousers_1_attribute_2').product_template_value_ids[1],
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_trousers_1a',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_trousers_1')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_trousers_1_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_trousers_1_attribute_2_value_1')),
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_trousers_1b',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_trousers_1')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_trousers_1_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_trousers_1_attribute_2_value_2')),
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <!-- Default Code product -->
-    <record id="men_clothing_trousers_1a" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">281.25</field>
-    </record>
-    <record id="men_clothing_trousers_1b" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">281.25</field>
-    </record>
-
-
-    <record id="men_clothing_trousers_2" model="product.template">
-        <field name="name">Daniele Alessandrini – Casual hosen</field>
-        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
-        <field name="list_price">218.75</field>
-        <field name="is_published" eval="True"/>
-        <field name="standard_price">218.75</field>
-        <field name="type">consu</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
-        <field name="default_code">578902-00</field>
-        <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_trousers')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/trousers/trousers-2.jpg"/>
-    </record>
-
-    <!-- Attribute Values -->
-    <record id="men_clothing_trousers_2_attribute_1" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_trousers_2"/>
-        <field name="attribute_id" ref="product_attribute_material"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
-    </record>
-    <record id="men_clothing_trousers_2_attribute_2" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_trousers_2"/>
-        <field name="attribute_id" ref="product_attribute_size"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_40')])]"/>
-    </record>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_trousers_2_attribute_1_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_trousers_2_attribute_1').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_trousers_2_attribute_2_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_trousers_2_attribute_2').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_trousers_2_attribute_2_value_2',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_trousers_2_attribute_2').product_template_value_ids[1],
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_trousers_2a',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_trousers_2')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_trousers_2_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_trousers_2_attribute_2_value_1')),
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_trousers_2b',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_trousers_2')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_trousers_2_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_trousers_2_attribute_2_value_2')),
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <!-- Default Code product -->
-    <record id="men_clothing_trousers_2a" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">218.75</field>
-    </record>
-    <record id="men_clothing_trousers_2b" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">218.75</field>
-    </record>
-
-
-    <!-- Products men-clothing-jeans -->
-    <record id="men_clothing_jeans_1" model="product.template">
-        <field name="name">jeans Siviglia dark blue</field>
-        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
-        <field name="list_price">243.75</field>
-        <field name="is_published" eval="True"/>
-        <field name="standard_price">243.75</field>
-        <field name="type">consu</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
-        <field name="default_code">578902-00</field>
-        <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jeans')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jeans/jeans-1.jpg"/>
-    </record>
-
-    <!-- Attribute Values -->
-    <record id="men_clothing_jeans_1_attribute_1" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_jeans_1"/>
-        <field name="attribute_id" ref="product_attribute_material"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
-    </record>
-    <record id="men_clothing_jeans_1_attribute_2" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_jeans_1"/>
-        <field name="attribute_id" ref="product_attribute_size"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_40')])]"/>
-    </record>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_jeans_1_attribute_1_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jeans_1_attribute_1').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_jeans_1_attribute_2_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jeans_1_attribute_2').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_jeans_1_attribute_2_value_2',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jeans_1_attribute_2').product_template_value_ids[1],
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_jeans_1a',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jeans_1')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jeans_1_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jeans_1_attribute_2_value_1')),
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_jeans_1b',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jeans_1')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jeans_1_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jeans_1_attribute_2_value_2')),
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <!-- Default Code product -->
-    <record id="men_clothing_jeans_1a" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">243.75</field>
-    </record>
-    <record id="men_clothing_jeans_1b" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">243.75</field>
-    </record>
-
-
-    <record id="men_clothing_jeans_2" model="product.template">
-        <field name="name">Jeans Closed grey</field>
-        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
-        <field name="list_price">211.25</field>
-        <field name="is_published" eval="True"/>
-        <field name="standard_price">211.25</field>
-        <field name="type">consu</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
-        <field name="default_code">578902-00</field>
-        <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jeans')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jeans/jeans-2.jpg"/>
-    </record>
-
-    <!-- Attribute Values -->
-    <record id="men_clothing_jeans_2_attribute_1" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_jeans_2"/>
-        <field name="attribute_id" ref="product_attribute_material"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
-    </record>
-    <record id="men_clothing_jeans_2_attribute_2" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_jeans_2"/>
-        <field name="attribute_id" ref="product_attribute_size"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_40')])]"/>
-    </record>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_jeans_2_attribute_1_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jeans_2_attribute_1').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_jeans_2_attribute_2_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jeans_2_attribute_2').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_jeans_2_attribute_2_value_2',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jeans_2_attribute_2').product_template_value_ids[1],
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_jeans_2a',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jeans_2')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jeans_2_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jeans_2_attribute_2_value_1')),
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_jeans_2b',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jeans_2')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jeans_2_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jeans_2_attribute_2_value_2')),
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <!-- Default Code product -->
-    <record id="men_clothing_jeans_2a" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">211.25</field>
-    </record>
-    <record id="men_clothing_jeans_2b" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">211.25</field>
-    </record>
-
-
-    <!-- Products men-clothing-blazer -->
-    <record id="men_clothing_blazer_1" model="product.template">
-        <field name="name">Blazer Tagliatore brown</field>
-        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
-        <field name="list_price">573.75</field>
-        <field name="is_published" eval="True"/>
-        <field name="standard_price">573.75</field>
-        <field name="type">consu</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
-        <field name="default_code">578902-00</field>
-        <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_blazer')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/blazer/blazer-1.jpg"/>
-    </record>
-
-    <!-- Attribute Values -->
-    <record id="men_clothing_blazer_1_attribute_1" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_blazer_1"/>
-        <field name="attribute_id" ref="product_attribute_material"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
-    </record>
-    <record id="men_clothing_blazer_1_attribute_2" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_blazer_1"/>
-        <field name="attribute_id" ref="product_attribute_size"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_40')])]"/>
-    </record>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_blazer_1_attribute_1_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_blazer_1_attribute_1').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_blazer_1_attribute_2_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_blazer_1_attribute_2').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_blazer_1_attribute_2_value_2',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_blazer_1_attribute_2').product_template_value_ids[1],
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_blazer_1a',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_blazer_1')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_blazer_1_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_blazer_1_attribute_2_value_1')),
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_blazer_1b',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_blazer_1')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_blazer_1_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_blazer_1_attribute_2_value_2')),
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <!-- Default Code product -->
-    <record id="men_clothing_blazer_1a" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">573.75</field>
-    </record>
-    <record id="men_clothing_blazer_1b" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">573.75</field>
-    </record>
-
-
-    <record id="men_clothing_blazer_2" model="product.template">
-        <field name="name">Blazer Circolo 1901 blue</field>
-        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
-        <field name="list_price">411.25</field>
-        <field name="is_published" eval="True"/>
-        <field name="standard_price">411.25</field>
-        <field name="type">consu</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
-        <field name="default_code">578902-00</field>
-        <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_blazer')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/blazer/blazer-2.jpg"/>
-    </record>
-
-    <!-- Attribute Values -->
-    <record id="men_clothing_blazer_2_attribute_1" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_blazer_2"/>
-        <field name="attribute_id" ref="product_attribute_material"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
-    </record>
-    <record id="men_clothing_blazer_2_attribute_2" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_blazer_2"/>
-        <field name="attribute_id" ref="product_attribute_size"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_40')])]"/>
-    </record>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_blazer_2_attribute_1_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_blazer_2_attribute_1').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_blazer_2_attribute_2_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_blazer_2_attribute_2').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_blazer_2_attribute_2_value_2',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_blazer_2_attribute_2').product_template_value_ids[1],
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_blazer_2a',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_blazer_2')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_blazer_2_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_blazer_2_attribute_2_value_1')),
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_blazer_2b',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_blazer_2')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_blazer_2_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_blazer_2_attribute_2_value_2')),
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <!-- Default Code product -->
-    <record id="men_clothing_blazer_2a" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">411.25</field>
-    </record>
-    <record id="men_clothing_blazer_2b" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">411.25</field>
-    </record>
-
-
-    <!-- Products men-clothing-suits -->
-    <record id="men_clothing_suits_1" model="product.template">
-        <field name="name">Suit Mauro Grifoni grey</field>
-        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
-        <field name="list_price">668.75</field>
-        <field name="is_published" eval="True"/>
-        <field name="standard_price">668.75</field>
-        <field name="type">consu</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
-        <field name="default_code">578902-00</field>
-        <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_suits')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/suits/suits-1.jpg"/>
-    </record>
-
-    <!-- Attribute Values -->
-    <record id="men_clothing_suits_1_attribute_1" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_suits_1"/>
-        <field name="attribute_id" ref="product_attribute_material"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
-    </record>
-    <record id="men_clothing_suits_1_attribute_2" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_suits_1"/>
-        <field name="attribute_id" ref="product_attribute_size"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_40')])]"/>
-    </record>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_suits_1_attribute_1_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_suits_1_attribute_1').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_suits_1_attribute_2_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_suits_1_attribute_2').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_suits_1_attribute_2_value_2',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_suits_1_attribute_2').product_template_value_ids[1],
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_suits_1a',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_suits_1')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_suits_1_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_suits_1_attribute_2_value_1')),
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_suits_1b',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_suits_1')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_suits_1_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_suits_1_attribute_2_value_2')),
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <!-- Default Code product -->
-    <record id="men_clothing_suits_1a" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">668.75</field>
-    </record>
-    <record id="men_clothing_suits_1b" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">668.75</field>
-    </record>
-
-
-    <record id="men_clothing_suits_2" model="product.template">
-        <field name="name">Suit Tagliatore dark blue</field>
-        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
-        <field name="list_price">862.50</field>
-        <field name="is_published" eval="True"/>
-        <field name="standard_price">862.50</field>
-        <field name="type">consu</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
-        <field name="default_code">578902-00</field>
-        <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_suits')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/suits/suits-2.jpg"/>
-    </record>
-
-    <!-- Attribute Values -->
-    <record id="men_clothing_suits_2_attribute_1" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_suits_2"/>
-        <field name="attribute_id" ref="product_attribute_material"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
-    </record>
-    <record id="men_clothing_suits_2_attribute_2" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_suits_2"/>
-        <field name="attribute_id" ref="product_attribute_size"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_40')])]"/>
-    </record>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_suits_2_attribute_1_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_suits_2_attribute_1').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_suits_2_attribute_2_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_suits_2_attribute_2').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_suits_2_attribute_2_value_2',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_suits_2_attribute_2').product_template_value_ids[1],
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_suits_2a',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_suits_2')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_suits_2_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_suits_2_attribute_2_value_1')),
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_suits_2b',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_suits_2')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_suits_2_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_suits_2_attribute_2_value_2')),
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <!-- Default Code product -->
-    <record id="men_clothing_suits_2a" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">862.50</field>
-    </record>
-    <record id="men_clothing_suits_2b" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">862.50</field>
-    </record>
-
-
-    <!-- Products men-clothing-t-shirts -->
-    <record id="men_clothing_t-shirts_1" model="product.template">
-        <field name="name">Shirt The Sartorialist light blue</field>
-        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
-        <field name="list_price">186.25</field>
-        <field name="is_published" eval="True"/>
-        <field name="standard_price">186.25</field>
-        <field name="type">consu</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
-        <field name="default_code">578902-00</field>
-        <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_t-shirts')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/t-shirts/t-shirts-1.jpg"/>
-    </record>
-
-    <!-- Attribute Values -->
-    <record id="men_clothing_t-shirts_1_attribute_1" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_t-shirts_1"/>
-        <field name="attribute_id" ref="product_attribute_material"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
-    </record>
-    <record id="men_clothing_t-shirts_1_attribute_2" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_t-shirts_1"/>
-        <field name="attribute_id" ref="product_attribute_size"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_40')])]"/>
-    </record>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_t-shirts_1_attribute_1_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_1_attribute_1').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_t-shirts_1_attribute_2_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_1_attribute_2').product_template_value_ids[0],
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_t-shirts_1_attribute_2_value_2',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_1_attribute_2').product_template_value_ids[1],
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <function model="ir.model.data" name="_update_xmlids">
-        <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_t-shirts_1a',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_1')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_1_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_1_attribute_2_value_1')),
-            'noupdate': True,
-        }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_t-shirts_1b',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_1')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_1_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_1_attribute_2_value_2')),
-            'noupdate': True,
-        },]"/>
-    </function>
-
-    <!-- Default Code product -->
-    <record id="men_clothing_t-shirts_1a" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">186.25</field>
-    </record>
-    <record id="men_clothing_t-shirts_1b" model="product.product">
-        <field name="default_code">578902-00</field>
-        <field name="standard_price">186.25</field>
-    </record>
-
-
-    <record id="men_clothing_t-shirts_2" model="product.template">
-        <field name="name">Shirt Daniele Alessandrini grey</field>
+    <!-- Products men-clothing-jackets 11 -->
+    <record id="men_clothing_jackets_11" model="product.template">
+        <field name="name">Casual Jacket Save the Duck dark blue</field>
         <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
         <field name="list_price">198.75</field>
         <field name="is_published" eval="True"/>
@@ -888,61 +11,793 @@
         <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
-        <field name="default_code">578902-00</field>
+        <field name="description_sale">This is the product: Casual Jacket Save the Duck dark blue</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_t-shirts')])]"/>
-        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/t-shirts/t-shirts-2.jpg"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-11-blue.jpg"/>
     </record>
 
     <!-- Attribute Values -->
-    <record id="men_clothing_t-shirts_2_attribute_1" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_t-shirts_2"/>
+    <record id="men_clothing_jackets_11_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_11"/>
         <field name="attribute_id" ref="product_attribute_material"/>
         <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
     </record>
-    <record id="men_clothing_t-shirts_2_attribute_2" model="product.template.attribute.line">
-        <field name="product_tmpl_id" ref="men_clothing_t-shirts_2"/>
+    <record id="men_clothing_jackets_11_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_11"/>
         <field name="attribute_id" ref="product_attribute_size"/>
-        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_40')])]"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_12'), ref('product_attribute_size_13')])]"/>
+    </record>
+    <record id="men_clothing_jackets_11_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_11"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_blue')])]"/>
     </record>
 
     <function model="ir.model.data" name="_update_xmlids">
         <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_t-shirts_2_attribute_1_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_2_attribute_1').product_template_value_ids[0],
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_11_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_11_attribute_1').product_template_value_ids[0],
             'noupdate': True,
         }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_t-shirts_2_attribute_2_value_1',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_2_attribute_2').product_template_value_ids[0],
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_11_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_11_attribute_2').product_template_value_ids[0],
             'noupdate': True,
         }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_t-shirts_2_attribute_2_value_2',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_2_attribute_2').product_template_value_ids[1],
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_11_attribute_2_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_11_attribute_2').product_template_value_ids[1],
             'noupdate': True,
-        },]"/>
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_11_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_11_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }]"/>
     </function>
 
     <function model="ir.model.data" name="_update_xmlids">
         <value model="base" eval="[{
-            'xml_id': 'graphql_vuestorefront.men_clothing_t-shirts_2a',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_2')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_2_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_2_attribute_2_value_1')),
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_11a',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_11')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_11_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_11_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_11_attribute_3_value_1')),
             'noupdate': True,
         }, {
-            'xml_id': 'graphql_vuestorefront.men_clothing_t-shirts_2b',
-            'record': obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_2')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_2_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_t-shirts_2_attribute_2_value_2')),
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_11b',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_11')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_11_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_11_attribute_2_value_2') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_11_attribute_3_value_1')),
             'noupdate': True,
-        },]"/>
+        }]"/>
     </function>
 
     <!-- Default Code product -->
-    <record id="men_clothing_t-shirts_2a" model="product.product">
-        <field name="default_code">578902-00</field>
+    <record id="men_clothing_jackets_11a" model="product.product">
+        <field name="default_code">CJSDDB-01</field>
         <field name="standard_price">198.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-11-blue.jpg"/>
+        <field name="active" eval="False"/>
     </record>
-    <record id="men_clothing_t-shirts_2b" model="product.product">
-        <field name="default_code">578902-00</field>
+    <record id="men_clothing_jackets_11b" model="product.product">
+        <field name="default_code">CJSDDB-02</field>
         <field name="standard_price">198.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-11-blue.jpg"/>
+    </record>
+
+
+    <!-- Products men-clothing-jackets 12 -->
+    <record id="men_clothing_jackets_12" model="product.template">
+        <field name="name">Leather jacket D.r.o.w.s black</field>
+        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
+        <field name="list_price">872.50</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">872.50</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">This is the product: Leather jacket D.r.o.w.s black</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-12-black.jpg"/>
+    </record>
+
+    <!-- Attribute Values -->
+    <record id="men_clothing_jackets_12_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_12"/>
+        <field name="attribute_id" ref="product_attribute_material"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_leather')])]"/>
+    </record>
+    <record id="men_clothing_jackets_12_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_12"/>
+        <field name="attribute_id" ref="product_attribute_size"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_51'), ref('product_attribute_size_52')])]"/>
+    </record>
+    <record id="men_clothing_jackets_12_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_12"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_black')])]"/>
+    </record>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_12_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_12_attribute_1').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_12_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_12_attribute_2').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_12_attribute_2_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_12_attribute_2').product_template_value_ids[1],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_12_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_12_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_12a',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_12')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_12_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_12_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_12_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_12b',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_12')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_12_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_12_attribute_2_value_2') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_12_attribute_3_value_1')),
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <!-- Default Code product -->
+    <record id="men_clothing_jackets_12a" model="product.product">
+        <field name="default_code">LJB3-01</field>
+        <field name="standard_price">872.50</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-12-black.jpg"/>
+    </record>
+    <record id="men_clothing_jackets_12b" model="product.product">
+        <field name="default_code">LJB3-02</field>
+        <field name="standard_price">872.50</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-12-black.jpg"/>
+        <field name="active" eval="False"/>
+    </record>
+
+
+    <!-- Products men-clothing-jackets 13 -->
+    <record id="men_clothing_jackets_13" model="product.template">
+        <field name="name">Moncler – Down Jacket “Ryan”</field>
+        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
+        <field name="list_price">1162.50</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">1162.50</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">This is the product: Moncler – Down Jacket “Ryan”</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-13-blue.jpg"/>
+    </record>
+
+    <!-- Attribute Values -->
+    <record id="men_clothing_jackets_13_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_13"/>
+        <field name="attribute_id" ref="product_attribute_material"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
+    </record>
+    <record id="men_clothing_jackets_13_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_13"/>
+        <field name="attribute_id" ref="product_attribute_size"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_45'), ref('product_attribute_size_49')])]"/>
+    </record>
+    <record id="men_clothing_jackets_13_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_13"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_blue')])]"/>
+    </record>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_13_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_13_attribute_1').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_13_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_13_attribute_2').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_13_attribute_2_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_13_attribute_2').product_template_value_ids[1],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_13_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_13_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_13a',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_13')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_13_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_13_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_13_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_13b',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_13')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_13_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_13_attribute_2_value_2') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_13_attribute_3_value_1')),
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <!-- Default Code product -->
+    <record id="men_clothing_jackets_13a" model="product.product">
+        <field name="default_code">RYAN-01</field>
+        <field name="standard_price">1162.50</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-13-blue.jpg"/>
+    </record>
+    <record id="men_clothing_jackets_13b" model="product.product">
+        <field name="default_code">RYAN-02</field>
+        <field name="standard_price">1162.50</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-13-blue.jpg"/>
+    </record>
+
+
+    <!-- Products men-clothing-jackets 14 -->
+    <record id="men_clothing_jackets_14" model="product.template">
+        <field name="name">Harris Wharf – Coat</field>
+        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
+        <field name="list_price">598.75</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">598.75</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">This is the product: Harris Wharf – Coat</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-14-black.jpg"/>
+    </record>
+
+    <!-- Attribute Values -->
+    <record id="men_clothing_jackets_14_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_14"/>
+        <field name="attribute_id" ref="product_attribute_material"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
+    </record>
+    <record id="men_clothing_jackets_14_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_14"/>
+        <field name="attribute_id" ref="product_attribute_size"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_40')])]"/>
+    </record>
+    <record id="men_clothing_jackets_14_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_14"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_black')])]"/>
+    </record>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_14_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_14_attribute_1').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_14_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_14_attribute_2').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_14_attribute_2_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_14_attribute_2').product_template_value_ids[1],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_14_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_14_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_14a',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_14')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_14_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_14_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_14_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_14b',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_14')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_14_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_14_attribute_2_value_2') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_14_attribute_3_value_1')),
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <!-- Default Code product -->
+    <record id="men_clothing_jackets_14a" model="product.product">
+        <field name="default_code">HARRISWARF-01</field>
+        <field name="standard_price">598.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-14-black.jpg"/>
+    </record>
+    <record id="men_clothing_jackets_14b" model="product.product">
+        <field name="default_code">HARRISWARF-02</field>
+        <field name="standard_price">598.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-14-black.jpg"/>
+    </record>
+
+
+    <!-- Products men-clothing-jackets 15 -->
+    <record id="men_clothing_jackets_15" model="product.template">
+        <field name="name">Casual jacket Michael Kors beige</field>
+        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
+        <field name="list_price">373.75</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">373.75</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">This is the product: Casual jacket Michael Kors beige</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-15-beige.jpg"/>
+    </record>
+
+    <!-- Attribute Values -->
+    <record id="men_clothing_jackets_15_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_15"/>
+        <field name="attribute_id" ref="product_attribute_material"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
+    </record>
+    <record id="men_clothing_jackets_15_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_15"/>
+        <field name="attribute_id" ref="product_attribute_size"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_38'), ref('product_attribute_size_42')])]"/>
+    </record>
+    <record id="men_clothing_jackets_15_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_15"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_beige')])]"/>
+    </record>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_15_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_15_attribute_1').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_15_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_15_attribute_2').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_15_attribute_2_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_15_attribute_2').product_template_value_ids[1],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_15_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_15_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_15a',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_15')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_15_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_15_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_15_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_15b',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_15')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_15_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_15_attribute_2_value_2') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_15_attribute_3_value_1')),
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <!-- Default Code product -->
+    <record id="men_clothing_jackets_15a" model="product.product">
+        <field name="default_code">MKB02-01</field>
+        <field name="standard_price">598.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-15-beige.jpg"/>
+        <field name="active" eval="False"/>
+    </record>
+    <record id="men_clothing_jackets_15b" model="product.product">
+        <field name="default_code">MKB02-02</field>
+        <field name="standard_price">598.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-15-beige.jpg"/>
+        <field name="active" eval="False"/>
+    </record>
+
+
+    <!-- Products men-clothing-jackets 16 -->
+    <record id="men_clothing_jackets_16" model="product.template">
+        <field name="name">Down jacket “Kathmandu“ Peuterey grey</field>
+        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
+        <field name="list_price">411.25</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">411.25</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">This is the product: Down jacket “Kathmandu“ Peuterey grey</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-16-grey.jpg"/>
+    </record>
+
+    <!-- Attribute Values -->
+    <record id="men_clothing_jackets_16_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_16"/>
+        <field name="attribute_id" ref="product_attribute_material"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
+    </record>
+    <record id="men_clothing_jackets_16_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_16"/>
+        <field name="attribute_id" ref="product_attribute_size"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_36'), ref('product_attribute_size_38'), ref('product_attribute_size_40')])]"/>
+    </record>
+    <record id="men_clothing_jackets_16_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_16"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_grey')])]"/>
+    </record>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_16_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16_attribute_1').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_16_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16_attribute_2').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_16_attribute_2_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16_attribute_2').product_template_value_ids[1],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_16_attribute_2_value_3',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16_attribute_2').product_template_value_ids[2],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_16_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_16a',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_16b',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16_attribute_2_value_2') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_16c',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16_attribute_2_value_3') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_16_attribute_3_value_1')),
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <!-- Default Code product -->
+    <record id="men_clothing_jackets_16a" model="product.product">
+        <field name="default_code">KATHMANDU-01</field>
+        <field name="standard_price">411.25</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-16-grey.jpg"/>
+    </record>
+    <record id="men_clothing_jackets_16b" model="product.product">
+        <field name="default_code">KATHMANDU-02</field>
+        <field name="standard_price">411.25</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-16-grey.jpg"/>
+    </record>
+    <record id="men_clothing_jackets_16c" model="product.product">
+        <field name="default_code">KATHMANDU-03</field>
+        <field name="standard_price">411.25</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-16-grey.jpg"/>
+        <field name="active" eval="False"/>
+    </record>
+
+
+    <!-- Products men-clothing-jackets 17 -->
+    <record id="men_clothing_jackets_17" model="product.template">
+        <field name="name">Coat Aspesi beige </field>
+        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
+        <field name="list_price">536.25</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">536.25</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">This is the product: Coat Aspesi beige</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-17-beige.jpg"/>
+    </record>
+
+    <!-- Attribute Values -->
+    <record id="men_clothing_jackets_17_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_17"/>
+        <field name="attribute_id" ref="product_attribute_material"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
+    </record>
+    <record id="men_clothing_jackets_17_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_17"/>
+        <field name="attribute_id" ref="product_attribute_size"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_50'), ref('product_attribute_size_51')])]"/>
+    </record>
+    <record id="men_clothing_jackets_17_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_17"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_beige')])]"/>
+    </record>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_17_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_17_attribute_1').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_17_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_17_attribute_2').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_17_attribute_2_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_17_attribute_2').product_template_value_ids[1],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_17_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_17_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_17a',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_17')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_17_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_17_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_17_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_17b',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_17')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_17_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_17_attribute_2_value_2') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_17_attribute_3_value_1')),
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <!-- Default Code product -->
+    <record id="men_clothing_jackets_17a" model="product.product">
+        <field name="default_code">CAD02-01</field>
+        <field name="standard_price">536.25</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-17-beige.jpg"/>
+    </record>
+    <record id="men_clothing_jackets_17b" model="product.product">
+        <field name="default_code">CAD02-02</field>
+        <field name="standard_price">536.25</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-17-beige.jpg"/>
+        <field name="active" eval="False"/>
+    </record>
+
+
+    <!-- Products men-clothing-jackets 18 -->
+    <record id="men_clothing_jackets_18" model="product.template">
+        <field name="name">Casual jacket Stone Island grey</field>
+        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
+        <field name="list_price">837.50</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">837.50</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">This is the product: Casual jacket Stone Island grey</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-18-grey.jpg"/>
+    </record>
+
+    <!-- Attribute Values -->
+    <record id="men_clothing_jackets_18_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_18"/>
+        <field name="attribute_id" ref="product_attribute_material"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
+    </record>
+    <record id="men_clothing_jackets_18_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_18"/>
+        <field name="attribute_id" ref="product_attribute_size"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_48'), ref('product_attribute_size_52')])]"/>
+    </record>
+    <record id="men_clothing_jackets_18_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_18"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_grey')])]"/>
+    </record>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_18_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_18_attribute_1').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_18_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_18_attribute_2').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_18_attribute_2_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_18_attribute_2').product_template_value_ids[1],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_18_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_18_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_18a',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_18')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_18_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_18_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_18_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_18b',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_18')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_18_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_18_attribute_2_value_2') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_18_attribute_3_value_1')),
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <!-- Default Code product -->
+    <record id="men_clothing_jackets_18a" model="product.product">
+        <field name="default_code">CJSIG-01</field>
+        <field name="standard_price">837.50</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-18-grey.jpg"/>
+    </record>
+    <record id="men_clothing_jackets_18b" model="product.product">
+        <field name="default_code">CJSIG-02</field>
+        <field name="standard_price">837.50</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-18-grey.jpg"/>
+    </record>
+
+
+    <!-- Products men-clothing-jackets 19 -->
+    <record id="men_clothing_jackets_19" model="product.template">
+        <field name="name">Jacket Doubleface “Sol Walk“ Luis Trenker blue</field>
+        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
+        <field name="list_price">498.75</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">498.75</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">This is the product: Jacket Doubleface “Sol Walk“ Luis Trenker blue</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-19-blue.jpg"/>
+    </record>
+
+    <!-- Attribute Values -->
+    <record id="men_clothing_jackets_19_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_19"/>
+        <field name="attribute_id" ref="product_attribute_material"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_cotton')])]"/>
+    </record>
+    <record id="men_clothing_jackets_19_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_19"/>
+        <field name="attribute_id" ref="product_attribute_size"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_6'), ref('product_attribute_size_8')])]"/>
+    </record>
+    <record id="men_clothing_jackets_19_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_19"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_blue')])]"/>
+    </record>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_19_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_19_attribute_1').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_19_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_19_attribute_2').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_19_attribute_2_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_19_attribute_2').product_template_value_ids[1],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_19_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_19_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_19a',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_19')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_19_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_19_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_19_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_19b',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_19')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_19_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_19_attribute_2_value_2') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_19_attribute_3_value_1')),
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <!-- Default Code product -->
+    <record id="men_clothing_jackets_19a" model="product.product">
+        <field name="default_code">SOLWALK-01</field>
+        <field name="standard_price">498.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-19-blue.jpg"/>
+    </record>
+    <record id="men_clothing_jackets_19b" model="product.product">
+        <field name="default_code">SOLWALK-02</field>
+        <field name="standard_price">498.75</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-19-blue.jpg"/>
+    </record>
+
+
+    <!-- Products men-clothing-jackets 20 -->
+    <record id="men_clothing_jackets_20" model="product.template">
+        <field name="name">Bully – Leather Jacket</field>
+        <field name="categ_id" ref="graphql_vuestorefront.product_category_pants"/>
+        <field name="list_price">497.50</field>
+        <field name="is_published" eval="True"/>
+        <field name="standard_price">497.50</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="description_sale">This is the product: Bully – Leather Jacket</field>
+        <field name="invoice_policy">delivery</field>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-20-brown.jpg"/>
+    </record>
+
+    <!-- Attribute Values -->
+    <record id="men_clothing_jackets_20_attribute_1" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_20"/>
+        <field name="attribute_id" ref="product_attribute_material"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_material_leather')])]"/>
+    </record>
+    <record id="men_clothing_jackets_20_attribute_2" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_20"/>
+        <field name="attribute_id" ref="product_attribute_size"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_size_44'), ref('product_attribute_size_48')])]"/>
+    </record>
+    <record id="men_clothing_jackets_20_attribute_3" model="product.template.attribute.line">
+        <field name="product_tmpl_id" ref="men_clothing_jackets_20"/>
+        <field name="attribute_id" ref="product_attribute_color"/>
+        <field name="value_ids" eval="[(6, 0, [ref('product_attribute_color_brown')])]"/>
+    </record>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_20_attribute_1_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_20_attribute_1').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_20_attribute_2_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_20_attribute_2').product_template_value_ids[0],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_20_attribute_2_value_2',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_20_attribute_2').product_template_value_ids[1],
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_20_attribute_3_value_1',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_20_attribute_3').product_template_value_ids[0],
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <function model="ir.model.data" name="_update_xmlids">
+        <value model="base" eval="[{
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_20a',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_20')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_20_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_20_attribute_2_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_20_attribute_3_value_1')),
+            'noupdate': True,
+        }, {
+            'xml_id': 'graphql_vuestorefront.men_clothing_jackets_20b',
+            'record': obj().env.ref('graphql_vuestorefront.men_clothing_jackets_20')._get_variant_for_combination(obj().env.ref('graphql_vuestorefront.men_clothing_jackets_20_attribute_1_value_1') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_20_attribute_2_value_2') + obj().env.ref('graphql_vuestorefront.men_clothing_jackets_20_attribute_3_value_1')),
+            'noupdate': True,
+        }]"/>
+    </function>
+
+    <!-- Default Code product -->
+    <record id="men_clothing_jackets_20a" model="product.product">
+        <field name="default_code">BULLY02-01</field>
+        <field name="standard_price">497.50</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-20-brown.jpg"/>
+        <field name="active" eval="False"/>
+    </record>
+    <record id="men_clothing_jackets_20b" model="product.product">
+        <field name="default_code">BULLY02-02</field>
+        <field name="standard_price">497.50</field>
+        <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-20-brown.jpg"/>
     </record>
 
 </odoo>
