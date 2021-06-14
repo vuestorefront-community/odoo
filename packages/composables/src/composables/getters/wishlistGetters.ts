@@ -3,7 +3,6 @@ import {
   AgnosticPrice,
   AgnosticTotals
 } from '@vue-storefront/core';
-import { Product } from '@vue-storefront/odoo-api';
 import { Wishlist, WishlistItem } from '@vue-storefront/odoo-api/src/types';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -12,7 +11,7 @@ export const getWishlistItems = (wishlist: Wishlist): Wishlist => {
     return [];
   }
 
-  return wishlist
+  return wishlist;
 
 };
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -41,7 +40,7 @@ export const getWishlistItemSku = (product: any): string => product?.id || 'some
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getWishlistTotals = (wishlist: Wishlist): AgnosticTotals => {
 
-  const total = wishlist.reduce((accumlated, current) => accumlated + current.price, 0)
+  const total = wishlist.reduce((accumlated, current) => accumlated + current.price, 0);
   return {
     total: total,
     subtotal: total

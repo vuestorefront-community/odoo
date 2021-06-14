@@ -9,13 +9,11 @@ const getInstance = () => {
 const useUiHelpers = () => {
   const instance = getInstance();
 
-
   const getFacetsFromURL = () => {
-    console.warn('[VSF] please implement useUiHelpers.getFacets.');
+    const { query } = instance.$router.history.current;
 
     return {
-      categorySlug: null,
-      page: 1
+      term: query.term
     } as any;
   };
 
@@ -63,7 +61,7 @@ const useUiHelpers = () => {
     changeItemsPerPage,
     changeSearchTerm,
     isFacetColor,
-    isFacetCheckbox,
+    isFacetCheckbox
   };
 };
 

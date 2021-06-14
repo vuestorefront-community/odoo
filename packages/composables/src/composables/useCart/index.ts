@@ -31,18 +31,18 @@ const params: UseCartFactoryParams<Cart, SaleOrderLine, Product, Coupon> = {
     return currentCart;
   },
 
-  removeItem: async (context: Context, { currentCart, product, customQuery }) => {
+  removeItem: async (context: Context, { currentCart, product: saleOrderLine, customQuery }) => {
 
-    await context.$odoo.api.cartRemoveItem({ productId: product.product.id }, customQuery);
+    await context.$odoo.api.cartRemoveItem({ productId: saleOrderLine.product.id }, customQuery);
 
     const cart = params.load(context, {});
 
     return cart;
   },
 
-  updateItemQty: async (context: Context, { currentCart, product, quantity, customQuery }) => {
+  updateItemQty: async (context: Context, { currentCart, product: saleOrderLine, quantity, customQuery }) => {
 
-    await context.$odoo.api.cartUpdateItemQty({ productId: product.product.id, quantity }, customQuery);
+    await context.$odoo.api.cartUpdateItemQty({ productId: saleOrderLine.product.id, quantity }, customQuery);
 
     const cart = params.load(context, {});
 

@@ -72,7 +72,7 @@ export type Product = {
   image: string
   listPrice: number
   realProduct: any
-  firstVariantId: string
+  firstVariantId: number
   attributes: Attribute[]
 }
 export type ProductVariant = {
