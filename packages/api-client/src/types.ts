@@ -42,6 +42,10 @@ export type State = {
   id: number
   name: string
 }
+export type ShippingMethod = {
+  id: number
+  name: string
+}
 export type Country = {
   id: number
   code: string
@@ -110,13 +114,15 @@ export type SaleOrder = {
   state: string
   dateOrder: Date
   validityDate: Date
+  shippingMethod: ShippingMethod
   orderLine: SaleOrderLine[]
   invoiceStatus: string
   amountUntaxed: number
   amountTax: number
   amountTotal: number
   currencyRate: string
+  partnerInvoice: Partner
+  partnerShipping: Partner
 }
 export type CategoryFilter = Record<string, unknown>
-export type ShippingMethod = Record<string, unknown>
 export type LineItem = Record<string, unknown>

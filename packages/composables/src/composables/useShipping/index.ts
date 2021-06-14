@@ -1,52 +1,52 @@
+/* eslint-disable no-prototype-builtins */
 import { ref } from '@vue/composition-api';
 import { useVSFContext } from '@vue-storefront/core';
 import { Context } from '@vue-storefront/core';
+import { SaleOrder as Cart } from '@vue-storefront/odoo-api/src/types';
 
 const useShipping = () => {
+  const context: Context = useVSFContext();
 
-    const context: Context = useVSFContext();
+  const errors = ref({ graphQLErrors: [] });
 
-    const errors = ref({ graphQLErrors: [] })
+  const shippingAddress = ref({});
+  const shippingMethods = ref([]);
 
-    const shippingAddress = ref({})
-    const shippingMethods = ref([])
+  const resetCountryErrors = () => errors.value = { graphQLErrors: [] };
 
-    const resetCountryErrors = () => errors.value = { graphQLErrors: [] }
-
-    const searchShippingMethods = async () => {
-        if (shippingMethods.value.length > 0) {
-            return shippingMethods
-        }
-
-        shippingMethods.value = await context.$odoo.api.shippingGetDeliveryMethods({}, {});
+  const searchShippingMethods = async () => {
+    if (shippingMethods.value.length > 0) {
+      return shippingMethods;
     }
 
-    const load = async () => {
-        if (shippingAddress?.value?.hasOwnProperty('firstName')) {
-            return shippingAddress
-        }
+    shippingMethods.value = await context.$odoo.api.shippingGetDeliveryMethods({}, {});
+  };
 
-        const cart = await context.$odoo.api.cartLoad({}, {});
-        if (!cart) {
-            return
-        }
-
-        shippingAddress.value = {
-            streetName: cart.partnerShippingId.street,
-            apartment: '',
-            postalCode: cart.partnerShippingId.zip,
-            phone: cart.partnerShippingId.phone,
-            firstName: cart.partnerShippingId.name,
-            city: cart.partnerShippingId.city,
-            country: cart.partnerShippingId.country?.id,
-            state: cart.partnerShippingId.state?.id,
-            selectedMethodShipping: cart.shippingMethod?.id
-        }
-
-        return shippingAddress
+  const load = async () => {
+    if (shippingAddress?.value?.hasOwnProperty('firstName')) {
+      return shippingAddress;
     }
 
-    return { resetCountryErrors, load, searchShippingMethods, shippingAddress, shippingMethods, errors }
-}
+    const cart = await context.$odoo.api.cartLoad({}, {});
+    if (cart.data.userShoppingCart.length > 0) {
+      const realCart = cart.data.userShoppingCart[0];
+      shippingAddress.value = {
+        streetName: realCart.partnerShipping.street,
+        apartment: '',
+        postalCode: realCart.partnerShipping.zip,
+        phone: realCart.partnerShipping.phone,
+        firstName: realCart.partnerShipping.name,
+        city: realCart.partnerShipping.city,
+        country: realCart.partnerShipping.country?.id,
+        state: realCart.partnerShipping.state?.id,
+        selectedMethodShipping: realCart.shippingMethod?.id
+      };
+    }
+
+    return shippingAddress;
+  };
+
+  return { resetCountryErrors, load, searchShippingMethods, shippingAddress, shippingMethods, errors };
+};
 
 export default useShipping;

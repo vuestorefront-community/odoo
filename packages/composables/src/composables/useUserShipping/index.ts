@@ -29,7 +29,7 @@ const userShipping = {
 const params: UseUserShippingFactoryParams<any, any> = {
   provide() {
     return {
-      user: useUser(),
+      user: useUser()
     };
   },
 
@@ -45,12 +45,12 @@ const params: UseUserShippingFactoryParams<any, any> = {
       deliveryMethodId: address.selectedMethodShipping,
       city: address.city,
       countryId: Number.parseInt(address.country),
-      stateId: Number.parseInt(address.state),
-    }
+      stateId: Number.parseInt(address.state)
+    };
 
-    await context.$odoo.api.shippingAddAdress(shippingAdress)
+    await context.$odoo.api.shippingAddAdress(shippingAdress);
 
-    return address
+    return address;
   },
 
   deleteAddress: async (context: Context, params?) => {
@@ -61,7 +61,6 @@ const params: UseUserShippingFactoryParams<any, any> = {
 
   updateAddress: async (context: Context, params?) => {
     console.log('Mocked: updateAddress', params);
-
 
     return Promise.resolve(userShipping);
   },
