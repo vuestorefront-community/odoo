@@ -19,7 +19,7 @@ const params: UseCartFactoryParams<Cart, SaleOrderLine, Product, Coupon> = {
   },
 
   addItem: async (context: Context, { currentCart, product, quantity, customQuery }) => {
-    const productId = product.realProduct ? product.realProduct.product_id : product.id;
+    const productId = product.realProduct ? product.realProduct.product_id : product.firstVariantId;
 
     if (!params.isInCart(context, { currentCart, product })) {
       await context.$odoo.api.cartAddItem({ productId, quantity }, customQuery);
@@ -65,7 +65,7 @@ const params: UseCartFactoryParams<Cart, SaleOrderLine, Product, Coupon> = {
   },
 
   isInCart: (context: Context, { currentCart, product }) => {
-    return currentCart?.orderLine?.some(item => item.product.id == product.id) || false;
+    return currentCart?.orderLine?.some(item => item.product.id == product.firstVariantId) || false;
   }
 };
 

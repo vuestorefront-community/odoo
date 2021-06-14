@@ -18,7 +18,7 @@
         <SfHeaderNavigationItem
           v-for="(category, index) in topCategories"
           :key="index"
-          v-e2e="'app-header-top-categories'"
+          data-cy="app-header-top-categories"
           class="nav-item"
           :label="category.name"
           :link="localePath(`/c/${category.name}`)"
