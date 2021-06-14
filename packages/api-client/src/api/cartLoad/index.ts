@@ -11,6 +11,6 @@ export default async function cartLoad(context, params, customQuery?: CustomQuer
     query
   });
 
-  return response.data.userShoppingCart.length > 0 ? response.data.userShoppingCart[0] : [];
+  return response;
 
 }

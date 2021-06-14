@@ -46,13 +46,12 @@
             @click="toggleCartSidebar"
           >
             <SfIcon class="sf-header__icon" icon="empty_cart" size="1.25rem" />
-            <no-ssr>
-              <SfBadge
-                v-if="cartTotalItems"
-                class="sf-badge--number cart-badge"
-                >{{ cartTotalItems }}</SfBadge
-              >
-            </no-ssr>
+
+            <SfBadge
+              v-if="cartTotalItems"
+              class="sf-badge--number cart-badge"
+              >{{ cartTotalItems }}</SfBadge
+            >
           </SfButton>
         </div>
       </template>
@@ -233,11 +232,10 @@ export default {
       await loadUser();
       await loadWishlist();
       await searchTopCategoryApi({ topCategory: true });
+      await loadCart();
     });
 
-    onMounted(() => {
-      loadCart();
-    });
+    onMounted(() => {});
 
     return {
       topCategories,

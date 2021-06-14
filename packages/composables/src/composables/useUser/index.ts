@@ -33,7 +33,6 @@ const factoryParams: UseUserFactoryParams<User, any, any> = {
     const agonisticUser = getAgnosticUserFromUser(user);
 
     const response = await context.$odoo.api.signUpUser(agonisticUser);
-    console.log(response);
 
     context.$odoo.config.app.$cookies.set('odoo-user', response.result);
 

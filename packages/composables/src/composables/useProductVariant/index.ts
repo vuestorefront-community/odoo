@@ -11,7 +11,7 @@ const useProductVariant = () => {
 
   const errors = ssrRef([]);
   const productVariants = ssrRef([]);
-  const realProduct = ssrRef([]);
+  const realProduct = ssrRef(null);
   const groupedVariants = reactive({});
   const elementNames = ssrRef({});
 
