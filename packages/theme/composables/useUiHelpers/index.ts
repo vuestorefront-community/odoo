@@ -10,10 +10,9 @@ const useUiHelpers = () => {
 
   const getFacetsFromURL = () => {
     const { params } = instance.$router.history.current;
-    const param = params.slug_1.slice(0, -1);
-
+    const term = params.slug_1.slice(0, -1);
     return {
-      term: param
+      term
     } as any;
   };
 
