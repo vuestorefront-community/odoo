@@ -341,6 +341,9 @@ export default {
       font-family: var(--font-family--secondary);
       font-weight: var(--font-weight--normal);
     }
+    ::v-deep .sf-select__label {
+      left: initial;
+    }
   }
   @include for-desktop {
     display: flex;
@@ -406,8 +409,7 @@ export default {
     --radio-description-font-size: var(--font-xs);
   }
 }
-.title,
-button {
+.title {
   margin: var(--spacer-xl) 0 var(--spacer-base) 0;
 }
 </style>
