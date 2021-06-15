@@ -12,7 +12,6 @@ const useProductVariant = () => {
   const errors = ssrRef([]);
   const productVariants = ssrRef([]);
   const realProduct = ssrRef(null);
-  const groupedVariants = reactive({});
   const elementNames = ssrRef({});
 
   const resetPasswordErrors = () => errors.value = [];
@@ -42,7 +41,7 @@ const useProductVariant = () => {
     realProduct.value = response;
   };
 
-  return { elementNames, searchVariants, resetPasswordErrors, searchRealProduct, groupedVariants, productVariants, realProduct, errors };
+  return { elementNames, searchVariants, resetPasswordErrors, searchRealProduct, productVariants, realProduct, errors };
 };
 
 export default useProductVariant;

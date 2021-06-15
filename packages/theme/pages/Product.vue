@@ -8,7 +8,6 @@
       <LazyHydrate when-idle>
         <SfGallery :images="productGallery" class="product__gallery" />
       </LazyHydrate>
-
       <div class="product__info">
         <div class="product__header">
           <SfHeading
@@ -61,6 +60,7 @@
               class="sf-select--underlined"
               :value="$route.query[select.label]"
               :label="select.label"
+              required
               @input="(selected) => updateFilter({ [select.label]: selected })"
             >
               <SfSelectOption
@@ -75,12 +75,13 @@
 
           <div v-if="options.radio">
             <template v-for="(radio, radioKey) in options.radio">
-              <p class="product__size-label" :key="radioKey">
+              <p class="product__radio-label" :key="radioKey">
                 {{ radio.label }}:
               </p>
               <SfRadio
                 class="sf-radio--transparent"
                 v-for="(item, itemKey) in radio.values"
+                required
                 :key="`${radioKey}_${itemKey}`"
                 :selected="$route.query[radio.label]"
                 :name="radio.label"
@@ -98,6 +99,7 @@
               </p>
 
               <SfColor
+                required
                 v-for="(color, itemKey) in option.values"
                 :key="`${colorKey}_${itemKey}`"
                 :color="color.label"
@@ -112,7 +114,7 @@
             data-cy="product-cart_add"
             :stock="stock"
             v-model="qty"
-            :disabled="loading"
+            :disabled="loading || !allOptionsSelected"
             :canAddToCart="stock > 0"
             class="product__add-to-cart"
             @click="addItem({ product, quantity: parseInt(qty) })"
@@ -173,7 +175,9 @@
               class="product__additional-info"
             >
               <div class="product__additional-info">
-                <p class="product__additional-info__title">{{ $t('Brand') }}</p>
+                <p class="product__additional-info__title">
+                  {{ $t('Brand') }}
+                </p>
                 <p>{{ brand }}</p>
                 <p class="product__additional-info__title">
                   {{ $t('Instruction1') }}
@@ -247,7 +251,6 @@ import {
 import { onSSR } from '@vue-storefront/core';
 import MobileStoreBanner from '~/components/MobileStoreBanner.vue';
 import LazyHydrate from 'vue-lazy-hydration';
-
 export default {
   name: 'Product',
   transition: 'fade',
@@ -262,7 +265,6 @@ export default {
       searchRealProduct,
       productVariants,
       realProduct,
-      groupedVariants,
       elementNames,
     } = useProductVariant();
     const {
@@ -333,14 +335,27 @@ export default {
       });
     };
 
+    const allOptionsSelected = computed(() => {
+      let keys = [];
+      Object.keys(options.value).forEach((item) => {
+        keys = [
+          ...options.value[item].map((element) => element.label),
+          ...keys,
+        ];
+      });
+      const queryParams = Object.keys(root.$route.query);
+
+      return keys.every((param) => queryParams.includes(param));
+    });
+
     const checkSelected = (attribute, value) => {
       return root.$route.query[attribute] == value;
     };
 
     return {
+      allOptionsSelected,
       checkSelected,
       elementNames,
-      groupedVariants,
       updateFilter,
       configuration,
       product,
@@ -437,6 +452,7 @@ export default {
   @include for-desktop {
     display: flex;
   }
+
   &__info {
     margin: var(--spacer-sm) auto;
     @include for-desktop {
@@ -512,6 +528,16 @@ export default {
     display: flex;
     align-items: center;
     margin-top: var(--spacer-xl);
+  }
+  &__radio-label {
+    @include font(
+      --product-color-font,
+      var(--font-weight--normal),
+      var(--font-size--lg),
+      1.6,
+      var(--font-family--secondary)
+    );
+    margin: 0 var(--spacer-lg) 0 0;
   }
   &__color-label {
     margin: 0 var(--spacer-lg) 0 0;
