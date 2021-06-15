@@ -1,5 +1,4 @@
 import { getCurrentInstance } from '@vue/composition-api';
-import { AgnosticCategoryTree } from '@vue-storefront/core';
 import { Category } from '~/../api-client/src/types';
 const getInstance = () => {
   const vm = getCurrentInstance();
@@ -10,15 +9,16 @@ const useUiHelpers = () => {
   const instance = getInstance();
 
   const getFacetsFromURL = () => {
-    const { query } = instance.$router.history.current;
+    const { params } = instance.$router.history.current;
+    const param = params.slug_1.slice(0, -1);
 
     return {
-      term: query.term
+      term: param
     } as any;
   };
 
   // eslint-disable-next-line
-  const getCatLink = (category: Category): string => `/c/${category.slug}`;
+  const getCatLink = (category: Category): string => `/c/${category.label}`;
 
   // eslint-disable-next-line
   const changeSorting = (sort: string) => {

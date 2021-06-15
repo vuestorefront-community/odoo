@@ -15,6 +15,6 @@ export default async function cartRemoveItem(context, params, customQuery?: Cust
     }
   });
 
-  return response
+  return response;
 
 }

@@ -2,6 +2,7 @@ import webpack from 'webpack';
 
 export default {
   server: {
+    target: 'static',
     port: 3000,
     host: '0.0.0.0'
   },
@@ -140,7 +141,7 @@ export default {
     ],
     extend(config, ctx) {
       if (ctx.isDev) {
-        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map';
       }
     },
     plugins: [

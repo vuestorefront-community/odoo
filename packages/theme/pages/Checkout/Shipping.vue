@@ -230,12 +230,7 @@ export default {
     const isShippingDetailsStepCompleted = ref(false);
     const canAddNewAddress = ref(true);
 
-    const {
-      save,
-      loading,
-      addAddress,
-      shipping: userShipping,
-    } = useUserShipping();
+    const { loading, addAddress, shipping: userShipping } = useUserShipping();
     const { shippingAddress, load: loadShipping } = useShipping();
 
     const { isAuthenticated } = useUser();
