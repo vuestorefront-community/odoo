@@ -67,7 +67,12 @@ class Partner(OdooObjectType):
 class EcommerceCategory(OdooObjectType):
     id = graphene.ID()
     name = graphene.String(required=True)
+    parent = graphene.List(graphene.NonNull(lambda: EcommerceCategory))
     slug = graphene.String()
+
+    @staticmethod
+    def resolve_parent(root, info):
+        return root.parent_id or None
 
     @staticmethod
     def resolve_slug(root, info):
@@ -285,7 +290,7 @@ class PaymentAcquirer(OdooObjectType):
 
 class Query(graphene.ObjectType):
     all_ecommerce_categories = graphene.List(
-        graphene.NonNull(ProductAttribute),
+        graphene.NonNull(EcommerceCategory),
         required=True,
         id=graphene.ID(),
         name=graphene.String(),
