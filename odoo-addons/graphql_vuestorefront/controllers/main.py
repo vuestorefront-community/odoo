@@ -4,7 +4,9 @@
 from odoo import http
 from odoo.addons.graphql_base import GraphQLControllerMixin
 from odoo.addons.sale.controllers.variant import VariantController
+from odoo.addons.website_sale.controllers.main import WebsiteSale
 from odoo.http import request
+from odoo.addons.http_routing.models.ir_http import slug
 
 from ..schema import schema
 
@@ -30,7 +32,7 @@ class GraphQLController(http.Controller, GraphQLControllerMixin):
         return self._handle_graphql_request(schema)
 
 
-class WebsiteSaleVariantController(VariantController):
+class VsfVariantController(VariantController):
     @http.route(['/shop/get_combinations/<int:product_template_id>'], type='json', auth='public', website=True)
     def shop_get_combination(self, product_template_id, **kw):
         """ Get all product template attributes for product template page """
@@ -64,3 +66,62 @@ class WebsiteSaleVariantController(VariantController):
             return product_template._get_combination_info(combination, add_qty=add_qty, pricelist=pricelist)
 
         return {}
+
+
+class VsfWebsiteSale(WebsiteSale):
+    @http.route(['/shop/products'], type='json', auth='public', website=True)
+    def shop_get_combination_info(self, search='', category_id=None, offset=0, ppg=20, attrib_list=[], **post):
+        env = request.env
+        Product = env['product.template']
+        Category = env['product.public.category']
+        ProductAttribute = env['product.attribute']
+        base_url = env['ir.config_parameter'].sudo().get_param('web.base.url', '')
+
+        # Get category
+        if category_id:
+            category = Category.search([('id', '=', category_id)], limit=1)
+            if not category or not category.can_access_from_current_website():
+                category = Category
+        else:
+            category = Category
+
+        # Get attributes
+        attrib_values = [[int(x) for x in v.split("-")] for v in attrib_list if v]
+        attributes_ids = {v[0] for v in attrib_values}
+
+        # Get domain with search, category and attributes
+        domain = self._get_search_domain(search, category, attrib_values)
+
+        # Search products and get total of products and sliced version based on pagination
+        search_product = Product.search(domain, order=self._get_search_order(post))
+        product_count = len(search_product)
+        products = search_product[offset: offset + ppg]
+
+        # Get attributes of total products for search
+        if products:
+            # get all products without limit
+            attributes = ProductAttribute.search([('product_tmpl_ids', 'in', search_product.ids)])
+        else:
+            attributes = ProductAttribute.browse(attributes_ids)
+
+        return {
+            'products': [{
+                'id': product.id,
+                'name': product.name,
+                'image': '{}/web/image/product.template/{}/image_1920'.format(base_url, product.id),
+                'price': product.list_price,
+                'slug': slug(product).replace('-{}'.format(product.id), ''),
+            } for product in products],
+            'product_count': product_count,
+            'attributes': [{
+                'id': attribute.id,
+                'name': attribute.name,
+                'display_type': attribute.display_type,
+                'values': [{
+                    'id': value.id,
+                    'name': value.name,
+                    'html_color': value.html_color,
+                    'search': '{}-{}'.format(attribute.id, value.id),
+                } for value in attribute.value_ids],
+            } for attribute in attributes],
+        }
