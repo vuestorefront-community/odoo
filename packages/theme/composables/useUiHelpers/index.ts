@@ -10,10 +10,11 @@ const useUiHelpers = () => {
   const instance = getInstance();
 
   const getFacets = (currentCategory) => {
-    const { params } = instance.$router.history.current;
+    const { params, query } = instance.$router.history.current;
     const term = params.slug_1;
     return {
       term,
+      order: query.sort,
       category_id: currentCategory.value?.id
     } as any;
   };
@@ -28,9 +29,10 @@ const useUiHelpers = () => {
 
   // eslint-disable-next-line
   const getCatLink = (category: Category): string => {
-    const { params } = instance.$router.history.current;
+    const { params, query } = instance.$router.history.current;
+    const sort = query.sort ? `?sort=${query.sort}` : '';
 
-    return `/c/${params.slug_1}/${category.slug}`;
+    return `/c/${params.slug_1}/${category.slug}${sort}`;
   };
 
   // eslint-disable-next-line

@@ -400,7 +400,11 @@ export default {
     const breadcrumbs = computed(() =>
       facetGetters.getBreadcrumbs(result.value)
     );
-    const sortBy = computed(() => facetGetters.getSortOptions(result.value));
+    const sortBy = computed(() =>
+      facetGetters.getSortOptions(
+        root.$router.history.current.query?.sort || ''
+      )
+    );
     const facets = computed(() =>
       facetGetters.getGrouped(result.value, ['color', 'size'])
     );

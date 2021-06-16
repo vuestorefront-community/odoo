@@ -13,7 +13,15 @@ const getAll = (searchData, criteria?: string[]): AgnosticFacet[] => [];
 
 const getGrouped = (searchData, criteria?: string[]): AgnosticGroupedFacet[] => [];
 
-const getSortOptions = (searchData): AgnosticSort => ({ options: [], selected: '' });
+const getSortOptions = (searchData): AgnosticSort => ({
+  options: [
+    { id: 'list_price desc', value: 'Category price: High to Low', type: '' },
+    { id: 'list_price asc', value: 'Category price: Low to High', type: '' },
+    { id: 'name desc', value: 'Name: A to Z', type: '' },
+    { id: 'name asc', value: 'Name: Z to A', type: '' }
+  ],
+  selected: searchData
+});
 
 const getCategoryTree = (searchData): AgnosticCategoryTree => {
   if (!searchData.data) {
