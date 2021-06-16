@@ -2,6 +2,7 @@
   "compilerOptions": {
     "outDir": "./lib",
     "esModuleInterop": true,
+    "downlevelIteration": true,
     "target": "es5",
     "module": "ES2015",
     "moduleResolution": "node",

@@ -8,6 +8,7 @@
     "lib"
   ],
   "compilerOptions": {
+    "downlevelIteration": true,
     "resolveJsonModule": true,
     "paths": {
       "@src/*": [

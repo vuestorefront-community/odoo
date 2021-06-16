@@ -8,7 +8,6 @@ import {
   AgnosticBreadcrumb,
   AgnosticFacet
 } from '@vue-storefront/core';
-import { getCategoryTree as buildCategoryTree } from './categoryGetters';
 
 const getAll = (searchData, criteria?: string[]): AgnosticFacet[] => [];
 
@@ -22,11 +21,24 @@ const getCategoryTree = (searchData): AgnosticCategoryTree => {
   }
 
   const categories = searchData.data.categories;
-  const formattedCategories = {
-    items: categories.map(category => buildCategoryTree(category))
-  };
 
-  return formattedCategories as any;
+  const categoriesWithParents = categories.filter((item) => item.parent);
+  const parents = categoriesWithParents.map((item) => item.parent).flat();
+  const currentParentSelected = parents.find(item => item.slug === searchData.input.term);
+
+  if (!currentParentSelected) {
+    return {} as any;
+  }
+
+  const uniqueParents = categoriesWithParents.filter(item => {
+    return item.parent[0].id === currentParentSelected.id;
+  });
+
+  uniqueParents.forEach(parent => {
+    parent.childs = categoriesWithParents.filter(item => item.parent[0].id === parent.id);
+  });
+
+  return uniqueParents as any;
 };
 
 const getProducts = (searchData): any => {
@@ -46,7 +58,7 @@ const getPagination = (searchData): AgnosticPagination => {
     totalItems: searchData.data?.products.length,
     itemsPerPage: 10,
     pageOptions: []
-  }
+  };
 };
 
 const getBreadcrumbs = (searchData): AgnosticBreadcrumb[] => [];

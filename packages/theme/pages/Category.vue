@@ -99,39 +99,21 @@
           <SfLoader :class="{ loading }" :loading="loading">
             <SfAccordion :open="activeCategory" :show-chevron="true">
               <SfAccordionItem
-                v-for="(cat, i) in categoryTree && categoryTree.items"
+                v-for="(cat, i) in categoryTree && categoryTree"
                 :key="i"
-                :header="cat.label"
+                :header="cat.name"
               >
                 <template>
                   <SfList class="list">
-                    <SfListItem class="list__item">
-                      <SfMenuItem
-                        :count="cat.count || ''"
-                        :data-cy="`category-link_subcategory_${cat.slug}`"
-                        :label="cat.label"
-                      >
-                        <template #label>
-                          <nuxt-link
-                            :to="localePath(th.getCatLink(cat))"
-                            :class="
-                              cat.isCurrent ? 'sidebar--cat-selected' : ''
-                            "
-                          >
-                            All
-                          </nuxt-link>
-                        </template>
-                      </SfMenuItem>
-                    </SfListItem>
                     <SfListItem
                       class="list__item"
-                      v-for="(subCat, j) in cat.items"
+                      v-for="(subCat, j) in cat.childs"
                       :key="j"
                     >
                       <SfMenuItem
                         :count="subCat.count || ''"
                         :data-cy="`category-link_subcategory_${subCat.slug}`"
-                        :label="subCat.label"
+                        :label="subCat.name"
                       >
                         <template #label="{ label }">
                           <nuxt-link

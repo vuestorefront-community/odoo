@@ -5,6 +5,10 @@ export default gql`
       allEcommerceCategories(name: $term, topCategory: $topCategory) {
         id
         name
+        slug
+        parent {
+          id, name, slug
+        }
       }
     }
 `;

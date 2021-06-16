@@ -10,14 +10,19 @@ const useUiHelpers = () => {
 
   const getFacetsFromURL = () => {
     const { params } = instance.$router.history.current;
-    const term = params.slug_1.slice(0, -1);
+    const term = params.slug_1;
     return {
       term
     } as any;
   };
 
   // eslint-disable-next-line
-  const getCatLink = (category: Category): string => `/c/${category.label}`;
+  const getCatLink = (category: Category): string => {
+    const { params } = instance.$router.history.current;
+    console.log(instance.$router.history.current);
+
+    return `/c/${params.slug_1}/${category.slug}`;
+  };
 
   // eslint-disable-next-line
   const changeSorting = (sort: string) => {
