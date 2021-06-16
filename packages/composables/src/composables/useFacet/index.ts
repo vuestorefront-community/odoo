@@ -8,9 +8,9 @@ const factoryParams = {
     const products = await context.$odoo.api.getProductTemplatesPublished({ ...params.input });
     return {
       categories,
-      products: products.result.products,
-      attributes: products.result.attributes,
-      totalProducts: products.result.product_count
+      products: products.result?.products,
+      attributes: products.result?.attributes,
+      totalProducts: products.result?.product_count
     };
   }
 };

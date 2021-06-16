@@ -15,19 +15,18 @@ const getGrouped = (searchData, criteria?: string[]): AgnosticGroupedFacet[] => 
 
 const getSortOptions = (searchData): AgnosticSort => ({
   options: [
-    { id: 'list_price desc', value: 'Category price: High to Low', type: '' },
-    { id: 'list_price asc', value: 'Category price: Low to High', type: '' },
-    { id: 'name desc', value: 'Name: A to Z', type: '' },
-    { id: 'name asc', value: 'Name: Z to A', type: '' }
+    { value: 'list_price desc', label: 'Price: High to Low', type: '' },
+    { value: 'list_price asc', label: 'Price: Low to High', type: '' },
+    { value: 'name asc', label: 'Name: A to Z', type: '' },
+    { value: 'name desc', label: 'Name: Z to A', type: '' }
   ],
-  selected: searchData
+  selected: searchData || 'name asc'
 });
 
 const getCategoryTree = (searchData): AgnosticCategoryTree => {
   if (!searchData.data) {
     return [] as any;
   }
-
   const categories = searchData.data.categories;
 
   const categoriesWithParents = categories.filter((item) => item.parent);
@@ -60,12 +59,14 @@ const getProducts = (searchData): any => {
 };
 
 const getPagination = (searchData): AgnosticPagination => {
+  const itemsPerPage = searchData.input?.ppg || 10;
+
   return {
     currentPage: 1,
-    totalPages: 1,
+    totalPages: Math.ceil(searchData.data?.totalProducts / itemsPerPage) || 1,
     totalItems: searchData.data?.totalProducts,
-    itemsPerPage: 10,
-    pageOptions: []
+    itemsPerPage,
+    pageOptions: [5, 10, 15, 20]
   };
 };
 

@@ -9,13 +9,14 @@ const getInstance = () => {
 const useUiHelpers = () => {
   const instance = getInstance();
 
-  const getFacets = (currentCategory) => {
+  const getFacets = () => {
     const { params, query } = instance.$router.history.current;
-    const term = params.slug_1;
     return {
-      term,
-      order: query.sort,
-      category_id: currentCategory.value?.id
+      term: params.slug_1,
+      order: query.sort || 'name asc',
+      offset: query.page ? parseInt(query.page) : 1,
+      ppg: query.itemsPerPage ? parseInt(query.itemsPerPage) : 10,
+      category_id: params.slug_3
     } as any;
   };
 
@@ -32,7 +33,7 @@ const useUiHelpers = () => {
     const { params, query } = instance.$router.history.current;
     const sort = query.sort ? `?sort=${query.sort}` : '';
 
-    return `/c/${params.slug_1}/${category.slug}${sort}`;
+    return `/c/${params.slug_1}/${category.slug}/${category.id}${sort}`;
   };
 
   // eslint-disable-next-line
@@ -48,7 +49,8 @@ const useUiHelpers = () => {
 
   // eslint-disable-next-line
   const changeItemsPerPage = (itemsPerPage) => {
-    console.warn('[VSF] please implement useUiHelpers.changeItemsPerPage.');
+    const { query } = instance.$router.history.current;
+    instance.$router.push({ query: { ...query, itemsPerPage } });
   };
 
   // eslint-disable-next-line

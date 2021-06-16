@@ -45,11 +45,11 @@
               @input="th.changeSorting"
             >
               <SfSelectOption
-                v-for="option in sortBy.options"
-                :key="option.id"
-                :value="option.id"
+                v-for="(option, index) in sortBy.options"
+                :key="index"
+                :value="option.value"
                 class="sort-by__option"
-                >{{ option.value }}</SfSelectOption
+                >{{ option.label }}</SfSelectOption
               >
             </SfSelect>
           </LazyHydrate>
@@ -97,7 +97,7 @@
       <div class="sidebar desktop-only">
         <LazyHydrate when-idle>
           <SfLoader :class="{ loading }" :loading="loading">
-            <SfAccordion :open="activeCategory.slug" :show-chevron="true">
+            <SfAccordion :open="activeCategory" :show-chevron="true">
               <SfAccordionItem
                 v-for="(cat, i) in categoryTree && categoryTree"
                 :key="i"
@@ -146,7 +146,7 @@
             <SfProductCard
               data-cy="category-product-card"
               v-for="(product, i) in products"
-              :key="productGetters.getSlug(product)"
+              :key="i"
               :style="{ '--index': i }"
               :title="productGetters.getName(product)"
               :image="productGetters.getCoverImage(product)"
@@ -400,11 +400,12 @@ export default {
     const breadcrumbs = computed(() =>
       facetGetters.getBreadcrumbs(result.value)
     );
+
+    const { query } = root.$router.history.current;
     const sortBy = computed(() =>
-      facetGetters.getSortOptions(
-        root.$router.history.current.query?.sort || ''
-      )
+      facetGetters.getSortOptions(query?.sort || '')
     );
+
     const facets = computed(() =>
       facetGetters.getGrouped(result.value, ['color', 'size'])
     );
@@ -420,13 +421,14 @@ export default {
         return '';
       }
 
-      return (
-        childCategories.find((child) => child.slug === params.slug_2) || {}
-      );
+      const currentCategory =
+        childCategories.find((child) => child.slug === params.slug_2) || {};
+
+      return currentCategory.parent[0]?.name || [categoryTree.value[0]?.name];
     });
 
     onSSR(async () => {
-      await search(th.getFacets(activeCategory));
+      await search(th.getFacets());
     });
 
     const { changeFilters, isFacetColor } = useUiHelpers();
