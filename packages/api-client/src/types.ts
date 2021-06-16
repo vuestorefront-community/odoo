@@ -74,6 +74,7 @@ export type Product = {
   slug: string
   sku: string
   image: string
+  price: number
   listPrice: number
   realProduct: any
   firstVariantId: number

@@ -17,7 +17,7 @@ const getSortOptions = (searchData): AgnosticSort => ({ options: [], selected: '
 
 const getCategoryTree = (searchData): AgnosticCategoryTree => {
   if (!searchData.data) {
-    return {} as any;
+    return [] as any;
   }
 
   const categories = searchData.data.categories;
@@ -27,7 +27,7 @@ const getCategoryTree = (searchData): AgnosticCategoryTree => {
   const currentParentSelected = parents.find(item => item.slug === searchData.input.term);
 
   if (!currentParentSelected) {
-    return {} as any;
+    return [] as any;
   }
 
   const uniqueParents = categoriesWithParents.filter(item => {
@@ -55,7 +55,7 @@ const getPagination = (searchData): AgnosticPagination => {
   return {
     currentPage: 1,
     totalPages: 1,
-    totalItems: searchData.data?.products.length,
+    totalItems: searchData.data?.totalProducts,
     itemsPerPage: 10,
     pageOptions: []
   };

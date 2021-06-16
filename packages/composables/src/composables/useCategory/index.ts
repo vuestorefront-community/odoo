@@ -6,7 +6,7 @@ const params: UseCategoryFactoryParams<Category, any> = {
   categorySearch: async (context: Context, params) => {
     const { customQuery, ...searchParams } = params;
     const categories = await context.$odoo.api.getCategory(searchParams, customQuery);
-    return categories;
+    return categories.filter(item => item.name === 'Women' || item.name === 'Men');
   }
 };
 

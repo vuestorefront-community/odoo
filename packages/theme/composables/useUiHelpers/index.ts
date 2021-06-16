@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { getCurrentInstance } from '@vue/composition-api';
 import { Category } from '~/../api-client/src/types';
 const getInstance = () => {
@@ -7,6 +8,15 @@ const getInstance = () => {
 
 const useUiHelpers = () => {
   const instance = getInstance();
+
+  const getFacets = (currentCategory) => {
+    const { params } = instance.$router.history.current;
+    const term = params.slug_1;
+    return {
+      term,
+      category_id: currentCategory.value?.id
+    } as any;
+  };
 
   const getFacetsFromURL = () => {
     const { params } = instance.$router.history.current;
@@ -19,7 +29,6 @@ const useUiHelpers = () => {
   // eslint-disable-next-line
   const getCatLink = (category: Category): string => {
     const { params } = instance.$router.history.current;
-    console.log(instance.$router.history.current);
 
     return `/c/${params.slug_1}/${category.slug}`;
   };
@@ -58,6 +67,7 @@ const useUiHelpers = () => {
   };
 
   return {
+    getFacets,
     getFacetsFromURL,
     getCatLink,
     changeSorting,

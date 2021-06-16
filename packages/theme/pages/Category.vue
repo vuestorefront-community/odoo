@@ -97,7 +97,7 @@
       <div class="sidebar desktop-only">
         <LazyHydrate when-idle>
           <SfLoader :class="{ loading }" :loading="loading">
-            <SfAccordion :open="activeCategory" :show-chevron="true">
+            <SfAccordion :open="activeCategory.slug" :show-chevron="true">
               <SfAccordionItem
                 v-for="(cat, i) in categoryTree && categoryTree"
                 :key="i"
@@ -386,7 +386,7 @@ import Vue from 'vue';
 // TODO(addToCart qty, horizontal): https://github.com/vuestorefront/storefront-ui/issues/1606
 export default {
   transition: 'fade',
-  setup(props, context) {
+  setup(props, { root }) {
     const th = useUiHelpers();
     const uiState = useUiState();
     const { addItem: addItemToCart, isInCart } = useCart();
@@ -406,21 +406,23 @@ export default {
     );
     const pagination = computed(() => facetGetters.getPagination(result.value));
     const activeCategory = computed(() => {
-      const items = categoryTree.value.items;
+      const childCategories = categoryTree.value
+        .map((category) => category.childs)
+        .flat();
 
-      if (!items) {
+      const { params } = root.$router.history.current;
+
+      if (!childCategories || !params.slug_2) {
         return '';
       }
-      const category = items.find(
-        ({ isCurrent, items }) =>
-          isCurrent || items.find(({ isCurrent }) => isCurrent)
-      );
 
-      return category?.label || items[0].label;
+      return (
+        childCategories.find((child) => child.slug === params.slug_2) || {}
+      );
     });
 
     onSSR(async () => {
-      await search(th.getFacetsFromURL());
+      await search(th.getFacets(activeCategory));
     });
 
     const { changeFilters, isFacetColor } = useUiHelpers();
@@ -428,7 +430,7 @@ export default {
     const selectedFilters = ref({});
 
     onMounted(() => {
-      context.root.$scrollTo(context.root.$el, 2000);
+      root.$scrollTo(root.$el, 2000);
       if (!facets.value.length) return;
       selectedFilters.value = facets.value.reduce(
         (prev, curr) => ({
