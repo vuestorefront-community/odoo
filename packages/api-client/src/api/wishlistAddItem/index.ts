@@ -7,7 +7,7 @@ export default async function wishlistAddItem(context, product, customQuery?: Cu
     jsonrpc: '2.0',
     method: 'call',
     params: {
-      product_id: Number.parseInt(product.id)
+      product_id: Number.parseInt(product.first_variant_id)
     }
   });
 

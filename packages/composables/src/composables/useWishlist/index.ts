@@ -47,7 +47,7 @@ const params: UseWishlistFactoryParams<Wishlist, WishlistProduct, Product> = {
   },
 
   isInWishlist: (context: Context, { currentWishlist, product }) => {
-    return currentWishlist?.some(item => item.product.id == product.firstVariantId);
+    return currentWishlist?.some(item => item.product.id == product.first_variant_id);
   }
 };
 

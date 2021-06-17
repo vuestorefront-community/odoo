@@ -89,6 +89,7 @@ export type Product = {
   listPrice: number
   realProduct: any
   firstVariantId: number
+  first_variant_id: number
   attributes: Attribute[]
 }
 export type ProductVariant = {
