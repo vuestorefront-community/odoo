@@ -111,6 +111,7 @@ class VsfWebsiteSale(WebsiteSale):
                 'image': '{}/web/image/product.template/{}/image_1920'.format(base_url, product.id),
                 'price': product.list_price,
                 'slug': slug(product).replace('-{}'.format(product.id), ''),
+                'first_variant_id': product.product_variant_id.id,
             } for product in products],
             'product_count': product_count,
             'attributes': [{
