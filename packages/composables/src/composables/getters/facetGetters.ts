@@ -11,7 +11,22 @@ import {
 
 const getAll = (searchData, criteria?: string[]): AgnosticFacet[] => [];
 
-const getGrouped = (searchData, criteria?: string[]): AgnosticGroupedFacet[] => [];
+const getGrouped = (searchData, criteria?: string[]): AgnosticGroupedFacet[] => {
+
+  const formatedAttribute = searchData?.data?.attributes.map(attribute => ({
+    id: attribute.id,
+    label: attribute.name,
+    count: 0,
+    options: attribute.values.map(value => ({
+      id: value.search,
+      value: value.id,
+      label: value.name,
+      metadata: value.search
+    }))
+  }));
+
+  return formatedAttribute;
+};
 
 const getSortOptions = (searchData): AgnosticSort => ({
   options: [

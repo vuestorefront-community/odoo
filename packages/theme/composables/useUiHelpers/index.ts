@@ -12,6 +12,8 @@ const useUiHelpers = () => {
   const getFacets = () => {
     const { params, query } = instance.$router.history.current;
 
+    const filters = query?.filters ? Object.values(query?.filters).flat() : [];
+
     const ppg = query.itemsPerPage ? parseInt(query.itemsPerPage) : 10;
     let offset = 0;
     if (query.page > 0) {
@@ -22,6 +24,7 @@ const useUiHelpers = () => {
       term: params.slug_1,
       order: query.sort || 'name asc',
       offset,
+      attrib_list: filters,
       ppg,
       category_id: params.slug_3
     } as any;
@@ -51,7 +54,8 @@ const useUiHelpers = () => {
 
   // eslint-disable-next-line
   const changeFilters = (filters) => {
-    console.warn('[VSF] please implement useUiHelpers.changeFilters.');
+    const { query } = instance.$router.history.current;
+    instance.$router.push({ query: { ...query, filters } });
   };
 
   // eslint-disable-next-line
@@ -66,9 +70,8 @@ const useUiHelpers = () => {
 
   // eslint-disable-next-line
   const isFacetColor = (facet): boolean => {
-    console.warn('[VSF] please implement useUiHelpers.isFacetColor.');
 
-    return false;
+    return facet.display_type === 'color';
   };
 
   // eslint-disable-next-line

@@ -307,7 +307,7 @@
                 :key="`${facet.id}-${option.value}`"
                 :data-cy="`category-filter_${facet.id}_${option.value}`"
                 :label="
-                  option.id + `${option.count ? ` (${option.count})` : ''}`
+                  option.label + `${option.count ? ` (${option.count})` : ''}`
                 "
                 :selected="isFilterSelected(facet, option)"
                 class="filters__item"
@@ -434,7 +434,7 @@ export default {
 
     onMounted(() => {
       root.$scrollTo(root.$el, 2000);
-      if (!facets.value.length) return;
+      if (!facets?.value?.length) return;
       selectedFilters.value = facets.value.reduce(
         (prev, curr) => ({
           ...prev,
@@ -464,7 +464,7 @@ export default {
 
     const clearFilters = () => {
       toggleFilterSidebar();
-      selectedFilters.value = {};
+      selectedFilters.value = [];
       changeFilters(selectedFilters.value);
     };
 

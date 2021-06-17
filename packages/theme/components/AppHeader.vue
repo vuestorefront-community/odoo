@@ -19,7 +19,7 @@
       </template>
       <template #navigation>
         <div
-          class="col-xs-12 col-sm-8 col-md-3 col-lg-2"
+          class="col-xs-12 col-sm-8 col-md-3 col-lg-2 desktop-only"
           v-for="(category, index) in topCategories"
         >
           <SfHeaderNavigationItem
@@ -170,7 +170,7 @@ export default {
     const { categories: topCategories, search: searchTopCategoryApi } =
       useCategory('AppHeader:TopCategories');
 
-    const term = ref(getFacetsFromURL().term);
+    const term = ref(null);
     const isSearchOpen = ref(false);
 
     const cartTotalItems = computed(() => {
