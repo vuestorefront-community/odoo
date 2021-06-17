@@ -49,7 +49,7 @@
                 :key="index"
                 :value="option.value"
                 class="sort-by__option"
-                >{{ option.label }}</SfSelectOption
+                >{{ option.attrName }}</SfSelectOption
               >
             </SfSelect>
           </LazyHydrate>

@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 
 export declare type Address = {
   city: string

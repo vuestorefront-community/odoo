@@ -5,10 +5,9 @@ import {
   AgnosticGroupedFacet,
   AgnosticPagination,
   AgnosticSort,
-  AgnosticBreadcrumb
-
+  AgnosticBreadcrumb,
+  AgnosticFacet
 } from '@vue-storefront/core';
-import { AgnosticFacet } from '@vue-storefront/odoo-api/src/types';
 
 const getAll = (searchData, criteria?: string[]): AgnosticFacet[] => [];
 
@@ -31,10 +30,10 @@ const getGrouped = (searchData, criteria?: string[]): AgnosticGroupedFacet[] => 
 
 const getSortOptions = (searchData): AgnosticSort => ({
   options: [
-    { value: 'list_price desc', label: 'Price: High to Low', type: '' },
-    { value: 'list_price asc', label: 'Price: Low to High', type: '' },
-    { value: 'name asc', label: 'Name: A to Z', type: '' },
-    { value: 'name desc', label: 'Name: Z to A', type: '' }
+    { id: 'list_price desc', value: 'list_price desc', attrName: 'Price: High to Low', type: '' },
+    { id: 'list_price asc', value: 'list_price asc', attrName: 'Price: Low to High', type: '' },
+    { id: 'name asc', value: 'name asc', attrName: 'Name: A to Z', type: '' },
+    { id: 'name desc', value: 'name desc', attrName: 'Name: Z to A', type: '' }
   ],
   selected: searchData || 'name asc'
 });
