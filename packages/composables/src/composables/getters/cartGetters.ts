@@ -12,7 +12,7 @@ export const getCartItems = (cart: Cart): SaleOrderLine[] => {
 
 export const getCartItemName = (saleOrderLine: SaleOrderLine): string => saleOrderLine?.product.name || 'Product\'s name';
 
-export const getCartItemImage = (saleOrderLine: SaleOrderLine): string => saleOrderLine?.product.image;
+export const getCartItemImage = (saleOrderLine: SaleOrderLine): string => `https://vsfdemo.labs.odoogap.com/web/image/product.template/${saleOrderLine?.product.id}/image_1920`;
 
 export const getCartItemPrice = (saleOrderLine: SaleOrderLine): AgnosticPrice => {
   return {
