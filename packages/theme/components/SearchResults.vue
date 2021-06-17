@@ -13,7 +13,10 @@
         >
           <SfMegaMenuColumn
             :title="$t('Categories')"
-            class="sf-mega-menu-column--pined-content-on-mobile search__categories"
+            class="
+              sf-mega-menu-column--pined-content-on-mobile
+              search__categories
+            "
           >
             <template #title="{ title }">
               <SfMenuItem :label="title" @click="megaMenu.changeActive(title)">
@@ -70,7 +73,7 @@
             <div class="results--mobile smartphone-only">
               <SfProductCard
                 v-for="(product, index) in products"
-                :key="productGetters.getSlug(product)"
+                :key="index"
                 class="result-card"
                 :regular-price="
                   $n(productGetters.getPrice(product).regular, 'currency')

@@ -11,11 +11,18 @@ const useUiHelpers = () => {
 
   const getFacets = () => {
     const { params, query } = instance.$router.history.current;
+
+    const ppg = query.itemsPerPage ? parseInt(query.itemsPerPage) : 10;
+    let offset = 0;
+    if (query.page > 0) {
+      offset = (query.page * ppg) - ppg;
+    }
+
     return {
       term: params.slug_1,
       order: query.sort || 'name asc',
-      offset: query.page ? parseInt(query.page) : 1,
-      ppg: query.itemsPerPage ? parseInt(query.itemsPerPage) : 10,
+      offset,
+      ppg,
       category_id: params.slug_3
     } as any;
   };
@@ -50,6 +57,7 @@ const useUiHelpers = () => {
   // eslint-disable-next-line
   const changeItemsPerPage = (itemsPerPage) => {
     const { query } = instance.$router.history.current;
+    delete query.page;
     instance.$router.push({ query: { ...query, itemsPerPage } });
   };
 

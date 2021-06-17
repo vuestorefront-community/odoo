@@ -60,7 +60,7 @@ export default {
   'Item': 'Item',
   'Items': 'Items',
   'Kidswear': 'Kidswear',
-  'Let’s start now – we’ll help you': 'Let’s start now – we’ll help you.',
+  'Let’s start now – we’ll help you': 'Let’s start now – we’ll help you. Type at least 2 letters.',
   'Log into your account': 'Log into your account',
   'login in to your account': 'login in to your account',
   'Login': 'Login',

@@ -18,14 +18,18 @@
         </nuxt-link>
       </template>
       <template #navigation>
-        <SfHeaderNavigationItem
+        <div
+          class="col-xs-12 col-sm-8 col-md-3 col-lg-2"
           v-for="(category, index) in topCategories"
-          :key="index"
-          data-cy="app-header-top-categories"
-          class="nav-item"
-          :label="category.name"
-          :link="localePath(`/c/${category.slug}`)"
-        />
+        >
+          <SfHeaderNavigationItem
+            :key="index"
+            data-cy="app-header-top-categories"
+            class="nav-item"
+            :label="category.name"
+            :link="localePath(`/c/${category.slug}`)"
+          />
+        </div>
       </template>
       <template #aside>
         <LocaleSelector class="smartphone-only" />
@@ -108,7 +112,6 @@
 
 <script>
 import {
-  SfHeader,
   SfImage,
   SfSearchBar,
   SfIcon,
@@ -116,6 +119,7 @@ import {
   SfOverlay,
   SfBadge,
 } from '@storefront-ui/vue';
+import SfHeader from '~/components/SfHeader/SfHeader.vue';
 import { useUiState } from '~/composables';
 import {
   useCart,
@@ -190,9 +194,11 @@ export default {
       } else {
         term.value = paramValue.target.value;
       }
+      if (term.value.length < 2) return;
+
       await Promise.all([
-        searchProductApi({ itemsPerPage: 12, term: term.value }),
-        searchCategoryApi({ itemsPerPage: 6, term: term.value }),
+        searchProductApi({ term: term.value }),
+        searchCategoryApi({ topCategory: false, term: term.value }),
       ]);
       result.value = {
         products: products.value,

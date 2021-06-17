@@ -33,6 +33,12 @@ export default {
         href: 'https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,600,700|Roboto:300,300i,400,400i,500,700&display=swap',
         media: 'print',
         onload: 'this.media=\'all\''
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css',
+        media: 'text/css',
+        onload: 'this.media=\'all\''
       }
     ]
   },

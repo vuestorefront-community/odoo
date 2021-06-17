@@ -393,15 +393,14 @@ export default {
     const { addItem: addItemToWishlist, isInWishlist } = useWishlist();
     const { result, search, loading } = useFacet();
 
+    const { params, query } = root.$router.history.current;
+
     const products = computed(() => facetGetters.getProducts(result.value));
     const categoryTree = computed(() =>
       facetGetters.getCategoryTree(result.value)
     );
-    const breadcrumbs = computed(() =>
-      facetGetters.getBreadcrumbs(result.value)
-    );
+    const breadcrumbs = computed(() => facetGetters.getBreadcrumbs(params));
 
-    const { query } = root.$router.history.current;
     const sortBy = computed(() =>
       facetGetters.getSortOptions(query?.sort || '')
     );
@@ -415,8 +414,6 @@ export default {
         .map((category) => category.childs)
         .flat();
 
-      const { params } = root.$router.history.current;
-
       if (!childCategories || !params.slug_2) {
         return '';
       }
@@ -424,7 +421,7 @@ export default {
       const currentCategory =
         childCategories.find((child) => child.slug === params.slug_2) || {};
 
-      return currentCategory.parent[0]?.name || [categoryTree.value[0]?.name];
+      return currentCategory?.parent[0]?.name || [categoryTree?.value[0]?.name];
     });
 
     onSSR(async () => {
@@ -540,6 +537,7 @@ export default {
 }
 .breadcrumbs {
   margin: var(--spacer-base) auto var(--spacer-lg);
+  text-transform: capitalize;
 }
 .navbar {
   position: relative;

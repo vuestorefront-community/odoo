@@ -70,7 +70,20 @@ const getPagination = (searchData): AgnosticPagination => {
   };
 };
 
-const getBreadcrumbs = (searchData): AgnosticBreadcrumb[] => [];
+const getBreadcrumbs = (params): AgnosticBreadcrumb[] => {
+  const breadcrumbs = [{ text: 'Home', link: '#' }];
+
+  if (params.slug_1) {
+    breadcrumbs.push({ text: params.slug_1, link: '#' });
+  }
+  if (params.slug_2) {
+    const splited = params.slug_2.split('-');
+    breadcrumbs.push({ text: splited[1], link: `/c/${params.slug_1}/${splited[0]}-${splited[1]}-all` });
+    breadcrumbs.push({ text: splited[2], link: '' });
+  }
+
+  return breadcrumbs;
+};
 
 const facetGetters: FacetsGetters<any, any> = {
   getSortOptions,
