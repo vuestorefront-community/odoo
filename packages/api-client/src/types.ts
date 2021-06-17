@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 
 export declare type Address = {
   city: string
@@ -31,6 +32,17 @@ export type AgnosticUser = {
   is_admin: boolean
   uid: number
   username: string
+}
+
+export interface AgnosticFacet {
+  type: string;
+  id?: string;
+  label: string;
+  value: any;
+  attrName?: string;
+  count?: number;
+  selected?: boolean;
+  metadata?: any;
 }
 
 export type Attribute = {

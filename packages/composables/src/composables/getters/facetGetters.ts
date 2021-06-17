@@ -5,9 +5,10 @@ import {
   AgnosticGroupedFacet,
   AgnosticPagination,
   AgnosticSort,
-  AgnosticBreadcrumb,
-  AgnosticFacet
+  AgnosticBreadcrumb
+
 } from '@vue-storefront/core';
+import { AgnosticFacet } from '@vue-storefront/odoo-api/src/types';
 
 const getAll = (searchData, criteria?: string[]): AgnosticFacet[] => [];
 
