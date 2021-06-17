@@ -33,12 +33,6 @@ export default {
         href: 'https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,600,700|Roboto:300,300i,400,400i,500,700&display=swap',
         media: 'print',
         onload: 'this.media=\'all\''
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css',
-        media: 'text/css',
-        onload: 'this.media=\'all\''
       }
     ]
   },
@@ -46,6 +40,7 @@ export default {
   plugins: [],
   buildModules: [
     // to core
+    '@nuxtjs/tailwindcss',
     '@nuxt/typescript-build',
     '@nuxtjs/style-resources',
     ['@vue-storefront/nuxt', {
@@ -141,6 +136,11 @@ export default {
     scss: [require.resolve('@storefront-ui/shared/styles/_helpers.scss', { paths: [process.cwd()] })]
   },
   build: {
+    postcss: {
+      plugins: {
+        'postcss-custom-properties': false
+      }
+    },
     transpile: [
       'vee-validate/dist/rules'
     ],

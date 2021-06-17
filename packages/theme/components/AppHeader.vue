@@ -18,11 +18,9 @@
         </nuxt-link>
       </template>
       <template #navigation>
-        <div
-          class="col-xs-12 col-sm-8 col-md-3 col-lg-2 desktop-only"
-          v-for="(category, index) in topCategories"
-        >
+        <div class="grid grid-cols-6 auto-cols-min">
           <SfHeaderNavigationItem
+            v-for="(category, index) in topCategories"
             :key="index"
             data-cy="app-header-top-categories"
             class="nav-item"
@@ -118,8 +116,8 @@ import {
   SfButton,
   SfOverlay,
   SfBadge,
+  SfHeader,
 } from '@storefront-ui/vue';
-import SfHeader from '~/components/SfHeader/SfHeader.vue';
 import { useUiState } from '~/composables';
 import {
   useCart,
