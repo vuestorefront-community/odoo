@@ -8,6 +8,7 @@ import {
   AgnosticBreadcrumb,
   AgnosticFacet
 } from '@vue-storefront/core';
+import { Product } from '@vue-storefront/odoo-api';
 
 const getAll = (searchData, criteria?: string[]): AgnosticFacet[] => [];
 
@@ -85,8 +86,20 @@ const getPagination = (searchData): AgnosticPagination => {
   };
 };
 
+const getBreadcrumbsByProduct = (product): AgnosticBreadcrumb[] => {
+  const category = product.ecommerceCategories?.find(
+    (cat) => cat.name !== 'All'
+  );
+  const breadcrumbs = [{ text: 'Home', link: '/' }];
+  const splited = category.slug?.split('-');
+  breadcrumbs.push({ text: splited[0], link: `/c/${splited[0]}` });
+  breadcrumbs.push({ text: splited[1], link: '' });
+
+  return breadcrumbs || [];
+};
+
 const getBreadcrumbs = (params): AgnosticBreadcrumb[] => {
-  const breadcrumbs = [{ text: 'Home', link: '#' }];
+  const breadcrumbs = [{ text: 'Home', link: '/' }];
 
   if (params.slug_1) {
     breadcrumbs.push({ text: params.slug_1, link: '#' });
@@ -101,6 +114,7 @@ const getBreadcrumbs = (params): AgnosticBreadcrumb[] => {
 };
 
 const facetGetters: FacetsGetters<any, any> = {
+  getBreadcrumbsByProduct,
   getSortOptions,
   getGrouped,
   getAll,

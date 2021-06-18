@@ -409,6 +409,7 @@ export default {
       facetGetters.getGrouped(result.value, ['color', 'size'])
     );
     const pagination = computed(() => facetGetters.getPagination(result.value));
+
     const activeCategory = computed(() => {
       const childCategories = categoryTree.value
         .map((category) => category.childs)
@@ -421,7 +422,11 @@ export default {
       const currentCategory =
         childCategories.find((child) => child.slug === params.slug_2) || {};
 
-      return currentCategory?.parent[0]?.name || [categoryTree?.value[0]?.name];
+      if (currentCategory.parent) {
+        return currentCategory?.parent[0]?.name;
+      }
+
+      return [categoryTree?.value[0]?.name] || {};
     });
 
     onSSR(async () => {

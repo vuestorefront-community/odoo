@@ -2,7 +2,6 @@
 import { ref } from '@vue/composition-api';
 import { useVSFContext } from '@vue-storefront/core';
 import { Context } from '@vue-storefront/core';
-import { SaleOrder as Cart } from '@vue-storefront/odoo-api/src/types';
 
 const useShipping = () => {
   const context: Context = useVSFContext();
@@ -35,7 +34,7 @@ const useShipping = () => {
         apartment: '',
         postalCode: realCart.partnerShipping.zip,
         phone: realCart.partnerShipping.phone,
-        firstName: realCart.partnerShipping.name,
+        firstName: realCart.partnerShipping.name === 'Public user' ? '' : realCart.partnerShipping.name,
         city: realCart.partnerShipping.city,
         country: realCart.partnerShipping.country?.id,
         state: realCart.partnerShipping.state?.id,

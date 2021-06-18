@@ -246,6 +246,7 @@ import {
   useReview,
   useProductVariant,
   reviewGetters,
+  facetGetters,
 } from '@vue-storefront/odoo';
 
 import { onSSR } from '@vue-storefront/core';
@@ -302,6 +303,11 @@ export default {
     const categories = computed(() =>
       productGetters.getCategoryIds(product.value)
     );
+
+    const breadcrumbs = computed(() =>
+      facetGetters.getBreadcrumbsByProduct(product.value)
+    );
+
     const reviews = computed(() =>
       reviewGetters.getItems(productReviews.value)
     );
@@ -353,6 +359,7 @@ export default {
     };
 
     return {
+      breadcrumbs,
       allOptionsSelected,
       checkSelected,
       elementNames,
@@ -415,26 +422,6 @@ export default {
       brand:
         'Brand name is the perfect pairing of quality and design. This label creates major everyday vibes with its collection of modern brooches, silver and gold jewellery, or clips it back with hair accessories in geo styles.',
       careInstructions: 'Do not wash!',
-      breadcrumbs: [
-        {
-          text: 'Home',
-          route: {
-            link: '#',
-          },
-        },
-        {
-          text: 'Category',
-          route: {
-            link: '#',
-          },
-        },
-        {
-          text: 'Pants',
-          route: {
-            link: '#',
-          },
-        },
-      ],
     };
   },
 };
@@ -605,6 +592,7 @@ export default {
 }
 .breadcrumbs {
   margin: var(--spacer-base) auto var(--spacer-lg);
+  text-transform: capitalize;
 }
 @keyframes moveicon {
   0% {
