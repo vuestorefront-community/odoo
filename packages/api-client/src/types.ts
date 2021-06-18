@@ -110,9 +110,8 @@ export type SaleOrderLine = {
 export type Category = {
   id: number
   name: string
-  label: string
   slug: string
-  items: Category[]
+  parent: Category[]
 }
 export type Pagination = {
   limit?: number
