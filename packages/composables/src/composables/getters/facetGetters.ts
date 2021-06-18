@@ -91,6 +91,10 @@ const getBreadcrumbsByProduct = (product): AgnosticBreadcrumb[] => {
     (cat) => cat.name !== 'All'
   );
   const breadcrumbs = [{ text: 'Home', link: '/' }];
+
+  if (!category) {
+    return [];
+  }
   const splited = category.slug?.split('-');
   breadcrumbs.push({ text: splited[0], link: `/c/${splited[0]}` });
   breadcrumbs.push({ text: splited[1], link: '' });
@@ -102,7 +106,7 @@ const getBreadcrumbs = (params): AgnosticBreadcrumb[] => {
   const breadcrumbs = [{ text: 'Home', link: '/' }];
 
   if (params.slug_1) {
-    breadcrumbs.push({ text: params.slug_1, link: '#' });
+    breadcrumbs.push({ text: params.slug_1, link: `/c/${params.slug_1}` });
   }
   if (params.slug_2) {
     const splited = params.slug_2.split('-');
