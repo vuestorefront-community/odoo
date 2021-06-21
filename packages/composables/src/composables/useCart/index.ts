@@ -19,7 +19,13 @@ const params: UseCartFactoryParams<Cart, SaleOrderLine, Product, Coupon> = {
   },
 
   addItem: async (context: Context, { currentCart, product, quantity, customQuery }) => {
-    const productId = product.realProduct ? product.realProduct.product_id : product.first_variant_id;
+    let productId = null;
+    if (product.realProduct) {
+      productId = product.realProduct.product_id;
+    }
+    if (!product.realProduct) {
+      productId = product.first_variant_id || product.firstVariantId;
+    }
 
     if (!params.isInCart(context, { currentCart, product })) {
       await context.$odoo.api.cartAddItem({ productId, quantity }, customQuery);
