@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* istanbul ignore file */
-import { ref, reactive } from '@vue/composition-api';
 import { ssrRef } from '@nuxtjs/composition-api';
 
 import { useVSFContext, sharedRef } from '@vue-storefront/core';

@@ -34,16 +34,16 @@ export const getProductGallery = (product: Product): AgnosticMediaGalleryItem[] 
 
   const images: AgnosticMediaGalleryItem[] = [
     {
-      small: `https://vsfdemo.labs.odoogap.com/web/image/product.template/${product.id}/image_1920`,
-      big: `https://vsfdemo.labs.odoogap.com/web/image/product.template/${product.id}/image_1920`,
-      normal: `https://vsfdemo.labs.odoogap.com/web/image/product.template/${product.id}/image_1920`
+      small: product.image?.replace('http', 'https'),
+      big: product.image?.replace('http', 'https'),
+      normal: product.image?.replace('http', 'https')
     }
   ];
 
   return images;
 };
 
-export const getProductCoverImage = (product: Product): string => `https://vsfdemo.labs.odoogap.com/web/image/product.template/${product.id}/image_1920`;
+export const getProductCoverImage = (product: Product): string => product.image?.replace('http', 'https');
 
 export const getProductSku = (product: Product): string => product.sku;
 
