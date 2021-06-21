@@ -368,7 +368,7 @@ import {
   SfBreadcrumbs,
   SfLoader,
   SfColor,
-  SfProperty,
+  SfProperty
 } from '@storefront-ui/vue';
 import { ref, computed, onMounted } from '@vue/composition-api';
 import {
@@ -376,7 +376,7 @@ import {
   useWishlist,
   productGetters,
   useFacet,
-  facetGetters,
+  facetGetters
 } from '@vue-storefront/odoo';
 import { useUiHelpers, useUiState } from '~/composables';
 import { onSSR } from '@vue-storefront/core';
@@ -443,7 +443,7 @@ export default {
       selectedFilters.value = facets.value.reduce(
         (prev, curr) => ({
           ...prev,
-          [curr.id]: curr.options.filter((o) => o.selected).map((o) => o.id),
+          [curr.id]: curr.options.filter((o) => o.selected).map((o) => o.id)
         }),
         {}
       );
@@ -499,7 +499,7 @@ export default {
       isFilterSelected,
       selectedFilters,
       clearFilters,
-      applyFilters,
+      applyFilters
     };
   },
   components: {
@@ -519,8 +519,8 @@ export default {
     SfColor,
     SfHeading,
     SfProperty,
-    LazyHydrate,
-  },
+    LazyHydrate
+  }
 };
 </script>
 
