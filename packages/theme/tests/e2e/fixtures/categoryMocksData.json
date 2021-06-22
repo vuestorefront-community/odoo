@@ -1,0 +1,38 @@
+[
+  {
+    "id": "11",
+    "name": "Women",
+    "slug": "women",
+    "parent": null,
+    "topCategory": true
+  },
+  {
+    "id": "12",
+    "name": "Men",
+    "slug": "men",
+    "parent": null,
+    "topCategory": true
+  },
+  {
+    "id": "13",
+    "name": "Clothing",
+    "slug": "women-clothing",
+    "parent": [
+      {
+        "id": "11",
+        "name": "Women"
+      }
+    ]
+  },
+  {
+    "id": "17",
+    "name": "All",
+    "slug": "women-clothing-all",
+    "parent": [
+      {
+        "id": "13",
+        "name": "Clothing"
+      }
+    ]
+  }
+]
