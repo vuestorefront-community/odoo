@@ -6,8 +6,9 @@
     "supportFile": "tests/e2e/support/index.js",
     "viewportHeight": 1080,
     "viewportWidth": 1920,
-    "ignoreTestFiles": [
-        "**/__snapshots__/*",
-        "**/__image_snapshots__/*"
-    ]
+    "requestTimeout": 30000,
+    "numTestsKeptInMemory": 0,
+    "responseTimeout": 50000,
+    "pageLoadTimeout": 100000,
+    "video": false
 }

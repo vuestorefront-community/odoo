@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 import { ssrRef } from '@nuxtjs/composition-api';
 
-import { useVSFContext, sharedRef } from '@vue-storefront/core';
-import { Context, ComputedProperty } from '@vue-storefront/core';
+import { useVSFContext } from '@vue-storefront/core';
+import { Context } from '@vue-storefront/core';
 
 const useProductVariant = () => {
   const context: Context = useVSFContext();
