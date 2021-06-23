@@ -34,10 +34,8 @@ const factoryParams: UseUserFactoryParams<User, any, any> = {
 
     const response = await context.$odoo.api.signUpUser(agonisticUser);
 
-    context.$odoo.config.app.$cookies.set('odoo-user', response.result);
-
     // @todo need api endpoint to return user info after register
-    return response;
+    return null;
   },
 
   logIn: async (context: Context, params) => {
