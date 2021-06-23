@@ -7,7 +7,7 @@ export const getCartItems = (cart: Cart): SaleOrderLine[] => {
     return [];
   }
 
-  return cart.orderLine;
+  return cart.orderLine.filter(line => !line.product.name.includes('Delivery'));
 };
 
 export const getCartItemName = (saleOrderLine: SaleOrderLine): string => saleOrderLine?.product.name || 'Product\'s name';
@@ -40,7 +40,7 @@ export const getCartTotals = (cart: Cart): AgnosticTotals => {
 
 export const getCartShippingPrice = (cart: Cart): number => 0;
 
-export const getCartTotalItems = (cart: Cart): number => cart?.orderLine?.length;
+export const getCartTotalItems = (cart: Cart): number => cart?.orderLine?.filter(line => !line.product.name.includes('Delivery')).length;
 
 export const getFormattedPrice = (price: number) => String(price);
 
