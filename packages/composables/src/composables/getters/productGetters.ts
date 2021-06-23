@@ -34,16 +34,16 @@ export const getProductGallery = (product: Product): AgnosticMediaGalleryItem[] 
 
   const images: AgnosticMediaGalleryItem[] = [
     {
-      small: product.image?.replace('http', 'https'),
-      big: product.image?.replace('http', 'https'),
-      normal: product.image?.replace('http', 'https')
+      small: product.image,
+      big: product.image,
+      normal: product.image
     }
   ];
 
   return images;
 };
 
-export const getProductCoverImage = (product: Product): string => product.image?.replace('http', 'https');
+export const getProductCoverImage = (product: Product): string => product.image;
 
 export const getProductSku = (product: Product): string => product.sku;
 

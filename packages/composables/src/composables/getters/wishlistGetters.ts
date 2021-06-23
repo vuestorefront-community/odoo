@@ -18,7 +18,7 @@ export const getWishlistItems = (wishlist: Wishlist): Wishlist => {
 export const getWishlistItemName = (wishlistItem: WishlistItem): string => wishlistItem?.product?.name || 'Product\'s name';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getWishlistItemImage = (wishlistItem: WishlistItem): string => wishlistItem?.product?.image.replace('http', 'https') || 'image';
+export const getWishlistItemImage = (wishlistItem: WishlistItem): string => wishlistItem?.product?.image || 'image';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getWishlistItemPrice = (wishlistItem: WishlistItem): AgnosticPrice => {

@@ -12,7 +12,7 @@ export const getCartItems = (cart: Cart): SaleOrderLine[] => {
 
 export const getCartItemName = (saleOrderLine: SaleOrderLine): string => saleOrderLine?.product.name || 'Product\'s name';
 
-export const getCartItemImage = (saleOrderLine: SaleOrderLine): string => saleOrderLine?.product?.image?.replace('http', 'https');
+export const getCartItemImage = (saleOrderLine: SaleOrderLine): string => saleOrderLine?.product?.image;
 
 export const getCartItemPrice = (saleOrderLine: SaleOrderLine): AgnosticPrice => {
   return {
