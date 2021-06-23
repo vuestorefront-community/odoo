@@ -70,7 +70,7 @@
           <SfIcon
             data-cy="category-icon_grid-view"
             class="navbar__view-icon"
-            :color="isCategoryGridView ? 'black' : 'dark-secondary'"
+            :color="isCategoryGridView ? 'green' : 'dark-secondary'"
             icon="tiles"
             size="12px"
             role="button"
@@ -81,7 +81,7 @@
           <SfIcon
             data-cy="category-icon_list-view"
             class="navbar__view-icon"
-            :color="!isCategoryGridView ? 'black' : 'dark-secondary'"
+            :color="!isCategoryGridView ? 'green' : 'dark-secondary'"
             icon="list"
             size="12px"
             role="button"
@@ -146,7 +146,7 @@
             <SfProductCard
               data-cy="category-product-card"
               v-for="(product, i) in products"
-              :key="i"
+              :key="product.id"
               :style="{ '--index': i }"
               :title="productGetters.getName(product)"
               :image="productGetters.getCoverImage(product)"
@@ -170,7 +170,7 @@
                 )
               "
               class="products__product-card"
-              @click:wishlist="addItemToWishlist({ product })"
+              @click:wishlist="isInWishlist({ product })  ? removeItemFromWisList({product}) : addItemToWishlist({ product })"
               @click:add-to-cart="addItemToCart({ product, quantity: 1 })"
             />
           </transition-group>
@@ -326,7 +326,7 @@
               <SfFilter
                 v-for="option in facet.options"
                 :key="`${facet.id}-${option.id}`"
-                :label="option.id"
+                :label="option.label"
                 :selected="isFilterSelected(facet, option)"
                 class="filters__item"
                 @change="() => selectFilter(facet, option)"
@@ -381,7 +381,6 @@ import {
 import { useUiHelpers, useUiState } from '~/composables';
 import { onSSR } from '@vue-storefront/core';
 import LazyHydrate from 'vue-lazy-hydration';
-import Vue from 'vue';
 
 // TODO(addToCart qty, horizontal): https://github.com/vuestorefront/storefront-ui/issues/1606
 export default {
@@ -390,7 +389,7 @@ export default {
     const th = useUiHelpers();
     const uiState = useUiState();
     const { addItem: addItemToCart, isInCart } = useCart();
-    const { addItem: addItemToWishlist, isInWishlist } = useWishlist();
+    const { addItem: addItemToWishlist, removeItem: removeItemFromWisList, isInWishlist } = useWishlist();
     const { result, search, loading } = useFacet();
 
     const { params, query } = root.$router.history.current;
@@ -435,36 +434,31 @@ export default {
 
     const { changeFilters, isFacetColor } = useUiHelpers();
     const { toggleFilterSidebar } = useUiState();
-    const selectedFilters = ref({});
+    const selectedFilters = ref([]);
 
     onMounted(() => {
       root.$scrollTo(root.$el, 2000);
-      if (!facets?.value?.length) return;
-      selectedFilters.value = facets.value.reduce(
-        (prev, curr) => ({
-          ...prev,
-          [curr.id]: curr.options.filter((o) => o.selected).map((o) => o.id)
-        }),
-        {}
-      );
+      selectedFilters.value = th.facetsFromUrlToFilter();
     });
 
-    const isFilterSelected = (facet, option) =>
-      (selectedFilters.value[facet.id] || []).includes(option.id);
+    const isFilterSelected = (facet, option) => {
+      return selectedFilters.value.some(filter => filter.id === option.id);
+    };
 
     const selectFilter = (facet, option) => {
-      if (!selectedFilters.value[facet.id]) {
-        Vue.set(selectedFilters.value, facet.id, []);
-      }
+      const alreadySelectedIndex = selectedFilters.value.findIndex(filter => filter.id === option.id);
 
-      if (selectedFilters.value[facet.id].find((f) => f === option.id)) {
-        selectedFilters.value[facet.id] = selectedFilters.value[
-          facet.id
-        ].filter((f) => f !== option.id);
+      if (alreadySelectedIndex === -1) {
+        selectedFilters.value.push({
+          filterName: facet.label,
+          label: option.label,
+          id: option.id
+        });
+
         return;
       }
 
-      selectedFilters.value[facet.id].push(option.id);
+      selectedFilters.value.splice(alreadySelectedIndex, 1);
     };
 
     const clearFilters = () => {
@@ -491,6 +485,7 @@ export default {
       facets,
       breadcrumbs,
       addItemToWishlist,
+      removeItemFromWisList,
       addItemToCart,
       isInWishlist,
       isInCart,

@@ -8,7 +8,6 @@ import {
   AgnosticBreadcrumb,
   AgnosticFacet
 } from '@vue-storefront/core';
-import { Product } from '@vue-storefront/odoo-api';
 
 const getAll = (searchData, criteria?: string[]): AgnosticFacet[] => [];
 

@@ -12,7 +12,7 @@ const useUiHelpers = () => {
   const getFacets = () => {
     const { params, query } = instance.$router.history.current;
 
-    const filters = query?.filters ? Object.values(query?.filters).flat() : [];
+    const filters: string[] = query ? Object.values(query).flat() as string[] : [];
 
     const ppg = query.itemsPerPage ? parseInt(query.itemsPerPage) : 10;
     let offset = 0;
@@ -24,7 +24,7 @@ const useUiHelpers = () => {
       term: params.slug_1,
       order: query.sort || 'name asc',
       offset,
-      attrib_list: filters,
+      attrib_list: filters.map(filter => filter.split(',')).flat(),
       ppg,
       category_id: params.slug_3
     } as any;
@@ -52,10 +52,41 @@ const useUiHelpers = () => {
     instance.$router.push({ query: { ...query, sort } });
   };
 
-  // eslint-disable-next-line
-  const changeFilters = (filters) => {
+  const facetsFromUrlToFilter = () => {
+
     const { query } = instance.$router.history.current;
-    instance.$router.push({ query: { ...query, filters } });
+    const formatedFilters = [];
+    Object.keys(query).forEach(label => {
+
+      const valueList = query[label].split(',');
+
+      valueList.forEach(value => {
+
+        const item = {
+          filterName: label,
+          label: value,
+          id: value
+        };
+        formatedFilters.push(item);
+      }
+      );
+
+    });
+
+    return formatedFilters;
+  };
+
+  const changeFilters = (filters) => {
+    const formatedFilters = {};
+    filters.forEach(element => {
+      if (formatedFilters[element.filterName]) {
+        formatedFilters[element.filterName] += `,${element.id}`;
+        return;
+      }
+      formatedFilters[element.filterName] = element.id;
+    });
+
+    instance.$router.push({ query: formatedFilters });
   };
 
   // eslint-disable-next-line
@@ -90,7 +121,8 @@ const useUiHelpers = () => {
     changeItemsPerPage,
     changeSearchTerm,
     isFacetColor,
-    isFacetCheckbox
+    isFacetCheckbox,
+    facetsFromUrlToFilter
   };
 };
 
