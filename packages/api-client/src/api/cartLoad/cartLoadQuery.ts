@@ -5,6 +5,7 @@ export default gql`
     userShoppingCart{
       name
       amountTotal
+      amountTax
       shippingMethod{
         id
       }

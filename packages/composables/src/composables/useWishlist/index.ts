@@ -29,10 +29,9 @@ const params: UseWishlistFactoryParams<Wishlist, WishlistProduct, Product> = {
     }
 
     return currentWishlist;
-
   },
 
-  removeItem: async (context: Context, { currentWishlist, product }) => {
+  removeItem: async (context: Context, { product }) => {
 
     await context.$odoo.api.wishlistRemoveItem(product);
 

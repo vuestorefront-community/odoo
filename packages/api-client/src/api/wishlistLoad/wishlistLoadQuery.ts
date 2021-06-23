@@ -15,9 +15,9 @@ export default gql`
           description
           image
           listPrice
+          slug
         }
       }
     }
-
 `;
 
