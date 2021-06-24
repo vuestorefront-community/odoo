@@ -44,7 +44,7 @@
             class="sf-button--pure sf-header__action"
             @click="toggleWishlistSidebar"
           >
-            <SfIcon class="sf-header__icon" icon="heart" size="1.25rem" />
+            <SfIcon class="sf-header__icon" :icon="wishlistHasItens ? 'heart_fill' : 'heart'" size="1.25rem" />
           </SfButton>
           <SfButton
             class="sf-button--pure sf-header__action"
@@ -116,7 +116,7 @@ import {
   SfButton,
   SfOverlay,
   SfBadge,
-  SfHeader,
+  SfHeader
 } from '@storefront-ui/vue';
 import { useUiState } from '~/composables';
 import {
@@ -126,7 +126,7 @@ import {
   cartGetters,
   categoryGetters,
   useProduct,
-  useCategory,
+  useCategory
 } from '@vue-storefront/odoo';
 import { clickOutside } from '@storefront-ui/vue/src/utilities/directives/click-outside/click-outside-directive.js';
 import { computed, ref, watch, onMounted } from '@vue/composition-api';
@@ -147,20 +147,20 @@ export default {
     LocaleSelector,
     SearchResults,
     SfOverlay,
-    SfBadge,
+    SfBadge
   },
   directives: { clickOutside },
   setup(props, { root }) {
     const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal } =
       useUiState();
-    const { changeSearchTerm, getFacetsFromURL } = useUiHelpers();
+    const { changeSearchTerm } = useUiHelpers();
     const { isAuthenticated, load: loadUser } = useUser();
     const { cart, load: loadCart } = useCart();
     const result = ref(null);
     const searchBarRef = ref(null);
     const isMobile = computed(() => mapMobileObserver().isMobile.get());
 
-    const { load: loadWishlist } = useWishlist();
+    const { load: loadWishlist, wishlist } = useWishlist();
     const { products, search: searchProductApi } = useProduct();
     const { categories, search: searchCategoryApi } = useCategory(
       'AppHeader:LeftCategories'
@@ -196,13 +196,13 @@ export default {
 
       await Promise.all([
         searchProductApi({ term: term.value }),
-        searchCategoryApi({ topCategory: false, term: term.value }),
+        searchCategoryApi({ topCategory: false, term: term.value })
       ]);
       result.value = {
         products: products.value,
         categories: categories.value.map((item) =>
           categoryGetters.getTree(item)
-        ),
+        )
       };
     }, 300);
     const closeOrFocusSearchBar = () => {
@@ -245,6 +245,7 @@ export default {
     onMounted(() => {});
 
     return {
+      wishlistHasItens: computed(() => wishlist.value.length > 0),
       topCategories,
       accountIcon,
       closeOrFocusSearchBar,
@@ -260,9 +261,9 @@ export default {
       term,
       isMobile,
       handleSearch,
-      closeSearch,
+      closeSearch
     };
-  },
+  }
 };
 </script>
 

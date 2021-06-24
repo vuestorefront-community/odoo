@@ -170,7 +170,7 @@
                 )
               "
               class="products__product-card"
-              @click:wishlist="isInWishlist({ product })  ? removeItemFromWisList({product}) : addItemToWishlist({ product })"
+              @click:wishlist="isInWishlist({ product })  ? removeItemFromWishList({product: { product }}) : addItemToWishlist({ product })"
               @click:add-to-cart="addItemToCart({ product, quantity: 1 })"
             />
           </transition-group>
@@ -389,7 +389,7 @@ export default {
     const th = useUiHelpers();
     const uiState = useUiState();
     const { addItem: addItemToCart, isInCart } = useCart();
-    const { addItem: addItemToWishlist, removeItem: removeItemFromWisList, isInWishlist } = useWishlist();
+    const { addItem: addItemToWishlist, removeItem: removeItemFromWishList, isInWishlist } = useWishlist();
     const { result, search, loading } = useFacet();
 
     const { params, query } = root.$router.history.current;
@@ -485,7 +485,7 @@ export default {
       facets,
       breadcrumbs,
       addItemToWishlist,
-      removeItemFromWisList,
+      removeItemFromWishList,
       addItemToCart,
       isInWishlist,
       isInCart,
