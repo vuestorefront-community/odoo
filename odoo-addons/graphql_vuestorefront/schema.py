@@ -234,6 +234,7 @@ class SaleOrder(OdooObjectType):
     partner_invoice = graphene.Field(Partner)
     partner_shipping = graphene.Field(Partner)
     currency = graphene.Field(Currency)
+    website_order_line = graphene.List(graphene.NonNull(lambda: SaleOrderLine))
     order_line = graphene.List(graphene.NonNull(lambda: SaleOrderLine))
     invoice_status = graphene.String()
     amount_untaxed = graphene.Float()
@@ -257,6 +258,10 @@ class SaleOrder(OdooObjectType):
     @staticmethod
     def resolve_currency(root, info):
         return root.currency_id or None
+
+    @staticmethod
+    def resolve_website_order_line(root, info):
+        return root.website_order_line or None
 
     @staticmethod
     def resolve_order_line(root, info):
