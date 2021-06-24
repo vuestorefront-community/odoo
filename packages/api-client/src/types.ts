@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 
 export declare type Address = {
   city: string
@@ -16,8 +17,33 @@ export declare type ShippingInfo = {
 
 }
 
+export type Attribute = {
+  id: number
+  name: string
+  displayName: string
+}
+
+export type Product = {
+  id: number
+  description: string
+  categoriesRef: string[]
+  defaultCode: string
+  name: string
+  slug: string
+  sku: string
+  image: string
+  price: number
+  listPrice: number
+  realProduct: any
+  firstVariantId: number
+  first_variant_id: number
+  attributes: Attribute[]
+  productTemplate: Product
+}
+
 export declare type WishlistItem = {
   product: Product
+  productTemplate: Product
   id: number
   price: number
 }
@@ -44,11 +70,6 @@ export interface AgnosticFacet {
   metadata?: any;
 }
 
-export type Attribute = {
-  id: number
-  name: string
-  displayName: string
-}
 export type State = {
   id: number
   name: string
@@ -76,22 +97,7 @@ export type Partner = {
   isCompany: boolean
   contacts: [Partner]
 }
-export type Product = {
-  id: number
-  description: string
-  categoriesRef: string[]
-  defaultCode: string
-  name: string
-  slug: string
-  sku: string
-  image: string
-  price: number
-  listPrice: number
-  realProduct: any
-  firstVariantId: number
-  first_variant_id: number
-  attributes: Attribute[]
-}
+
 export type ProductVariant = {
   attribute_name: string
   attribute_display_type: string

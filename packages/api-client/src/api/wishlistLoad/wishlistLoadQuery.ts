@@ -9,13 +9,19 @@ export default gql`
           id
           name
         }
+       
         product {
           id
           name
           description
           image
-          listPrice
-          slug
+          listPrice,
+          productTemplate {
+            id, slug
+          },
+          attributes {
+            id,name,
+          }
         }
       }
     }
