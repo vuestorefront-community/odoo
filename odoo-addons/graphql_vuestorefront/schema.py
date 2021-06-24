@@ -146,6 +146,7 @@ class Product(OdooObjectType):
     list_price = graphene.Float()
     standard_price = graphene.Float()
     currency = graphene.Field(Currency)
+    product_template = graphene.Field(ProductTemplate)
     ecommerce_categories = graphene.List(graphene.NonNull(lambda: EcommerceCategory))
     attributes = graphene.List(graphene.NonNull(lambda: ProductAttribute))
 
@@ -170,6 +171,10 @@ class Product(OdooObjectType):
     @staticmethod
     def resolve_currency(root, info):
         return root.currency_id or None
+
+    @staticmethod
+    def resolve_product_template(root, info):
+        return root.product_template_id or None
 
     @staticmethod
     def resolve_attributes(root, info):
