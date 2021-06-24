@@ -239,6 +239,7 @@ class SaleOrder(OdooObjectType):
     invoice_status = graphene.String()
     amount_untaxed = graphene.Float()
     amount_tax = graphene.Float()
+    amount_delivery = graphene.Float()
     amount_total = graphene.Float()
     currency_rate = graphene.String()
     shipping_method = graphene.Field(ShippingMethod)
