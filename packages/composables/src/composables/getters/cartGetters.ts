@@ -3,11 +3,11 @@ import { CartGetters, AgnosticPrice, AgnosticTotals, AgnosticCoupon, AgnosticDis
 import { Product, SaleOrderLine, SaleOrder as Cart, LineItem } from '@vue-storefront/odoo-api/src/types';
 
 export const getCartItems = (cart: Cart): SaleOrderLine[] => {
-  if (!cart || !cart.orderLine) {
+  if (!cart || !cart.websiteOrderLine) {
     return [];
   }
 
-  return cart.orderLine.filter(line => !line.product.name.includes('Delivery'));
+  return cart.websiteOrderLine;
 };
 
 export const getCartItemName = (saleOrderLine: SaleOrderLine): string => saleOrderLine?.product.name || 'Product\'s name';
@@ -40,7 +40,7 @@ export const getCartTotals = (cart: Cart): AgnosticTotals => {
 
 export const getCartShippingPrice = (cart: Cart): number => 0;
 
-export const getCartTotalItems = (cart: Cart): number => cart?.orderLine?.filter(line => !line.product.name.includes('Delivery')).length;
+export const getCartTotalItems = (cart: Cart): number => cart?.websiteOrderLine.length;
 
 export const getFormattedPrice = (price: number) => String(price);
 

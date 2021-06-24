@@ -71,7 +71,7 @@ const params: UseCartFactoryParams<Cart, SaleOrderLine, Product, Coupon> = {
   },
 
   isInCart: (context: Context, { currentCart, product }) => {
-    return currentCart?.orderLine?.some(item => item.product.id == product.first_variant_id) || false;
+    return currentCart?.websiteOrderLine?.some(item => item.product.id == product.first_variant_id) || false;
   }
 };
 

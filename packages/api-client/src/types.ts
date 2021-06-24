@@ -134,7 +134,7 @@ export type SaleOrder = {
   dateOrder: Date
   validityDate: Date
   shippingMethod: ShippingMethod
-  orderLine: SaleOrderLine[]
+  websiteOrderLine: SaleOrderLine[]
   invoiceStatus: string
   amountUntaxed: number
   amountTax: number
