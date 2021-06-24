@@ -174,7 +174,7 @@ class Product(OdooObjectType):
 
     @staticmethod
     def resolve_product_template(root, info):
-        return root.product_template_id or None
+        return root.product_tmpl_id or None
 
     @staticmethod
     def resolve_attributes(root, info):
