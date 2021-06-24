@@ -75,3 +75,42 @@ axios.post('<domain>/shop/carrier_rate_shipment', {
 }}, {
     "withCredentials": true
 })
+
+Get all product template attributes for product template page
+=============================================================
+
+axios.post('<domain>/shop/get_combinations/<int:product_template_id>', {
+    "jsonrpc": "2.0",
+    "method": "call"
+}, {
+    "withCredentials": true
+})
+
+Get product id and price after selecting the combination on the product template page
+=====================================================================================
+
+axios.post('<domain>/shop/get_combination_info/<int:product_template_id>', {
+    "jsonrpc": "2.0",
+    "method": "call"
+    "params": {
+        "combination_ids": [1, 2],
+        add_qty=1
+}}, {
+    "withCredentials": true
+})
+
+Get products for shop with search, category, sort, count, pagination and attributes filtering
+=============================================================================================
+
+axios.post('<domain>/shop/products', {
+    "jsonrpc": "2.0",
+    "method": "call"
+    "params": {
+        "search": "",
+        "category_id": 1,
+        "offset": 0,
+        "ppg": 20,
+        "attrib_list": []
+}}, {
+    "withCredentials": true
+})
