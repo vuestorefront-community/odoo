@@ -136,8 +136,7 @@ export type SaleOrder = {
   shippingMethod: ShippingMethod
   websiteOrderLine: SaleOrderLine[]
   invoiceStatus: string
-  amountUntaxed: number
-  amountTax: number
+  amountDelivery: number
   amountTotal: number
   currencyRate: string
   partnerInvoice: Partner

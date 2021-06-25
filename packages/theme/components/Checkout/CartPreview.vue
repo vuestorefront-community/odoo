@@ -40,12 +40,7 @@
       />
       <SfProperty
         name="Shipping"
-        :value="
-          $n(
-            checkoutGetters.getShippingMethodPrice('chosenShippingMethod'),
-            'currency'
-          )
-        "
+        :value="$n(shippingMethodPrice, 'currency')"
         class="sf-property--full-width sf-property--large property"
       />
       <SfProperty
@@ -65,8 +60,7 @@
       <SfButton
         class="promo-code__button"
         @click="() => applyCoupon({ couponCode: promoCode })"
-        >{{ $t('Apply') }}</SfButton
-      >
+      >{{ $t('Apply') }}</SfButton>
     </div>
     <div class="highlighted">
       <SfCharacteristic
@@ -104,7 +98,7 @@ export default {
     SfInput,
     SfCircleIcon
   },
-  setup() {
+  setup () {
     const { cart, removeItem, updateItemQty, applyCoupon } = useCart();
     const listIsHidden = ref(false);
     const promoCode = ref('');
@@ -113,8 +107,10 @@ export default {
     const totalItems = computed(() => cartGetters.getTotalItems(cart.value));
     const totals = computed(() => cartGetters.getTotals(cart.value));
     const discounts = computed(() => cartGetters.getDiscounts(cart.value));
+    const shippingMethodPrice = computed(() => checkoutGetters.getShippingMethodPrice(cart.value));
 
     return {
+      shippingMethodPrice,
       discounts,
       totalItems,
       listIsHidden,

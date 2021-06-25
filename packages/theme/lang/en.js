@@ -139,6 +139,8 @@ export default {
   'You haven’t searched for items yet': 'You haven’t searched for items yet.',
   'Your bag is empty': 'Your bag is empty',
   'Your current email address is': 'Your current email address is',
+  'Sorry, we didnt find what youre looking for': 'Sorry, we didn\'t find what you\'re looking for.',
+  'Enter your email to receive instructions on how to reset your password': 'Enter your email to receive instructions on how to reset your password',
   'Enter your email to receive instructions on how to reset your password': 'Enter your email to receive instructions on how to reset your password',
 
 };

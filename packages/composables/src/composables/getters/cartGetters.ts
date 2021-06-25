@@ -34,7 +34,7 @@ export const getCartTotals = (cart: Cart): AgnosticTotals => {
 
   return {
     total: cart?.amountTotal || 0,
-    subtotal: cart?.amountTotal || 0
+    subtotal: cart?.amountTotal - cart?.amountDelivery || 0
   };
 };
 
