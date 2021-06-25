@@ -3,7 +3,7 @@ import facetGetters from '../../../src/composables/getters/facetGetters';
 test('category tree response any empty', () => {
   const categoryTree = facetGetters.getCategoryTree({ data: null, input: null });
 
-  expect(categoryTree).toStrictEqual({});
+  expect(categoryTree).toStrictEqual([]);
 });
 
 test('categoryTree response with formatted categories', () => {
@@ -44,6 +44,6 @@ test('get correct pagination', () => {
     totalPages: 1,
     totalItems: 3,
     itemsPerPage: 10,
-    pageOptions: []
+    pageOptions: [5, 10, 15, 20]
   });
 });

@@ -13,6 +13,8 @@ const getAll = (searchData, criteria?: string[]): AgnosticFacet[] => [];
 
 const getGrouped = (searchData, criteria?: string[]): AgnosticGroupedFacet[] => {
 
+  if (!searchData?.data?.attributes) return [];
+
   const formatedAttribute = searchData?.data?.attributes.map(attribute => ({
     id: attribute.id,
     label: attribute.name,

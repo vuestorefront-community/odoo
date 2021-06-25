@@ -27,7 +27,7 @@
               <SfListItem v-for="(category, key) in categories" :key="key">
                 <SfMenuItem
                   :label="category.label"
-                  :link="uiHelper.getCatLink(category)"
+                  :link="uiHelper.getCatLinkForSearch(category)"
                 >
                   <template #mobile-nav-icon> &#8203; </template>
                 </SfMenuItem>
@@ -130,13 +130,13 @@ import {
   SfScrollable,
   SfMenuItem,
   SfButton,
-  SfImage,
+  SfImage
 } from '@storefront-ui/vue';
 import { ref, watch, computed } from '@vue/composition-api';
 import {
   productGetters,
   categoryGetters,
-  useWishlist,
+  useWishlist
 } from '@vue-storefront/odoo';
 import { useUiHelpers } from '~/composables';
 
@@ -150,22 +150,22 @@ export default {
     SfScrollable,
     SfMenuItem,
     SfButton,
-    SfImage,
+    SfImage
   },
   props: {
     visible: {
       type: Boolean,
-      default: false,
+      default: false
     },
     result: {
-      type: Object,
-    },
+      type: Object
+    }
   },
   watch: {
     $route(to, from) {
       this.$emit('close');
       this.$emit('removeSearchResults');
-    },
+    }
   },
   setup(props, { emit }) {
     const uiHelper = useUiHelpers();
@@ -199,9 +199,9 @@ export default {
       categoryGetters,
       productGetters,
       products,
-      categories,
+      categories
     };
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>

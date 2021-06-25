@@ -25,7 +25,7 @@
             data-cy="app-header-top-categories"
             class="nav-item"
             :label="category.name"
-            :link="localePath(`/c/${category.slug}`)"
+            :link="localePath(`/c/${category.slug}/${category.id}`)"
           />
         </div>
       </template>
@@ -50,7 +50,8 @@
             class="sf-button--pure sf-header__action"
             @click="toggleCartSidebar"
           >
-            <SfIcon class="sf-header__icon" icon="empty_cart" size="1.25rem" />
+
+            <SfIcon class="sf-header__icon " icon="empty_cart" size="1.25rem"   />
 
             <SfBadge
               v-if="cartTotalItems"

@@ -280,40 +280,42 @@
       >
         <div class="filters desktop-only">
           <div v-for="(facet, i) in facets" :key="i">
-            <SfHeading
-              :level="4"
-              :title="facet.label"
-              class="filters__title sf-heading--left"
-              :key="`filter-title-${facet.id}`"
-            />
-            <div
-              v-if="isFacetColor(facet)"
-              class="filters__colors"
-              :key="`${facet.id}-colors`"
-            >
-              <SfColor
-                v-for="option in facet.options"
-                :key="`${facet.id}-${option.value}`"
-                :data-cy="`category-filter_color_${option.value}`"
-                :color="option.value"
-                :selected="isFilterSelected(facet, option)"
-                class="filters__color"
-                @click="() => selectFilter(facet, option)"
+            <template v-if="facet.options.length > 1">
+              <SfHeading
+                :level="4"
+                :title="facet.label"
+                class="filters__title sf-heading--left"
+                :key="`filter-title-${facet.id}`"
               />
-            </div>
-            <div v-else>
-              <SfFilter
-                v-for="option in facet.options"
-                :key="`${facet.id}-${option.value}`"
-                :data-cy="`category-filter_${facet.id}_${option.value}`"
-                :label="
-                  option.label + `${option.count ? ` (${option.count})` : ''}`
-                "
-                :selected="isFilterSelected(facet, option)"
-                class="filters__item"
-                @change="() => selectFilter(facet, option)"
-              />
-            </div>
+              <div
+                v-if="isFacetColor(facet)"
+                class="filters__colors"
+                :key="`${facet.id}-colors`"
+              >
+                <SfColor
+                  v-for="option in facet.options"
+                  :key="`${facet.id}-${option.value}`"
+                  :data-cy="`category-filter_color_${option.value}`"
+                  :color="option.value"
+                  :selected="isFilterSelected(facet, option)"
+                  class="filters__color"
+                  @click="() => selectFilter(facet, option)"
+                />
+              </div>
+              <div v-else>
+                <SfFilter
+                  v-for="option in facet.options"
+                  :key="`${facet.id}-${option.value}`"
+                  :data-cy="`category-filter_${facet.id}_${option.value}`"
+                  :label="
+                    option.label + `${option.count ? ` (${option.count})` : ''}`
+                  "
+                  :selected="isFilterSelected(facet, option)"
+                  class="filters__item"
+                  @change="() => selectFilter(facet, option)"
+                />
+              </div>
+            </template>
           </div>
         </div>
         <SfAccordion class="filters smartphone-only">
@@ -429,7 +431,7 @@ export default {
     });
 
     onSSR(async () => {
-      await search(th.getFacets());
+      await search(th.getFacetsFromURL());
     });
 
     const { changeFilters, isFacetColor } = useUiHelpers();

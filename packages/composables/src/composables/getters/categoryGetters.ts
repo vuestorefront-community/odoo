@@ -5,8 +5,10 @@ const itemToTree = (category: Category): AgnosticCategoryTree => {
   return {
     label: category.name,
     slug: category.slug,
+    parent: category.parent,
     items: [],
-    isCurrent: false
+    isCurrent: false,
+    id: category.id
   };
 };
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

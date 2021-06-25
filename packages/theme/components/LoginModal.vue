@@ -194,7 +194,7 @@ import {
   SfCheckbox,
   SfLoader,
   SfAlert,
-  SfBar,
+  SfBar
 } from '@storefront-ui/vue';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { required, email } from 'vee-validate/dist/rules';
@@ -204,12 +204,12 @@ import { useUiState } from '~/composables';
 
 extend('email', {
   ...email,
-  message: 'Invalid email',
+  message: 'Invalid email'
 });
 
 extend('required', {
   ...required,
-  message: 'This field is required',
+  message: 'This field is required'
 });
 
 export default {
@@ -224,7 +224,7 @@ export default {
     ValidationProvider,
     ValidationObserver,
     SfBar,
-    LiUserError,
+    LiUserError
   },
   setup() {
     const { isLoginModalOpen, toggleLoginModal } = useUiState();
@@ -239,7 +239,7 @@ export default {
     const {
       sendResetPassword,
       errors: errorPassword,
-      resetPasswordErrors,
+      resetPasswordErrors
     } = usePassword();
 
     watch(isLoginModalOpen, () => {
@@ -251,7 +251,7 @@ export default {
     });
 
     const mapGraphQLErrorToArray = (errors) =>
-      errors?.graphQLErrors.map((item) => item.message);
+      errors?.graphQLErrors?.map((item) => item.message);
 
     const handleForm = (fn) => async () => {
       await fn({ user: form.value });
@@ -279,9 +279,9 @@ export default {
       toggleLoginModal,
       handleLogin,
       handleRegister,
-      mapGraphQLErrorToArray,
+      mapGraphQLErrorToArray
     };
-  },
+  }
 };
 </script>
 

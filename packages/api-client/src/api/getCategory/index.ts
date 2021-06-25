@@ -9,6 +9,7 @@ export default async function getCategory(context, params, customQuery?: CustomQ
   const response = await apolloClient.query(
     {
       query: gql`${query}`,
+      fetchPolicy: 'no-cache',
       variables: params
     }
   );

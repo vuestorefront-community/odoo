@@ -6,13 +6,23 @@ const getInstance = () => {
   return vm.$root as any;
 };
 
+const queryParamsNotFilters = ['page', 'sort'];
+
 const useUiHelpers = () => {
   const instance = getInstance();
 
-  const getFacets = () => {
+  const getFacetsFromURL = () => {
     const { params, query } = instance.$router.history.current;
+    let filters: string[] = [];
+    if (query) {
+      Object.keys(query).forEach(filterKey => {
+        if (!queryParamsNotFilters.includes(filterKey)) {
+          filters.push(query[filterKey]);
+        }
+      });
 
-    const filters: string[] = query ? Object.values(query).flat() as string[] : [];
+      filters = filters.map(filter => filter.split(',')).flat();
+    }
 
     const ppg = query.itemsPerPage ? parseInt(query.itemsPerPage) : 10;
     let offset = 0;
@@ -24,21 +34,12 @@ const useUiHelpers = () => {
       term: params.slug_1,
       order: query.sort || 'name asc',
       offset,
-      attrib_list: filters.map(filter => filter.split(',')).flat(),
+      attrib_list: filters,
       ppg,
-      category_id: params.slug_3
+      category_id: params.slug_3 || params.slug_2
     } as any;
   };
 
-  const getFacetsFromURL = () => {
-    const { params } = instance.$router.history.current;
-    const term = params.slug_1;
-    return {
-      term
-    } as any;
-  };
-
-  // eslint-disable-next-line
   const getCatLink = (category: Category): string => {
     const { params, query } = instance.$router.history.current;
     const sort = query.sort ? `?sort=${query.sort}` : '';
@@ -46,7 +47,12 @@ const useUiHelpers = () => {
     return `/c/${params.slug_1}/${category.slug}/${category.id}${sort}`;
   };
 
-  // eslint-disable-next-line
+  const getCatLinkForSearch = (category: Category): string => {
+    const splitedSlug = category.slug.split('-');
+
+    return `/c/${splitedSlug[0]}/${category.slug}/${category.id}`;
+  };
+
   const changeSorting = (sort: string) => {
     const { query } = instance.$router.history.current;
     instance.$router.push({ query: { ...query, sort } });
@@ -57,6 +63,7 @@ const useUiHelpers = () => {
     const { query } = instance.$router.history.current;
     const formatedFilters = [];
     Object.keys(query).forEach(label => {
+      if (queryParamsNotFilters.includes(label)) return;
 
       const valueList = query[label].split(',');
 
@@ -113,9 +120,9 @@ const useUiHelpers = () => {
   };
 
   return {
-    getFacets,
     getFacetsFromURL,
     getCatLink,
+    getCatLinkForSearch,
     changeSorting,
     changeFilters,
     changeItemsPerPage,
