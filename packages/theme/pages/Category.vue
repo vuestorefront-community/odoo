@@ -135,7 +135,7 @@
         </LazyHydrate>
       </div>
       <SfLoader :class="{ loading }" :loading="loading">
-        <div class="products" v-if="!loading">
+        <div class="products" v-if="!loading && products.length > 0">
           <transition-group
             v-if="isCategoryGridView"
             appear
@@ -268,6 +268,23 @@
             </LazyHydrate>
           </div>
         </div>
+        <div v-else key="no-results" class="before-results">
+          <SfImage
+            src="/error/error_big.svg"
+            class="before-results__picture"
+            alt="error"
+            loading="lazy"
+          />
+          <p class="before-results__paragraph">
+            {{ $t('Sorry, we didnt find what youre looking for') }}
+          </p>
+          <SfButton
+            class="before-results__button color-secondary smartphone-only"
+            @click="$emit('close')"
+          >
+            {{ $t('Go back') }}
+          </SfButton>
+        </div>
       </SfLoader>
     </div>
 
@@ -370,7 +387,8 @@ import {
   SfBreadcrumbs,
   SfLoader,
   SfColor,
-  SfProperty
+  SfProperty,
+  SfImage
 } from '@storefront-ui/vue';
 import { ref, computed, onMounted } from '@vue/composition-api';
 import {
@@ -516,7 +534,8 @@ export default {
     SfColor,
     SfHeading,
     SfProperty,
-    LazyHydrate
+    LazyHydrate,
+    SfImage
   }
 };
 </script>
@@ -835,6 +854,40 @@ export default {
     --button-background: var(--c-light);
     --button-color: var(--c-dark-variant);
     margin: var(--spacer-xs) 0 0 0;
+  }
+}
+.before-results {
+  box-sizing: border-box;
+  padding: var(--spacer-lg) var(--spacer-sm) var(--spacer-2xl) ;
+  width: 100%;
+  text-align: center;
+  @include for-desktop {
+    padding: 0;
+  }
+  &__picture {
+    --image-width: 230px;
+    margin-top: var(--spacer-2xl);
+    @include for-desktop {
+      --image-width: 18.75rem;
+      margin-top: var(--spacer-base);
+    }
+  }
+  &__paragraph {
+    font-family: var(--font-family--primary);
+    font-weight: var(--font-weight--normal);
+    font-size: var(--font-size--base);
+    color: var(--c-text-muted);
+    margin: 0;
+    @include for-desktop {
+      font-size: var(--font-size--lg);
+    }
+    &:first-of-type {
+      margin: var(--spacer-xl) auto var(--spacer-xs);
+    }
+  }
+  &__button {
+    margin: var(--spacer-xl) auto;
+    width: 100%;
   }
 }
 </style>
