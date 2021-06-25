@@ -5,7 +5,7 @@ export default gql`
     allProductTemplates(id: $id, limit: $limit, offset: $offset, name: $term) {
         id, name, slug, description, defaultCode, image, listPrice, firstVariantId,
             ecommerceCategories {
-                id,name, slug
+                id,name, slug, parent {parent{id}}
             }
         }
     }

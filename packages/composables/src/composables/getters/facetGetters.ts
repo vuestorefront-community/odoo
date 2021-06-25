@@ -11,6 +11,8 @@ import {
 
 const getAll = (searchData, criteria?: string[]): AgnosticFacet[] => [];
 
+const isNumeric = (num) => !isNaN(num);
+
 const getGrouped = (searchData, criteria?: string[]): AgnosticGroupedFacet[] => {
 
   if (!searchData?.data?.attributes) return [];
@@ -96,8 +98,9 @@ const getBreadcrumbsByProduct = (product): AgnosticBreadcrumb[] => {
   if (!category) {
     return [];
   }
+  const topCategoryParentId = category.parent === null ? category.id : category.parent[0]?.parent[0]?.id;
   const splited = category.slug?.split('-');
-  breadcrumbs.push({ text: splited[0], link: `/c/${splited[0]}` });
+  breadcrumbs.push({ text: splited[0], link: `/c/${splited[0]}/${topCategoryParentId}` });
   breadcrumbs.push({ text: splited[1], link: '' });
 
   return breadcrumbs || [];
@@ -109,7 +112,7 @@ const getBreadcrumbs = (params): AgnosticBreadcrumb[] => {
   if (params.slug_1) {
     breadcrumbs.push({ text: params.slug_1, link: `/c/${params.slug_1}` });
   }
-  if (params.slug_2) {
+  if (params.slug_2 && !isNumeric(params.slug_2)) {
     const splited = params.slug_2.split('-');
     breadcrumbs.push({ text: splited[1], link: `/c/${params.slug_1}/${splited[0]}-${splited[1]}-all` });
     breadcrumbs.push({ text: splited[2], link: '' });

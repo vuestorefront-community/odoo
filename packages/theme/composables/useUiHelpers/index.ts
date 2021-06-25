@@ -6,7 +6,7 @@ const getInstance = () => {
   return vm.$root as any;
 };
 
-const queryParamsNotFilters = ['page', 'sort'];
+const queryParamsNotFilters = ['page', 'sort', 'itemsPerPage'];
 
 const useUiHelpers = () => {
   const instance = getInstance();

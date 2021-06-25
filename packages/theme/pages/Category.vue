@@ -49,20 +49,16 @@
                 :key="index"
                 :value="option.value"
                 class="sort-by__option"
-                >{{ option.attrName }}</SfSelectOption
-              >
+              >{{ option.attrName }}</SfSelectOption>
             </SfSelect>
           </LazyHydrate>
         </div>
 
         <div class="navbar__counter">
-          <span class="navbar__label desktop-only"
-            >{{ $t('Products found') }}:
+          <span class="navbar__label desktop-only">{{ $t('Products found') }}:
           </span>
           <span class="desktop-only">{{ pagination.totalItems }}</span>
-          <span class="navbar__label smartphone-only"
-            >{{ pagination.totalItems }} {{ $t('Items') }}</span
-          >
+          <span class="navbar__label smartphone-only">{{ pagination.totalItems }} {{ $t('Items') }}</span>
         </div>
 
         <div class="navbar__view">
@@ -96,8 +92,14 @@
     <div class="main section">
       <div class="sidebar desktop-only">
         <LazyHydrate when-idle>
-          <SfLoader :class="{ loading }" :loading="loading">
-            <SfAccordion :open="activeCategory" :show-chevron="true">
+          <SfLoader
+            :class="{ loading }"
+            :loading="loading"
+          >
+            <SfAccordion
+              :open="activeCategory"
+              :show-chevron="true"
+            >
               <SfAccordionItem
                 v-for="(cat, i) in categoryTree && categoryTree"
                 :key="i"
@@ -134,8 +136,14 @@
           </SfLoader>
         </LazyHydrate>
       </div>
-      <SfLoader :class="{ loading }" :loading="loading">
-        <div class="products" v-if="!loading && products.length > 0">
+      <SfLoader
+        :class="{ loading }"
+        :loading="loading"
+      >
+        <div
+          class="products"
+          v-if="showProducts"
+        >
           <transition-group
             v-if="isCategoryGridView"
             appear
@@ -217,7 +225,11 @@
                   value="XS"
                   style="margin: 0 0 1rem 0"
                 />
-                <SfProperty class="desktop-only" name="Color" value="white" />
+                <SfProperty
+                  class="desktop-only"
+                  name="Color"
+                  value="white"
+                />
               </template>
               <template #actions>
                 <SfButton
@@ -268,9 +280,13 @@
             </LazyHydrate>
           </div>
         </div>
-        <div v-else key="no-results" class="before-results">
+        <div
+          v-else
+          key="no-results"
+          class="before-results"
+        >
           <SfImage
-            src="/error/error_big.svg"
+            src="/error/error.svg"
             class="before-results__picture"
             alt="error"
             loading="lazy"
@@ -296,8 +312,11 @@
         @close="toggleFilterSidebar"
       >
         <div class="filters desktop-only">
-          <div v-for="(facet, i) in facets" :key="i">
-            <template v-if="facet.options.length > 1">
+          <div
+            v-for="(facet, i) in facets"
+            :key="i"
+          >
+            <template v-if="facetHasMoreThanOneOption(facet)">
               <SfHeading
                 :level="4"
                 :title="facet.label"
@@ -336,7 +355,10 @@
           </div>
         </div>
         <SfAccordion class="filters smartphone-only">
-          <div v-for="(facet, i) in facets" :key="i">
+          <div
+            v-for="(facet, i) in facets"
+            :key="i"
+          >
             <SfAccordionItem
               :key="`filter-title-${facet.id}`"
               :header="facet.label"
@@ -355,14 +377,16 @@
         </SfAccordion>
         <template #content-bottom>
           <div class="filters__buttons">
-            <SfButton class="sf-button--full-width" @click="applyFilters">{{
+            <SfButton
+              class="sf-button--full-width"
+              @click="applyFilters"
+            >{{
               $t('Done')
             }}</SfButton>
             <SfButton
               class="sf-button--full-width filters__button-clear"
               @click="clearFilters"
-              >{{ $t('Clear all') }}</SfButton
-            >
+            >{{ $t('Clear all') }}</SfButton>
           </div>
         </template>
       </SfSidebar>
@@ -405,7 +429,7 @@ import LazyHydrate from 'vue-lazy-hydration';
 // TODO(addToCart qty, horizontal): https://github.com/vuestorefront/storefront-ui/issues/1606
 export default {
   transition: 'fade',
-  setup(props, { root }) {
+  setup (props, { root }) {
     const th = useUiHelpers();
     const uiState = useUiState();
     const { addItem: addItemToCart, isInCart } = useCart();
@@ -428,6 +452,7 @@ export default {
       facetGetters.getGrouped(result.value, ['color', 'size'])
     );
     const pagination = computed(() => facetGetters.getPagination(result.value));
+    const showProducts = computed(() => !loading.value && products.value?.length > 0);
 
     const activeCategory = computed(() => {
       const childCategories = categoryTree.value
@@ -492,6 +517,8 @@ export default {
       changeFilters(selectedFilters.value);
     };
 
+    const facetHasMoreThanOneOption = (facet) => facet?.options?.length > 1 || false;
+
     return {
       ...uiState,
       th,
@@ -504,6 +531,7 @@ export default {
       sortBy,
       facets,
       breadcrumbs,
+      applyFilters,
       addItemToWishlist,
       removeItemFromWishList,
       addItemToCart,
@@ -514,7 +542,8 @@ export default {
       isFilterSelected,
       selectedFilters,
       clearFilters,
-      applyFilters
+      facetHasMoreThanOneOption,
+      showProducts
     };
   },
   components: {
@@ -858,7 +887,7 @@ export default {
 }
 .before-results {
   box-sizing: border-box;
-  padding: var(--spacer-lg) var(--spacer-sm) var(--spacer-2xl) ;
+  padding: var(--spacer-lg) var(--spacer-sm) var(--spacer-2xl);
   width: 100%;
   text-align: center;
   @include for-desktop {
