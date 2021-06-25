@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "private": true,
   "scripts": {
-    "build": "nuxt build -m",
+    "build": "nuxt build -m --dotenv .env_production",
     "test:e2e": "cypress open --config-file tests/e2e/cypress.json",
     "build:analyze": "nuxt build -a -m",
     "cypress:open": "cypress open",
