@@ -32,7 +32,7 @@ Want to contribute? Ping us on `odoo` channel on [our Discord](https://discord.v
 ## Resources
 
 - [Vue Storefront Documentation](https://docs.vuestorefront.io/v2/)
-- [Odoo integration Documentation] in progress
+- [Odoo integration Documentation](https://github.com/vuestorefront/odoo)
 
 
 ## Credits
