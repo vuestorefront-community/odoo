@@ -1,4 +1,4 @@
-![Vue Storefront](https://git.odoogap.com/internal/vuestorefront-api/-/blob/leonardo_2/docs/odoo_readme.png)
+![Vue Storefront](docs/odoo_readme.png)
 
 # Vue Storefront 2 integration with Odoo
 This project is a Odoo integration with [Vue Storefront 2](https://github.com/vuestorefront/vue-storefront/).
@@ -7,7 +7,7 @@ This project is a Odoo integration with [Vue Storefront 2](https://github.com/vu
 ## How to start?
 
 ```sh
-1. git clone https://git.odoogap.com/internal/vuestorefront-api
+1. git clone https://github.com/vuestorefront/odoo.git
 2. yarn install
 3. yarn build # (optional) Verify if everything works properly by building all three projects
 4. yarn dev
