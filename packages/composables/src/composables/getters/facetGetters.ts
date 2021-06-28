@@ -106,15 +106,20 @@ const getBreadcrumbsByProduct = (product): AgnosticBreadcrumb[] => {
   return breadcrumbs || [];
 };
 
-const getBreadcrumbs = (params): AgnosticBreadcrumb[] => {
+const getBreadcrumbs = ({ input }): AgnosticBreadcrumb[] => {
   const breadcrumbs = [{ text: 'Home', link: '/' }];
+  let parentId = null;
 
-  if (params.slug_1) {
-    breadcrumbs.push({ text: params.slug_1, link: `/c/${params.slug_1}` });
+  if (input.currentCategory.parent) {
+    parentId = input.currentCategory?.parent[0]?.id;
   }
-  if (params.slug_2 && !isNumeric(params.slug_2)) {
-    const splited = params.slug_2.split('-');
-    breadcrumbs.push({ text: splited[1], link: `/c/${params.slug_1}/${splited[0]}-${splited[1]}-all` });
+
+  if (input.params.slug_1) {
+    breadcrumbs.push({ text: input.params.slug_1, link: `/c/${input.params.slug_1}/${parentId}` });
+  }
+
+  if (input.params.slug_2 && !isNumeric(input.params.slug_2)) {
+    const splited = input.params.slug_2.split('-');
     breadcrumbs.push({ text: splited[2], link: '' });
   }
 

@@ -1,5 +1,5 @@
 import webpack from 'webpack';
-
+import cache from './cache';
 export default {
   server: {
     port: 3000,
@@ -78,7 +78,26 @@ export default {
     '@nuxtjs/axios',
     'nuxt-i18n',
     'cookie-universal-nuxt',
-    'vue-scrollto/nuxt'
+    'vue-scrollto/nuxt',
+    ['@vue-storefront/cache/nuxt', {
+      invalidation: {
+        endpoint: '/cache-invalidate',
+        key: 'uniqueKey',
+        handlers: [
+          '@vue-storefront/cache/defaultHandler'
+        ]
+      },
+      driver: [
+        './cache.js',
+        {
+          redis: {
+            host: 'localhost',
+            port: '6379',
+            password: '123'
+          }
+        }
+      ]
+    }]
   ],
   i18n: {
     currency: 'USD',
@@ -144,7 +163,7 @@ export default {
     transpile: [
       'vee-validate/dist/rules'
     ],
-    extend(config, ctx) {
+    extend (config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map';
       }
@@ -161,7 +180,7 @@ export default {
   },
 
   router: {
-    scrollBehavior(_to, _from, savedPosition) {
+    scrollBehavior (_to, _from, savedPosition) {
       if (savedPosition) {
         return savedPosition;
       } else {

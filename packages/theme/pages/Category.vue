@@ -422,6 +422,7 @@ import {
   useFacet,
   facetGetters
 } from '@vue-storefront/odoo';
+import { useCache, CacheTagPrefix } from '@vue-storefront/cache';
 import { useUiHelpers, useUiState } from '~/composables';
 import { onSSR } from '@vue-storefront/core';
 import LazyHydrate from 'vue-lazy-hydration';
@@ -431,30 +432,21 @@ export default {
   transition: 'fade',
   setup (props, { root }) {
     const th = useUiHelpers();
+    const { addTags } = useCache();
     const uiState = useUiState();
     const { addItem: addItemToCart, isInCart } = useCart();
     const { addItem: addItemToWishlist, removeItem: removeItemFromWishList, isInWishlist } = useWishlist();
     const { result, search, loading } = useFacet();
-
     const { params, query } = root.$router.history.current;
 
     const products = computed(() => facetGetters.getProducts(result.value));
-    const categoryTree = computed(() =>
-      facetGetters.getCategoryTree(result.value)
-    );
-    const breadcrumbs = computed(() => facetGetters.getBreadcrumbs(params));
-
-    const sortBy = computed(() =>
-      facetGetters.getSortOptions(query?.sort || '')
-    );
-
-    const facets = computed(() =>
-      facetGetters.getGrouped(result.value, ['color', 'size'])
-    );
+    const categoryTree = computed(() => facetGetters.getCategoryTree(result.value));
+    const sortBy = computed(() => facetGetters.getSortOptions(query?.sort || ''));
+    const facets = computed(() => facetGetters.getGrouped(result.value, ['color', 'size']));
     const pagination = computed(() => facetGetters.getPagination(result.value));
     const showProducts = computed(() => !loading.value && products.value?.length > 0);
 
-    const activeCategory = computed(() => {
+    const currentCategory = computed(() => {
       const childCategories = categoryTree.value
         .map((category) => category.childs)
         .flat();
@@ -463,9 +455,10 @@ export default {
         return '';
       }
 
-      const currentCategory =
-        childCategories.find((child) => child.slug === params.slug_2) || {};
+      return childCategories.find((child) => child.slug === params.slug_2) || {};
+    });
 
+    const activeCategory = computed(() => {
       if (currentCategory.parent) {
         return currentCategory?.parent[0]?.name;
       }
@@ -473,7 +466,12 @@ export default {
       return [categoryTree?.value[0]?.name] || {};
     });
 
+    const breadcrumbs = computed(() => facetGetters.getBreadcrumbs({ input: { params, currentCategory: currentCategory.value } }));
+
     onSSR(async () => {
+      addTags([
+        { prefix: CacheTagPrefix.View, value: 'category' }
+      ]);
       await search(th.getFacetsFromURL());
     });
 
@@ -521,6 +519,7 @@ export default {
 
     return {
       ...uiState,
+      currentCategory,
       th,
       products,
       categoryTree,
