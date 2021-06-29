@@ -1,5 +1,4 @@
 import webpack from 'webpack';
-import cache from './cache';
 export default {
   server: {
     port: 3000,
@@ -79,16 +78,16 @@ export default {
     'nuxt-i18n',
     'cookie-universal-nuxt',
     'vue-scrollto/nuxt',
-    ['@vue-storefront/cache/nuxt', {
+    ['~/helpers/cache/nuxt', {
       invalidation: {
         endpoint: '/cache-invalidate',
         key: '0ead60c3-d118-40be-9519-d531462ddc60',
         handlers: [
-          '@vue-storefront/cache/defaultHandler'
+          './helpers/cache/defaultHandler'
         ]
       },
       driver: [
-        './cache.js',
+        './helpers/cache.js',
         {
           redis: {
             host: process.env.REDIS_HOST,
