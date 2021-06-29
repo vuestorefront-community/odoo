@@ -6,7 +6,10 @@
     />
     <div class="product">
       <LazyHydrate when-idle>
-        <SfGallery :images="productGallery" class="product__gallery" />
+        <SfGallery
+          :images="productGallery"
+          class="product__gallery"
+        />
       </LazyHydrate>
       <div class="product__info">
         <div class="product__header">
@@ -32,12 +35,22 @@
           />
           <div>
             <div class="product__rating">
-              <SfRating :score="averageRating" :max="5" />
-              <a v-if="!!totalReviews" href="#" class="product__count">
+              <SfRating
+                :score="averageRating"
+                :max="5"
+              />
+              <a
+                v-if="!!totalReviews"
+                href="#"
+                class="product__count"
+              >
                 ({{ totalReviews }})
               </a>
             </div>
-            <SfButton data-cy="product-btn_read-all" class="sf-button--text">{{
+            <SfButton
+              data-cy="product-btn_read-all"
+              class="sf-button--text"
+            >{{
               $t('Read all reviews')
             }}</SfButton>
           </div>
@@ -75,7 +88,10 @@
 
           <div v-if="options.radio">
             <template v-for="(radio, radioKey) in options.radio">
-              <p class="product__radio-label" :key="radioKey">
+              <p
+                class="product__radio-label"
+                :key="radioKey"
+              >
                 {{ radio.label }}:
               </p>
               <SfRadio
@@ -92,9 +108,15 @@
             </template>
           </div>
 
-          <div v-if="options.color" class="product__colors desktop-only">
+          <div
+            v-if="options.color"
+            class="product__colors desktop-only"
+          >
             <template v-for="(option, colorKey) in options.color">
-              <p class="product__color-label" :key="colorKey">
+              <p
+                class="product__color-label"
+                :key="colorKey"
+              >
                 {{ $t('Color') }}:
               </p>
 
@@ -122,8 +144,14 @@
         </div>
 
         <LazyHydrate when-idle>
-          <SfTabs :open-tab="1" class="product__tabs">
-            <SfTab data-cy="product-tab_description" title="Description">
+          <SfTabs
+            :open-tab="1"
+            class="product__tabs"
+          >
+            <SfTab
+              data-cy="product-tab_description"
+              title="Description"
+            >
               <div class="product__description">
                 {{ $t('Product description') }}
               </div>
@@ -147,14 +175,20 @@
                 :value="property.value"
                 class="product__property"
               >
-                <template v-if="property.name === 'Category'" #value>
+                <template
+                  v-if="property.name === 'Category'"
+                  #value
+                >
                   <SfButton class="product__property__button sf-button--text">
                     {{ property.value }}
                   </SfButton>
                 </template>
               </SfProperty>
             </SfTab>
-            <SfTab title="Read reviews" data-cy="product-tab_reviews">
+            <SfTab
+              title="Read reviews"
+              data-cy="product-tab_reviews"
+            >
               <SfReview
                 v-for="review in reviews"
                 :key="reviewGetters.getReviewId(review)"
@@ -233,12 +267,13 @@ import {
   SfBreadcrumbs,
   SfButton,
   SfColor,
-  SfColorPicker,
+  SfColorPicker
 } from '@storefront-ui/vue';
 
 import InstagramFeed from '~/components/InstagramFeed.vue';
 import RelatedProducts from '~/components/RelatedProducts.vue';
 import { ref, computed, reactive } from '@vue/composition-api';
+import { useCache, CacheTagPrefix } from '@vue-storefront/cache';
 import {
   useProduct,
   useCart,
@@ -246,7 +281,7 @@ import {
   useReview,
   useProductVariant,
   reviewGetters,
-  facetGetters,
+  facetGetters
 } from '@vue-storefront/odoo';
 
 import { onSSR } from '@vue-storefront/core';
@@ -255,7 +290,7 @@ import LazyHydrate from 'vue-lazy-hydration';
 export default {
   name: 'Product',
   transition: 'fade',
-  setup(props, { root }) {
+  setup (props, { root }) {
     const qty = ref(1);
     const { id } = root.$route.params;
     const { size, color } = root.$route.query;
@@ -266,14 +301,16 @@ export default {
       searchRealProduct,
       productVariants,
       realProduct,
-      elementNames,
+      elementNames
     } = useProductVariant();
     const {
       products: relatedProducts,
       search: searchRelatedProducts,
-      loading: relatedLoading,
+      loading: relatedLoading
     } = useProduct('relatedProducts');
     const { addItem, loading } = useCart();
+    const { addTags } = useCache();
+
     const { reviews: productReviews, search: searchReviews } =
       useReview('productReviews');
 
@@ -285,7 +322,7 @@ export default {
 
       return {
         ...productTemplate,
-        realProduct: realProduct.value,
+        realProduct: realProduct.value
       };
     });
 
@@ -317,7 +354,7 @@ export default {
         mobile: { url: img.small },
         desktop: { url: img.normal },
         big: { url: img.big },
-        alt: product.value.name,
+        alt: product.value.name
       }))
     );
 
@@ -325,9 +362,12 @@ export default {
       await searchVariants({ productId: id });
       await searchRealProduct({
         productId: id,
-        combinationIds: Object.values(root.$route.query),
+        combinationIds: Object.values(root.$route.query)
       });
       await search({ id });
+      addTags([
+        { prefix: CacheTagPrefix.Product, value: id }
+      ]);
       // await searchRelatedProducts({ catId: [categories.value[0]], limit: 8 });
       // await searchReviews({ productId: id });
     });
@@ -335,7 +375,7 @@ export default {
     const updateFilter = (filter) => {
       root.$router.push({
         path: root.$route.path,
-        query: { ...root.$route.query, ...filter },
+        query: { ...root.$route.query, ...filter }
       });
     };
 
@@ -344,7 +384,7 @@ export default {
       Object.keys(options.value).forEach((item) => {
         keys = [
           ...options.value[item].map((element) => element.label),
-          ...keys,
+          ...keys
         ];
       });
       const queryParams = Object.keys(root.$route.query);
@@ -385,7 +425,7 @@ export default {
       loading,
       productGetters,
       productVariants,
-      productGallery,
+      productGallery
     };
   },
   components: {
@@ -411,17 +451,17 @@ export default {
     RelatedProducts,
     MobileStoreBanner,
     SfColorPicker,
-    LazyHydrate,
+    LazyHydrate
   },
-  data() {
+  data () {
     return {
       stock: 5,
       detailsIsActive: false,
       brand:
         'Brand name is the perfect pairing of quality and design. This label creates major everyday vibes with its collection of modern brooches, silver and gold jewellery, or clips it back with hair accessories in geo styles.',
-      careInstructions: 'Do not wash!',
+      careInstructions: 'Do not wash!'
     };
-  },
+  }
 };
 </script>
 

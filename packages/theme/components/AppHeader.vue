@@ -9,7 +9,10 @@
     >
       <!-- TODO: add mobile view buttons after SFUI team PR -->
       <template #logo>
-        <nuxt-link :to="localePath('/')" class="sf-header__logo">
+        <nuxt-link
+          :to="localePath('/')"
+          class="sf-header__logo"
+        >
           <SfImage
             src="/icons/logo.svg"
             alt="Vue Storefront Next"
@@ -38,26 +41,36 @@
             class="sf-button--pure sf-header__action"
             @click="handleAccountClick"
           >
-            <SfIcon :icon="accountIcon" size="1.25rem" />
+            <SfIcon
+              :icon="accountIcon"
+              size="1.25rem"
+            />
           </SfButton>
           <SfButton
             class="sf-button--pure sf-header__action"
             @click="toggleWishlistSidebar"
           >
-            <SfIcon class="sf-header__icon" :icon="wishlistHasItens ? 'heart_fill' : 'heart'" size="1.25rem" />
+            <SfIcon
+              class="sf-header__icon"
+              :icon="wishlistHasItens ? 'heart_fill' : 'heart'"
+              size="1.25rem"
+            />
           </SfButton>
           <SfButton
             class="sf-button--pure sf-header__action"
             @click="toggleCartSidebar"
           >
 
-            <SfIcon class="sf-header__icon " icon="empty_cart" size="1.25rem"   />
+            <SfIcon
+              class="sf-header__icon "
+              icon="empty_cart"
+              size="1.25rem"
+            />
 
             <SfBadge
               v-if="cartTotalItems"
               class="sf-badge--number cart-badge"
-              >{{ cartTotalItems }}</SfBadge
-            >
+            >{{ cartTotalItems }}</SfBadge>
           </SfButton>
         </div>
       </template>
@@ -81,7 +94,11 @@
               @click="closeOrFocusSearchBar"
             >
               <span class="sf-search-bar__icon">
-                <SfIcon color="var(--c-text)" size="18px" icon="cross" />
+                <SfIcon
+                  color="var(--c-text)"
+                  size="18px"
+                  icon="cross"
+                />
               </span>
             </SfButton>
             <SfButton
@@ -92,7 +109,11 @@
               "
             >
               <span class="sf-search-bar__icon">
-                <SfIcon color="var(--c-text)" size="20px" icon="search" />
+                <SfIcon
+                  color="var(--c-text)"
+                  size="20px"
+                  icon="search"
+                />
               </span>
             </SfButton>
           </template>
@@ -135,6 +156,7 @@ import { onSSR } from '@vue-storefront/core';
 import { useUiHelpers } from '~/composables';
 import LocaleSelector from './LocaleSelector';
 import SearchResults from '~/components/SearchResults';
+import { useCache, CacheTagPrefix } from '@vue-storefront/cache';
 
 import debounce from 'lodash.debounce';
 import { mapMobileObserver } from '@storefront-ui/vue/src/utilities/mobile-observer.js';
@@ -151,7 +173,7 @@ export default {
     SfBadge
   },
   directives: { clickOutside },
-  setup(props, { root }) {
+  setup (props, { root }) {
     const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal } =
       useUiState();
     const { changeSearchTerm } = useUiHelpers();
@@ -160,6 +182,7 @@ export default {
     const result = ref(null);
     const searchBarRef = ref(null);
     const isMobile = computed(() => mapMobileObserver().isMobile.get());
+    const { addTags } = useCache();
 
     const { load: loadWishlist, wishlist } = useWishlist();
     const { products, search: searchProductApi } = useProduct();
@@ -237,13 +260,16 @@ export default {
     );
 
     onSSR(async () => {
+      addTags([
+        { prefix: '', value: 'cart-wishlist-user' }
+      ]);
       await loadUser();
       await loadWishlist();
       await searchTopCategoryApi({ topCategory: true });
       await loadCart();
     });
 
-    onMounted(() => {});
+    onMounted(() => { });
 
     return {
       wishlistHasItens: computed(() => wishlist.value.length > 0),
