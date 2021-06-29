@@ -458,21 +458,30 @@ export default {
       return childCategories.find((child) => child.slug === params.slug_2) || {};
     });
 
-    const activeCategory = computed(() => {
-      if (currentCategory.parent) {
-        return currentCategory?.parent[0]?.name;
+    const getCurrentParentCategory = (currentCategory) => {
+      if (currentCategory.value.parent) {
+        return currentCategory?.value.parent[0];
       }
+      return {};
+    };
 
+    const activeCategory = computed(() => {
+      const currentParentCategory = getCurrentParentCategory(currentCategory);
+
+      if (currentParentCategory) {
+        return currentParentCategory.name;
+      }
       return [categoryTree?.value[0]?.name] || {};
     });
 
-    const breadcrumbs = computed(() => facetGetters.getBreadcrumbs({ input: { params, currentCategory: currentCategory.value } }));
+    const breadcrumbs = computed(() => facetGetters.getBreadcrumbs({ input: { params, currentParentCategory: getCurrentParentCategory(currentCategory) } }));
 
     onSSR(async () => {
-      addTags([
-        { prefix: CacheTagPrefix.View, value: 'category' }
-      ]);
       await search(th.getFacetsFromURL());
+
+      addTags([
+        { prefix: CacheTagPrefix.View, value: currentCategory.value.id || params.slug_2 }
+      ]);
     });
 
     const { changeFilters, isFacetColor } = useUiHelpers();

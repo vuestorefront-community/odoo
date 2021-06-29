@@ -82,7 +82,7 @@ export default {
     ['@vue-storefront/cache/nuxt', {
       invalidation: {
         endpoint: '/cache-invalidate',
-        key: 'uniqueKey',
+        key: '0ead60c3-d118-40be-9519-d531462ddc60',
         handlers: [
           '@vue-storefront/cache/defaultHandler'
         ]
@@ -91,9 +91,9 @@ export default {
         './cache.js',
         {
           redis: {
-            host: 'localhost',
-            port: '6379',
-            password: '123'
+            host: process.env.REDIS_HOST,
+            port: process.env.REDIS_PORT,
+            password: process.env.REDIS_PASSWORD
           }
         }
       ]

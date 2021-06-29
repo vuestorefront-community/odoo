@@ -7,7 +7,7 @@ export default gql`
         name
         slug
         parent {
-          id, name, slug
+          id, name, slug, parent{id}
         }
       }
     }

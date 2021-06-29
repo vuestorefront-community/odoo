@@ -108,14 +108,10 @@ const getBreadcrumbsByProduct = (product): AgnosticBreadcrumb[] => {
 
 const getBreadcrumbs = ({ input }): AgnosticBreadcrumb[] => {
   const breadcrumbs = [{ text: 'Home', link: '/' }];
-  let parentId = null;
-
-  if (input.currentCategory.parent) {
-    parentId = input.currentCategory?.parent[0]?.id;
-  }
+  const categoryId = input.currentParentCategory?.parent ? input.currentParentCategory?.parent[0]?.id : input.params.slug_2;
 
   if (input.params.slug_1) {
-    breadcrumbs.push({ text: input.params.slug_1, link: `/c/${input.params.slug_1}/${parentId}` });
+    breadcrumbs.push({ text: input.params.slug_1, link: `/c/${input.params.slug_1}/${categoryId}` });
   }
 
   if (input.params.slug_2 && !isNumeric(input.params.slug_2)) {
