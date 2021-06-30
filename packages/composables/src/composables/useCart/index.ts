@@ -12,7 +12,6 @@ import { SaleOrder as Cart, SaleOrderLine, Product } from '@vue-storefront/odoo-
 const params: UseCartFactoryParams<Cart, SaleOrderLine, Product, Coupon> = {
 
   load: async (context: Context, { customQuery }) => {
-
     const cart = await context.$odoo.api.cartLoad({}, customQuery);
 
     return cart.data.userShoppingCart.length > 0 ? cart.data.userShoppingCart[0] : [];

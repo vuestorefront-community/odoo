@@ -2,12 +2,13 @@ import Redis from 'redis-tag-cache';
 
 export default function RedisCache (options) {
   const client = new Redis({
-    defaultTimeout: 86400,
+    defaultTimeout: options.redis.defaultTimeout,
     redis: options.redis
   });
 
   return {
     async invoke ({ route, render, getTags }) {
+
       const key = `page:${route}`;
       const cachedResponse = await client.get(key);
 
@@ -22,11 +23,7 @@ export default function RedisCache (options) {
         return content;
       }
 
-      client.set(
-        key,
-        content,
-        tags
-      );
+      client.set(key, content, tags);
 
       return content;
     },
@@ -39,12 +36,11 @@ export default function RedisCache (options) {
       }
 
       return new Promise((resolve, reject) => {
-        const prefix = `${options.redis.keyPrefix || ''}tags:`;
-        const stream = client.redis.scanStream({ match: `${prefix}*` });
+        const stream = client.redis.scanStream({ match: 'tags:*' });
 
         const tags = [];
 
-        stream.on('data', rawTags => tags.push(...rawTags.map(tag => tag.replace(prefix, ''))));
+        stream.on('data', rawTags => tags.push(...rawTags));
         stream.on('end', async () => {
           if (tags.length) {
             await client.invalidate(...tags);

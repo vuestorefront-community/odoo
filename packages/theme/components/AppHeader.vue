@@ -156,7 +156,6 @@ import { onSSR } from '@vue-storefront/core';
 import { useUiHelpers } from '~/composables';
 import LocaleSelector from './LocaleSelector';
 import SearchResults from '~/components/SearchResults';
-import { useCache, CacheTagPrefix } from '@vue-storefront/cache';
 
 import debounce from 'lodash.debounce';
 import { mapMobileObserver } from '@storefront-ui/vue/src/utilities/mobile-observer.js';
@@ -174,42 +173,41 @@ export default {
   },
   directives: { clickOutside },
   setup (props, { root }) {
-    const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal } =
-      useUiState();
-    const { changeSearchTerm } = useUiHelpers();
-    const { isAuthenticated, load: loadUser } = useUser();
-    const { cart, load: loadCart } = useCart();
     const result = ref(null);
     const searchBarRef = ref(null);
-    const isMobile = computed(() => mapMobileObserver().isMobile.get());
-    const { addTags } = useCache();
-
-    const { load: loadWishlist, wishlist } = useWishlist();
-    const { products, search: searchProductApi } = useProduct();
-    const { categories, search: searchCategoryApi } = useCategory(
-      'AppHeader:LeftCategories'
-    );
-    const { categories: topCategories, search: searchTopCategoryApi } =
-      useCategory('AppHeader:TopCategories');
-
     const term = ref(null);
     const isSearchOpen = ref(false);
+
+    const { changeSearchTerm } = useUiHelpers();
+    const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal } = useUiState();
+
+    const { load: loadUser, isAuthenticated } = useUser();
+    const { load: loadCart, cart } = useCart();
+    const { load: loadWishlist, wishlist } = useWishlist();
+    const { search: searchProductApi, products } = useProduct();
+    const { search: searchCategoryApi, categories } = useCategory('AppHeader:LeftCategories');
+    const { categories: topCategories, search: searchTopCategoryApi } = useCategory('AppHeader:TopCategories');
+
+    const isMobile = computed(() => mapMobileObserver().isMobile.get());
 
     const cartTotalItems = computed(() => {
       const count = cartGetters.getTotalItems(cart.value);
       return count ? count.toString() : null;
     });
-    const removeSearchResults = () => {
-      result.value = null;
-    };
     const accountIcon = computed(() =>
       isAuthenticated.value ? 'profile_fill' : 'profile'
     );
+
+    const removeSearchResults = () => {
+      result.value = null;
+    };
+
     const closeSearch = () => {
       if (!isSearchOpen.value) return;
       term.value = '';
       isSearchOpen.value = false;
     };
+
     const handleSearch = debounce(async (paramValue) => {
       if (!paramValue.target) {
         term.value = paramValue;
@@ -260,19 +258,18 @@ export default {
     );
 
     onSSR(async () => {
-      addTags([
-        { prefix: '', value: 'cart-wishlist-user' }
-      ]);
-      await loadUser();
-      await loadWishlist();
       await searchTopCategoryApi({ topCategory: true });
-      await loadCart();
+
     });
 
-    onMounted(() => { });
+    onMounted(() => {
+      loadUser();
+      loadWishlist();
+      loadCart();
+    });
 
     return {
-      wishlistHasItens: computed(() => wishlist.value.length > 0),
+      wishlistHasItens: computed(() => wishlist.value?.length > 0),
       topCategories,
       accountIcon,
       closeOrFocusSearchBar,

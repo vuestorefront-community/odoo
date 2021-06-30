@@ -10,7 +10,6 @@ import { Wishlist, WishlistItem, Product } from '@vue-storefront/odoo-api/src/ty
 
 const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
   load: async (context: Context) => {
-
     const wishlist = await context.$odoo.api.wishlistLoad();
 
     return wishlist.data.allWishlistItems.length > 0 ? wishlist.data.allWishlistItems : [];

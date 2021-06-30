@@ -9,23 +9,41 @@
     >
       <template #title>
         <div class="heading__wrapper">
-          <SfHeading :level="3" title="My wishlist" class="sf-heading--left" />
+          <SfHeading
+            :level="3"
+            title="My wishlist"
+            class="sf-heading--left"
+          />
           <SfButton
             class="heading__close-button sf-button--pure"
             aria-label="Wishlist sidebar close button"
             @click="toggleWishlistSidebar"
           >
-            <SfIcon icon="cross" size="14px" color="gray-primary" />
+            <SfIcon
+              icon="cross"
+              size="14px"
+              color="gray-primary"
+            />
           </SfButton>
         </div>
       </template>
-      <transition name="fade" mode="out-in">
-        <div v-if="totalItems" class="my-wishlist" key="my-wishlist">
+      <transition
+        name="fade"
+        mode="out-in"
+      >
+        <div
+          v-if="totalItems"
+          class="my-wishlist"
+          key="my-wishlist"
+        >
           <div class="my-wishlist__total-items">
             Total items: <strong>{{ totalItems }}</strong>
           </div>
           <div class="collected-product-list">
-            <transition-group name="fade" tag="div">
+            <transition-group
+              name="fade"
+              tag="div"
+            >
               <SfCollectedProduct
                 v-for="product in products"
                 :key="wishlistGetters.getItemSku(product)"
@@ -65,9 +83,7 @@
             </transition-group>
           </div>
           <div class="sidebar-bottom">
-            <SfProperty
-              class="sf-property--full-width my-wishlist__total-price"
-            >
+            <SfProperty class="sf-property--full-width my-wishlist__total-price">
               <template #name>
                 <span class="my-wishlist__total-price-label">Total price:</span>
               </template>
@@ -77,7 +93,11 @@
             </SfProperty>
           </div>
         </div>
-        <div v-else class="empty-wishlist" key="empty-wishlist">
+        <div
+          v-else
+          class="empty-wishlist"
+          key="empty-wishlist"
+        >
           <div class="empty-wishlist__banner">
             <SfImage
               src="/icons/empty-cart.svg"
@@ -137,7 +157,7 @@ export default {
     SfCollectedProduct,
     SfImage
   },
-  setup() {
+  setup () {
     const { isWishlistSidebarOpen, toggleWishlistSidebar } = useUiState();
     const { wishlist, removeItem, load: loadWishlist } = useWishlist();
     const { isAuthenticated } = useUser();
@@ -148,7 +168,7 @@ export default {
     );
 
     onSSR(async () => {
-      await loadWishlist();
+      // await loadWishlist();
     });
 
     const getLocalPathFromWishListItem = (wishlistItem) => {

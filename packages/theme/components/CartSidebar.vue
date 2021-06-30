@@ -14,10 +14,20 @@
           :value="totalItems"
         />
       </template>
-      <transition name="sf-fade" mode="out-in">
-        <div v-if="totalItems" key="my-cart" class="my-cart">
+      <transition
+        name="sf-fade"
+        mode="out-in"
+      >
+        <div
+          v-if="totalItems"
+          key="my-cart"
+          class="my-cart"
+        >
           <div class="collected-product-list">
-            <transition-group name="sf-fade" tag="div">
+            <transition-group
+              name="sf-fade"
+              tag="div"
+            >
               <SfCollectedProduct
                 data-cy="collected-product-cart-sidebar"
                 v-for="product in products"
@@ -56,7 +66,11 @@
             </transition-group>
           </div>
         </div>
-        <div v-else key="empty-cart" class="empty-cart">
+        <div
+          v-else
+          key="empty-cart"
+          class="empty-cart"
+        >
           <div class="empty-cart__banner">
             <SfImage
               alt="Empty bag"
@@ -97,8 +111,7 @@
             <SfButton
               class="sf-button--full-width color-primary"
               @click="toggleCartSidebar"
-              >{{ $t('Go back shopping') }}</SfButton
-            >
+            >{{ $t('Go back shopping') }}</SfButton>
           </div>
         </transition>
       </template>
@@ -114,9 +127,9 @@ import {
   SfProperty,
   SfPrice,
   SfCollectedProduct,
-  SfImage,
+  SfImage
 } from '@storefront-ui/vue';
-import { computed } from '@vue/composition-api';
+import { computed, onMounted } from '@vue/composition-api';
 import { useCart, useUser, cartGetters } from '@vue-storefront/odoo';
 import { useUiState } from '~/composables';
 import { onSSR } from '@vue-storefront/core';
@@ -131,9 +144,9 @@ export default {
     SfProperty,
     SfPrice,
     SfCollectedProduct,
-    SfImage,
+    SfImage
   },
-  setup() {
+  setup () {
     const { isCartSidebarOpen, toggleCartSidebar } = useUiState();
     const { cart, removeItem, updateItemQty, load: loadCart } = useCart();
     const { isAuthenticated } = useUser();
@@ -142,7 +155,7 @@ export default {
     const totalItems = computed(() => cartGetters.getTotalItems(cart.value));
 
     onSSR(async () => {
-      await loadCart();
+      // await loadCart();
     });
 
     return {
@@ -154,9 +167,9 @@ export default {
       toggleCartSidebar,
       totals,
       totalItems,
-      cartGetters,
+      cartGetters
     };
-  },
+  }
 };
 </script>
 
