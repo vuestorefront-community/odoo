@@ -480,7 +480,6 @@ export default {
       await search(th.getFacetsFromURL());
 
       addTags([
-        { prefix: CacheTagPrefix.View, value: 'category' },
         { prefix: CacheTagPrefix.Category, value: currentCategory.value.id || params.slug_2 }
       ]);
     });
