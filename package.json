@@ -14,7 +14,7 @@
     "dev:api-client": "cd packages/api-client && yarn dev",
     "dev:composables": "cd packages/composables && yarn dev",
     "dev:theme": "cd packages/theme && yarn dev",
-    "test": "yarn test:api-client && yarn test:composables && yarn test:theme",
+    "test": "yarn test:api-client && yarn test:composables",
     "test:api-client": "cd packages/api-client && yarn test --passWithNoTests",
     "test:composables": "cd packages/composables && yarn test",
     "test:theme": "cd packages/theme && yarn test",

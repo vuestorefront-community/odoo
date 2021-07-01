@@ -9,8 +9,7 @@
     "cypress:open": "cypress open",
     "dev": "nuxt",
     "generate": "nuxt generate",
-    "start": "nuxt start",
-    "test": "jest"
+    "start": "nuxt start"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.5",
