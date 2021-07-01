@@ -128,19 +128,19 @@ export type Pagination = {
 export type SaleOrder = {
   id: number
   name: string
-  origin: string
-  clientOrderRef: string
-  state: string
-  dateOrder: Date
-  validityDate: Date
-  shippingMethod: ShippingMethod
-  websiteOrderLine: SaleOrderLine[]
-  invoiceStatus: string
+  origin?: string
+  clientOrderRef?: string
+  state?: string
+  dateOrder?: Date
+  validityDate?: Date
+  shippingMethod?: ShippingMethod
+  websiteOrderLine?: SaleOrderLine[]
+  invoiceStatus?: string
   amountDelivery: number
   amountTotal: number
-  currencyRate: string
-  partnerInvoice: Partner
-  partnerShipping: Partner
+  currencyRate?: string
+  partnerInvoice?: Partner
+  partnerShipping?: Partner
 }
 export type CategoryFilter = Record<string, unknown>
 export type LineItem = Record<string, unknown>

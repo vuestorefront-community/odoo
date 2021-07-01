@@ -2,6 +2,11 @@
 import { CartGetters, AgnosticPrice, AgnosticTotals, AgnosticCoupon, AgnosticDiscount } from '@vue-storefront/core';
 import { Product, SaleOrderLine, SaleOrder as Cart, LineItem } from '@vue-storefront/odoo-api/src/types';
 
+function roundDecimal (num) {
+  const m = Number((Math.abs(num) * 100).toPrecision(15));
+  return Math.round(m) / 100 * Math.sign(num);
+}
+
 export const getCartItems = (cart: Cart): SaleOrderLine[] => {
   if (!cart || !cart.websiteOrderLine) {
     return [];
@@ -34,7 +39,7 @@ export const getCartTotals = (cart: Cart): AgnosticTotals => {
 
   return {
     total: cart?.amountTotal || 0,
-    subtotal: cart?.amountTotal - cart?.amountDelivery || 0
+    subtotal: roundDecimal(cart?.amountTotal - cart?.amountDelivery) || 0
   };
 };
 
