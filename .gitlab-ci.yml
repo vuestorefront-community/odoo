@@ -1,0 +1,16 @@
+image: alpine:3.11
+
+stages:
+  - test
+
+before_script:
+  - npm install
+  - npm run build
+
+cache:
+  paths:
+    - node_modules/
+
+pages:
+  script:
+    - npm run test
