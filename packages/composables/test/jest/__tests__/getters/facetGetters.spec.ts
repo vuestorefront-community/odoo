@@ -1,18 +1,18 @@
-import facetGetters from '../../../src/composables/getters/facetGetters';
+import { facetGetters } from '@vue-storefront/odoo';
 
-test('category tree response any empty', () => {
+it('category tree response any empty', () => {
   const categoryTree = facetGetters.getCategoryTree({ data: null, input: null });
 
   expect(categoryTree).toStrictEqual([]);
 });
 
-test('products tree response any empty', () => {
+it('products tree response any empty', () => {
   const products = facetGetters.getProducts({ data: null, input: null });
 
   expect(products).toStrictEqual({});
 });
 
-test('get correct pagination with custom ppg and two pages', () => {
+it('get correct pagination with custom ppg and two pages', () => {
   const searchData = {
     data: {
       products: new Array(30),
@@ -33,7 +33,7 @@ test('get correct pagination with custom ppg and two pages', () => {
   });
 });
 
-test('get correct pagination with no ppg ', () => {
+it('get correct pagination with no ppg ', () => {
   const searchData = {
     data: {
       products: new Array(30),

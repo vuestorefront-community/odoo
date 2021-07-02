@@ -108,10 +108,10 @@ export type ProductVariant = {
 }
 export type SaleOrderLine = {
   id: number
-  name: string
-  product: Product
-  productUomQty: number
-  priceTotal: number
+  name?: string
+  product?: Product
+  productUomQty?: number
+  priceTotal?: number
 }
 export type Category = {
   id: number

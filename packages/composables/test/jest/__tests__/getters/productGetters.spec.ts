@@ -1,15 +1,16 @@
-import { getProductProperties, getProductGallery, getProductFiltered, getProductAttributes } from '../../../src/composables/getters/productGetters';
+import { getProductProperties, getProductGallery, getProductFiltered, getProductAttributes } from '../../../../src/composables/getters/productGetters';
 import { Product } from '@vue-storefront/odoo-api/src/types';
-import productVariants from '../data/productVariants.json';
-import productVariantsCorrectResponse from '../data/getProductAttributesResponse.json';
-test('get empty product attributes', () => {
+import productVariants from '../../data/productVariants.json';
+import productVariantsCorrectResponse from '../../data/getProductAttributesResponse.json';
+
+it('get empty product attributes', () => {
   const propertiesWithNull = getProductProperties(null);
   const propertiesWithUndefined = getProductProperties(undefined);
 
   expect(propertiesWithNull).toStrictEqual([]);
   expect(propertiesWithUndefined).toStrictEqual([]);
 });
-test('get list of Attributes', () => {
+it('get list of Attributes', () => {
   const product = {
     id: 1,
     attributes: [
@@ -22,7 +23,7 @@ test('get list of Attributes', () => {
   expect(properties).toStrictEqual(product.attributes);
 });
 
-test('get empty gallery for no product', () => {
+it('get empty gallery for no product', () => {
 
   const galleryWithNull = getProductGallery(null);
   const galleryWithUndefined = getProductGallery(undefined);
@@ -31,7 +32,7 @@ test('get empty gallery for no product', () => {
   expect(galleryWithUndefined).toStrictEqual([]);
 });
 
-test('get AgnosticMediaGallery with empty image for product without image', () => {
+it('get AgnosticMediaGallery with empty image for product without image', () => {
 
   const galleryWithNull = getProductGallery({} as Product);
 
@@ -42,7 +43,7 @@ test('get AgnosticMediaGallery with empty image for product without image', () =
   }]);
 });
 
-test('get AgnosticMediaGallery with image for product', () => {
+it('get AgnosticMediaGallery with image for product', () => {
 
   const product = {
     image: 'http://odoo.com'
@@ -57,7 +58,7 @@ test('get AgnosticMediaGallery with image for product', () => {
   }]);
 });
 
-test('get empty filtered product', () => {
+it('get empty filtered product', () => {
 
   const productsWithNull = getProductFiltered(null);
   const productsWithUndefined = getProductFiltered(undefined);
@@ -66,7 +67,7 @@ test('get empty filtered product', () => {
   expect(productsWithUndefined).toStrictEqual([]);
 });
 
-test('get grouped attribute list', () => {
+it('get grouped attribute list', () => {
 
   const result = getProductAttributes(productVariants, []);
 

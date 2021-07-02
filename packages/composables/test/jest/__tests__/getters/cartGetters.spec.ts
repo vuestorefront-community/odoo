@@ -1,6 +1,6 @@
-import cartGetters from '../../../src/composables/getters/cartGetters';
+import { cartGetters } from '@vue-storefront/odoo';
 
-test('calculate cart subtotal', () => {
+it('calculate cart subtotal', () => {
   const cart = {
     id: 1,
     name: '',
@@ -12,7 +12,7 @@ test('calculate cart subtotal', () => {
   expect(categoryTree).toStrictEqual({ subtotal: 141, total: 151 });
 });
 
-test('calculate cart float subtotal', () => {
+it('calculate cart float subtotal', () => {
   const cart = {
     id: 1,
     name: '',
@@ -24,7 +24,7 @@ test('calculate cart float subtotal', () => {
   expect(totals).toStrictEqual({ subtotal: 141.30, total: 151.60 });
 });
 
-test('cart total items', () => {
+it('cart total items', () => {
   const cart = {
     id: 1,
     name: '',
@@ -37,7 +37,7 @@ test('cart total items', () => {
   expect(totalItems).toBe(30);
 });
 
-test('empty cart items', () => {
+it('empty cart items', () => {
   const cart = {
     id: 1,
     name: '',
@@ -49,7 +49,7 @@ test('empty cart items', () => {
   expect(totalItems).toBe(0);
 });
 
-test('cart items', () => {
+it('cart items', () => {
   const cart = {
     id: 1,
     name: '',
@@ -65,7 +65,7 @@ test('cart items', () => {
   expect(cartItems).toStrictEqual([{ id: 1 }, { id: 2 }]);
 });
 
-test('empty cart items', () => {
+it('empty cart items', () => {
   const cart = {
     id: 1,
     name: '',
