@@ -1,0 +1,19 @@
+{
+  "name": "vuestorefront-odoo-api-docs",
+  "version": "0.0.1",
+  "description": "This project is a Odoo integration documentation",
+  "main": "index.js",
+  "authors": {
+    "name": "Leonardo",
+    "email": "lmuniz@odoogap.com"
+  },
+  "repository": "https://git.odoogap.com/internal/vuestorefront-odoo-api-docs/vuestorefront-odoo-api-docs",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.5.3"
+  }
+}
