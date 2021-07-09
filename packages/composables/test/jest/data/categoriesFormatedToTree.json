@@ -1,0 +1,650 @@
+[
+  {
+    "__typename": "EcommerceCategory",
+    "childs": [
+      {
+        "__typename": "EcommerceCategory",
+        "id": "17",
+        "name": "All",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "13",
+            "name": "Clothing",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-clothing"
+          }
+        ],
+        "slug": "women-clothing-all"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "18",
+        "name": "Jackets",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "13",
+            "name": "Clothing",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-clothing"
+          }
+        ],
+        "slug": "women-clothing-jackets"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "19",
+        "name": "Blazer",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "13",
+            "name": "Clothing",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-clothing"
+          }
+        ],
+        "slug": "women-clothing-blazer"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "20",
+        "name": "Tops",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "13",
+            "name": "Clothing",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-clothing"
+          }
+        ],
+        "slug": "women-clothing-tops"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "21",
+        "name": "Shirts",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "13",
+            "name": "Clothing",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-clothing"
+          }
+        ],
+        "slug": "women-clothing-shirts"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "22",
+        "name": "T-shirts",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "13",
+            "name": "Clothing",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-clothing"
+          }
+        ],
+        "slug": "women-clothing-t-shirts"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "23",
+        "name": "Jeans",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "13",
+            "name": "Clothing",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-clothing"
+          }
+        ],
+        "slug": "women-clothing-jeans"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "24",
+        "name": "Trouser",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "13",
+            "name": "Clothing",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-clothing"
+          }
+        ],
+        "slug": "women-clothing-trouser"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "25",
+        "name": "Skirts",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "13",
+            "name": "Clothing",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-clothing"
+          }
+        ],
+        "slug": "women-clothing-skirts"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "26",
+        "name": "Dresses",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "13",
+            "name": "Clothing",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-clothing"
+          }
+        ],
+        "slug": "women-clothing-dresses"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "27",
+        "name": "Swimwear",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "13",
+            "name": "Clothing",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-clothing"
+          }
+        ],
+        "slug": "women-clothing-swimwear"
+      }
+    ],
+    "id": "13",
+    "name": "Clothing",
+    "parent": [
+      {
+        "__typename": "EcommerceCategory",
+        "id": "11",
+        "name": "Women",
+        "parent": null,
+        "slug": "women"
+      }
+    ],
+    "slug": "women-clothing"
+  },
+  {
+    "__typename": "EcommerceCategory",
+    "childs": [
+      {
+        "__typename": "EcommerceCategory",
+        "id": "28",
+        "name": "All",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "14",
+            "name": "Shoes",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-shoes"
+          }
+        ],
+        "slug": "women-shoes-all"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "29",
+        "name": "Sneakers",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "14",
+            "name": "Shoes",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-shoes"
+          }
+        ],
+        "slug": "women-shoes-sneakers"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "30",
+        "name": "Boots",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "14",
+            "name": "Shoes",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-shoes"
+          }
+        ],
+        "slug": "women-shoes-boots"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "31",
+        "name": "Ankle boots",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "14",
+            "name": "Shoes",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-shoes"
+          }
+        ],
+        "slug": "women-shoes-ankle-boots"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "32",
+        "name": "Pumps",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "14",
+            "name": "Shoes",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-shoes"
+          }
+        ],
+        "slug": "women-shoes-pumps"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "33",
+        "name": "Ballerinas",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "14",
+            "name": "Shoes",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-shoes"
+          }
+        ],
+        "slug": "women-shoes-ballerinas"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "34",
+        "name": "Lace-up shoes",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "14",
+            "name": "Shoes",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-shoes"
+          }
+        ],
+        "slug": "women-shoes-lace-up-shoes"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "35",
+        "name": "Loafers",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "14",
+            "name": "Shoes",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-shoes"
+          }
+        ],
+        "slug": "women-shoes-loafers"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "36",
+        "name": "Sandals",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "14",
+            "name": "Shoes",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-shoes"
+          }
+        ],
+        "slug": "women-shoes-sandals"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "37",
+        "name": "Winterboots",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "14",
+            "name": "Shoes",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-shoes"
+          }
+        ],
+        "slug": "women-shoes-winterboots"
+      }
+    ],
+    "id": "14",
+    "name": "Shoes",
+    "parent": [
+      {
+        "__typename": "EcommerceCategory",
+        "id": "11",
+        "name": "Women",
+        "parent": null,
+        "slug": "women"
+      }
+    ],
+    "slug": "women-shoes"
+  },
+  {
+    "__typename": "EcommerceCategory",
+    "childs": [
+      {
+        "__typename": "EcommerceCategory",
+        "id": "38",
+        "name": "All",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "15",
+            "name": "bags",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-bags"
+          }
+        ],
+        "slug": "women-bags-all"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "39",
+        "name": "Clutches",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "15",
+            "name": "bags",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-bags"
+          }
+        ],
+        "slug": "women-bags-clutches"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "40",
+        "name": "Shoulder Bags",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "15",
+            "name": "bags",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-bags"
+          }
+        ],
+        "slug": "women-bags-shoulder-bags"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "41",
+        "name": "Shopper",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "15",
+            "name": "bags",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-bags"
+          }
+        ],
+        "slug": "women-bags-shopper"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "42",
+        "name": "Handbag",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "15",
+            "name": "bags",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-bags"
+          }
+        ],
+        "slug": "women-bags-handbag"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "43",
+        "name": "Wallets",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "15",
+            "name": "bags",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-bags"
+          }
+        ],
+        "slug": "women-bags-wallets"
+      },
+      {
+        "__typename": "EcommerceCategory",
+        "id": "44",
+        "name": "Bucketbag/packbag",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "15",
+            "name": "bags",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-bags"
+          }
+        ],
+        "slug": "women-bags-bucketbag-packbag"
+      }
+    ],
+    "id": "15",
+    "name": "bags",
+    "parent": [
+      {
+        "__typename": "EcommerceCategory",
+        "id": "11",
+        "name": "Women",
+        "parent": null,
+        "slug": "women"
+      }
+    ],
+    "slug": "women-bags"
+  },
+  {
+    "__typename": "EcommerceCategory",
+    "childs": [
+      {
+        "__typename": "EcommerceCategory",
+        "id": "45",
+        "name": "All",
+        "parent": [
+          {
+            "__typename": "EcommerceCategory",
+            "id": "16",
+            "name": "Looks",
+            "parent": [
+              {
+                "__typename": "EcommerceCategory",
+                "id": "11"
+              }
+            ],
+            "slug": "women-looks"
+          }
+        ],
+        "slug": "women-looks-all"
+      }
+    ],
+    "id": "16",
+    "name": "Looks",
+    "parent": [
+      {
+        "__typename": "EcommerceCategory",
+        "id": "11",
+        "name": "Women",
+        "parent": null,
+        "slug": "women"
+      }
+    ],
+    "slug": "women-looks"
+  }
+]

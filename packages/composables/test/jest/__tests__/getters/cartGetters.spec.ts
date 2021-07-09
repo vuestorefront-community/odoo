@@ -1,4 +1,4 @@
-import { cartGetters } from '@vue-storefront/odoo';
+import cartGetters from '../../../../src/composables/getters/cartGetters';
 
 it('calculate cart subtotal', () => {
   const cart = {
@@ -10,18 +10,6 @@ it('calculate cart subtotal', () => {
   const categoryTree = cartGetters.getTotals(cart);
 
   expect(categoryTree).toStrictEqual({ subtotal: 141, total: 151 });
-});
-
-it('calculate cart float subtotal', () => {
-  const cart = {
-    id: 1,
-    name: '',
-    amountTotal: 151.60,
-    amountDelivery: 10.30
-  };
-  const totals = cartGetters.getTotals(cart);
-
-  expect(totals).toStrictEqual({ subtotal: 141.30, total: 151.60 });
 });
 
 it('cart total items', () => {
@@ -77,3 +65,4 @@ it('empty cart items', () => {
 
   expect(cartItems).toStrictEqual([]);
 });
+

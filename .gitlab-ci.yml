@@ -1,16 +1,25 @@
-image: alpine:3.11
+image: node:lts
 
 stages:
   - test
-
-before_script:
-  - npm install
-  - npm run build
+  - deploy_dev
 
 cache:
   paths:
     - node_modules/
 
-pages:
+test:
+  stage: test
   script:
-    - npm run test
+    - yarn
+    - yarn build
+    - yarn test
+
+deploy_dev:
+  stage: deploy_dev
+  only:
+    - dev
+  script:
+    - yarn
+    - yarn build
+    - .scripts/deploy_dev.sh

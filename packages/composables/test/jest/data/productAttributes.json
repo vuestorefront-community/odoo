@@ -1,0 +1,196 @@
+[
+  {
+    "id": 4,
+    "name": "Size",
+    "display_type": "select",
+    "values": [
+      {
+        "id": 8,
+        "name": "One Size",
+        "html_color": false,
+        "search": "4-8"
+      },
+      {
+        "id": 9,
+        "name": "5",
+        "html_color": false,
+        "search": "4-9"
+      },
+      {
+        "id": 10,
+        "name": "6",
+        "html_color": false,
+        "search": "4-10"
+      },
+      {
+        "id": 11,
+        "name": "7",
+        "html_color": false,
+        "search": "4-11"
+      },
+      {
+        "id": 12,
+        "name": "8",
+        "html_color": false,
+        "search": "4-12"
+      },
+      {
+        "id": 13,
+        "name": "9",
+        "html_color": false,
+        "search": "4-13"
+      },
+      {
+        "id": 14,
+        "name": "10",
+        "html_color": false,
+        "search": "4-14"
+      },
+      {
+        "id": 15,
+        "name": "11",
+        "html_color": false,
+        "search": "4-15"
+      },
+      {
+        "id": 16,
+        "name": "12",
+        "html_color": false,
+        "search": "4-16"
+      },
+      {
+        "id": 17,
+        "name": "13",
+        "html_color": false,
+        "search": "4-17"
+      },
+      {
+        "id": 18,
+        "name": "34",
+        "html_color": false,
+        "search": "4-18"
+      },
+      {
+        "id": 19,
+        "name": "35",
+        "html_color": false,
+        "search": "4-19"
+      },
+      {
+        "id": 20,
+        "name": "36",
+        "html_color": false,
+        "search": "4-20"
+      },
+      {
+        "id": 21,
+        "name": "37",
+        "html_color": false,
+        "search": "4-21"
+      },
+      {
+        "id": 22,
+        "name": "38",
+        "html_color": false,
+        "search": "4-22"
+      },
+      {
+        "id": 23,
+        "name": "39",
+        "html_color": false,
+        "search": "4-23"
+      },
+      {
+        "id": 24,
+        "name": "40",
+        "html_color": false,
+        "search": "4-24"
+      },
+      {
+        "id": 25,
+        "name": "41",
+        "html_color": false,
+        "search": "4-25"
+      },
+      {
+        "id": 26,
+        "name": "42",
+        "html_color": false,
+        "search": "4-26"
+      },
+      {
+        "id": 27,
+        "name": "43",
+        "html_color": false,
+        "search": "4-27"
+      },
+      {
+        "id": 28,
+        "name": "44",
+        "html_color": false,
+        "search": "4-28"
+      },
+      {
+        "id": 29,
+        "name": "45",
+        "html_color": false,
+        "search": "4-29"
+      },
+      {
+        "id": 30,
+        "name": "46",
+        "html_color": false,
+        "search": "4-30"
+      },
+      {
+        "id": 31,
+        "name": "47",
+        "html_color": false,
+        "search": "4-31"
+      },
+      {
+        "id": 32,
+        "name": "48",
+        "html_color": false,
+        "search": "4-32"
+      },
+      {
+        "id": 33,
+        "name": "49",
+        "html_color": false,
+        "search": "4-33"
+      },
+      {
+        "id": 34,
+        "name": "50",
+        "html_color": false,
+        "search": "4-34"
+      },
+      {
+        "id": 35,
+        "name": "51",
+        "html_color": false,
+        "search": "4-35"
+      },
+      {
+        "id": 36,
+        "name": "52",
+        "html_color": false,
+        "search": "4-36"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Material",
+    "display_type": "radio",
+    "values": [
+      {
+        "id": 37,
+        "name": "Cotton",
+        "html_color": false,
+        "search": "5-37"
+      }
+    ]
+  }
+]

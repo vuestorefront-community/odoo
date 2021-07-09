@@ -112,6 +112,7 @@ export type SaleOrderLine = {
   product?: Product
   productUomQty?: number
   priceTotal?: number
+
 }
 export type Category = {
   id: number
@@ -141,6 +142,7 @@ export type SaleOrder = {
   currencyRate?: string
   partnerInvoice?: Partner
   partnerShipping?: Partner
+
 }
 export type CategoryFilter = Record<string, unknown>
 export type LineItem = Record<string, unknown>
