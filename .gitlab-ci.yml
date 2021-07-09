@@ -22,4 +22,4 @@ deploy_dev:
   script:
     - yarn
     - yarn build
-    - .scripts/deploy_dev.sh
+
