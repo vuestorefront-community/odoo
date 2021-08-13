@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import graphene
+from graphql import GraphQLError
+from odoo import _
 
-from odoo.addons.graphql_vuestorefront.schemas.objects import SortEnum, Category
+from odoo.addons.graphql_vuestorefront.schemas.objects import (
+    SortEnum, Category
+)
 
 
 def get_search_order(sort):
@@ -10,8 +14,6 @@ def get_search_order(sort):
     for field, val in sort.items():
         if sorting:
             sorting += ', '
-        if field == 'price':
-            sorting += 'lst_price %s' % val
         else:
             sorting += '%s %s' % (field, val)
     if not sorting:
@@ -21,16 +23,15 @@ def get_search_order(sort):
 
 class CategoryFilterInput(graphene.InputObjectType):
     id = graphene.List(graphene.Int)
-    parent_id = graphene.Int()
+    parent = graphene.Boolean()
 
 
 class CategorySortInput(graphene.InputObjectType):
     id = SortEnum()
-    parent_id = SortEnum()
 
 
 class Categories(graphene.Interface):
-    category = graphene.List(graphene.NonNull(Category))
+    categories = graphene.List(Category)
     total_count = graphene.Int(required=True)
 
 
@@ -47,34 +48,44 @@ class CategoryQuery(graphene.ObjectType):
     )
     categories = graphene.Field(
         Categories,
-        filter=graphene.Argument(CategoryFilterInput),
+        filter=graphene.Argument(CategoryFilterInput, default_value={}),
         current_page=graphene.Int(default_value=0),
         page_size=graphene.Int(default_value=20),
-        search=graphene.String(),
-        sort=graphene.Argument(CategorySortInput, )
+        search=graphene.String(default_value=''),
+        sort=graphene.Argument(CategorySortInput, default_value={})
     )
 
     @staticmethod
     def resolve_category(self, info, id):
-        return info.context["env"]["product.public.category"].search([('id', '=', id)])
+        category = info.context['env']['product.public.category'].search([('id', '=', id)], limit=1)
+        if not category:
+            raise GraphQLError(_('Category does not exist.'))
+        return category
 
     @staticmethod
-    def resolve_categories(self, info, current_page, page_size, filter={}, search='', sort={}):
+    def resolve_categories(self, info, filter, current_page, page_size, search, sort):
         env = info.context["env"]
         order = get_search_order(sort)
         domain = []
+
         if search:
             for srch in search.split(" "):
                 domain += [('name', 'ilike', srch)]
+
         if filter.get('id'):
             domain += [('id', 'in', filter['id'])]
-        # IMPORTANT ###########################
-        # Verify this condition ------------------------------------------------------------
-        if filter.get('parent_id'):
-            domain += [('parent_id', '=', filter['id'])]
 
-        offset = current_page and current_page * page_size or 0
+        # Parent if is a Top Category
+        if filter.get('parent'):
+            domain += [('parent_id', '=', False)]
+
+        # First offset is 0 but first page is 1
+        if current_page > 1:
+            offset = (current_page - 1) * page_size
+        else:
+            offset = 0
+
         ProductPublicCategory = env["product.public.category"]
         total_count = ProductPublicCategory.search_count(domain)
-        category = ProductPublicCategory.search(domain, limit=page_size, offset=offset, order=order)
-        return CategoryList(category=category, total_count=total_count)
+        categories = ProductPublicCategory.search(domain, limit=page_size, offset=offset, order=order)
+        return CategoryList(categories=categories, total_count=total_count)
