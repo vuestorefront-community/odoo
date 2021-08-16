@@ -5,10 +5,10 @@ WORKDIR /var/www
 COPY . .
 
 RUN npm install \
-  && sed -i "s/base: '\/',/base: '\/<% INTEGRATION %>\/',/g" ./.vuepress/config.js \
+  && sed -i "s/base: '\/',/base: '\/odoo\/',/g" ./.vuepress/config.js \
   && cat ./.vuepress/config.js \
   && npm run build
 
 FROM nginx
 
-COPY --from=build /var/www/.vuepress/dist /usr/share/nginx/html/<% INTEGRATION %>
+COPY --from=build /var/www/.vuepress/dist /usr/share/nginx/html/odoo
