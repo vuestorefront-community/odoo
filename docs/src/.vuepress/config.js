@@ -38,18 +38,8 @@ module.exports = {
         text: 'Demo',
         link: 'https://vsf.labs.odoogap.com/',
       },
-      {
-        text: 'Integrations',
-        link: 'https://docs.vuestorefront.io/v2/integrations/'
-      },
-      {
-        text: 'VuePress',
-        link: 'https://docs.vuestorefront.io/v2/migrate/'
-      },
-      {
-        text: 'Roadmap',
-        link: 'https://www.notion.so/Vue-Storefront-2-Next-High-level-Roadmap-201cf06abb314b84ad01b7b8463c0437'
-      }
+      { text: 'Vue Storefront', link: 'https://vuestorefront.io/' },
+      { text: 'Core Documentation', link: 'https://docs.vuestorefront.io/v2/' }
     ],
     sidebar: [
       {
