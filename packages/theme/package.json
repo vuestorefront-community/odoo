@@ -9,7 +9,10 @@
     "cypress:open": "cypress open",
     "dev": "nuxt",
     "generate": "nuxt generate",
-    "start": "nuxt start"
+    "start": "nuxt start",
+    "precommit": "lint-staged",
+    "update:check": "ncu",
+    "update:update": "ncu -u"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.5",
@@ -37,6 +40,7 @@
     "babel-jest": "^24.1.0",
     "cypress": "7.5.0",
     "jest": "^24.1.0",
+    "lint-staged": "^11.1.2",
     "postcss": "^8.3.5",
     "tailwindcss": "^2.1.4",
     "vue-cli-plugin-tailwind": "~2.0.6",

@@ -11,7 +11,10 @@
     "dev": "rollup -c -w",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "prepublish": "yarn build"
+    "prepublish": "yarn build",
+    "precommit": "lint-staged",
+    "update:check": "ncu",
+    "update:update": "ncu -u"
   },
   "dependencies": {
     "@vue-storefront/core": "2.3.0",
