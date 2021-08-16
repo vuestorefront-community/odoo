@@ -1,0 +1,51 @@
+{
+  "projectName": "<% INTEGRATION %>",
+  "projectOwner": "vuestorefront",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 80,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "cpintofonseca",
+      "name": "cpintofonseca",
+      "avatar_url": "https://avatars.githubusercontent.com/u/21957046?v=4",
+      "profile": "http://www.promptequation.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "SDMonteiro",
+      "name": "SDMonteiro",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68434298?v=4",
+      "profile": "https://github.com/SDMonteiro",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "brunoodoogap",
+      "name": "brunoodoogap",
+      "avatar_url": "https://avatars.githubusercontent.com/u/84967663?v=4",
+      "profile": "https://github.com/brunoodoogap",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "dduarte-odoogap",
+      "name": "Diogo Duarte",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18329970?v=4",
+      "profile": "https://github.com/dduarte-odoogap",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 5
+}
