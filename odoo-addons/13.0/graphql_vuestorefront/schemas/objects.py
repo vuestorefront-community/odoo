@@ -22,13 +22,13 @@ class SortEnum(graphene.Enum):
 
 
 class Currency(OdooObjectType):
-    id = graphene.ID(required=True)
+    id = graphene.Int(required=True)
     name = graphene.String()
     symbol = graphene.String()
 
 
 class Category(OdooObjectType):
-    id = graphene.ID(required=True)
+    id = graphene.Int(required=True)
     name = graphene.String()
     parent_id = graphene.Field(lambda: Category)
     slug = graphene.String()
@@ -45,7 +45,7 @@ class Category(OdooObjectType):
 
 
 class AttributeValue(OdooObjectType):
-    id = graphene.ID(required=True)
+    id = graphene.Int(required=True)
     name = graphene.String()
     attribute_code = graphene.String()
 
@@ -54,7 +54,7 @@ class AttributeValue(OdooObjectType):
 
 
 class Attribute(OdooObjectType):
-    id = graphene.ID(required=True)
+    id = graphene.Int(required=True)
     name = graphene.String()
     options = graphene.List(graphene.NonNull(lambda: AttributeValue))
 
@@ -63,7 +63,7 @@ class Attribute(OdooObjectType):
 
 
 class ProductImage(OdooObjectType):
-    id = graphene.ID(required=True)
+    id = graphene.Int(required=True)
     name = graphene.String()
     image = graphene.String()
     video = graphene.String()
@@ -86,7 +86,7 @@ class ProductImage(OdooObjectType):
 
 
 class Product(OdooObjectType):
-    id = graphene.ID(required=True)
+    id = graphene.Int(required=True)
     type_id = graphene.String()
     visibility = graphene.Int()
     status = graphene.Int()
@@ -94,7 +94,7 @@ class Product(OdooObjectType):
     sku = graphene.String()
     description = graphene.String()
     price = graphene.Float()
-    currency_id = graphene.Field(lambda: Currency)
+    currency = graphene.Field(lambda: Currency)
     weight = graphene.Float()
     meta_title = graphene.String()
     meta_keyword = graphene.String()
@@ -102,7 +102,7 @@ class Product(OdooObjectType):
     image = graphene.String()
     small_image = graphene.String()
     thumbnail = graphene.String()
-    category = graphene.List(graphene.NonNull(lambda: Category))
+    categories = graphene.List(graphene.NonNull(lambda: Category))
     is_in_stock = graphene.Boolean()
     media_gallery = graphene.List(graphene.NonNull(lambda: ProductImage))
     qty = graphene.Float()
@@ -139,6 +139,9 @@ class Product(OdooObjectType):
     def resolve_price(self, info):
         return self.lst_price
 
+    def resolve_currency(self, info):
+        return self.currency_id or None
+
     def resolve_meta_title(self, info):
         return self.website_meta_title or None
 
@@ -169,7 +172,7 @@ class Product(OdooObjectType):
             return '{}/web/image/product.product/{}/image_512'.format(base_url, self.id)
         return None
 
-    def resolve_category(self, info):
+    def resolve_categories(self, info):
         return self.public_categ_ids or None
 
     def resolve_is_in_stock(self, info):

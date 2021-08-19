@@ -17,7 +17,7 @@ def get_search_order(sort):
         else:
             sorting += '%s %s' % (field, val)
     if not sorting:
-        sorting = 'id asc'
+        sorting = 'id ASC'
     return sorting
 
 

@@ -13,8 +13,6 @@ from odoo.addons.graphql_vuestorefront.schemas.objects import (
 def get_search_order(sort):
     sorting = ''
     for field, val in sort.items():
-        print(field)
-        print(val)
         if sorting:
             sorting += ', '
         if field == 'price':
@@ -22,8 +20,7 @@ def get_search_order(sort):
         else:
             sorting += '%s %s' % (field, val)
     if not sorting:
-        sorting = 'id asc'
-    print(sorting)
+        sorting = 'id ASC'
     return sorting
 
 
@@ -32,12 +29,17 @@ def get_search_domain(env, search, **kwargs):
     domain = [('website_published', '=', True)]
 
     # Filter with Category
-    if kwargs.get('category_id', False):
-        domain += [('public_categ_id', '=', kwargs['category_id'])]
+    if kwargs.get('category', False):
+        domain += [('public_categ_ids', 'in', kwargs['category'])]
+
+    # Filter with Attributes
+    if kwargs.get('attribute', False):
+        domain += [('product_template_attribute_value_ids', 'in', kwargs['attribute'])]
 
     if search:
         for srch in search.split(" "):
-            domain += ['|', '|', ('name', 'ilike', srch), ('description_sale', 'like', srch), ('default_code', 'like', srch)]
+            domain += ['|', '|', ('name', 'ilike', srch), ('description_sale', 'like', srch),
+                       ('default_code', 'like', srch)]
 
     # Product Price Filter
     if kwargs.get('min_price') and not kwargs.get('max_price'):
@@ -62,13 +64,13 @@ def get_product_list(env, current_page, page_size, search, sort, **kwargs):
         offset = 0
     order = get_search_order(sort)
     products = Product.search(domain, limit=page_size, offset=offset, order=order)
-    product_count = Product.search_count(domain)
-    return products, product_count
+    total_count = Product.search_count(domain)
+    return products, total_count
 
 
 class Products(graphene.Interface):
     products = graphene.List(Product)
-    product_count = graphene.Int(required=True)
+    total_count = graphene.Int(required=True)
 
 
 class ProductList(graphene.ObjectType):
@@ -77,13 +79,14 @@ class ProductList(graphene.ObjectType):
 
 
 class ProductFilterInput(graphene.InputObjectType):
-    attributes = graphene.List(graphene.Int)
+    category = graphene.List(graphene.Int)
+    attribute = graphene.List(graphene.Int)
     min_price = graphene.Float()
     max_price = graphene.Float()
-    category_id = graphene.Int()
 
 
 class ProductSortInput(graphene.InputObjectType):
+    id = SortEnum()
     price = SortEnum()
 
 
@@ -109,7 +112,7 @@ class ProductQuery(graphene.ObjectType):
 
     @staticmethod
     def resolve_product(self, info, id):
-        product = info.context["env"]["product.product"].sudo().search([('id', '=', id)])
+        product = info.context["env"]["product.product"].sudo().search([('id', '=', id)], limit=1)
         if not product:
             raise GraphQLError(_('Product does not exist.'))
         return product
@@ -117,12 +120,12 @@ class ProductQuery(graphene.ObjectType):
     @staticmethod
     def resolve_products(self, info, filter, current_page, page_size, search, sort):
         env = info.context["env"]
-        products, product_count = get_product_list(env, current_page, page_size, search, sort, **filter)
-        return ProductList(products=products, product_count=product_count)
+        products, total_count = get_product_list(env, current_page, page_size, search, sort, **filter)
+        return ProductList(products=products, total_count=total_count)
 
     @staticmethod
     def resolve_attribute(self, info, attribute_id):
-        attribute = info.context["env"]["product.attribute"].search([('id', '=', attribute_id)])
+        attribute = info.context["env"]["product.attribute"].search([('id', '=', attribute_id)], limit=1)
         if not attribute:
             raise GraphQLError(_('Attribute does not exist.'))
         return attribute
