@@ -15,9 +15,11 @@
         'website_sale_delivery',
         'auth_signup',
         'contacts',
+        'crm',
     ],
     'data': [
         'data/website_data.xml',
+        'data/res_config_settings_data.xml',
     ],
     'demo': [
         'data/demo_product_attribute.xml',

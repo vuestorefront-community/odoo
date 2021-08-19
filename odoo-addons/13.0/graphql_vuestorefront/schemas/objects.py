@@ -20,6 +20,68 @@ class SortEnum(graphene.Enum):
 #       Objects         #
 # --------------------- #
 
+class Lead(OdooObjectType):
+    id = graphene.Int(required=True)
+    name = graphene.String()
+    email = graphene.String()
+    phone = graphene.Int()
+    company = graphene.String()
+    subject = graphene.String()
+    message = graphene.String()
+
+    def resolve_name(self, info):
+        return self.contact_name
+
+    def resolve_email(self, info):
+        return self.email_from
+
+    def resolve_company(self, info):
+        return self.partner_name
+
+    def resolve_subject(self, info):
+        return self.name
+
+    def resolve_message(self, info):
+        return self.description
+
+
+class Country(OdooObjectType):
+    id = graphene.Int(required=True)
+    name = graphene.String(required=True)
+    code = graphene.String(required=True)
+
+
+class State(OdooObjectType):
+    id = graphene.Int(required=True)
+    name = graphene.String(required=True)
+    code = graphene.String(required=True)
+
+
+class Partner(OdooObjectType):
+    id = graphene.Int(required=True)
+    name = graphene.String()
+    street = graphene.String()
+    street2 = graphene.String()
+    city = graphene.String()
+    country = graphene.Field(lambda: Country)
+    state = graphene.Field(lambda: State)
+    zip = graphene.String()
+    email = graphene.String()
+    phone = graphene.String()
+    is_company = graphene.Boolean(required=True)
+    contacts = graphene.List(graphene.NonNull(lambda: Partner))
+    signup_token = graphene.String()
+    signup_valid = graphene.String()
+
+    def resolve_country(self, info):
+        return self.country_id or None
+
+    def resolve_state(self, info):
+        return self.state_id or None
+
+    def resolve_contacts(self, info):
+        return self.child_ids or None
+
 
 class Currency(OdooObjectType):
     id = graphene.Int(required=True)
@@ -137,7 +199,7 @@ class Product(OdooObjectType):
         return self.description_sale or None
 
     def resolve_price(self, info):
-        return self.lst_price
+        return self.lst_price or None
 
     def resolve_currency(self, info):
         return self.currency_id or None
@@ -198,3 +260,64 @@ class Product(OdooObjectType):
 
     def resolve_combination_info(self, info):
         return self._get_combination_info_variant(pricelist=self.pricelist_id)
+
+
+class OrderLine(OdooObjectType):
+    id = graphene.Int(required=True)
+    name = graphene.String()
+    product = graphene.Field(lambda: Product)
+    quantity = graphene.Float()
+    price_unit = graphene.Float()
+    price_subtotal = graphene.Float()
+    price_total = graphene.Float()
+    price_tax = graphene.Float()
+
+    def resolve_product(self, info):
+        return self.product_id or None
+
+    def resolve_quantity(self, info):
+        return self.product_uom_qty or None
+
+
+class Order(OdooObjectType):
+    id = graphene.Int(required=True)
+    name = graphene.String()
+    partner = graphene.Field(lambda: Partner)
+    partner_shipping = graphene.Field(lambda: Partner)
+    partner_invoice = graphene.Field(lambda: Partner)
+    date_order = graphene.String()
+    amount_untaxed = graphene.Float()
+    amount_tax = graphene.Float()
+    amount_total = graphene.Float()
+    currency = graphene.Field(lambda: Currency)
+    order_line = graphene.List(graphene.NonNull(lambda: OrderLine))
+    stage = graphene.String()
+    portal_url = graphene.String()
+
+    def resolve_partner(self, info):
+        return self.partner_id or None
+
+    def resolve_partner_shipping(self, info):
+        return self.partner_shipping_id or None
+
+    def resolve_partner_invoice(self, info):
+        return self.partner_invoice_id or None
+
+    def resolve_currency(self, info):
+        return self.currency_id or None
+
+    def resolve_order_line(self, info):
+        return self.order_line or None
+
+    def resolve_stage(self, info):
+        if self.state:
+            state = dict(self._fields['state'].selection).get(self.state)
+            return state
+        return None
+
+    def resolve_date_order(self, info):
+        return self.date_order or None
+
+    @staticmethod
+    def resolve_portal_url(self, info):
+        return self.get_portal_url() or None

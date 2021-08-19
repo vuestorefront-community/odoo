@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
+
 import graphene
 from graphql import GraphQLError
 from odoo import _
 
 from odoo.addons.graphql_vuestorefront.schemas.objects import (
-    SortEnum, Product, Attribute,
+    SortEnum, Product, Attribute
 )
 
-# -------------------------------------------------------- REVIEW THIS PART OF CODE ---------------------------------- #
-# SORT AND FILTER BY category, attribute, minprice and maxprice not WORKING
+# ---------- SORT PRICE and FILTER minPrice and maxPrice have some problem maybe because computed ------------------ #
+
 
 def get_search_order(sort):
     sorting = ''
