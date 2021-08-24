@@ -5,24 +5,32 @@ import {
   AgnosticGroupedFacet,
   AgnosticPagination,
   AgnosticSort,
-  AgnosticBreadcrumb,
-  AgnosticFacet
+  AgnosticFacet,
+  AgnosticBreadcrumb
 } from '@vue-storefront/core';
+import { Product } from '@vue-storefront/odoo-api/src/types';
+import { SearchData } from '../types';
 
-const getAll = (searchData, criteria?: string[]): AgnosticFacet[] => [];
+const getAll = (
+  searchData: SearchData,
+  criteria?: string[]
+): AgnosticFacet[] => [];
 
 const isNumeric = (num) => !isNaN(num);
 
-const getGrouped = (searchData, criteria?: string[]): AgnosticGroupedFacet[] => {
-
+const getGrouped = (
+  searchData: SearchData,
+  criteria?: string[]
+): AgnosticGroupedFacet[] => {
   if (!searchData?.data?.attributes) return [];
 
-  const formatedAttribute = searchData?.data?.attributes.map(attribute => ({
-    id: attribute.id,
+  const formatedAttribute = searchData?.data?.attributes.map((attribute) => ({
+    id: String(attribute.id),
     label: attribute.name,
     count: 0,
-    options: attribute.values.map(value => ({
-      id: value.search,
+    options: attribute.values.map((value) => ({
+      type: '',
+      id: String(value.search),
       value: value.id,
       label: value.name,
       metadata: value.search
@@ -32,17 +40,27 @@ const getGrouped = (searchData, criteria?: string[]): AgnosticGroupedFacet[] => 
   return formatedAttribute;
 };
 
-const getSortOptions = (searchData): AgnosticSort => ({
+const getSortOptions = (searchData: SearchData): AgnosticSort => ({
   options: [
-    { id: 'list_price desc', value: 'list_price desc', attrName: 'Price: High to Low', type: '' },
-    { id: 'list_price asc', value: 'list_price asc', attrName: 'Price: Low to High', type: '' },
+    {
+      id: 'list_price desc',
+      value: 'list_price desc',
+      attrName: 'Price: High to Low',
+      type: ''
+    },
+    {
+      id: 'list_price asc',
+      value: 'list_price asc',
+      attrName: 'Price: Low to High',
+      type: ''
+    },
     { id: 'name asc', value: 'name asc', attrName: 'Name: A to Z', type: '' },
     { id: 'name desc', value: 'name desc', attrName: 'Name: Z to A', type: '' }
   ],
-  selected: searchData || 'name asc'
+  selected: searchData.input.sort || 'name asc'
 });
 
-const getCategoryTree = (searchData): AgnosticCategoryTree => {
+const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
   if (!searchData.data) {
     return [] as any;
   }
@@ -50,24 +68,28 @@ const getCategoryTree = (searchData): AgnosticCategoryTree => {
 
   const categoriesWithParents = categories.filter((item) => item.parent);
   const parents = categoriesWithParents.map((item) => item.parent).flat();
-  const currentParentSelected = parents.find(item => item.slug === searchData.input.term);
+  const currentParentSelected = parents.find(
+    (item) => item.slug === searchData.input.term
+  );
 
   if (!currentParentSelected) {
     return [] as any;
   }
 
-  const uniqueParents = categoriesWithParents.filter(item => {
+  const uniqueParents = categoriesWithParents.filter((item) => {
     return item.parent[0].id === currentParentSelected.id;
   });
 
-  uniqueParents.forEach(parent => {
-    parent.childs = categoriesWithParents.filter(item => item.parent[0].id === parent.id);
+  uniqueParents.forEach((parent) => {
+    parent.childs = categoriesWithParents.filter(
+      (item) => item.parent[0].id === parent.id
+    );
   });
 
   return uniqueParents as any;
 };
 
-const getProducts = (searchData): any => {
+const getProducts = (searchData: SearchData): any => {
   if (!searchData.data) {
     return {} as any;
   }
@@ -77,7 +99,7 @@ const getProducts = (searchData): any => {
   return products as any;
 };
 
-const getPagination = (searchData): AgnosticPagination => {
+const getPagination = (searchData: SearchData): AgnosticPagination => {
   const itemsPerPage = searchData.input?.ppg || 10;
 
   return {
@@ -89,7 +111,7 @@ const getPagination = (searchData): AgnosticPagination => {
   };
 };
 
-const getBreadcrumbsByProduct = (product): AgnosticBreadcrumb[] => {
+const getBreadcrumbsByProduct = (product: Product): AgnosticBreadcrumb[] => {
   const category = product.ecommerceCategories?.find(
     (cat) => cat.name !== 'All'
   );
@@ -98,20 +120,29 @@ const getBreadcrumbsByProduct = (product): AgnosticBreadcrumb[] => {
   if (!category) {
     return [];
   }
-  const topCategoryParentId = category.parent === null ? category.id : category.parent[0]?.parent[0]?.id;
+  const topCategoryParentId =
+    category.parent === null ? category.id : category.parent[0]?.parent[0]?.id;
   const splited = category.slug?.split('-');
-  breadcrumbs.push({ text: splited[0], link: `/c/${splited[0]}/${topCategoryParentId}` });
+  breadcrumbs.push({
+    text: splited[0],
+    link: `/c/${splited[0]}/${topCategoryParentId}`
+  });
   breadcrumbs.push({ text: splited[1], link: '' });
 
   return breadcrumbs || [];
 };
 
-const getBreadcrumbs = ({ input }): AgnosticBreadcrumb[] => {
+const getBreadcrumbs = ({ input }: SearchData): AgnosticBreadcrumb[] => {
   const breadcrumbs = [{ text: 'Home', link: '/' }];
-  const categoryId = input.currentParentCategory?.parent ? input.currentParentCategory?.parent[0]?.id : input.params.slug_2;
+  const categoryId = input.currentParentCategory?.parent
+    ? input.currentParentCategory?.parent[0]?.id
+    : input.params.slug_2;
 
   if (input.params.slug_1) {
-    breadcrumbs.push({ text: input.params.slug_1, link: `/c/${input.params.slug_1}/${categoryId}` });
+    breadcrumbs.push({
+      text: input.params.slug_1,
+      link: `/c/${input.params.slug_1}/${categoryId}`
+    });
   }
 
   if (input.params.slug_2 && !isNumeric(input.params.slug_2)) {

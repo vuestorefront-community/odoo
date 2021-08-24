@@ -7,17 +7,25 @@ import {
   UseCartFactoryParams
 } from '@vue-storefront/core';
 import { Coupon } from '../types';
-import { SaleOrder as Cart, SaleOrderLine, Product } from '@vue-storefront/odoo-api/src/types';
+import {
+  SaleOrder as Cart,
+  SaleOrderLine,
+  Product
+} from '@vue-storefront/odoo-api/src/types';
 
 const params: UseCartFactoryParams<Cart, SaleOrderLine, Product, Coupon> = {
-
   load: async (context: Context, { customQuery }) => {
     const cart = await context.$odoo.api.cartLoad({}, customQuery);
 
-    return cart.data.userShoppingCart.length > 0 ? cart.data.userShoppingCart[0] : [];
+    return cart.data.userShoppingCart.length > 0
+      ? cart.data.userShoppingCart[0]
+      : [];
   },
 
-  addItem: async (context: Context, { currentCart, product, quantity, customQuery }) => {
+  addItem: async (
+    context: Context,
+    { currentCart, product, quantity, customQuery }
+  ) => {
     let productId = null;
     if (product.realProduct) {
       productId = product.realProduct.product_id;
@@ -36,18 +44,28 @@ const params: UseCartFactoryParams<Cart, SaleOrderLine, Product, Coupon> = {
     return currentCart;
   },
 
-  removeItem: async (context: Context, { currentCart, product: saleOrderLine, customQuery }) => {
-
-    await context.$odoo.api.cartRemoveItem({ productId: saleOrderLine.product.id }, customQuery);
+  removeItem: async (
+    context: Context,
+    { currentCart, product: saleOrderLine, customQuery }
+  ) => {
+    await context.$odoo.api.cartRemoveItem(
+      { productId: saleOrderLine.product.id },
+      customQuery
+    );
 
     const cart = params.load(context, {});
 
     return cart;
   },
 
-  updateItemQty: async (context: Context, { currentCart, product: saleOrderLine, quantity, customQuery }) => {
-
-    await context.$odoo.api.cartUpdateItemQty({ productId: saleOrderLine.product.id, quantity }, customQuery);
+  updateItemQty: async (
+    context: Context,
+    { currentCart, product: saleOrderLine, quantity, customQuery }
+  ) => {
+    await context.$odoo.api.cartUpdateItemQty(
+      { productId: saleOrderLine.product.id, quantity },
+      customQuery
+    );
 
     const cart = params.load(context, {});
 
@@ -59,20 +77,29 @@ const params: UseCartFactoryParams<Cart, SaleOrderLine, Product, Coupon> = {
     return currentCart;
   },
 
-  applyCoupon: async (context: Context, { currentCart, couponCode, customQuery }) => {
+  applyCoupon: async (
+    context: Context,
+    { currentCart, couponCode, customQuery }
+  ) => {
     console.log('Mocked: applyCoupon');
     return { updatedCart: currentCart, updatedCoupon: {} };
   },
 
-  removeCoupon: async (context: Context, { currentCart, coupon, customQuery }) => {
+  removeCoupon: async (
+    context: Context,
+    { currentCart, coupon, customQuery }
+  ) => {
     console.log('Mocked: removeCoupon');
     return { updatedCart: currentCart };
   },
 
   isInCart: (context: Context, { currentCart, product }) => {
-    return currentCart?.websiteOrderLine?.some(item => item.product.id == product.first_variant_id) || false;
+    return (
+      currentCart?.websiteOrderLine?.some(
+        (item) => item.product.id === product.first_variant_id
+      ) || false
+    );
   }
 };
 
 export default useCartFactory<Cart, SaleOrderLine, Product, Coupon>(params);
-

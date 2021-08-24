@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* istanbul ignore file */
 
 import { UserGetters } from '@vue-storefront/core';
@@ -8,7 +9,8 @@ export const getUserFirstName = (user: User): string => user?.firstName || '';
 
 export const getUserLastName = (user: User): string => user?.lastName || '';
 
-export const getUserFullName = (user: User): string => user ? `${user.firstName} ${user.lastName}` : '';
+export const getUserFullName = (user: User): string =>
+  user ? `${user.firstName} ${user.lastName}` : '';
 
 export const getUserEmailAddress = (user: User): string => user?.email || '';
 
@@ -24,7 +26,7 @@ export const getAgnosticUserFromUser = (user: User): AgnosticUser => ({
 export const getUserFromAgnosticUser = (user: AgnosticUser): User => ({
   password: user.password,
   email: user.username,
-  firstName: user.name,
+  firstName: user.name
 });
 
 const userGetters: UserGetters<User> = {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* istanbul ignore file */
 
 import { UserOrderGetters } from '@vue-storefront/core';
@@ -7,7 +8,8 @@ import { Order, OrderItem } from '../types';
 export const getDate = (order: any): string => order?.date || '123';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getId = (order: any): string => order?.id || Math.floor(Math.random() * 100);
+export const getId = (order: any): string =>
+  order?.id || Math.floor(Math.random() * 100);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getStatus = (order: any): string => order?.status || 'Failed';

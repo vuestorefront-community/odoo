@@ -1,9 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   WishlistGetters,
   AgnosticPrice,
-  AgnosticTotals
+  AgnosticTotals,
+  AgnosticAttribute
 } from '@vue-storefront/core';
-import { Wishlist, WishlistItem } from '@vue-storefront/odoo-api/src/types';
+import {
+  Product,
+  Wishlist,
+  WishlistItem
+} from '@vue-storefront/odoo-api/src/types';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getWishlistItems = (wishlist: Wishlist): Wishlist => {
@@ -12,16 +18,19 @@ export const getWishlistItems = (wishlist: Wishlist): Wishlist => {
   }
 
   return wishlist;
-
 };
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getWishlistItemName = (wishlistItem: WishlistItem): string => wishlistItem?.product?.name || 'Product\'s name';
+export const getWishlistItemName = (wishlistItem: WishlistItem): string =>
+  wishlistItem?.product?.name || 'Product\'s name';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getWishlistItemImage = (wishlistItem: WishlistItem): string => wishlistItem?.product?.image || 'image';
+export const getWishlistItemImage = (wishlistItem: WishlistItem): string =>
+  wishlistItem?.product?.image || 'image';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getWishlistItemPrice = (wishlistItem: WishlistItem): AgnosticPrice => {
+export const getWishlistItemPrice = (
+  wishlistItem: WishlistItem
+): AgnosticPrice => {
   return {
     regular: wishlistItem?.price || 1,
     special: wishlistItem?.price || 1
@@ -32,15 +41,21 @@ export const getWishlistItemPrice = (wishlistItem: WishlistItem): AgnosticPrice 
 export const getWishlistItemQty = (wishlistItem: WishlistItem): number => 1;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getWishlistItemAttributes = (wishlistItem: WishlistItem, filterByAttributeName?: string[]) => ({ color: 'red' });
+export const getWishlistItemAttributes = (
+  wishlistItem: WishlistItem,
+  filterByAttributeName?: string[]
+): Record<string, AgnosticAttribute | string> => ({ color: 'red' });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getWishlistItemSku = (product: any): string => product?.id || 'some-sku';
+export const getWishlistItemSku = (product: WishlistItem): string =>
+  String(product?.id) || 'some-sku';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getWishlistTotals = (wishlist: Wishlist): AgnosticTotals => {
-
-  const total = wishlist.reduce((accumlated, current) => accumlated + current.price, 0);
+  const total = wishlist.reduce(
+    (accumlated, current) => accumlated + current.price,
+    0
+  );
   return {
     total: total,
     subtotal: total
@@ -51,7 +66,8 @@ export const getWishlistTotals = (wishlist: Wishlist): AgnosticTotals => {
 export const getWishlistShippingPrice = (wishlist: Wishlist): number => 0;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getWishlistTotalItems = (wishlist: Wishlist): number => wishlist?.length;
+export const getWishlistTotalItems = (wishlist: Wishlist): number =>
+  wishlist?.length;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getFormattedPrice = (price: number): string => String(price);

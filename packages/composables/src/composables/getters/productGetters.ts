@@ -5,18 +5,25 @@ import {
   AgnosticPrice,
   ProductGetters
 } from '@vue-storefront/core';
-import { Product, ProductVariant, Attribute } from '@vue-storefront/odoo-api/src/types';
+import {
+  Product,
+  ProductVariant,
+  Attribute
+} from '@vue-storefront/odoo-api/src/types';
 
-type ProductFilters = any
+type ProductFilters = any;
 
 // TODO: Add interfaces for some of the methods in core
 // Product
 
-export const getProductName = (product: Product): string => product?.name || 'Product\'s name';
+export const getProductName = (product: Product): string =>
+  product?.name || 'Product\'s name';
 
-export const getProductProperties = (product: Product): Attribute[] => product?.attributes || [];
+export const getProductProperties = (product: Product): Attribute[] =>
+  product?.attributes || [];
 
-export const getProductCode = (product: Product): string => product?.defaultCode || '';
+export const getProductCode = (product: Product): string =>
+  product?.defaultCode || '';
 
 export const getProductSlug = (product: Product): string => product.slug;
 
@@ -27,7 +34,9 @@ export const getProductPrice = (product: Product): AgnosticPrice => {
   };
 };
 
-export const getProductGallery = (product: Product): AgnosticMediaGalleryItem[] => {
+export const getProductGallery = (
+  product: Product
+): AgnosticMediaGalleryItem[] => {
   if (!product) {
     return [];
   }
@@ -47,7 +56,10 @@ export const getProductCoverImage = (product: Product): string => product.image;
 
 export const getProductSku = (product: Product): string => product.sku;
 
-export const getProductFiltered = (products: Product[], filters: ProductFilters | Product[] = {}) => {
+export const getProductFiltered = (
+  products: Product[],
+  filters: ProductFilters | Product[] = {}
+): Product[] => {
   if (!products) {
     return [];
   }
@@ -55,8 +67,10 @@ export const getProductFiltered = (products: Product[], filters: ProductFilters 
   return products;
 };
 // es
-export const getProductAttributes = (productVariants: ProductVariant[], filterByAttributeName?: string[]): Record<string, AgnosticAttribute | string> => {
-
+export const getProductAttributes = (
+  productVariants: ProductVariant[],
+  filterByAttributeName?: string[]
+): Record<string, AgnosticAttribute | string> => {
   const attributes = {};
   const groupedByName = {};
 
@@ -81,7 +95,7 @@ export const getProductAttributes = (productVariants: ProductVariant[], filterBy
     }
     if (
       groupedByName[option.attribute_name].type ===
-      option.attribute_display_type &&
+        option.attribute_display_type &&
       !attributes[option.attribute_display_type].some(
         (item) =>
           item.variantId === groupedByName[option.attribute_name].variantId
@@ -96,13 +110,17 @@ export const getProductAttributes = (productVariants: ProductVariant[], filterBy
   return attributes;
 };
 
-export const getProductDescription = (product: Product): any => (product as any)?.description || '';
+export const getProductDescription = (product: Product): any =>
+  (product as any)?.description || '';
 
-export const getProductCategoryIds = (product: Product): string[] => (product as any)?.categoriesRef || '';
+export const getProductCategoryIds = (product: Product): string[] =>
+  (product as any)?.categoriesRef || '';
 
-export const getProductId = (product: Product): string => (product as any)?.id || '';
+export const getProductId = (product: Product): string =>
+  (product as any)?.id || '';
 
-export const getFormattedPrice = (listPrice: number): string => String(listPrice);
+export const getFormattedPrice = (listPrice: number): string =>
+  String(listPrice);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getProductTotalReviews = (product: Product): number => 0;
@@ -110,7 +128,10 @@ export const getProductTotalReviews = (product: Product): number => 0;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getProductAverageRating = (product: Product): number => 0;
 
-const productGetters: ProductGetters<Product | ProductVariant, ProductFilters> = {
+const productGetters: ProductGetters<
+  Product | ProductVariant,
+  ProductFilters
+> = {
   getName: getProductName,
   getSlug: getProductSlug,
   getPrice: getProductPrice,

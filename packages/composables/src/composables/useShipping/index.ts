@@ -3,7 +3,7 @@ import { ref } from '@vue/composition-api';
 import { useVSFContext } from '@vue-storefront/core';
 import { Context } from '@vue-storefront/core';
 
-const useShipping = () => {
+const useShipping = (): any => {
   const context: Context = useVSFContext();
 
   const errors = ref({ graphQLErrors: [] });
@@ -11,14 +11,17 @@ const useShipping = () => {
   const shippingAddress = ref({});
   const shippingMethods = ref([]);
 
-  const resetCountryErrors = () => errors.value = { graphQLErrors: [] };
+  const resetCountryErrors = () => (errors.value = { graphQLErrors: [] });
 
   const searchShippingMethods = async () => {
     if (shippingMethods.value.length > 0) {
       return shippingMethods;
     }
 
-    shippingMethods.value = await context.$odoo.api.shippingGetDeliveryMethods({}, {});
+    shippingMethods.value = await context.$odoo.api.shippingGetDeliveryMethods(
+      {},
+      {}
+    );
   };
 
   const load = async () => {
@@ -34,7 +37,10 @@ const useShipping = () => {
         apartment: '',
         postalCode: realCart.partnerShipping.zip,
         phone: realCart.partnerShipping.phone,
-        firstName: realCart.partnerShipping.name === 'Public user' ? '' : realCart.partnerShipping.name,
+        firstName:
+          realCart.partnerShipping.name === 'Public user'
+            ? ''
+            : realCart.partnerShipping.name,
         city: realCart.partnerShipping.city,
         country: realCart.partnerShipping.country?.id,
         state: realCart.partnerShipping.state?.id,
@@ -45,7 +51,14 @@ const useShipping = () => {
     return shippingAddress;
   };
 
-  return { resetCountryErrors, load, searchShippingMethods, shippingAddress, shippingMethods, errors };
+  return {
+    resetCountryErrors,
+    load,
+    searchShippingMethods,
+    shippingAddress,
+    shippingMethods,
+    errors
+  };
 };
 
 export default useShipping;

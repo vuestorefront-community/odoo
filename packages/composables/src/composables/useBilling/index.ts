@@ -4,16 +4,15 @@ import { ref } from '@vue/composition-api';
 import { useVSFContext } from '@vue-storefront/core';
 import { Context } from '@vue-storefront/core';
 
-const useBilling = () => {
+const useBilling = (): any => {
   const context: Context = useVSFContext();
 
   const errors = ref({ graphQLErrors: [] });
   const billingAddress = ref({});
 
-  const resetPasswordErrors = () => errors.value = { graphQLErrors: [] };
+  const resetPasswordErrors = () => (errors.value = { graphQLErrors: [] });
 
   const load = async () => {
-
     const cart = await context.$odoo.api.cartLoad({}, {});
     if (cart.data.userShoppingCart.length > 0) {
       const realCart = cart.data.userShoppingCart[0];
@@ -27,7 +26,6 @@ const useBilling = () => {
         country: realCart.partnerInvoice.country?.id,
         state: realCart.partnerInvoice.state?.id
       };
-
     }
 
     return billingAddress;
@@ -37,7 +35,13 @@ const useBilling = () => {
     await context.$odoo.api.billingUseShippingAsBillingAddress({}, {});
   };
 
-  return { load, errors, resetPasswordErrors, useShippingAsBillingAddress, billingAddress };
+  return {
+    load,
+    errors,
+    resetPasswordErrors,
+    useShippingAsBillingAddress,
+    billingAddress
+  };
 };
 
 export default useBilling;
