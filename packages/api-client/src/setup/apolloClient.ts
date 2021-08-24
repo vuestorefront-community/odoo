@@ -19,24 +19,23 @@ const createOddoLink = (settings: Config): any => {
     if (networkError) console.warn(`[Network error]: ${networkError}`);
   });
 
-
   const afterwareLink = new ApolloLink((operation, forward) => {
     return forward(operation).map((response) => {
-      const context = operation.getContext()
-      const authHeader = context.response.headers.get('set-cookie')
+      const context = operation.getContext();
+      const authHeader = context.response.headers.get('set-cookie');
 
-      response.data.cookie = authHeader
+      response.data.cookie = authHeader;
 
-      return response
-    })
-  })
+      return response;
+    });
+  });
 
   const httpLink = createHttpLink({
     uri: settings.graphqlBaseUrl,
     credentials: 'include',
     fetch,
     headers: {
-      'Cookie': settings['auth']
+      Cookie: settings.auth
     }
   });
 

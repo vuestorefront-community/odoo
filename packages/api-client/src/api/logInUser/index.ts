@@ -1,9 +1,14 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CustomQuery } from '@vue-storefront/core';
+import { Context, CustomQuery } from '@vue-storefront/core';
+import { FetchResult } from 'apollo-link/lib/types';
+import { AgnosticUser } from '../../types';
 
-export default async function logInUser (context, { username, password }, customQuery?: CustomQuery) {
-
+export default async function logInUser(
+  context: Context,
+  { username, password }: AgnosticUser,
+  customQuery?: CustomQuery
+): Promise<FetchResult> {
   const response = await context.client.axios.post('web/session/authenticate', {
     jsonrpc: '2.0',
     method: 'call',

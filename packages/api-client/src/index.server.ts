@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { apiClientFactory, ApiClientExtension } from '@vue-storefront/core';
 import * as api from './api';
 import onCreate from './setup/clientSetup';
@@ -16,17 +17,17 @@ const cookieExtension: ApiClientExtension = {
       afterCall: ({ configuration, callName, response }) => {
         // axios
         if (response.headers) {
-          res.setHeader('Set-cookie', response.headers['set-cookie'])
+          res.setHeader('Set-cookie', response.headers['set-cookie']);
 
-          return response.data
+          return response.data;
         }
 
-        //apollo
+        // apollo
         if (response?.data?.cookie) {
-          res.setHeader('Set-cookie', response.data.cookie)
+          res.setHeader('Set-cookie', response.data.cookie);
         }
 
-        return response
+        return response;
       }
 
     };

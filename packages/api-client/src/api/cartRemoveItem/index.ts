@@ -1,10 +1,15 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CustomQuery } from '@vue-storefront/core';
+import { Context, CustomQuery } from '@vue-storefront/core';
+import { FetchResult } from 'apollo-link/lib/types';
 import gql from 'graphql-tag';
+import { GraphQlCartRemoveItemParams } from '../../types';
 
-export default async function cartRemoveItem(context, params, customQuery?: CustomQuery) {
-
+export default async function cartRemoveItem(
+  context: Context,
+  params: GraphQlCartRemoveItemParams,
+  customQuery?: CustomQuery
+): Promise<FetchResult> {
   const response = await context.client.axios.post('/shop/cart/update_json', {
     withCredentials: true,
     jsonrpc: '2.0',
@@ -16,5 +21,4 @@ export default async function cartRemoveItem(context, params, customQuery?: Cust
   });
 
   return response;
-
 }

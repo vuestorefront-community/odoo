@@ -1,10 +1,15 @@
-
-import { CustomQuery } from '@vue-storefront/core';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import { Pagination } from '@vue-storefront/odoo-api/src/types';
 import query from './getProductTemplateQuery';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default async function getProductTemplates(context, params, customQuery?: CustomQuery) {
+import { GraphQlAllProductTemplatesParams, Product } from '../../types';
+import { FetchResult } from 'apollo-link/lib/types';
+export default async function getProductTemplates(
+  context: Context,
+  params: GraphQlAllProductTemplatesParams,
+  customQuery?: CustomQuery
+): Promise<FetchResult<Product>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   const searchParams: Pagination = {
@@ -18,6 +23,4 @@ export default async function getProductTemplates(context, params, customQuery?:
   });
 
   return response.data.allProductTemplates;
-
 }
-
