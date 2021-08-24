@@ -50,12 +50,13 @@
 </template>
 
 <script>
+/* eslint-disable no-use-before-define */
 import { ref } from '@vue/composition-api';
 import { required, confirmed } from 'vee-validate/dist/rules';
 extend('required', required);
 extend('confirmed', {
   ...confirmed,
-  message: 'Passwords must match.',
+  message: 'Passwords must match.'
 });
 import { usePassword } from '@vue-storefront/odoo';
 import LiUserError from '~/components/LiUserError';
@@ -66,7 +67,7 @@ import {
   SfContentPages,
   SfHeading,
   SfInput,
-  SfButton,
+  SfButton
 } from '@storefront-ui/vue';
 
 export default {
@@ -79,12 +80,12 @@ export default {
     ValidationObserver,
     SfBreadcrumbs,
     SfContentPages,
-    LiUserError,
+    LiUserError
   },
-  setup(_, { emit, root, router }) {
+  setup(_, { root }) {
     const resetForm = () => ({
       newPassword: '',
-      repeatPassword: '',
+      repeatPassword: ''
     });
     const success = ref(null);
 
@@ -98,24 +99,22 @@ export default {
     const submitForm = async () => {
       errors.value = { graphQLErrors: [] };
       await resetPassword({
-        password: newPassword.value,
-        token: root.$route.query.token,
+        password: form.newPassword.value,
+        token: root.$route.query.token
       });
-      if (errors.value.graphQLErrors.length === 0) {
-      }
     };
     return {
       mapGraphQLErrorToArray,
       form,
       submitForm,
       success,
-      errors,
+      errors
     };
-  },
+  }
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 #reset-password {
   padding: var(--spacer-xl) 0 var(--spacer-xl) 0;
   margin: auto;

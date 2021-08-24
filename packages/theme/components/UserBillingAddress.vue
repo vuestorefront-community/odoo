@@ -27,8 +27,8 @@ export default {
   props: {
     address: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(props) {
     const address = toRef(props, 'address');
@@ -42,12 +42,12 @@ export default {
       province: userBillingGetters.getProvince(address.value) || '',
       country: userBillingGetters.getCountry(address.value),
       phone: userBillingGetters.getPhone(address.value),
-      isDefault: userBillingGetters.isDefault(address.value),
+      isDefault: userBillingGetters.isDefault(address.value)
     }));
     return {
-      userBillingAddress,
+      userBillingAddress
     };
-  },
+  }
 };
 </script>
 

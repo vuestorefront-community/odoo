@@ -75,23 +75,23 @@ export default {
     SfButton,
     SfModal,
     ValidationProvider,
-    ValidationObserver,
+    ValidationObserver
   },
   props: {
     loading: {
       type: Boolean,
       required: false,
-      default: false,
-    },
+      default: false
+    }
   },
   emits: ['submit'],
-  setup(props, { emit }) {
+  setup() {
     const { user } = useUser();
     const currentPassword = ref('');
     const requirePassword = ref(false);
     const resetForm = () => ({
       firstname: userGetters.getFirstName(user.value),
-      email: userGetters.getEmailAddress(user.value),
+      email: userGetters.getEmailAddress(user.value)
     });
     const form = ref(resetForm());
 
@@ -99,12 +99,12 @@ export default {
       user,
       requirePassword,
       currentPassword,
-      form,
+      form
     };
-  },
+  }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .form {
   &__element {
     display: block;

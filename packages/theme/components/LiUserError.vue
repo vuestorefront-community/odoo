@@ -10,8 +10,8 @@ export default {
   props: {
     errors: {
       type: [Array, Error],
-      default: () => [],
-    },
-  },
+      default: () => []
+    }
+  }
 };
 </script>

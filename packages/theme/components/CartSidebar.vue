@@ -14,20 +14,10 @@
           :value="totalItems"
         />
       </template>
-      <transition
-        name="sf-fade"
-        mode="out-in"
-      >
-        <div
-          v-if="totalItems"
-          key="my-cart"
-          class="my-cart"
-        >
+      <transition name="sf-fade" mode="out-in">
+        <div v-if="totalItems" key="my-cart" class="my-cart">
           <div class="collected-product-list">
-            <transition-group
-              name="sf-fade"
-              tag="div"
-            >
+            <transition-group name="sf-fade" tag="div">
               <SfCollectedProduct
                 data-cy="collected-product-cart-sidebar"
                 v-for="product in products"
@@ -39,7 +29,7 @@
                 "
                 :special-price="
                   cartGetters.getItemPrice(product).special &&
-                  $n(cartGetters.getItemPrice(product).special, 'currency')
+                    $n(cartGetters.getItemPrice(product).special, 'currency')
                 "
                 :stock="99999"
                 :qty="cartGetters.getItemQty(product)"
@@ -50,11 +40,10 @@
                 <template #configuration>
                   <div class="collected-product__properties">
                     <SfProperty
-                      v-for="(
-                        attribute, key
-                      ) in cartGetters.getItemAttributes(product, [
+                      v-for="(attribute,
+                      key) in cartGetters.getItemAttributes(product, [
                         'color',
-                        'size',
+                        'size'
                       ])"
                       :key="key"
                       :name="key"
@@ -66,11 +55,7 @@
             </transition-group>
           </div>
         </div>
-        <div
-          v-else
-          key="empty-cart"
-          class="empty-cart"
-        >
+        <div v-else key="empty-cart" class="empty-cart">
           <div class="empty-cart__banner">
             <SfImage
               alt="Empty bag"
@@ -111,7 +96,8 @@
             <SfButton
               class="sf-button--full-width color-primary"
               @click="toggleCartSidebar"
-            >{{ $t('Go back shopping') }}</SfButton>
+              >{{ $t('Go back shopping') }}</SfButton
+            >
           </div>
         </transition>
       </template>
@@ -129,7 +115,7 @@ import {
   SfCollectedProduct,
   SfImage
 } from '@storefront-ui/vue';
-import { computed, onMounted } from '@vue/composition-api';
+import { computed } from '@vue/composition-api';
 import { useCart, useUser, cartGetters } from '@vue-storefront/odoo';
 import { useUiState } from '~/composables';
 import { onSSR } from '@vue-storefront/core';
@@ -146,9 +132,9 @@ export default {
     SfCollectedProduct,
     SfImage
   },
-  setup () {
+  setup() {
     const { isCartSidebarOpen, toggleCartSidebar } = useUiState();
-    const { cart, removeItem, updateItemQty, load: loadCart } = useCart();
+    const { cart, removeItem, updateItemQty } = useCart();
     const { isAuthenticated } = useUser();
     const products = computed(() => cartGetters.getItems(cart.value));
     const totals = computed(() => cartGetters.getTotals(cart.value));

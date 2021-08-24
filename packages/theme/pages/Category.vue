@@ -49,16 +49,20 @@
                 :key="index"
                 :value="option.value"
                 class="sort-by__option"
-              >{{ option.attrName }}</SfSelectOption>
+                >{{ option.attrName }}</SfSelectOption
+              >
             </SfSelect>
           </LazyHydrate>
         </div>
 
         <div class="navbar__counter">
-          <span class="navbar__label desktop-only">{{ $t('Products found') }}:
+          <span class="navbar__label desktop-only"
+            >{{ $t('Products found') }}:
           </span>
           <span class="desktop-only">{{ pagination.totalItems }}</span>
-          <span class="navbar__label smartphone-only">{{ pagination.totalItems }} {{ $t('Items') }}</span>
+          <span class="navbar__label smartphone-only"
+            >{{ pagination.totalItems }} {{ $t('Items') }}</span
+          >
         </div>
 
         <div class="navbar__view">
@@ -92,14 +96,8 @@
     <div class="main section">
       <div class="sidebar desktop-only">
         <LazyHydrate when-idle>
-          <SfLoader
-            :class="{ loading }"
-            :loading="loading"
-          >
-            <SfAccordion
-              :open="activeCategory"
-              :show-chevron="true"
-            >
+          <SfLoader :class="{ loading }" :loading="loading">
+            <SfAccordion :open="activeCategory" :show-chevron="true">
               <SfAccordionItem
                 v-for="(cat, i) in categoryTree && categoryTree"
                 :key="i"
@@ -136,14 +134,8 @@
           </SfLoader>
         </LazyHydrate>
       </div>
-      <SfLoader
-        :class="{ loading }"
-        :loading="loading"
-      >
-        <div
-          class="products"
-          v-if="showProducts"
-        >
+      <SfLoader :class="{ loading }" :loading="loading">
+        <div class="products" v-if="showProducts">
           <transition-group
             v-if="isCategoryGridView"
             appear
@@ -163,7 +155,7 @@
               "
               :special-price="
                 productGetters.getPrice(product).special &&
-                $n(productGetters.getPrice(product).special, 'currency')
+                  $n(productGetters.getPrice(product).special, 'currency')
               "
               :max-rating="5"
               :score-rating="productGetters.getAverageRating(product)"
@@ -178,7 +170,11 @@
                 )
               "
               class="products__product-card"
-              @click:wishlist="isInWishlist({ product })  ? removeItemFromWishList({product: { product }}) : addItemToWishlist({ product })"
+              @click:wishlist="
+                isInWishlist({ product })
+                  ? removeItemFromWishList({ product: { product } })
+                  : addItemToWishlist({ product })
+              "
               @click:add-to-cart="addItemToCart({ product, quantity: 1 })"
             />
           </transition-group>
@@ -202,7 +198,7 @@
               "
               :special-price="
                 productGetters.getPrice(product).special &&
-                $n(productGetters.getPrice(product).special, 'currency')
+                  $n(productGetters.getPrice(product).special, 'currency')
               "
               :max-rating="5"
               :score-rating="3"
@@ -225,11 +221,7 @@
                   value="XS"
                   style="margin: 0 0 1rem 0"
                 />
-                <SfProperty
-                  class="desktop-only"
-                  name="Color"
-                  value="white"
-                />
+                <SfProperty class="desktop-only" name="Color" value="white" />
               </template>
               <template #actions>
                 <SfButton
@@ -280,11 +272,7 @@
             </LazyHydrate>
           </div>
         </div>
-        <div
-          v-else
-          key="no-results"
-          class="before-results"
-        >
+        <div v-else key="no-results" class="before-results">
           <SfImage
             src="/error/error.svg"
             class="before-results__picture"
@@ -312,10 +300,7 @@
         @close="toggleFilterSidebar"
       >
         <div class="filters desktop-only">
-          <div
-            v-for="(facet, i) in facets"
-            :key="i"
-          >
+          <div v-for="(facet, i) in facets" :key="i">
             <template v-if="facetHasMoreThanOneOption(facet)">
               <SfHeading
                 :level="4"
@@ -355,10 +340,7 @@
           </div>
         </div>
         <SfAccordion class="filters smartphone-only">
-          <div
-            v-for="(facet, i) in facets"
-            :key="i"
-          >
+          <div v-for="(facet, i) in facets" :key="i">
             <SfAccordionItem
               :key="`filter-title-${facet.id}`"
               :header="facet.label"
@@ -377,16 +359,14 @@
         </SfAccordion>
         <template #content-bottom>
           <div class="filters__buttons">
-            <SfButton
-              class="sf-button--full-width"
-              @click="applyFilters"
-            >{{
+            <SfButton class="sf-button--full-width" @click="applyFilters">{{
               $t('Done')
             }}</SfButton>
             <SfButton
               class="sf-button--full-width filters__button-clear"
               @click="clearFilters"
-            >{{ $t('Clear all') }}</SfButton>
+              >{{ $t('Clear all') }}</SfButton
+            >
           </div>
         </template>
       </SfSidebar>
@@ -430,21 +410,33 @@ import LazyHydrate from 'vue-lazy-hydration';
 // TODO(addToCart qty, horizontal): https://github.com/vuestorefront/storefront-ui/issues/1606
 export default {
   transition: 'fade',
-  setup (props, { root }) {
+  setup(props, { root }) {
     const th = useUiHelpers();
     const { addTags } = useCache();
     const uiState = useUiState();
     const { addItem: addItemToCart, isInCart } = useCart();
-    const { addItem: addItemToWishlist, removeItem: removeItemFromWishList, isInWishlist } = useWishlist();
+    const {
+      addItem: addItemToWishlist,
+      removeItem: removeItemFromWishList,
+      isInWishlist
+    } = useWishlist();
     const { result, search, loading } = useFacet();
     const { params, query } = root.$router.history.current;
 
     const products = computed(() => facetGetters.getProducts(result.value));
-    const categoryTree = computed(() => facetGetters.getCategoryTree(result.value));
-    const sortBy = computed(() => facetGetters.getSortOptions(query?.sort || ''));
-    const facets = computed(() => facetGetters.getGrouped(result.value, ['color', 'size']));
+    const categoryTree = computed(() =>
+      facetGetters.getCategoryTree(result.value)
+    );
+    const sortBy = computed(() =>
+      facetGetters.getSortOptions({ input: { sort: query?.sort } } || '')
+    );
+    const facets = computed(() =>
+      facetGetters.getGrouped(result.value, ['color', 'size'])
+    );
     const pagination = computed(() => facetGetters.getPagination(result.value));
-    const showProducts = computed(() => !loading.value && products.value?.length > 0);
+    const showProducts = computed(
+      () => !loading.value && products.value?.length > 0
+    );
 
     const currentCategory = computed(() => {
       const childCategories = categoryTree.value
@@ -455,7 +447,9 @@ export default {
         return '';
       }
 
-      return childCategories.find((child) => child.slug === params.slug_2) || {};
+      return (
+        childCategories.find((child) => child.slug === params.slug_2) || {}
+      );
     });
 
     const getCurrentParentCategory = (currentCategory) => {
@@ -474,13 +468,23 @@ export default {
       return [categoryTree?.value[0]?.name] || {};
     });
 
-    const breadcrumbs = computed(() => facetGetters.getBreadcrumbs({ input: { params, currentParentCategory: getCurrentParentCategory(currentCategory) } }));
+    const breadcrumbs = computed(() =>
+      facetGetters.getBreadcrumbs({
+        input: {
+          params,
+          currentParentCategory: getCurrentParentCategory(currentCategory)
+        }
+      })
+    );
 
     onSSR(async () => {
       await search(th.getFacetsFromURL());
 
       addTags([
-        { prefix: CacheTagPrefix.Category, value: currentCategory.value.id || params.slug_2 }
+        {
+          prefix: CacheTagPrefix.Category,
+          value: currentCategory.value.id || params.slug_2
+        }
       ]);
     });
 
@@ -494,11 +498,13 @@ export default {
     });
 
     const isFilterSelected = (facet, option) => {
-      return selectedFilters.value.some(filter => filter.id === option.id);
+      return selectedFilters.value.some((filter) => filter.id === option.id);
     };
 
     const selectFilter = (facet, option) => {
-      const alreadySelectedIndex = selectedFilters.value.findIndex(filter => filter.id === option.id);
+      const alreadySelectedIndex = selectedFilters.value.findIndex(
+        (filter) => filter.id === option.id
+      );
 
       if (alreadySelectedIndex === -1) {
         selectedFilters.value.push({
@@ -524,7 +530,8 @@ export default {
       changeFilters(selectedFilters.value);
     };
 
-    const facetHasMoreThanOneOption = (facet) => facet?.options?.length > 1 || false;
+    const facetHasMoreThanOneOption = (facet) =>
+      facet?.options?.length > 1 || false;
 
     return {
       ...uiState,

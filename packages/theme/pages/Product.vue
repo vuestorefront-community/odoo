@@ -6,10 +6,7 @@
     />
     <div class="product">
       <LazyHydrate when-idle>
-        <SfGallery
-          :images="productGallery"
-          class="product__gallery"
-        />
+        <SfGallery :images="productGallery" class="product__gallery" />
       </LazyHydrate>
       <div class="product__info">
         <div class="product__header">
@@ -30,27 +27,17 @@
             :regular="$n(productGetters.getPrice(product).regular, 'currency')"
             :special="
               productGetters.getPrice(product).special &&
-              $n(productGetters.getPrice(product).special, 'currency')
+                $n(productGetters.getPrice(product).special, 'currency')
             "
           />
           <div>
             <div class="product__rating">
-              <SfRating
-                :score="averageRating"
-                :max="5"
-              />
-              <a
-                v-if="!!totalReviews"
-                href="#"
-                class="product__count"
-              >
+              <SfRating :score="averageRating" :max="5" />
+              <a v-if="!!totalReviews" href="#" class="product__count">
                 ({{ totalReviews }})
               </a>
             </div>
-            <SfButton
-              data-cy="product-btn_read-all"
-              class="sf-button--text"
-            >{{
+            <SfButton data-cy="product-btn_read-all" class="sf-button--text">{{
               $t('Read all reviews')
             }}</SfButton>
           </div>
@@ -88,10 +75,7 @@
 
           <div v-if="options.radio">
             <template v-for="(radio, radioKey) in options.radio">
-              <p
-                class="product__radio-label"
-                :key="radioKey"
-              >
+              <p class="product__radio-label" :key="radioKey">
                 {{ radio.label }}:
               </p>
               <SfRadio
@@ -108,15 +92,9 @@
             </template>
           </div>
 
-          <div
-            v-if="options.color"
-            class="product__colors desktop-only"
-          >
+          <div v-if="options.color" class="product__colors desktop-only">
             <template v-for="(option, colorKey) in options.color">
-              <p
-                class="product__color-label"
-                :key="colorKey"
-              >
+              <p class="product__color-label" :key="colorKey">
                 {{ $t('Color') }}:
               </p>
 
@@ -144,14 +122,8 @@
         </div>
 
         <LazyHydrate when-idle>
-          <SfTabs
-            :open-tab="1"
-            class="product__tabs"
-          >
-            <SfTab
-              data-cy="product-tab_description"
-              title="Description"
-            >
+          <SfTabs :open-tab="1" class="product__tabs">
+            <SfTab data-cy="product-tab_description" title="Description">
               <div class="product__description">
                 {{ $t('Product description') }}
               </div>
@@ -175,20 +147,14 @@
                 :value="property.value"
                 class="product__property"
               >
-                <template
-                  v-if="property.name === 'Category'"
-                  #value
-                >
+                <template v-if="property.name === 'Category'" #value>
                   <SfButton class="product__property__button sf-button--text">
                     {{ property.value }}
                   </SfButton>
                 </template>
               </SfProperty>
             </SfTab>
-            <SfTab
-              title="Read reviews"
-              data-cy="product-tab_reviews"
-            >
+            <SfTab title="Read reviews" data-cy="product-tab_reviews">
               <SfReview
                 v-for="review in reviews"
                 :key="reviewGetters.getReviewId(review)"
@@ -290,7 +256,7 @@ import LazyHydrate from 'vue-lazy-hydration';
 export default {
   name: 'Product',
   transition: 'fade',
-  setup (props, { root }) {
+  setup(props, { root }) {
     const qty = ref(1);
     const { id } = root.$route.params;
     const { size, color } = root.$route.query;
@@ -303,16 +269,13 @@ export default {
       realProduct,
       elementNames
     } = useProductVariant();
-    const {
-      products: relatedProducts,
-      search: searchRelatedProducts,
-      loading: relatedLoading
-    } = useProduct('relatedProducts');
+    const { products: relatedProducts, loading: relatedLoading } = useProduct(
+      'relatedProducts'
+    );
     const { addItem, loading } = useCart();
     const { addTags } = useCache();
 
-    const { reviews: productReviews, search: searchReviews } =
-      useReview('productReviews');
+    const { reviews: productReviews } = useReview('productReviews');
 
     const product = computed(() => {
       const productTemplate =
@@ -336,10 +299,6 @@ export default {
       productGetters.getProperties(product.value)
     );
     const code = computed(() => productGetters.getCode(product.value));
-
-    const categories = computed(() =>
-      productGetters.getCategoryIds(product.value)
-    );
 
     const breadcrumbs = computed(() =>
       facetGetters.getBreadcrumbsByProduct(product.value)
@@ -365,9 +324,7 @@ export default {
         combinationIds: Object.values(root.$route.query)
       });
       await search({ id });
-      addTags([
-        { prefix: CacheTagPrefix.Product, value: id }
-      ]);
+      addTags([{ prefix: CacheTagPrefix.Product, value: id }]);
       // await searchRelatedProducts({ catId: [categories.value[0]], limit: 8 });
       // await searchReviews({ productId: id });
     });
@@ -393,7 +350,7 @@ export default {
     });
 
     const checkSelected = (attribute, value) => {
-      return root.$route.query[attribute] == value;
+      return root.$route.query[attribute] === value;
     };
 
     return {
@@ -453,7 +410,7 @@ export default {
     SfColorPicker,
     LazyHydrate
   },
-  data () {
+  data() {
     return {
       stock: 5,
       detailsIsActive: false,

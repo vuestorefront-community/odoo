@@ -185,7 +185,7 @@
   </SfModal>
 </template>
 <script>
-import { ref, watch, watchEffect } from '@vue/composition-api';
+import { ref, watch } from '@vue/composition-api';
 
 import {
   SfModal,

@@ -66,13 +66,13 @@ export default {
     SfInput,
     SfButton,
     ValidationProvider,
-    ValidationObserver,
+    ValidationObserver
   },
   setup(_, { emit }) {
     const resetForm = () => ({
       currentPassword: '',
       newPassword: '',
-      repeatPassword: '',
+      repeatPassword: ''
     });
     const form = ref(resetForm());
     const submitForm = (resetValidationFn) => () => {
@@ -87,9 +87,9 @@ export default {
     };
     return {
       form,
-      submitForm,
+      submitForm
     };
-  },
+  }
 };
 </script>
 

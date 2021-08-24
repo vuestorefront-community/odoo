@@ -24,8 +24,8 @@
     />
     <hr class="sf-divider" />
   </div>
-</template> 
- 
+</template>
+
 <script>
 import { SfCheckbox, SfAddressPicker } from '@storefront-ui/vue';
 import { useUserShipping, userShippingGetters } from '@vue-storefront/odoo';
@@ -36,17 +36,17 @@ export default {
   components: {
     SfCheckbox,
     SfAddressPicker,
-    UserShippingAddress,
+    UserShippingAddress
   },
   props: {
     currentAddressId: {
       type: [String, Number],
-      required: true,
+      required: true
     },
     value: {
       type: Boolean,
-      required: true,
-    },
+      required: true
+    }
   },
   emits: ['setCurrentAddress'],
   setup(props, { emit }) {
@@ -67,9 +67,9 @@ export default {
     return {
       setCurrentAddress,
       shippingAddresses,
-      userShippingGetters,
+      userShippingGetters
     };
-  },
+  }
 };
 </script>
 
