@@ -5,6 +5,7 @@
   "scripts": {
     "build": "nuxt build -m --dotenv .env_production",
     "test:e2e": "cypress open --config-file tests/e2e/cypress.json",
+    "test:e2e:hl": "cypress run --headless --config-file tests/e2e/cypress.json",
     "build:analyze": "nuxt build -a -m",
     "cypress:open": "cypress open",
     "dev": "nuxt",
@@ -12,7 +13,8 @@
     "start": "nuxt start",
     "precommit": "lint-staged",
     "update:check": "ncu",
-    "update:update": "ncu -u"
+    "update:update": "ncu -u",
+    "test": "jest"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.5",
