@@ -3,6 +3,7 @@
 import graphene
 from graphql import GraphQLError
 from graphene.types import generic
+from odoo import _
 
 from werkzeug import urls
 
@@ -38,7 +39,7 @@ def get_document_with_check_access(model, domain, order=None, limit=20, offset=0
     document = model.search(domain, order=order, limit=limit, offset=offset)
     document_sudo = document.sudo().exists()
     if document and not document_sudo:
-        raise GraphQLError(error_msg)
+        raise GraphQLError(_(error_msg))
     return document_sudo
 
 
