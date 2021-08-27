@@ -16,8 +16,13 @@ def get_search_order(sort):
             sorting += ', '
         else:
             sorting += '%s %s' % (field, val)
-    if not sorting:
+
+    # Add id as last factor so we can consistently get the same results
+    if sorting:
+        sorting += ', id ASC'
+    else:
         sorting = 'id ASC'
+
     return sorting
 
 
@@ -49,7 +54,7 @@ class CategoryQuery(graphene.ObjectType):
     categories = graphene.Field(
         Categories,
         filter=graphene.Argument(CategoryFilterInput, default_value={}),
-        current_page=graphene.Int(default_value=0),
+        current_page=graphene.Int(default_value=1),
         page_size=graphene.Int(default_value=20),
         search=graphene.String(default_value=''),
         sort=graphene.Argument(CategorySortInput, default_value={})

@@ -8,8 +8,6 @@ from odoo.addons.graphql_vuestorefront.schemas.objects import (
     SortEnum, Product, Attribute
 )
 
-# ---------- SORT PRICE and FILTER minPrice and maxPrice have some problem maybe because computed ------------------ #
-
 
 def get_search_order(sort):
     sorting = ''
@@ -20,8 +18,13 @@ def get_search_order(sort):
             sorting += 'lst_price %s' % val
         else:
             sorting += '%s %s' % (field, val)
-    if not sorting:
+
+    # Add id as last factor so we can consistently get the same results
+    if sorting:
+        sorting += ', id ASC'
+    else:
         sorting = 'id ASC'
+
     return sorting
 
 
@@ -100,7 +103,7 @@ class ProductQuery(graphene.ObjectType):
     products = graphene.Field(
         Products,
         filter=graphene.Argument(ProductFilterInput, default_value={}),
-        current_page=graphene.Int(default_value=0),
+        current_page=graphene.Int(default_value=1),
         page_size=graphene.Int(default_value=20),
         search=graphene.String(default_value=''),
         sort=graphene.Argument(ProductSortInput, default_value={})

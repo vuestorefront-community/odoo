@@ -14,12 +14,18 @@ def get_search_order(sort):
         if sorting:
             sorting += ', '
         sorting += '%s %s' % (field, val)
-    if not sorting:
+
+    # Add id as last factor so we can consistently get the same results
+    if sorting:
+        sorting += ', id ASC'
+    else:
         sorting = 'id ASC'
+
     return sorting
 
 
 class OrderSortInput(graphene.InputObjectType):
+    id = SortEnum()
     date_order = SortEnum()
     name = SortEnum()
     state = SortEnum()
@@ -43,7 +49,7 @@ class OrderQuery(graphene.ObjectType):
     )
     orders = graphene.Field(
         Orders,
-        current_page=graphene.Int(default_value=0),
+        current_page=graphene.Int(default_value=1),
         page_size=graphene.Int(default_value=10),
         sort=graphene.Argument(OrderSortInput, default_value={})
     )

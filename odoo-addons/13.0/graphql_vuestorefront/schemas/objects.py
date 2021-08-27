@@ -1,19 +1,60 @@
 # -*- coding: utf-8 -*-
 
 import graphene
+from graphql import GraphQLError
 from graphene.types import generic
+
+from werkzeug import urls
 
 from odoo.addons.graphql_base import OdooObjectType
 from odoo.addons.http_routing.models.ir_http import slug
+from odoo.exceptions import AccessError
 
 
 # --------------------- #
 #       ENUMS           #
 # --------------------- #
 
+OrderStage = graphene.Enum('OrderStage', [('Quotation', 'draft'), ('QuotationSent', 'sent'),
+                                          ('SalesOrder', 'sale'), ('Locked', 'done'), ('Cancelled', 'cancel')])
+
+
 class SortEnum(graphene.Enum):
     ASC = 'ASC'
     DESC = 'DESC'
+
+
+# --------------------- #
+#      Functions        #
+# --------------------- #
+
+def get_document_with_check_access(model, domain, order=None, limit=20, offset=0,
+                                   error_msg='This document does not exist.'):
+    try:
+        model.check_access_rights('read')
+        model.check_access_rule('read')
+    except AccessError:
+        return []
+    document = model.search(domain, order=order, limit=limit, offset=offset)
+    document_sudo = document.sudo().exists()
+    if document and not document_sudo:
+        raise GraphQLError(error_msg)
+    return document_sudo
+
+
+def get_document_count_with_check_access(model, domain):
+    try:
+        model.check_access_rights('read')
+        model.check_access_rule('read')
+    except AccessError:
+        return 0
+    return model.search_count(domain)
+
+
+def get_product_pricing_info(env, product):
+    website = env['website'].get_current_website()
+    pricelist = website.get_current_pricelist()
+    return product._get_combination_info_variant(pricelist=pricelist)
 
 
 # --------------------- #
@@ -130,21 +171,18 @@ class ProductImage(OdooObjectType):
     image = graphene.String()
     video = graphene.String()
 
-    @staticmethod
-    def resolve_id(root, info):
-        return root.id or None
+    def resolve_id(self, info):
+        return self.id or None
 
-    @staticmethod
-    def resolve_image(root, info):
-        if root.image_1920:
+    def resolve_image(self, info):
+        if self.image_1920:
             base_url = info.context["env"]['ir.config_parameter'].sudo().get_param('web.base.url')
-            image_url = '{}/web/image/product.image/{}/image_1920'.format(base_url, root.id)
+            image_url = '{}/web/image/product.image/{}/image_1920'.format(base_url, self.id)
             return image_url
         return None
 
-    @staticmethod
-    def resolve_video(root, info):
-        return root.video_url or None
+    def resolve_video(self, info):
+        return self.video_url or None
 
 
 class Product(OdooObjectType):
@@ -156,6 +194,8 @@ class Product(OdooObjectType):
     sku = graphene.String()
     description = graphene.String()
     price = graphene.Float()
+    price_after_discount = graphene.Float()
+    has_discounted_price = graphene.Boolean()
     currency = graphene.Field(lambda: Currency)
     weight = graphene.Float()
     meta_title = graphene.String()
@@ -172,7 +212,6 @@ class Product(OdooObjectType):
     alternative_products = graphene.List(graphene.NonNull(lambda: Product))
     accessory_products = graphene.List(graphene.NonNull(lambda: Product))
     product_template_attribute_values = graphene.List(graphene.NonNull(lambda: AttributeValue))
-    combination_info = generic.GenericScalar()
 
     def resolve_type_id(self, info):
         if self.type == 'product':
@@ -199,7 +238,19 @@ class Product(OdooObjectType):
         return self.description_sale or None
 
     def resolve_price(self, info):
-        return self.lst_price or None
+        env = info.context["env"]
+        pricing_info = get_product_pricing_info(env, self)
+        return pricing_info['list_price'] or None
+
+    def resolve_price_after_discount(self, info):
+        env = info.context["env"]
+        pricing_info = get_product_pricing_info(env, self)
+        return pricing_info['price'] or None
+
+    def resolve_has_discounted_price(self, info):
+        env = info.context["env"]
+        pricing_info = get_product_pricing_info(env, self)
+        return pricing_info['has_discounted_price']
 
     def resolve_currency(self, info):
         return self.currency_id or None
@@ -258,9 +309,6 @@ class Product(OdooObjectType):
     def resolve_product_template_attribute_values(self, info):
         return self.product_template_attribute_value_ids or None
 
-    def resolve_combination_info(self, info):
-        return self._get_combination_info_variant(pricelist=self.pricelist_id)
-
 
 class OrderLine(OdooObjectType):
     id = graphene.Int(required=True)
@@ -291,8 +339,8 @@ class Order(OdooObjectType):
     amount_total = graphene.Float()
     currency = graphene.Field(lambda: Currency)
     order_line = graphene.List(graphene.NonNull(lambda: OrderLine))
-    stage = graphene.String()
-    portal_url = graphene.String()
+    stage = OrderStage()
+    order_url = graphene.String()
 
     def resolve_partner(self, info):
         return self.partner_id or None
@@ -310,14 +358,15 @@ class Order(OdooObjectType):
         return self.order_line or None
 
     def resolve_stage(self, info):
-        if self.state:
-            state = dict(self._fields['state'].selection).get(self.state)
-            return state
-        return None
+        return self.state or None
 
     def resolve_date_order(self, info):
         return self.date_order or None
 
-    @staticmethod
-    def resolve_portal_url(self, info):
-        return self.get_portal_url() or None
+    def resolve_order_url(self, info):
+        env = info.context["env"]
+        base_url = env['ir.config_parameter'].sudo().get_param('web.base.url')
+        url = urls.url_join(base_url, self.get_portal_url(report_type='pdf', download=True))
+        if url:
+            return url
+        return None
