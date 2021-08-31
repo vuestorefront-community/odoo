@@ -19,6 +19,11 @@ from odoo.exceptions import AccessError
 OrderStage = graphene.Enum('OrderStage', [('Quotation', 'draft'), ('QuotationSent', 'sent'),
                                           ('SalesOrder', 'sale'), ('Locked', 'done'), ('Cancelled', 'cancel')])
 
+InvoiceState = graphene.Enum('InvoiceState', [('Draft', 'draft'), ('Posted', 'posted'), ('Cancelled', 'cancel')])
+
+Provider = graphene.Enum('Provider', [('Ingenico', 'ogone'), ('ManualPayment', 'transfer'),
+                                      ('CustomPaymentForm', 'manual')])
+
 
 class SortEnum(graphene.Enum):
     ASC = 'ASC'
@@ -40,7 +45,7 @@ def get_document_with_check_access(model, domain, order=None, limit=20, offset=0
     document_sudo = document.sudo().exists()
     if document and not document_sudo:
         raise GraphQLError(_(error_msg))
-    return document_sudo
+    return document
 
 
 def get_document_count_with_check_access(model, domain):
@@ -125,6 +130,24 @@ class Partner(OdooObjectType):
         return self.child_ids or None
 
 
+class User(OdooObjectType):
+    id = graphene.Int(required=True)
+    name = graphene.String(required=True)
+    email = graphene.String(required=True)
+    partner = graphene.Field(lambda: Partner)
+
+    def resolve_email(self, info):
+        return self.login or None
+
+    def resolve_partner(self, info):
+        return self.partner_id or None
+
+
+class UserToken(graphene.ObjectType):
+    user = graphene.Field(User, required=True)
+    token = graphene.String(required=True)
+
+
 class Currency(OdooObjectType):
     id = graphene.Int(required=True)
     name = graphene.String()
@@ -151,9 +174,10 @@ class Category(OdooObjectType):
 class AttributeValue(OdooObjectType):
     id = graphene.Int(required=True)
     name = graphene.String()
-    attribute_code = graphene.String()
+    attribute_id = graphene.Int()
+    attribute_name = graphene.String()
 
-    def resolve_attribute_code(self, info):
+    def resolve_attribute_name(self, info):
         return self.attribute_id.name or None
 
 
@@ -212,7 +236,7 @@ class Product(OdooObjectType):
     slug = graphene.String()
     alternative_products = graphene.List(graphene.NonNull(lambda: Product))
     accessory_products = graphene.List(graphene.NonNull(lambda: Product))
-    product_template_attribute_values = graphene.List(graphene.NonNull(lambda: AttributeValue))
+    attribute_values = graphene.List(graphene.NonNull(lambda: AttributeValue))
 
     def resolve_type_id(self, info):
         if self.type == 'product':
@@ -307,8 +331,36 @@ class Product(OdooObjectType):
     def resolve_accessory_products(self, info):
         return self.accessory_product_ids or None
 
-    def resolve_product_template_attribute_values(self, info):
+    def resolve_attribute_values(self, info):
         return self.product_template_attribute_value_ids or None
+
+
+class Payment(OdooObjectType):
+    id = graphene.Int()
+    name = graphene.String()
+    provider = graphene.String()
+    amount = graphene.Float()
+    payment_reference = graphene.String()
+
+    def resolve_provider(self, info):
+        return self.journal_id.name or None
+
+
+class PaymentTransaction(OdooObjectType):
+    id = graphene.Int()
+    payment = graphene.Field(lambda: Payment)
+    payment_token = graphene.String()
+    amount = graphene.Float()
+    acquirer = graphene.String()
+
+    def resolve_payment(self, info):
+        return self.payment_id or None
+
+    def resolve_payment_token(self, info):
+        return self.payment_token_id.name or None
+
+    def resolve_acquirer(self, info):
+        return self.acquirer_id.name or None
 
 
 class OrderLine(OdooObjectType):
@@ -339,9 +391,10 @@ class Order(OdooObjectType):
     amount_tax = graphene.Float()
     amount_total = graphene.Float()
     currency = graphene.Field(lambda: Currency)
-    order_line = graphene.List(graphene.NonNull(lambda: OrderLine))
+    order_lines = graphene.List(graphene.NonNull(lambda: OrderLine))
     stage = OrderStage()
     order_url = graphene.String()
+    transactions = graphene.List(graphene.NonNull(lambda: PaymentTransaction))
 
     def resolve_partner(self, info):
         return self.partner_id or None
@@ -352,17 +405,17 @@ class Order(OdooObjectType):
     def resolve_partner_invoice(self, info):
         return self.partner_invoice_id or None
 
+    def resolve_date_order(self, info):
+        return self.date_order or None
+
     def resolve_currency(self, info):
         return self.currency_id or None
 
-    def resolve_order_line(self, info):
+    def resolve_order_lines(self, info):
         return self.order_line or None
 
     def resolve_stage(self, info):
         return self.state or None
-
-    def resolve_date_order(self, info):
-        return self.date_order or None
 
     def resolve_order_url(self, info):
         env = info.context["env"]
@@ -371,3 +424,104 @@ class Order(OdooObjectType):
         if url:
             return url
         return None
+
+    def resolve_transactions(self, info):
+        return self.transaction_ids or None
+
+
+class InvoiceLine(OdooObjectType):
+    id = graphene.Int(required=True)
+    name = graphene.String()
+    product = graphene.Field(lambda: Product)
+    quantity = graphene.Float()
+    price_unit = graphene.Float()
+    price_subtotal = graphene.Float()
+    price_total = graphene.Float()
+
+    def resolve_product(self, info):
+        return self.product_id or None
+
+
+class Invoice(OdooObjectType):
+    id = graphene.Int(required=True)
+    name = graphene.String()
+    partner = graphene.Field(lambda: Partner)
+    partner_shipping = graphene.Field(lambda: Partner)
+    invoice_date = graphene.String()
+    invoice_date_due = graphene.String()
+    amount_untaxed = graphene.Float()
+    amount_tax = graphene.Float()
+    amount_total = graphene.Float()
+    amount_residual = graphene.Float()
+    currency = graphene.Field(lambda: Currency)
+    invoice_lines = graphene.List(graphene.NonNull(lambda: InvoiceLine))
+    state = InvoiceState()
+    invoice_url = graphene.String()
+    transactions = graphene.List(graphene.NonNull(lambda: PaymentTransaction))
+
+    def resolve_partner(self, info):
+        return self.partner_id or None
+
+    def resolve_partner_shipping(self, info):
+        return self.partner_shipping_id or None
+
+    def resolve_invoice_date(self, info):
+        return self.invoice_date or None
+
+    def resolve_invoice_date_due(self, info):
+        return self.invoice_date_due or None
+
+    def resolve_currency(self, info):
+        return self.currency_id or None
+
+    def resolve_invoice_lines(self, info):
+        return self.invoice_line_ids or None
+
+    def resolve_state(self, info):
+        return self.state or None
+
+    def resolve_invoice_url(self, info):
+        env = info.context["env"]
+        base_url = env['ir.config_parameter'].sudo().get_param('web.base.url')
+        url = urls.url_join(base_url, self.get_portal_url(report_type='pdf', download=True))
+        if url:
+            return url
+        return None
+
+    def resolve_transactions(self, info):
+        return self.transaction_ids or None
+
+
+class WishlistItem(OdooObjectType):
+    id = graphene.Int(required=True)
+    partner = graphene.Field(lambda: Partner)
+    product = graphene.Field(lambda: Product)
+
+    def resolve_partner(self, info):
+        return self.partner_id or None
+
+    def resolve_product(self, info):
+        return self.product_id or None
+
+
+class PaymentIcon(OdooObjectType):
+    id = graphene.ID()
+    name = graphene.String(required=True)
+    image = graphene.String()
+
+    def resolve_image(self, info):
+        if self.image:
+            env = info.context['env']
+            base_url = env['ir.config_parameter'].sudo().get_param('web.base.url', '')
+            return '{}/web/image/payment.icon/{}/image'.format(base_url, self.id)
+        return None
+
+
+class PaymentAcquirer(OdooObjectType):
+    id = graphene.Int(required=True)
+    name = graphene.String()
+    provider = Provider()
+    payment_icons = graphene.List(graphene.NonNull(lambda: PaymentIcon))
+
+    def resolve_payment_icons(self, info):
+        return self.payment_icon_ids or None

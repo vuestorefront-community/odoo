@@ -14,8 +14,7 @@ def get_search_order(sort):
     for field, val in sort.items():
         if sorting:
             sorting += ', '
-        else:
-            sorting += '%s %s' % (field, val)
+        sorting += '%s %s' % (field, val)
 
     # Add id as last factor so we can consistently get the same results
     if sorting:
@@ -56,7 +55,7 @@ class CategoryQuery(graphene.ObjectType):
         filter=graphene.Argument(CategoryFilterInput, default_value={}),
         current_page=graphene.Int(default_value=1),
         page_size=graphene.Int(default_value=20),
-        search=graphene.String(default_value=''),
+        search=graphene.String(default_value=False),
         sort=graphene.Argument(CategorySortInput, default_value={})
     )
 

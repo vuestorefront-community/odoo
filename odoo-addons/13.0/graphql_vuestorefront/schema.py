@@ -11,8 +11,9 @@ import graphene
 
 from odoo.addons.graphql_base import OdooObjectType
 from odoo.addons.graphql_vuestorefront.schemas import (
-    category, product, order,
-    contact_us, user_profile,
+    category, product, order, invoice,
+    contact_us, user_profile, sign, address,
+    wishlist, shop, payment,
 )
 
 
@@ -21,6 +22,11 @@ class Query(
     category.CategoryQuery,
     product.ProductQuery,
     order.OrderQuery,
+    invoice.InvoiceQuery,
+    address.AddressQuery,
+    shop.ShoppingCartQuery,
+    wishlist.WishlistQuery,
+    payment.PaymentQuery,
 ):
     pass
 
@@ -29,6 +35,11 @@ class Mutation(
     OdooObjectType,
     contact_us.ContactUsMutation,
     user_profile.UserProfileMutation,
+    sign.SignMutation,
+    address.AddressMutation,
+    shop.ShopMutation,
+    wishlist.WishlistMutation,
+    payment.PaymentMutation,
 ):
     pass
 
@@ -37,7 +48,8 @@ class Mutation(
 schema = graphene.Schema(
     query=Query,
     mutation=Mutation,
-    types=[product.ProductList, category.CategoryList, order.OrderList]
+    types=[product.ProductList, category.CategoryList, order.OrderList, invoice.InvoiceList,
+           shop.CartData]
 )
 
 

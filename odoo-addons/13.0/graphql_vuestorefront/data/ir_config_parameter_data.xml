@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="jwt_secret" model="ir.config_parameter">
+        <field name="key">jwt_secret</field>
+        <field name="value">dummy</field>
+    </record>
+
+    <record id="api_reset_password_url" model="ir.config_parameter">
+        <field name="key">api_reset_password_url</field>
+        <field name="value"></field>
+    </record>
+
+</odoo>

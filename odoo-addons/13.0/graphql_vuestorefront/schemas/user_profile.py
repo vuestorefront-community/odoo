@@ -23,8 +23,8 @@ class UpdateMyAccount(graphene.Mutation):
     def mutate(self, info, myaccount):
         env = info.context["env"]
         ResPartner = env['res.partner'].with_context(show_address=1).sudo()
-        if ResPartner:
-            partner = ResPartner.browse(myaccount['id'])
+        partner = ResPartner.search([('id', '=', myaccount['id'])], limit=1)
+        if partner:
             partner.write(myaccount)
         else:
             raise GraphQLError(_('Partner does not exist.'))

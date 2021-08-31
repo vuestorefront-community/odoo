@@ -19,6 +19,8 @@
     ],
     'data': [
         'data/website_data.xml',
+        'data/mail_template.xml',
+        'data/ir_config_parameter_data.xml',
         'data/res_config_settings_data.xml',
     ],
     'demo': [

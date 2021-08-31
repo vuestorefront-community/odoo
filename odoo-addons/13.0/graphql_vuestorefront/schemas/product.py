@@ -33,12 +33,12 @@ def get_search_domain(env, search, **kwargs):
     domain = [('website_published', '=', True)]
 
     # Filter with Category
-    if kwargs.get('category', False):
-        domain += [('public_categ_ids', 'in', kwargs['category'])]
+    if kwargs.get('category_id', False):
+        domain += [('public_categ_ids', 'in', kwargs['category_id'])]
 
     # Filter with Attributes
-    if kwargs.get('attribute', False):
-        domain += [('product_template_attribute_value_ids', 'in', kwargs['attribute'])]
+    if kwargs.get('attribute_id', False):
+        domain += [('product_template_attribute_value_ids', 'in', kwargs['attribute_id'])]
 
     if search:
         for srch in search.split(" "):
@@ -46,15 +46,11 @@ def get_search_domain(env, search, **kwargs):
                        ('default_code', 'like', srch)]
 
     # Product Price Filter
-    if kwargs.get('min_price') and not kwargs.get('max_price'):
+    if kwargs.get('min_price', False):
         domain += [('lst_price', '>=', float(kwargs['min_price']))]
-    elif not kwargs.get('min_price') and kwargs.get('max_price'):
+    if kwargs.get('max_price', False):
         domain += [('lst_price', '<=', float(kwargs['max_price']))]
-    elif kwargs.get('min_price') and kwargs.get('max_price'):
-        domain += [
-            ('lst_price', '>=', float(kwargs['min_price'])),
-            ('lst_price', '<=', float(kwargs['max_price']))
-        ]
+
     return domain
 
 
@@ -83,8 +79,8 @@ class ProductList(graphene.ObjectType):
 
 
 class ProductFilterInput(graphene.InputObjectType):
-    category = graphene.List(graphene.Int)
-    attribute = graphene.List(graphene.Int)
+    category_id = graphene.List(graphene.Int)
+    attribute_id = graphene.List(graphene.Int)
     min_price = graphene.Float()
     max_price = graphene.Float()
 
@@ -105,13 +101,13 @@ class ProductQuery(graphene.ObjectType):
         filter=graphene.Argument(ProductFilterInput, default_value={}),
         current_page=graphene.Int(default_value=1),
         page_size=graphene.Int(default_value=20),
-        search=graphene.String(default_value=''),
+        search=graphene.String(default_value=False),
         sort=graphene.Argument(ProductSortInput, default_value={})
     )
     attribute = graphene.Field(
         Attribute,
         required=True,
-        attribute_id=graphene.Int(),
+        id=graphene.Int(),
     )
 
     @staticmethod
@@ -128,8 +124,8 @@ class ProductQuery(graphene.ObjectType):
         return ProductList(products=products, total_count=total_count)
 
     @staticmethod
-    def resolve_attribute(self, info, attribute_id):
-        attribute = info.context["env"]["product.attribute"].search([('id', '=', attribute_id)], limit=1)
+    def resolve_attribute(self, info, id):
+        attribute = info.context["env"]["product.attribute"].search([('id', '=', id)], limit=1)
         if not attribute:
             raise GraphQLError(_('Attribute does not exist.'))
         return attribute

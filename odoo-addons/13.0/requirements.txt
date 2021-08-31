@@ -1,2 +1,3 @@
 graphene
 graphql-server-core
+pyjwt
