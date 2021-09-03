@@ -13,7 +13,7 @@ import {
   Product
 } from '@vue-storefront/odoo-api/src/types';
 
-const params: UseCartFactoryParams<Cart, SaleOrderLine, Product, Coupon> = {
+const params: UseCartFactoryParams<Cart, SaleOrderLine, Product> = {
   load: async (context: Context, { customQuery }) => {
     const cart = await context.$odoo.api.cartLoad({}, customQuery);
 
@@ -87,7 +87,7 @@ const params: UseCartFactoryParams<Cart, SaleOrderLine, Product, Coupon> = {
 
   removeCoupon: async (
     context: Context,
-    { currentCart, coupon, customQuery }
+    { currentCart, couponCode, customQuery }
   ) => {
     console.log('Mocked: removeCoupon');
     return { updatedCart: currentCart };
@@ -102,4 +102,4 @@ const params: UseCartFactoryParams<Cart, SaleOrderLine, Product, Coupon> = {
   }
 };
 
-export default useCartFactory<Cart, SaleOrderLine, Product, Coupon>(params);
+export default useCartFactory<Cart, SaleOrderLine, Product>(params);
