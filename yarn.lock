@@ -4198,27 +4198,15 @@
     "@typescript-eslint/types" "4.29.1"
     eslint-visitor-keys "^2.0.0"
 
-"@vue-storefront/cache@^2.3.4":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@vue-storefront/cache/-/cache-2.4.0.tgz#4722e8d8099db6765a56766aaf5426ee132e10ca"
-  integrity sha512-OH8xuRGU3MXag7kO87YNoALTA4xuv+PMqYVNlZqHPIQHitX8WsC8Ke2tLrEWGp/8LDfvK3HU9YL+bTduMNApUQ==
+"@vue-storefront/cache@^2.4.0":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@vue-storefront/cache/-/cache-2.4.1.tgz#9579c3f9735333cc2917592681b186e359aba239"
+  integrity sha512-ym6hwhxEELI/0JCT/0MoupPbv33bGjdTT0iKodaQEj9DZ0l4XLP/jAdW7gEVLvl9vwf6qT0nkIH08jVS1P+Ktw==
   dependencies:
     "@nuxtjs/composition-api" "0.17.0"
-    "@vue-storefront/core" "^2.4.0"
+    "@vue-storefront/core" "~2.4.1"
 
-"@vue-storefront/core@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@vue-storefront/core/-/core-2.3.0.tgz#2b0ce0d67201142536d3a2be855ce61653077f77"
-  integrity sha512-UIkPBd+nCszDY2YyRfxPJpW2MC49pOfcHTmwP8SeRA/cewe8u1SZgsol95vHAyThh/2ZIrmEkeCn0gihCVvhPg==
-  dependencies:
-    "@vue/composition-api" "1.0.0-beta.21"
-    axios "0.21.1"
-    express "^4.17.1"
-    is-https "^3.0.2"
-    lodash-es "^4.17.15"
-    vue "^2.6.11"
-
-"@vue-storefront/core@^2.4.0":
+"@vue-storefront/core@2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@vue-storefront/core/-/core-2.4.0.tgz#d721e70ce0b659c0d75a32a11af8c13986632f9a"
   integrity sha512-NlPe2uq+ssDmcLv5PK551e/Uo1uMn8rbBDVg3hOc8M3/y8UFoVVfHB8IqehATnTthJwvYPeBJgwztgW0G/PT2w==
@@ -4230,30 +4218,42 @@
     lodash-es "^4.17.15"
     vue "^2.6.11"
 
-"@vue-storefront/middleware@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@vue-storefront/middleware/-/middleware-2.3.0.tgz#47ebf00ddfdcb17436138d28077c34f92ecc421a"
-  integrity sha512-JjrKuQyCB+GakYW1rKY/a90u3oS+9ZarCCUKwHPqNcxaQucyAIpLK8ZeIEL1+UvirAIt9akkXyHnAHoG1zqwNA==
+"@vue-storefront/core@~2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@vue-storefront/core/-/core-2.4.1.tgz#dcf90b690673823606d8e82387ef9fe74bfd8475"
+  integrity sha512-s30PPMW1oYujZ226tKMkpGYv+s9wOSzozsrzEkFm2r3m2/f5oBh5kcb0mGGVovLucmeSdoGiRmFIvB4FQ+0xXg==
+  dependencies:
+    "@vue/composition-api" "1.0.0-beta.21"
+    axios "0.21.1"
+    express "^4.17.1"
+    is-https "^3.0.2"
+    lodash-es "^4.17.15"
+    vue "^2.6.11"
+
+"@vue-storefront/middleware@2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@vue-storefront/middleware/-/middleware-2.4.0.tgz#ebba34944803b51fa123b6d0082c7a272c787d3d"
+  integrity sha512-RDPYTTxTlMpCKgLhaHb4c/kF39gIZPaWQFZjLuPTsKGcHQoUlHKQoGCMn94To2ApwdGrFNULomqynFa3o9j9LA==
   dependencies:
     consola "2.15.3"
     cookie-parser "^1.4.5"
     cors "^2.8.5"
     express "^4.17.1"
 
-"@vue-storefront/nuxt-theme@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@vue-storefront/nuxt-theme/-/nuxt-theme-2.3.0.tgz#b18523e05b37c3674f6f55d5125cb1239f127d71"
-  integrity sha512-qv6nTF2yLVwjqdCnqskNZ2uTZKaFRgnprFuL7QaYOJrHQXVX2QTzyo2GrqZgv6WUmbqCgsYv1NyTb77U4Ts11Q==
+"@vue-storefront/nuxt-theme@2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@vue-storefront/nuxt-theme/-/nuxt-theme-2.4.0.tgz#0c9f54118d4a5336cfe4de99580ecc55eca4ebb0"
+  integrity sha512-5bRVT73YV+LA8reHQJYWOSvm/nPc2d7uhcDpAb/8EKtYh5Q7BXRg8kRs7d8euZ54dGC+l2bVFLAjRr6D8DYO9A==
   dependencies:
     ejs "^3.0.2"
     lodash.debounce "^4.0.8"
     lodash.merge "^4.6.2"
     vue-lazy-hydration "^2.0.0-beta.4"
 
-"@vue-storefront/nuxt@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@vue-storefront/nuxt/-/nuxt-2.3.0.tgz#ad4fc4ccee07ae65fe37d6d97ed8274a2b2371d9"
-  integrity sha512-9n17/UziwF6WfQ2kF935A81+zcw79nxJ5FzrdNXeqwN7wajblsUaNOesO3x+jTjk8omSUW8NYeOydECTrR4P9Q==
+"@vue-storefront/nuxt@2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@vue-storefront/nuxt/-/nuxt-2.4.0.tgz#64896887ffd605492da0790243b93bc2b017fe28"
+  integrity sha512-Q8vNECGYKiLbzkfTcFiMcK9UY+/n9ClIzB+RaZJ7blaFN86/gn61ToKwFln9p1iJFxNIpjhKauwxtrBf1r3FGg==
   dependencies:
     "@nuxt/typescript-build" "^2.0.0"
     "@nuxtjs/composition-api" "0.17.0"
