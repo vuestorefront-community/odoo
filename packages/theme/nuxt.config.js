@@ -1,4 +1,6 @@
 import webpack from 'webpack';
+import theme from './themeConfig';
+
 export default {
   server: {
     port: 3000,
@@ -78,6 +80,9 @@ export default {
     project-only-end */
     ['@vue-storefront/odoo/nuxt', {}]
   ],
+  publicRuntimeConfig: {
+    theme
+  },
   modules: [
     '@vue-storefront/middleware/nuxt',
     '@nuxtjs/axios',
