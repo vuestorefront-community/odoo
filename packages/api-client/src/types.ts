@@ -45,8 +45,9 @@ export type Category = {
   id: number;
   name: string;
   slug: string;
-  parent: Category[];
+  parentId: Category;
   childs: Category[];
+  products: [Product];
 };
 
 export type CategoryFilterInput = {
