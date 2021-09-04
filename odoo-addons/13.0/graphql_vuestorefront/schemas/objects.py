@@ -10,6 +10,7 @@ from werkzeug import urls
 from odoo.addons.graphql_base import OdooObjectType
 from odoo.addons.http_routing.models.ir_http import slug
 from odoo.exceptions import AccessError
+from odoo.http import request
 
 
 # --------------------- #
@@ -61,6 +62,12 @@ def get_product_pricing_info(env, product):
     website = env['website'].get_current_website()
     pricelist = website.get_current_pricelist()
     return product._get_combination_info_variant(pricelist=pricelist)
+
+
+def product_is_in_wishlist(env, product):
+    website = env['website'].get_current_website()
+    request.website = website
+    return product._is_in_wishlist()
 
 
 # --------------------- #
@@ -141,11 +148,6 @@ class User(OdooObjectType):
 
     def resolve_partner(self, info):
         return self.partner_id or None
-
-
-class UserToken(graphene.ObjectType):
-    user = graphene.Field(User, required=True)
-    token = graphene.String(required=True)
 
 
 class Currency(OdooObjectType):
@@ -231,6 +233,7 @@ class Product(OdooObjectType):
     thumbnail = graphene.String()
     categories = graphene.List(graphene.NonNull(lambda: Category))
     is_in_stock = graphene.Boolean()
+    is_in_wishlist = graphene.Boolean()
     media_gallery = graphene.List(graphene.NonNull(lambda: ProductImage))
     qty = graphene.Float()
     slug = graphene.String()
@@ -315,6 +318,11 @@ class Product(OdooObjectType):
 
     def resolve_is_in_stock(self, info):
         return bool(self.qty_available > 0)
+
+    def resolve_is_in_wishlist(self, info):
+        env = info.context["env"]
+        is_in_wishlist = product_is_in_wishlist(env, self)
+        return bool(is_in_wishlist)
 
     def resolve_media_gallery(self, info):
         return self.product_template_image_ids or None

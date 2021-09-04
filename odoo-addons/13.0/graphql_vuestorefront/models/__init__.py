@@ -4,6 +4,5 @@
 
 from . import website
 from . import product
-from . import ir_http
 from . import res_users
 from . import res_partner

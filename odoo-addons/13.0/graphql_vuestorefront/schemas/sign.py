@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from datetime import datetime, timedelta
 import graphene
 from graphql import GraphQLError
-import jwt
 import odoo
 from odoo import _
 from odoo.http import request
 from odoo.exceptions import UserError
 from odoo.addons.auth_signup.models.res_users import SignupError
-from odoo.addons.graphql_vuestorefront.schemas.objects import User, UserToken
+from odoo.addons.graphql_vuestorefront.schemas.objects import User
 
 
 class Login(graphene.Mutation):
@@ -17,7 +15,7 @@ class Login(graphene.Mutation):
         email = graphene.String(required=True)
         password = graphene.String(required=True)
 
-    Output = UserToken
+    Output = User
 
     @staticmethod
     def mutate(self, info, email, password):
@@ -25,13 +23,7 @@ class Login(graphene.Mutation):
 
         try:
             uid = request.session.authenticate(request.session.db, email, password)
-            payload = {'uid': uid, 'exp': datetime.now() + timedelta(days=30)}
-            jwt_secret = request.env['ir.config_parameter'].sudo().get_param('jwt_secret', '')
-            encoded_jwt = jwt.encode(payload, jwt_secret, algorithm='HS256')
-            # Convert bytes to string if necessary
-            if isinstance(encoded_jwt, bytes):
-                encoded_jwt = encoded_jwt.decode()
-            return UserToken(user=env['res.users'].browse(uid), token=encoded_jwt)
+            return env['res.users'].browse(uid)
         except odoo.exceptions.AccessDenied as e:
             if e.args == odoo.exceptions.AccessDenied().args:
                 raise GraphQLError(_('Wrong email or password.'))

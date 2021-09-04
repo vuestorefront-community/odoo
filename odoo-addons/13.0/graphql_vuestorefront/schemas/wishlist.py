@@ -8,10 +8,18 @@ from odoo import fields
 from odoo.addons.graphql_vuestorefront.schemas.objects import WishlistItem
 
 
+class WishlistItems(graphene.Interface):
+    wishlist_items = graphene.List(WishlistItem)
+
+
+class WishlistData(graphene.ObjectType):
+    class Meta:
+        interfaces = (WishlistItems,)
+
+
 class WishlistQuery(graphene.ObjectType):
-    wishlist_items = graphene.List(
-        graphene.NonNull(WishlistItem),
-        required=True,
+    wishlist_items = graphene.Field(
+        WishlistData,
     )
 
     @staticmethod
@@ -20,36 +28,34 @@ class WishlistQuery(graphene.ObjectType):
         env = info.context['env']
         website = env['website'].get_current_website()
         request.website = website
-        return env['product.wishlist'].with_context(display_default_code=False).current()
+        wishlist_items = env['product.wishlist'].current()
+        return WishlistData(wishlist_items=wishlist_items)
 
 
 class WishlistAddItem(graphene.Mutation):
     class Arguments:
         product_id = graphene.Int(required=True)
 
-    Output = WishlistItem
+    Output = WishlistData
 
     @staticmethod
     def mutate(self, info, product_id):
+        partner_id = request.env.user.partner_id.id
         env = info.context["env"]
+        Wishlist = env['product.wishlist'].sudo()
         website = env['website'].get_current_website()
         request.website = website
+        pricelist = website.get_current_pricelist()
+        product = env['product.product'].search([('id', '=', product_id)])
+        price = product._get_combination_info_variant()['price']
 
-        pricelist_context, pl = self._get_pricelist_context()
-        p = request.env['product.product'].with_context(pricelist_context, display_default_code=False).browse(product_id)
-        price = p._get_combination_info_variant()['price']
-
-        Wishlist = request.env['product.wishlist']
-        if request.website.is_public_user():
-            Wishlist = Wishlist.sudo()
-            partner_id = False
-        else:
-            partner_id = request.env.user.partner_id.id
+        if product._is_in_wishlist():
+            raise GraphQLError('Product is already in the Wishlist.')
 
         wish_id = Wishlist._add_to_wishlist(
-            pl.id,
-            pl.currency_id.id,
-            request.website.id,
+            pricelist.id,
+            pricelist.currency_id.id,
+            website.id,
             price,
             product_id,
             partner_id
@@ -58,8 +64,30 @@ class WishlistAddItem(graphene.Mutation):
         if not partner_id:
             request.session['wishlist_ids'] = request.session.get('wishlist_ids', []) + [wish_id.id]
 
-        return wish_id
+        wishlist_items = env['product.wishlist'].current()
+        return WishlistData(wishlist_items=wishlist_items)
+
+
+class WishlistRemoveItem(graphene.Mutation):
+    class Arguments:
+       wish_id = graphene.Int(required=True)
+
+    Output = WishlistData
+
+    @staticmethod
+    def mutate(self, info, wish_id):
+        env = info.context['env']
+
+        wish_id = env['product.wishlist'].search([('id', '=', wish_id)], limit=1)
+        wish_id.unlink()
+
+        website = env['website'].get_current_website()
+        request.website = website
+        wishlist_items = env['product.wishlist'].current()
+
+        return WishlistData(wishlist_items=wishlist_items)
 
 
 class WishlistMutation(graphene.ObjectType):
     wishlist_add_item = WishlistAddItem.Field(description="Add Item")
+    wishlist_remove_item = WishlistRemoveItem.Field(description="Remove Item")
