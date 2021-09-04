@@ -2,31 +2,50 @@ import gql from 'graphql-tag';
 
 export default gql`
   query {
-    userShoppingCart{
-      name
-      amountTotal
-      amountDelivery
-      shippingMethod{
-        id
-      }
-      websiteOrderLine {
-        id
-        product {
-          id, 
-          name,
-          image
-          listPrice 
+    cart {
+      order {
+        name
+        amountTotal
+        amountTax
+        orderLines {
+          id
+          product {
+            id
+            name
+            image
+          }
+          quantity
+          priceTotal
         }
-        productUomQty
-        priceTotal
-      },
-      partnerInvoice{
-        id, name, street, city,phone,zip, country{id},state{id}
-      },
-      partnerShipping{
-        id, name, street, city,phone,zip, country{id},state{id}
+        partnerInvoice {
+          id
+          name
+          street
+          city
+          phone
+          zip
+          country {
+            id
+          }
+          state {
+            id
+          }
+        }
+        partnerShipping {
+          id
+          name
+          street
+          city
+          phone
+          zip
+          country {
+            id
+          }
+          state {
+            id
+          }
+        }
       }
     }
   }
 `;
-

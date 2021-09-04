@@ -17,5 +17,5 @@ export default async function cartLoad(
     query
   });
 
-  return response;
+  return response.data;
 }

@@ -11,11 +11,9 @@ import { Cart, OrderLine, Product } from '@vue-storefront/odoo-api/src/types';
 
 const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
   load: async (context: Context, { customQuery }) => {
-    const cart = await context.$odoo.api.cartLoad({}, customQuery);
+    const cart: Cart = await context.$odoo.api.cartLoad({}, customQuery);
 
-    return cart.data.userShoppingCart.length > 0
-      ? cart.data.userShoppingCart[0]
-      : [];
+    return cart;
   },
 
   addItem: async (
