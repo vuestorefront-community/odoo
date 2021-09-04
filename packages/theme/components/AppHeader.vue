@@ -218,7 +218,7 @@ export default {
 
       await Promise.all([
         searchProductApi({ term: term.value }),
-        searchCategoryApi({ topCategory: false, term: term.value })
+        searchCategoryApi({ filter: { parent: false }, search: term.value })
       ]);
       result.value = {
         products: products.value,
@@ -258,7 +258,7 @@ export default {
     );
 
     onSSR(async () => {
-      await searchTopCategoryApi({ topCategory: true });
+      await searchTopCategoryApi({ filter: { parent: true }});
 
     });
 
