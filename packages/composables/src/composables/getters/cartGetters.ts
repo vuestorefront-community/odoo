@@ -9,8 +9,8 @@ import {
 } from '@vue-storefront/core';
 import {
   Product,
-  SaleOrderLine,
-  SaleOrder as Cart,
+  OrderLine,
+  Cart,
   LineItem
 } from '@vue-storefront/odoo-api/src/types';
 
@@ -19,31 +19,29 @@ function roundDecimal(num) {
   return (Math.round(m) / 100) * Math.sign(num);
 }
 
-export const getCartItems = (cart: Cart): SaleOrderLine[] => {
-  if (!cart || !cart.websiteOrderLine) {
+export const getCartItems = (cart: Cart): OrderLine[] => {
+  if (!cart || !cart.orderLines) {
     return [];
   }
 
-  return cart.websiteOrderLine;
+  return cart.orderLines;
 };
 
-export const getCartItemName = (saleOrderLine: SaleOrderLine): string =>
-  saleOrderLine?.product.name || 'Product\'s name';
+export const getCartItemName = (orderLine: OrderLine): string =>
+  orderLine?.product.name || 'Product\'s name';
 
-export const getCartItemImage = (saleOrderLine: SaleOrderLine): string =>
-  saleOrderLine?.product?.image;
+export const getCartItemImage = (orderLine: OrderLine): string =>
+  orderLine?.product?.image;
 
-export const getCartItemPrice = (
-  saleOrderLine: SaleOrderLine
-): AgnosticPrice => {
+export const getCartItemPrice = (orderLine: OrderLine): AgnosticPrice => {
   return {
-    regular: saleOrderLine?.product?.listPrice || 12,
-    special: saleOrderLine?.product?.listPrice || 10
+    regular: orderLine?.product?.listPrice || 12,
+    special: orderLine?.product?.listPrice || 10
   };
 };
 
-export const getCartItemQty = (saleOrderLine: SaleOrderLine): number =>
-  saleOrderLine.productUomQty;
+export const getCartItemQty = (orderLine: OrderLine): number =>
+  orderLine.quantity;
 
 export const getCartItemAttributes = (
   product: Product,
@@ -59,14 +57,14 @@ export const getCartItemSku = (product: Product): string =>
 export const getCartTotals = (cart: Cart): AgnosticTotals => {
   return {
     total: cart?.amountTotal || 0,
-    subtotal: roundDecimal(cart?.amountTotal - cart?.amountDelivery) || 0
+    subtotal: roundDecimal(cart?.amountTotal - cart?.orderLines.length) || 0
   };
 };
 
 export const getCartShippingPrice = (cart: Cart): number => 0;
 
 export const getCartTotalItems = (cart: Cart): number =>
-  cart?.websiteOrderLine?.length || 0;
+  cart?.orderLines?.length || 0;
 
 export const getFormattedPrice = (price: number): string => String(price);
 
