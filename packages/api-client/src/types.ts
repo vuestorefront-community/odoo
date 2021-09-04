@@ -5,6 +5,20 @@ export enum SortEnum {
   DESC
 }
 
+export enum OrderStage {
+  Quotation,
+  QuotationSent,
+  SalesOrder,
+  Locked,
+  Cancelled
+}
+
+export declare type Currency = {
+  id: number;
+  name: string;
+  symbol: string;
+};
+
 export declare type Address = {
   city: string;
   countryId: number;
@@ -141,12 +155,48 @@ export type ProductVariant = {
   attribute_value_html_color: any;
   attribute_value_price_extra: number;
 };
-export type SaleOrderLine = {
+export type OrderLine = {
   id: number;
   name?: string;
   product?: Product;
-  productUomQty?: number;
+  quantity?: number;
   priceTotal?: number;
+  priceUnit?: number;
+  priceSubtotal?: number;
+  priceTax?: number;
+};
+
+export type Payment = {
+  id: number;
+  name: string;
+  provider: string;
+  amount: number;
+  paymentReference: string;
+};
+
+export type PaymentTransaction = {
+  id: number;
+  payment: Payment;
+  paymentToken: string;
+  amount: number;
+  acquirer: string;
+};
+
+export type Cart = {
+  id: number;
+  name: string;
+  partner?: Partner;
+  partnerShipping?: Partner;
+  partnerInvoice?: Partner;
+  dateOrder?: Date;
+  amountUntaxed: number;
+  amountTax: number;
+  amountTotal: number;
+  currency: Currency;
+  orderLines?: OrderLine[];
+  stage: OrderStage;
+  orderUrl: string;
+  transactions: [PaymentTransaction];
 };
 
 export type Pagination = {
@@ -155,23 +205,6 @@ export type Pagination = {
   sort?: string;
 };
 
-export type SaleOrder = {
-  id: number;
-  name: string;
-  origin?: string;
-  clientOrderRef?: string;
-  state?: string;
-  dateOrder?: Date;
-  validityDate?: Date;
-  shippingMethod?: ShippingMethod;
-  websiteOrderLine?: SaleOrderLine[];
-  invoiceStatus?: string;
-  amountDelivery: number;
-  amountTotal: number;
-  currencyRate?: string;
-  partnerInvoice?: Partner;
-  partnerShipping?: Partner;
-};
 export type CategoryFilter = Record<string, unknown>;
 export type LineItem = Record<string, unknown>;
 
