@@ -7,13 +7,9 @@ import {
   UseCartFactoryParams
 } from '@vue-storefront/core';
 import { Coupon } from '../types';
-import {
-  SaleOrder as Cart,
-  SaleOrderLine,
-  Product
-} from '@vue-storefront/odoo-api/src/types';
+import { Cart, OrderLine, Product } from '@vue-storefront/odoo-api/src/types';
 
-const params: UseCartFactoryParams<Cart, SaleOrderLine, Product> = {
+const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
   load: async (context: Context, { customQuery }) => {
     const cart = await context.$odoo.api.cartLoad({}, customQuery);
 
@@ -46,10 +42,10 @@ const params: UseCartFactoryParams<Cart, SaleOrderLine, Product> = {
 
   removeItem: async (
     context: Context,
-    { currentCart, product: saleOrderLine, customQuery }
+    { currentCart, product: orderLine, customQuery }
   ) => {
     await context.$odoo.api.cartRemoveItem(
-      { productId: saleOrderLine.product.id },
+      { productId: orderLine.product.id },
       customQuery
     );
 
@@ -60,10 +56,10 @@ const params: UseCartFactoryParams<Cart, SaleOrderLine, Product> = {
 
   updateItemQty: async (
     context: Context,
-    { currentCart, product: saleOrderLine, quantity, customQuery }
+    { currentCart, product: orderLine, quantity, customQuery }
   ) => {
     await context.$odoo.api.cartUpdateItemQty(
-      { productId: saleOrderLine.product.id, quantity },
+      { productId: orderLine.product.id, quantity },
       customQuery
     );
 
@@ -95,11 +91,11 @@ const params: UseCartFactoryParams<Cart, SaleOrderLine, Product> = {
 
   isInCart: (context: Context, { currentCart, product }) => {
     return (
-      currentCart?.websiteOrderLine?.some(
+      currentCart?.orderLines?.some(
         (item) => item.product.id === product.first_variant_id
       ) || false
     );
   }
 };
 
-export default useCartFactory<Cart, SaleOrderLine, Product>(params);
+export default useCartFactory<Cart, OrderLine, Product>(params);
