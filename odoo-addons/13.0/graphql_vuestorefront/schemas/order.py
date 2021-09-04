@@ -6,7 +6,7 @@ from odoo.http import request
 from odoo import _
 
 from odoo.addons.graphql_vuestorefront.schemas.objects import (
-    SortEnum, Order,
+    SortEnum, Order, ShippingMethod,
     get_document_with_check_access,
     get_document_count_with_check_access
 )
@@ -57,6 +57,9 @@ class OrderQuery(graphene.ObjectType):
         page_size=graphene.Int(default_value=10),
         sort=graphene.Argument(OrderSortInput, default_value={})
     )
+    delivery_methods = graphene.List(
+        graphene.NonNull(ShippingMethod)
+    )
 
     @staticmethod
     def resolve_order(self, info, id):
@@ -89,3 +92,12 @@ class OrderQuery(graphene.ObjectType):
                                                 error_msg='Sale Order does not exist.')
         total_count = get_document_count_with_check_access(SaleOrder, domain)
         return OrderList(orders=orders, total_count=total_count)
+
+    @staticmethod
+    def resolve_delivery_methods(self, info):
+        """ Get all shipping/delivery methods """
+        env = info.context['env']
+        website = env['website'].get_current_website()
+        request.website = website
+        order = website.sale_get_order()
+        return order._get_delivery_methods()

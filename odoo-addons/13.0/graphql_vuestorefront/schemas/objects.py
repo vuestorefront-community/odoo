@@ -388,6 +388,15 @@ class OrderLine(OdooObjectType):
         return self.product_uom_qty or None
 
 
+class ShippingMethod(OdooObjectType):
+    id = graphene.Int(required=True)
+    name = graphene.String()
+    price = graphene.Float()
+
+    def resolve_price(self, info):
+        return self.fixed_price or None
+
+
 class Order(OdooObjectType):
     id = graphene.Int(required=True)
     name = graphene.String()
@@ -398,6 +407,9 @@ class Order(OdooObjectType):
     amount_untaxed = graphene.Float()
     amount_tax = graphene.Float()
     amount_total = graphene.Float()
+    amount_delivery = graphene.Float()
+    currency_rate = graphene.String()
+    shipping_method = graphene.Field(lambda: ShippingMethod)
     currency = graphene.Field(lambda: Currency)
     order_lines = graphene.List(graphene.NonNull(lambda: OrderLine))
     stage = OrderStage()
@@ -415,6 +427,9 @@ class Order(OdooObjectType):
 
     def resolve_date_order(self, info):
         return self.date_order or None
+
+    def resolve_shipping_method(self, info):
+        return self.carrier_id or None
 
     def resolve_currency(self, info):
         return self.currency_id or None
