@@ -28,7 +28,7 @@
   "rules": {
     "eqeqeq": 2,
     "no-use-before-define": [
-      2,
+      1,
       {
         "functions": false
       }
