@@ -1,5 +1,10 @@
 /* eslint-disable camelcase */
 
+export enum SortEnum {
+  ASC,
+  DESC
+}
+
 export declare type Address = {
   city: string;
   countryId: number;
@@ -28,6 +33,28 @@ export type Category = {
   slug: string;
   parent: Category[];
   childs: Category[];
+};
+
+export type CategoryFilterInput = {
+  id: number;
+  parent: boolean;
+};
+
+export type CategorySortInput = {
+  id: SortEnum;
+};
+
+export type GraphQlGetCategoryParams = {
+  filter: CategoryFilterInput;
+  currentPage: number;
+  pageSize: number;
+  search: string;
+  sort: CategorySortInput;
+};
+
+export type CategoryResult = {
+  categories: [Category];
+  totalCount: number;
 };
 
 export type Product = {
@@ -187,15 +214,6 @@ export type GraphQlGetAllCountryStatesParams = {
   countryId: string;
   limit: number;
   offset: number;
-};
-
-export type GraphQlGetCategoryParams = {
-  id: number;
-  name: string;
-  limit: number;
-  offset: number;
-  topCategory: boolean;
-  token: string;
 };
 
 export type GraphQlGetProductTemplateParams = {
