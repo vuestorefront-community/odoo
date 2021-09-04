@@ -5,7 +5,7 @@ const itemToTree = (category: Category): AgnosticCategoryTree => {
   return {
     label: category.name,
     slug: category.slug,
-    parent: category.parent,
+    parent: category.parentId,
     items: [],
     isCurrent: false,
     id: category.id

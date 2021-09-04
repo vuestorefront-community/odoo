@@ -8,7 +8,7 @@ import {
   AgnosticFacet,
   AgnosticBreadcrumb
 } from '@vue-storefront/core';
-import { Product } from '@vue-storefront/odoo-api/src/types';
+import { Category, Product } from '@vue-storefront/odoo-api/src/types';
 import { SearchData } from '../types';
 
 const getAll = (
@@ -64,10 +64,10 @@ const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
   if (!searchData.data) {
     return [] as any;
   }
-  const categories = searchData.data.categories;
+  const categories: Category[] = searchData.data.categories;
 
-  const categoriesWithParents = categories.filter((item) => item.parent);
-  const parents = categoriesWithParents.map((item) => item.parent).flat();
+  const categoriesWithParents = categories.filter((item) => item.parentId);
+  const parents = categoriesWithParents.map((item) => item.parentId).flat();
   const currentParentSelected = parents.find(
     (item) => item.slug === searchData.input.term
   );
@@ -77,12 +77,12 @@ const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
   }
 
   const uniqueParents = categoriesWithParents.filter((item) => {
-    return item.parent[0].id === currentParentSelected.id;
+    return item.parentId.id === currentParentSelected.id;
   });
 
   uniqueParents.forEach((parent) => {
     parent.childs = categoriesWithParents.filter(
-      (item) => item.parent[0].id === parent.id
+      (item) => item.parentId.id === parent.id
     );
   });
 
@@ -121,7 +121,7 @@ const getBreadcrumbsByProduct = (product: Product): AgnosticBreadcrumb[] => {
     return [];
   }
   const topCategoryParentId =
-    category.parent === null ? category.id : category.parent[0]?.parent[0]?.id;
+    category.parentId === null ? category.id : category.parentId?.parentId?.id;
   const splited = category.slug?.split('-');
   breadcrumbs.push({
     text: splited[0],
