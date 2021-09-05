@@ -6,14 +6,13 @@ import {
   useCartFactory,
   UseCartFactoryParams
 } from '@vue-storefront/core';
-import { Coupon } from '../types';
 import { Cart, OrderLine, Product } from '@vue-storefront/odoo-api/src/types';
 
 const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
   load: async (context: Context, { customQuery }) => {
-    const cart: Cart = await context.$odoo.api.cartLoad({}, customQuery);
+    const cart = await context.$odoo.api.cartLoad({}, customQuery);
 
-    return cart;
+    return cart.cart;
   },
 
   addItem: async (
@@ -89,7 +88,7 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
 
   isInCart: (context: Context, { currentCart, product }) => {
     return (
-      currentCart?.orderLines?.some(
+      currentCart?.order?.orderLines?.some(
         (item) => item.product.id === product.first_variant_id
       ) || false
     );

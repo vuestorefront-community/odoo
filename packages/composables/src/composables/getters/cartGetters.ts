@@ -20,11 +20,11 @@ function roundDecimal(num) {
 }
 
 export const getCartItems = (cart: Cart): OrderLine[] => {
-  if (!cart || !cart.orderLines) {
+  if (!cart || !cart?.order?.orderLines) {
     return [];
   }
 
-  return cart.orderLines;
+  return cart?.order?.orderLines;
 };
 
 export const getCartItemName = (orderLine: OrderLine): string =>
@@ -56,15 +56,16 @@ export const getCartItemSku = (product: Product): string =>
 
 export const getCartTotals = (cart: Cart): AgnosticTotals => {
   return {
-    total: cart?.amountTotal || 0,
-    subtotal: roundDecimal(cart?.amountTotal - cart?.orderLines.length) || 0
+    total: cart.order?.amountTotal || 0,
+    subtotal:
+      roundDecimal(cart.order?.amountTotal - cart.order?.orderLines.length) || 0
   };
 };
 
 export const getCartShippingPrice = (cart: Cart): number => 0;
 
 export const getCartTotalItems = (cart: Cart): number =>
-  cart?.orderLines?.length || 0;
+  cart?.order?.orderLines?.length || 0;
 
 export const getFormattedPrice = (price: number): string => String(price);
 

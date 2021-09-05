@@ -12,8 +12,9 @@ export const getShippingMethodDescription = (
   shippingMethod: ShippingMethod
 ): string => '';
 
-export const getShippingMethodPrice = (cart: Cart): number =>
-  cart.amountTax || 0;
+export const getShippingMethodPrice = (
+  shippingMethod: ShippingMethod
+): number => shippingMethod.price || 0;
 
 export const getFormattedPrice = (price: number): string => String(price);
 

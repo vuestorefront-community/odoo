@@ -2,6 +2,7 @@
 import { ref } from '@vue/composition-api';
 import { useVSFContext } from '@vue-storefront/core';
 import { Context } from '@vue-storefront/core';
+import { Cart } from '@vue-storefront/odoo-api/src/types';
 
 const useShipping = (): any => {
   const context: Context = useVSFContext();
@@ -29,22 +30,23 @@ const useShipping = (): any => {
       return shippingAddress;
     }
 
-    const cart = await context.$odoo.api.cartLoad({}, {});
-    if (cart.data.userShoppingCart.length > 0) {
-      const realCart = cart.data.userShoppingCart[0];
+    const cart: Cart = await context.$odoo.api.cartLoad({}, {});
+    // @todo add shippingmethod add after added to graphql
+    if (cart.order?.orderLines?.length > 0) {
       shippingAddress.value = {
-        streetName: realCart.partnerShipping.street,
+        streetName: cart.order.partnerShipping.street,
         apartment: '',
-        postalCode: realCart.partnerShipping.zip,
-        phone: realCart.partnerShipping.phone,
+        postalCode: cart.order.partnerShipping.zip,
+        phone: cart.order.partnerShipping.phone,
         firstName:
-          realCart.partnerShipping.name === 'Public user'
+          cart.order.partnerShipping.name === 'Public user'
             ? ''
-            : realCart.partnerShipping.name,
-        city: realCart.partnerShipping.city,
-        country: realCart.partnerShipping.country?.id,
-        state: realCart.partnerShipping.state?.id,
-        selectedMethodShipping: realCart.shippingMethod?.id
+            : cart.order.partnerShipping.name,
+        city: cart.order.partnerShipping.city,
+        country: cart.order.partnerShipping.country?.id,
+        state: cart.order.partnerShipping.state?.id,
+        // cart.shippingMethod?.id
+        selectedMethodShipping: 1
       };
     }
 
