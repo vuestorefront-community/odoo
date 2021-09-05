@@ -127,6 +127,7 @@ export type State = {
 export type ShippingMethod = {
   id: number;
   name: string;
+  price: number;
 };
 export type Country = {
   id: number;
@@ -182,8 +183,7 @@ export type PaymentTransaction = {
   amount: number;
   acquirer: string;
 };
-
-export type Cart = {
+export type Order = {
   id: number;
   name: string;
   partner?: Partner;
@@ -198,6 +198,10 @@ export type Cart = {
   stage: OrderStage;
   orderUrl: string;
   transactions: [PaymentTransaction];
+}
+
+export type Cart = {
+  order: Order
 };
 
 export type Pagination = {
