@@ -37,8 +37,8 @@ export declare type ShippingInfo = Record<string, string>;
 export type Attribute = {
   id: number;
   name: string;
-  displayName: string;
-  values: any;
+  attributeId: number;
+  attributeName: string;
 };
 
 export type Category = {
@@ -72,23 +72,38 @@ export type CategoryResult = {
   totalCount: number;
 };
 
+export type ProductImage = {
+  id: number;
+  name: string;
+  image: string;
+  video: string;
+};
+
 export type Product = {
   id: number;
   description: string;
-  categoriesRef: string[];
-  defaultCode: string;
   name: string;
   slug: string;
+  isInStock: boolean;
+  qty: number;
   sku: string;
   image: string;
+  smallImage: string;
+  mediaGallery: [ProductImage];
   price: number;
+  weight: number;
+  priceAfterDiscount: number;
+  hasDiscountedPrice: number;
   listPrice: number;
   realProduct: any;
   firstVariantId: number;
   first_variant_id: number;
-  attributes: Attribute[];
+  currency: Currency;
+  alternativeProducts: [Product];
+  accessoryProducts: [Product];
+  attributeValues: Attribute[];
   productTemplate: Product;
-  ecommerceCategories: Category[];
+  categories: [Category];
 };
 
 export declare type WishlistItem = {
@@ -198,10 +213,10 @@ export type Order = {
   stage: OrderStage;
   orderUrl: string;
   transactions: [PaymentTransaction];
-}
+};
 
 export type Cart = {
-  order: Order
+  order: Order;
 };
 
 export type Pagination = {
