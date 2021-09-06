@@ -2,28 +2,14 @@ import gql from 'graphql-tag';
 
 export default gql`
   query {
-      allWishlistItems {
+    wishlistItems {
+      product {
         id
+        name
+        description
+        image
         price
-        currency {
-          id
-          name
-        }
-       
-        product {
-          id
-          name
-          description
-          image
-          listPrice,
-          productTemplate {
-            id, slug
-          },
-          attributes {
-            id,name,
-          }
-        }
       }
     }
+  }
 `;
-

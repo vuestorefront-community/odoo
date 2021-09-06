@@ -16,5 +16,5 @@ export default async function wishlistLoad(
     query
   });
 
-  return response;
+  return response.data;
 }

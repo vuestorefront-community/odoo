@@ -113,7 +113,9 @@ export declare type WishlistItem = {
   price: number;
 };
 
-export declare type Wishlist = WishlistItem[];
+export declare type Wishlist = {
+  wishlistItems?: [WishlistItem]
+};
 
 export type AgnosticUser = {
   email: string;
