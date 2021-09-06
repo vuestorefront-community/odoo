@@ -24,20 +24,21 @@ const getGrouped = (
 ): AgnosticGroupedFacet[] => {
   if (!searchData?.data?.attributes) return [];
 
-  const formatedAttribute = searchData?.data?.attributes.map((attribute) => ({
-    id: String(attribute.id),
-    label: attribute.name,
-    count: 0,
-    options: attribute.values.map((value) => ({
-      type: '',
-      id: String(value.search),
-      value: value.id,
-      label: value.name,
-      metadata: value.search
-    }))
-  }));
+  // @todo update to new types
+  // const formatedAttribute = searchData?.data?.attributes.map((attribute) => ({
+  //   id: String(attribute.id),
+  //   label: attribute.name,
+  //   count: 0,
+  //   options: attribute.values.map((value) => ({
+  //     type: '',
+  //     id: String(value.search),
+  //     value: value.id,
+  //     label: value.name,
+  //     metadata: value.search
+  //   }))
+  // }));
 
-  return formatedAttribute;
+  return [];
 };
 
 const getSortOptions = (searchData: SearchData): AgnosticSort => ({
@@ -112,9 +113,7 @@ const getPagination = (searchData: SearchData): AgnosticPagination => {
 };
 
 const getBreadcrumbsByProduct = (product: Product): AgnosticBreadcrumb[] => {
-  const category = product.ecommerceCategories?.find(
-    (cat) => cat.name !== 'All'
-  );
+  const category = product.categories?.find((cat) => cat.name !== 'All');
   const breadcrumbs = [{ text: 'Home', link: '/' }];
 
   if (!category) {

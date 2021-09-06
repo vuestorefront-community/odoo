@@ -20,10 +20,9 @@ export const getProductName = (product: Product): string =>
   product?.name || 'Product\'s name';
 
 export const getProductProperties = (product: Product): Attribute[] =>
-  product?.attributes || [];
+  product?.attributeValues || [];
 
-export const getProductCode = (product: Product): string =>
-  product?.defaultCode || '';
+export const getProductCode = (product: Product): string => product?.sku || '';
 
 export const getProductSlug = (product: Product): string => product.slug;
 

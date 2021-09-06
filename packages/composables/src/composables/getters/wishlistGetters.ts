@@ -12,12 +12,8 @@ import {
 } from '@vue-storefront/odoo-api/src/types';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getWishlistItems = (wishlist: Wishlist): Wishlist => {
-  if (!wishlist) {
-    return [];
-  }
-
-  return wishlist;
+export const getWishlistItems = (wishlist: Wishlist): WishlistItem[] => {
+  return wishlist.wishlistItems;
 };
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getWishlistItemName = (wishlistItem: WishlistItem): string =>
@@ -52,7 +48,7 @@ export const getWishlistItemSku = (product: WishlistItem): string =>
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getWishlistTotals = (wishlist: Wishlist): AgnosticTotals => {
-  const total = wishlist.reduce(
+  const total = wishlist?.wishlistItems?.reduce(
     (accumlated, current) => accumlated + current.price,
     0
   );
@@ -67,7 +63,7 @@ export const getWishlistShippingPrice = (wishlist: Wishlist): number => 0;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getWishlistTotalItems = (wishlist: Wishlist): number =>
-  wishlist?.length;
+  wishlist?.wishlistItems?.length;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getFormattedPrice = (price: number): string => String(price);
