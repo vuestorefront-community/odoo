@@ -159,11 +159,11 @@ class Currency(OdooObjectType):
 class Category(OdooObjectType):
     id = graphene.Int(required=True)
     name = graphene.String()
-    parent_id = graphene.Field(lambda: Category)
+    parent = graphene.Field(lambda: Category)
     slug = graphene.String()
     products = graphene.List(graphene.NonNull(lambda: Product))
 
-    def resolve_parent_id(self, info):
+    def resolve_parent(self, info):
         return self.parent_id or None
 
     def resolve_slug(self, info):
