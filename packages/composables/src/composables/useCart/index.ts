@@ -9,6 +9,7 @@ import {
 import {
   Cart,
   GraphQlCartAddItemParams,
+  GraphQlCartRemoveItemParams,
   OrderLine,
   Product
 } from '@vue-storefront/odoo-api/src/types';
@@ -50,16 +51,17 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
 
   removeItem: async (
     context: Context,
-    { currentCart, product: orderLine, customQuery }
+    { currentCart, product, customQuery }
   ) => {
-    await context.$odoo.api.cartRemoveItem(
-      { productId: orderLine.product.id },
+    const addItemParams: GraphQlCartRemoveItemParams = {
+      lineId: product.id
+    };
+    const cart = await context.$odoo.api.cartRemoveItem(
+      addItemParams,
       customQuery
     );
 
-    const cart = params.load(context, {});
-
-    return cart;
+    return cart.cartRemoveItem;
   },
 
   updateItemQty: async (
