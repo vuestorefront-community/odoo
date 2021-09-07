@@ -45,7 +45,7 @@ export type Category = {
   id: number;
   name: string;
   slug: string;
-  parentId: Category;
+  parent: Category;
   childs: Category[];
   products: [Product];
 };
@@ -114,7 +114,7 @@ export declare type WishlistItem = {
 };
 
 export declare type Wishlist = {
-  wishlistItems?: [WishlistItem]
+  wishlistItems?: [WishlistItem];
 };
 
 export type AgnosticUser = {
