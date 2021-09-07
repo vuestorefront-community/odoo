@@ -6,7 +6,12 @@ import {
   useCartFactory,
   UseCartFactoryParams
 } from '@vue-storefront/core';
-import { Cart, OrderLine, Product } from '@vue-storefront/odoo-api/src/types';
+import {
+  Cart,
+  GraphQlCartAddItemParams,
+  OrderLine,
+  Product
+} from '@vue-storefront/odoo-api/src/types';
 
 const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
   load: async (context: Context, { customQuery }) => {
@@ -28,10 +33,16 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
     }
 
     if (!params.isInCart(context, { currentCart, product })) {
-      await context.$odoo.api.cartAddItem({ productId, quantity }, customQuery);
-      const cart = params.load(context, {});
+      const addItemParams: GraphQlCartAddItemParams = {
+        productId,
+        quantity
+      };
+      const cart = await context.$odoo.api.cartAddItem(
+        addItemParams,
+        customQuery
+      );
 
-      return cart;
+      return cart.cartAddItem;
     }
 
     return currentCart;

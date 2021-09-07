@@ -67,8 +67,8 @@ const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
   }
   const categories: Category[] = searchData.data.categories;
 
-  const categoriesWithParents = categories.filter((item) => item.parentId);
-  const parents = categoriesWithParents.map((item) => item.parentId).flat();
+  const categoriesWithParents = categories.filter((item) => item.parent);
+  const parents = categoriesWithParents.map((item) => item.parent).flat();
   const currentParentSelected = parents.find(
     (item) => item.slug === searchData.input.term
   );
@@ -78,12 +78,12 @@ const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
   }
 
   const uniqueParents = categoriesWithParents.filter((item) => {
-    return item.parentId.id === currentParentSelected.id;
+    return item.parent.id === currentParentSelected.id;
   });
 
   uniqueParents.forEach((parent) => {
     parent.childs = categoriesWithParents.filter(
-      (item) => item.parentId.id === parent.id
+      (item) => item.parent.id === parent.id
     );
   });
 
@@ -119,12 +119,12 @@ const getBreadcrumbsByProduct = (product: Product): AgnosticBreadcrumb[] => {
   if (!category) {
     return [];
   }
-  const topCategoryParentId =
-    category.parentId === null ? category.id : category.parentId?.parentId?.id;
+  const topCategoryParent =
+    category.parent === null ? category.id : category.parent?.parent?.id;
   const splited = category.slug?.split('-');
   breadcrumbs.push({
     text: splited[0],
-    link: `/c/${splited[0]}/${topCategoryParentId}`
+    link: `/c/${splited[0]}/${topCategoryParent}`
   });
   breadcrumbs.push({ text: splited[1], link: '' });
 
