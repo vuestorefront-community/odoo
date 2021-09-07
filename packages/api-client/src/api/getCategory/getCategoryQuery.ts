@@ -19,11 +19,11 @@ export default gql`
         id
         name
         slug
-        parentId {
+        parent {
           id
           name
           slug
-          parentId {
+          parent {
             id
           }
         }
