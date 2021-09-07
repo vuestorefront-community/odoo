@@ -24,7 +24,7 @@ export const getProductProperties = (product: Product): Attribute[] =>
 
 export const getProductCode = (product: Product): string => product?.sku || '';
 
-export const getProductSlug = (product: Product): string => product.slug;
+export const getProductSlug = (product: Product): string => product?.slug || '';
 
 export const getProductPrice = (product: Product): AgnosticPrice => {
   return {
