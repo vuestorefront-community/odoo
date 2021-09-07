@@ -1,24 +1,21 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context, CustomQuery } from '@vue-storefront/core';
+import ApolloClient from 'apollo-client';
 import { FetchResult } from 'apollo-link/lib/types';
-import gql from 'graphql-tag';
 import { GraphQlCartRemoveItemParams } from '../../types';
+import mutation from './cartRemoveItemMutation';
 
 export default async function cartRemoveItem(
   context: Context,
   params: GraphQlCartRemoveItemParams,
   customQuery?: CustomQuery
 ): Promise<FetchResult> {
-  const response = await context.client.axios.post('/shop/cart/update_json', {
-    withCredentials: true,
-    jsonrpc: '2.0',
-    method: 'call',
-    params: {
-      product_id: Number.parseInt(params.productId),
-      set_qty: 0
-    }
+  const apolloClient = context.client.apollo as ApolloClient<any>;
+  const response = await apolloClient.mutate({
+    mutation,
+    variables: params
   });
 
-  return response;
+  return response.data;
 }

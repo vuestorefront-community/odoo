@@ -243,7 +243,7 @@ export type GraphQlGetProductVariants = {
 };
 
 export type GraphQlCartRemoveItemParams = {
-  productId: string;
+  lineId: number;
 };
 
 export type GraphQlGetProductParams = {
