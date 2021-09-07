@@ -17,5 +17,5 @@ export default async function cartAddItem(
     variables: params
   });
 
-  return response;
+  return response.data;
 }
