@@ -9,22 +9,28 @@ import {
 import {
   Wishlist,
   WishlistItem,
-  Product
+  Product,
+  GraphQlWishlistAddItem
 } from '@vue-storefront/odoo-api/src/types';
 
 const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
   load: async (context: Context) => {
-    const wishlist: Wishlist = await context.$odoo.api.wishlistLoad();
+    const wishlist = await context.$odoo.api.wishlistLoad();
 
-    return wishlist;
+    return wishlist.wishlistItems;
   },
 
   addItem: async (context: Context, { currentWishlist, product }) => {
     if (!params.isInWishlist(context, { currentWishlist, product })) {
-      await context.$odoo.api.wishlistAddItem(product);
-      const wishlist = params.load(context, {});
+      const addWishlistItemParams: GraphQlWishlistAddItem = {
+        productId: product.first_variant_id
+      };
 
-      return wishlist;
+      const wishlist = await context.$odoo.api.wishlistAddItem(
+        addWishlistItemParams
+      );
+
+      return wishlist.wishlistAddItem;
     }
 
     return currentWishlist;
