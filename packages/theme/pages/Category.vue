@@ -188,7 +188,7 @@
             <SfProductCardHorizontal
               v-e2e="'category-product-card'"
               v-for="(product, i) in products"
-              :key="productGetters.getSlug(product)"
+              :key="product.id"
               :style="{ '--index': i }"
               :title="productGetters.getName(product)"
               :description="productGetters.getDescription(product)"
@@ -205,7 +205,9 @@
               :isOnWishlist="isInWishlist({ product })"
               class="products__product-card-horizontal"
               @click:wishlist="addItemToWishlist({ product })"
-              @click:add-to-cart="addItemToCart({ product, quantity: product.qty })"
+              @click:add-to-cart="
+                addItemToCart({ product, quantity: product.qty })
+              "
               v-model="products[i].qty"
               :link="
                 localePath(
