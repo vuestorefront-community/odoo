@@ -10,7 +10,8 @@ import {
   Wishlist,
   WishlistItem,
   Product,
-  GraphQlWishlistAddItem
+  GraphQlWishlistAddItemParams,
+  GraphQlWishlistRemoveItemParams
 } from '@vue-storefront/odoo-api/src/types';
 
 const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
@@ -22,7 +23,7 @@ const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
 
   addItem: async (context: Context, { currentWishlist, product }) => {
     if (!params.isInWishlist(context, { currentWishlist, product })) {
-      const addWishlistItemParams: GraphQlWishlistAddItem = {
+      const addWishlistItemParams: GraphQlWishlistAddItemParams = {
         productId: product.first_variant_id
       };
 
@@ -37,18 +38,15 @@ const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
   },
 
   removeItem: async (context: Context, { currentWishlist, product }) => {
-    const productIdToCompare =
-      product.product.first_variant_id || product.product.id;
+    const removeItemParams: GraphQlWishlistRemoveItemParams = {
+      wishId: product.id
+    };
 
-    const wishlistItem = currentWishlist.wishlistItems.find(
-      (item) => item.product.id == productIdToCompare
+    const wishlist = await context.$odoo.api.wishlistRemoveItem(
+      removeItemParams
     );
 
-    await context.$odoo.api.wishlistRemoveItem(wishlistItem);
-
-    const wishlist = params.load(context, {});
-
-    return wishlist;
+    return wishlist.wishlistRemoveItem;
   },
 
   isInWishlist: (context: Context, { currentWishlist, product }) => {

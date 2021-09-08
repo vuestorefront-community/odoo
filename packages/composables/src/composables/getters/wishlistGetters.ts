@@ -28,8 +28,8 @@ export const getWishlistItemPrice = (
   wishlistItem: WishlistItem
 ): AgnosticPrice => {
   return {
-    regular: wishlistItem?.price || 1,
-    special: wishlistItem?.price || 1
+    regular: wishlistItem?.product.price || 1,
+    special: wishlistItem?.product.price || 1
   };
 };
 
@@ -49,7 +49,7 @@ export const getWishlistItemSku = (product: WishlistItem): string =>
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getWishlistTotals = (wishlist: Wishlist): AgnosticTotals => {
   const total = wishlist?.wishlistItems?.reduce(
-    (accumlated, current) => accumlated + current.price,
+    (accumlated, current) => accumlated + current.product.price,
     0
   );
   return {
