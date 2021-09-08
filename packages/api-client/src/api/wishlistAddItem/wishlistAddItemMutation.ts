@@ -1,14 +1,10 @@
 import gql from 'graphql-tag';
+import wishlistItemsFragment from '../../fragments/wishlistItemsFragment';
 
 export default gql`
-  mutation SignUpUser($name: String!, $email: String!, $password: String!) {
-    signUpUser(name: $name, email: $email, password: $password) {
-      wishlistItems {
-        id
-        product {
-          id
-        }
-      }
+  mutation($productId: Int!) {
+    wishlistAddItem(productId: $productId) {
+      ${wishlistItemsFragment}
     }
   }
 `;
