@@ -19,10 +19,9 @@ const useShipping = (): any => {
       return shippingMethods;
     }
 
-    shippingMethods.value = await context.$odoo.api.shippingGetDeliveryMethods(
-      {},
-      {}
-    );
+    const response = await context.$odoo.api.shippingGetDeliveryMethods();
+
+    shippingMethods.value = response.deliveryMethods;
   };
 
   const load = async () => {

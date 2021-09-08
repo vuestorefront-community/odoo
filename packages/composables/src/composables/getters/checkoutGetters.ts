@@ -14,7 +14,7 @@ export const getShippingMethodDescription = (
 
 export const getShippingMethodPrice = (
   shippingMethod: ShippingMethod
-): number => shippingMethod.price || 0;
+): number => shippingMethod?.price || 0;
 
 export const getFormattedPrice = (price: number): string => String(price);
 

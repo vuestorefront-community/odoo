@@ -56,9 +56,10 @@ export const getCartItemSku = (product: Product): string =>
 
 export const getCartTotals = (cart: Cart): AgnosticTotals => {
   return {
-    total: cart.order?.amountTotal || 0,
+    total: cart?.order?.amountTotal || 0,
     subtotal:
-      roundDecimal(cart.order?.amountTotal - cart.order?.orderLines.length) || 0
+      roundDecimal(cart?.order?.amountTotal - cart?.order?.orderLines.length) ||
+      0
   };
 };
 
