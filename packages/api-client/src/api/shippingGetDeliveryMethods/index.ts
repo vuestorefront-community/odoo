@@ -15,5 +15,5 @@ export default async function shippingGetDeliveryMethods(
     query
   });
 
-  return response.data.allDeliveryMethods;
+  return response.data;
 }

@@ -5,6 +5,7 @@ export default gql`
     deliveryMethods {
       id
       name
+      price
     }
   }
 `;
