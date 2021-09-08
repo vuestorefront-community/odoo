@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import mutation from './cartAddItemMutation';
+import { Context, CustomQuery } from '@vue-storefront/core';
 import { FetchResult } from 'apollo-link/lib/types';
 import { GraphQlCartAddItemParams } from '../../types';
 

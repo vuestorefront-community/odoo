@@ -239,15 +239,19 @@ export type GraphQlSendResetPasswordParams = {
 };
 
 export type GraphQlGetProductVariants = {
-  productId: string;
+  productId: number;
 };
 
 export type GraphQlCartRemoveItemParams = {
   lineId: number;
 };
 
+export type GraphQlWishlistAddItem = {
+  productId: number;
+};
+
 export type GraphQlGetProductParams = {
-  productId: string;
+  productId: number;
   combinationIds: string[];
 };
 
