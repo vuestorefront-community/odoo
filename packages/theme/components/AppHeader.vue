@@ -269,7 +269,7 @@ export default {
     });
 
     return {
-      wishlistHasItens: computed(() => wishlist.value?.length > 0),
+      wishlistHasItens: computed(() => wishlist.value?.wishlistItems.length > 0),
       topCategories,
       accountIcon,
       closeOrFocusSearchBar,
