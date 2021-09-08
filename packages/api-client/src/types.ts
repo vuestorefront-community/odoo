@@ -108,9 +108,7 @@ export type Product = {
 
 export declare type WishlistItem = {
   product: Product;
-  productTemplate: Product;
   id: number;
-  price: number;
 };
 
 export declare type Wishlist = {
@@ -246,8 +244,12 @@ export type GraphQlCartRemoveItemParams = {
   lineId: number;
 };
 
-export type GraphQlWishlistAddItem = {
+export type GraphQlWishlistAddItemParams = {
   productId: number;
+};
+
+export type GraphQlWishlistRemoveItemParams = {
+  wishId: number;
 };
 
 export type GraphQlGetProductParams = {
