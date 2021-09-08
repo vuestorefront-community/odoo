@@ -12,7 +12,6 @@ export default async function wishlistAddItem(
   customQuery?: CustomQuery
 ): Promise<FetchResult> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
-  console.log(params);
 
   const response = await apolloClient.mutate({
     mutation,
