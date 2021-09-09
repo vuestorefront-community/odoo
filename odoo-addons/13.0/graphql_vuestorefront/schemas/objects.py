@@ -99,16 +99,20 @@ class Lead(OdooObjectType):
         return self.description
 
 
-class Country(OdooObjectType):
-    id = graphene.Int(required=True)
-    name = graphene.String(required=True)
-    code = graphene.String(required=True)
-
-
 class State(OdooObjectType):
     id = graphene.Int(required=True)
     name = graphene.String(required=True)
     code = graphene.String(required=True)
+
+
+class Country(OdooObjectType):
+    id = graphene.Int(required=True)
+    name = graphene.String(required=True)
+    code = graphene.String(required=True)
+    states = graphene.List(graphene.NonNull(lambda: State))
+
+    def resolve_states(self, info):
+        return self.state_ids or None
 
 
 class Partner(OdooObjectType):

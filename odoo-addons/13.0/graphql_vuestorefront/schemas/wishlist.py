@@ -40,18 +40,32 @@ class WishlistAddItem(graphene.Mutation):
 
     @staticmethod
     def mutate(self, info, product_id):
-        partner_id = request.env.user.partner_id.id
         env = info.context["env"]
-        Wishlist = env['product.wishlist'].sudo()
+        Wishlist = env['product.wishlist']
         website = env['website'].get_current_website()
         request.website = website
         pricelist = website.get_current_pricelist()
+
+        # Partner
+        if request.website.is_public_user():
+            Wishlist = Wishlist.sudo()
+            partner_id = False
+        else:
+            partner_id = request.env.user.partner_id.id
+
         product = env['product.product'].search([('id', '=', product_id)])
-        price = product._get_combination_info_variant()['price']
+
+        #  Conditions
+        if not product:
+            raise GraphQLError('Product does not Exist.')
 
         if product._is_in_wishlist():
             raise GraphQLError('Product is already in the Wishlist.')
 
+        # Price
+        price = product._get_combination_info_variant()['price']
+
+        # Add wish_id to Wishlist
         wish_id = Wishlist._add_to_wishlist(
             pricelist.id,
             pricelist.currency_id.id,
@@ -77,8 +91,9 @@ class WishlistRemoveItem(graphene.Mutation):
     @staticmethod
     def mutate(self, info, wish_id):
         env = info.context['env']
+        Wishlist = env['product.wishlist'].sudo()
 
-        wish_id = env['product.wishlist'].search([('id', '=', wish_id)], limit=1)
+        wish_id = Wishlist.search([('id', '=', wish_id)], limit=1)
         wish_id.unlink()
 
         website = env['website'].get_current_website()

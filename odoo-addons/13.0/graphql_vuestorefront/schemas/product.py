@@ -36,9 +36,15 @@ def get_search_domain(env, search, **kwargs):
     if kwargs.get('category_id', False):
         domain += [('public_categ_ids', 'in', kwargs['category_id'])]
 
-    # Filter with Attributes
+    # Filter with Attribute
     if kwargs.get('attribute_id', False):
         domain += [('product_template_attribute_value_ids', 'in', kwargs['attribute_id'])]
+
+    # Filter With Name
+    if kwargs.get('name', False):
+        name = kwargs['name']
+        for n in name.split(" "):
+            domain += [('name', 'ilike', n)]
 
     if search:
         for srch in search.split(" "):
@@ -81,6 +87,7 @@ class ProductList(graphene.ObjectType):
 class ProductFilterInput(graphene.InputObjectType):
     category_id = graphene.List(graphene.Int)
     attribute_id = graphene.List(graphene.Int)
+    name = graphene.String()
     min_price = graphene.Float()
     max_price = graphene.Float()
 
