@@ -56,6 +56,11 @@ export type CategorySortInput = {
   id: SortEnum;
 };
 
+export type ProductSortInput = {
+  id: SortEnum;
+  price: SortEnum;
+};
+
 export type GraphQlGetCategoryParams = {
   filter: CategoryFilterInput;
   currentPage: number;
@@ -101,6 +106,11 @@ export type Product = {
   attributeValues: Attribute[];
   productTemplate: Product;
   categories: [Category];
+};
+
+export type ProductResult = {
+  products: [Product];
+  totalCount: number;
 };
 
 export declare type WishlistItem = {
@@ -286,9 +296,9 @@ export type GraphQlGetProductTemplateParams = {
   [x: string]: any;
 };
 
-export type GraphQlAllProductTemplatesParams = {
-  id: number;
-  name: string;
-  limit: number;
-  offset: number;
+export type GraphQlGetProductsFilter = {
+  categoryId: [number];
+  attributeId: [number];
+  minPrice: number;
+  maxPrice: number;
 };

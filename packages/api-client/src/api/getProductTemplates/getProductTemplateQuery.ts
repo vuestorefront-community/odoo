@@ -1,12 +1,40 @@
 import gql from 'graphql-tag';
-
 export default gql`
-    query($id: ID, $limit: Int = 20, $offset: Int = 0, $term: String) {
-    allProductTemplates(id: $id, limit: $limit, offset: $offset, name: $term) {
-        id, name, slug, description, defaultCode, image, listPrice, firstVariantId,
-            ecommerceCategories {
-                id,name, slug, parent {parent{id}}
-            }
+  query(
+    $filter: ProductFilterInput
+    $currentPage: Int
+    $pageSize: Int = 0
+    $search: String
+    $sort: ProductSortInput
+  ) {
+    products(
+      filter: $filter
+      currentPage: $currentPage
+      pageSize: $pageSize
+      search: $search
+      sort: $sort
+    ) {
+      totalCount
+      products {
+        categories {
+          id
+          name
+          slug
         }
+        id
+        smallImage
+        name
+        description
+        image
+        slug
+        sku
+        isInWishlist
+        status
+        attributeValues {
+          id
+        }
+        price
+      }
     }
+  }
 `;
