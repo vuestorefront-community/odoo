@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { getCurrentInstance } from '@vue/composition-api';
-import { Category } from '~/../api-client/src/types';
+import { Category, GraphQlGetProductParams } from '~/../api-client/src/types';
 const getInstance = () => {
   const vm = getCurrentInstance();
   return vm.$root as any;
@@ -11,7 +11,7 @@ const queryParamsNotFilters = ['page', 'sort', 'itemsPerPage'];
 const useUiHelpers = (): any => {
   const instance = getInstance();
 
-  const getFacetsFromURL = () => {
+  const getFacetsFromURL = (): GraphQlGetProductParams => {
     const { params, query } = instance.$router.history.current;
     let filters: string[] = [];
     if (query) {
@@ -24,20 +24,17 @@ const useUiHelpers = (): any => {
       filters = filters.map((filter) => filter.split(',')).flat();
     }
 
-    const ppg = query.itemsPerPage ? parseInt(query.itemsPerPage) : 10;
-    let offset = 0;
-    if (query.page > 0) {
-      offset = (query.page * ppg) - ppg;
-    }
+    const pageSize = query.itemsPerPage ? parseInt(query.itemsPerPage) : 10;
 
     return {
-      term: params.slug_1,
-      order: query.sort || 'name asc',
-      offset,
-      attrib_list: filters,
-      ppg,
-      category_id: params.slug_3 || params.slug_2
-    } as any;
+      search: '',
+      sort: {},
+      pageSize,
+      currentPage: 1,
+      filter: {
+        categoryId: params.slug_3 || params.slug_2
+      }
+    };
   };
 
   const getCatLink = (category: Category): string => {
