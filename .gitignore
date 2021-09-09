@@ -1,6 +1,9 @@
 # Dependency directories
 node_modules
 
+# PyCache
+*.pyc
+
 # Logs
 npm-debug.log*
 yarn-debug.log*
