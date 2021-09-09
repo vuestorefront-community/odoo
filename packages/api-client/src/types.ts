@@ -52,13 +52,20 @@ export type CategoryFilterInput = {
   parent: boolean;
 };
 
+export type ProductFilterInput = {
+  categoryId?: number[];
+  attributeId?: number[];
+  minPrice?: number;
+  maxPrice?: number;
+};
+
 export type CategorySortInput = {
   id: SortEnum;
 };
 
 export type ProductSortInput = {
-  id: SortEnum;
-  price: SortEnum;
+  id?: SortEnum;
+  price?: SortEnum;
 };
 
 export type GraphQlGetCategoryParams = {
@@ -259,7 +266,7 @@ export type GraphQlWishlistRemoveItemParams = {
   wishId: number;
 };
 
-export type GraphQlGetProductParams = {
+export type GraphQlGetProductParamsOld = {
   productId: number;
   combinationIds: string[];
 };
@@ -296,9 +303,10 @@ export type GraphQlGetProductTemplateParams = {
   [x: string]: any;
 };
 
-export type GraphQlGetProductsFilter = {
-  categoryId: [number];
-  attributeId: [number];
-  minPrice: number;
-  maxPrice: number;
+export type GraphQlGetProductParams = {
+  filter: ProductFilterInput;
+  currentPage: number;
+  pageSize: number;
+  search: string;
+  sort: ProductSortInput;
 };

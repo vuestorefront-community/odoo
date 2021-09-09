@@ -3,11 +3,11 @@
 
 import { Context, CustomQuery } from '@vue-storefront/core';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlGetProductParams } from '../../types';
+import { GraphQlGetProductParamsOld } from '../../types';
 
 export default async function getProduct(
   context: Context,
-  params: GraphQlGetProductParams,
+  params: GraphQlGetProductParamsOld,
   customQuery?: CustomQuery
 ): Promise<FetchResult> {
   const response = await context.client.axios.post(
