@@ -2,6 +2,7 @@
 import { ref } from '@vue/composition-api';
 import { useVSFContext } from '@vue-storefront/core';
 import { Context } from '@vue-storefront/core';
+import { GraphQlGetAllCountryStatesParams } from '@vue-storefront/odoo-api/src/types';
 
 const useCountrySearch = (): any => {
   const context: Context = useVSFContext();
@@ -14,29 +15,27 @@ const useCountrySearch = (): any => {
   const resetCountryErrors = () => (errors.value = { graphQLErrors: [] });
 
   const search = async () => {
-    // countries.value = await context.$odoo.api.getCountries().catch((error) => {
-    //   errors.value = error;
-    // });
-    countries.value = [
-      { id: 1, code: 1, name: 'Brazil' },
-      { id: 2, code: 1, name: 'Portugal' }
-    ];
+    const response = await context.$odoo.api.getCountries().catch((error) => {
+      errors.value = error;
+    });
+
+    countries.value = response.countries.countries;
   };
 
   const searchCountryStates = async (countryId) => {
     if (!countryId) return;
 
-    countryStates.value = [
-      { id: 1, code: 1, name: 'Rio de Janeiro' },
-      { id: 2, code: 1, name: 'Lisboa' },
-      { id: 3, code: 1, name: 'São Paulo' }
-    ];
+    const params: GraphQlGetAllCountryStatesParams = {
+      filter: { id: [parseInt(countryId)] }
+    };
 
-    // countryStates.value = await context.$odoo.api
-    //   .getCountryStates({ countryId })
-    //   .catch((error) => {
-    //     errors.value = error;
-    //   });
+    const response = await context.$odoo.api
+      .getCountryStates(params)
+      .catch((error) => {
+        errors.value = error;
+      });
+
+    countryStates.value = response?.countries?.countries[1]?.states || [];
   };
 
   return {
