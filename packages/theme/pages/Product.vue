@@ -233,7 +233,8 @@ import {
   SfBreadcrumbs,
   SfButton,
   SfColor,
-  SfColorPicker
+  SfColorPicker,
+  SfLoader
 } from '@storefront-ui/vue';
 
 import InstagramFeed from '~/components/InstagramFeed.vue';
@@ -261,7 +262,9 @@ export default {
     const { id } = root.$route.params;
     const { size, color } = root.$route.query;
     const configuration = reactive({ size, color });
-    const { products, search } = useProduct('products');
+    const { products, search, loading: productloading } = useProduct(
+      `products-${id}`
+    );
     const {
       searchVariants,
       searchRealProduct,
@@ -349,6 +352,7 @@ export default {
     };
 
     return {
+      productloading,
       breadcrumbs,
       allOptionsSelected,
       checkSelected,
@@ -400,6 +404,7 @@ export default {
     SfBreadcrumbs,
     SfButton,
     InstagramFeed,
+    SfLoader,
     RelatedProducts,
     MobileStoreBanner,
     SfColorPicker,
@@ -580,6 +585,7 @@ export default {
     flex: 1;
   }
 }
+
 .breadcrumbs {
   margin: var(--spacer-base) auto var(--spacer-lg);
   text-transform: capitalize;
