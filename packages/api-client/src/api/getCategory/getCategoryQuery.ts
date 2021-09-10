@@ -19,6 +19,16 @@ export default gql`
         id
         name
         slug
+        childs {
+          id
+          name
+          slug
+          childs {
+            id
+            name
+            slug
+          }
+        }
         parent {
           id
           name
@@ -27,6 +37,16 @@ export default gql`
             id
             name
             slug
+            childs {
+              id
+              name
+              slug
+              childs {
+                id
+                name
+                slug
+              }
+            }
           }
         }
       }

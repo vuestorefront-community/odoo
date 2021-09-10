@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import productFragment from '../../fragments/productFragment';
 export default gql`
   query(
     $filter: ProductFilterInput
@@ -27,27 +28,7 @@ export default gql`
           attributeId
         }
       }
-      products {
-        id
-        firstVariant
-        smallImage
-        price
-        name
-        description
-        image
-        slug
-        sku
-        isInWishlist
-        status
-        categories {
-          id
-          name
-          slug
-        }
-        attributeValues {
-          id
-        }
-      }
+      ${productFragment}
     }
   }
 `;

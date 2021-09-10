@@ -271,6 +271,10 @@ export type GraphQlWishlistAddItemParams = {
   productId: number;
 };
 
+export type GraphQlGetProductTemplateParams = {
+  id: number;
+};
+
 export type GraphQlWishlistRemoveItemParams = {
   wishId: number;
 };
@@ -304,18 +308,6 @@ export type GraphQlGetAllCountryStatesParams = {
   pageSize?: number;
   search?: string;
   sort?: ProductSortInput;
-};
-
-export type GraphQlGetProductTemplateParams = {
-  categorySlug?: string;
-  rootCatSlug?: string;
-  term?: string;
-  page?: number;
-  itemsPerPage?: number;
-  sort?: string;
-  filters?: Record<string, string[]>;
-  metadata?: any;
-  [x: string]: any;
 };
 
 export type GraphQlGetProductParams = {
