@@ -308,5 +308,6 @@ export type GraphQlGetProductParams = {
   currentPage: number;
   pageSize: number;
   search: string;
+  categorySlug?: string;
   sort: ProductSortInput;
 };
