@@ -21,7 +21,10 @@ const useShipping = (): any => {
 
     const response = await context.$odoo.api.shippingGetDeliveryMethods();
 
-    shippingMethods.value = response.deliveryMethods;
+    shippingMethods.value = response.deliveryMethods.map((method) => ({
+      ...method,
+      id: String(method.id)
+    }));
   };
 
   const load = async () => {
