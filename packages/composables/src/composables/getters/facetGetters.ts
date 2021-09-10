@@ -8,10 +8,7 @@ import {
   AgnosticSort,
   FacetsGetters
 } from '@vue-storefront/core';
-import {
-  GraphQlGetProductParams,
-  Product
-} from '@vue-storefront/odoo-api/src/types';
+import { Product } from '@vue-storefront/odoo-api/src/types';
 import { FacetResultsData, SearchData } from '../types';
 
 const getAll = (
@@ -27,21 +24,20 @@ const getGrouped = (
 ): AgnosticGroupedFacet[] => {
   if (!searchData?.data?.attributes) return [];
 
-  // @todo update to new types
-  // const formatedAttribute = searchData?.data?.attributes.map((attribute) => ({
-  //   id: String(attribute.id),
-  //   label: attribute.name,
-  //   count: 0,
-  //   options: attribute.values.map((value) => ({
-  //     type: '',
-  //     id: String(value.search),
-  //     value: value.id,
-  //     label: value.name,
-  //     metadata: value.search
-  //   }))
-  // }));
+  const formatedAttribute = searchData?.data?.attributes.map((attribute) => ({
+    id: String(attribute.id),
+    label: attribute.name,
+    count: 0,
+    options: attribute.values.map((value) => ({
+      type: '',
+      id: String(value.search),
+      value: value.id,
+      label: value.name,
+      metadata: value.search
+    }))
+  }));
 
-  return [];
+  return formatedAttribute;
 };
 
 const getSortOptions = (searchData: SearchData): AgnosticSort => ({
@@ -65,13 +61,14 @@ const getSortOptions = (searchData: SearchData): AgnosticSort => ({
 });
 
 const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
-  if (!searchData.data.categories) {
+  if (!searchData?.data?.categories) {
     return [] as any;
   }
   const categories = searchData.data.categories;
 
   const categoriesWithParents = categories.filter((item) => item.parent);
   const parents = categoriesWithParents.map((item) => item.parent).flat();
+
   const currentParentSelected = parents.find(
     (item) => item.slug === searchData.input.categorySlug
   );
@@ -136,16 +133,11 @@ const getBreadcrumbsByProduct = (product: Product): AgnosticBreadcrumb[] => {
 
 const getBreadcrumbs = ({ input }: SearchData): AgnosticBreadcrumb[] => {
   const breadcrumbs = [{ text: 'Home', link: '/' }];
-  const categoryId = input.currentParentCategory?.parent
-    ? input.currentParentCategory?.parent[0]?.id
-    : input.params.slug_2;
 
-  if (input.params.slug_1) {
-    breadcrumbs.push({
-      text: input.params.slug_1,
-      link: `/c/${input.params.slug_1}/${categoryId}`
-    });
-  }
+  breadcrumbs.push({
+    text: input.currentRootCategory.name,
+    link: `/c/${input.currentRootCategory.slug}/${input.currentRootCategory.id}`
+  });
 
   if (input.params.slug_2 && !isNumeric(input.params.slug_2)) {
     const splited = input.params.slug_2.split('-');
