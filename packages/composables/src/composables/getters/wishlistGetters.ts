@@ -36,7 +36,7 @@ export const getWishlistItemPrice = (
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getWishlistItemQty = (wishlistItem: WishlistItem): number => 1;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslut-disable-next-line @typescript-eslint/no-unused-vars
 export const getWishlistItemAttributes = (
   wishlistItem: WishlistItem,
   filterByAttributeName?: string[]

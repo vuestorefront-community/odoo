@@ -7,11 +7,16 @@ import {
 import { ProductsResponse } from '../types';
 
 const params: UseProductFactoryParams<ProductsResponse, any> = {
-  productsSearch: async (context: Context, params: ProductsSearchParams): Promise<ProductsResponse> => {
-
+  productsSearch: async (
+    context: Context,
+    params: ProductsSearchParams
+  ): Promise<ProductsResponse> => {
     const { customQuery, ...searchParams } = params;
 
-    return await context.$odoo.api.getProductTemplates({ ...searchParams, published: true }, customQuery);
+    return await context.$odoo.api.getProductTemplate(
+      { ...searchParams, published: true },
+      customQuery
+    );
   }
 };
 

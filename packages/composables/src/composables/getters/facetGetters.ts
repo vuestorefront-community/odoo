@@ -8,9 +8,9 @@ import {
   AgnosticSort,
   FacetsGetters
 } from '@vue-storefront/core';
-import { Product } from '@vue-storefront/odoo-api/src/types';
+import { Category, Product } from '@vue-storefront/odoo-api/src/types';
 import { FacetResultsData, SearchData } from '../types';
-
+import CategoryGetters from './categoryGetters';
 const getAll = (
   searchData: SearchData,
   criteria?: string[]
@@ -44,18 +44,18 @@ const getSortOptions = (searchData: SearchData): AgnosticSort => ({
   options: [
     {
       id: 'list_price desc',
-      value: 'list_price desc',
+      value: 'price,DESC',
       attrName: 'Price: High to Low',
       type: ''
     },
     {
       id: 'list_price asc',
-      value: 'list_price asc',
+      value: 'price,ASC',
       attrName: 'Price: Low to High',
       type: ''
     },
-    { id: 'name asc', value: 'name asc', attrName: 'Name: A to Z', type: '' },
-    { id: 'name desc', value: 'name desc', attrName: 'Name: Z to A', type: '' }
+    { id: 'name asc', value: 'name,ASC', attrName: 'Name: A to Z', type: '' },
+    { id: 'name desc', value: 'name,DESC', attrName: 'Name: Z to A', type: '' }
   ],
   selected: searchData.input.sort || 'name asc'
 });
@@ -64,30 +64,15 @@ const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
   if (!searchData?.data?.categories) {
     return [] as any;
   }
+
   const categories = searchData.data.categories;
+  let parentCategory: Category = searchData.data.categories[0];
 
-  const categoriesWithParents = categories.filter((item) => item.parent);
-  const parents = categoriesWithParents.map((item) => item.parent).flat();
-
-  const currentParentSelected = parents.find(
-    (item) => item.slug === searchData.input.categorySlug
-  );
-
-  if (!currentParentSelected) {
-    return [] as any;
+  if (!categories[0].childs) {
+    parentCategory = categories[0].parent.parent;
   }
 
-  const uniqueParents = categoriesWithParents.filter((item) => {
-    return item.parent.id === currentParentSelected.id;
-  });
-
-  uniqueParents.forEach((parent) => {
-    parent.childs = categoriesWithParents.filter(
-      (item) => item.parent.id === parent.id
-    );
-  });
-
-  return categoriesWithParents as any;
+  return CategoryGetters.getTree(parentCategory);
 };
 
 const getProducts = (searchData: SearchData): any => {

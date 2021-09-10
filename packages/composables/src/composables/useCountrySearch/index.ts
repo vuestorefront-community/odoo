@@ -26,7 +26,7 @@ const useCountrySearch = (): any => {
     if (!countryId) return;
 
     const params: GraphQlGetAllCountryStatesParams = {
-      filter: { id: [parseInt(countryId)] }
+      filter: { id: parseInt(countryId) }
     };
 
     const response = await context.$odoo.api
