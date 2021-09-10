@@ -1,9 +1,5 @@
 import { FacetSearchResult } from '@vue-storefront/core';
-import {
-  Attribute,
-  Category,
-  ProductVariant
-} from '@vue-storefront/odoo-api/src/types';
+import { Attribute, Category } from '@vue-storefront/odoo-api/src/types';
 
 export { UseCategory, UseProduct } from '@vue-storefront/core';
 
@@ -53,11 +49,11 @@ export type OrdersResponse = {
 };
 
 export interface FacetResultsData {
-  products: ProductVariant[];
+  products: Product[];
   categories: Category[];
   facets: Record<string, string>;
   totalProducts: number;
-  perPageOptions: number[];
+  perPageOptions: number;
   itemsPerPage: number;
   attributes: Attribute[];
 }

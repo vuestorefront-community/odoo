@@ -1,15 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-  FacetsGetters,
+  AgnosticBreadcrumb,
   AgnosticCategoryTree,
+  AgnosticFacet,
   AgnosticGroupedFacet,
   AgnosticPagination,
   AgnosticSort,
-  AgnosticFacet,
-  AgnosticBreadcrumb
+  FacetsGetters
 } from '@vue-storefront/core';
-import { Category, Product } from '@vue-storefront/odoo-api/src/types';
-import { SearchData } from '../types';
+import {
+  GraphQlGetProductParams,
+  Product
+} from '@vue-storefront/odoo-api/src/types';
+import { FacetResultsData, SearchData } from '../types';
 
 const getAll = (
   searchData: SearchData,
@@ -62,15 +65,15 @@ const getSortOptions = (searchData: SearchData): AgnosticSort => ({
 });
 
 const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
-  if (!searchData.data) {
+  if (!searchData.data.categories) {
     return [] as any;
   }
-  const categories: Category[] = searchData.data.categories;
+  const categories = searchData.data.categories;
 
   const categoriesWithParents = categories.filter((item) => item.parent);
   const parents = categoriesWithParents.map((item) => item.parent).flat();
   const currentParentSelected = parents.find(
-    (item) => item.slug === searchData.input.term
+    (item) => item.slug === searchData.input.categorySlug
   );
 
   if (!currentParentSelected) {
@@ -87,7 +90,7 @@ const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
     );
   });
 
-  return uniqueParents as any;
+  return categoriesWithParents as any;
 };
 
 const getProducts = (searchData: SearchData): any => {
@@ -152,7 +155,7 @@ const getBreadcrumbs = ({ input }: SearchData): AgnosticBreadcrumb[] => {
   return breadcrumbs;
 };
 
-const facetGetters: FacetsGetters<any, any> = {
+const facetGetters: FacetsGetters<FacetResultsData, any> = {
   getBreadcrumbsByProduct,
   getSortOptions,
   getGrouped,
