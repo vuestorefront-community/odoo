@@ -7,6 +7,7 @@ wishlistItems {
       description
       image
       price
+      isInWishlist
     }
   }
 `;

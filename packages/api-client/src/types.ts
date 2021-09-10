@@ -31,11 +31,19 @@ export declare type Address = {
 
 export declare type ShippingInfo = Record<string, string>;
 
+export type AttributeValueList = {
+  id: number;
+  name: string;
+  htmlColor: string;
+  search: string;
+  attributeId: number;
+};
+
 export type Attribute = {
   id: number;
   name: string;
-  attributeId: number;
-  attributeName: string;
+  displayType: string;
+  values: [AttributeValueList];
 };
 
 export type Category = {
@@ -105,9 +113,9 @@ export type Product = {
   hasDiscountedPrice: number;
   listPrice: number;
   realProduct: any;
-  firstVariantId: number;
-  first_variant_id: number;
+  firstVariant: number;
   currency: Currency;
+  isInWishlist: boolean;
   alternativeProducts: [Product];
   accessoryProducts: [Product];
   attributeValues: Attribute[];
@@ -118,6 +126,7 @@ export type Product = {
 export type ProductResult = {
   products: [Product];
   totalCount: number;
+  attributes: [Attribute];
 };
 
 export declare type WishlistItem = {
@@ -286,7 +295,7 @@ export type GraphQlResetPasswordParams = {
 };
 
 export type CountryFiltersInput = {
-  id: [number];
+  id: number;
 };
 
 export type GraphQlGetAllCountryStatesParams = {

@@ -1,6 +1,6 @@
 export { default as getCategory } from './getCategory';
-export { default as getProductTemplates } from './getProductTemplates';
-export { default as getProduct } from './getProduct';
+export { default as getProductTemplatesList } from './getProductTemplatesList';
+export { default as getProductTemplate } from './getProductTemplate';
 export { default as cartLoad } from './cartLoad';
 export { default as cartAddItem } from './cartAddItem';
 export { default as signUpUser } from './signUpUser';
@@ -21,4 +21,3 @@ export { default as getPriceShippingMethod } from './getPriceShippingMethod';
 export { default as billingUseShippingAsBillingAddress } from './billingUseShippingAsBillingAddress';
 export { default as billingAddAddress } from './billingAddAddress';
 export { default as getProductVariants } from './getProductVariants';
-export { default as getProductTemplatesPublished } from './getProductTemplatesPublished';
