@@ -97,7 +97,11 @@
       <div class="sidebar desktop-only">
         <LazyHydrate when-idle>
           <SfLoader :class="{ loading }" :loading="loading">
-            <SfAccordion :open="activeCategory" :show-chevron="true">
+            <SfAccordion
+              :open="currentCategory.name"
+              showChevron
+              transition="sf-expand"
+            >
               <SfAccordionItem
                 v-for="(cat, i) in categoryTree && categoryTree"
                 :key="i"
@@ -442,17 +446,11 @@ export default {
     );
 
     const currentCategory = computed(() => {
-      const childCategories = categoryTree.value
-        .map((category) => category.childs)
-        .flat();
+      const category = result.value.data.categories.find((category) => {
+        return category.slug === params.slug_1;
+      });
 
-      if (!childCategories || !params.slug_2) {
-        return '';
-      }
-
-      return (
-        childCategories.find((child) => child.slug === params.slug_2) || {}
-      );
+      return category || {};
     });
 
     const getCurrentParentCategory = (currentCategory) => {
@@ -461,15 +459,6 @@ export default {
       }
       return {};
     };
-
-    const activeCategory = computed(() => {
-      const currentParentCategory = getCurrentParentCategory(currentCategory);
-
-      if (currentParentCategory) {
-        return currentParentCategory.name;
-      }
-      return [categoryTree?.value[0]?.name] || {};
-    });
 
     const breadcrumbs = computed(() =>
       facetGetters.getBreadcrumbs({
@@ -545,7 +534,6 @@ export default {
       loading,
       productGetters,
       pagination,
-      activeCategory,
       sortBy,
       facets,
       breadcrumbs,
