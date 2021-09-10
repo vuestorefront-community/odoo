@@ -2,7 +2,7 @@
 import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import { Pagination } from '@vue-storefront/odoo-api/src/types';
-import query from './getProductTemplateQuery';
+import query from './getProductTemplateListQuery';
 import { GraphQlGetProductParams, Product } from '../../types';
 import { FetchResult } from 'apollo-link/lib/types';
 export default async function getProductTemplates(
