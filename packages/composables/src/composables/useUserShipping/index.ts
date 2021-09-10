@@ -35,20 +35,24 @@ const params: UseUserShippingFactoryParams<any, any> = {
   },
 
   addAddress: async (context: Context, { address }) => {
+    console.log(address, 'my address')
     const shippingAdress = {
       street: address.streetName,
-      houseNumber: '',
-      zipCode: address.postalCode,
+      zip: address.postalCode,
       phone: address.phone,
-      firstName: address.firstName,
-      lastName: '',
-      deliveryMethodId: address.selectedMethodShipping,
+      name: address.firstName,
       city: address.city,
       countryId: Number.parseInt(address.country),
       stateId: Number.parseInt(address.state)
     };
 
-    await context.$odoo.api.shippingAddAdress(shippingAdress);
+    console.log(shippingAdress, 'address')
+
+    await context.$odoo.api.shippingAddAdress(shippingAdress).then((res) => {
+      console.log(res, 'minha resposta')
+    }).catch((err) => {
+      console.log('meu erro', err)
+    });
 
     return address;
   },

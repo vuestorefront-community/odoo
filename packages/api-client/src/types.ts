@@ -22,14 +22,11 @@ export declare type Currency = {
 export declare type Address = {
   city: string;
   countryId: number;
-  deliveryMethodId: number;
   firstName: string;
-  houseNumber: string;
-  lastName: string;
   phone: string;
   stateId: number;
   street: string;
-  zipCode: string;
+  zip: string;
 };
 
 export declare type ShippingInfo = Record<string, string>;
