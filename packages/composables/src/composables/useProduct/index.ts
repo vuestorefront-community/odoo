@@ -4,6 +4,7 @@ import {
   ProductsSearchParams,
   UseProductFactoryParams
 } from '@vue-storefront/core';
+import { GraphQlGetProductTemplateParams } from '@vue-storefront/odoo-api/src/types';
 import { ProductsResponse } from '../types';
 
 const params: UseProductFactoryParams<ProductsResponse, any> = {
@@ -11,12 +12,14 @@ const params: UseProductFactoryParams<ProductsResponse, any> = {
     context: Context,
     params: ProductsSearchParams
   ): Promise<ProductsResponse> => {
-    const { customQuery, ...searchParams } = params;
+    const graphQlParams: GraphQlGetProductTemplateParams = {
+      id: params.id
+    };
 
-    return await context.$odoo.api.getProductTemplate(
-      { ...searchParams, published: true },
-      customQuery
+    const { product } = await context.$odoo.api.getProductTemplate(
+      graphQlParams
     );
+    return product;
   }
 };
 
