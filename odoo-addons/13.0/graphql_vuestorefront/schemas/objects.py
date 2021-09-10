@@ -181,13 +181,15 @@ class Category(OdooObjectType):
         return self.product_tmpl_ids or None
 
 
-# Only to use in Attributes List of Products Query
-class AttributeValueList(OdooObjectType, description='Only use to return the Attributes List of Products Query'):
+class AttributeValue(OdooObjectType):
     id = graphene.Int(required=True)
     name = graphene.String()
+    display_type = graphene.String()
     html_color = graphene.String()
     search = graphene.String()
+    price_extra = graphene.Float(description='Not use in the return Attributes List of the Products Query')
     attribute_id = graphene.Int()
+    attribute_name = graphene.String()
 
     def resolve_id(self, info):
         return self.id or None
@@ -195,25 +197,6 @@ class AttributeValueList(OdooObjectType, description='Only use to return the Att
     def resolve_search(self, info):
         attribute_id = self.attribute_id.id
         attribute_value_id = self.id
-        return '{}-{}'.format(attribute_id, attribute_value_id) or None
-
-
-class AttributeValue(OdooObjectType):
-    id = graphene.Int(required=True)
-    name = graphene.String()
-    display_type = graphene.String()
-    html_color = graphene.String()
-    search = graphene.String()
-    price_extra = graphene.Float()
-    attribute_id = graphene.Int()
-    attribute_name = graphene.String()
-
-    def resolve_id(self, info):
-        return self.product_attribute_value_id.id or None
-
-    def resolve_search(self, info):
-        attribute_id = self.attribute_id.id
-        attribute_value_id = self.product_attribute_value_id.id
         return '{}-{}'.format(attribute_id, attribute_value_id) or None
 
     def resolve_attribute_name(self, info):
@@ -224,7 +207,7 @@ class Attribute(OdooObjectType):
     id = graphene.Int(required=True)
     name = graphene.String()
     display_type = graphene.String()
-    values = graphene.List(graphene.NonNull(lambda: AttributeValueList))
+    values = graphene.List(graphene.NonNull(lambda: AttributeValue))
 
     def resolve_values(self, info):
         return self.value_ids or None
