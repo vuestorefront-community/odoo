@@ -164,11 +164,15 @@ class Category(OdooObjectType):
     id = graphene.Int(required=True)
     name = graphene.String()
     parent = graphene.Field(lambda: Category)
+    childs = graphene.List(graphene.NonNull(lambda: Category))
     slug = graphene.String()
     products = graphene.List(graphene.NonNull(lambda: Product))
 
     def resolve_parent(self, info):
         return self.parent_id or None
+
+    def resolve_childs(self, info):
+        return self.child_id or None
 
     def resolve_slug(self, info):
         return slug(self) or None
@@ -205,7 +209,6 @@ class AttributeValue(OdooObjectType):
     attribute_name = graphene.String()
 
     def resolve_id(self, info):
-        print(self.read())
         return self.product_attribute_value_id.id or None
 
     def resolve_search(self, info):
@@ -260,9 +263,6 @@ class Product(OdooObjectType):
     meta_title = graphene.String()
     meta_keyword = graphene.String()
     meta_description = graphene.String()
-    image = graphene.String()
-    small_image = graphene.String()
-    thumbnail = graphene.String()
     categories = graphene.List(graphene.NonNull(lambda: Category))
     is_in_stock = graphene.Boolean()
     is_in_wishlist = graphene.Boolean()
@@ -275,10 +275,16 @@ class Product(OdooObjectType):
     variant_price = graphene.Float(description='Specific to Product Variant')
     variant_price_after_discount = graphene.Float(description='Specific to Product Variant')
     variant_has_discounted_price = graphene.Boolean(description='Specific to Product Variant')
+    variant_image = graphene.String(description='Specific to Product Variant')
+    variant_small_image = graphene.String(description='Specific to Product Variant')
+    variant_thumbnail = graphene.String(description='Specific to Product Variant')
     variant_attribute_values = graphene.List(graphene.NonNull(lambda: AttributeValue),
                                              description='Specific to Product Variant')
     # Specific to use in Product Template
     price = graphene.Float(description='Specific to Product Template')
+    image = graphene.String(description='Specific to Product Template')
+    small_image = graphene.String(description='Specific to Product Template')
+    thumbnail = graphene.String(description='Specific to Product Template')
     attribute_values = graphene.List(graphene.NonNull(lambda: AttributeValue),
                                      description='Specific to Product Template')
     product_variants = graphene.List(graphene.NonNull(lambda: Product), description='Specific to Product Template')
@@ -319,27 +325,6 @@ class Product(OdooObjectType):
 
     def resolve_meta_description(self, info):
         return self.website_meta_description or None
-
-    def resolve_image(self, info):
-        if self.image_1920:
-            env = info.context["env"]
-            base_url = env['ir.config_parameter'].sudo().get_param('web.base.url', '')
-            return '{}/web/image/product.product/{}/image_1920'.format(base_url, self.id)
-        return None
-
-    def resolve_small_image(self, info):
-        if self.image_1920:
-            env = info.context["env"]
-            base_url = env['ir.config_parameter'].sudo().get_param('web.base.url', '')
-            return '{}/web/image/product.product/{}/image_128'.format(base_url, self.id)
-        return None
-
-    def resolve_thumbnail(self, info):
-        if self.image_1920:
-            env = info.context["env"]
-            base_url = env['ir.config_parameter'].sudo().get_param('web.base.url', '')
-            return '{}/web/image/product.product/{}/image_512'.format(base_url, self.id)
-        return None
 
     def resolve_categories(self, info):
         return self.public_categ_ids or None
@@ -383,12 +368,54 @@ class Product(OdooObjectType):
         pricing_info = get_product_pricing_info(env, self)
         return pricing_info['has_discounted_price']
 
+    def resolve_variant_image(self, info):
+        if self.image_1920:
+            env = info.context["env"]
+            base_url = env['ir.config_parameter'].sudo().get_param('web.base.url', '')
+            return '{}/web/image/product.product/{}/image_1920'.format(base_url, self.id)
+        return None
+
+    def resolve_variant_small_image(self, info):
+        if self.image_1920:
+            env = info.context["env"]
+            base_url = env['ir.config_parameter'].sudo().get_param('web.base.url', '')
+            return '{}/web/image/product.product/{}/image_128'.format(base_url, self.id)
+        return None
+
+    def resolve_variant_thumbnail(self, info):
+        if self.image_1920:
+            env = info.context["env"]
+            base_url = env['ir.config_parameter'].sudo().get_param('web.base.url', '')
+            return '{}/web/image/product.product/{}/image_512'.format(base_url, self.id)
+        return None
+
     def resolve_variant_attribute_values(self, info):
         return self.product_template_attribute_value_ids or None
 
     # Specific to use in Product Template
     def resolve_price(self, info):
         return self.list_price or None
+
+    def resolve_image(self, info):
+        if self.image_1920:
+            env = info.context["env"]
+            base_url = env['ir.config_parameter'].sudo().get_param('web.base.url', '')
+            return '{}/web/image/product.template/{}/image_1920'.format(base_url, self.id)
+        return None
+
+    def resolve_small_image(self, info):
+        if self.image_1920:
+            env = info.context["env"]
+            base_url = env['ir.config_parameter'].sudo().get_param('web.base.url', '')
+            return '{}/web/image/product.template/{}/image_128'.format(base_url, self.id)
+        return None
+
+    def resolve_thumbnail(self, info):
+        if self.image_1920:
+            env = info.context["env"]
+            base_url = env['ir.config_parameter'].sudo().get_param('web.base.url', '')
+            return '{}/web/image/product.template/{}/image_512'.format(base_url, self.id)
+        return None
 
     def resolve_attribute_values(self, info):
         return self.attribute_line_ids.product_template_value_ids or None
