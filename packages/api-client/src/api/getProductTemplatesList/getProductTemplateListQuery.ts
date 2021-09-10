@@ -28,7 +28,9 @@ export default gql`
           attributeId
         }
       }
-      ${productFragment}
+      products {
+        ${productFragment}
+      }
     }
   }
 `;
