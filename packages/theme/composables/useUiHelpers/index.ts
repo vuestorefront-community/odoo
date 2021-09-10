@@ -25,7 +25,7 @@ const useUiHelpers = (): any => {
     }
 
     const pageSize = query.itemsPerPage ? parseInt(query.itemsPerPage) : 10;
-    const sort = query.sort.split(',');
+    const sort = query?.sort?.split(',') || [];
     const categoryId = parseInt(params.slug_3) || parseInt(params.slug_2);
     return {
       search: '',

@@ -278,13 +278,8 @@ export default {
     const { reviews: productReviews } = useReview('productReviews');
 
     const product = computed(() => {
-      const productTemplate =
-        Array.isArray(products.value) && products.value[0]
-          ? products.value[0]
-          : {};
-
       return {
-        ...productTemplate,
+        ...products.value,
         realProduct: realProduct.value
       };
     });
