@@ -25,17 +25,9 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
     context: Context,
     { currentCart, product, quantity, customQuery }
   ) => {
-    let productId = null;
-    if (product.realProduct) {
-      productId = product.realProduct.product_id;
-    }
-    if (!product.realProduct) {
-      productId = product.first_variant_id || product.firstVariantId;
-    }
-
     if (!params.isInCart(context, { currentCart, product })) {
       const addItemParams: GraphQlCartAddItemParams = {
-        productId,
+        productId: String(product.firstVariant),
         quantity
       };
       const cart = await context.$odoo.api.cartAddItem(
@@ -102,7 +94,7 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
   isInCart: (context: Context, { currentCart, product }) => {
     return (
       currentCart?.order?.orderLines?.some(
-        (item) => item.product.id === product.first_variant_id
+        (item) => item.product.id === product.id
       ) || false
     );
   }
