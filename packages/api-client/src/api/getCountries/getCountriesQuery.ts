@@ -1,11 +1,13 @@
 import gql from 'graphql-tag';
 
 export default gql`
-    query{
-        allCountries {
-            id
-            code
-            name
-            }
-        }
+  query {
+    countries {
+      countries {
+        id
+        name
+        code
+      }
+    }
+  }
 `;

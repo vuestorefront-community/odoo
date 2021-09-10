@@ -15,5 +15,5 @@ export default async function getCountries(
     query
   });
 
-  return response.data.allCountries;
+  return response.data;
 }
