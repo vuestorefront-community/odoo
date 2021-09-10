@@ -15,7 +15,7 @@ def get_search_order(sort):
         if sorting:
             sorting += ', '
         if field == 'price':
-            sorting += 'lst_price %s' % val
+            sorting += 'list_price %s' % val
         else:
             sorting += '%s %s' % (field, val)
 
@@ -53,9 +53,9 @@ def get_search_domain(env, search, **kwargs):
 
     # Product Price Filter
     if kwargs.get('min_price', False):
-        domain += [('lst_price', '>=', float(kwargs['min_price']))]
+        domain += [('list_price', '>=', float(kwargs['min_price']))]
     if kwargs.get('max_price', False):
-        domain += [('lst_price', '<=', float(kwargs['max_price']))]
+        domain += [('list_price', '<=', float(kwargs['max_price']))]
 
     return domain
 
@@ -98,6 +98,7 @@ class ProductFilterInput(graphene.InputObjectType):
 
 class ProductSortInput(graphene.InputObjectType):
     id = SortEnum()
+    name = SortEnum()
     price = SortEnum()
 
 
