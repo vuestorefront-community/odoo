@@ -70,10 +70,10 @@ export type ProductSortInput = {
 
 export type GraphQlGetCategoryParams = {
   filter: CategoryFilterInput;
-  currentPage: number;
-  pageSize: number;
-  search: string;
-  sort: CategorySortInput;
+  currentPage?: number;
+  pageSize?: number;
+  search?: string;
+  sort?: CategorySortInput;
 };
 
 export type CategoryResult = {
@@ -285,10 +285,16 @@ export type GraphQlResetPasswordParams = {
   token: string;
 };
 
+export type CountryFiltersInput = {
+  id: [number];
+};
+
 export type GraphQlGetAllCountryStatesParams = {
-  countryId: string;
-  limit: number;
-  offset: number;
+  filter: CountryFiltersInput;
+  currentPage?: number;
+  pageSize?: number;
+  search?: string;
+  sort?: ProductSortInput;
 };
 
 export type GraphQlGetProductTemplateParams = {
@@ -305,6 +311,18 @@ export type GraphQlGetProductTemplateParams = {
 
 export type GraphQlGetProductParams = {
   filter: ProductFilterInput;
+  currentPage: number;
+  pageSize: number;
+  search: string;
+  sort: ProductSortInput;
+};
+
+export type ParamsFromUrlFilterInput = {
+  categoryId?: number;
+};
+
+export type ParamsFromUrl = {
+  filter: ParamsFromUrlFilterInput;
   currentPage: number;
   pageSize: number;
   search: string;

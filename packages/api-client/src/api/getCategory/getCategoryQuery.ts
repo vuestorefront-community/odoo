@@ -25,6 +25,8 @@ export default gql`
           slug
           parent {
             id
+            name
+            slug
           }
         }
       }

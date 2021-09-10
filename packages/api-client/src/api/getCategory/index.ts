@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context, CustomQuery } from '@vue-storefront/core';
-import gql from 'graphql-tag';
 import ApolloClient from 'apollo-client';
 import query from './getCategoryQuery';
 import { CategoryResult, GraphQlGetCategoryParams } from '../../types';
