@@ -177,11 +177,41 @@ class Category(OdooObjectType):
         return self.product_tmpl_ids or None
 
 
+# Only to use in Attributes List of Products Query
+class AttributeValueList(OdooObjectType, description='Only use to return the Attributes List of Products Query'):
+    id = graphene.Int(required=True)
+    name = graphene.String()
+    html_color = graphene.String()
+    search = graphene.String()
+    attribute_id = graphene.Int()
+
+    def resolve_id(self, info):
+        return self.id or None
+
+    def resolve_search(self, info):
+        attribute_id = self.attribute_id.id
+        attribute_value_id = self.id
+        return '{}-{}'.format(attribute_id, attribute_value_id) or None
+
+
 class AttributeValue(OdooObjectType):
     id = graphene.Int(required=True)
     name = graphene.String()
+    display_type = graphene.String()
+    html_color = graphene.String()
+    search = graphene.String()
+    price_extra = graphene.Float()
     attribute_id = graphene.Int()
     attribute_name = graphene.String()
+
+    def resolve_id(self, info):
+        print(self.read())
+        return self.product_attribute_value_id.id or None
+
+    def resolve_search(self, info):
+        attribute_id = self.attribute_id.id
+        attribute_value_id = self.product_attribute_value_id.id
+        return '{}-{}'.format(attribute_id, attribute_value_id) or None
 
     def resolve_attribute_name(self, info):
         return self.attribute_id.name or None
@@ -190,9 +220,10 @@ class AttributeValue(OdooObjectType):
 class Attribute(OdooObjectType):
     id = graphene.Int(required=True)
     name = graphene.String()
-    options = graphene.List(graphene.NonNull(lambda: AttributeValue))
+    display_type = graphene.String()
+    values = graphene.List(graphene.NonNull(lambda: AttributeValueList))
 
-    def resolve_options(self, info):
+    def resolve_values(self, info):
         return self.value_ids or None
 
 
@@ -224,9 +255,6 @@ class Product(OdooObjectType):
     name = graphene.String()
     sku = graphene.String()
     description = graphene.String()
-    price = graphene.Float()
-    price_after_discount = graphene.Float()
-    has_discounted_price = graphene.Boolean()
     currency = graphene.Field(lambda: Currency)
     weight = graphene.Float()
     meta_title = graphene.String()
@@ -243,7 +271,18 @@ class Product(OdooObjectType):
     slug = graphene.String()
     alternative_products = graphene.List(graphene.NonNull(lambda: Product))
     accessory_products = graphene.List(graphene.NonNull(lambda: Product))
-    attribute_values = graphene.List(graphene.NonNull(lambda: AttributeValue))
+    # Specific to use in Product Variant
+    variant_price = graphene.Float(description='Specific to Product Variant')
+    variant_price_after_discount = graphene.Float(description='Specific to Product Variant')
+    variant_has_discounted_price = graphene.Boolean(description='Specific to Product Variant')
+    variant_attribute_values = graphene.List(graphene.NonNull(lambda: AttributeValue),
+                                             description='Specific to Product Variant')
+    # Specific to use in Product Template
+    price = graphene.Float(description='Specific to Product Template')
+    attribute_values = graphene.List(graphene.NonNull(lambda: AttributeValue),
+                                     description='Specific to Product Template')
+    product_variants = graphene.List(graphene.NonNull(lambda: Product), description='Specific to Product Template')
+    first_variant = graphene.Int(description='Specific to use in Product Template')
 
     def resolve_type_id(self, info):
         if self.type == 'product':
@@ -268,21 +307,6 @@ class Product(OdooObjectType):
 
     def resolve_description(self, info):
         return self.description_sale or None
-
-    def resolve_price(self, info):
-        env = info.context["env"]
-        pricing_info = get_product_pricing_info(env, self)
-        return pricing_info['list_price'] or None
-
-    def resolve_price_after_discount(self, info):
-        env = info.context["env"]
-        pricing_info = get_product_pricing_info(env, self)
-        return pricing_info['price'] or None
-
-    def resolve_has_discounted_price(self, info):
-        env = info.context["env"]
-        pricing_info = get_product_pricing_info(env, self)
-        return pricing_info['has_discounted_price']
 
     def resolve_currency(self, info):
         return self.currency_id or None
@@ -343,8 +367,37 @@ class Product(OdooObjectType):
     def resolve_accessory_products(self, info):
         return self.accessory_product_ids or None
 
-    def resolve_attribute_values(self, info):
+    # Specific to use in Product Variant
+    def resolve_variant_price(self, info):
+        env = info.context["env"]
+        pricing_info = get_product_pricing_info(env, self)
+        return pricing_info['list_price'] or None
+
+    def resolve_variant_price_after_discount(self, info):
+        env = info.context["env"]
+        pricing_info = get_product_pricing_info(env, self)
+        return pricing_info['price'] or None
+
+    def resolve_variant_has_discounted_price(self, info):
+        env = info.context["env"]
+        pricing_info = get_product_pricing_info(env, self)
+        return pricing_info['has_discounted_price']
+
+    def resolve_variant_attribute_values(self, info):
         return self.product_template_attribute_value_ids or None
+
+    # Specific to use in Product Template
+    def resolve_price(self, info):
+        return self.list_price or None
+
+    def resolve_attribute_values(self, info):
+        return self.attribute_line_ids.product_template_value_ids or None
+
+    def resolve_product_variants(self, info):
+        return self.product_variant_ids or None
+
+    def resolve_first_variant(self, info):
+        return self.product_variant_id or None
 
 
 class Payment(OdooObjectType):

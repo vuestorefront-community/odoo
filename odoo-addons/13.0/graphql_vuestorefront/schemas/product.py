@@ -36,9 +36,9 @@ def get_search_domain(env, search, **kwargs):
     if kwargs.get('category_id', False):
         domain += [('public_categ_ids', 'in', kwargs['category_id'])]
 
-    # Filter with Attribute
-    if kwargs.get('attribute_id', False):
-        domain += [('product_template_attribute_value_ids', 'in', kwargs['attribute_id'])]
+    # Filter with Attribute Value
+    if kwargs.get('attribute_value_id', False):
+        domain += [('attribute_line_ids.value_ids', 'in', kwargs['attribute_value_id'])]
 
     # Filter With Name
     if kwargs.get('name', False):
@@ -61,7 +61,8 @@ def get_search_domain(env, search, **kwargs):
 
 
 def get_product_list(env, current_page, page_size, search, sort, **kwargs):
-    Product = env['product.product'].sudo()
+    Product = env['product.template'].sudo()
+    ProductAttribute = env['product.attribute'].sudo()
     domain = get_search_domain(env, search, **kwargs)
     # First offset is 0 but first page is 1
     if current_page > 1:
@@ -71,12 +72,15 @@ def get_product_list(env, current_page, page_size, search, sort, **kwargs):
     order = get_search_order(sort)
     products = Product.search(domain, limit=page_size, offset=offset, order=order)
     total_count = Product.search_count(domain)
-    return products, total_count
+    search_products = Product.search(domain, order=order)
+    attributes = ProductAttribute.search([('product_tmpl_ids', 'in', search_products.ids)])
+    return products, total_count, attributes
 
 
 class Products(graphene.Interface):
     products = graphene.List(Product)
     total_count = graphene.Int(required=True)
+    attributes = graphene.List(Attribute)
 
 
 class ProductList(graphene.ObjectType):
@@ -86,7 +90,7 @@ class ProductList(graphene.ObjectType):
 
 class ProductFilterInput(graphene.InputObjectType):
     category_id = graphene.List(graphene.Int)
-    attribute_id = graphene.List(graphene.Int)
+    attribute_value_id = graphene.List(graphene.Int)
     name = graphene.String()
     min_price = graphene.Float()
     max_price = graphene.Float()
@@ -119,7 +123,7 @@ class ProductQuery(graphene.ObjectType):
 
     @staticmethod
     def resolve_product(self, info, id):
-        product = info.context["env"]["product.product"].sudo().search([('id', '=', id)], limit=1)
+        product = info.context["env"]["product.template"].sudo().search([('id', '=', id)], limit=1)
         if not product:
             raise GraphQLError(_('Product does not exist.'))
         return product
@@ -127,8 +131,8 @@ class ProductQuery(graphene.ObjectType):
     @staticmethod
     def resolve_products(self, info, filter, current_page, page_size, search, sort):
         env = info.context["env"]
-        products, total_count = get_product_list(env, current_page, page_size, search, sort, **filter)
-        return ProductList(products=products, total_count=total_count)
+        products, total_count, attributes = get_product_list(env, current_page, page_size, search, sort, **filter)
+        return ProductList(products=products, total_count=total_count, attributes=attributes)
 
     @staticmethod
     def resolve_attribute(self, info, id):

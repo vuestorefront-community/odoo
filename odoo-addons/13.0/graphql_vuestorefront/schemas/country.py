@@ -26,7 +26,7 @@ def get_search_order(sort):
 
 
 class CountryFilterInput(graphene.InputObjectType):
-    id = graphene.List(graphene.Int)
+    id = graphene.Int()
 
 
 class CountrySortInput(graphene.InputObjectType):
@@ -76,7 +76,7 @@ class CountryQuery(graphene.ObjectType):
                 domain += [('name', 'ilike', srch)]
 
         if filter.get('id'):
-            domain += [('id', 'in', filter['id'])]
+            domain += [('id', '=', filter['id'])]
 
         # First offset is 0 but first page is 1
         if current_page > 1:
