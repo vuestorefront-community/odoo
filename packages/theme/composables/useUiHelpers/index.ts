@@ -25,14 +25,15 @@ const useUiHelpers = (): any => {
     }
 
     const pageSize = query.itemsPerPage ? parseInt(query.itemsPerPage) : 10;
-
+    const categoryId = [parseInt(params.slug_3) || parseInt(params.slug_2)];
     return {
       search: '',
       sort: {},
       pageSize,
+      categorySlug: params.slug_1,
       currentPage: 1,
       filter: {
-        categoryId: params.slug_3 || params.slug_2
+        categoryId
       }
     };
   };
