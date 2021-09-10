@@ -17,7 +17,8 @@ const factoryParams = {
   ): Promise<FacetResultsData> => {
     const categoryParams: GraphQlGetCategoryParams = {
       pageSize: 100,
-      filter: { parent: false, id: params.input.filter.categoryId }
+      search: params.input.search,
+      filter: { parent: false, id: params?.input?.filter?.categoryId || null }
     };
 
     const { categories } = await context.$odoo.api.getCategory(categoryParams);
@@ -25,7 +26,7 @@ const factoryParams = {
     const { products } = await context.$odoo.api.getProductTemplatesList(
       params.input
     );
-    //
+
     return {
       categories: categories.categories,
       products: products.products,

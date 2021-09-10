@@ -20,7 +20,8 @@ const itemToTree = (category: Category): AgnosticCategoryTree => {
     label: category.name,
     slug: category.slug,
     items: buildTree(category.childs),
-    isCurrent: false
+    isCurrent: false,
+    id: category.id
   };
 };
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
