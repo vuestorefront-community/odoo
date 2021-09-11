@@ -217,7 +217,6 @@ export default {
 
       await searchProductApi({ search: term.value, pageSize: 12 });
 
-      console.log(result);
       formatedResult.value = {
         products: result?.value?.data?.products,
         categories: result?.value?.data?.categories

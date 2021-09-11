@@ -98,26 +98,26 @@
         <LazyHydrate when-idle>
           <SfLoader :class="{ loading }" :loading="loading">
             <SfAccordion
-              :open="currentCategory.name"
+              :open="currentRootCategory.name"
               showChevron
               transition="sf-expand"
             >
               <SfAccordionItem
-                v-for="(cat, i) in categoryTree && categoryTree"
+                v-for="(cat, i) in categoryTree.items"
                 :key="i"
-                :header="cat.name"
+                :header="cat.label"
               >
                 <template>
                   <SfList class="list">
                     <SfListItem
                       class="list__item"
-                      v-for="(subCat, j) in cat.childs"
+                      v-for="(subCat, j) in cat.items"
                       :key="j"
                     >
                       <SfMenuItem
                         :count="subCat.count || ''"
                         :data-cy="`category-link_subcategory_${subCat.slug}`"
-                        :label="subCat.name"
+                        :label="subCat.label"
                       >
                         <template #label="{ label }">
                           <nuxt-link
@@ -445,26 +445,29 @@ export default {
       () => !loading.value && products.value?.length > 0
     );
 
-    const currentCategory = computed(() => {
-      const category = result.value.data.categories.find((category) => {
+    const currentRootCategory = computed(() => {
+      const categories = result.value?.data?.categories || [];
+      const category = categories.find((category) => {
         return category.slug === params.slug_1;
       });
 
-      return category || {};
+      const categoryFromParent = categories.find((category) => {
+        return category?.parent?.parent?.slug === params.slug_1;
+      });
+
+      return category || categoryFromParent?.parent?.parent || {};
     });
 
-    const getCurrentParentCategory = (currentCategory) => {
-      if (currentCategory.value.parent) {
-        return currentCategory?.value.parent[0];
-      }
-      return {};
-    };
+    const currentCategory = computed(() => {
+      const categories = result.value?.data?.categories || [];
+      return categories[0];
+    });
 
     const breadcrumbs = computed(() =>
       facetGetters.getBreadcrumbs({
         input: {
           params,
-          currentParentCategory: getCurrentParentCategory(currentCategory)
+          currentRootCategory: currentRootCategory.value
         }
       })
     );
@@ -475,7 +478,7 @@ export default {
       addTags([
         {
           prefix: CacheTagPrefix.Category,
-          value: currentCategory.value.id || params.slug_2
+          value: currentRootCategory.value.id || params.slug_2
         }
       ]);
     });
@@ -527,6 +530,7 @@ export default {
 
     return {
       ...uiState,
+      currentRootCategory,
       currentCategory,
       th,
       products,
