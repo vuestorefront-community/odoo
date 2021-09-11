@@ -67,42 +67,39 @@ export const getProductFiltered = (
 };
 // es
 export const getProductAttributes = (
-  productVariants: ProductVariant[],
+  product: Product,
   filterByAttributeName?: string[]
 ): Record<string, AgnosticAttribute | string> => {
   const attributes = {};
   const groupedByName = {};
 
-  productVariants.forEach((option) => {
-    groupedByName[option.attribute_name] = {
-      type: option.attribute_display_type,
-      variantId: option.attribute_value_id,
-      label: option.attribute_name,
+  product?.attributeValues?.forEach((option) => {
+    groupedByName[option.attributeName] = {
+      type: option.displayType,
+      variantId: option.id,
+      label: option.attributeName,
       values: []
     };
   });
-  productVariants.forEach((option) => {
-    groupedByName[option.attribute_name].values.push({
-      value: String(option.attribute_value_id),
-      label: option.attribute_value_name
+  product?.attributeValues?.forEach((option) => {
+    groupedByName[option.attributeName].values.push({
+      value: String(option.id),
+      label: option.name
     });
   });
 
-  productVariants.forEach((option) => {
-    if (!attributes[option.attribute_display_type]) {
-      attributes[option.attribute_display_type] = [];
+  product?.attributeValues?.forEach((option) => {
+    if (!attributes[option.displayType]) {
+      attributes[option.displayType] = [];
     }
     if (
-      groupedByName[option.attribute_name].type ===
-        option.attribute_display_type &&
-      !attributes[option.attribute_display_type].some(
+      groupedByName[option.attributeName].type === option.displayType &&
+      !attributes[option.displayType].some(
         (item) =>
-          item.variantId === groupedByName[option.attribute_name].variantId
+          item.variantId === groupedByName[option.attributeName].variantId
       )
     ) {
-      attributes[option.attribute_display_type].push(
-        groupedByName[option.attribute_name]
-      );
+      attributes[option.displayType].push(groupedByName[option.attributeName]);
     }
   });
 
