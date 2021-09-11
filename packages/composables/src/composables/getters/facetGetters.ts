@@ -69,7 +69,7 @@ const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
   let parentCategory: Category = searchData.data.categories[0];
 
   if (!categories[0].childs) {
-    parentCategory = categories[0].parent.parent;
+    parentCategory = categories[0]?.parent?.parent;
   }
 
   return CategoryGetters.getTree(parentCategory);
@@ -111,7 +111,6 @@ const getBreadcrumbsByProduct = (product: Product): AgnosticBreadcrumb[] => {
     text: splited[0],
     link: `/c/${splited[0]}/${topCategoryParent}`
   });
-  breadcrumbs.push({ text: splited[1], link: '' });
 
   return breadcrumbs || [];
 };
