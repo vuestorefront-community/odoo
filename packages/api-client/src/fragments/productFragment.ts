@@ -14,8 +14,18 @@ export default `
     id
     name
     slug
+    parent{
+      parent{
+        id
+      }
+    }
   }
   attributeValues {
     id
+    name
+    displayType
+    priceExtra
+    attributeName
+    search
   }
 `;

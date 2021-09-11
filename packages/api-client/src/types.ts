@@ -43,6 +43,9 @@ export type Attribute = {
   id: number;
   name: string;
   displayType: string;
+  priceExtra: number;
+  attributeName: string;
+  search: string;
   values: [AttributeValueList];
 };
 
