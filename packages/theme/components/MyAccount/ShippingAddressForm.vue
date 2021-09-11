@@ -6,16 +6,19 @@
 
 <script>
 import SAddressShopping from '../../pages/Checkout/Shipping.vue'
-import { useUiHelpers, useUiState, useUserShipping } from '~/composables';
-import { onSSR } from '@vue-storefront/core';
+import { ref } from '@vue/composition-api';
 export default {
   name: 'Shipping-address-form',
   components: {
     SAddressShopping
   },
-  steup(props, { root }) {
-    const tese = useUserShipping();
-    console.log(tese)
-  }
+  setup(props, { root }) {
+    // const hasSaved = ref(false);
+    // hasSaved.value = root.$on('finish', e => e)
+    // console.log(hasSaved)
+    // return {
+    //   hasSaved
+    // }
+  },
 }
 </script>

@@ -256,7 +256,10 @@ export default {
         address: form.value
       });
       isFormSubmitted.value = true;
+      if (root.$router.history.current.path != '/my-account/shipping-details')
       root.$router.push('/checkout/billing');
+
+      root.$emit('finish', true)
     };
 
     const hasSavedShippingAddress = computed(() => {
