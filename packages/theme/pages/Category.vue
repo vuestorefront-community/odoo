@@ -95,48 +95,46 @@
 
     <div class="main section">
       <div class="sidebar desktop-only">
-        <LazyHydrate when-idle>
-          <SfLoader :class="{ loading }" :loading="loading">
-            <SfAccordion
-              :open="currentRootCategory.name"
-              showChevron
-              transition="sf-expand"
+        <SfLoader :class="{ loading }" :loading="loading">
+          <SfAccordion
+            :open="currentCategoryNameForAccordion"
+            showChevron
+            transition="sf-expand"
+          >
+            <SfAccordionItem
+              v-for="(cat, i) in categoryTree.items"
+              :key="i"
+              :header="cat.label"
             >
-              <SfAccordionItem
-                v-for="(cat, i) in categoryTree.items"
-                :key="i"
-                :header="cat.label"
-              >
-                <template>
-                  <SfList class="list">
-                    <SfListItem
-                      class="list__item"
-                      v-for="(subCat, j) in cat.items"
-                      :key="j"
+              <template>
+                <SfList class="list">
+                  <SfListItem
+                    class="list__item"
+                    v-for="(subCat, j) in cat.items"
+                    :key="j"
+                  >
+                    <SfMenuItem
+                      :count="subCat.count || ''"
+                      :data-cy="`category-link_subcategory_${subCat.slug}`"
+                      :label="subCat.label"
                     >
-                      <SfMenuItem
-                        :count="subCat.count || ''"
-                        :data-cy="`category-link_subcategory_${subCat.slug}`"
-                        :label="subCat.label"
-                      >
-                        <template #label="{ label }">
-                          <nuxt-link
-                            :to="localePath(th.getCatLink(subCat))"
-                            :class="
-                              subCat.isCurrent ? 'sidebar--cat-selected' : ''
-                            "
-                          >
-                            {{ label }}
-                          </nuxt-link>
-                        </template>
-                      </SfMenuItem>
-                    </SfListItem>
-                  </SfList>
-                </template>
-              </SfAccordionItem>
-            </SfAccordion>
-          </SfLoader>
-        </LazyHydrate>
+                      <template #label="{ label }">
+                        <nuxt-link
+                          :to="localePath(th.getCatLink(subCat))"
+                          :class="
+                            subCat.isCurrent ? 'sidebar--cat-selected' : ''
+                          "
+                        >
+                          {{ label }}
+                        </nuxt-link>
+                      </template>
+                    </SfMenuItem>
+                  </SfListItem>
+                </SfList>
+              </template>
+            </SfAccordionItem>
+          </SfAccordion>
+        </SfLoader>
       </div>
       <SfLoader :class="{ loading }" :loading="loading">
         <div class="products" v-if="showProducts">
@@ -419,6 +417,8 @@ export default {
   transition: 'fade',
   setup(props, { root }) {
     const th = useUiHelpers();
+    const selectedFilters = ref([]);
+
     const { addTags } = useCache();
     const uiState = useUiState();
     const { addItem: addItemToCart, isInCart } = useCart();
@@ -448,6 +448,13 @@ export default {
     const currentCategory = computed(() => {
       const categories = result.value?.data?.categories || [];
       return categories[0];
+    });
+
+    const currentCategoryNameForAccordion = computed(() => {
+      const name =
+        currentCategory.value?.parent?.name ||
+        categoryTree.value?.items[0]?.label;
+      return name;
     });
 
     const currentRootCategory = computed(() => {
@@ -483,8 +490,6 @@ export default {
 
     const { changeFilters, isFacetColor } = useUiHelpers();
     const { toggleFilterSidebar } = useUiState();
-    const selectedFilters = ref([]);
-
     onMounted(() => {
       root.$scrollTo(root.$el, 2000);
       selectedFilters.value = th.facetsFromUrlToFilter();
@@ -553,7 +558,8 @@ export default {
       selectedFilters,
       clearFilters,
       facetHasMoreThanOneOption,
-      showProducts
+      showProducts,
+      currentCategoryNameForAccordion
     };
   },
   components: {
