@@ -86,7 +86,7 @@ const getProducts = (searchData: SearchData): any => {
 };
 
 const getPagination = (searchData: SearchData): AgnosticPagination => {
-  const itemsPerPage = searchData.input?.ppg || 10;
+  const itemsPerPage = searchData.input?.pageSize || 10;
 
   return {
     currentPage: 1,
