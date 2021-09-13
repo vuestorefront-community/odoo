@@ -313,6 +313,11 @@ export type GraphQlGetAllCountryStatesParams = {
   sort?: ProductSortInput;
 };
 
+export type GraphQlLoginParams = {
+  email: string;
+  password: string;
+};
+
 export type GraphQlGetProductParams = {
   filter: ProductFilterInput;
   currentPage: number;
