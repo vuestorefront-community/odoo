@@ -26,6 +26,7 @@ const useUiHelpers = (): any => {
 
     const pageSize = query.itemsPerPage ? parseInt(query.itemsPerPage) : 10;
     const sort = query?.sort?.split(',') || [];
+    const page = query?.page || 1;
     const categoryId = parseInt(params.slug_3) || parseInt(params.slug_2);
 
     return {
@@ -33,7 +34,7 @@ const useUiHelpers = (): any => {
       sort: { [sort[0]]: sort[1] },
       pageSize,
       categorySlug: params.slug_1,
-      currentPage: 1,
+      currentPage: page,
       filter: {
         categoryId,
         attributeValueId: filters.map((item) => parseInt(item))
