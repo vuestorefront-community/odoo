@@ -220,7 +220,7 @@ export default {
     VsfShippingProvider: () =>
       import('~/components/Checkout/VsfShippingProvider')
   },
-  setup(props, { root }) {
+  setup(props, { root, emit }) {
     const isFormSubmitted = ref(false);
     const formRef = ref(false);
     const currentAddressId = ref('');
@@ -259,7 +259,7 @@ export default {
       if (root.$router.history.current.path != '/my-account/shipping-details')
       root.$router.push('/checkout/billing');
 
-      root.$emit('finish', true)
+      emit('finish', true)
     };
 
     const hasSavedShippingAddress = computed(() => {
