@@ -313,12 +313,12 @@
                 :level="4"
                 :title="facet.label"
                 class="filters__title sf-heading--left"
-                :key="`filter-title-${facet.id}`"
+                :key="`filter-title-${facet.value}`"
               />
               <div
                 v-if="isFacetColor(facet)"
                 class="filters__colors"
-                :key="`${facet.id}-colors`"
+                :key="`${facet.value}-colors`"
               >
                 <SfColor
                   v-for="option in facet.options"
@@ -491,19 +491,21 @@ export default {
     });
 
     const isFilterSelected = (facet, option) => {
-      return selectedFilters.value.some((filter) => filter.id === option.id);
+      return selectedFilters.value.some(
+        (filter) => String(filter.id) === String(option.value)
+      );
     };
 
     const selectFilter = (facet, option) => {
       const alreadySelectedIndex = selectedFilters.value.findIndex(
-        (filter) => filter.id === option.id
+        (filter) => String(filter.id) === String(option.value)
       );
 
       if (alreadySelectedIndex === -1) {
         selectedFilters.value.push({
           filterName: facet.label,
           label: option.label,
-          id: option.id
+          id: option.value
         });
 
         return;
