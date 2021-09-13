@@ -36,7 +36,7 @@
 
         <div class="navbar__sort desktop-only">
           <span class="navbar__label">{{ $t('Sort by') }}:</span>
-          <LazyHydrate on-interaction>
+          <LazyHydrate when-idle>
             <SfSelect
               :value="sortBy.selected"
               placeholder="Select sorting"
@@ -445,22 +445,20 @@ export default {
       () => !loading.value && products.value?.length > 0
     );
 
+    const currentCategory = computed(() => {
+      const categories = result.value?.data?.categories || [];
+      return categories[0];
+    });
+
     const currentRootCategory = computed(() => {
       const categories = result.value?.data?.categories || [];
       const category = categories.find((category) => {
         return category.slug === params.slug_1;
       });
 
-      const categoryFromParent = categories.find((category) => {
-        return category?.parent?.parent?.slug === params.slug_1;
-      });
+      const categoryFromParent = currentCategory.value?.parent?.parent;
 
-      return category || categoryFromParent?.parent?.parent || {};
-    });
-
-    const currentCategory = computed(() => {
-      const categories = result.value?.data?.categories || [];
-      return categories[0];
+      return category || categoryFromParent || {};
     });
 
     const breadcrumbs = computed(() =>
