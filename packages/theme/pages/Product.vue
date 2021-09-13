@@ -143,7 +143,7 @@
               <SfProperty
                 v-for="(property, i) in properties"
                 :key="i"
-                :name="property.name"
+                :name="property.attributeName"
                 :value="property.value"
                 class="product__property"
               >
@@ -266,7 +266,6 @@ export default {
       `products-${id}`
     );
     const {
-      searchVariants,
       searchRealProduct,
       productVariants,
       realProduct,
@@ -288,7 +287,7 @@ export default {
     });
 
     const options = computed(() =>
-      productGetters.getAttributes(productVariants.value, ['color', 'size'])
+      productGetters.getAttributes(product.value, ['color', 'size'])
     );
     const description = computed(() =>
       productGetters.getDescription(product.value)
@@ -316,7 +315,6 @@ export default {
     );
 
     onSSR(async () => {
-      await searchVariants({ productId: id });
       await searchRealProduct({
         productId: id,
         combinationIds: Object.values(root.$route.query)
