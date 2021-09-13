@@ -1,24 +1,51 @@
 <template>
   <div>
-   <s-address-shopping />
+    <s-address-shopping v-if="displayConfirmMessage" @finish="hasSendForm" />
+    <h3 v-else>A new <span>address</span> has been added to your profile</h3>
+    <p class="centralizer">
+    <SfButton
+    link="/"
+    class="sf-button--full-width color-primary"
+    >{{ $t('Go back shopping') }}</SfButton>
+    </p>
   </div>
 </template>
 
 <script>
 import SAddressShopping from '../../pages/Checkout/Shipping.vue'
 import { ref } from '@vue/composition-api';
+import { SfButton } from '@storefront-ui/vue';
 export default {
   name: 'Shipping-address-form',
   components: {
-    SAddressShopping
+    SAddressShopping,
+    SfButton
   },
-  setup(props, { root }) {
-    // const hasSaved = ref(false);
-    // hasSaved.value = root.$on('finish', e => e)
-    // console.log(hasSaved)
-    // return {
-    //   hasSaved
-    // }
+  setup() {
+    const displayConfirmMessage = ref(false);
+    return {
+      displayConfirmMessage
+    }
   },
+  methods: {
+    hasSendForm() {
+      this.displayConfirmMessage = true
+    }
+  }
 }
 </script>
+
+<style lang="scss" scoped>
+  h3 {
+    text-align: center;
+    span {
+      color: #5ece7b;
+      font-weight: 500;
+    }
+  }
+  a {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+  }
+</style>
