@@ -328,6 +328,7 @@ export type GraphQlGetProductParams = {
 
 export type ParamsFromUrlFilterInput = {
   categoryId?: number;
+  attributeValueId: number[];
 };
 
 export type ParamsFromUrl = {
