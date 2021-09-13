@@ -36,17 +36,13 @@ export const getProductPrice = (product: Product): AgnosticPrice => {
 export const getProductGallery = (
   product: Product
 ): AgnosticMediaGalleryItem[] => {
-  if (!product) {
-    return [];
-  }
+  const images: AgnosticMediaGalleryItem[] = [];
 
-  const images: AgnosticMediaGalleryItem[] = [
-    {
-      small: product.image,
-      big: product.image,
-      normal: product.image
-    }
-  ];
+  images.push({
+    small: product.smallImage,
+    big: product.image,
+    normal: product.image
+  });
 
   return images;
 };
