@@ -1,6 +1,6 @@
 <template>
   <div>
-    <s-address-shopping v-if="displayConfirmMessage" @finish="hasSendForm" />
+    <s-address-shopping v-if="!displayConfirmMessage" @finish="hasSendForm" />
     <h3 v-else>A new <span>address</span> has been added to your profile</h3>
     <p class="centralizer">
     <SfButton
