@@ -17,7 +17,6 @@ export { default as getCountries } from './getCountries';
 export { default as getCountryStates } from './getCountryStates';
 export { default as shippingAddAdress } from './shippingAddAddress';
 export { default as shippingGetDeliveryMethods } from './shippingGetDeliveryMethods';
-export { default as getPriceShippingMethod } from './getPriceShippingMethod';
 export { default as billingUseShippingAsBillingAddress } from './billingUseShippingAsBillingAddress';
 export { default as billingAddAddress } from './billingAddAddress';
 export { default as getProductVariants } from './getProductVariants';
