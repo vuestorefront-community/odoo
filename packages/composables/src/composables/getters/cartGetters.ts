@@ -31,12 +31,12 @@ export const getCartItemName = (orderLine: OrderLine): string =>
   orderLine?.product.name || 'Product\'s name';
 
 export const getCartItemImage = (orderLine: OrderLine): string =>
-  orderLine?.product?.image;
+  orderLine?.product?.variantImage;
 
 export const getCartItemPrice = (orderLine: OrderLine): AgnosticPrice => {
   return {
-    regular: orderLine?.product?.listPrice || 12,
-    special: orderLine?.product?.listPrice || 10
+    regular: orderLine?.priceTotal || 12,
+    special: orderLine?.priceTotal || 10
   };
 };
 
