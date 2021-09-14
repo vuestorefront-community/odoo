@@ -447,7 +447,7 @@ export default {
 
     const currentCategory = computed(() => {
       const categories = result.value?.data?.categories || [];
-      return categories[0];
+      return categories[0] || {};
     });
 
     const currentCategoryNameForAccordion = computed(() => {

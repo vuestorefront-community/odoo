@@ -40,7 +40,6 @@
             />
           </ValidationProvider>
         </div>
-        <li-user-error :errors="mapGraphQLErrorToArray(errors)" />
         <SfButton class="form__button">
           {{ $t('Update password') }}
         </SfButton>
@@ -59,7 +58,6 @@ extend('confirmed', {
   message: 'Passwords must match.'
 });
 import { usePassword } from '@vue-storefront/odoo';
-import LiUserError from '~/components/LiUserError';
 
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import {
@@ -79,8 +77,7 @@ export default {
     ValidationProvider,
     ValidationObserver,
     SfBreadcrumbs,
-    SfContentPages,
-    LiUserError
+    SfContentPages
   },
   setup(_, { root }) {
     const resetForm = () => ({
