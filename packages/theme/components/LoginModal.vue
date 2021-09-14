@@ -29,7 +29,7 @@
             <ValidationProvider rules="required|email" v-slot="{ errors }">
               <SfInput
                 data-cy="login-input_email"
-                v-model="form.username"
+                v-model="form.email"
                 :valid="!errors[0]"
                 :errorMessage="errors[0]"
                 name="email"
@@ -58,11 +58,6 @@
                 class="form__element checkbox"
               />
             </template>
-            <li-user-error
-              :errors="mapGraphQLErrorToArray(errorPassword)"
-              v-if="isForgottenPassword"
-            />
-            <li-user-error v-else :errors="error.login" key="log-in" />
 
             <SfButton
               data-cy="login-btn_submit"
@@ -153,11 +148,6 @@
               />
             </ValidationProvider>
 
-            <li-user-error
-              :errors="mapGraphQLErrorToArray(error.register)"
-              key="sign-up"
-            />
-
             <SfButton
               data-cy="login-btn_submit"
               type="submit"
@@ -186,6 +176,7 @@
 </template>
 <script>
 import { ref, watch } from '@vue/composition-api';
+import { useUiNotification } from '~/composables';
 
 import {
   SfModal,
@@ -199,7 +190,6 @@ import {
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { required, email } from 'vee-validate/dist/rules';
 import { useUser, usePassword } from '@vue-storefront/odoo';
-import LiUserError from '~/components/LiUserError';
 import { useUiState } from '~/composables';
 
 extend('email', {
@@ -223,19 +213,18 @@ export default {
     SfAlert,
     ValidationProvider,
     ValidationObserver,
-    SfBar,
-    LiUserError
+    SfBar
   },
   setup() {
     const { isLoginModalOpen, toggleLoginModal } = useUiState();
+    const { send } = useUiNotification();
     const form = ref({});
 
     const isLogin = ref(false);
-    const error = ref({});
     const isForgottenPassword = ref(false);
     const createAccount = ref(false);
     const rememberMe = ref(false);
-    const { register, login, loading, error: errorUser, user } = useUser();
+    const { register, login, loading, error, user } = useUser();
     const {
       sendResetPassword,
       errors: errorPassword,
@@ -245,17 +234,20 @@ export default {
     watch(isLoginModalOpen, () => {
       if (isLoginModalOpen) {
         form.value = {};
-        error.value = {};
         resetPasswordErrors();
       }
     });
 
-    const mapGraphQLErrorToArray = (errors) =>
-      errors?.graphQLErrors?.map((item) => item.message);
-
     const handleForm = (fn) => async () => {
       await fn({ user: form.value });
-      error.value = errorUser.value;
+
+      if (error.value.login) {
+        send({ message: error?.value?.login?.message, type: 'danger' });
+      }
+      if (error.value.register) {
+        send({ message: error?.value?.register?.message, type: 'danger' });
+      }
+
       if (user.value !== null) {
         toggleLoginModal();
       }
@@ -278,8 +270,7 @@ export default {
       isLoginModalOpen,
       toggleLoginModal,
       handleLogin,
-      handleRegister,
-      mapGraphQLErrorToArray
+      handleRegister
     };
   }
 };
