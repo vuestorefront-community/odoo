@@ -62,7 +62,7 @@ const getSortOptions = (searchData: SearchData): AgnosticSort => ({
 
 const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
   if (!searchData?.data?.categories) {
-    return [] as any;
+    return { items: [], label: '', isCurrent: false };
   }
 
   const categories = searchData.data.categories;
