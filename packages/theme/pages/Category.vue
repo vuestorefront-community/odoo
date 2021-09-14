@@ -453,7 +453,8 @@ export default {
     const currentCategoryNameForAccordion = computed(() => {
       const name =
         currentCategory.value?.parent?.name ||
-        categoryTree.value?.items[0]?.label;
+        categoryTree.value?.items[0]?.label ||
+        {};
       return name;
     });
 
