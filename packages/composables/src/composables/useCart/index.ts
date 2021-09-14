@@ -94,7 +94,7 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
   isInCart: (context: Context, { currentCart, product }) => {
     return (
       currentCart?.order?.orderLines?.some(
-        (item) => item.product.id === product.id
+        (item) => item.product.id === product.firstVariant
       ) || false
     );
   }
