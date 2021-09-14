@@ -8,14 +8,26 @@ import { FetchResult } from 'apollo-link/lib/types';
 
 export default async function signUpUser(
   context: Context,
-  user: AgnosticUser,
+  params: AgnosticUser,
   customQuery?: CustomQuery
 ): Promise<FetchResult<DefaultGraphQlMutationResponse>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
-  const response = await apolloClient.mutate({
-    mutation,
-    variables: user
-  });
 
-  return response;
+  try {
+    const response = await apolloClient.mutate({
+      mutation,
+      variables: params,
+      fetchPolicy: 'no-cache'
+    });
+
+    return response.data;
+  } catch (error) {
+    if (error.graphQLErrors) {
+      return {
+        errors: error.graphQLErrors,
+        data: null
+      };
+    }
+    throw error.networkError?.result || error;
+  }
 }
