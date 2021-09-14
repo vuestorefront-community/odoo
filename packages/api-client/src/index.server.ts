@@ -23,8 +23,8 @@ const cookieExtension: ApiClientExtension = {
         }
 
         // apollo
-        if (response?.data?.cookie) {
-          res.setHeader('Set-cookie', response.data.cookie);
+        if (response?.cookie) {
+          res.setHeader('Set-cookie', response.cookie);
         }
 
         return response;
