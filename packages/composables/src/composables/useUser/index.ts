@@ -6,7 +6,7 @@ import {
   useUserFactory,
   UseUserFactoryParams
 } from '@vue-storefront/core';
-import { User } from '../types';
+import { User } from '@vue-storefront/odoo-api/src/types';
 import {
   getUserFromAgnosticUser,
   getAgnosticUserFromUser
@@ -15,10 +15,11 @@ import {
 const factoryParams: UseUserFactoryParams<User, any, any> = {
   load: async (context: Context) => {
     const user = context.$odoo.config.app.$cookies.get('odoo-user');
-
     if (user) {
-      return getUserFromAgnosticUser(user);
+      const { partner, errors } = await context.$odoo.api.loadUser();
+      return partner;
     }
+
     return null;
   },
 
@@ -31,7 +32,7 @@ const factoryParams: UseUserFactoryParams<User, any, any> = {
 
   updateUser: async (context: Context, { currentUser, updatedUserData }) => {
     console.log('Mocked: updateUser');
-    return {};
+    return {} as User;
   },
 
   register: async (context: Context, user) => {
@@ -56,6 +57,7 @@ const factoryParams: UseUserFactoryParams<User, any, any> = {
       throw new Error(errors.map((e) => e.message).join(','));
     }
 
+    context.$odoo.config.app.$cookies.set('odoo-user', login.partner);
     return login.partner;
   },
 
@@ -64,7 +66,7 @@ const factoryParams: UseUserFactoryParams<User, any, any> = {
     { currentUser, currentPassword, newPassword }
   ) => {
     console.log('Mocked: changePassword');
-    return {};
+    return {} as User;
   }
 };
 

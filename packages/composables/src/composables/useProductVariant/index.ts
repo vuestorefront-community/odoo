@@ -3,6 +3,7 @@
 
 import { useVSFContext, vsfRef } from '@vue-storefront/core';
 import { Context } from '@vue-storefront/core';
+import { GraphQlGetProductVariantParams } from '@vue-storefront/odoo-api/src/types';
 
 const useProductVariant = (): any => {
   const context: Context = useVSFContext();
@@ -27,18 +28,19 @@ const useProductVariant = (): any => {
   };
 
   const searchRealProduct = async ({ productId, combinationIds }) => {
+    const params: GraphQlGetProductVariantParams = {
+      combinationIds: combinationIds.map((id) => parseInt(id)),
+      productId
+    };
+
     if (combinationIds.length === 0) return;
 
-    const response = await context.$odoo.api.getProduct(
-      { productId, combinationIds },
-      {}
-    );
+    const response = await context.$odoo.api.getProduct(params);
 
     if (response.error) {
       errors.value = response?.error.data.arguments;
       return;
     }
-
     realProduct.value = response;
   };
 
