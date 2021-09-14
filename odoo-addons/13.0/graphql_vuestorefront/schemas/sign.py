@@ -23,7 +23,7 @@ class Login(graphene.Mutation):
 
         try:
             uid = request.session.authenticate(request.session.db, email, password)
-            return env['res.users'].browse(uid)
+            return env['res.users'].sudo().browse(uid)
         except odoo.exceptions.AccessDenied as e:
             if e.args == odoo.exceptions.AccessDenied().args:
                 raise GraphQLError(_('Wrong email or password.'))

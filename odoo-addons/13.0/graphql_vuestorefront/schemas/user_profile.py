@@ -3,8 +3,28 @@
 import graphene
 from graphql import GraphQLError
 from odoo import _
+from odoo.http import request
 
 from odoo.addons.graphql_vuestorefront.schemas.objects import Partner
+
+
+class UserProfileQuery(graphene.ObjectType):
+    partner = graphene.Field(
+        Partner,
+        required=True,
+    )
+
+    @staticmethod
+    def resolve_partner(self, info):
+        uid = request.session.uid
+        user = info.context['env']['res.users'].sudo().browse(uid)
+        if user:
+            partner = user.partner_id
+            if not partner:
+                raise GraphQLError(_('Partner does not exist.'))
+        else:
+            raise GraphQLError(_('User does not exist.'))
+        return partner
 
 
 class UpdateMyAccountParams(graphene.InputObjectType):

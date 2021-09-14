@@ -19,6 +19,7 @@ class Query(
     product.ProductQuery,
     order.OrderQuery,
     invoice.InvoiceQuery,
+    user_profile.UserProfileQuery,
     address.AddressQuery,
     wishlist.WishlistQuery,
     shop.ShoppingCartQuery,
