@@ -192,13 +192,16 @@ export type Partner = {
 };
 
 export type ProductVariant = {
-  attribute_name: string;
-  attribute_display_type: string;
-  attribute_value_id: number;
-  attribute_value_name: string;
-  attribute_value_html_color: any;
-  attribute_value_price_extra: number;
+  productId: number;
+  productTemplateId: number;
+  displayName: string;
+  displayImage: boolean;
+  price: number;
+  listPrice: string;
+  hasDiscountedPrice: boolean;
+  isCombinationPossible: boolean;
 };
+
 export type OrderLine = {
   id: number;
   name?: string;
@@ -283,7 +286,7 @@ export type GraphQlWishlistRemoveItemParams = {
   wishId: number;
 };
 
-export type GraphQlGetProductParamsOld = {
+export type GraphQlGetProductVariantParams = {
   productId: number;
   combinationIds: string[];
 };

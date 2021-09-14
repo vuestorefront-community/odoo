@@ -2,24 +2,22 @@
 /* eslint-disable camelcase */
 
 import { Context, CustomQuery } from '@vue-storefront/core';
+import ApolloClient from 'apollo-client';
+import query from './getRealProductQuery';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlGetProductParamsOld } from '../../types';
+import { GraphQlGetProductVariantParams } from '../../types';
 
 export default async function getProduct(
   context: Context,
-  params: GraphQlGetProductParamsOld,
+  params: GraphQlGetProductVariantParams,
   customQuery?: CustomQuery
 ): Promise<FetchResult> {
-  const response = await context.client.axios.post(
-    `/shop/get_combination_info/${params.productId}`,
-    {
-      jsonrpc: '2.0',
-      method: 'call',
-      params: {
-        combination_ids: params.combinationIds.map((id) => parseInt(id))
-      }
-    }
-  );
+  const apolloClient = context.client.apollo as ApolloClient<any>;
 
-  return response.data.result;
+  const response = await apolloClient.query({
+    query,
+    variables: params
+  });
+
+  return response.data;
 }
