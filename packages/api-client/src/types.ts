@@ -108,6 +108,7 @@ export type Product = {
   qty: number;
   sku: string;
   image: string;
+  variantImage: string;
   smallImage: string;
   mediaGallery: [ProductImage];
   price: number;
