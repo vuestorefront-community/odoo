@@ -1,22 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context, CustomQuery } from '@vue-storefront/core';
-import mutation from './signUpUserMutation';
 import ApolloClient from 'apollo-client';
-import { User } from '@vue-storefront/odoo-api/src/types';
-import { DefaultGraphQlMutationResponse } from '../../types';
+import query from './loadUserQuery';
 import { FetchResult } from 'apollo-link/lib/types';
-
-export default async function signUpUser(
+export default async function getProductTemplates(
   context: Context,
-  params: User,
   customQuery?: CustomQuery
-): Promise<FetchResult<DefaultGraphQlMutationResponse>> {
+): Promise<FetchResult> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   try {
-    const response = await apolloClient.mutate({
-      mutation,
-      variables: params,
+    const response = await apolloClient.query({
+      query,
       fetchPolicy: 'no-cache'
     });
 

@@ -7,12 +7,12 @@ import fetch from 'isomorphic-fetch';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const createOddoLink = (settings: Config): any => {
-
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
       graphQLErrors.map(({ message, locations, path }) =>
         console.warn(
-          `%c [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`, 'background: #222; color: #FFA07A'
+          `%c [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+          'background: #222; color: #FFA07A'
         )
       );
 
@@ -24,7 +24,9 @@ const createOddoLink = (settings: Config): any => {
       const context = operation.getContext();
       const authHeader = context.response.headers.get('set-cookie');
 
-      response.data.cookie = authHeader;
+      if (response.data) {
+        response.data.cookie = authHeader;
+      }
 
       return response;
     });
@@ -50,4 +52,3 @@ const createOddoLink = (settings: Config): any => {
 };
 
 export { createOddoLink };
-

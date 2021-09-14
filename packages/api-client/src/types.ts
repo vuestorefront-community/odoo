@@ -142,13 +142,22 @@ export declare type Wishlist = {
   wishlistItems?: [WishlistItem];
 };
 
-export type AgnosticUser = {
-  email: string;
-  name: string;
+export type User = {
   password: string;
-  is_admin: boolean;
-  uid: number;
-  username: string;
+  id?: number
+  name: string
+  street?: string
+  street2?: string
+  city?: string
+  country?: Country
+  state?: State
+  zip?: string
+  email: string
+  phone?: string
+  isCompany?: boolean
+  contacts?: [Partner]
+  signupToken?: string
+  signupValid?: string
 };
 
 export interface AgnosticFacet {
