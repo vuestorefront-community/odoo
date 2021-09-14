@@ -175,7 +175,7 @@
         type="submit"
         :disabled="invalid"
       >
-        {{ $t('Continue to billing') }}
+        <slot name="btn-text"></slot>
       </SfButton>
     </form>
   </ValidationObserver>
@@ -258,6 +258,8 @@ export default {
       isFormSubmitted.value = true;
       if (root.$router.history.current.path != '/my-account/shipping-details')
       root.$router.push('/checkout/billing');
+      else
+      root.$router.push('/my-account/shipping-details')
 
       emit('finish', true)
     };

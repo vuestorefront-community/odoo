@@ -1,12 +1,10 @@
 <template>
   <div>
-    <s-address-shopping v-if="!displayConfirmMessage" @finish="hasSendForm" />
+    <s-address-shopping v-if="!displayConfirmMessage" @finish="hasSendForm" >
+      <p slot="btn-text">{{ $t('Update Profile') }}</p>
+    </s-address-shopping>
     <h3 v-else>A new <span>address</span> has been added to your profile</h3>
     <p class="centralizer">
-    <SfButton
-    link="/"
-    class="sf-button--full-width color-primary"
-    >{{ $t('Go back shopping') }}</SfButton>
     </p>
   </div>
 </template>
@@ -14,12 +12,14 @@
 <script>
 import SAddressShopping from '../../pages/Checkout/Shipping.vue'
 import { ref } from '@vue/composition-api';
-import { SfButton } from '@storefront-ui/vue';
+import { SfButton, SfList, SfContentPages  } from '@storefront-ui/vue';
 export default {
   name: 'Shipping-address-form',
   components: {
     SAddressShopping,
-    SfButton
+    SfContentPages,
+    SfList,
+    SfButton,
   },
   setup() {
     const displayConfirmMessage = ref(false);
