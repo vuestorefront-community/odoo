@@ -247,6 +247,7 @@ export type Order = {
   amountUntaxed: number;
   amountTax: number;
   amountTotal: number;
+  amountDelivery: number;
   currency: Currency;
   orderLines?: OrderLine[];
   stage: OrderStage;

@@ -3,6 +3,7 @@ order {
   name
   amountTotal
   amountTax
+  amountDelivery
   orderLines {
     id
     name
