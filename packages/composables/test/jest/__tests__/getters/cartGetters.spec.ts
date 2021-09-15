@@ -55,13 +55,13 @@ it('get cart item sku without sky', () => {
 it('get cart totals', () => {
   const categoryTree = cartGetters.getTotals(mockedCart);
 
-  expect(categoryTree).toStrictEqual({ subtotal: 1639.75, total: 1643.75 });
+  expect(categoryTree).toStrictEqual({ subtotal: 1633.75, total: 1643.75 });
 });
 
-it('calculate cart subtotal', () => {
-  const categoryTree = cartGetters.getTotals(mockedCart);
+it('get cart sshipping price', () => {
+  const categoryTree = cartGetters.getShippingPrice(mockedCart);
 
-  expect(categoryTree).toStrictEqual({ subtotal: 1639.75, total: 1643.75 });
+  expect(categoryTree).toStrictEqual(10);
 });
 
 it('cart total items', () => {

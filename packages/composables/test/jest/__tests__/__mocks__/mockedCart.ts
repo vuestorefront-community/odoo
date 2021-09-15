@@ -15,6 +15,7 @@ export const mockedCart: Cart = {
     name: 'S00290',
     amountTotal: 1643.75,
     amountTax: 0,
+    amountDelivery: 10.0,
     stage: OrderStage.SalesOrder,
     orderUrl: 'string',
     transactions: [{} as PaymentTransaction],
