@@ -113,11 +113,11 @@
             </ValidationProvider>
             <ValidationProvider rules="required" v-slot="{ errors }">
               <SfInput
-                data-cy="login-input_firstName"
-                v-model="form.firstName"
+                data-cy="login-input_name"
+                v-model="form.name"
                 :valid="!errors[0]"
                 :errorMessage="errors[0]"
-                name="first-name"
+                name="name"
                 label="Name"
                 class="form__element"
               />
