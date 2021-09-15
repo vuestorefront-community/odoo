@@ -1,25 +1,14 @@
 /* eslint-disable camelcase */
+import { Order } from '@vue-storefront/odoo-api/src/types';
 import useCart from '../../../src/composables/useCart';
-
+import { mockedCart } from './__mocks__/mockedCart';
 const { load, addItem, removeItem, updateItemQty, isInCart } = useCart() as any;
 
-const websiteOrderLine = [
-  {
-    id: 68,
-    product: {
-      id: 22,
-      name: '[578902-00] Shirt Himons multi (36)'
-    }
-  }
-];
-const loadedShoppingCart = { name: 'S00117', websiteOrderLine };
 const context = {
   $odoo: {
     api: {
-      cartLoad: jest.fn(() => ({
-        data: { userShoppingCart: [loadedShoppingCart] }
-      })),
-      cartAddItem: jest.fn(() => loadedShoppingCart),
+      cartLoad: jest.fn(() => ({ cart: mockedCart })),
+      cartAddItem: jest.fn(() => mockedCart),
       cartRemoveItem: jest.fn(() => ({})),
       cartUpdateItemQty: jest.fn(() => ({}))
     }
@@ -38,106 +27,56 @@ describe('useCart', () => {
   it('load cart', async () => {
     const cart = await load(context, {});
 
-    expect(cart).toStrictEqual(loadedShoppingCart);
+    expect(cart).toStrictEqual(mockedCart);
   });
 
   it('load empty cart', async () => {
     context.$odoo.api.cartLoad = jest.fn(() => ({
-      data: { userShoppingCart: [] }
+      cart: { order: {} as Order }
     }));
+
     const cart = await load(context, {});
 
-    expect(cart).toStrictEqual([]);
+    expect(cart).toStrictEqual({ order: {} });
   });
 
-  it('adds to cart real product', async () => {
+  it('add to cart real product', async () => {
     const product = {
-      realProduct: { product_id: 10 }
+      realProduct: { productId: 10 }
     };
-    const cart = await addItem(context, {
+    await addItem(context, {
       product,
       quantity: 3,
       customQuery: {}
     });
 
     expect(context.$odoo.api.cartAddItem).toBeCalledWith(
-      { productId: 10, quantity: 3 },
+      { productId: '10', quantity: 3 },
       {}
     );
-    expect(cart).toStrictEqual([]);
   });
 
-  it('adds to cart first variant item from category', async () => {
+  it('add to cart first variant item from category', async () => {
     const product = {
-      first_variant_id: 5
+      firstVariant: 5
     };
-    const cart = await addItem(context, {
-      product,
-      quantity: 2,
-      customQuery: {}
-    });
+    await addItem(context, { product, quantity: 2, customQuery: {} });
 
     expect(context.$odoo.api.cartAddItem).toBeCalledWith(
-      { productId: 5, quantity: 2 },
+      {
+        productId: '5',
+        quantity: 2
+      },
       {}
     );
-    expect(cart).toStrictEqual([]);
-  });
-
-  it('adds to cart first variant item from category jsonrpc call', async () => {
-    const product = {
-      first_variant_id: 5
-    };
-    const cart = await addItem(context, {
-      product,
-      quantity: 2,
-      customQuery: {}
-    });
-
-    expect(context.$odoo.api.cartAddItem).toBeCalledWith(
-      { productId: 5, quantity: 2 },
-      {}
-    );
-    expect(cart).toStrictEqual([]);
-  });
-
-  it('adds to cart first variant item from category graphql call', async () => {
-    const product = {
-      firstVariantId: 22
-    };
-    const cart = await addItem(context, {
-      product,
-      quantity: 1,
-      customQuery: {}
-    });
-
-    expect(context.$odoo.api.cartAddItem).toBeCalledWith(
-      { productId: 22, quantity: 1 },
-      {}
-    );
-    expect(cart).toStrictEqual([]);
-  });
-
-  it('load cart after add item', async () => {
-    const product = {
-      firstVariantId: 22
-    };
-    const cart = await addItem(context, {
-      product,
-      quantity: 1,
-      customQuery: {}
-    });
-
-    expect(context.$odoo.api.cartLoad).toBeCalledTimes(1);
-    expect(cart).toStrictEqual([]);
   });
 
   it('dont add to cart item already in cart', async () => {
     const product = {
-      first_variant_id: 22
+      firstVariant: 108
     };
     await addItem(context, {
-      currentCart: loadedShoppingCart,
+      currentCart: mockedCart,
       product,
       quantity: 1,
       customQuery: {}
@@ -147,15 +86,10 @@ describe('useCart', () => {
   });
 
   it('remove item from cart with saleOrder product', async () => {
-    const orderLine = {
-      product: { id: 10 }
-    };
+    const orderLine = { id: 10 };
     await removeItem(context, { product: orderLine, customQuery: {} });
 
-    expect(context.$odoo.api.cartRemoveItem).toBeCalledWith(
-      { productId: 10 },
-      {}
-    );
+    expect(context.$odoo.api.cartRemoveItem).toBeCalledWith({ lineId: 10 }, {});
   });
 
   it('remove item from cart with saleOrder product', async () => {
@@ -174,12 +108,26 @@ describe('useCart', () => {
     );
   });
 
-  it('checks if item is in cart', async () => {
+  it('checks if item from category is in cart', async () => {
     const product = {
-      first_variant_id: 22
+      firstVariant: 107
     };
     const inCart = await isInCart(context, {
-      currentCart: loadedShoppingCart,
+      currentCart: mockedCart,
+      product
+    });
+
+    expect(inCart).toBeTruthy();
+  });
+
+  it('checks if item variant from product is in cart', async () => {
+    const product = {
+      realProduct: {
+        productId: 107
+      }
+    };
+    const inCart = await isInCart(context, {
+      currentCart: mockedCart,
       product
     });
 

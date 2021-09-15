@@ -1,9 +1,14 @@
-import { getProductProperties, getProductGallery, getProductFiltered, getProductAttributes } from '../../../../src/composables/getters/productGetters';
+import {
+  getProductProperties,
+  getProductGallery,
+  getProductFiltered,
+  getProductAttributes
+} from '../../../../src/composables/getters/productGetters';
 import { Product } from '@vue-storefront/odoo-api/src/types';
-import productVariants from '../../data/productVariants.json';
-import productVariantsFormated from '../../data/productVariantsFormated.json';
+import { productVariantsFormated } from '../__mocks__/productAttributesFormated';
+import { productWithAttributes } from '../__mocks__/productWithAttributes';
 
-it('get empty product attributes', () => {
+it('get empty product Attributes', () => {
   const propertiesWithNull = getProductProperties(null);
   const propertiesWithUndefined = getProductProperties(undefined);
 
@@ -11,55 +16,50 @@ it('get empty product attributes', () => {
   expect(propertiesWithUndefined).toStrictEqual([]);
 });
 it('get list of Attributes', () => {
-  const product = {
-    id: 1,
-    attributes: [
-      { id: 1, name: 'size', displayName: 'Size' },
-      { id: 1, name: 'category', displayName: 'Category' }
-    ]
-  } as Product;
-  const properties = getProductProperties(product);
+  const properties = getProductProperties(productWithAttributes);
 
-  expect(properties).toStrictEqual(product.attributes);
+  expect(properties).toStrictEqual(productWithAttributes.attributeValues);
 });
 
 it('get empty gallery for no product', () => {
-
+  const expected = [{ big: '', normal: '', small: '' }];
   const galleryWithNull = getProductGallery(null);
   const galleryWithUndefined = getProductGallery(undefined);
 
-  expect(galleryWithNull).toStrictEqual([]);
-  expect(galleryWithUndefined).toStrictEqual([]);
+  expect(galleryWithNull).toStrictEqual(expected);
+  expect(galleryWithUndefined).toStrictEqual(expected);
 });
 
 it('get AgnosticMediaGallery with empty image for product without image', () => {
-
   const galleryWithNull = getProductGallery({} as Product);
 
-  expect(galleryWithNull).toStrictEqual([{
-    small: undefined,
-    big: undefined,
-    normal: undefined
-  }]);
+  expect(galleryWithNull).toStrictEqual([
+    {
+      small: '',
+      big: '',
+      normal: ''
+    }
+  ]);
 });
 
 it('get AgnosticMediaGallery with image for product', () => {
-
   const product = {
-    image: 'http://odoo.com'
+    image: 'http://odoo.com',
+    smallImage: 'http://odoo.small.com'
   } as Product;
 
   const galleryWithNull = getProductGallery(product);
 
-  expect(galleryWithNull).toStrictEqual([{
-    small: 'http://odoo.com',
-    big: 'http://odoo.com',
-    normal: 'http://odoo.com'
-  }]);
+  expect(galleryWithNull).toStrictEqual([
+    {
+      small: 'http://odoo.small.com',
+      big: 'http://odoo.com',
+      normal: 'http://odoo.com'
+    }
+  ]);
 });
 
 it('get empty filtered product', () => {
-
   const productsWithNull = getProductFiltered(null);
   const productsWithUndefined = getProductFiltered(undefined);
 
@@ -68,8 +68,7 @@ it('get empty filtered product', () => {
 });
 
 it('get grouped attribute list', () => {
-
-  const result = getProductAttributes(productVariants, []);
+  const result = getProductAttributes(productWithAttributes, []);
 
   expect(result).toStrictEqual(productVariantsFormated);
 });
