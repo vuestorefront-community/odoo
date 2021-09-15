@@ -454,7 +454,7 @@ export default {
       const name =
         currentCategory.value?.parent?.name ||
         categoryTree.value?.items[0]?.label ||
-        {};
+        '';
       return name;
     });
 
