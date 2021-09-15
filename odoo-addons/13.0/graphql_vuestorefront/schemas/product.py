@@ -104,7 +104,7 @@ class ProductSortInput(graphene.InputObjectType):
 
 
 class ProductVariant(graphene.Interface):
-    product_id = graphene.Int()
+    product = graphene.Field(Product)
     product_template_id = graphene.Int()
     display_name = graphene.String()
     display_image = graphene.Boolean()
@@ -188,7 +188,7 @@ class ProductQuery(graphene.ObjectType):
             variant_info['is_combination_possible'] = True
 
         return ProductVariantData(
-            product_id=variant_info['product_id'],
+            product=product,
             product_template_id=variant_info['product_template_id'],
             display_name=variant_info['display_name'],
             display_image=variant_info['display_image'],
