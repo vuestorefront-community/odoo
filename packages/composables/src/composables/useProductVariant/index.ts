@@ -15,38 +15,22 @@ const useProductVariant = (): any => {
 
   const resetPasswordErrors = () => (errors.value = []);
 
-  const searchVariants = async ({ productId }) => {
-    try {
-      const response = await context.$odoo.api.getProductVariants(
-        { productId },
-        {}
-      );
-      productVariants.value = response;
-    } catch (error) {
-      errors.value = error;
-    }
-  };
-
-  const searchRealProduct = async ({ productId, combinationIds }) => {
+  const searchRealProduct = async ({ productTemplateId, combinationIds }) => {
     const params: GraphQlGetProductVariantParams = {
-      combinationIds: combinationIds.map((id) => parseInt(id)),
-      productId
+      combinationId: combinationIds.map((id) => parseInt(id)),
+      productTemplateId
     };
 
     if (combinationIds.length === 0) return;
 
-    const response = await context.$odoo.api.getProduct(params);
+    const { productVariant } = await context.$odoo.api.getRealProduct(params);
+    console.log(productVariant);
 
-    if (response.error) {
-      errors.value = response?.error.data.arguments;
-      return;
-    }
-    realProduct.value = response;
+    realProduct.value = productVariant;
   };
 
   return {
     elementNames,
-    searchVariants,
     resetPasswordErrors,
     searchRealProduct,
     productVariants,
