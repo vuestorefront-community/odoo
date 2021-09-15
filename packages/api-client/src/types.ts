@@ -15,8 +15,8 @@ export enum OrderStage {
 
 export declare type Currency = {
   id: number;
-  name: string;
-  symbol: string;
+  name?: string;
+  symbol?: string;
 };
 
 export declare type Address = {
@@ -101,10 +101,10 @@ export type ProductImage = {
 
 export type Product = {
   id: number;
-  description: string;
+  description?: string;
   name: string;
-  slug: string;
-  isInStock: boolean;
+  slug?: string;
+  isInStock?: boolean;
   qty: number;
   sku: string;
   image: string;
@@ -116,14 +116,14 @@ export type Product = {
   priceAfterDiscount: number;
   hasDiscountedPrice: number;
   listPrice: number;
-  realProduct: ProductVariant;
+  realProduct?: ProductVariant;
   firstVariant: number;
   currency: Currency;
   isInWishlist: boolean;
-  alternativeProducts: [Product];
-  accessoryProducts: [Product];
+  alternativeProducts?: [Product];
+  accessoryProducts?: [Product];
   attributeValues: Attribute[];
-  productTemplate: Product;
+  productTemplate?: Product;
   categories: [Category];
 };
 
@@ -144,20 +144,20 @@ export declare type Wishlist = {
 
 export type User = {
   password: string;
-  id?: number
-  name: string
-  street?: string
-  street2?: string
-  city?: string
-  country?: Country
-  state?: State
-  zip?: string
-  email: string
-  phone?: string
-  isCompany?: boolean
-  contacts?: [Partner]
-  signupToken?: string
-  signupValid?: string
+  id?: number;
+  name: string;
+  street?: string;
+  street2?: string;
+  city?: string;
+  country?: Country;
+  state?: State;
+  zip?: string;
+  email: string;
+  phone?: string;
+  isCompany?: boolean;
+  contacts?: [Partner];
+  signupToken?: string;
+  signupValid?: string;
 };
 
 export interface AgnosticFacet {
@@ -173,7 +173,7 @@ export interface AgnosticFacet {
 
 export type State = {
   id: number;
-  name: string;
+  name?: string;
 };
 export type ShippingMethod = {
   id: number;
@@ -182,21 +182,21 @@ export type ShippingMethod = {
 };
 export type Country = {
   id: number;
-  code: string;
-  name: string;
+  code?: string;
+  name?: string;
 };
 export type Partner = {
   id: number;
   name: string;
   street: string;
-  street2: string;
+  street2?: string;
   city: string;
   state: State;
   zip: string;
   country: Country;
-  email: string;
+  email?: string;
   phone: string;
-  isCompany: boolean;
+  isCompany?: boolean;
   contacts: [Partner];
 };
 
