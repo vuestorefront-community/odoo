@@ -116,7 +116,7 @@ export type Product = {
   priceAfterDiscount: number;
   hasDiscountedPrice: number;
   listPrice: number;
-  realProduct: any;
+  realProduct: ProductVariant;
   firstVariant: number;
   currency: Currency;
   isInWishlist: boolean;
@@ -296,8 +296,8 @@ export type GraphQlWishlistRemoveItemParams = {
 };
 
 export type GraphQlGetProductVariantParams = {
-  productId: number;
-  combinationIds: string[];
+  productTemplateId: number;
+  combinationId: string[];
 };
 
 export type GraphQlCartAddItemParams = {

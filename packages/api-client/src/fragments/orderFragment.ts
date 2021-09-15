@@ -5,6 +5,7 @@ order {
   amountTax
   orderLines {
     id
+    name
     product {
       id
       name

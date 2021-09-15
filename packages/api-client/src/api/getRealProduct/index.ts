@@ -7,17 +7,28 @@ import query from './getRealProductQuery';
 import { FetchResult } from 'apollo-link/lib/types';
 import { GraphQlGetProductVariantParams } from '../../types';
 
-export default async function getProduct(
+export default async function getRealProduct(
   context: Context,
   params: GraphQlGetProductVariantParams,
   customQuery?: CustomQuery
 ): Promise<FetchResult> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
-  const response = await apolloClient.query({
-    query,
-    variables: params
-  });
+  try {
+    const response = await apolloClient.query({
+      query,
+      variables: params,
+      fetchPolicy: 'no-cache'
+    });
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    if (error.graphQLErrors) {
+      return {
+        errors: error.graphQLErrors,
+        data: null
+      };
+    }
+    throw error.networkError?.result || error;
+  }
 }

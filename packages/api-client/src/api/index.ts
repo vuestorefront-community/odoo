@@ -19,5 +19,5 @@ export { default as shippingAddAdress } from './shippingAddAddress';
 export { default as shippingGetDeliveryMethods } from './shippingGetDeliveryMethods';
 export { default as billingUseShippingAsBillingAddress } from './billingUseShippingAsBillingAddress';
 export { default as billingAddAddress } from './billingAddAddress';
-export { default as getProductVariants } from './getProductVariants';
 export { default as loadUser } from './loadUser';
+export { default as getRealProduct } from './getRealProduct';
