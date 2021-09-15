@@ -58,12 +58,12 @@ export const getCartTotals = (cart: Cart): AgnosticTotals => {
   return {
     total: cart?.order?.amountTotal || 0,
     subtotal:
-      roundDecimal(cart?.order?.amountTotal - cart?.order?.orderLines.length) ||
-      0
+      roundDecimal(cart?.order?.amountTotal - cart?.order?.amountDelivery) || 0
   };
 };
 
-export const getCartShippingPrice = (cart: Cart): number => 0;
+export const getCartShippingPrice = (cart: Cart): number =>
+  cart.order.amountDelivery;
 
 export const getCartTotalItems = (cart: Cart): number =>
   cart?.order?.orderLines?.length || 0;
