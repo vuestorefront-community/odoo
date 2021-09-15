@@ -46,7 +46,7 @@ export type Attribute = {
   priceExtra: number;
   attributeName: string;
   search: string;
-  values: [AttributeValueList];
+  values?: [AttributeValueList];
 };
 
 export type Category = {
