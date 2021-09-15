@@ -66,9 +66,9 @@ const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
   }
 
   const categories = searchData.data.categories;
-  let parentCategory: Category = searchData.data.categories[0];
+  let parentCategory: Category = categories[0];
 
-  if (!categories[0].childs) {
+  if (!categories[0].childs && categories[0]?.parent) {
     parentCategory = categories[0]?.parent?.parent;
   }
 
