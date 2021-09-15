@@ -45,7 +45,7 @@ export const mockedCart: Cart = {
           variantImage:
             'http://localhost/web/image/product.product/107/image_1920'
         },
-        quantity: 1,
+        quantity: 4,
         priceTotal: 186.25
       },
       {

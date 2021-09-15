@@ -52,7 +52,7 @@ export const getCartItemAttributes = (
 };
 
 export const getCartItemSku = (product: Product): string =>
-  String(product?.id) || 'some-sku';
+  product?.sku || String(product?.id) || 'some-sku';
 
 export const getCartTotals = (cart: Cart): AgnosticTotals => {
   return {
