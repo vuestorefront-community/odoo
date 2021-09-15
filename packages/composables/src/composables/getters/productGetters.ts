@@ -39,9 +39,9 @@ export const getProductGallery = (
   const images: AgnosticMediaGalleryItem[] = [];
 
   images.push({
-    small: product.smallImage,
-    big: product.image,
-    normal: product.image
+    small: product?.smallImage || '',
+    big: product?.image || '',
+    normal: product?.image || ''
   });
 
   return images;
