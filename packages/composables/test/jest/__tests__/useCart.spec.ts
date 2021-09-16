@@ -42,7 +42,7 @@ describe('useCart', () => {
 
   it('add to cart real product', async () => {
     const product = {
-      realProduct: { productId: 10 }
+      realProduct: { product: { id: 10 } }
     };
     await addItem(context, {
       product,
@@ -123,7 +123,9 @@ describe('useCart', () => {
   it('checks if item variant from product is in cart', async () => {
     const product = {
       realProduct: {
-        productId: 107
+        product: {
+          id: 107
+        }
       }
     };
     const inCart = await isInCart(context, {
