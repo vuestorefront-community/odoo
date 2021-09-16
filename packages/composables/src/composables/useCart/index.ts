@@ -27,7 +27,7 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
   ) => {
     if (!params.isInCart(context, { currentCart, product })) {
       const productId = product.realProduct
-        ? String(product.realProduct.productId)
+        ? String(product.realProduct.product.id)
         : String(product.firstVariant);
 
       const addItemParams: GraphQlCartAddItemParams = {
@@ -97,7 +97,7 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
 
   isInCart: (context: Context, { currentCart, product }) => {
     const productId = product.realProduct
-      ? product.realProduct.productId
+      ? product.realProduct.product.id
       : product.firstVariant;
 
     return (

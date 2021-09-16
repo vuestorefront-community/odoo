@@ -28,10 +28,10 @@ export const getCartItems = (cart: Cart): OrderLine[] => {
 };
 
 export const getCartItemName = (orderLine: OrderLine): string =>
-  orderLine?.name || 'Product\'s name';
+  orderLine?.product.displayName || 'Product\'s name';
 
 export const getCartItemImage = (orderLine: OrderLine): string =>
-  orderLine?.product?.variantImage;
+  orderLine?.product?.image;
 
 export const getCartItemPrice = (orderLine: OrderLine): AgnosticPrice => {
   return {
