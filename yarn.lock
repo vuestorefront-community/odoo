@@ -3635,6 +3635,11 @@
   resolved "https://registry.yarnpkg.com/@types/anymatch/-/anymatch-1.3.1.tgz#336badc1beecb9dacc38bea2cf32adf627a8421a"
   integrity sha512-/+CRPXpBDpo2RK9C68N3b2cOvO0Cf5B9aPijHsoDQTHivnGSObdOF2BRQOYjojWTDy6nQvMjmqRXIxH55VjxxA==
 
+"@types/applepayjs@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@types/applepayjs/-/applepayjs-3.0.2.tgz#9de0543627f445d7a767003ec7f9264e17e9bc5b"
+  integrity sha512-rxw8jS/eDZ3ceBGThboHrB+TFbwrqGhOMRXSQjNBfxtQorK/mc9Xmu2JSKT5yqrJkQaZT/podzhm8OOdVI+Dow==
+
 "@types/autoprefixer@9.7.2":
   version "9.7.2"
   resolved "https://registry.yarnpkg.com/@types/autoprefixer/-/autoprefixer-9.7.2.tgz#64b3251c9675feef5a631b7dd34cfea50a8fdbcc"
@@ -3773,6 +3778,11 @@
   integrity sha512-evodFzM0PLOXmMZy8DhPN+toP6QgJiIteF6e8iD9T0xGBUllQA/DAb1nZwCIoNh7vuLvqCGPUdsLf3GSbcHd4g==
   dependencies:
     "@types/webpack" "^4"
+
+"@types/googlepay@^0.6.2":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@types/googlepay/-/googlepay-0.6.3.tgz#4e716556b904c9af5263255bf872b81ee4073d4d"
+  integrity sha512-mA9d9UoSAKbfcP3xYvTtpyBTxFytu1bwjquy8oZdZPG8z0xnfQwtmTI4F44ptyz8OBWiCmvBj8QR0Rb2D/hQXg==
 
 "@types/graceful-fs@^4.1.2":
   version "4.1.5"
@@ -6073,6 +6083,11 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+classnames@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
+  integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
+
 clean-css@^4.2.1, clean-css@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.2.3.tgz#507b5de7d97b48ee53d84adb0160ff6216380f78"
@@ -6743,6 +6758,11 @@ core-js@^3.0.1, core-js@^3.6.5:
   version "3.11.0"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.11.0.tgz#05dac6aa70c0a4ad842261f8957b961d36eb8926"
   integrity sha512-bd79DPpx+1Ilh9+30aT5O1sgpQd4Ttg8oqkqi51ZzhedMM1omD2e6IOF48Z/DzDCZ2svp49tN/3vneTK6ZBkXw==
+
+core-js@^3.14.0:
+  version "3.17.3"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.17.3.tgz#8e8bd20e91df9951e903cabe91f9af4a0895bc1e"
+  integrity sha512-lyvajs+wd8N1hXfzob1LdOCCHFU4bGMbqqmLn1Q4QlCpDqWPpGf+p0nj+LNrvDDG33j0hZXw2nsvvVpHysxyNw==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -14292,6 +14312,11 @@ postcss@^8.1.10, postcss@^8.1.6, postcss@^8.2.1, postcss@^8.2.15, postcss@^8.3.5
     colorette "^1.2.2"
     nanoid "^3.1.23"
     source-map-js "^0.6.2"
+
+preact@^10.5.13:
+  version "10.5.14"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.14.tgz#0b14a2eefba3c10a57116b90d1a65f5f00cd2701"
+  integrity sha512-KojoltCrshZ099ksUZ2OQKfbH66uquFoxHSbnwKbTJHeQNvx42EmC7wQVWNuDt6vC5s3nudRHFtKbpY4ijKlaQ==
 
 prelude-ls@^1.2.1:
   version "1.2.1"
