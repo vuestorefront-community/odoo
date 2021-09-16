@@ -78,14 +78,12 @@ const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
   return CategoryGetters.getTree(parentCategory);
 };
 
-const getProducts = (searchData: SearchData): any => {
-  if (!searchData.data) {
-    return {} as any;
+const getProducts = (searchData: SearchData): Product[] => {
+  if (!searchData?.data.products || searchData?.data.products.length === 0) {
+    return [];
   }
 
-  const products = searchData.data.products;
-
-  return products as any;
+  return searchData.data.products;
 };
 
 const getPagination = (searchData: SearchData): AgnosticPagination => {

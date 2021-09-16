@@ -1,5 +1,9 @@
 import { FacetSearchResult } from '@vue-storefront/core';
-import { Attribute, Category } from '@vue-storefront/odoo-api/src/types';
+import {
+  Attribute,
+  Category,
+  Product
+} from '@vue-storefront/odoo-api/src/types';
 
 export { UseCategory, UseProduct } from '@vue-storefront/core';
 
@@ -25,8 +29,6 @@ export type Coupon = Record<string, unknown>;
 export type Order = Record<string, unknown>;
 
 export type OrderItem = Record<string, unknown>;
-
-export type Product = Record<string, unknown>;
 
 export type Review = Record<string, unknown>;
 
