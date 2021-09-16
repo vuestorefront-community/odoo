@@ -53,6 +53,24 @@ class CartAddItem(graphene.Mutation):
         return CartData(order=order)
 
 
+class CartUpdateItem(graphene.Mutation):
+    class Arguments:
+        line_id = graphene.Int(required=True)
+        quantity = graphene.Int(required=True)
+
+    Output = CartData
+
+    @staticmethod
+    def mutate(self, info, line_id, quantity):
+        env = info.context["env"]
+        website = env['website'].get_current_website()
+        request.website = website
+        order = website.sale_get_order(force_create=1)
+        line = order.order_line.filtered(lambda rec: rec.id == line_id)
+        order._cart_update(product_id=line.product_id.id, set_qty=quantity)
+        return CartData(order=order)
+
+
 class CartRemoveItem(graphene.Mutation):
     class Arguments:
         line_id = graphene.Int(required=True)
@@ -86,5 +104,6 @@ class CartClear(graphene.Mutation):
 
 class ShopMutation(graphene.ObjectType):
     cart_add_item = CartAddItem.Field(description="Add Item")
+    cart_update_item = CartUpdateItem.Field(description="Update Item")
     cart_remove_item = CartRemoveItem.Field(description="Remove Item")
     cart_clear = CartClear.Field(description="Cart Clear")

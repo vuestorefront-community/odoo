@@ -31,6 +31,15 @@ class Login(graphene.Mutation):
                 raise GraphQLError(_(e.args[0]))
 
 
+class Logout(graphene.Mutation):
+
+    Output = graphene.Boolean
+
+    @staticmethod
+    def mutate(self, info):
+        request.session.logout()
+
+
 class Register(graphene.Mutation):
     class Arguments:
         name = graphene.String(required=True)
@@ -119,6 +128,7 @@ class ChangePassword(graphene.Mutation):
 
 class SignMutation(graphene.ObjectType):
     login = Login.Field(description='Authenticate user with email and password and retrieves token.')
+    logout = Logout.Field(description='Logout user')
     register = Register.Field(description='Register a new user with email, name and password.')
     reset_password = ResetPassword.Field(description="Send change password url to user's email.")
     change_password = ChangePassword.Field(description="Set new user's password with the token from the change "
