@@ -34,19 +34,19 @@ export declare type ShippingInfo = Record<string, string>;
 export type AttributeValueList = {
   id: number;
   name: string;
-  htmlColor: string;
+  htmlColor?: string;
   search: string;
-  attributeId: number;
+  attributeId?: number;
 };
 
 export type Attribute = {
   id: number;
   name: string;
   displayType: string;
-  priceExtra: number;
-  attributeName: string;
-  search: string;
-  values?: [AttributeValueList];
+  priceExtra?: number;
+  attributeName?: string;
+  search?: string;
+  values?: AttributeValueList[];
 };
 
 export type Category = {
@@ -55,7 +55,7 @@ export type Category = {
   slug: string;
   parent?: Category;
   childs?: Category[];
-  products?: [Product];
+  products?: Product[];
 };
 
 export type CategoryFilterInput = {

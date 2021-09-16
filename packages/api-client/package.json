@@ -1,7 +1,7 @@
 {
   "name": "@vue-storefront/odoo-api",
   "version": "0.0.1",
-  "private": true,
+  "private": false,
   "sideEffects": false,
   "server": "server/index.js",
   "main": "lib/index.cjs.js",
