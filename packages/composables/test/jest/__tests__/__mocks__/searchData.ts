@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { SearchData } from '../../../../src/composables/types';
 import { mockedCategories } from './/mockedCategories';
 export const emptySearchData: SearchData = {
@@ -16,7 +17,7 @@ export const emptySearchData: SearchData = {
 export const searchData: SearchData = {
   data: {
     facets: {},
-    totalProducts: 1,
+    totalProducts: 129,
     perPageOptions: 1,
     itemsPerPage: 1,
     attributes: [
@@ -277,6 +278,228 @@ export const searchData: SearchData = {
     products: []
   },
   input: {
-    sort: 'name desc'
+    params: {
+      slug_1: 'women-11',
+      slug_2: 'women-clothing-jackets-18',
+      slug_3: '18',
+      slug_4: '__vue_devtool_undefined__',
+      slug_5: '__vue_devtool_undefined__'
+    },
+    sort: 'name desc',
+    pageSize: 5,
+    currentRootCategory: {
+      id: 11,
+      name: 'Women',
+      slug: 'women-11',
+      childs: [
+        {
+          id: 13,
+          name: 'Clothing',
+          slug: 'women-clothing-13',
+          childs: [
+            {
+              id: 17,
+              name: 'All',
+              slug: 'women-clothing-all-17',
+              __typename: 'Category'
+            },
+            {
+              id: 18,
+              name: 'Jackets',
+              slug: 'women-clothing-jackets-18',
+              __typename: 'Category'
+            },
+            {
+              id: 19,
+              name: 'Blazer',
+              slug: 'women-clothing-blazer-19',
+              __typename: 'Category'
+            },
+            {
+              id: 20,
+              name: 'Tops',
+              slug: 'women-clothing-tops-20',
+              __typename: 'Category'
+            },
+            {
+              id: 21,
+              name: 'Shirts',
+              slug: 'women-clothing-shirts-21',
+              __typename: 'Category'
+            },
+            {
+              id: 22,
+              name: 'T-shirts',
+              slug: 'women-clothing-t-shirts-22',
+              __typename: 'Category'
+            },
+            {
+              id: 23,
+              name: 'Jeans',
+              slug: 'women-clothing-jeans-23',
+              __typename: 'Category'
+            },
+            {
+              id: 24,
+              name: 'Trouser',
+              slug: 'women-clothing-trouser-24',
+              __typename: 'Category'
+            },
+            {
+              id: 25,
+              name: 'Skirts',
+              slug: 'women-clothing-skirts-25',
+              __typename: 'Category'
+            },
+            {
+              id: 26,
+              name: 'Dresses',
+              slug: 'women-clothing-dresses-26',
+              __typename: 'Category'
+            },
+            {
+              id: 27,
+              name: 'Swimwear',
+              slug: 'women-clothing-swimwear-27',
+              __typename: 'Category'
+            }
+          ],
+          __typename: 'Category'
+        },
+        {
+          id: 14,
+          name: 'Shoes',
+          slug: 'women-shoes-14',
+          childs: [
+            {
+              id: 28,
+              name: 'All',
+              slug: 'women-shoes-all-28',
+              __typename: 'Category'
+            },
+            {
+              id: 29,
+              name: 'Sneakers',
+              slug: 'women-shoes-sneakers-29',
+              __typename: 'Category'
+            },
+            {
+              id: 30,
+              name: 'Boots',
+              slug: 'women-shoes-boots-30',
+              __typename: 'Category'
+            },
+            {
+              id: 31,
+              name: 'Ankle boots',
+              slug: 'women-shoes-ankle-boots-31',
+              __typename: 'Category'
+            },
+            {
+              id: 32,
+              name: 'Pumps',
+              slug: 'women-shoes-pumps-32',
+              __typename: 'Category'
+            },
+            {
+              id: 33,
+              name: 'Ballerinas',
+              slug: 'women-shoes-ballerinas-33',
+              __typename: 'Category'
+            },
+            {
+              id: 34,
+              name: 'Lace-up shoes',
+              slug: 'women-shoes-lace-up-shoes-34',
+              __typename: 'Category'
+            },
+            {
+              id: 35,
+              name: 'Loafers',
+              slug: 'women-shoes-loafers-35',
+              __typename: 'Category'
+            },
+            {
+              id: 36,
+              name: 'Sandals',
+              slug: 'women-shoes-sandals-36',
+              __typename: 'Category'
+            },
+            {
+              id: 37,
+              name: 'Winterboots',
+              slug: 'women-shoes-winterboots-37',
+              __typename: 'Category'
+            }
+          ],
+          __typename: 'Category'
+        },
+        {
+          id: 15,
+          name: 'bags',
+          slug: 'women-bags-15',
+          childs: [
+            {
+              id: 38,
+              name: 'All',
+              slug: 'women-bags-all-38',
+              __typename: 'Category'
+            },
+            {
+              id: 39,
+              name: 'Clutches',
+              slug: 'women-bags-clutches-39',
+              __typename: 'Category'
+            },
+            {
+              id: 40,
+              name: 'Shoulder Bags',
+              slug: 'women-bags-shoulder-bags-40',
+              __typename: 'Category'
+            },
+            {
+              id: 41,
+              name: 'Shopper',
+              slug: 'women-bags-shopper-41',
+              __typename: 'Category'
+            },
+            {
+              id: 42,
+              name: 'Handbag',
+              slug: 'women-bags-handbag-42',
+              __typename: 'Category'
+            },
+            {
+              id: 43,
+              name: 'Wallets',
+              slug: 'women-bags-wallets-43',
+              __typename: 'Category'
+            },
+            {
+              id: 44,
+              name: 'Bucketbag/packbag',
+              slug: 'women-bags-bucketbag-packbag-44',
+              __typename: 'Category'
+            }
+          ],
+          __typename: 'Category'
+        },
+        {
+          id: 16,
+          name: 'Looks',
+          slug: 'women-looks-16',
+          childs: [
+            {
+              id: 45,
+              name: 'All',
+              slug: 'women-looks-all-45',
+              __typename: 'Category'
+            }
+          ],
+          __typename: 'Category'
+        }
+      ],
+      __typename: 'Category'
+    }
   }
 };
