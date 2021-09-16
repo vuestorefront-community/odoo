@@ -102,7 +102,8 @@ export type ProductImage = {
 export type Product = {
   id: number;
   description?: string;
-  name: string;
+  name?: string;
+  displayName?: string;
   slug?: string;
   isInStock?: boolean;
   qty: number;
@@ -201,7 +202,7 @@ export type Partner = {
 };
 
 export type ProductVariant = {
-  productId: number;
+  product: Product;
   productTemplateId: number;
   displayName: string;
   displayImage: boolean;
