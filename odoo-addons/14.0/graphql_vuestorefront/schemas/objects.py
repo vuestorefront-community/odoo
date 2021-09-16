@@ -262,6 +262,7 @@ class Product(OdooObjectType):
     variant_price = graphene.Float(description='Specific to Product Variant')
     variant_price_after_discount = graphene.Float(description='Specific to Product Variant')
     variant_has_discounted_price = graphene.Boolean(description='Specific to Product Variant')
+    is_variant_possible = graphene.Boolean(description='Specific to Product Variant')
     variant_attribute_values = graphene.List(graphene.NonNull(lambda: AttributeValue),
                                              description='Specific to Product Variant')
     # Specific to use in Product Template
@@ -369,6 +370,9 @@ class Product(OdooObjectType):
         env = info.context["env"]
         pricing_info = get_product_pricing_info(env, self)
         return pricing_info['has_discounted_price']
+
+    def resolve_is_variant_possible(self, info):
+        return self._is_variant_possible()
 
     def resolve_variant_attribute_values(self, info):
         return self.product_template_attribute_value_ids or None
