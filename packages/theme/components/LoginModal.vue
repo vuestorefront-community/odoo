@@ -87,7 +87,7 @@
           <SfButton
             data-cy="login-btn_sign-up"
             class="sf-button--text"
-            @click="isLogin = false"
+            @click="displayChoosedTrue(() => (isCreateAccount = true))"
           >
             {{ $t('Register today') }}
           </SfButton>
@@ -165,7 +165,7 @@
           <SfButton
             data-cy="login-btn_login-into-account"
             class="sf-button--text"
-            @click="isLogin = true"
+            @click="displayChoosedTrue(() => (isLogin = true))"
           >
             {{ $t('login in to your account') }}
           </SfButton>
@@ -222,6 +222,8 @@ export default {
 
     const isLogin = ref(false);
     const isForgottenPassword = ref(false);
+    const isCreateAccount = ref(true);
+
     const createAccount = ref(false);
     const rememberMe = ref(false);
     const { register, login, loading, error, user } = useUser();
@@ -261,6 +263,18 @@ export default {
       }
     };
 
+    const displayChoosedTrue = async (fn) => {
+      isLogin.value = false;
+      isForgottenPassword.value = false;
+      isCreateAccount.value = false;
+      fn();
+    };
+
+    const showIsForgottenPassword = () => {
+      isForgottenPassword.value = true;
+      isLogin.value = true;
+    };
+
     const handleRegister = async () => handleForm(register)();
     const handleLogin = async () => handleForm(login)();
     const handlePasswordRecovery = async () => handleForm(sendResetPassword)();
@@ -278,7 +292,10 @@ export default {
       isLoginModalOpen,
       toggleLoginModal,
       handleLogin,
-      handleRegister
+      handleRegister,
+      displayChoosedTrue,
+      isCreateAccount,
+      showIsForgottenPassword
     };
   }
 };
