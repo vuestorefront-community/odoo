@@ -312,7 +312,7 @@ export type GraphQlGetPricinsShippingMethodParams = {
 };
 
 export type GraphQlResetPasswordParams = {
-  password: string;
+  newPassword: string;
   token: string;
 };
 

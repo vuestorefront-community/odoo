@@ -6,16 +6,11 @@ export default gql`
       combinationId: $combinationId
     ) {
       product {
-        name
         id
+        image
         variantPrice
         variantPriceAfterDiscount
         variantHasDiscountedPrice
-        currency {
-          id
-          name
-          symbol
-        }
       }
       productTemplateId
       displayName

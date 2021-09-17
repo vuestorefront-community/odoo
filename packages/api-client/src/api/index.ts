@@ -7,7 +7,7 @@ export { default as signUpUser } from './signUpUser';
 export { default as logInUser } from './logInUser';
 export { default as logOutUser } from './logOutUser';
 export { default as sendResetPassword } from './sendResetPassword';
-export { default as resetPassword } from './resetPassword';
+export { default as changePassword } from './changePassword';
 export { default as cartRemoveItem } from './cartRemoveItem';
 export { default as cartUpdateItemQty } from './cartUpdateItemQty';
 export { default as wishlistLoad } from './wishlistLoad';

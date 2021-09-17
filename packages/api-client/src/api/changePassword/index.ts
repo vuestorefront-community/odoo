@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context, CustomQuery } from '@vue-storefront/core';
-import mutation from './resetPasswordMutation';
+import mutation from './changePasswordMutation';
 import ApolloClient from 'apollo-client';
 import {
   DefaultGraphQlMutationResponse,
@@ -8,7 +8,7 @@ import {
 } from '../../types';
 import { FetchResult } from 'apollo-link/lib/types';
 
-export default async function resetPassword(
+export default async function changePassword(
   context: Context,
   params: GraphQlResetPasswordParams,
   customQuery?: CustomQuery
