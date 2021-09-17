@@ -243,9 +243,17 @@ export default {
 
       if (error.value.login) {
         send({ message: error?.value?.login?.message, type: 'danger' });
+        return;
       }
       if (error.value.register) {
         send({ message: error?.value?.register?.message, type: 'danger' });
+        return;
+      }
+      if (isForgottenPassword.value) {
+        send({
+          message: `Thanks! If there is an account registered with the ${form.value.email} email, you will find message with a password reset link in your inbox. If the message is not arriving in your inbox, try another email address you might’ve used to register.`,
+          type: 'info'
+        });
       }
 
       if (user.value !== null) {

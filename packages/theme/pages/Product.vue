@@ -270,7 +270,7 @@ export default {
       productVariants,
       realProduct,
       elementNames
-    } = useProductVariant();
+    } = useProductVariant(`products-${id}`);
     const { products: relatedProducts, loading: relatedLoading } = useProduct(
       'relatedProducts'
     );
