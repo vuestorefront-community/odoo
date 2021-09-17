@@ -19,11 +19,13 @@ const factoryParams: UseForgotPasswordFactoryParams<any> = {
     context: Context,
     { tokenValue, newPassword, customQuery }
   ) => {
-    const response = await context.$odoo.api.changePassword({
-      tokenValue,
-      newPassword,
+    await context.$odoo.api.changePassword(
+      {
+        token: tokenValue,
+        newPassword
+      },
       customQuery
-    });
+    );
     return {};
   }
 };
