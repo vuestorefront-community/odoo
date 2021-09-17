@@ -8,13 +8,14 @@
         <field name="list_price">118.75</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">118.75</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_sneakers')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_sneakers')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/sneakers/sneakers-1.jpg"/>
     </record>
 
@@ -75,13 +76,14 @@
         <field name="list_price">327.50</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">327.50</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_sneakers')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_sneakers')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/sneakers/sneakers-2.jpg"/>
     </record>
 
@@ -143,13 +145,14 @@
         <field name="list_price">186.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">186.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_boots')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_boots')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/boots/boots-1.jpg"/>
     </record>
 
@@ -210,13 +213,14 @@
         <field name="list_price">186.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">186.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_boots')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_boots')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/boots/boots-2.jpg"/>
     </record>
 
@@ -278,13 +282,14 @@
         <field name="list_price">231.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">231.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_ankle_boots')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_ankle_boots')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/ankle_boots/ankle_boots-1.jpg"/>
     </record>
 
@@ -345,13 +350,14 @@
         <field name="list_price">248.75</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">248.75</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_ankle_boots')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_ankle_boots')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/ankle_boots/ankle_boots-2.jpg"/>
     </record>
 
@@ -413,13 +419,14 @@
         <field name="list_price">186.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">186.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_pumps')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_pumps')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/pumps/pumps-1.jpg"/>
     </record>
 
@@ -480,13 +487,14 @@
         <field name="list_price">362.50 </field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">362.50</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_pumps')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_pumps')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/pumps/pumps-2.jpg"/>
     </record>
 
@@ -548,13 +556,14 @@
         <field name="list_price">123.75</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">123.75</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_ballerinas')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_ballerinas')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/ballerinas/ballerinas-1.jpg"/>
     </record>
 
@@ -615,13 +624,14 @@
         <field name="list_price">98.75</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">98.75</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_ballerinas')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_ballerinas')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/ballerinas/ballerinas-2.jpg"/>
     </record>
 
@@ -683,13 +693,14 @@
         <field name="list_price">343.75</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">343.75</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_loafers')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_loafers')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/loafers/loafers-1.jpg"/>
     </record>
 
@@ -750,13 +761,14 @@
         <field name="list_price">161.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">161.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_loafers')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_loafers')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/loafers/loafers-2.jpg"/>
     </record>
 
@@ -818,13 +830,14 @@
         <field name="list_price">337.50</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">337.50</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_sandals')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_sandals')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/sandals/sandals-1.jpg"/>
     </record>
 
@@ -885,13 +898,14 @@
         <field name="list_price">186.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">186.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_sandals')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_shoes_all'), ref('graphql_vuestorefront.public_category_women_shoes_sandals')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/shoes/sandals/sandals-2.jpg"/>
     </record>
 

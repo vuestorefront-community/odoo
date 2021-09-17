@@ -8,13 +8,14 @@
         <field name="list_price">281.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">281.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Michael Kors – Clutch “Daria”</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_clutches')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_clutches')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/bags/clutches/clutches-1.jpg"/>
     </record>
 
@@ -63,13 +64,14 @@
         <field name="list_price">198.75</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">198.75</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Clutch ”Carol” Liebeskind black</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_clutches')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_clutches')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/bags/clutches/clutches-2.jpg"/>
     </record>
 
@@ -119,13 +121,14 @@
         <field name="list_price">106.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">106.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Clutch “Jet Set Travel” small Michael Kors</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_clutches')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_clutches')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/bags/clutches/clutches-3-pink.jpg"/>
     </record>
 
@@ -272,13 +275,14 @@
         <field name="list_price">190.00</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">190.00</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_shoulder_bags')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_shoulder_bags')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/bags/shoulder_bags/shoulder_bags-1.jpg"/>
     </record>
 
@@ -327,13 +331,14 @@
         <field name="list_price">372.50</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">372.50</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_shoulder_bags')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_shoulder_bags')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/bags/shoulder_bags/shoulder_bags-2.jpg"/>
     </record>
 
@@ -383,13 +388,14 @@
         <field name="list_price">256.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">256.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_shopper')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_shopper')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/bags/shopper/shopper-1.jpg"/>
     </record>
 
@@ -439,13 +445,14 @@
         <field name="list_price">343.75</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">343.75</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_shopper')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_shopper')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/bags/shopper/shopper-2.jpg"/>
     </record>
 
@@ -495,13 +502,14 @@
         <field name="list_price">368.75</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">368.75</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Bag “Jet Set Travel” Michael Kors</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_shopper')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_shopper')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/bags/shopper/shopper-3-black.jpg"/>
     </record>
 
@@ -578,13 +586,14 @@
         <field name="list_price">173.75</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">173.75</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_handbag')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_handbag')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/bags/handbag/handbag-1.jpg"/>
     </record>
 
@@ -633,13 +642,14 @@
         <field name="list_price">181.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">181.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_handbag')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_handbag')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/bags/handbag/handbag-2.jpg"/>
     </record>
 
@@ -689,13 +699,14 @@
         <field name="list_price">102.50</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">102.50</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_wallets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_wallets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/bags/wallets/wallets-1.jpg"/>
     </record>
 
@@ -744,13 +755,14 @@
         <field name="list_price">106.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">106.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common "problem" areas. Find stunning women's cocktail dresses and party dresses.</field>
         <field name="default_code">578902-00</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_wallets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_women'), ref('graphql_vuestorefront.public_category_women_bags_all'), ref('graphql_vuestorefront.public_category_women_bags_wallets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/women/bags/wallets/wallets-2.jpg"/>
     </record>
 
