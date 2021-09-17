@@ -11,7 +11,9 @@ const createOddoLink = (settings: Config): any => {
     if (graphQLErrors)
       graphQLErrors.map(({ message, locations, path }) =>
         console.warn(
-          `%c [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+          `%c [GraphQL error]: Message: ${message}, Location: ${locations.map(
+            (item) => `line: ${item.line} | column: ${item.column}`
+          )}).join(' '), Path: ${path}`,
           'background: #222; color: #FFA07A'
         )
       );

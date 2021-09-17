@@ -303,7 +303,12 @@ export type GraphQlGetProductVariantParams = {
 };
 
 export type GraphQlCartAddItemParams = {
-  productId: string;
+  productId: number;
+  quantity: number;
+};
+
+export type GraphQlCartUpdateItemQtyParams = {
+  lineId: number;
   quantity: number;
 };
 
