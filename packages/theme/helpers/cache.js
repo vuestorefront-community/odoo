@@ -1,15 +1,19 @@
 import Redis from 'redis-tag-cache';
 
-export default function RedisCache (options) {
+export default function RedisCache({ redis, isDev }) {
   const client = new Redis({
-    defaultTimeout: options.redis.defaultTimeout,
-    redis: options.redis
+    defaultTimeout: redis.defaultTimeout,
+    redis: redis
   });
 
   return {
-    async invoke ({ route, render, getTags }) {
-
+    async invoke({ route, render, getTags }) {
       const key = `page:${route}`;
+      if (isDev) {
+        const content = await render();
+        return content;
+      }
+
       const cachedResponse = await client.get(key);
 
       if (cachedResponse) {
@@ -28,7 +32,7 @@ export default function RedisCache (options) {
       return content;
     },
 
-    invalidate ({ tags }) {
+    invalidate({ tags }) {
       const clearAll = tags.includes('*');
 
       if (!clearAll) {
@@ -40,7 +44,7 @@ export default function RedisCache (options) {
 
         const tags = [];
 
-        stream.on('data', rawTags => tags.push(...rawTags));
+        stream.on('data', (rawTags) => tags.push(...rawTags));
         stream.on('end', async () => {
           if (tags.length) {
             await client.invalidate(...tags);
