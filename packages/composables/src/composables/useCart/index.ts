@@ -10,6 +10,7 @@ import {
   Cart,
   GraphQlCartAddItemParams,
   GraphQlCartRemoveItemParams,
+  GraphQlCartUpdateItemQtyParams,
   OrderLine,
   Product
 } from '@vue-storefront/odoo-api/src/types';
@@ -27,8 +28,8 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
   ) => {
     if (!params.isInCart(context, { currentCart, product })) {
       const productId = product.realProduct
-        ? String(product.realProduct.product.id)
-        : String(product.firstVariant);
+        ? product.realProduct.product.id
+        : product.firstVariant;
 
       const addItemParams: GraphQlCartAddItemParams = {
         productId,
@@ -64,14 +65,17 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
     context: Context,
     { currentCart, product: orderLine, quantity, customQuery }
   ) => {
-    await context.$odoo.api.cartUpdateItemQty(
-      { productId: orderLine.product.id, quantity },
+    const updateItemParams: GraphQlCartUpdateItemQtyParams = {
+      lineId: orderLine.id,
+      quantity
+    };
+
+    const cart = await context.$odoo.api.cartUpdateItemQty(
+      updateItemParams,
       customQuery
     );
 
-    const cart = params.load(context, {});
-
-    return cart;
+    return cart.cartUpdateItem;
   },
 
   clear: async (context: Context, { currentCart }) => {
