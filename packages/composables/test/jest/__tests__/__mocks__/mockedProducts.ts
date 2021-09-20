@@ -1,4 +1,6 @@
-export const mockedProducts = [
+import { Product, ProductImage } from '@vue-storefront/odoo-api/src/types';
+
+export const mockedProducts: Product[] = [
   {
     id: 36,
     firstVariant: 53,
@@ -13,66 +15,46 @@ export const mockedProducts = [
     slug: 'blazer-michael-kors-brown-36',
     sku: null,
     isInWishlist: false,
-    status: 0,
+    qty: 1,
+    mediaGallery: [{} as ProductImage],
+    priceAfterDiscount: 0,
+    hasDiscountedPrice: 0,
+    listPrice: 0,
+    variantImage: 'http://localhost/web/image/product.product/107/image_1920',
+    currency: { id: 0 },
+    attributeValues: [],
+    weight: 0,
     categories: [
       {
         id: 11,
         name: 'Women',
         slug: 'women-11',
-        parent: null,
-        __typename: 'Category'
+        parent: null
       },
       {
         id: 17,
         name: 'All',
         slug: 'women-clothing-all-17',
         parent: {
-          parent: { id: 11, __typename: 'Category' },
-          __typename: 'Category'
-        },
-        __typename: 'Category'
+          id: 17,
+          name: 'clothing',
+          slug: 'clothing',
+          parent: { id: 11, name: 'women', slug: 'women'}
+        }
       },
       {
         id: 19,
         name: 'Blazer',
         slug: 'women-clothing-blazer-19',
         parent: {
-          parent: { id: 11, __typename: 'Category' },
-          __typename: 'Category'
-        },
-        __typename: 'Category'
+          id: 17,
+          name: 'clothing',
+          slug: 'clothing',
+          parent: { id: 11, name: 'women', slug: 'women'}
+        }
       }
-    ],
-    attributeValues: [
-      {
-        id: 17,
-        name: '36',
-        displayType: 'select',
-        priceExtra: 0,
-        attributeName: 'Size',
-        search: '4-17',
-        __typename: 'AttributeValue'
-      },
-      {
-        id: 18,
-        name: '40',
-        displayType: 'select',
-        priceExtra: 0,
-        attributeName: 'Size',
-        search: '4-18',
-        __typename: 'AttributeValue'
-      },
-      {
-        id: 16,
-        name: 'Cotton',
-        displayType: 'radio',
-        priceExtra: 0,
-        attributeName: 'Material',
-        search: '5-16',
-        __typename: 'AttributeValue'
-      }
-    ],
-    __typename: 'Product'
+    ]
+
   },
   {
     id: 54,
@@ -88,65 +70,45 @@ export const mockedProducts = [
     slug: 'booclothing-lerews-beige-54',
     sku: null,
     isInWishlist: false,
-    status: 0,
+    qty: 1,
+    mediaGallery: [{} as ProductImage],
+    priceAfterDiscount: 0,
+    hasDiscountedPrice: 0,
+    listPrice: 0,
+    variantImage: 'http://localhost/web/image/product.product/107/image_1920',
+    currency: { id: 0 },
+    attributeValues: [],
+    weight: 0,
     categories: [
       {
         id: 11,
         name: 'Women',
         slug: 'women-11',
-        parent: null,
-        __typename: 'Category'
+        parent: null
       },
       {
         id: 28,
         name: 'All',
         slug: 'women-shoes-all-28',
         parent: {
-          parent: { id: 11, __typename: 'Category' },
-          __typename: 'Category'
-        },
-        __typename: 'Category'
+          id: 18,
+          name: 'shoes',
+          slug: 'shoes',
+          parent: { id: 11, name: 'women', slug: 'women' }
+        }
       },
       {
         id: 30,
         name: 'Boots',
         slug: 'women-shoes-boots-30',
         parent: {
-          parent: { id: 11, __typename: 'Category' },
-          __typename: 'Category'
-        },
-        __typename: 'Category'
+          id: 18,
+          name: 'shoes',
+          slug: 'shoes',
+          parent: { id: 11, name: 'women', slug: 'women'}
+        }
       }
-    ],
-    attributeValues: [
-      {
-        id: 71,
-        name: '36',
-        displayType: 'select',
-        priceExtra: 0,
-        attributeName: 'Size',
-        search: '4-71',
-        __typename: 'AttributeValue'
-      },
-      {
-        id: 72,
-        name: '40',
-        displayType: 'select',
-        priceExtra: 0,
-        attributeName: 'Size',
-        search: '4-72',
-        __typename: 'AttributeValue'
-      },
-      {
-        id: 70,
-        name: 'Cotton',
-        displayType: 'radio',
-        priceExtra: 0,
-        attributeName: 'Material',
-        search: '5-70',
-        __typename: 'AttributeValue'
-      }
-    ],
-    __typename: 'Product'
+    ]
+
   }
 ];
