@@ -171,10 +171,7 @@
         @submit="$router.push('/checkout/billing')"
         @selectedMethod="handleSelectedMethodShipping"
       />
-      <SfButton
-        type="submit"
-        :disabled="invalid"
-      >
+      <SfButton type="submit" :disabled="invalid">
         <slot name="btn-text"></slot>
       </SfButton>
     </form>
@@ -256,12 +253,11 @@ export default {
         address: form.value
       });
       isFormSubmitted.value = true;
-      if (root.$router.history.current.path != '/my-account/shipping-details')
-      root.$router.push('/checkout/billing');
-      else
-      root.$router.push('/my-account/shipping-details')
+      if (root.$router.history.current.path !== '/my-account/shipping-details')
+        root.$router.push('/checkout/billing');
+      else root.$router.push('/my-account/shipping-details');
 
-      emit('finish', true)
+      emit('finish', true);
     };
 
     const hasSavedShippingAddress = computed(() => {
