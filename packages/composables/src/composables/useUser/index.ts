@@ -8,7 +8,6 @@ import {
 } from '@vue-storefront/core';
 import { User } from '@vue-storefront/odoo-api/src/types';
 import {
-  getUserFromAgnosticUser,
   getAgnosticUserFromUser
 } from '../getters/userGetters';
 
