@@ -8,12 +8,13 @@
         <field name="list_price">165.00</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">165.00</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Daniele Alessandrini - Vest</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men'), ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-1-grey.jpg"/>
     </record>
 
@@ -132,12 +133,13 @@
         <field name="list_price">523.75</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">523.75</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Leather jacket Bully dark blue</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men'), ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-2-blue.jpg"/>
     </record>
 
@@ -210,12 +212,13 @@
         <field name="list_price">356.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">356.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Bomber Daniele Alessandrini blue</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men'), ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-3-blue.jpg"/>
     </record>
 
@@ -288,12 +291,13 @@
         <field name="list_price">161.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">161.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Save the Duck – Casual Jacket</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men'), ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-4-brown.jpg"/>
     </record>
 
@@ -410,12 +414,13 @@
         <field name="list_price">662.50</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">662.50</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Vest ”Naples” Moncler red </field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men'), ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-5-red.jpg"/>
     </record>
 
@@ -514,12 +519,13 @@
         <field name="list_price">1218.75</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">1218.75</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Moncler – Down Jacket “Jacob” </field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men'), ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-6-brown.jpg"/>
     </record>
 
@@ -606,12 +612,13 @@
         <field name="list_price">430.00</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">430.00</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Casual jacket Aspesi blue</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men'), ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-7-blue.jpg"/>
     </record>
 
@@ -684,12 +691,13 @@
         <field name="list_price">423.75</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">423.75</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Casual jacket “Mahakali“ Peuterey blue</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men'), ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-8-blue.jpg"/>
     </record>
 
@@ -762,12 +770,13 @@
         <field name="list_price">173.75</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">173.75</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Casual jacket Invicta blue</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men'), ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-9-blue.jpg"/>
     </record>
 
@@ -841,12 +850,13 @@
         <field name="list_price">656.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">656.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Casual jacket ”Lyon” Moncler black</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men'), ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-10-black.jpg"/>
     </record>
 

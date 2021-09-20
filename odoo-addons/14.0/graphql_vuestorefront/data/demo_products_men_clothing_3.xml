@@ -8,12 +8,13 @@
         <field name="list_price">536.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">536.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Coat Aspesi blue</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men'), ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-21-blue.jpg"/>
     </record>
 
@@ -87,12 +88,13 @@
         <field name="list_price">498.75</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">498.75</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Casual jacket Stone Island black</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men'), ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-22-black.jpg"/>
     </record>
 
@@ -166,12 +168,13 @@
         <field name="list_price">486.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">486.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Vest Bully black</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men'), ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-23-black.jpg"/>
     </record>
 
@@ -244,12 +247,13 @@
         <field name="list_price">736.25</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">736.25</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Leather jacket Daniele Alessandrini beige</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men'), ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-24-beige.jpg"/>
     </record>
 
@@ -322,12 +326,13 @@
         <field name="list_price">498.75</field>
         <field name="is_published" eval="True"/>
         <field name="standard_price">498.75</field>
-        <field name="type">consu</field>
+        <field name="type">product</field>
+        <field name="taxes_id" eval="False"/>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="description_sale">This is the product: Jacket Doubleface “Sol Walk“ Luis Trenker red</field>
         <field name="invoice_policy">delivery</field>
-        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
+        <field name="public_categ_ids" eval="[(6, 0, [ref('graphql_vuestorefront.public_category_men'), ref('graphql_vuestorefront.public_category_men_clothing_all'), ref('graphql_vuestorefront.public_category_men_clothing_jackets')])]"/>
         <field name="image_1920" type="base64" file="graphql_vuestorefront/static/men/clothing/jackets/jackets-25-red.jpg"/>
     </record>
 

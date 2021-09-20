@@ -179,10 +179,15 @@ class ProductQuery(graphene.ObjectType):
         variant_info = product_template._get_combination_info(combination, pricelist)
 
         product = env['product.product'].browse(variant_info['product_id'])
+
+        # Condition to verify if Product exist
+        if not product:
+            raise GraphQLError(_('Product does not exist'))
+
         is_combination_possible = product_template._is_combination_possible(combination)
 
         # Condition to Verify if Product is active or if combination exist
-        if not product or not product.active or not is_combination_possible:
+        if not product.active or not is_combination_possible:
             variant_info['is_combination_possible'] = False
         else:
             variant_info['is_combination_possible'] = True

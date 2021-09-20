@@ -3,10 +3,10 @@ import { CheckoutGetters } from '@vue-storefront/core';
 import { Cart, ShippingMethod } from '@vue-storefront/odoo-api/src/types';
 
 export const getShippingMethodId = (shippingMethod: ShippingMethod): string =>
-  '';
+  String(shippingMethod.id) || '';
 
 export const getShippingMethodName = (shippingMethod: ShippingMethod): string =>
-  '';
+  shippingMethod.name || '';
 
 export const getShippingMethodDescription = (
   shippingMethod: ShippingMethod

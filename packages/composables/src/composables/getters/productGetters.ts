@@ -40,8 +40,8 @@ export const getProductGallery = (
 
   images.push({
     small: product?.smallImage || '',
-    big: product?.image || '',
-    normal: product?.image || ''
+    big: product?.realProduct?.product.image || product?.image || '',
+    normal: product?.realProduct?.product.image || product?.image || ''
   });
 
   return images;

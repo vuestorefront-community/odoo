@@ -41,7 +41,8 @@ export const mockedCart: Cart = {
           attributeValues: [],
           categories: [{} as Category],
           weight: 0,
-          name: 'Booclothing Lerews beige',
+          name: '',
+          displayName: 'Booclothing Lerews beige',
           image: 'http://localhost/web/image/product.template/107/image_1920',
           variantImage:
             'http://localhost/web/image/product.product/107/image_1920'
@@ -69,7 +70,8 @@ export const mockedCart: Cart = {
           attributeValues: [],
           categories: [{} as Category],
           weight: 0,
-          name: 'Blazer Michael Kors brown',
+          name: '',
+          displayName: 'Blazer Michael Kors brown',
           image: 'http://localhost/web/image/product.template/53/image_1920',
           variantImage:
             'http://localhost/web/image/product.product/53/image_1920'
@@ -97,7 +99,8 @@ export const mockedCart: Cart = {
           attributeValues: [],
           categories: [{} as Category],
           weight: 0,
-          name: 'Booclothing Lerews beige',
+          name: '',
+          displayName: 'Booclothing Lerews beige',
           image: 'http://localhost/web/image/product.template/108/image_1920',
           variantImage:
             'http://localhost/web/image/product.product/108/image_1920'
@@ -125,7 +128,8 @@ export const mockedCart: Cart = {
           attributeValues: [],
           categories: [{} as Category],
           weight: 0,
-          name: 'Pullover Moschino Cheap And Chic black',
+          name: '',
+          displayName: 'Pullover Moschino Cheap And Chic black',
           image: 'http://localhost/web/image/product.template/59/image_1920',
           variantImage:
             'http://localhost/web/image/product.product/59/image_1920'

@@ -87,7 +87,7 @@
           <SfButton
             data-cy="login-btn_sign-up"
             class="sf-button--text"
-            @click="isLogin = false"
+            @click="displayChoosedTrue(() => (isCreateAccount = true))"
           >
             {{ $t('Register today') }}
           </SfButton>
@@ -113,11 +113,11 @@
             </ValidationProvider>
             <ValidationProvider rules="required" v-slot="{ errors }">
               <SfInput
-                data-cy="login-input_firstName"
-                v-model="form.firstName"
+                data-cy="login-input_name"
+                v-model="form.name"
                 :valid="!errors[0]"
                 :errorMessage="errors[0]"
-                name="first-name"
+                name="name"
                 label="Name"
                 class="form__element"
               />
@@ -165,7 +165,7 @@
           <SfButton
             data-cy="login-btn_login-into-account"
             class="sf-button--text"
-            @click="isLogin = true"
+            @click="displayChoosedTrue(() => (isLogin = true))"
           >
             {{ $t('login in to your account') }}
           </SfButton>
@@ -222,6 +222,8 @@ export default {
 
     const isLogin = ref(false);
     const isForgottenPassword = ref(false);
+    const isCreateAccount = ref(true);
+
     const createAccount = ref(false);
     const rememberMe = ref(false);
     const { register, login, loading, error, user } = useUser();
@@ -243,14 +245,34 @@ export default {
 
       if (error.value.login) {
         send({ message: error?.value?.login?.message, type: 'danger' });
+        return;
       }
       if (error.value.register) {
         send({ message: error?.value?.register?.message, type: 'danger' });
+        return;
+      }
+      if (isForgottenPassword.value) {
+        send({
+          message: `Thanks! If there is an account registered with the ${form.value.email} email, you will find message with a password reset link in your inbox. If the message is not arriving in your inbox, try another email address you might’ve used to register.`,
+          type: 'info'
+        });
       }
 
       if (user.value !== null) {
         toggleLoginModal();
       }
+    };
+
+    const displayChoosedTrue = async (fn) => {
+      isLogin.value = false;
+      isForgottenPassword.value = false;
+      isCreateAccount.value = false;
+      fn();
+    };
+
+    const showIsForgottenPassword = () => {
+      isForgottenPassword.value = true;
+      isLogin.value = true;
     };
 
     const handleRegister = async () => handleForm(register)();
@@ -270,7 +292,10 @@ export default {
       isLoginModalOpen,
       toggleLoginModal,
       handleLogin,
-      handleRegister
+      handleRegister,
+      displayChoosedTrue,
+      isCreateAccount,
+      showIsForgottenPassword
     };
   }
 };

@@ -25,6 +25,12 @@ InvoiceState = graphene.Enum('InvoiceState', [('Draft', 'draft'), ('Posted', 'po
 Provider = graphene.Enum('Provider', [('Ingenico', 'ogone'), ('ManualPayment', 'transfer'),
                                       ('CustomPaymentForm', 'manual')])
 
+InventoryAvailability = graphene.Enum('InventoryAvailability', [
+    ('SellRegardlessOfInventory', 'never'), ('ShowInventoryOnWebsiteAndPreventSalesIfNotEnoughStock', 'always'),
+    ('ShowInventoryBelowAThresholdAndPreventSalesIfNotEnoughStock', 'threshold'),
+    ('ShowProductSpecificNotifications', 'custom')
+])
+
 
 class SortEnum(graphene.Enum):
     ASC = 'ASC'
@@ -251,6 +257,11 @@ class Product(OdooObjectType):
     small_image = graphene.String()
     thumbnail = graphene.String()
     categories = graphene.List(graphene.NonNull(lambda: Category))
+    inventory_availability = InventoryAvailability()
+    available_threshold = graphene.String(
+        description='Related W/Availability: Show inventory below a threshold and prevent sales if not enough stock'
+    )
+    custom_message = graphene.String(description='Related W/Availability: Show product-specific notifications')
     is_in_stock = graphene.Boolean()
     is_in_wishlist = graphene.Boolean()
     media_gallery = graphene.List(graphene.NonNull(lambda: ProductImage))
@@ -262,6 +273,7 @@ class Product(OdooObjectType):
     variant_price = graphene.Float(description='Specific to Product Variant')
     variant_price_after_discount = graphene.Float(description='Specific to Product Variant')
     variant_has_discounted_price = graphene.Boolean(description='Specific to Product Variant')
+    is_variant_possible = graphene.Boolean(description='Specific to Product Variant')
     variant_attribute_values = graphene.List(graphene.NonNull(lambda: AttributeValue),
                                              description='Specific to Product Variant')
     # Specific to use in Product Template
@@ -331,6 +343,12 @@ class Product(OdooObjectType):
     def resolve_categories(self, info):
         return self.public_categ_ids or None
 
+    def resolve_available_threshold(self, info):
+        return self.available_threshold or None
+
+    def resolve_custom_message(self, info):
+        return self.custom_message or None
+
     def resolve_is_in_stock(self, info):
         return bool(self.qty_available > 0)
 
@@ -369,6 +387,9 @@ class Product(OdooObjectType):
         env = info.context["env"]
         pricing_info = get_product_pricing_info(env, self)
         return pricing_info['has_discounted_price']
+
+    def resolve_is_variant_possible(self, info):
+        return self._is_variant_possible()
 
     def resolve_variant_attribute_values(self, info):
         return self.product_template_attribute_value_ids or None
@@ -424,6 +445,7 @@ class OrderLine(OdooObjectType):
     price_subtotal = graphene.Float()
     price_total = graphene.Float()
     price_tax = graphene.Float()
+    warning_stock = graphene.String()
 
     def resolve_product(self, info):
         return self.product_id or None

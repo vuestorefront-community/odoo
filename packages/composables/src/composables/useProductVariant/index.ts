@@ -24,7 +24,6 @@ const useProductVariant = (): any => {
     if (combinationIds.length === 0) return;
 
     const { productVariant } = await context.$odoo.api.getRealProduct(params);
-    console.log(productVariant);
 
     realProduct.value = productVariant;
   };

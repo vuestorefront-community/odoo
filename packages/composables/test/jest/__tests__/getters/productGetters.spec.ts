@@ -5,7 +5,7 @@ import {
   getProductAttributes
 } from '../../../../src/composables/getters/productGetters';
 import { Product } from '@vue-storefront/odoo-api/src/types';
-import { productVariantsFormated } from '../__mocks__/productAttributesFormated';
+import { productVariantsFormatedForProduct } from '../__mocks__/productAttributesFormated';
 import { productWithAttributes } from '../__mocks__/productWithAttributes';
 
 it('get empty product Attributes', () => {
@@ -70,5 +70,5 @@ it('get empty filtered product', () => {
 it('get grouped attribute list', () => {
   const result = getProductAttributes(productWithAttributes, []);
 
-  expect(result).toStrictEqual(productVariantsFormated);
+  expect(result).toStrictEqual(productVariantsFormatedForProduct);
 });

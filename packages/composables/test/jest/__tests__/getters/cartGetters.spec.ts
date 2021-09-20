@@ -10,14 +10,16 @@ it('get cart items', () => {
 it('get cart item name', () => {
   const categoryTree = cartGetters.getItemName(mockedCart.order.orderLines[0]);
 
-  expect(categoryTree).toStrictEqual(mockedCart.order.orderLines[0].name);
+  expect(categoryTree).toStrictEqual(
+    mockedCart.order.orderLines[0].product.displayName
+  );
 });
 
 it('get cart item variant image', () => {
   const categoryTree = cartGetters.getItemImage(mockedCart.order.orderLines[0]);
 
   expect(categoryTree).toStrictEqual(
-    mockedCart.order.orderLines[0].product.variantImage
+    mockedCart.order.orderLines[0].product.image
   );
 });
 it('get cart item price', () => {

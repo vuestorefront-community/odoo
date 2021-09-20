@@ -61,28 +61,29 @@ const getSortOptions = (searchData: SearchData): AgnosticSort => ({
 });
 
 const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
-  if (!searchData?.data?.categories) {
+  if (
+    !searchData?.data?.categories ||
+    searchData?.data?.categories.length === 0
+  ) {
     return { items: [], label: '', isCurrent: false };
   }
 
   const categories = searchData.data.categories;
-  let parentCategory: Category = searchData.data.categories[0];
+  let parentCategory: Category = categories[0];
 
-  if (!categories[0].childs) {
+  if (!categories[0]?.childs && categories[0]?.parent) {
     parentCategory = categories[0]?.parent?.parent;
   }
 
   return CategoryGetters.getTree(parentCategory);
 };
 
-const getProducts = (searchData: SearchData): any => {
-  if (!searchData.data) {
-    return {} as any;
+const getProducts = (searchData: SearchData): Product[] => {
+  if (!searchData?.data.products || searchData?.data.products.length === 0) {
+    return [];
   }
 
-  const products = searchData.data.products;
-
-  return products as any;
+  return searchData.data.products;
 };
 
 const getPagination = (searchData: SearchData): AgnosticPagination => {

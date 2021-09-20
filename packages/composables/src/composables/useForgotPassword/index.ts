@@ -6,22 +6,28 @@ import {
 } from '@vue-storefront/core';
 
 const factoryParams: UseForgotPasswordFactoryParams<any> = {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   resetPassword: async (context: Context, { email, customQuery }) => {
-    const { data } = await context.$odoo.api.sendResetPassword(email);
+    const { data } = await context.$odoo.api.sendResetPassword(
+      email,
+      customQuery
+    );
 
     return data;
   },
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setNewPassword: async (
     context: Context,
     { tokenValue, newPassword, customQuery }
   ) => {
-    console.log('Mocked: setNewPassword');
+    await context.$odoo.api.changePassword(
+      {
+        token: tokenValue,
+        newPassword
+      },
+      customQuery
+    );
     return {};
   }
 };
 
-export const useForgotPassword = useForgotPasswordFactory<any>(factoryParams);
-export default useForgotPassword;
+export default useForgotPasswordFactory<any>(factoryParams);

@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable camelcase */
 
 export enum SortEnum {
@@ -34,28 +35,28 @@ export declare type ShippingInfo = Record<string, string>;
 export type AttributeValueList = {
   id: number;
   name: string;
-  htmlColor: string;
+  htmlColor?: string;
   search: string;
-  attributeId: number;
+  attributeId?: number;
 };
 
 export type Attribute = {
   id: number;
   name: string;
   displayType: string;
-  priceExtra: number;
-  attributeName: string;
-  search: string;
-  values?: [AttributeValueList];
+  priceExtra?: number;
+  attributeName?: string;
+  search?: string;
+  values?: AttributeValueList[];
 };
 
 export type Category = {
   id: number;
   name: string;
   slug: string;
-  parent: Category;
-  childs: Category[];
-  products: [Product];
+  parent?: Category;
+  childs?: Category[];
+  products?: Product[];
 };
 
 export type CategoryFilterInput = {
@@ -102,7 +103,8 @@ export type ProductImage = {
 export type Product = {
   id: number;
   description?: string;
-  name: string;
+  name?: string;
+  displayName?: string;
   slug?: string;
   isInStock?: boolean;
   qty: number;
@@ -201,7 +203,7 @@ export type Partner = {
 };
 
 export type ProductVariant = {
-  productId: number;
+  product: Product;
   productTemplateId: number;
   displayName: string;
   displayImage: boolean;
@@ -302,7 +304,12 @@ export type GraphQlGetProductVariantParams = {
 };
 
 export type GraphQlCartAddItemParams = {
-  productId: string;
+  productId: number;
+  quantity: number;
+};
+
+export type GraphQlCartUpdateItemQtyParams = {
+  lineId: number;
   quantity: number;
 };
 
@@ -311,7 +318,7 @@ export type GraphQlGetPricinsShippingMethodParams = {
 };
 
 export type GraphQlResetPasswordParams = {
-  password: string;
+  newPassword: string;
   token: string;
 };
 

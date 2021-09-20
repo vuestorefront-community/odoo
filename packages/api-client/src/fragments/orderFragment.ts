@@ -11,7 +11,8 @@ order {
       id
       name
       image
-      variantImage
+      image
+      displayName
     }
     quantity
     priceTotal

@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import theme from './themeConfig';
+const isDev = process.env.NODE_ENV !== 'production';
 
 export default {
   server: {
@@ -101,6 +102,7 @@ export default {
         driver: [
           './helpers/cache.js',
           {
+            isDev,
             redis: {
               host: process.env.REDIS_HOST,
               port: process.env.REDIS_PORT,

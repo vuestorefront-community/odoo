@@ -42,7 +42,7 @@ describe('useCart', () => {
 
   it('add to cart real product', async () => {
     const product = {
-      realProduct: { productId: 10 }
+      realProduct: { product: { id: 10 } }
     };
     await addItem(context, {
       product,
@@ -51,7 +51,7 @@ describe('useCart', () => {
     });
 
     expect(context.$odoo.api.cartAddItem).toBeCalledWith(
-      { productId: '10', quantity: 3 },
+      { productId: 10, quantity: 3 },
       {}
     );
   });
@@ -64,7 +64,7 @@ describe('useCart', () => {
 
     expect(context.$odoo.api.cartAddItem).toBeCalledWith(
       {
-        productId: '5',
+        productId: 5,
         quantity: 2
       },
       {}
@@ -93,17 +93,14 @@ describe('useCart', () => {
   });
 
   it('remove item from cart with saleOrder product', async () => {
-    const orderLine = {
-      product: { id: 11 }
-    };
     await updateItemQty(context, {
-      product: orderLine,
+      product: { id: 11 },
       quantity: 12,
       customQuery: {}
     });
 
     expect(context.$odoo.api.cartUpdateItemQty).toBeCalledWith(
-      { productId: 11, quantity: 12 },
+      { lineId: 11, quantity: 12 },
       {}
     );
   });
@@ -123,7 +120,9 @@ describe('useCart', () => {
   it('checks if item variant from product is in cart', async () => {
     const product = {
       realProduct: {
-        productId: 107
+        product: {
+          id: 107
+        }
       }
     };
     const inCart = await isInCart(context, {

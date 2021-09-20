@@ -5,7 +5,13 @@ export default gql`
       productTemplateId: $productTemplateId
       combinationId: $combinationId
     ) {
-      productId
+      product {
+        id
+        image
+        variantPrice
+        variantPriceAfterDiscount
+        variantHasDiscountedPrice
+      }
       productTemplateId
       displayName
       price
