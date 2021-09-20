@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable camelcase */
 
 export enum SortEnum {
