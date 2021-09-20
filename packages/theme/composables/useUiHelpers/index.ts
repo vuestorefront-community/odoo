@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { getCurrentInstance } from '@vue/composition-api';
-import { Category, ParamsFromUrl } from '~/../api-client/src/types';
+import { Category } from '@vue-storefront/odoo-api/server';
 const getInstance = () => {
   const vm = getCurrentInstance();
   return vm.$root as any;
@@ -11,7 +11,7 @@ const queryParamsNotFilters = ['page', 'sort', 'itemsPerPage'];
 const useUiHelpers = (): any => {
   const instance = getInstance();
 
-  const getFacetsFromURL = (): ParamsFromUrl => {
+  const getFacetsFromURL = () => {
     const { params, query } = instance.$router.history.current;
     let filters: string[] = [];
     if (query) {
