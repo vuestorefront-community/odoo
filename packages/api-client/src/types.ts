@@ -125,7 +125,7 @@ export type Product = {
   accessoryProducts?: [Product];
   attributeValues: Attribute[];
   productTemplate?: Product;
-  categories: [Category];
+  categories: Category[];
 };
 
 export type ProductResult = {
@@ -140,7 +140,7 @@ export declare type WishlistItem = {
 };
 
 export declare type Wishlist = {
-  wishlistItems?: [WishlistItem];
+  wishlistItems?: WishlistItem[];
 };
 
 export type User = {
