@@ -208,8 +208,7 @@ export default {
     };
 
     const handleSearch = debounce(async (paramValue) => {
-      if (!paramValue.target
-      ) {
+      if (!paramValue.target) {
         term.value = paramValue;
       } else {
         term.value = paramValue.target.value;
