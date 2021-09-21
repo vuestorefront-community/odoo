@@ -39,7 +39,7 @@ export const mockedProducts: Product[] = [
           id: 17,
           name: 'clothing',
           slug: 'clothing',
-          parent: { id: 11, name: 'women', slug: 'women'}
+          parent: { id: 11, name: 'women', slug: 'women' }
         }
       },
       {
@@ -50,11 +50,10 @@ export const mockedProducts: Product[] = [
           id: 17,
           name: 'clothing',
           slug: 'clothing',
-          parent: { id: 11, name: 'women', slug: 'women'}
+          parent: { id: 11, name: 'women', slug: 'women' }
         }
       }
     ]
-
   },
   {
     id: 54,
@@ -105,10 +104,9 @@ export const mockedProducts: Product[] = [
           id: 18,
           name: 'shoes',
           slug: 'shoes',
-          parent: { id: 11, name: 'women', slug: 'women'}
+          parent: { id: 11, name: 'women', slug: 'women' }
         }
       }
     ]
-
   }
 ];
