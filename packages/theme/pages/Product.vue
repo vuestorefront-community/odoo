@@ -260,6 +260,7 @@ export default {
   setup(props, { root }) {
     const qty = ref(1);
     const { id } = root.$route.params;
+    const { query } = root.$route;
     const { size, color } = root.$route.query;
     const configuration = reactive({ size, color });
     const { products, search, loading: productloading } = useProduct(
@@ -270,7 +271,7 @@ export default {
       productVariants,
       realProduct,
       elementNames
-    } = useProductVariant(`products-${id}`);
+    } = useProductVariant(query);
     const { products: relatedProducts, loading: relatedLoading } = useProduct(
       'relatedProducts'
     );
