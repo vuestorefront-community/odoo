@@ -6,8 +6,6 @@ import { Context, sharedRef} from '@vue-storefront/core';
 import { GraphQlGetProductVariantParams } from '@vue-storefront/odoo-api/src/types';
 
 const useProductVariant = (queryParams: Record<string, string>): any => {
-  console.log(Object.values(queryParams).join('-'));
-
   const context: Context = useVSFContext();
 
   const errors = vsfRef([], 'errors');
