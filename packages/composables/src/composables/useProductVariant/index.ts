@@ -2,15 +2,17 @@
 /* istanbul ignore file */
 
 import { useVSFContext, vsfRef } from '@vue-storefront/core';
-import { Context } from '@vue-storefront/core';
+import { Context, sharedRef} from '@vue-storefront/core';
 import { GraphQlGetProductVariantParams } from '@vue-storefront/odoo-api/src/types';
 
-const useProductVariant = (): any => {
+const useProductVariant = (queryParams: Record<string, string>): any => {
+  console.log(Object.values(queryParams).join('-'));
+
   const context: Context = useVSFContext();
 
   const errors = vsfRef([], 'errors');
   const productVariants = vsfRef([], 'productVariants');
-  const realProduct = vsfRef(null, 'realProduct');
+  const realProduct = sharedRef(null, Object.values(queryParams).join('-'));
   const elementNames = vsfRef({}, 'elementNames');
 
   const resetPasswordErrors = () => (errors.value = []);
