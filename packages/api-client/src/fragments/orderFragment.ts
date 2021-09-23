@@ -1,5 +1,6 @@
 export default `
 order {
+  id
   name
   amountTotal
   amountTax
