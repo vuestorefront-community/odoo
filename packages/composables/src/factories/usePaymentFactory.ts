@@ -13,6 +13,7 @@ export interface UsePaymentFactoryParams< PAYMENT_PROVIDER, API extends Platform
      customQuery?: CustomQuery;
     }) => PAYMENT_PROVIDER[];
 }
+
 export const usePaymentFactory = <PAYMENT_PROVIDER, API extends PlatformApi = any>(
   factoryParams: UsePaymentFactoryParams<PAYMENT_PROVIDER, API>
 ) => function usePayment(): UsePayment<PAYMENT_PROVIDER, API> {
