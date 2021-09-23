@@ -84,13 +84,27 @@
           class="sf-property--full-width sf-property--large summary__property-total"
         />
 
-        <component
-          :is="provider.name"
-          v-for="provider in providerList"
-          :key="provider.id"
+        <SfHeading
+          :level="3"
+          title="Choose payment provider"
+          class="sf-heading--left sf-heading--no-underline title"
         />
 
-        <VsfPaymentProvider @status="isPaymentReady = true" />
+        <SfAccordion
+          transition="sf-expand"
+          showChevron
+          v-if="providerListHasMoreThanOne"
+        >
+          <SfAccordionItem
+            :header="provider.name"
+            v-for="provider in providerList"
+            :key="provider.id"
+          >
+            <component :is="provider.component" />
+          </SfAccordionItem>
+        </SfAccordion>
+
+        <component :is="providerList[0].component" v-else />
 
         <SfCheckbox
           v-e2e="'terms'"
@@ -140,11 +154,18 @@ import {
   SfPrice,
   SfProperty,
   SfAccordion,
-  SfLink
+  SfLink,
+  SfRadio
 } from '@storefront-ui/vue';
 import { onSSR } from '@vue-storefront/core';
 import { ref, computed } from '@vue/composition-api';
-import { useMakeOrder, useCart, cartGetters, orderGetters, usePayment} from '@vue-storefront/odoo';
+import {
+  useMakeOrder,
+  useCart,
+  cartGetters,
+  orderGetters,
+  usePayment
+} from '@vue-storefront/odoo';
 
 export default {
   name: 'ReviewOrder',
@@ -160,18 +181,32 @@ export default {
     SfProperty,
     SfAccordion,
     SfLink,
-    VsfPaymentProvider: () => import('~/components/Checkout/VsfPaymentProvider'),
-    AdyenPaymentProvider: () => import('~/components/Checkout/AdyenPaymentProvider'),
-    AdyenExternalPaymentProvider: () => import('~/components/Checkout/AdyenExternalPaymentProvider')
+    SfRadio,
+    VsfPaymentProvider: () =>
+      import('~/components/Checkout/VsfPaymentProvider'),
+    AdyenPaymentProvider: () =>
+      import('~/components/Checkout/AdyenPaymentProvider'),
+    AdyenExternalPaymentProvider: () =>
+      import('~/components/Checkout/AdyenExternalPaymentProvider')
   },
   setup(props, context) {
     const { cart, load, setCart } = useCart();
     const { getPaymentProviderList } = usePayment();
     const { order, make, loading } = useMakeOrder();
 
+    const selectedMethod = ref(null);
+
+    const selectMethod = (method) => {
+      selectedMethod.value = method;
+      context.emit('status');
+    };
+
     const isPaymentReady = ref(false);
     const terms = ref(false);
     const providerList = ref(getPaymentProviderList());
+    const providerListHasMoreThanOne = computed(
+      () => providerList.value.length > 1
+    );
 
     onSSR(async () => {
       await load();
@@ -196,7 +231,10 @@ export default {
       tableHeaders: ['Description', 'Size', 'Color', 'Quantity', 'Amount'],
       cartGetters,
       processOrder,
-      providerList
+      providerList,
+      selectMethod,
+      selectedMethod,
+      providerListHasMoreThanOne
     };
   }
 };
