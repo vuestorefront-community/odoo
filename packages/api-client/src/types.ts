@@ -53,8 +53,8 @@ export declare type PaymentProvider = {
 };
 
 export declare type PaymentMethod = {
-  name: string
-}
+  name: string;
+};
 
 export type AttributeValueList = {
   id: number;
@@ -350,12 +350,8 @@ export type CountryFiltersInput = {
   id: number;
 };
 
-export type GraphQlGetAllCountryStatesParams = {
-  filter: CountryFiltersInput;
-  currentPage?: number;
-  pageSize?: number;
-  search?: string;
-  sort?: ProductSortInput;
+export type GraphQlGetCountryParams = {
+  id: number;
 };
 
 export type GraphQlLoginParams = {
