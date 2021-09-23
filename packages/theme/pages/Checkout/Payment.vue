@@ -173,8 +173,6 @@ export default {
     const terms = ref(false);
     const providerList = ref(getPaymentProviderList());
 
-    console.log(providerList);
-
     onSSR(async () => {
       await load();
     });
