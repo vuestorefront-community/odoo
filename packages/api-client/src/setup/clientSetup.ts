@@ -1,12 +1,18 @@
 
 import { createOddoLink } from './apolloClient';
 import ApolloClient from 'apollo-client';
-import axios from 'axios';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Config, ClientInstance } from './config';
 const onCreate = (settings: Config): { config: Config; client: ClientInstance } => {
 
   const config = (settings as any) as Config;
+
+  // if (config.payment?.providers.length === 0) {
+  //   console.warn(
+  //     '%c [Config error]: Message: You must set payment providers on middleware config',
+  //     'background: #222; color: #FFA07A'
+  //   );
+  // }
 
   const { apolloLink } = createOddoLink(config);
 
@@ -16,19 +22,10 @@ const onCreate = (settings: Config): { config: Config; client: ClientInstance } 
     ...settings
   });
 
-  const axiosClient = axios.create({
-    withCredentials: true,
-    baseURL: settings.odooBaseUrl,
-    headers: {
-      Cookie: settings.auth
-    }
-  });
-
   return {
     config,
     client: {
-      apollo: apolloClient,
-      axios: axiosClient
+      apollo: apolloClient
     }
   };
 };
