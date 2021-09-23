@@ -1,27 +1,42 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime
+
 import graphene
 from graphql import GraphQLError
 from odoo import _
-from odoo.osv import expression
-
 from odoo.addons.graphql_vuestorefront.schemas.objects import PaymentAcquirer, Order
+from odoo.http import request
+from odoo.osv import expression
 
 
 class PaymentQuery(graphene.ObjectType):
+    payment_acquirer = graphene.Field(
+        PaymentAcquirer,
+        required=True,
+        id=graphene.Int(),
+    )
     payment_acquirers = graphene.List(
         graphene.NonNull(PaymentAcquirer),
-        required=True,
-        order_id=graphene.Int(),
     )
 
-    def resolve_payment_acquirers(self, info, order_id):
+    def resolve_payment_acquirer(self, info, id):
+        domain = [
+            ('id', '=', id),
+            ('state', 'in', ['enabled', 'test']),
+        ]
+        payment_acquirer = info.context["env"]['payment.acquirer'].sudo().search(domain, limit=1)
+        if not payment_acquirer:
+            raise GraphQLError(_('Payment acquirer does not exist.'))
+        return payment_acquirer
+
+    def resolve_payment_acquirers(self, info):
         env = info.context["env"]
-        order = env['sale.order'].search([('id', '=', order_id)], limit=1)
-        if not order:
-            raise GraphQLError(_("Sale Order does not exist."))
+
         website = env['website'].get_current_website()
+        request.website = website
+        order = website.sale_get_order()
+
         domain = expression.AND([
             ['&', ('state', 'in', ['enabled', 'test']), ('company_id', '=', order.company_id.id)],
             ['|', ('website_id', '=', False), ('website_id', '=', website.id)],
