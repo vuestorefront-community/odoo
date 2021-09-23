@@ -15,12 +15,6 @@ const cookieExtension: ApiClientExtension = {
       }),
       beforeCall: ({ configuration, callName, args }) => args,
       afterCall: ({ configuration, callName, response }) => {
-        // axios
-        if (response.headers) {
-          res.setHeader('Set-cookie', response.headers['set-cookie']);
-
-          return response.data;
-        }
 
         // apollo
         if (response?.cookie) {
