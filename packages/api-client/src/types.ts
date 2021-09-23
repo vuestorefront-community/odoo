@@ -1,8 +1,15 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable camelcase */
 
 export enum SortEnum {
   ASC,
   DESC
+}
+
+export enum Provider {
+  Ingenico,
+  ManualPayment,
+  CustomPaymentForm
 }
 
 export enum OrderStage {
@@ -30,6 +37,19 @@ export declare type Address = {
 };
 
 export declare type ShippingInfo = Record<string, string>;
+
+export declare type PaymentIcon = {
+  id: number;
+  name: string;
+  image: string;
+};
+
+export declare type PaymentProvider = {
+  id: number;
+  name: string;
+  provider: Provider;
+  paymentIcons?: PaymentIcon[];
+};
 
 export type AttributeValueList = {
   id: number;
@@ -88,7 +108,7 @@ export type GraphQlGetCategoryParams = {
 };
 
 export type CategoryResult = {
-  categories: [Category];
+  categories: Category[];
   totalCount: number;
 };
 
@@ -111,7 +131,7 @@ export type Product = {
   image: string;
   variantImage: string;
   smallImage: string;
-  mediaGallery: [ProductImage];
+  mediaGallery: ProductImage[];
   price: number;
   weight: number;
   priceAfterDiscount: number;
@@ -121,17 +141,17 @@ export type Product = {
   firstVariant: number;
   currency: Currency;
   isInWishlist: boolean;
-  alternativeProducts?: [Product];
-  accessoryProducts?: [Product];
+  alternativeProducts?: Product[];
+  accessoryProducts?: Product[];
   attributeValues: Attribute[];
   productTemplate?: Product;
   categories: Category[];
 };
 
 export type ProductResult = {
-  products: [Product];
+  products: Product[];
   totalCount: number;
-  attributes: [Attribute];
+  attributes: Attribute[];
 };
 
 export declare type WishlistItem = {
@@ -156,7 +176,7 @@ export type User = {
   email: string;
   phone?: string;
   isCompany?: boolean;
-  contacts?: [Partner];
+  contacts?: Partner[];
   signupToken?: string;
   signupValid?: string;
 };
@@ -198,7 +218,7 @@ export type Partner = {
   email?: string;
   phone: string;
   isCompany?: boolean;
-  contacts: [Partner];
+  contacts: Partner[];
 };
 
 export type ProductVariant = {
@@ -253,7 +273,7 @@ export type Order = {
   orderLines?: OrderLine[];
   stage: OrderStage;
   orderUrl: string;
-  transactions: [PaymentTransaction];
+  transactions: PaymentTransaction[];
 };
 
 export type Cart = {
