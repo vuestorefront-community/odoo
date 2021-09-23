@@ -1,12 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  CustomQuery,
-  Context,
-  FactoryParams,
-  PlatformApi,
-  ComputedProperty,
-  Composable
-} from '@vue-storefront/core';
+import { CustomQuery, Context, FactoryParams, PlatformApi, ComputedProperty, Composable, configureFactoryParams, sharedRef} from '@vue-storefront/core';
+import { computed, Ref } from '@vue/composition-api';
 
 export interface usePayMentProviderErrors {
   getPaymentMethods: Error;
@@ -27,6 +21,23 @@ export interface UsePaymentProviderParams< PAYMENT_PROVIDER, PAYMENT_METHOD, API
 
   getPaymentExternalUrl: (context: Context, params: { customQuery?: CustomQuery; }) => string;
 }
-export declare const usePaymentProviderFactory: < PAYMENT_PROVIDER, PAYMENT_METHOD, API extends PlatformApi = any>(
+
+export const usePaymentProviderFactory = <PAYMENT_PROVIDER, PAYMENT_METHOD, API extends PlatformApi = any>(
   factoryParams: UsePaymentProviderParams<PAYMENT_PROVIDER, PAYMENT_METHOD, API>
-) => () => UsePaymentProvider<PAYMENT_PROVIDER, PAYMENT_METHOD, API>;
+) => function UsePaymentProvider(): UsePaymentProvider<PAYMENT_PROVIDER, PAYMENT_METHOD, API> {
+    const _factoryParams = configureFactoryParams(factoryParams);
+
+    const loading: Ref<boolean> = sharedRef(false, 'loading');
+    const error: Ref<usePayMentProviderErrors> = sharedRef({}, 'error');
+
+    const getPaymentMethods = _factoryParams.getPaymentMethods;
+    const getPaymentExternalUrl = _factoryParams.getPaymentExternalUrl;
+
+    return {
+      loading: computed(() => loading.value),
+      error: computed(() => error.value),
+      getPaymentMethods,
+      getPaymentExternalUrl
+    };
+  };
+

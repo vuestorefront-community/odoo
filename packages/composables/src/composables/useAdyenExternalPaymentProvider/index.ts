@@ -4,17 +4,13 @@ import {
   usePaymentProviderFactory,
   UsePaymentProviderParams
 } from '../../factories/usePaymentProviderFactory';
-import { PaymentProvider } from '@vue-storefront/odoo-api/src/types';
-
-declare type PaymentMethods = {
-  name: string;
-};
+import { PaymentProvider, PaymentMethod } from '@vue-storefront/odoo-api/src/types';
 
 const factoryParams: UsePaymentProviderParams<PaymentProvider, any> = {
-  getPaymentMethods: (context: Context, params): PaymentMethods[] => {
+  getPaymentMethods: (context: Context, params): PaymentMethod[] => {
     console.log('implement');
 
-    return [] as PaymentMethods[];
+    return [] as PaymentMethod[];
   },
   getPaymentExternalUrl: (context: Context, params): string => {
     console.log('implement');
@@ -23,6 +19,4 @@ const factoryParams: UsePaymentProviderParams<PaymentProvider, any> = {
   }
 };
 
-export default usePaymentProviderFactory<PaymentProvider, PaymentMethods>(
-  factoryParams
-);
+export default usePaymentProviderFactory<PaymentProvider, PaymentMethod>(factoryParams);
