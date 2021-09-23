@@ -87,7 +87,6 @@ export default {
   },
   modules: [
     '@vue-storefront/middleware/nuxt',
-    '@nuxtjs/axios',
     'nuxt-i18n',
     'cookie-universal-nuxt',
     'vue-scrollto/nuxt',
