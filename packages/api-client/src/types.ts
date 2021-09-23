@@ -51,6 +51,10 @@ export declare type PaymentProvider = {
   paymentIcons?: PaymentIcon[];
 };
 
+export declare type PaymentMethod = {
+  name: string
+}
+
 export type AttributeValueList = {
   id: number;
   name: string;
