@@ -20,7 +20,7 @@
           slim
         >
           <SfInput
-            v-model="form.firstName"
+            v-model="form.name"
             label="First name"
             name="firstName"
             class="form__element"
@@ -36,7 +36,7 @@
           slim
         >
           <SfInput
-            v-model="form.streetName"
+            v-model="form.street"
             label="Street name"
             name="streetName"
             class="form__element"
@@ -69,7 +69,7 @@
           slim
         >
           <SfInput
-            v-model="form.postalCode"
+            v-model="form.zip"
             label="Zip-code"
             name="zipCode"
             class="form__element form__element--half form__element--half-even"
@@ -85,7 +85,7 @@
           slim
         >
           <SfSelect
-            v-model="form.country"
+            v-model="form.country.id"
             label="Country"
             name="country"
             class="
@@ -113,7 +113,7 @@
           slim
         >
           <SfSelect
-            v-model="form.state"
+            v-model="form.state.id"
             label="State/Province"
             name="state"
             class="
@@ -172,7 +172,7 @@
         @selectedMethod="handleSelectedMethodShipping"
       />
       <SfButton type="submit" :disabled="invalid">
-        <slot name="btn-text"></slot>
+        {{ $t('Continue to billing') }}
       </SfButton>
     </form>
   </ValidationObserver>
@@ -238,15 +238,13 @@ export default {
     } = useCountrySearch();
 
     const form = ref({
-      firstName: '',
-      lastName: '',
-      streetName: '',
+      name: '',
+      street: '',
       city: '',
-      state: '',
-      country: '',
-      postalCode: '',
-      phone: '',
-      selectedMethodShipping: ''
+      state: { id: null },
+      country: { id: null },
+      zip: '',
+      phone: null
     });
     const handleFormSubmit = async () => {
       await addAddress({
@@ -298,7 +296,7 @@ export default {
     watch(
       () => form.value.country,
       async () => {
-        await searchCountryStates(form.value.country);
+        await searchCountryStates(form.value.country.id);
       }
     );
 
