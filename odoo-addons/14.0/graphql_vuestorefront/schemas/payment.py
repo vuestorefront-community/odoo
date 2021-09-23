@@ -3,9 +3,11 @@
 from datetime import datetime
 
 import graphene
+from graphene.types import generic
 from graphql import GraphQLError
 from odoo import _
-from odoo.addons.graphql_vuestorefront.schemas.objects import PaymentAcquirer, Order
+from odoo.addons.graphql_vuestorefront.schemas.objects import PaymentAcquirer
+from odoo.addons.website_sale.controllers.main import WebsiteSale
 from odoo.http import request
 from odoo.osv import expression
 
@@ -77,53 +79,25 @@ def prepare_payment_transaction(env, data, payment_acquire, order):
     return transaction
 
 
+class MakePaymentResult(graphene.ObjectType):
+    form = generic.GenericScalar()
+
+
 class MakePayment(graphene.Mutation):
     class Arguments:
         payment_acquire_id = graphene.Int(required=True)
-        order_id = graphene.Int(required=True)
-        expiry_month = graphene.Int(required=True)
-        expiry_year = graphene.String(required=True)
-        holder_name = graphene.String(required=True)
-        card_number = graphene.String(required=True)
-        cvc = graphene.String(required=True)
-        brand = graphene.String(required=True)
 
-    Output = Order
+    Output = MakePaymentResult
 
     @staticmethod
-    def mutate(self, info, payment_acquire_id, order_id, expiry_month, expiry_year,
-               holder_name, card_number, cvc, brand):
-        env = info.context['env']
-        cc_expiry = validate_expiry(expiry_month, expiry_year)
+    def mutate(self, info, payment_acquire_id):
+        env = info.context["env"]
+        website = env['website'].get_current_website()
+        request.website = website
 
-        order = env['sale.order'].sudo().search([('id', '=', order_id)], limit=1)
-        if not order:
-            raise GraphQLError(_('Sale Order does not exist.'))
-
-        payment_acquire = env['payment.acquirer'].sudo().search([('id', '=', payment_acquire_id)], limit=1)
-        if not payment_acquire:
-            raise GraphQLError(_('Payment Acquire does not exist.'))
-
-        data = {
-            'cc_number': card_number,
-            'cc_cvc': cvc,
-            'cc_holder_name': holder_name,
-            'cc_expiry': cc_expiry,
-            'cc_brand': brand,
-            'acquirer_id': payment_acquire_id,
-            'partner_id': order.partner_id.id
-        }
-        transaction = prepare_payment_transaction(env, data, payment_acquire, order)
-
-        params = {'CVC': cvc, '3d_secure': True}
-        transaction.ogone_s2s_do_transaction(**params)
-
-        # check if transaction is done confirm sale order and create invoice
-        if transaction.state == 'done':
-            transaction._post_process_after_done()
-        else:
-            raise GraphQLError(_(transaction.state_message))
-        return order
+        return MakePaymentResult(
+            form=WebsiteSale().payment_transaction(payment_acquire_id).decode('utf-8')
+        )
 
 
 class PaymentMutation(graphene.ObjectType):

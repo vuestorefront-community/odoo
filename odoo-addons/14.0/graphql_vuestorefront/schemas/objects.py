@@ -2,7 +2,6 @@
 
 import graphene
 from graphql import GraphQLError
-from graphene.types import generic
 from odoo import _
 
 from werkzeug import urls
@@ -21,9 +20,6 @@ OrderStage = graphene.Enum('OrderStage', [('Quotation', 'draft'), ('QuotationSen
                                           ('SalesOrder', 'sale'), ('Locked', 'done'), ('Cancelled', 'cancel')])
 
 InvoiceState = graphene.Enum('InvoiceState', [('Draft', 'draft'), ('Posted', 'posted'), ('Cancelled', 'cancel')])
-
-Provider = graphene.Enum('Provider', [('Ingenico', 'ogone'), ('ManualPayment', 'transfer'),
-                                      ('CustomPaymentForm', 'manual')])
 
 InventoryAvailability = graphene.Enum('InventoryAvailability', [
     ('SellRegardlessOfInventory', 'never'), ('ShowInventoryOnWebsiteAndPreventSalesIfNotEnoughStock', 'always'),
@@ -411,12 +407,8 @@ class Product(OdooObjectType):
 class Payment(OdooObjectType):
     id = graphene.Int()
     name = graphene.String()
-    provider = graphene.String()
     amount = graphene.Float()
     payment_reference = graphene.String()
-
-    def resolve_provider(self, info):
-        return self.journal_id.name or None
 
 
 class PaymentTransaction(OdooObjectType):
@@ -609,7 +601,6 @@ class PaymentIcon(OdooObjectType):
 class PaymentAcquirer(OdooObjectType):
     id = graphene.Int(required=True)
     name = graphene.String()
-    provider = Provider()
     payment_icons = graphene.List(graphene.NonNull(lambda: PaymentIcon))
 
     def resolve_payment_icons(self, info):
