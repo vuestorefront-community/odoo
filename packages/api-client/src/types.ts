@@ -48,6 +48,7 @@ export declare type PaymentProvider = {
   id: number;
   name: string;
   provider: Provider;
+  component: string;
   paymentIcons?: PaymentIcon[];
 };
 
