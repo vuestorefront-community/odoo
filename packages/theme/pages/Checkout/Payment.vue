@@ -40,7 +40,7 @@
           class="table__data"
           v-for="(value, key) in cartGetters.getItemAttributes(product, [
             'size',
-            'color'
+            'color',
           ])"
           :key="key"
         >
@@ -54,7 +54,7 @@
             :regular="$n(cartGetters.getItemPrice(product).regular, 'currency')"
             :special="
               cartGetters.getItemPrice(product).special &&
-                $n(cartGetters.getItemPrice(product).special, 'currency')
+              $n(cartGetters.getItemPrice(product).special, 'currency')
             "
             class="product-price"
           />
@@ -81,7 +81,10 @@
         <SfProperty
           name="Total price"
           :value="$n(totals.total, 'currency')"
-          class="sf-property--full-width sf-property--large summary__property-total"
+          class="
+            sf-property--full-width sf-property--large
+            summary__property-total
+          "
         />
 
         <SfHeading
@@ -90,7 +93,36 @@
           class="sf-heading--left sf-heading--no-underline title"
         />
 
-        <SfAccordion
+        <SfRadio
+          v-for="provider in providerList"
+          :key="provider.id"
+          :label="provider.name"
+          :value="String(provider.id)"
+          :selected="String(selectedProvider.id)"
+          name="shippingMethod"
+          class="form__radio shipping"
+          @input="selectProvider(provider)"
+        >
+          <div class="shipping__label">
+            {{ provider.name }}
+          </div>
+
+          <div class="shipping__description">
+            {{ provider.name }}
+          </div>
+        </SfRadio>
+
+        <abstract-payment-observer v-if="selectedProvider.name">
+          <component
+            class="py-8"
+            @isPaymentReady="isPaymentReady = arguments[0]"
+            @providerPaymentHandler="providerPaymentHandler = arguments[0]"
+            :provider="selectedProvider"
+            :is="getComponentProviderByName(selectedProvider.name)"
+          />
+        </abstract-payment-observer>
+
+        <!-- <SfAccordion
           transition="sf-expand"
           showChevron
           v-if="providerListHasMoreThanOne"
@@ -100,11 +132,14 @@
             v-for="provider in providerList"
             :key="provider.id"
           >
-            <component :is="provider.component" />
+            <component :is="getComponentProviderByName(provider.name)" />
           </SfAccordionItem>
         </SfAccordion>
 
-        <component :is="providerList[0].component" v-else />
+        <component
+          :is="getComponentProviderByName(providerList[0].name)"
+          v-else
+        /> -->
 
         <SfCheckbox
           v-e2e="'terms'"
@@ -132,7 +167,7 @@
             v-e2e="'make-an-order'"
             :disabled="loading || !isPaymentReady || !terms"
             class="summary__action-button"
-            @click="processOrder"
+            @click="providerPaymentHandler"
           >
             {{ $t('Make an order') }}
           </SfButton>
@@ -158,6 +193,8 @@ import {
   SfRadio
 } from '@storefront-ui/vue';
 import { onSSR } from '@vue-storefront/core';
+import { useUiHelpers } from '~/composables';
+
 import { ref, computed } from '@vue/composition-api';
 import {
   useMakeOrder,
@@ -187,33 +224,36 @@ export default {
     AdyenPaymentProvider: () =>
       import('~/components/Checkout/AdyenPaymentProvider'),
     AdyenExternalPaymentProvider: () =>
-      import('~/components/Checkout/AdyenExternalPaymentProvider')
+      import('~/components/Checkout/AdyenExternalPaymentProvider'),
+    WireTransferPaymentProvider: () =>
+      import('~/components/Checkout/WireTransferPaymentProvider'),
+    AbstractPaymentObserver: () =>
+      import('~/components/Checkout/AbstractPaymentObserver')
   },
   setup(props, context) {
     const { cart, load, setCart } = useCart();
-    const { getPaymentProviderList } = usePayment();
+    const { providerList, getPaymentProviderList } = usePayment();
     const { order, make, loading } = useMakeOrder();
-
-    const selectedMethod = ref(null);
-
-    const selectMethod = (method) => {
-      selectedMethod.value = method;
-      context.emit('status');
-    };
+    const th = useUiHelpers();
 
     const isPaymentReady = ref(false);
     const terms = ref(false);
-    const providerList = ref(getPaymentProviderList());
-    const providerListHasMoreThanOne = computed(
-      () => providerList.value.length > 1
-    );
+    const selectedProvider = ref({});
+
+    const selectProvider = (provider) => {
+      isPaymentReady.value = false;
+      selectedProvider.value = provider;
+      context.emit('status');
+    };
 
     onSSR(async () => {
       await load();
+      await getPaymentProviderList();
     });
 
     const processOrder = async () => {
       await make();
+
       const thankYouPath = {
         name: 'thank-you',
         query: { order: orderGetters.getId(order.value) }
@@ -221,6 +261,12 @@ export default {
       context.root.$router.push(context.root.localePath(thankYouPath));
       setCart(null);
     };
+
+    const providerPaymentHandler = () => {};
+
+    const providerListHasMoreThanOne = computed(
+      () => providerList.value.length > 1
+    );
 
     return {
       isPaymentReady,
@@ -232,9 +278,11 @@ export default {
       cartGetters,
       processOrder,
       providerList,
-      selectMethod,
-      selectedMethod,
-      providerListHasMoreThanOne
+      selectProvider,
+      selectedProvider,
+      providerListHasMoreThanOne,
+      providerPaymentHandler,
+      getComponentProviderByName: th.getComponentProviderByName
     };
   }
 };

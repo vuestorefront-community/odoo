@@ -1,7 +1,5 @@
 <template>
-  <div>
-    WireTransferPaymentProvider
-  </div>
+  <div>Must implement WireTransferPaymentProvider</div>
 </template>
 
 <script>
