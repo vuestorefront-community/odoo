@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable camelcase */
 import { getCurrentInstance } from '@vue/composition-api';
 import { Category } from '@vue-storefront/odoo-api/server';
@@ -94,26 +95,38 @@ const useUiHelpers = (): any => {
     instance.$router.push({ query: formatedFilters });
   };
 
-  // eslint-disable-next-line
   const changeItemsPerPage = (itemsPerPage) => {
     const { query } = instance.$router.history.current;
     delete query.page;
     instance.$router.push({ query: { ...query, itemsPerPage } });
   };
 
-  // eslint-disable-next-line
   const changeSearchTerm = (term: string) => term;
 
-  // eslint-disable-next-line
   const isFacetColor = (facet): boolean => {
     return facet.display_type === 'color';
   };
 
-  // eslint-disable-next-line
   const isFacetCheckbox = (facet): boolean => {
     console.warn('[VSF] please implement useUiHelpers.isFacetCheckbox.');
 
     return false;
+  };
+
+  const getComponentProviderByName = (name: string): string => {
+    if (!name) throw new Error('Provider without name');
+
+    const upperName = name.toLocaleUpperCase();
+
+    if (upperName.includes('ADYEN')) {
+      return 'AdyenExternalPaymentProvider';
+    }
+
+    if (upperName.includes('WIRE')) {
+      return 'WireTransferPaymentProvider';
+    }
+
+    throw new Error(`Provider ${name} not implemented!`);
   };
 
   return {
@@ -126,7 +139,8 @@ const useUiHelpers = (): any => {
     changeSearchTerm,
     isFacetColor,
     isFacetCheckbox,
-    facetsFromUrlToFilter
+    facetsFromUrlToFilter,
+    getComponentProviderByName
   };
 };
 
