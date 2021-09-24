@@ -4,18 +4,19 @@ import {
   usePaymentProviderFactory,
   UsePaymentProviderParams
 } from '../../factories/usePaymentProviderFactory';
-import { PaymentProvider, PaymentMethod } from '@vue-storefront/odoo-api/src/types';
+import { PaymentProvider, PaymentMethod, GraphQlMakePaymentParams } from '@vue-storefront/odoo-api/src/types';
 
 const factoryParams: UsePaymentProviderParams<PaymentProvider, any> = {
+
   getPaymentMethods: (context: Context, params): PaymentMethod[] => {
-    console.log('implement');
+    console.log('implement getPaymentMethods');
 
     return [] as PaymentMethod[];
   },
-  getPaymentExternalUrl: (context: Context, params): string => {
-    console.log('implement');
+  getPaymentExternal: async (context: Context, params): Promise<string> => {
 
-    return '';
+    const { makePayment } = await context.$odoo.api.paymentMakeExternal(params);
+    return makePayment.form;
   }
 };
 

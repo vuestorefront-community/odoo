@@ -2,8 +2,8 @@
 import { Context, FactoryParams, PlatformApi, Composable, CustomQuery,
   configureFactoryParams, sharedRef, ComputedProperty, Logger} from '@vue-storefront/core';
 import { computed, Ref } from '@vue/composition-api';
-export interface UsePaymentErrors { getPaymentProviderList: Error;}
 
+export interface UsePaymentErrors { getPaymentProviderList: Error;}
 export interface UsePayment<PAYMENT_PROVIDER, API extends PlatformApi = any>
   extends Composable<API> {
   error: ComputedProperty<UsePaymentErrors>;
@@ -35,18 +35,16 @@ export const usePaymentFactory = < PAYMENT_PROVIDER, API extends PlatformApi = a
         `${ssrKey}-error`
       );
 
-      const getPaymentProviderList = async (): Promise<PAYMENT_PROVIDER[]> => {
+      const getPaymentProviderList = async (params): Promise<PAYMENT_PROVIDER[]> => {
         try {
-          const response = await _factoryParams.getPaymentProviderList();
+          const response = await _factoryParams.getPaymentProviderList(params);
 
           providerList.value = response;
 
           return response;
-        } catch (error) {
-          error.value.Logger.error(
-            `UsePayment/${id}/getPaymentProviderList`,
-            error
-          );
+        } catch (err) {
+          error.value.getPaymentProviderList = err;
+          Logger.error(`UsePayment/${id}/getPaymentProviderList`, err);
         }
       };
 

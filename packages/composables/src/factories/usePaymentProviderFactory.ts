@@ -1,17 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CustomQuery, Context, FactoryParams, PlatformApi, ComputedProperty, Composable, configureFactoryParams, sharedRef} from '@vue-storefront/core';
+import { CustomQuery, Context, FactoryParams, PlatformApi, ComputedProperty, Composable, configureFactoryParams, sharedRef, Logger} from '@vue-storefront/core';
+import { GraphQlMakePaymentParams, PaymentProvider } from '@vue-storefront/odoo-api/src/types';
 import { computed, Ref } from '@vue/composition-api';
 
-export interface usePayMentProviderErrors {
+export interface usePaymentProviderErrors {
   getPaymentMethods: Error;
-  getPaymentExternalUrl: Error;
+  getPaymentExternal: Error;
 }
 
 export interface UsePaymentProvider< PAYMENT_PROVIDER, PAYMENT_METHOD, API extends PlatformApi = any> extends Composable<API> {
   getPaymentMethods(cart: PAYMENT_PROVIDER): PAYMENT_METHOD[];
-  getPaymentExternalUrl(params: { customQuery?: CustomQuery }): string;
+  getPaymentExternal(params: { customQuery?: CustomQuery }): Promise<string>;
 
-  error: ComputedProperty<usePayMentProviderErrors>;
+  paymentExternalResponse: Ref<any>;
+
+  error: ComputedProperty<usePaymentProviderErrors>;
   loading: ComputedProperty<boolean>;
 }
 
@@ -19,25 +22,46 @@ export interface UsePaymentProviderParams< PAYMENT_PROVIDER, PAYMENT_METHOD, API
 
   getPaymentMethods: (context: Context, params: { customQuery?: any; }) => PAYMENT_METHOD[];
 
-  getPaymentExternalUrl: (context: Context, params: { customQuery?: CustomQuery; }) => string;
+  getPaymentExternal: (context: Context, params: { customQuery?: CustomQuery; }) => Promise<string>;
 }
 
 export const usePaymentProviderFactory = <PAYMENT_PROVIDER, PAYMENT_METHOD, API extends PlatformApi = any>(
   factoryParams: UsePaymentProviderParams<PAYMENT_PROVIDER, PAYMENT_METHOD, API>
-) => function UsePaymentProvider(): UsePaymentProvider<PAYMENT_PROVIDER, PAYMENT_METHOD, API> {
-    const _factoryParams = configureFactoryParams(factoryParams);
 
-    const loading: Ref<boolean> = sharedRef(false, 'loading');
-    const error: Ref<usePayMentProviderErrors> = sharedRef({}, 'error');
+) => function UsePaymentProvider(provider: PaymentProvider): UsePaymentProvider<PAYMENT_PROVIDER, PAYMENT_METHOD, API> {
+    const _factoryParams = configureFactoryParams(factoryParams);
+    const ssrKey = provider.id || 'usePaymentProvider';
+
+    const paymentExternalResponse = sharedRef(null, `${ssrKey}-provider`);
+    const loading = sharedRef<boolean>(false, `${ssrKey}-loading`);
+    const error = sharedRef<usePaymentProviderErrors>({ getPaymentMethods: null, getPaymentExternal: null }, `${ssrKey}-error`);
 
     const getPaymentMethods = _factoryParams.getPaymentMethods;
-    const getPaymentExternalUrl = _factoryParams.getPaymentExternalUrl;
+
+    const getPaymentExternal = async (): Promise<string> => {
+      try {
+        const params: GraphQlMakePaymentParams = {
+          paymentAcquireId: provider.id
+        };
+
+        const response = await _factoryParams.getPaymentExternal(params);
+
+        paymentExternalResponse.value = response;
+
+        return response;
+
+      } catch (err) {
+        error.value.getPaymentExternal = err;
+        Logger.error(`UsePayment/${ssrKey}/getPaymentExternal`, err);
+      }
+    };
 
     return {
       loading: computed(() => loading.value),
       error: computed(() => error.value),
       getPaymentMethods,
-      getPaymentExternalUrl
+      getPaymentExternal,
+      paymentExternalResponse
     };
   };
 
