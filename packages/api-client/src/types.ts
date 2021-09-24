@@ -343,6 +343,10 @@ export type CountryFiltersInput = {
   id: number;
 };
 
+export type GraphQlMakePaymentParams = {
+  paymentAcquireId: number;
+};
+
 export type GraphQlGetCountryParams = {
   id: number;
 };

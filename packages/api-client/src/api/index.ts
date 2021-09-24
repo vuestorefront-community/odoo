@@ -22,3 +22,4 @@ export { default as billingAddAddress } from './billingAddAddress';
 export { default as loadUser } from './loadUser';
 export { default as getRealProduct } from './getRealProduct';
 export { default as paymentLoadProviders } from './paymentLoadProviders';
+export { default as paymentMakeExternal } from './paymentMakeExternal';
