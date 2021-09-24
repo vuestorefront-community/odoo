@@ -6,12 +6,6 @@ export enum SortEnum {
   DESC
 }
 
-export enum Provider {
-  Ingenico,
-  ManualPayment,
-  CustomPaymentForm
-}
-
 export enum OrderStage {
   Quotation,
   QuotationSent,
@@ -47,7 +41,6 @@ export declare type PaymentIcon = {
 export declare type PaymentProvider = {
   id: number;
   name: string;
-  provider: Provider;
   component: string;
   paymentIcons?: PaymentIcon[];
 };
