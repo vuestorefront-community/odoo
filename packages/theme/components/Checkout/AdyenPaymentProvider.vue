@@ -8,7 +8,7 @@
 import { SfButton, SfRadio } from '@storefront-ui/vue';
 
 export default {
-  name: 'VsfPaymentProvider',
+  name: 'AdyenPaymentProvider',
 
   components: {
     SfButton,
@@ -16,9 +16,7 @@ export default {
   },
 
   setup() {
-
-    return {
-    };
+    return {};
   }
 };
 </script>

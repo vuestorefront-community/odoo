@@ -10,7 +10,7 @@ import { ref } from '@vue/composition-api';
 import { useAdyenExternalPaymentProvider } from '@vue-storefront/odoo';
 
 export default {
-  name: 'VsfPaymentProvider',
+  name: 'AdyenExternalPaymentProvider',
 
   components: {
     SfButton,
@@ -18,7 +18,7 @@ export default {
   },
 
   setup(props, { emit }) {
-    const { getPaymentExternalUrl} = useAdyenExternalPaymentProvider();
+    const { getPaymentExternalUrl } = useAdyenExternalPaymentProvider();
     console.log(getPaymentExternalUrl());
     const selectedMethod = ref(null);
 
