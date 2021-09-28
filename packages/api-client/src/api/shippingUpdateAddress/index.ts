@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context, CustomQuery } from '@vue-storefront/core';
-import mutation from './shippingAddAdressMutation';
+import mutation from './shippingUpdateAddressMutation';
 import ApolloClient from 'apollo-client';
-import { GraphQlAddAddressParams, DefaultGraphQlMutationResponse } from '../../types';
+import { GraphQlUpdateAddressParams, DefaultGraphQlMutationResponse } from '../../types';
 import { FetchResult } from 'apollo-link/lib/types';
 
-export default async function shippingAddAdress(
+export default async function shippingUpdateAddress(
   context: Context,
-  shippingAdress: GraphQlAddAddressParams,
+  shippingAdress: GraphQlUpdateAddressParams,
   customQuery?: CustomQuery
 ): Promise<FetchResult<DefaultGraphQlMutationResponse>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
@@ -17,5 +17,5 @@ export default async function shippingAddAdress(
     variables: shippingAdress
   });
 
-  return response;
+  return response.data;
 }
