@@ -42,6 +42,8 @@ const factoryParams: UseShippingParams<Address, GraphQlUpdateAddressParams> = {
 
     const address = await context.$odoo.api.shippingUpdateAddress(params);
 
+    context.useCart.cart.value.order.partnerShipping = address.updateAddress;
+
     return address.updateAddress;
   }
 };
