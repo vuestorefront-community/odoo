@@ -3,7 +3,12 @@
 
     <record id="api_reset_password_url" model="ir.config_parameter">
         <field name="key">api_reset_password_url</field>
-        <field name="value"></field>
+        <field name="value">dummy</field>
+    </record>
+
+    <record id="vsf_payment_return_url" model="ir.config_parameter">
+        <field name="key">vsf_payment_return_url</field>
+        <field name="value">/checkout/payment</field>
     </record>
 
 </odoo>
