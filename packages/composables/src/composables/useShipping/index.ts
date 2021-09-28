@@ -1,56 +1,50 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-prototype-builtins */
-import { ref } from '@vue/composition-api';
-import { ComputedProperty, useVSFContext } from '@vue-storefront/core';
-import { Context } from '@vue-storefront/core';
-import { Cart } from '@vue-storefront/odoo-api/src/types';
+import { Context, useShippingFactory, UseShippingParams } from '@vue-storefront/core';
+import { Address, GraphQlUpdateAddressParams } from '@vue-storefront/odoo-api/src/types';
 import useCart from '../useCart';
 
-const useShipping = (): any => {
-  const { cart }: { cart: ComputedProperty<Cart> } = useCart();
-
-  const context: Context = useVSFContext();
-
-  const errors = ref({ graphQLErrors: [] });
-
-  const shippingAddress = ref({});
-  const shippingMethods = ref([]);
-
-  const resetCountryErrors = () => (errors.value = { graphQLErrors: [] });
-
-  const searchShippingMethods = async () => {
-    if (shippingMethods.value.length > 0) {
-      return shippingMethods;
+const factoryParams: UseShippingParams<Address, GraphQlUpdateAddressParams> = {
+  provide() {
+    return {
+      useCart: useCart()
+    };
+  },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  load: async (context: Context, { customQuery }) => {
+    if (!context.useCart.cart) {
+      await context.useCart.load();
     }
 
-    const response = await context.$odoo.api.shippingGetDeliveryMethods();
+    const address = context.useCart?.cart?.value?.order?.partnerShipping || {};
 
-    shippingMethods.value = response.deliveryMethods.map((method) => ({
-      ...method,
-      id: String(method.id)
-    }));
-  };
+    const shippingAdress = {
+      ...address,
+      country: { id: String(address.country.id) },
+      state: { id: String(address.state.id) }
+    };
 
-  const load = async () => {
-    if (shippingAddress?.value?.hasOwnProperty('name')) {
-      return shippingAddress;
-    }
+    return shippingAdress;
+  },
 
-    // @todo add shippingmethod add after added to graphql
-    if (cart.value.order?.partnerShipping) {
-      shippingAddress.value = cart.value.order.partnerShipping;
-    }
+  save: async (context: Context, { shippingDetails }) => {
 
-    return shippingAddress;
-  };
+    const params: GraphQlUpdateAddressParams = {
+      id: shippingDetails.id,
+      street: shippingDetails.street,
+      zip: shippingDetails.zip,
+      phone: shippingDetails.phone,
+      name: shippingDetails.name,
+      city: shippingDetails.city,
+      countryId: shippingDetails.country.id,
+      stateId: shippingDetails.state.id
+    };
 
-  return {
-    resetCountryErrors,
-    load,
-    searchShippingMethods,
-    shippingAddress,
-    shippingMethods,
-    errors
-  };
+    const address = await context.$odoo.api.shippingUpdateAddress(params);
+
+    return address.updateAddress;
+  }
 };
 
-export default useShipping;
+export default useShippingFactory<Address, GraphQlUpdateAddressParams>(factoryParams);
+

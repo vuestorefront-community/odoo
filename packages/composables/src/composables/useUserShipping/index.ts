@@ -4,48 +4,28 @@ import {
   useUserShippingFactory,
   UseUserShippingFactoryParams
 } from '@vue-storefront/core';
-import useUser from '../useUser';
-
-const addresses: any[] = [
-  {
-    id: 1,
-    email: 'john@gmail.com',
-    firstName: 'John',
-    lastName: 'Doe',
-    streetName: 'Warsawska',
-    apartment: '24/193A',
-    city: 'Phoenix',
-    state: null,
-    zipCode: '26-620',
-    country: 'US',
-    phoneNumber: '560123456',
-    isDefault: true
-  }
-];
-
-const userShipping = {
-  addresses
-};
+import { Address, GraphQlAddAddressParams } from '@vue-storefront/odoo-api/src/types';
+import useCart from '../useCart';
 
 const params: UseUserShippingFactoryParams<any, any> = {
   provide() {
     return {
-      user: useUser()
+      useCart: useCart()
     };
   },
 
   addAddress: async (context: Context, { address }) => {
-    const shippingAdress = {
-      street: address.streetName,
-      zip: address.postalCode,
+    const params: GraphQlAddAddressParams = {
+      street: address.street,
+      zip: address.zip,
       phone: address.phone,
-      name: address.firstName,
+      name: address.name,
       city: address.city,
-      countryId: Number.parseInt(address.country),
-      stateId: Number.parseInt(address.state)
+      countryId: Number.parseInt(address.country.id),
+      stateId: Number.parseInt(address.state.id)
     };
 
-    await context.$odoo.api.shippingAddAdress(shippingAdress);
+    await context.$odoo.api.shippingAddAdress(params);
 
     return address;
   },
@@ -53,26 +33,33 @@ const params: UseUserShippingFactoryParams<any, any> = {
   deleteAddress: async (context: Context, params?) => {
     console.log('Mocked: deleteAddress', params);
 
-    return Promise.resolve(userShipping);
+    return {} as Address;
   },
 
   updateAddress: async (context: Context, params?) => {
     console.log('Mocked: updateAddress', params);
 
-    return Promise.resolve(userShipping);
+    return {} as Address;
   },
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, params?) => {
-    if (!context.user.user?.value?.id) {
-      await context.user.load();
+    if (!context.useCart.cart) {
+      await context.useCart.load();
     }
 
-    return context.user.user?.value;
+    const address = context.useCart?.cart?.value?.order?.partnerShipping || {};
+
+    const shippingAdress = {
+      ...address,
+      country: { id: String(address.country.id) },
+      state: { id: String(address.state.id) }
+    };
+
+    return shippingAdress;
   },
 
   setDefaultAddress: async (context: Context, params?) => {
-    return Promise.resolve(userShipping);
+    return {} as Address;
   }
 };
 
