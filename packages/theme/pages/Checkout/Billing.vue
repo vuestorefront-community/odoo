@@ -270,7 +270,7 @@ export default {
     });
 
     watch(
-      () => form.value.country,
+      () => form.value.country.id,
       async () => {
         await searchCountryStates(form.value.country.id);
       }
