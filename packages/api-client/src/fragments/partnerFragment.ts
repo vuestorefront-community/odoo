@@ -9,6 +9,10 @@ partner{
     {
       id
     }
+    country
+    {
+      id
+    }
     email
     phone
   }
