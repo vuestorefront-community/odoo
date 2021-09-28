@@ -1,20 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context, CustomQuery } from '@vue-storefront/core';
-import mutation from './billingUseShippingAsBillingAddress';
+import mutation from './billingUpdateAddressMutation';
 import ApolloClient from 'apollo-client';
-import { DefaultGraphQlMutationResponse } from '../../types';
+import { GraphQlUpdateAddressParams, DefaultGraphQlMutationResponse } from '../../types';
 import { FetchResult } from 'apollo-link/lib/types';
 
-export default async function billingUseShippingAsBillingAddress(
+export default async function billingUpdateAddress(
   context: Context,
-  params: Record<string, string>,
+  shippingAdress: GraphQlUpdateAddressParams,
   customQuery?: CustomQuery
 ): Promise<FetchResult<DefaultGraphQlMutationResponse>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   const response = await apolloClient.mutate({
-    mutation
+    mutation,
+    variables: shippingAdress
   });
 
-  return response;
+  return response.data;
 }
