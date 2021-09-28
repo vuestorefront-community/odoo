@@ -190,18 +190,13 @@ import {
 import { required, min, digits } from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 
-extend('required', {
-  ...required,
-  message: 'This field is required'
-});
+extend('required', { ...required, message: 'This field is required' });
 extend('min', {
   ...min,
   message: 'The field should have at least {length} characters'
 });
-extend('digits', {
-  ...digits,
-  message: 'Please provide a valid phone number'
-});
+extend('digits', { ...digits, message: 'Please provide a valid phone number' });
+
 export default {
   name: 'Shipping',
   components: {
@@ -264,6 +259,7 @@ export default {
       const addresses = userShippingGetters.getAddresses(shipping.value);
       return Boolean(addresses?.length);
     });
+
     const handleAddNewAddressBtnClick = () => {
       currentAddressId.value = '';
       form.value = {};
