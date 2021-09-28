@@ -1,49 +1,51 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* istanbul ignore file */
-import { ref } from '@vue/composition-api';
-import { ComputedProperty, useVSFContext } from '@vue-storefront/core';
-import { Context } from '@vue-storefront/core';
-import { Cart } from '@vue-storefront/odoo-api/src/types';
+import { Context, useBillingFactory, UseBillingParams } from '@vue-storefront/core';
+import { Address, GraphQlUpdateAddressParams } from '@vue-storefront/odoo-api/src/types';
 import useCart from '../useCart';
 
-const useBilling = (): any => {
-  const { cart }: { cart: ComputedProperty<Cart> } = useCart();
+const factoryParams: UseBillingParams<Address, GraphQlUpdateAddressParams> = {
+  provide() {
+    return {
+      useCart: useCart()
+    };
+  },
 
-  const context: Context = useVSFContext();
-
-  const errors = ref({ graphQLErrors: [] });
-  const billingAddress = ref({
-    country: { id: null },
-    state: { id: null }
-  });
-
-  const resetPasswordErrors = () => (errors.value = { graphQLErrors: [] });
-
-  const load = async () => {
-    if (cart.value.order?.partnerInvoice) {
-      billingAddress.value = cart.value.order?.partnerInvoice;
-      billingAddress.value.country.id = String(
-        cart.value.order?.partnerInvoice.country.id
-      );
-      billingAddress.value.state.id = String(
-        cart.value.order?.partnerInvoice.state.id
-      );
+  load: async (context: Context, { customQuery }) => {
+    if (!context.useCart.cart) {
+      await context.useCart.load();
     }
 
+    const address = context.useCart?.cart?.value?.order?.partnerInvoice || {};
+
+    const billingAddress = {
+      ...address,
+      country: { id: String(address.country.id) },
+      state: { id: String(address.state.id) }
+    };
+
     return billingAddress;
-  };
+  },
 
-  const useShippingAsBillingAddress = async () => {
-    await context.$odoo.api.billingUseShippingAsBillingAddress({}, {});
-  };
+  save: async (context: Context, { billingDetails }) => {
 
-  return {
-    load,
-    errors,
-    resetPasswordErrors,
-    useShippingAsBillingAddress,
-    billingAddress
-  };
+    const params: GraphQlUpdateAddressParams = {
+      id: billingDetails.id,
+      street: billingDetails.street,
+      zip: billingDetails.zip,
+      phone: billingDetails.phone,
+      name: billingDetails.name,
+      city: billingDetails.city,
+      countryId: billingDetails.country.id,
+      stateId: billingDetails.state.id
+    };
+
+    const address = await context.$odoo.api.billingUpdateAddress(params);
+
+    context.useCart.cart.value.order.partnerInvoice = address.updateAddress;
+
+    return address.updateAddress;
+  }
 };
 
-export default useBilling;
+export default useBillingFactory<Address, GraphQlUpdateAddressParams>(factoryParams);
