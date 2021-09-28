@@ -184,7 +184,6 @@ import { ref, watch, onMounted, computed } from '@vue/composition-api';
 import {
   useCountrySearch,
   useUser,
-  useUserShipping,
   userShippingGetters,
   useShipping
 } from '@vue-storefront/odoo';
@@ -225,8 +224,7 @@ export default {
     const isShippingDetailsStepCompleted = ref(false);
     const canAddNewAddress = ref(true);
 
-    const { loading, addAddress, shipping: userShipping } = useUserShipping();
-    const { shippingAddress, load: loadShipping } = useShipping();
+    const { load: loadShipping, shipping, save } = useShipping();
 
     const { isAuthenticated } = useUser();
 
@@ -246,10 +244,12 @@ export default {
       zip: '',
       phone: null
     });
+
     const handleFormSubmit = async () => {
-      await addAddress({
-        address: form.value
+      await save({
+        shippingDetails: form.value
       });
+
       isFormSubmitted.value = true;
       if (root.$router.history.current.path !== '/my-account/shipping-details')
         root.$router.push('/checkout/billing');
@@ -259,11 +259,11 @@ export default {
     };
 
     const hasSavedShippingAddress = computed(() => {
-      if (!isAuthenticated.value || !userShipping.value) {
+      if (!isAuthenticated.value || !shipping.value) {
         return false;
       }
 
-      const addresses = userShippingGetters.getAddresses(userShipping.value);
+      const addresses = userShippingGetters.getAddresses(shipping.value);
       return Boolean(addresses?.length);
     });
     const handleAddNewAddressBtnClick = () => {
@@ -287,14 +287,14 @@ export default {
     onMounted(async () => {
       await search();
       await loadShipping();
-      if (shippingAddress) {
-        form.value = shippingAddress.value;
+      if (shipping.value) {
+        form.value = shipping.value;
       }
       formRef.value.validate({ silent: true });
     });
 
     watch(
-      () => form.value.country,
+      () => form.value.country.id,
       async () => {
         await searchCountryStates(form.value.country.id);
       }
@@ -309,10 +309,9 @@ export default {
       defaultShippingAddress,
       handleSetCurrentAddress,
       currentAddressId,
-      userShipping,
+      shipping,
       hasSavedShippingAddress,
       isAuthenticated,
-      loading,
       isFormSubmitted,
       form,
       countries,
