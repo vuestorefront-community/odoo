@@ -45,16 +45,29 @@ export default {
       }
     ]
   },
+  router: {
+    middleware: ['checkout']
+  },
   loading: { color: '#fff' },
   plugins: [],
   buildModules: [
     // to core
+    '@nuxtjs/web-vitals',
     '@nuxtjs/tailwindcss',
     '@nuxt/typescript-build',
     '@nuxtjs/style-resources',
     [
       '@vue-storefront/nuxt',
       {
+        performance: {
+          httpPush: true,
+          purgeCSS: {
+            enabled: false,
+            paths: [
+              '**/*.vue'
+            ]
+          }
+        },
         // @core-development-only-start
         coreDevelopment: true,
         // @core-development-only-end
@@ -86,6 +99,7 @@ export default {
     theme
   },
   modules: [
+    'nuxt-precompress',
     '@vue-storefront/middleware/nuxt',
     'nuxt-i18n',
     'cookie-universal-nuxt',
@@ -113,6 +127,42 @@ export default {
       }
     ]
   ],
+  nuxtPrecompress: {
+    enabled: true,
+    report: false,
+    test: /\.(js|css|html|txt|xml|svg)$/,
+    // Serving options
+    middleware: {
+      // You can disable middleware if you serve static files using nginx...
+      enabled: true,
+      // Enable if you have .gz or .br files in /static/ folder
+      enabledStatic: true,
+      // Priority of content-encodings, first matched with request Accept-Encoding will me served
+      encodingsPriority: ['br', 'gzip']
+    },
+
+    // build time compression settings
+    gzip: {
+      // should compress to gzip?
+      enabled: true,
+      // compression config
+      // https://www.npmjs.com/package/compression-webpack-plugin
+      filename: '[path].gz[query]',
+      threshold: 10240,
+      minRatio: 0.8,
+      compressionOptions: { level: 9 }
+    },
+    brotli: {
+      // should compress to brotli?
+      enabled: true,
+      // compression config
+      // https://www.npmjs.com/package/compression-webpack-plugin
+      filename: '[path].br[query]',
+      compressionOptions: { level: 11 },
+      threshold: 10240,
+      minRatio: 0.8
+    }
+  },
   i18n: {
     currency: 'USD',
     country: 'US',
