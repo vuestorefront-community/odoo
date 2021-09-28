@@ -20,23 +20,15 @@ export declare type Currency = {
   symbol?: string;
 };
 
-export declare type Address = {
-  city: string;
-  countryId: number;
-  firstName: string;
-  phone: string;
-  stateId: number;
-  street: string;
-  zip: string;
-};
-
-export declare type ShippingInfo = Record<string, string>;
+export declare type Address = Partner;
 
 export declare type PaymentIcon = {
   id: number;
   name: string;
   image: string;
 };
+
+export declare type ShippingInfo = Record<string, string>;
 
 export declare type PaymentProvider = {
   id: number;
@@ -205,7 +197,7 @@ export type Country = {
   name?: string;
 };
 export type Partner = {
-  id: number;
+  id?: number;
   name: string;
   street: string;
   street2?: string;
@@ -216,7 +208,8 @@ export type Partner = {
   email?: string;
   phone: string;
   isCompany?: boolean;
-  contacts: Partner[];
+  isDefault?: boolean;
+  contacts?: Partner[];
 };
 
 export type ProductVariant = {
@@ -323,6 +316,31 @@ export type GraphQlGetProductVariantParams = {
 export type GraphQlCartAddItemParams = {
   productId: number;
   quantity: number;
+};
+
+export type GraphQlAddAddressParams = {
+  name: string
+  street: string
+  street2?: string
+  zip: string
+  city: string
+  stateId: number
+  countryId: number
+  phone: string
+  email?: string
+};
+
+export type GraphQlUpdateAddressParams = {
+  id: number;
+  name: string
+  street: string
+  street2?: string
+  zip: string
+  city: string
+  stateId: number
+  countryId: number
+  phone: string
+  email?: string
 };
 
 export type GraphQlCartUpdateItemQtyParams = {
