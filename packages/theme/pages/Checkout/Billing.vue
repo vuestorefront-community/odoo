@@ -177,7 +177,7 @@ import { onSSR } from '@vue-storefront/core';
 import {
   useBilling,
   useCountrySearch,
-  useUserBilling
+  useShippingAsBillingAddress
 } from '@vue-storefront/odoo';
 import { required, min, digits } from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
@@ -213,13 +213,9 @@ export default {
       countries,
       countryStates
     } = useCountrySearch();
-    const {
-      load: loadBillingAddress,
-      billingAddress,
-      useShippingAsBillingAddress,
-      error
-    } = useBilling();
-    const { addAddress } = useUserBilling();
+    const { load: loadBillingAddress, billing, save, error } = useBilling();
+
+    const { use } = useShippingAsBillingAddress();
 
     const isFormSubmitted = ref(false);
     const sameAsShipping = ref(false);
@@ -238,22 +234,19 @@ export default {
     const handleCheckSameAddress = async () => {
       sameAsShipping.value = !sameAsShipping.value;
       if (sameAsShipping.value) {
-        await useShippingAsBillingAddress();
-        await loadBillingAddress();
-        form.value = billingAddress.value;
+        const shippingAddress = await use();
+
+        form.value = shippingAddress;
 
         await searchCountryStates(form.value.country.id);
-
-        return;
       }
-      form.value = {};
     };
 
     const handleFormSubmit = async () => {
-      await addAddress({ address: form.value });
+      await save({ billingDetails: form.value });
       isFormSubmitted.value = true;
 
-      if (!error) {
+      if (!error.save) {
         root.$router.push('/checkout/payment');
       }
     };
@@ -263,8 +256,8 @@ export default {
     onMounted(async () => {
       await loadBillingAddress();
       await search();
-      if (billingAddress) {
-        form.value = billingAddress.value;
+      if (billing) {
+        form.value = billing.value;
       }
       formRef.value.validate({ silent: true });
     });

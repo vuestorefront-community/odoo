@@ -246,11 +246,9 @@ export default {
     });
 
     const handleFormSubmit = async () => {
-      await save({
-        shippingDetails: form.value
-      });
-
+      await save({ shippingDetails: form.value });
       isFormSubmitted.value = true;
+
       if (root.$router.history.current.path !== '/my-account/shipping-details')
         root.$router.push('/checkout/billing');
       else root.$router.push('/my-account/shipping-details');
