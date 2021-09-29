@@ -36,7 +36,7 @@
 
         <div class="navbar__sort desktop-only">
           <span class="navbar__label">{{ $t('Sort by') }}:</span>
-          <LazyHydrate when-idle>
+          <LazyHydrate on-interaction>
             <SfSelect
               :value="sortBy.selected"
               placeholder="Select sorting"
@@ -157,7 +157,7 @@
               "
               :special-price="
                 productGetters.getPrice(product).special &&
-                  $n(productGetters.getPrice(product).special, 'currency')
+                $n(productGetters.getPrice(product).special, 'currency')
               "
               :max-rating="5"
               :score-rating="productGetters.getAverageRating(product)"
@@ -200,7 +200,7 @@
               "
               :special-price="
                 productGetters.getPrice(product).special &&
-                  $n(productGetters.getPrice(product).special, 'currency')
+                $n(productGetters.getPrice(product).special, 'currency')
               "
               :max-rating="5"
               :score-rating="3"
@@ -297,7 +297,7 @@
       </SfLoader>
     </div>
 
-    <LazyHydrate when-visible>
+    <LazyHydrate when-idle>
       <SfSidebar
         :visible="isFilterSidebarOpen"
         title="Filters"
