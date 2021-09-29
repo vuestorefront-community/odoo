@@ -17,6 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@nuxtjs/amp": "^0.5.4",
     "@nuxtjs/style-resources": "1.1.0",
     "@storefront-ui/vue": "0.10.8",
     "@vue-storefront/cache": "^2.4.0",

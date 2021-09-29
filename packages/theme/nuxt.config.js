@@ -99,6 +99,7 @@ export default {
     theme
   },
   modules: [
+    '@nuxtjs/amp',
     'nuxt-precompress',
     '@vue-storefront/middleware/nuxt',
     'nuxt-i18n',
