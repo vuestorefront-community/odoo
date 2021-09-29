@@ -31,3 +31,4 @@ export { default as billingUpdateAddress } from './billingUpdateAddress';
 
 export { default as paymentLoadProviders } from './paymentLoadProviders';
 export { default as paymentMakeExternal } from './paymentMakeExternal';
+export { default as paymentConfirmation } from './paymentConfirmation';
