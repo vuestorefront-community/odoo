@@ -3,11 +3,8 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import graphene
-from graphql import GraphQLError
-from odoo.http import request
-from odoo import fields
-
 from odoo.addons.graphql_vuestorefront.schemas.objects import Order
+from odoo.http import request
 
 
 class Cart(graphene.Interface):
@@ -93,7 +90,6 @@ class CartRemoveItem(graphene.Mutation):
 
 
 class CartClear(graphene.Mutation):
-
     Output = Order
 
     @staticmethod

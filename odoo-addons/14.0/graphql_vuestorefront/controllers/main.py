@@ -5,11 +5,8 @@
 import werkzeug
 from odoo import http
 from odoo.addons.graphql_base import GraphQLControllerMixin
-from odoo.addons.http_routing.models.ir_http import slug
 from odoo.addons.payment.controllers.portal import PaymentProcessing
 from odoo.addons.payment_adyen.controllers.main import AdyenController
-from odoo.addons.sale.controllers.variant import VariantController
-from odoo.addons.website_sale.controllers.main import WebsiteSale
 from odoo.http import request
 
 from ..schema import schema
