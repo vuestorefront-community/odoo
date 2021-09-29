@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# Copyright 2021 ODOOGAP/PROMPTEQUATION LDA
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import graphene
 from graphql import GraphQLError
@@ -11,6 +13,38 @@ from odoo.addons.graphql_vuestorefront.schemas.objects import Partner
 class AddressEnum(graphene.Enum):
     Billing = 'invoice'
     Shipping = 'delivery'
+
+
+class AddressFilterInput(graphene.InputObjectType):
+    address_type = graphene.List(AddressEnum)
+
+
+class AddressQuery(graphene.ObjectType):
+    addresses = graphene.List(
+        graphene.NonNull(Partner),
+        filter=graphene.Argument(AddressFilterInput, default_value={})
+    )
+
+    @staticmethod
+    def resolve_addresses(self, info, filter):
+        env = info.context["env"]
+        Partner = env['res.partner'].with_context(show_address=1).sudo()
+
+        # Get all addresses of a specific addressType - delivery or/and shipping
+        if filter.get('address_type'):
+            domain = [("id", "child_of", env.user.partner_id.commercial_partner_id.ids),
+                      ("type", "in", filter['address_type'])]
+
+        # Get all addresses with addressType contact, delivery and invoice
+        else:
+            domain = [
+                ("id", "child_of", env.user.partner_id.commercial_partner_id.ids),
+                '|', ("type", "in", ['delivery', 'invoice']),
+                ("id", "=", env.user.partner_id.commercial_partner_id.id)
+            ]
+
+        shippings = Partner.search(domain, order='id desc')
+        return shippings
 
 
 class AddAddressInput(graphene.InputObjectType):
@@ -255,20 +289,3 @@ class AddressMutation(graphene.ObjectType):
     delete_address = DeleteAddress.Field(description='Delete a billing or shipping address.')
     select_address = SelectAddress.Field(description="Select a billing or shipping address to be used on the shopping "
                                                      "cart.")
-
-
-class AddressQuery(graphene.ObjectType):
-    addresses = graphene.List(
-        graphene.NonNull(Partner),
-    )
-
-    @staticmethod
-    def resolve_addresses(self, info):
-        env = info.context["env"]
-        Partner = env['res.partner'].with_context(show_address=1).sudo()
-        shippings = Partner.search([
-            ("id", "child_of", env.user.partner_id.commercial_partner_id.ids),
-            '|', ("type", "in", ["delivery", "invoice"]),
-            ("id", "=", env.user.partner_id.commercial_partner_id.id)
-        ], order='id desc')
-        return shippings
