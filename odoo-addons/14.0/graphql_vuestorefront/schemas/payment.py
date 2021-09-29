@@ -9,6 +9,7 @@ from graphene.types import generic
 from graphql import GraphQLError
 from odoo import _
 from odoo.addons.graphql_vuestorefront.schemas.objects import PaymentAcquirer
+from odoo.addons.graphql_vuestorefront.schemas.shop import Cart, CartData
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 from odoo.http import request
 from odoo.osv import expression
@@ -22,6 +23,9 @@ class PaymentQuery(graphene.ObjectType):
     )
     payment_acquirers = graphene.List(
         graphene.NonNull(PaymentAcquirer),
+    )
+    payment_confirmation = graphene.Field(
+        Cart,
     )
 
     def resolve_payment_acquirer(self, info, id):
@@ -47,6 +51,17 @@ class PaymentQuery(graphene.ObjectType):
             ['|', ('country_ids', '=', False), ('country_ids', 'in', [order.partner_id.country_id.id])]
         ])
         return env['payment.acquirer'].search(domain)
+
+    def resolve_payment_confirmation(self, info):
+        order = request.env['sale.order']
+
+        sale_order_id = request.session.get('sale_last_order_id')
+        if sale_order_id:
+            order = order.sudo().browse(sale_order_id)
+            if order.exists():
+                return CartData(order=order)
+
+        raise GraphQLError(_('Cart does not exist'))
 
 
 def validate_expiry(expiry_month, expiry_year):

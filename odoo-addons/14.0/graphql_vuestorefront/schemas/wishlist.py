@@ -5,7 +5,6 @@
 import graphene
 from graphql import GraphQLError
 from odoo.http import request
-from odoo import fields
 
 from odoo.addons.graphql_vuestorefront.schemas.objects import WishlistItem
 

@@ -3,8 +3,6 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import graphene
-from graphql import GraphQLError
-from odoo import _
 
 from odoo.addons.graphql_vuestorefront.schemas.objects import Lead
 
