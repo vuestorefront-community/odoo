@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# Copyright 2021 ODOOGAP/PROMPTEQUATION LDA
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import graphene
 from graphql import GraphQLError
@@ -15,6 +17,10 @@ from odoo.http import request
 # --------------------- #
 #       ENUMS           #
 # --------------------- #
+
+AddressType = graphene.Enum('AddressType', [('Contact', 'contact'), ('InvoiceAddress', 'invoice'),
+                                            ('DeliveryAddress', 'delivery'), ('OtherAddress', 'other'),
+                                            ('PrivateAddress', 'private')])
 
 OrderStage = graphene.Enum('OrderStage', [('Quotation', 'draft'), ('QuotationSent', 'sent'),
                                           ('SalesOrder', 'sale'), ('Locked', 'done'), ('Cancelled', 'cancel')])
@@ -128,6 +134,7 @@ class Partner(OdooObjectType):
     zip = graphene.String()
     email = graphene.String()
     phone = graphene.String()
+    address_type = AddressType()
     is_company = graphene.Boolean(required=True)
     contacts = graphene.List(graphene.NonNull(lambda: Partner))
     signup_token = graphene.String()
@@ -138,6 +145,9 @@ class Partner(OdooObjectType):
 
     def resolve_state(self, info):
         return self.state_id or None
+
+    def resolve_address_type(self, info):
+        return self.type or None
 
     def resolve_contacts(self, info):
         return self.child_ids or None
