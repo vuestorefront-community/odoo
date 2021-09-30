@@ -55,7 +55,7 @@ class PaymentQuery(graphene.ObjectType):
     def resolve_payment_confirmation(self, info):
         order = request.env['sale.order']
 
-        sale_order_id = request.session.get('sale_last_order_id')
+        sale_order_id = request.session.get('sale_order_id')
         if sale_order_id:
             order = order.sudo().browse(sale_order_id)
             if order.exists():
