@@ -107,7 +107,7 @@ export default {
   setup(props, { root, emit }) {
     emit('changeStep', 4);
 
-    const { getPaymentConfirmation } = usePayment;
+    const { getPaymentConfirmation } = usePayment();
 
     const { query } = root.$router.history.current;
     const companyDetails = ref({
@@ -118,7 +118,7 @@ export default {
     });
 
     onMounted(async () => {
-      await getPaymentConfirmation();
+      console.log(await getPaymentConfirmation());
     });
 
     const orderNumber = ref(query.merchantReference);

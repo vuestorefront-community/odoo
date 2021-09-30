@@ -1,6 +1,6 @@
 <template>
   <ValidationObserver v-slot="{ handleSubmit, reset }">
-    <form class="form" @submit.prevent="handleSubmit()">
+    <form class="form" @submit.prevent="handleSubmit(submitForm(reset))">
       <div class="form__horizontal">
         <ValidationProvider
           v-slot="{ errors }"
@@ -8,9 +8,9 @@
           class="form__element"
         >
           <SfInput
-            v-model="form.firstname"
-            name="firstName"
-            label="First Name"
+            v-model="form.name"
+            name="name"
+            label="Name"
             required
             :valid="!errors[0]"
             :error-message="errors[0]"
@@ -50,9 +50,9 @@
           required
           class="form__element"
           style="margin-top: 10px"
-          @keypress.enter="handleSubmit()"
+          @keypress.enter="handleSubmit(submitForm(reset))"
         />
-        <SfButton class="form__button" @click="handleSubmit(submitForm(reset))">
+        <SfButton class="form__button" type="submit">
           {{ $t('Update personal data') }}
         </SfButton>
       </SfModal>
@@ -65,6 +65,7 @@
 
 <script>
 import { ref } from '@vue/composition-api';
+import { useUiNotification } from '~/composables';
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import { useUser, userGetters } from '@vue-storefront/odoo';
 import { SfInput, SfButton, SfModal } from '@storefront-ui/vue';
@@ -85,17 +86,41 @@ export default {
     }
   },
   emits: ['submit'],
-  setup() {
+  setup(props, { emit }) {
+    const { send } = useUiNotification();
     const { user } = useUser();
+
     const currentPassword = ref('');
     const requirePassword = ref(false);
+
     const resetForm = () => ({
-      firstname: userGetters.getFirstName(user.value),
+      name: userGetters.getFirstName(user.value),
       email: userGetters.getEmailAddress(user.value)
     });
     const form = ref(resetForm());
 
+    const submitForm = (resetValidationFn) => () => {
+      const onComplete = () => {
+        form.value = resetForm();
+        requirePassword.value = false;
+        currentPassword.value = '';
+        resetValidationFn();
+
+        send({ message: 'Update Succefully.', type: 'success' });
+      };
+      const onError = (error) => {
+        form.value = resetForm();
+        requirePassword.value = false;
+        currentPassword.value = '';
+        console.log(error);
+        send({ message: error?.value, type: 'danger' });
+      };
+
+      emit('submit', { form, onComplete, onError });
+    };
+
     return {
+      submitForm,
       user,
       requirePassword,
       currentPassword,

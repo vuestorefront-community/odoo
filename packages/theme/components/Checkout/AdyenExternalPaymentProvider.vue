@@ -32,7 +32,6 @@ export default {
     } = useAdyenExternalPaymentProvider(props.provider);
 
     const sendForm = () => {
-      console.log(form.value);
       // set the url action from api
       form.value.action = form.value[0]?.dataset?.actionUrl;
       // remove input from api before send form
