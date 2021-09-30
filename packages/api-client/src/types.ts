@@ -374,6 +374,12 @@ export type GraphQlLoginParams = {
   password: string;
 };
 
+export type GraphQlUpdateAccountParams = {
+  id: number;
+  name?: string;
+  email?: string;
+};
+
 export type GraphQlGetProductParams = {
   filter: ProductFilterInput;
   currentPage: number;
