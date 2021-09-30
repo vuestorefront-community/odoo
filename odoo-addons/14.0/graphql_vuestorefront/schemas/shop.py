@@ -48,6 +48,8 @@ class CartAddItem(graphene.Mutation):
         website = env['website'].get_current_website()
         request.website = website
         order = website.sale_get_order(force_create=1)
+        # Forcing the website_id to be passed to the Order
+        order.write({'website_id': website.id})
         order._cart_update(product_id=product_id, add_qty=quantity)
         return CartData(order=order)
 
@@ -128,6 +130,8 @@ class CartAddMultipleItems(graphene.Mutation):
         website = env['website'].get_current_website()
         request.website = website
         order = website.sale_get_order(force_create=1)
+        # Forcing the website_id to be passed to the Order
+        order.write({'website_id': website.id})
         for product in products:
             product_id = product['id']
             quantity = product['quantity']
