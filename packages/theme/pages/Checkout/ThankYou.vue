@@ -96,8 +96,8 @@
 
 <script>
 import { SfHeading, SfButton, SfCallToAction } from '@storefront-ui/vue';
-import { ref, computed } from '@vue/composition-api';
-
+import { ref, computed, onMounted } from '@vue/composition-api';
+import { usePayment } from '@vue-storefront/odoo';
 export default {
   components: {
     SfHeading,
@@ -107,13 +107,18 @@ export default {
   setup(props, { root, emit }) {
     emit('changeStep', 4);
 
+    const { getPaymentConfirmation } = usePayment;
+
     const { query } = root.$router.history.current;
-    console.log(query);
     const companyDetails = ref({
       name: 'Divante Headquarter',
       street: 'St. Dmowskiego 17, 53-534',
       city: 'Wroclaw, Poland',
       email: 'demo@vuestorefront.io'
+    });
+
+    onMounted(async () => {
+      await getPaymentConfirmation();
     });
 
     const orderNumber = ref(query.merchantReference);
