@@ -15,5 +15,9 @@ export default async function paymentConfirmation(
     query
   });
 
+  console.log('**** confirmPayment ****');
+  console.log(response);
+  console.log('************************');
+
   return response.data;
 }
