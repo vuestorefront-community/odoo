@@ -111,7 +111,7 @@ export default {
   'Set up newsletter': 'Set up your newsletter and we will send you information about new products and trends from the sections you selected every week.',
   'Share your look': 'Share your look',
   'Shipping address': 'Shipping address',
-  'Shipping details': 'Shipping details',
+  'Shipping Details': 'Shipping Details',
   'Shipping method': 'Shipping method',
   'Shipping': 'Shipping',
   'Show on page': 'Show on page',
