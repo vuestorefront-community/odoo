@@ -32,12 +32,12 @@ export default {
   props: {
     selectedMethodShipping: {
       type: [String, Number],
-      default: '',
-    },
+      default: ''
+    }
   },
   components: {
     SfButton,
-    SfRadio,
+    SfRadio
   },
   setup(props, context) {
     const selectedMethod = ref(null);
@@ -61,9 +61,9 @@ export default {
     return {
       shippingMethods,
       selectedMethod,
-      selectMethod,
+      selectMethod
     };
-  },
+  }
 };
 </script>
 

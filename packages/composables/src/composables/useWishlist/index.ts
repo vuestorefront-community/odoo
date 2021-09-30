@@ -6,47 +6,65 @@ import {
   useWishlistFactory,
   UseWishlistFactoryParams
 } from '@vue-storefront/core';
-import { Wishlist, WishlistItem, Product } from '@vue-storefront/odoo-api/src/types';
+import {
+  Wishlist,
+  WishlistItem,
+  Product,
+  GraphQlWishlistAddItemParams,
+  GraphQlWishlistRemoveItemParams
+} from '@vue-storefront/odoo-api/src/types';
 
 const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
   load: async (context: Context) => {
     const wishlist = await context.$odoo.api.wishlistLoad();
 
-    return wishlist.data.allWishlistItems.length > 0 ? wishlist.data.allWishlistItems : [];
+    return wishlist.wishlistItems;
   },
 
   addItem: async (context: Context, { currentWishlist, product }) => {
-
     if (!params.isInWishlist(context, { currentWishlist, product })) {
+      const addWishlistItemParams: GraphQlWishlistAddItemParams = {
+        productId: product.firstVariant
+      };
 
-      await context.$odoo.api.wishlistAddItem(product);
-      const wishlist = params.load(context, {});
+      const wishlist = await context.$odoo.api.wishlistAddItem(
+        addWishlistItemParams
+      );
 
-      return wishlist;
+      return wishlist.wishlistAddItem;
     }
 
     return currentWishlist;
   },
 
   removeItem: async (context: Context, { currentWishlist, product }) => {
-    const productIdToCompare = product.product.first_variant_id || product.product.id;
+    const productIdToCompare =
+      product.product.firstVariant || product.product.id;
 
-    const wishlistItem = currentWishlist.find(item => item.product.id == productIdToCompare);
+    const wishlistItem = currentWishlist.wishlistItems.find(
+      (item) => item.product.id == productIdToCompare
+    );
 
-    await context.$odoo.api.wishlistRemoveItem(wishlistItem);
+    const removeItemParams: GraphQlWishlistRemoveItemParams = {
+      wishId: wishlistItem.id
+    };
 
-    const wishlist = params.load(context, {});
+    const wishlist = await context.$odoo.api.wishlistRemoveItem(
+      removeItemParams
+    );
 
-    return wishlist;
+    return wishlist.wishlistRemoveItem;
   },
 
   isInWishlist: (context: Context, { currentWishlist, product }) => {
-    return currentWishlist?.some(item => item.product.id == product.first_variant_id);
+    return currentWishlist?.wishlistItems.some(
+      (item) => item.product.id == product.firstVariant
+    );
   },
 
   clear: async (context: Context, { currentWishlist }) => {
     console.log('Mocked: clearWishlist');
-    return [];
+    return currentWishlist;
   }
 };
 

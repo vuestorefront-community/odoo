@@ -1,4 +1,3 @@
-
 <template>
   <ValidationObserver v-slot="{ handleSubmit, invalid }" ref="formRef">
     <SfHeading
@@ -172,11 +171,8 @@
         @submit="$router.push('/checkout/billing')"
         @selectedMethod="handleSelectedMethodShipping"
       />
-      <SfButton
-        type="submit"
-        :disabled="invalid || !form.selectedMethodShipping"
-      >
-        {{ $t('Continue to billing') }}
+      <SfButton type="submit" :disabled="invalid">
+        <slot name="btn-text"></slot>
       </SfButton>
     </form>
   </ValidationObserver>
@@ -185,28 +181,27 @@
 <script>
 import { SfHeading, SfInput, SfButton, SfSelect } from '@storefront-ui/vue';
 import { ref, watch, onMounted, computed } from '@vue/composition-api';
-import { onSSR } from '@vue-storefront/core';
 import {
   useCountrySearch,
   useUser,
   useUserShipping,
   userShippingGetters,
-  useShipping,
+  useShipping
 } from '@vue-storefront/odoo';
 import { required, min, digits } from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 
 extend('required', {
   ...required,
-  message: 'This field is required',
+  message: 'This field is required'
 });
 extend('min', {
   ...min,
-  message: 'The field should have at least {length} characters',
+  message: 'The field should have at least {length} characters'
 });
 extend('digits', {
   ...digits,
-  message: 'Please provide a valid phone number',
+  message: 'Please provide a valid phone number'
 });
 export default {
   name: 'Shipping',
@@ -220,9 +215,9 @@ export default {
     UserShippingAddresses: () =>
       import('~/components/Checkout/UserShippingAddresses.vue'),
     VsfShippingProvider: () =>
-      import('~/components/Checkout/VsfShippingProvider'),
+      import('~/components/Checkout/VsfShippingProvider')
   },
-  setup(props, { root }) {
+  setup(props, { root, emit }) {
     const isFormSubmitted = ref(false);
     const formRef = ref(false);
     const currentAddressId = ref('');
@@ -235,8 +230,12 @@ export default {
 
     const { isAuthenticated } = useUser();
 
-    const { search, searchCountryStates, countries, countryStates } =
-      useCountrySearch();
+    const {
+      search,
+      searchCountryStates,
+      countries,
+      countryStates
+    } = useCountrySearch();
 
     const form = ref({
       firstName: '',
@@ -247,14 +246,18 @@ export default {
       country: '',
       postalCode: '',
       phone: '',
-      selectedMethodShipping: '',
+      selectedMethodShipping: ''
     });
     const handleFormSubmit = async () => {
       await addAddress({
-        address: form.value,
+        address: form.value
       });
       isFormSubmitted.value = true;
-      root.$router.push('/checkout/billing');
+      if (root.$router.history.current.path !== '/my-account/shipping-details')
+        root.$router.push('/checkout/billing');
+      else root.$router.push('/my-account/shipping-details');
+
+      emit('finish', true);
     };
 
     const hasSavedShippingAddress = computed(() => {
@@ -316,9 +319,9 @@ export default {
       form,
       countries,
       countryStates,
-      handleFormSubmit,
+      handleFormSubmit
     };
-  },
+  }
 };
 </script>
 

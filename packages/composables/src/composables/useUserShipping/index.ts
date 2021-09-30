@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Context,
   useUserShippingFactory,
@@ -33,16 +34,12 @@ const params: UseUserShippingFactoryParams<any, any> = {
     };
   },
 
-  addAddress: async (context: Context, { address, shipping }) => {
-
+  addAddress: async (context: Context, { address }) => {
     const shippingAdress = {
       street: address.streetName,
-      houseNumber: '',
-      zipCode: address.postalCode,
+      zip: address.postalCode,
       phone: address.phone,
-      firstName: address.firstName,
-      lastName: '',
-      deliveryMethodId: address.selectedMethodShipping,
+      name: address.firstName,
       city: address.city,
       countryId: Number.parseInt(address.country),
       stateId: Number.parseInt(address.state)
@@ -67,7 +64,6 @@ const params: UseUserShippingFactoryParams<any, any> = {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, params?) => {
-
     if (!context.user.user?.value?.id) {
       await context.user.load();
     }

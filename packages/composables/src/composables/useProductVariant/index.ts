@@ -1,47 +1,41 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* istanbul ignore file */
-import { ssrRef } from '@nuxtjs/composition-api';
 
-import { useVSFContext } from '@vue-storefront/core';
+import { useVSFContext, vsfRef } from '@vue-storefront/core';
 import { Context } from '@vue-storefront/core';
+import { GraphQlGetProductVariantParams } from '@vue-storefront/odoo-api/src/types';
 
-const useProductVariant = () => {
+const useProductVariant = (): any => {
   const context: Context = useVSFContext();
 
-  const errors = ssrRef([]);
-  const productVariants = ssrRef([]);
-  const realProduct = ssrRef(null);
-  const elementNames = ssrRef({});
+  const errors = vsfRef([], 'errors');
+  const productVariants = vsfRef([], 'productVariants');
+  const realProduct = vsfRef(null, 'realProduct');
+  const elementNames = vsfRef({}, 'elementNames');
 
-  const resetPasswordErrors = () => errors.value = [];
+  const resetPasswordErrors = () => (errors.value = []);
 
-  const searchVariants = async ({ productId }) => {
+  const searchRealProduct = async ({ productTemplateId, combinationIds }) => {
+    const params: GraphQlGetProductVariantParams = {
+      combinationId: combinationIds.map((id) => parseInt(id)),
+      productTemplateId
+    };
 
-    try {
-      const response = await context.$odoo.api.getProductVariants({ productId }, {});
-      productVariants.value = response;
-
-    } catch (error) {
-      errors.value = error;
-
-    }
-  };
-
-  const searchRealProduct = async ({ productId, combinationIds }) => {
     if (combinationIds.length === 0) return;
 
-    const response = await context.$odoo.api.getProduct({ productId, combinationIds }, {});
+    const { productVariant } = await context.$odoo.api.getRealProduct(params);
 
-    if (response.error) {
-      errors.value = response?.error.data.arguments;
-      return;
-    }
-
-    realProduct.value = response;
+    realProduct.value = productVariant;
   };
 
-  return { elementNames, searchVariants, resetPasswordErrors, searchRealProduct, productVariants, realProduct, errors };
+  return {
+    elementNames,
+    resetPasswordErrors,
+    searchRealProduct,
+    productVariants,
+    realProduct,
+    errors
+  };
 };
 
 export default useProductVariant;
-

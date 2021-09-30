@@ -1,53 +1,74 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CartGetters, AgnosticPrice, AgnosticTotals, AgnosticCoupon, AgnosticDiscount } from '@vue-storefront/core';
-import { Product, SaleOrderLine, SaleOrder as Cart, LineItem } from '@vue-storefront/odoo-api/src/types';
+import {
+  CartGetters,
+  AgnosticPrice,
+  AgnosticTotals,
+  AgnosticCoupon,
+  AgnosticDiscount,
+  AgnosticAttribute
+} from '@vue-storefront/core';
+import {
+  Product,
+  OrderLine,
+  Cart,
+  LineItem
+} from '@vue-storefront/odoo-api/src/types';
 
-function roundDecimal (num) {
+function roundDecimal(num) {
   const m = Number((Math.abs(num) * 100).toPrecision(15));
-  return Math.round(m) / 100 * Math.sign(num);
+  return (Math.round(m) / 100) * Math.sign(num);
 }
 
-export const getCartItems = (cart: Cart): SaleOrderLine[] => {
-  if (!cart || !cart.websiteOrderLine) {
+export const getCartItems = (cart: Cart): OrderLine[] => {
+  if (!cart || !cart?.order?.orderLines) {
     return [];
   }
 
-  return cart.websiteOrderLine;
+  return cart?.order?.orderLines;
 };
 
-export const getCartItemName = (saleOrderLine: SaleOrderLine): string => saleOrderLine?.product.name || 'Product\'s name';
+export const getCartItemName = (orderLine: OrderLine): string =>
+  orderLine?.product.displayName || 'Product\'s name';
 
-export const getCartItemImage = (saleOrderLine: SaleOrderLine): string => saleOrderLine?.product?.image;
+export const getCartItemImage = (orderLine: OrderLine): string =>
+  orderLine?.product?.image;
 
-export const getCartItemPrice = (saleOrderLine: SaleOrderLine): AgnosticPrice => {
+export const getCartItemPrice = (orderLine: OrderLine): AgnosticPrice => {
   return {
-    regular: saleOrderLine?.product?.listPrice || 12,
-    special: saleOrderLine?.product?.listPrice || 10
+    regular: orderLine?.priceTotal || 12,
+    special: orderLine?.priceTotal || 10
   };
 };
 
-export const getCartItemQty = (saleOrderLine: SaleOrderLine): number => saleOrderLine.productUomQty;
+export const getCartItemQty = (orderLine: OrderLine): number =>
+  orderLine.quantity;
 
-export const getCartItemAttributes = (product: Product, filterByAttributeName?: Array<string>) => {
+export const getCartItemAttributes = (
+  product: Product,
+  filterByAttributeName?: Array<string>
+): Record<string, AgnosticAttribute | string> => {
   const attributesList = {};
   return attributesList;
 };
 
-export const getCartItemSku = (product: any): string => product?.id || 'some-sku';
+export const getCartItemSku = (product: Product): string =>
+  product?.sku || String(product?.id) || 'some-sku';
 
 export const getCartTotals = (cart: Cart): AgnosticTotals => {
-
   return {
-    total: cart?.amountTotal || 0,
-    subtotal: roundDecimal(cart?.amountTotal - cart?.amountDelivery) || 0
+    total: cart?.order?.amountTotal || 0,
+    subtotal:
+      roundDecimal(cart?.order?.amountTotal - cart?.order?.amountDelivery) || 0
   };
 };
 
-export const getCartShippingPrice = (cart: Cart): number => 0;
+export const getCartShippingPrice = (cart: Cart): number =>
+  cart.order.amountDelivery;
 
-export const getCartTotalItems = (cart: Cart): number => cart?.websiteOrderLine?.length || 0;
+export const getCartTotalItems = (cart: Cart): number =>
+  cart?.order?.orderLines?.length || 0;
 
-export const getFormattedPrice = (price: number) => String(price);
+export const getFormattedPrice = (price: number): string => String(price);
 
 export const getCoupons = (cart: Cart): AgnosticCoupon[] => [];
 

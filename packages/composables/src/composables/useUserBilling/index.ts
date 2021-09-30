@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Context,
   useUserBillingFactory,
   UseUserBillingFactoryParams
 } from '@vue-storefront/core';
-
 
 const params: UseUserBillingFactoryParams<any, any> = {
   addAddress: async (context: Context, { address }) => {
@@ -16,21 +16,19 @@ const params: UseUserBillingFactoryParams<any, any> = {
       lastName: '',
       city: address.city,
       countryId: Number.parseInt(address.country),
-      stateId: Number.parseInt(address.state),
-    }
+      stateId: Number.parseInt(address.state)
+    };
 
-    await context.$odoo.api.billingAddAddress(shippingAdress)
+    await context.$odoo.api.billingAddAddress(shippingAdress);
 
-    return address
+    return address;
   },
 
   deleteAddress: async (context: Context, params?) => {
-
     return Promise.resolve([]);
   },
 
   updateAddress: async (context: Context, params?) => {
-
     return Promise.resolve([]);
   },
 
@@ -41,7 +39,6 @@ const params: UseUserBillingFactoryParams<any, any> = {
   },
 
   setDefaultAddress: async (context: Context, params?) => {
-
     return Promise.resolve([]);
   }
 };

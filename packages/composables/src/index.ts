@@ -16,5 +16,6 @@ export { default as useWishlist } from './composables/useWishlist';
 export { default as useCountrySearch } from './composables/useCountrySearch';
 export { default as usePassword } from './composables/usePassword';
 export { default as useProductVariant } from './composables/useProductVariant';
+export { default as useForgotPassword } from './composables/useForgotPassword';
 
 export * from './composables/getters';

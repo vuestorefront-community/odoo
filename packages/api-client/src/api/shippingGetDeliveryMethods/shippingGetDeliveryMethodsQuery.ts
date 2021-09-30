@@ -1,9 +1,11 @@
 import gql from 'graphql-tag';
 
 export default gql`
-    query{
-        allDeliveryMethods{
-            id, name
-        }
+  query {
+    deliveryMethods {
+      id
+      name
+      price
     }
+  }
 `;

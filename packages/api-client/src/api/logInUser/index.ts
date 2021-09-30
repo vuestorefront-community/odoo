@@ -1,18 +1,33 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CustomQuery } from '@vue-storefront/core';
+import { Context, CustomQuery } from '@vue-storefront/core';
+import ApolloClient from 'apollo-client';
+import mutation from './logInMutation';
+import { FetchResult } from 'apollo-link/lib/types';
+import { GraphQlLoginParams } from '../../types';
 
-export default async function logInUser (context, { username, password }, customQuery?: CustomQuery) {
+export default async function logInUser(
+  context: Context,
+  params: GraphQlLoginParams,
+  customQuery?: CustomQuery
+): Promise<FetchResult> {
+  const apolloClient = context.client.apollo as ApolloClient<any>;
 
-  const response = await context.client.axios.post('web/session/authenticate', {
-    jsonrpc: '2.0',
-    method: 'call',
-    params: {
-      db: context.config.database,
-      login: username,
-      password: password
+  try {
+    const response = await apolloClient.mutate({
+      mutation,
+      variables: params,
+      fetchPolicy: 'no-cache'
+    });
+
+    return response.data;
+  } catch (error) {
+    if (error.graphQLErrors) {
+      return {
+        errors: error.graphQLErrors,
+        data: null
+      };
     }
-  });
-
-  return response;
+    throw error.networkError?.result || error;
+  }
 }

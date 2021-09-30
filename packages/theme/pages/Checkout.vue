@@ -30,14 +30,14 @@ import { computed } from '@vue/composition-api';
 const STEPS = {
   shipping: 'Shipping',
   billing: 'Billing',
-  payment: 'Payment',
+  payment: 'Payment'
 };
 export default {
   name: 'Checkout',
   components: {
     SfButton,
     SfSteps,
-    CartPreview,
+    CartPreview
   },
   setup(props, context) {
     const currentStep = computed(() =>
@@ -56,9 +56,9 @@ export default {
       STEPS,
       currentStepIndex,
       isThankYou,
-      currentStep,
+      currentStep
     };
-  },
+  }
 };
 </script>
 

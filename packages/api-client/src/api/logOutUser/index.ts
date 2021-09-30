@@ -1,16 +1,19 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CustomQuery } from '@vue-storefront/core';
-import gql from 'graphql-tag';
+import { Context, CustomQuery } from '@vue-storefront/core';
+import mutation from './logOutUserMutation';
+import { FetchResult } from 'apollo-link/lib/types';
+import ApolloClient from 'apollo-client';
 
-export default async function logOutUser(context, customQuery?: CustomQuery) {
+export default async function logOutUser(
+  context: Context,
+  customQuery?: CustomQuery
+): Promise<FetchResult> {
+  const apolloClient = context.client.apollo as ApolloClient<any>;
 
-  const response = await context.client.axios.post('web/session/destroy', {
-    withCredentials: true,
-    jsonrpc: '2.0',
-    method: 'call'
+  const response = await apolloClient.mutate({
+    mutation
   });
 
   return response;
-
 }

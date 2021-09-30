@@ -5,20 +5,26 @@ import {
   AgnosticPrice,
   ProductGetters
 } from '@vue-storefront/core';
-import { Product, ProductVariant, Attribute } from '@vue-storefront/odoo-api/src/types';
+import {
+  Product,
+  ProductVariant,
+  Attribute
+} from '@vue-storefront/odoo-api/src/types';
 
-type ProductFilters = any
+type ProductFilters = any;
 
 // TODO: Add interfaces for some of the methods in core
 // Product
 
-export const getProductName = (product: Product): string => product?.name || 'Product\'s name';
+export const getProductName = (product: Product): string =>
+  product?.name || 'Product\'s name';
 
-export const getProductProperties = (product: Product): Attribute[] => product?.attributes || [];
+export const getProductProperties = (product: Product): Attribute[] =>
+  product?.attributeValues || [];
 
-export const getProductCode = (product: Product): string => product?.defaultCode || '';
+export const getProductCode = (product: Product): string => product?.sku || '';
 
-export const getProductSlug = (product: Product): string => product.slug;
+export const getProductSlug = (product: Product): string => product?.slug || '';
 
 export const getProductPrice = (product: Product): AgnosticPrice => {
   return {
@@ -27,18 +33,16 @@ export const getProductPrice = (product: Product): AgnosticPrice => {
   };
 };
 
-export const getProductGallery = (product: Product): AgnosticMediaGalleryItem[] => {
-  if (!product) {
-    return [];
-  }
+export const getProductGallery = (
+  product: Product
+): AgnosticMediaGalleryItem[] => {
+  const images: AgnosticMediaGalleryItem[] = [];
 
-  const images: AgnosticMediaGalleryItem[] = [
-    {
-      small: product.image,
-      big: product.image,
-      normal: product.image
-    }
-  ];
+  images.push({
+    small: product?.smallImage || '',
+    big: product?.realProduct?.product.image || product?.image || '',
+    normal: product?.realProduct?.product.image || product?.image || ''
+  });
 
   return images;
 };
@@ -47,7 +51,10 @@ export const getProductCoverImage = (product: Product): string => product.image;
 
 export const getProductSku = (product: Product): string => product.sku;
 
-export const getProductFiltered = (products: Product[], filters: ProductFilters | Product[] = {}) => {
+export const getProductFiltered = (
+  products: Product[],
+  filters: ProductFilters | Product[] = {}
+): Product[] => {
   if (!products) {
     return [];
   }
@@ -55,54 +62,57 @@ export const getProductFiltered = (products: Product[], filters: ProductFilters 
   return products;
 };
 // es
-export const getProductAttributes = (productVariants: ProductVariant[], filterByAttributeName?: string[]): Record<string, AgnosticAttribute | string> => {
-
+export const getProductAttributes = (
+  product: Product,
+  filterByAttributeName?: string[]
+): Record<string, AgnosticAttribute | string> => {
   const attributes = {};
   const groupedByName = {};
 
-  productVariants.forEach((option) => {
-    groupedByName[option.attribute_name] = {
-      type: option.attribute_display_type,
-      variantId: option.attribute_value_id,
-      label: option.attribute_name,
+  product?.attributeValues?.forEach((option) => {
+    groupedByName[option.attributeName] = {
+      type: option.displayType,
+      variantId: option.id,
+      label: option.attributeName,
       values: []
     };
   });
-  productVariants.forEach((option) => {
-    groupedByName[option.attribute_name].values.push({
-      value: String(option.attribute_value_id),
-      label: option.attribute_value_name
+  product?.attributeValues?.forEach((option) => {
+    groupedByName[option.attributeName].values.push({
+      value: String(option.id),
+      label: option.name
     });
   });
 
-  productVariants.forEach((option) => {
-    if (!attributes[option.attribute_display_type]) {
-      attributes[option.attribute_display_type] = [];
+  product?.attributeValues?.forEach((option) => {
+    if (!attributes[option.displayType]) {
+      attributes[option.displayType] = [];
     }
     if (
-      groupedByName[option.attribute_name].type ===
-      option.attribute_display_type &&
-      !attributes[option.attribute_display_type].some(
+      groupedByName[option.attributeName].type === option.displayType &&
+      !attributes[option.displayType].some(
         (item) =>
-          item.variantId === groupedByName[option.attribute_name].variantId
+          item.variantId === groupedByName[option.attributeName].variantId
       )
     ) {
-      attributes[option.attribute_display_type].push(
-        groupedByName[option.attribute_name]
-      );
+      attributes[option.displayType].push(groupedByName[option.attributeName]);
     }
   });
 
   return attributes;
 };
 
-export const getProductDescription = (product: Product): any => (product as any)?.description || '';
+export const getProductDescription = (product: Product): any =>
+  (product as any)?.description || '';
 
-export const getProductCategoryIds = (product: Product): string[] => (product as any)?.categoriesRef || '';
+export const getProductCategoryIds = (product: Product): string[] =>
+  (product as any)?.categoriesRef || '';
 
-export const getProductId = (product: Product): string => (product as any)?.id || '';
+export const getProductId = (product: Product): string =>
+  (product as any)?.id || '';
 
-export const getFormattedPrice = (listPrice: number): string => String(listPrice);
+export const getFormattedPrice = (listPrice: number): string =>
+  String(listPrice);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getProductTotalReviews = (product: Product): number => 0;
@@ -110,7 +120,10 @@ export const getProductTotalReviews = (product: Product): number => 0;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getProductAverageRating = (product: Product): number => 0;
 
-const productGetters: ProductGetters<Product | ProductVariant, ProductFilters> = {
+const productGetters: ProductGetters<
+  Product | ProductVariant,
+  ProductFilters
+> = {
   getName: getProductName,
   getSlug: getProductSlug,
   getPrice: getProductPrice,

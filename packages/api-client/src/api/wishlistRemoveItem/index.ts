@@ -1,13 +1,22 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CustomQuery } from '@vue-storefront/core';
-import axios from 'axios'
-export default async function wishlistRemoveItem(context, product, customQuery?: CustomQuery) {
+import ApolloClient from 'apollo-client';
+import mutation from './wishlistRemoveItemMutation';
+import { Context, CustomQuery } from '@vue-storefront/core';
+import { Product } from '../../types';
+import { GraphQlWishlistRemoveItemParams } from '../../types';
 
-  const response = await context.client.axios.post(`/shop/wishlist/remove/${product.id}`, {
-    jsonrpc: '2.0',
-    method: 'call'
+export default async function wishlistRemoveItem(
+  context: Context,
+  params: GraphQlWishlistRemoveItemParams,
+  customQuery?: CustomQuery
+): Promise<any> {
+  const apolloClient = context.client.apollo as ApolloClient<any>;
+
+  const response = await apolloClient.mutate({
+    mutation,
+    variables: params
   });
 
-  return response;
+  return response.data;
 }

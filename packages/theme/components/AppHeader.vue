@@ -122,7 +122,7 @@
     </SfHeader>
     <SearchResults
       :visible="isSearchOpen"
-      :result="result"
+      :result="formatedResult"
       @close="closeSearch"
       @removeSearchResults="removeSearchResults"
     />
@@ -147,11 +147,11 @@ import {
   useUser,
   cartGetters,
   categoryGetters,
-  useProduct,
-  useCategory
+  useCategory,
+  useFacet
 } from '@vue-storefront/odoo';
 import { clickOutside } from '@storefront-ui/vue/src/utilities/directives/click-outside/click-outside-directive.js';
-import { computed, ref, watch, onMounted } from '@vue/composition-api';
+import { computed, ref, watch } from '@vue/composition-api';
 import { onSSR } from '@vue-storefront/core';
 import { useUiHelpers } from '~/composables';
 import LocaleSelector from './LocaleSelector';
@@ -173,9 +173,9 @@ export default {
   },
   directives: { clickOutside },
   setup (props, { root }) {
-    const result = ref(null);
     const searchBarRef = ref(null);
     const term = ref(null);
+    const formatedResult = ref(null);
     const isSearchOpen = ref(false);
 
     const { changeSearchTerm } = useUiHelpers();
@@ -184,8 +184,7 @@ export default {
     const { load: loadUser, isAuthenticated } = useUser();
     const { load: loadCart, cart } = useCart();
     const { load: loadWishlist, wishlist } = useWishlist();
-    const { search: searchProductApi, products } = useProduct();
-    const { search: searchCategoryApi, categories } = useCategory('AppHeader:LeftCategories');
+    const { search: searchProductApi, result } = useFacet('AppHeader:Search');
     const { categories: topCategories, search: searchTopCategoryApi } = useCategory('AppHeader:TopCategories');
 
     const isMobile = computed(() => mapMobileObserver().isMobile.get());
@@ -199,7 +198,7 @@ export default {
     );
 
     const removeSearchResults = () => {
-      result.value = null;
+      formatedResult.value = null;
     };
 
     const closeSearch = () => {
@@ -216,17 +215,17 @@ export default {
       }
       if (term.value.length < 2) return;
 
-      await Promise.all([
-        searchProductApi({ term: term.value }),
-        searchCategoryApi({ topCategory: false, term: term.value })
-      ]);
-      result.value = {
-        products: products.value,
-        categories: categories.value.map((item) =>
-          categoryGetters.getTree(item)
-        )
+      await searchProductApi({ search: term.value, pageSize: 12 });
+
+      formatedResult.value = {
+        products: result?.value?.data?.products,
+        categories: result?.value?.data?.categories
+          .filter(category => category.childs === null)
+          .map((category) =>
+            categoryGetters.getTree(category)
+          )
       };
-    }, 300);
+    }, 100);
     const closeOrFocusSearchBar = () => {
       if (isMobile.value) {
         return closeSearch();
@@ -258,18 +257,16 @@ export default {
     );
 
     onSSR(async () => {
-      await searchTopCategoryApi({ topCategory: true });
-
-    });
-
-    onMounted(() => {
-      loadUser();
-      loadWishlist();
-      loadCart();
+      await Promise.all([
+        searchTopCategoryApi({ filter: { parent: true }}),
+        loadUser(),
+        loadWishlist(),
+        loadCart()
+      ]);
     });
 
     return {
-      wishlistHasItens: computed(() => wishlist.value?.length > 0),
+      wishlistHasItens: computed(() => wishlist.value?.wishlistItems.length > 0),
       topCategories,
       accountIcon,
       closeOrFocusSearchBar,
@@ -281,7 +278,7 @@ export default {
       toggleCartSidebar,
       toggleWishlistSidebar,
       changeSearchTerm,
-      result,
+      formatedResult,
       term,
       isMobile,
       handleSearch,

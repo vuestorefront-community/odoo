@@ -6,52 +6,76 @@ import {
   useCartFactory,
   UseCartFactoryParams
 } from '@vue-storefront/core';
-import { Coupon } from '../types';
-import { SaleOrder as Cart, SaleOrderLine, Product } from '@vue-storefront/odoo-api/src/types';
+import {
+  Cart,
+  GraphQlCartAddItemParams,
+  GraphQlCartRemoveItemParams,
+  GraphQlCartUpdateItemQtyParams,
+  OrderLine,
+  Product
+} from '@vue-storefront/odoo-api/src/types';
 
-const params: UseCartFactoryParams<Cart, SaleOrderLine, Product, Coupon> = {
+const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
+  load: async (context: Context) => {
+    const cart = await context.$odoo.api.cartLoad();
 
-  load: async (context: Context, { customQuery }) => {
-    const cart = await context.$odoo.api.cartLoad({}, customQuery);
-
-    return cart.data.userShoppingCart.length > 0 ? cart.data.userShoppingCart[0] : [];
+    return cart.cart;
   },
 
-  addItem: async (context: Context, { currentCart, product, quantity, customQuery }) => {
-    let productId = null;
-    if (product.realProduct) {
-      productId = product.realProduct.product_id;
-    }
-    if (!product.realProduct) {
-      productId = product.first_variant_id || product.firstVariantId;
-    }
-
+  addItem: async (
+    context: Context,
+    { currentCart, product, quantity, customQuery }
+  ) => {
     if (!params.isInCart(context, { currentCart, product })) {
-      await context.$odoo.api.cartAddItem({ productId, quantity }, customQuery);
-      const cart = params.load(context, {});
+      const productId = product.realProduct
+        ? product.realProduct.product.id
+        : product.firstVariant;
 
-      return cart;
+      const addItemParams: GraphQlCartAddItemParams = {
+        productId,
+        quantity
+      };
+      const cart = await context.$odoo.api.cartAddItem(
+        addItemParams,
+        customQuery
+      );
+
+      return cart.cartAddItem;
     }
 
     return currentCart;
   },
 
-  removeItem: async (context: Context, { currentCart, product: saleOrderLine, customQuery }) => {
+  removeItem: async (
+    context: Context,
+    { currentCart, product, customQuery }
+  ) => {
+    const addItemParams: GraphQlCartRemoveItemParams = {
+      lineId: product.id
+    };
+    const cart = await context.$odoo.api.cartRemoveItem(
+      addItemParams,
+      customQuery
+    );
 
-    await context.$odoo.api.cartRemoveItem({ productId: saleOrderLine.product.id }, customQuery);
-
-    const cart = params.load(context, {});
-
-    return cart;
+    return cart.cartRemoveItem;
   },
 
-  updateItemQty: async (context: Context, { currentCart, product: saleOrderLine, quantity, customQuery }) => {
+  updateItemQty: async (
+    context: Context,
+    { currentCart, product: orderLine, quantity, customQuery }
+  ) => {
+    const updateItemParams: GraphQlCartUpdateItemQtyParams = {
+      lineId: orderLine.id,
+      quantity
+    };
 
-    await context.$odoo.api.cartUpdateItemQty({ productId: saleOrderLine.product.id, quantity }, customQuery);
+    const cart = await context.$odoo.api.cartUpdateItemQty(
+      updateItemParams,
+      customQuery
+    );
 
-    const cart = params.load(context, {});
-
-    return cart;
+    return cart.cartUpdateItem;
   },
 
   clear: async (context: Context, { currentCart }) => {
@@ -59,20 +83,33 @@ const params: UseCartFactoryParams<Cart, SaleOrderLine, Product, Coupon> = {
     return currentCart;
   },
 
-  applyCoupon: async (context: Context, { currentCart, couponCode, customQuery }) => {
+  applyCoupon: async (
+    context: Context,
+    { currentCart, couponCode, customQuery }
+  ) => {
     console.log('Mocked: applyCoupon');
     return { updatedCart: currentCart, updatedCoupon: {} };
   },
 
-  removeCoupon: async (context: Context, { currentCart, coupon, customQuery }) => {
+  removeCoupon: async (
+    context: Context,
+    { currentCart, couponCode, customQuery }
+  ) => {
     console.log('Mocked: removeCoupon');
     return { updatedCart: currentCart };
   },
 
   isInCart: (context: Context, { currentCart, product }) => {
-    return currentCart?.websiteOrderLine?.some(item => item.product.id == product.first_variant_id) || false;
+    const productId = product.realProduct
+      ? product.realProduct.product.id
+      : product.firstVariant;
+
+    return (
+      currentCart?.order?.orderLines?.some(
+        (item) => item.product.id === productId
+      ) || false
+    );
   }
 };
 
-export default useCartFactory<Cart, SaleOrderLine, Product, Coupon>(params);
-
+export default useCartFactory<Cart, OrderLine, Product>(params);

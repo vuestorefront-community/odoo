@@ -3,31 +3,29 @@
 import { ref } from '@vue/composition-api';
 import { useVSFContext } from '@vue-storefront/core';
 import { Context } from '@vue-storefront/core';
+import { Cart } from '@vue-storefront/odoo-api/src/types';
 
-const useBilling = () => {
+const useBilling = (): any => {
   const context: Context = useVSFContext();
 
   const errors = ref({ graphQLErrors: [] });
   const billingAddress = ref({});
 
-  const resetPasswordErrors = () => errors.value = { graphQLErrors: [] };
+  const resetPasswordErrors = () => (errors.value = { graphQLErrors: [] });
 
   const load = async () => {
-
-    const cart = await context.$odoo.api.cartLoad({}, {});
-    if (cart.data.userShoppingCart.length > 0) {
-      const realCart = cart.data.userShoppingCart[0];
+    const cart: Cart = await context.$odoo.api.cartLoad({}, {});
+    if (cart.order?.orderLines?.length > 0) {
       billingAddress.value = {
-        streetName: realCart.partnerInvoice.street,
+        streetName: cart.order.partnerInvoice.street,
         apartment: '',
-        postalCode: realCart.partnerInvoice.zip,
-        phone: realCart.partnerInvoice.phone,
-        firstName: realCart.partnerInvoice.name,
-        city: realCart.partnerInvoice.city,
-        country: realCart.partnerInvoice.country?.id,
-        state: realCart.partnerInvoice.state?.id
+        postalCode: cart.order.partnerInvoice.zip,
+        phone: cart.order.partnerInvoice.phone,
+        firstName: cart.order.partnerInvoice.name,
+        city: cart.order.partnerInvoice.city,
+        country: cart.order.partnerInvoice.country?.id,
+        state: cart.order.partnerInvoice.state?.id
       };
-
     }
 
     return billingAddress;
@@ -37,7 +35,13 @@ const useBilling = () => {
     await context.$odoo.api.billingUseShippingAsBillingAddress({}, {});
   };
 
-  return { load, errors, resetPasswordErrors, useShippingAsBillingAddress, billingAddress };
+  return {
+    load,
+    errors,
+    resetPasswordErrors,
+    useShippingAsBillingAddress,
+    billingAddress
+  };
 };
 
 export default useBilling;

@@ -1,14 +1,19 @@
-import { Context, useCategoryFactory, UseCategoryFactoryParams } from '@vue-storefront/core';
+import {
+  Context,
+  useCategoryFactory,
+  UseCategoryFactoryParams
+} from '@vue-storefront/core';
+import {
+  Category,
+  GraphQlGetCategoryParams
+} from '@vue-storefront/odoo-api/src/types';
 
-import { Category } from '../types';
-const params: UseCategoryFactoryParams<Category, any> = {
-
+const params: UseCategoryFactoryParams<Category, GraphQlGetCategoryParams> = {
   categorySearch: async (context: Context, params) => {
-    const { customQuery, ...searchParams } = params;
-    const categories = await context.$odoo.api.getCategory(searchParams, customQuery);
+    const { categories } = await context.$odoo.api.getCategory(params);
 
-    return categories;
+    return categories.categories;
   }
 };
 
-export default useCategoryFactory<Category, any>(params);
+export default useCategoryFactory<Category, GraphQlGetCategoryParams>(params);

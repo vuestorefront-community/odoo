@@ -170,30 +170,29 @@ import {
   SfButton,
   SfSelect,
   SfRadio,
-  SfCheckbox,
+  SfCheckbox
 } from '@storefront-ui/vue';
 import { ref, onMounted, watch } from '@vue/composition-api';
 import { onSSR } from '@vue-storefront/core';
 import {
   useBilling,
-  useShipping,
   useCountrySearch,
-  useUserBilling,
+  useUserBilling
 } from '@vue-storefront/odoo';
 import { required, min, digits } from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 
 extend('required', {
   ...required,
-  message: 'This field is required',
+  message: 'This field is required'
 });
 extend('min', {
   ...min,
-  message: 'The field should have at least {length} characters',
+  message: 'The field should have at least {length} characters'
 });
 extend('digits', {
   ...digits,
-  message: 'Please provide a valid phone number',
+  message: 'Please provide a valid phone number'
 });
 export default {
   name: 'Billing',
@@ -205,17 +204,20 @@ export default {
     SfRadio,
     SfCheckbox,
     ValidationProvider,
-    ValidationObserver,
+    ValidationObserver
   },
   setup(props, { root }) {
-    const { shippingAddress } = useShipping();
-    const { search, searchCountryStates, countries, countryStates } =
-      useCountrySearch();
+    const {
+      search,
+      searchCountryStates,
+      countries,
+      countryStates
+    } = useCountrySearch();
     const {
       load: loadBillingAddress,
       billingAddress,
       useShippingAsBillingAddress,
-      error,
+      error
     } = useBilling();
     const { addAddress } = useUserBilling();
 
@@ -231,7 +233,7 @@ export default {
       state: '',
       country: '',
       postalCode: '',
-      phone: null,
+      phone: null
     });
 
     const handleCheckSameAddress = async () => {
@@ -282,9 +284,9 @@ export default {
       handleCheckSameAddress,
       sameAsShipping,
       form,
-      handleFormSubmit,
+      handleFormSubmit
     };
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>

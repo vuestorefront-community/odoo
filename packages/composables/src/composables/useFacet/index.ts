@@ -1,16 +1,40 @@
-import { Context, useFacetFactory, FacetSearchResult } from '@vue-storefront/core';
+import {
+  Context,
+  FacetSearchResult,
+  useFacetFactory
+} from '@vue-storefront/core';
+import {
+  GraphQlGetCategoryParams,
+  ParamsFromUrl
+} from '@vue-storefront/odoo-api/src/types';
+import { FacetResultsData } from '../types';
 
 const factoryParams = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  search: async (context: Context, params: FacetSearchResult<any>) => {
+  search: async (
+    context: Context,
+    params: FacetSearchResult<ParamsFromUrl>
+  ): Promise<FacetResultsData> => {
+    const categoryParams: GraphQlGetCategoryParams = {
+      pageSize: 100,
+      search: params.input.search,
+      filter: { parent: false, id: params?.input?.filter?.categoryId || null }
+    };
 
-    const categories = await context.$odoo.api.getCategory({ ...params, topCategory: false });
-    const products = await context.$odoo.api.getProductTemplatesPublished({ ...params.input });
+    const { categories } = await context.$odoo.api.getCategory(categoryParams);
+
+    const { products } = await context.$odoo.api.getProductTemplatesList(
+      params.input
+    );
+
     return {
-      categories,
-      products: products.result?.products,
-      attributes: products.result?.attributes,
-      totalProducts: products.result?.product_count
+      categories: categories.categories,
+      products: products.products,
+      attributes: products.attributes,
+      itemsPerPage: 1,
+      facets: {},
+      perPageOptions: 20,
+      totalProducts: products.totalCount
     };
   }
 };

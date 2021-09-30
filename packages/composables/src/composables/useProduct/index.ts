@@ -4,14 +4,22 @@ import {
   ProductsSearchParams,
   UseProductFactoryParams
 } from '@vue-storefront/core';
+import { GraphQlGetProductTemplateParams } from '@vue-storefront/odoo-api/src/types';
 import { ProductsResponse } from '../types';
 
 const params: UseProductFactoryParams<ProductsResponse, any> = {
-  productsSearch: async (context: Context, params: ProductsSearchParams): Promise<ProductsResponse> => {
+  productsSearch: async (
+    context: Context,
+    params: ProductsSearchParams
+  ): Promise<ProductsResponse> => {
+    const graphQlParams: GraphQlGetProductTemplateParams = {
+      id: params.id
+    };
 
-    const { customQuery, ...searchParams } = params;
-
-    return await context.$odoo.api.getProductTemplates({ ...searchParams, published: true }, customQuery);
+    const { product } = await context.$odoo.api.getProductTemplate(
+      graphQlParams
+    );
+    return product;
   }
 };
 

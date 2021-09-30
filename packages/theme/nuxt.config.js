@@ -1,15 +1,23 @@
 import webpack from 'webpack';
+import theme from './themeConfig';
+const isDev = process.env.NODE_ENV !== 'production';
+
 export default {
   server: {
     port: 3000,
     host: '0.0.0.0'
   },
+  css: ['@/assets/styles.scss'],
   head: {
     title: 'Vue Storefront',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      {
+        hid: 'description',
+        name: 'description',
+        content: process.env.npm_package_description || ''
+      }
     ],
     link: [
       {
@@ -24,12 +32,14 @@ export default {
       },
       {
         rel: 'preload',
-        href: 'https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,600,700|Roboto:300,300i,400,400i,500,700&display=swap',
+        href:
+          'https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,600,700|Roboto:300,300i,400,400i,500,700&display=swap',
         as: 'style'
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,600,700|Roboto:300,300i,400,400i,500,700&display=swap',
+        href:
+          'https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,600,700|Roboto:300,300i,400,400i,500,700&display=swap',
         media: 'print',
         onload: 'this.media=\'all\''
       }
@@ -42,62 +52,67 @@ export default {
     '@nuxtjs/tailwindcss',
     '@nuxt/typescript-build',
     '@nuxtjs/style-resources',
-    ['@vue-storefront/nuxt', {
-      // @core-development-only-start
-      coreDevelopment: true,
-      // @core-development-only-end
-      useRawSource: {
-        dev: [
-          '@vue-storefront/odoo',
-          '@vue-storefront/core'
-        ],
-        prod: [
-          '@vue-storefront/odoo',
-          '@vue-storefront/core'
-        ]
-      }
-    }],
-    // @core-development-only-start
-    ['@vue-storefront/nuxt-theme', {
-      generate: {
-        replace: {
-          apiClient: '@vue-storefront/odoo-api',
-          composables: '@vue-storefront/odoo'
+    [
+      '@vue-storefront/nuxt',
+      {
+        // @core-development-only-start
+        coreDevelopment: true,
+        // @core-development-only-end
+        useRawSource: {
+          dev: ['@vue-storefront/odoo', '@vue-storefront/core'],
+          prod: ['@vue-storefront/odoo', '@vue-storefront/core']
         }
       }
-    }],
+    ],
+    // @core-development-only-start
+    [
+      '@vue-storefront/nuxt-theme',
+      {
+        generate: {
+          replace: {
+            apiClient: '@vue-storefront/odoo-api',
+            composables: '@vue-storefront/odoo'
+          }
+        }
+      }
+    ],
     // @core-development-only-end
     /* project-only-start
     ['@vue-storefront/nuxt-theme'],
     project-only-end */
     ['@vue-storefront/odoo/nuxt', {}]
   ],
+  publicRuntimeConfig: {
+    theme
+  },
   modules: [
     '@vue-storefront/middleware/nuxt',
     '@nuxtjs/axios',
     'nuxt-i18n',
     'cookie-universal-nuxt',
     'vue-scrollto/nuxt',
-    ['~/helpers/cache/nuxt', {
-      invalidation: {
-        endpoint: '/cache-invalidate',
-        key: '0ead60c3-d118-40be-9519-d531462ddc60',
-        handlers: [
-          './helpers/cache/defaultHandler'
-        ]
-      },
-      driver: [
-        './helpers/cache.js',
-        {
-          redis: {
-            host: process.env.REDIS_HOST,
-            port: process.env.REDIS_PORT,
-            password: process.env.REDIS_PASSWORD,
-            defaultTimeout: 86400
+    [
+      '~/helpers/cache/nuxt',
+      {
+        invalidation: {
+          endpoint: '/cache-invalidate',
+          key: '0ead60c3-d118-40be-9519-d531462ddc60',
+          handlers: ['./helpers/cache/defaultHandler']
+        },
+        driver: [
+          './helpers/cache.js',
+          {
+            isDev,
+            redis: {
+              host: process.env.REDIS_HOST,
+              port: process.env.REDIS_PORT,
+              password: process.env.REDIS_PASSWORD,
+              defaultTimeout: 86400
+            }
           }
-        }
-      ]
-    }]
+        ]
+      }
+    ]
   ],
   i18n: {
     currency: 'USD',
@@ -152,18 +167,25 @@ export default {
     }
   },
   styleResources: {
-    scss: [require.resolve('@storefront-ui/shared/styles/_helpers.scss', { paths: [process.cwd()] })]
+    scss: [
+      require.resolve('@storefront-ui/shared/styles/_helpers.scss', {
+        paths: [process.cwd()]
+      })
+    ]
   },
   build: {
+    babel: {
+      plugins: [
+        ['@babel/plugin-proposal-private-property-in-object', { loose: true }]
+      ]
+    },
     postcss: {
       plugins: {
         'postcss-custom-properties': false
       }
     },
-    transpile: [
-      'vee-validate/dist/rules'
-    ],
-    extend (config, ctx) {
+    transpile: ['vee-validate/dist/rules'],
+    extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map';
       }
@@ -180,7 +202,7 @@ export default {
   },
 
   router: {
-    scrollBehavior (_to, _from, savedPosition) {
+    scrollBehavior(_to, _from, savedPosition) {
       if (savedPosition) {
         return savedPosition;
       } else {

@@ -1,12 +1,25 @@
 import { CategoryGetters, AgnosticCategoryTree } from '@vue-storefront/core';
 import { Category } from '@vue-storefront/odoo-api/src/types';
 
+const buildTree = (categories: Category[]): AgnosticCategoryTree[] => {
+  if (!categories) {
+    return [] as AgnosticCategoryTree[];
+  }
+
+  return categories.map((category) => ({
+    label: category.name,
+    slug: category.slug,
+    items: buildTree(category.childs),
+    isCurrent: false,
+    id: category.id
+  }));
+};
+
 const itemToTree = (category: Category): AgnosticCategoryTree => {
   return {
     label: category.name,
     slug: category.slug,
-    parent: category.parent,
-    items: [],
+    items: buildTree(category.childs),
     isCurrent: false,
     id: category.id
   };

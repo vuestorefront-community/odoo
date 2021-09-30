@@ -1,12 +1,14 @@
 import gql from 'graphql-tag';
 
 export default gql`
-    query ($countryId: ID!) {
-        allCountries(countryId: $countryId) {
-            states {
-                id
-                name
-            }
+  query($id: Int) {
+    countries(filter: { id: $id }) {
+      countries {
+        states {
+          id
+          name
         }
+      }
     }
+  }
 `;

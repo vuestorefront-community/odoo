@@ -1,29 +1,10 @@
 import gql from 'graphql-tag';
+import wishlistItemsFragment from '../../fragments/wishlistItemsFragment';
 
 export default gql`
   query {
-      allWishlistItems {
-        id
-        price
-        currency {
-          id
-          name
-        }
-       
-        product {
-          id
-          name
-          description
-          image
-          listPrice,
-          productTemplate {
-            id, slug
-          },
-          attributes {
-            id,name,
-          }
-        }
-      }
+    wishlistItems {
+      ${wishlistItemsFragment}
     }
+  }
 `;
-

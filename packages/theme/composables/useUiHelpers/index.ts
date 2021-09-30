@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { getCurrentInstance } from '@vue/composition-api';
-import { Category } from '~/../api-client/src/types';
+import { Category, ParamsFromUrl } from '~/../api-client/src/types';
 const getInstance = () => {
   const vm = getCurrentInstance();
   return vm.$root as any;
@@ -8,36 +8,38 @@ const getInstance = () => {
 
 const queryParamsNotFilters = ['page', 'sort', 'itemsPerPage'];
 
-const useUiHelpers = () => {
+const useUiHelpers = (): any => {
   const instance = getInstance();
 
-  const getFacetsFromURL = () => {
+  const getFacetsFromURL = (): ParamsFromUrl => {
     const { params, query } = instance.$router.history.current;
     let filters: string[] = [];
     if (query) {
-      Object.keys(query).forEach(filterKey => {
+      Object.keys(query).forEach((filterKey) => {
         if (!queryParamsNotFilters.includes(filterKey)) {
           filters.push(query[filterKey]);
         }
       });
 
-      filters = filters.map(filter => filter.split(',')).flat();
+      filters = filters.map((filter) => filter.split(',')).flat();
     }
 
-    const ppg = query.itemsPerPage ? parseInt(query.itemsPerPage) : 10;
-    let offset = 0;
-    if (query.page > 0) {
-      offset = (query.page * ppg) - ppg;
-    }
+    const pageSize = query.itemsPerPage ? parseInt(query.itemsPerPage) : 10;
+    const sort = query?.sort?.split(',') || [];
+    const page = query?.page || 1;
+    const categoryId = parseInt(params.slug_3) || parseInt(params.slug_2);
 
     return {
-      term: params.slug_1,
-      order: query.sort || 'name asc',
-      offset,
-      attrib_list: filters,
-      ppg,
-      category_id: params.slug_3 || params.slug_2
-    } as any;
+      search: '',
+      sort: { [sort[0]]: sort[1] },
+      pageSize,
+      categorySlug: params.slug_1,
+      currentPage: page,
+      filter: {
+        categoryId,
+        attributeValueId: filters.map((item) => parseInt(item))
+      }
+    };
   };
 
   const getCatLink = (category: Category): string => {
@@ -59,25 +61,21 @@ const useUiHelpers = () => {
   };
 
   const facetsFromUrlToFilter = () => {
-
     const { query } = instance.$router.history.current;
     const formatedFilters = [];
-    Object.keys(query).forEach(label => {
+    Object.keys(query).forEach((label) => {
       if (queryParamsNotFilters.includes(label)) return;
 
       const valueList = query[label].split(',');
 
-      valueList.forEach(value => {
-
+      valueList.forEach((value) => {
         const item = {
           filterName: label,
           label: value,
           id: value
         };
         formatedFilters.push(item);
-      }
-      );
-
+      });
     });
 
     return formatedFilters;
@@ -85,7 +83,7 @@ const useUiHelpers = () => {
 
   const changeFilters = (filters) => {
     const formatedFilters = {};
-    filters.forEach(element => {
+    filters.forEach((element) => {
       if (formatedFilters[element.filterName]) {
         formatedFilters[element.filterName] += `,${element.id}`;
         return;
@@ -108,7 +106,6 @@ const useUiHelpers = () => {
 
   // eslint-disable-next-line
   const isFacetColor = (facet): boolean => {
-
     return facet.display_type === 'color';
   };
 
