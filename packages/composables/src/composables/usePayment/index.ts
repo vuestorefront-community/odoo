@@ -1,3 +1,4 @@
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context } from '@vue-storefront/core';
 import { Order, PaymentProvider } from '@vue-storefront/odoo-api/src/types';
@@ -12,7 +13,6 @@ const factoryParams: UsePaymentFactoryParams<PaymentProvider, Order> = {
   },
   getPaymentConfirmation: async (context: Context): Promise<Order> => {
     const { paymentConfirmation } = await context.$odoo.api.paymentConfirmation();
-    console.log(paymentConfirmation);
 
     return paymentConfirmation;
   }

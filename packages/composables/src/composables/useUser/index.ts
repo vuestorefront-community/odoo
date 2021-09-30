@@ -6,7 +6,7 @@ import {
   useUserFactory,
   UseUserFactoryParams
 } from '@vue-storefront/core';
-import { User } from '@vue-storefront/odoo-api/src/types';
+import { User, GraphQlUpdateAccountParams } from '@vue-storefront/odoo-api/src/types';
 import {
   getAgnosticUserFromUser
 } from '../getters/userGetters';
@@ -30,8 +30,16 @@ const factoryParams: UseUserFactoryParams<User, any, any> = {
   },
 
   updateUser: async (context: Context, { currentUser, updatedUserData }) => {
-    console.log('Mocked: updateUser');
-    return {} as User;
+
+    const params: GraphQlUpdateAccountParams = {
+      id: currentUser.id,
+      name: updatedUserData.name,
+      email: updatedUserData.email
+    };
+    const { updateMyAccount } = await context.$odoo.api.updateAccount(params);
+    console.log(updateMyAccount);
+
+    return updateMyAccount;
   },
 
   register: async (context: Context, user) => {
