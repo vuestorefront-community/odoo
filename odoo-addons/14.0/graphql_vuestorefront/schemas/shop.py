@@ -102,8 +102,84 @@ class CartClear(graphene.Mutation):
         return order
 
 
+# ---------------------------------------------------#
+#      Additional Mutations that can be useful       #
+# ---------------------------------------------------#
+
+class ProductInput(graphene.InputObjectType):
+    id = graphene.Int(required=True)
+    quantity = graphene.Int(required=True)
+
+
+class CartLineInput(graphene.InputObjectType):
+    id = graphene.Int(required=True)
+    quantity = graphene.Int(required=True)
+
+
+class CartAddMultipleItems(graphene.Mutation):
+    class Arguments:
+        products = graphene.List(ProductInput, default_value={}, required=True)
+
+    Output = CartData
+
+    @staticmethod
+    def mutate(self, info, products):
+        env = info.context["env"]
+        website = env['website'].get_current_website()
+        request.website = website
+        order = website.sale_get_order(force_create=1)
+        for product in products:
+            product_id = product['id']
+            quantity = product['quantity']
+            order._cart_update(product_id=product_id, add_qty=quantity)
+        return CartData(order=order)
+
+
+class CartUpdateMultipleItems(graphene.Mutation):
+    class Arguments:
+        lines = graphene.List(CartLineInput, default_value={}, required=True)
+
+    Output = CartData
+
+    @staticmethod
+    def mutate(self, info, lines):
+        env = info.context["env"]
+        website = env['website'].get_current_website()
+        request.website = website
+        order = website.sale_get_order(force_create=1)
+        for line in lines:
+            line_id = line['id']
+            quantity = line['quantity']
+            line = order.order_line.filtered(lambda rec: rec.id == line_id)
+            # Reset Warning Stock Message always before a new update
+            line.warning_stock = ""
+            order._cart_update(product_id=line.product_id.id, set_qty=quantity)
+        return CartData(order=order)
+
+
+class CartRemoveMultipleItems(graphene.Mutation):
+    class Arguments:
+        line_ids = graphene.List(graphene.Int, required=True)
+
+    Output = CartData
+
+    @staticmethod
+    def mutate(self, info, line_ids):
+        env = info.context["env"]
+        website = env['website'].get_current_website()
+        request.website = website
+        order = website.sale_get_order(force_create=1)
+        for line_id in line_ids:
+            line = order.order_line.filtered(lambda rec: rec.id == line_id)
+            line.unlink()
+        return CartData(order=order)
+
+
 class ShopMutation(graphene.ObjectType):
     cart_add_item = CartAddItem.Field(description="Add Item")
     cart_update_item = CartUpdateItem.Field(description="Update Item")
     cart_remove_item = CartRemoveItem.Field(description="Remove Item")
     cart_clear = CartClear.Field(description="Cart Clear")
+    cart_add_multiple_items = CartAddMultipleItems.Field(description="Add Multiple Items")
+    cart_update_multiple_items = CartUpdateMultipleItems.Field(description="Update Multiple Items")
+    cart_remove_multiple_items = CartRemoveMultipleItems.Field(description="Remove Multiple Items")
