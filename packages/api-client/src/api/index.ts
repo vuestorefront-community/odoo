@@ -3,6 +3,7 @@ export { default as getProductTemplatesList } from './getProductTemplatesList';
 export { default as getProductTemplate } from './getProductTemplate';
 export { default as getRealProduct } from './getRealProduct';
 
+export { default as updateAccount } from './updateAccount';
 export { default as signUpUser } from './signUpUser';
 export { default as logInUser } from './logInUser';
 export { default as logOutUser } from './logOutUser';
