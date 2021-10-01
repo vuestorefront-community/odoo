@@ -12,11 +12,11 @@
       <template #description>
         <div class="banner__order-number">
           <span>{{ $t('Order No.') }}</span>
-          <strong>{{ orderNumber }}</strong>
+          <strong>{{ cartGetters.getOrderNumber(cart) }}</strong>
         </div>
         <div class="banner__order-number">
           <span>{{ $t('Payment status.') }}</span>
-          <strong :class="paymentStatusClass">{{ paymentStatus }}</strong>
+          <strong>{{ cartGetters.getStage(cart) }}</strong>
         </div>
 
         <div class="banner__order-number" v-if="paymentRefused">
@@ -96,8 +96,8 @@
 
 <script>
 import { SfHeading, SfButton, SfCallToAction } from '@storefront-ui/vue';
-import { ref, computed, onMounted } from '@vue/composition-api';
-import { usePayment } from '@vue-storefront/odoo';
+import { ref, onMounted } from '@vue/composition-api';
+import { usePayment, useCart, cartGetters } from '@vue-storefront/odoo';
 export default {
   components: {
     SfHeading,
@@ -108,8 +108,8 @@ export default {
     emit('changeStep', 4);
 
     const { getPaymentConfirmation } = usePayment();
+    const { cart } = useCart();
 
-    const { query } = root.$router.history.current;
     const companyDetails = ref({
       name: 'Divante Headquarter',
       street: 'St. Dmowskiego 17, 53-534',
@@ -118,28 +118,18 @@ export default {
     });
 
     onMounted(async () => {
-      console.log(await getPaymentConfirmation());
+      await getPaymentConfirmation();
     });
-
-    const orderNumber = ref(query.merchantReference);
-    const paymentStatus = ref(query.authResult);
-
-    const paymentRefused = computed(() => paymentStatus.value === 'REFUSED');
-    const paymentStatusClass = computed(() =>
-      paymentRefused.value ? 'text-danger' : 'text-success'
-    );
 
     const redirectToPayment = () => {
       return root.$router.push('/checkout/payment');
     };
 
     return {
+      cartGetters,
+      cart,
       redirectToPayment,
-      paymentRefused,
-      paymentStatusClass,
-      companyDetails,
-      orderNumber,
-      paymentStatus
+      companyDetails
     };
   }
 };
