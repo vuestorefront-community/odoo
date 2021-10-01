@@ -1,32 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* istanbul ignore file */
 
-import {
-  Context,
-  useUserFactory,
-  UseUserFactoryParams
-} from '@vue-storefront/core';
-import { User, GraphQlUpdateAccountParams } from '@vue-storefront/odoo-api';
-import {
-  getAgnosticUserFromUser
-} from '../getters/userGetters';
-
-const factoryParams: UseUserFactoryParams<User, any, any> = {
+import { Context, useUserFactory, UseUserFactoryParams} from '@vue-storefront/core';
+import { Partner, GraphQlUpdateAccountParams, GraphQlLoginParams } from '@vue-storefront/odoo-api';
+import { getAgnosticUserFromUser} from '../getters/userGetters';
+const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, any> = {
   load: async (context: Context) => {
-    const user = context.$odoo.config.app.$cookies.get('odoo-user');
-    if (user) {
-      const { partner, errors } = await context.$odoo.api.loadUser();
-      return partner;
-    }
+    const { data, errors } = await context.$odoo.api.loadUser();
 
-    return null;
+    return data.partner;
   },
 
   logOut: async (context: Context) => {
     context.$odoo.config.app.$cookies.remove('odoo-user');
     const response = await context.$odoo.api.logOutUser();
-
-    return response;
   },
 
   updateUser: async (context: Context, { currentUser, updatedUserData }) => {
@@ -36,15 +23,15 @@ const factoryParams: UseUserFactoryParams<User, any, any> = {
       name: updatedUserData.name,
       email: updatedUserData.email
     };
-    const { updateMyAccount } = await context.$odoo.api.updateAccount(params);
+    const { data } = await context.$odoo.api.updateAccount(params);
 
-    return updateMyAccount;
+    return data.updateMyAccount;
   },
 
   register: async (context: Context, user) => {
     const agonisticUser = getAgnosticUserFromUser(user);
 
-    const { register, errors } = await context.$odoo.api.signUpUser(
+    const { data, errors } = await context.$odoo.api.signUpUser(
       agonisticUser
     );
 
@@ -52,19 +39,24 @@ const factoryParams: UseUserFactoryParams<User, any, any> = {
       throw new Error(errors.map((e) => e.message).join(','));
     }
 
-    context.$odoo.config.app.$cookies.set('odoo-user', register.partner);
-    return register.partner;
+    context.$odoo.config.app.$cookies.set('odoo-user', data.register);
+    return data.register;
   },
 
   logIn: async (context: Context, params) => {
-    const { login, errors } = await context.$odoo.api.logInUser(params);
+    const loginParams : GraphQlLoginParams = {
+      email: params.username,
+      password: params.password
+    };
+
+    const { data, errors } = await context.$odoo.api.logInUser(loginParams);
 
     if (errors) {
       throw new Error(errors.map((e) => e.message).join(','));
     }
 
-    context.$odoo.config.app.$cookies.set('odoo-user', login.partner);
-    return login.partner;
+    context.$odoo.config.app.$cookies.set('odoo-user', data.login);
+    return data.login;
   },
 
   changePassword: async (
@@ -72,8 +64,8 @@ const factoryParams: UseUserFactoryParams<User, any, any> = {
     { currentUser, currentPassword, newPassword }
   ) => {
     console.log('Mocked: changePassword');
-    return {} as User;
+    return {} as Partner;
   }
 };
 
-export default useUserFactory<User, any, any>(factoryParams);
+export default useUserFactory<Partner, any, any>(factoryParams);

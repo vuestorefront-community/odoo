@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* istanbul ignore file */
 
-import {
-  useVSFContext,
-  vsfRef,
-  Context,
-  sharedRef
-} from '@vue-storefront/core';
+import { useVSFContext, vsfRef, Context, sharedRef} from '@vue-storefront/core';
 import { GraphQlGetProductVariantParams } from '@vue-storefront/odoo-api';
 
 const useProductVariant = (queryParams: Record<string, string>): any => {
@@ -14,10 +9,7 @@ const useProductVariant = (queryParams: Record<string, string>): any => {
 
   const errors = vsfRef([], 'errors');
   const productVariants = vsfRef([], 'productVariants');
-  const realProduct = sharedRef(
-    null,
-    Object?.values(queryParams)?.join('-') || 'realProduct'
-  );
+  const realProduct = sharedRef(null, Object?.values(queryParams)?.join('-') || 'realProduct');
   const elementNames = vsfRef({}, 'elementNames');
 
   const resetPasswordErrors = () => (errors.value = []);
@@ -30,9 +22,9 @@ const useProductVariant = (queryParams: Record<string, string>): any => {
 
     if (combinationIds.length === 0) return;
 
-    const { productVariant } = await context.$odoo.api.getRealProduct(params);
+    const { data } = await context.$odoo.api.getRealProduct(params);
 
-    realProduct.value = productVariant;
+    realProduct.value = data.productVariant;
   };
 
   return {

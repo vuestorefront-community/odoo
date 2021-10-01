@@ -13,7 +13,7 @@ const factoryParams = {
 
     const productParams: GraphQlGetProductParams = {
       pageSize: params.input.pageSize,
-      currentPage: params.input.page,
+      currentPage: params.input.currentPage,
       search: params.input.search,
       sort: params.input.sort as ProductSortInput,
       filter: {

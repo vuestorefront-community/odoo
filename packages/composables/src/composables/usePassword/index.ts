@@ -23,7 +23,7 @@ const usePassword = (): any => {
 
   const resetPassword = async ({ password, token }) => {
     const response = await context.$odoo.api
-      .resetPassword({ password, token })
+      .changePassword({ newPassword: password, token })
       .catch((error) => {
         errors.value = error;
       });
