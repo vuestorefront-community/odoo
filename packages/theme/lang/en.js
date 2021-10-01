@@ -89,6 +89,7 @@ export default {
   'Privacy': 'Privacy',
   'Product suggestions': 'Product suggestions',
   'Product': 'Product',
+  'Product description': 'Product description',
   'Products found': 'Products found',
   'Products': 'Products',
   'Purchase terms': 'Purchase terms',
