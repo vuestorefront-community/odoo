@@ -9,5 +9,14 @@
   "exclude": [
     "node_modules",
     "lib"
-  ]
+  ],
+  "compilerOptions": {
+    "lib": ["ESNext"],
+    "resolveJsonModule": true,
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationDir": "./lib",
+    "declarationMap": true,
+    "sourceMap": true
+  }
 }
