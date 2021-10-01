@@ -5,13 +5,13 @@ import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import query from './getRealProductQuery';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlGetProductVariantParams } from '../../index';
+import { GraphQlGetProductVariantParams, ProductVariantResult } from '../../index';
 
 export default async function getRealProduct(
   context: Context,
   params: GraphQlGetProductVariantParams,
   customQuery?: CustomQuery
-): Promise<FetchResult> {
+): Promise<FetchResult<ProductVariantResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   try {
@@ -21,7 +21,7 @@ export default async function getRealProduct(
       fetchPolicy: 'no-cache'
     });
 
-    return response.data;
+    return response;
   } catch (error) {
     if (error.graphQLErrors) {
       return {
