@@ -447,20 +447,21 @@ export default {
     );
 
     const currentCategory = computed(() => {
-      const categories = result.value?.data?.categories || [];
+      const categories = result.value?.categories || [];
       return categories[0] || {};
     });
 
     const currentCategoryNameForAccordion = computed(() => {
       const name =
         currentCategory.value?.parent?.name ||
-        categoryTree.value?.items[0]?.label ||
-        '';
+        categoryTree.value?.items?.length > 0
+          ? categoryTree.value?.items?.length[0]?.label
+          : '';
       return name;
     });
 
     const currentRootCategory = computed(() => {
-      const categories = result.value?.data?.categories || [];
+      const categories = result.value?.categories || [];
       const category = categories.find((category) => {
         return category.slug === params.slug_1;
       });
