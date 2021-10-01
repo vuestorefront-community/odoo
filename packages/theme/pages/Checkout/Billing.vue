@@ -1,5 +1,5 @@
 <template>
-  <ValidationObserver v-slot="{ handleSubmit }" ref="formRef">
+  <ValidationObserver v-slot="{ handleSubmit, invalid }" ref="formRef">
     <SfHeading
       :level="3"
       :title="$t('Billing')"
@@ -109,7 +109,7 @@
         <ValidationProvider
           name="state"
           rules="required"
-          v-slot="{ errors }"
+          v-slot="{ errors, validate }"
           slim
         >
           <SfSelect
@@ -122,6 +122,7 @@
               form__element--half-even
             "
             required
+            @change="validate"
             :valid="!errors[0]"
             :errorMessage="errors[0]"
           >
@@ -154,7 +155,11 @@
       </div>
       <div class="form">
         <div class="form__action">
-          <SfButton class="form__action-button" type="submit">
+          <SfButton
+            class="form__action-button"
+            type="submit"
+            :disabled="invalid"
+          >
             {{ $t('Continue to payment') }}
           </SfButton>
         </div>
@@ -263,9 +268,12 @@ export default {
     });
 
     watch(
-      () => form.value.country.id,
+      () => form?.value?.country.id,
       async () => {
-        await searchCountryStates(form.value.country.id);
+        await searchCountryStates(form?.value?.country?.id || null);
+        if (!countryStates.value || countryStates.value.length === 0) {
+          form.value.state.id = null;
+        }
       }
     );
 

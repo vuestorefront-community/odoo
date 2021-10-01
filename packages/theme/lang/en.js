@@ -11,6 +11,7 @@ export default {
   'Apply': 'Apply',
   'Back to homepage': 'Back to homepage',
   'Billing address': 'Billing address',
+  'Billing': 'Billing',
   'Brand': 'Brand',
   'Cancel': 'Cancel',
   'Categories': 'Categories',

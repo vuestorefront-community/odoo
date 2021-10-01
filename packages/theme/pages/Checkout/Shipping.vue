@@ -167,6 +167,7 @@
         class="sf-heading--left sf-heading--no-underline title"
       />
       <VsfShippingProvider
+        name="selectedMethodShipping"
         :selectedMethodShipping="form.selectedMethodShipping"
         @submit="$router.push('/checkout/billing')"
         @selectedMethod="handleSelectedMethodShipping"
@@ -237,7 +238,8 @@ export default {
       state: { id: null },
       country: { id: null },
       zip: '',
-      phone: null
+      phone: null,
+      selectedMethodShipping: null
     });
 
     const handleFormSubmit = async () => {
@@ -291,6 +293,9 @@ export default {
       () => form.value.country.id,
       async () => {
         await searchCountryStates(form.value.country.id);
+        if (!countryStates.value || countryStates.value.length === 0) {
+          form.value.state.id = null;
+        }
       }
     );
 
