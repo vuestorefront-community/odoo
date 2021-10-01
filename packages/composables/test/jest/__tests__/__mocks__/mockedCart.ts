@@ -5,7 +5,7 @@ import {
   Partner,
   PaymentTransaction,
   ProductImage
-} from '@vue-storefront/odoo-api/src/types';
+} from '@vue-storefront/odoo-api/src/types/types';
 
 export const mockedCart: Cart = {
   order: {

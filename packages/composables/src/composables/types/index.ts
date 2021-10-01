@@ -3,7 +3,7 @@ import {
   Attribute,
   Category,
   Product
-} from '@vue-storefront/odoo-api/src/types';
+} from '@vue-storefront/odoo-api';
 
 export { UseCategory, UseProduct } from '@vue-storefront/core';
 

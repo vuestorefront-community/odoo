@@ -4,7 +4,7 @@ import {
   ProductsSearchParams,
   UseProductFactoryParams
 } from '@vue-storefront/core';
-import { GraphQlGetProductTemplateParams } from '@vue-storefront/odoo-api/src/types';
+import { GraphQlGetProductTemplateParams } from '@vue-storefront/odoo-api';
 import { ProductsResponse } from '../types';
 
 const params: UseProductFactoryParams<ProductsResponse, any> = {

@@ -13,7 +13,7 @@ import {
   GraphQlCartUpdateItemQtyParams,
   OrderLine,
   Product
-} from '@vue-storefront/odoo-api/src/types';
+} from '@vue-storefront/odoo-api';
 
 const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
   load: async (context: Context) => {

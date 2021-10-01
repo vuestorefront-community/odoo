@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { Order } from '@vue-storefront/odoo-api/src/types';
+import { Order } from '@vue-storefront/odoo-api/src/types/types';
 import useCart from '../../../src/composables/useCart';
 import { mockedCart } from './__mocks__/mockedCart';
 const { load, addItem, removeItem, updateItemQty, isInCart } = useCart() as any;

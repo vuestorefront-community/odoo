@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-prototype-builtins */
 import { Context, useShippingFactory, UseShippingParams } from '@vue-storefront/core';
-import { Address, GraphQlUpdateAddressParams } from '@vue-storefront/odoo-api/src/types';
+import { Address, GraphQlUpdateAddressParams } from '@vue-storefront/odoo-api';
 import useCart from '../useCart';
 
 const factoryParams: UseShippingParams<Address, GraphQlUpdateAddressParams> = {

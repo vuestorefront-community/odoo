@@ -7,7 +7,7 @@ import {
   Context,
   sharedRef
 } from '@vue-storefront/core';
-import { GraphQlGetProductVariantParams } from '@vue-storefront/odoo-api/src/types';
+import { GraphQlGetProductVariantParams } from '@vue-storefront/odoo-api';
 
 const useProductVariant = (queryParams: Record<string, string>): any => {
   const context: Context = useVSFContext();

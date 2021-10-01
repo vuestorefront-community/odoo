@@ -2,7 +2,7 @@
 import { ref } from '@vue/composition-api';
 import { useVSFContext } from '@vue-storefront/core';
 import { Context } from '@vue-storefront/core';
-import { GraphQlGetCountryParams } from '@vue-storefront/odoo-api/src/types';
+import { GraphQlGetCountryParams } from '@vue-storefront/odoo-api';
 
 const useCountrySearch = (): any => {
   const context: Context = useVSFContext();

@@ -1,6 +1,6 @@
 {
   "name": "@vue-storefront/odoo",
-  "version": "0.0.1",
+  "version": "1.0.0-beta.1",
   "private": false,
   "sideEffects": false,
   "main": "lib/index.cjs.js",

@@ -4,7 +4,7 @@ import {
   getProductFiltered,
   getProductAttributes
 } from '../../../../src/composables/getters/productGetters';
-import { Product } from '@vue-storefront/odoo-api/src/types';
+import { Product } from '@vue-storefront/odoo-api/src/types/types';
 import { productVariantsFormatedForProduct } from '../__mocks__/productAttributesFormated';
 import { productWithAttributes } from '../__mocks__/productWithAttributes';
 

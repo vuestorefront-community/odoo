@@ -4,7 +4,7 @@ import {
   useUserShippingFactory,
   UseUserShippingFactoryParams
 } from '@vue-storefront/core';
-import { Address, GraphQlAddAddressParams } from '@vue-storefront/odoo-api/src/types';
+import { Address, GraphQlAddAddressParams } from '@vue-storefront/odoo-api';
 import useCart from '../useCart';
 
 const params: UseUserShippingFactoryParams<any, any> = {

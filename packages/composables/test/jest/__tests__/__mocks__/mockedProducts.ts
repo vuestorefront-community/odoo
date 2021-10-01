@@ -1,4 +1,4 @@
-import { Product, ProductImage } from '@vue-storefront/odoo-api/src/types';
+import { Product, ProductImage } from '@vue-storefront/odoo-api/src/types/types';
 
 export const mockedProducts: Product[] = [
   {

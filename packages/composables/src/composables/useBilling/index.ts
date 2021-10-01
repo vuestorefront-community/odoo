@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* istanbul ignore file */
 import { Context, useBillingFactory, UseBillingParams } from '@vue-storefront/core';
-import { Address, GraphQlUpdateAddressParams } from '@vue-storefront/odoo-api/src/types';
+import { Address, GraphQlUpdateAddressParams } from '@vue-storefront/odoo-api';
 import useCart from '../useCart';
 
 const factoryParams: UseBillingParams<any, any> = {

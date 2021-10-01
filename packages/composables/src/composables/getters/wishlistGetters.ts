@@ -9,7 +9,7 @@ import {
   Product,
   Wishlist,
   WishlistItem
-} from '@vue-storefront/odoo-api/src/types';
+} from '@vue-storefront/odoo-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getWishlistItems = (wishlist: Wishlist): WishlistItem[] => {

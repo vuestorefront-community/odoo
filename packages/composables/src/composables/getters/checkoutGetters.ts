@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CheckoutGetters } from '@vue-storefront/core';
-import { Cart, ShippingMethod } from '@vue-storefront/odoo-api/src/types';
+import { Cart, ShippingMethod } from '@vue-storefront/odoo-api';
 
 export const getShippingMethodId = (shippingMethod: ShippingMethod): string =>
   String(shippingMethod.id) || '';

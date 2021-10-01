@@ -7,7 +7,7 @@ import {
 import {
   ShippingInfo,
   ShippingMethod
-} from '@vue-storefront/odoo-api/src/types';
+} from '@vue-storefront/odoo-api';
 
 interface ShippingProviderState {
   response: ShippingInfo;
