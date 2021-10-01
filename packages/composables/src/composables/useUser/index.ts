@@ -37,7 +37,6 @@ const factoryParams: UseUserFactoryParams<User, any, any> = {
       email: updatedUserData.email
     };
     const { updateMyAccount } = await context.$odoo.api.updateAccount(params);
-    console.log(updateMyAccount);
 
     return updateMyAccount;
   },
