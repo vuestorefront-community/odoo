@@ -36,10 +36,7 @@
                 "
                 :special-price="
                   wishlistGetters.getItemPrice(product).special &&
-                    $n(
-                      wishlistGetters.getItemPrice(product).special,
-                      'currency'
-                    )
+                  $n(wishlistGetters.getItemPrice(product).special, 'currency')
                 "
                 :stock="99999"
                 :link="localePath(getLocalPathFromWishListItem(product))"
@@ -51,10 +48,11 @@
                 <template #configuration>
                   <div class="collected-product__properties">
                     <SfProperty
-                      v-for="(attribute,
-                      key) in wishlistGetters.getItemAttributes(product, [
+                      v-for="(
+                        attribute, key
+                      ) in wishlistGetters.getItemAttributes(product, [
                         'color',
-                        'size'
+                        'size',
                       ])"
                       :key="key"
                       :name="key"
@@ -155,8 +153,8 @@ export default {
 
     const getLocalPathFromWishListItem = (wishlistItem) => {
       return `/p/${productGetters.getId(
-        wishlistItem.product.productTemplate
-      )}/${productGetters.getSlug(wishlistItem.product.productTemplate)}`;
+        wishlistItem.product
+      )}/${productGetters.getSlug(wishlistItem.product)}`;
     };
 
     return {
