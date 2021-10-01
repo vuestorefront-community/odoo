@@ -112,7 +112,6 @@ export default {
         form.value = resetForm();
         requirePassword.value = false;
         currentPassword.value = '';
-        console.log(error);
         send({ message: error?.value, type: 'danger' });
       };
 
