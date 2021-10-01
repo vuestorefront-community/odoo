@@ -11,7 +11,8 @@ import {
   Product,
   OrderLine,
   Cart,
-  LineItem
+  LineItem,
+  OrderStage
 } from '@vue-storefront/odoo-api/src/types';
 
 function roundDecimal(num) {
@@ -74,6 +75,10 @@ export const getCoupons = (cart: Cart): AgnosticCoupon[] => [];
 
 export const getDiscounts = (cart: Cart): AgnosticDiscount[] => [];
 
+export const getCartOrderNumber = (cart: Cart): string => cart.order.name;
+
+export const getCartState = (cart: Cart): OrderStage => cart.order.stage;
+
 const cartGetters: CartGetters<Cart, LineItem> = {
   getTotals: getCartTotals,
   getShippingPrice: getCartShippingPrice,
@@ -87,7 +92,9 @@ const cartGetters: CartGetters<Cart, LineItem> = {
   getFormattedPrice: getFormattedPrice,
   getTotalItems: getCartTotalItems,
   getCoupons,
-  getDiscounts
+  getDiscounts,
+  getOrderNumber: getCartOrderNumber,
+  getStage: getCartState
 };
 
 export default cartGetters;
