@@ -1,5 +1,5 @@
 import { CategoryGetters, AgnosticCategoryTree } from '@vue-storefront/core';
-import { Category } from '@vue-storefront/odoo-api/src/types';
+import { Category } from '@vue-storefront/odoo-api';
 
 const buildTree = (categories: Category[]): AgnosticCategoryTree[] => {
   if (!categories) {

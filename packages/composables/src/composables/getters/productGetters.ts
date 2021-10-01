@@ -9,7 +9,7 @@ import {
   Product,
   ProductVariant,
   Attribute
-} from '@vue-storefront/odoo-api/src/types';
+} from '@vue-storefront/odoo-api';
 
 type ProductFilters = any;
 

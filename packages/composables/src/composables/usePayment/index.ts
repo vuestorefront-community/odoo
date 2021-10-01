@@ -1,7 +1,7 @@
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context } from '@vue-storefront/core';
-import { Order, PaymentProvider } from '@vue-storefront/odoo-api/src/types';
+import { Order, PaymentProvider } from '@vue-storefront/odoo-api';
 import { usePaymentFactory, UsePaymentFactoryParams } from '../../factories/usePaymentFactory';
 import useCart from '../useCart';
 

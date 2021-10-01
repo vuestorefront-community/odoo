@@ -6,7 +6,7 @@ import {
   useUserFactory,
   UseUserFactoryParams
 } from '@vue-storefront/core';
-import { User, GraphQlUpdateAccountParams } from '@vue-storefront/odoo-api/src/types';
+import { User, GraphQlUpdateAccountParams } from '@vue-storefront/odoo-api';
 import {
   getAgnosticUserFromUser
 } from '../getters/userGetters';

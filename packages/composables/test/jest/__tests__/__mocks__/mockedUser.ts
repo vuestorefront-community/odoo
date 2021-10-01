@@ -1,4 +1,4 @@
-import { User} from '@vue-storefront/odoo-api/src/types';
+import { User} from '@vue-storefront/odoo-api/src/types/types';
 
 export const mockedUser: User = {
   password: '123',

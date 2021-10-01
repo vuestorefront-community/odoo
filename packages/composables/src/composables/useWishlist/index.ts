@@ -12,7 +12,7 @@ import {
   Product,
   GraphQlWishlistAddItemParams,
   GraphQlWishlistRemoveItemParams
-} from '@vue-storefront/odoo-api/src/types';
+} from '@vue-storefront/odoo-api';
 
 const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
   load: async (context: Context) => {

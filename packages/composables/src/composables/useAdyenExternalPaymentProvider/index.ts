@@ -4,7 +4,7 @@ import {
   usePaymentProviderFactory,
   UsePaymentProviderParams
 } from '../../factories/usePaymentProviderFactory';
-import { PaymentProvider, PaymentMethod, GraphQlMakePaymentParams } from '@vue-storefront/odoo-api/src/types';
+import { PaymentProvider, PaymentMethod, GraphQlMakePaymentParams } from '@vue-storefront/odoo-api';
 
 const factoryParams: UsePaymentProviderParams<PaymentProvider, any> = {
 

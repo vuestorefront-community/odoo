@@ -3,7 +3,7 @@
 
 import { UserGetters } from '@vue-storefront/core';
 import { AgnosticUser } from '@vue-storefront/odoo-api';
-import { User } from '@vue-storefront/odoo-api/src/types';
+import { User } from '@vue-storefront/odoo-api';
 
 export const getUserFirstName = (user: User): string => user?.name || '';
 

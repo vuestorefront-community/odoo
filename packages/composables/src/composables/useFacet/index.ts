@@ -1,40 +1,40 @@
-import {
-  Context,
-  FacetSearchResult,
-  useFacetFactory
-} from '@vue-storefront/core';
-import {
-  GraphQlGetCategoryParams,
-  ParamsFromUrl
-} from '@vue-storefront/odoo-api/src/types';
+import { Context, FacetSearchResult, useFacetFactory} from '@vue-storefront/core';
+import { GraphQlGetCategoryParams, GraphQlGetProductParams, ParamsFromUrl, ProductSortInput} from '@vue-storefront/odoo-api';
 import { FacetResultsData } from '../types';
 
 const factoryParams = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  search: async (
-    context: Context,
-    params: FacetSearchResult<ParamsFromUrl>
-  ): Promise<FacetResultsData> => {
+  search: async (context: Context, params: FacetSearchResult<ParamsFromUrl>): Promise<FacetResultsData> => {
     const categoryParams: GraphQlGetCategoryParams = {
       pageSize: 100,
       search: params.input.search,
       filter: { parent: false, id: params?.input?.filter?.categoryId || null }
     };
 
-    const { categories } = await context.$odoo.api.getCategory(categoryParams);
+    const productParams: GraphQlGetProductParams = {
+      pageSize: params.input.pageSize,
+      currentPage: params.input.page,
+      search: params.input.search,
+      sort: params.input.sort as ProductSortInput,
+      filter: {
+        categoryId: params?.input?.filter?.categoryId,
+        attributeId: params.input?.filters?.attributeValueId.map(id => parseInt(id))
+      }
 
-    const { products } = await context.$odoo.api.getProductTemplatesList(
-      params.input
-    );
+    };
+
+    const { data } = await context.$odoo.api.getCategory(categoryParams);
+
+    const { data: productData } = await context.$odoo.api.getProductTemplatesList(productParams);
 
     return {
-      categories: categories.categories,
-      products: products.products,
-      attributes: products.attributes,
+      categories: data.categories.categories,
+      products: productData.products.products,
+      attributes: productData.products.attributes,
       itemsPerPage: 1,
       facets: {},
       perPageOptions: 20,
-      totalProducts: products.totalCount
+      totalProducts: productData.products.totalCount
     };
   }
 };

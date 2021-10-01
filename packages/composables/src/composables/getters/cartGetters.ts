@@ -13,7 +13,7 @@ import {
   Cart,
   LineItem,
   OrderStage
-} from '@vue-storefront/odoo-api/src/types';
+} from '@vue-storefront/odoo-api';
 
 function roundDecimal(num) {
   const m = Number((Math.abs(num) * 100).toPrecision(15));
