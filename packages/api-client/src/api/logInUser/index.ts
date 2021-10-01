@@ -4,13 +4,13 @@ import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import mutation from './logInMutation';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlLoginParams } from '../../index';
+import { GraphQlLoginParams, LoginResult } from '../../index';
 
 export default async function logInUser(
   context: Context,
   params: GraphQlLoginParams,
   customQuery?: CustomQuery
-): Promise<FetchResult> {
+): Promise<FetchResult<LoginResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   try {
@@ -20,7 +20,7 @@ export default async function logInUser(
       fetchPolicy: 'no-cache'
     });
 
-    return response.data;
+    return response;
   } catch (error) {
     if (error.graphQLErrors) {
       return {

@@ -101,6 +101,30 @@ export type ProductResult = {
   products: Products
 };
 
+export type LoadUserResult = {
+  partner: Partner
+};
+
+export type LoginResult = {
+  login: Partner
+};
+
+export type RegisterResult = {
+  register: Partner
+};
+
+export type UpdateAccountResult = {
+  updateMyAccount: Partner
+};
+
+export type ProductVariantResult = {
+  productVariant: ProductVariant
+};
+
+export type SingleProductResult = {
+  product: Product
+};
+
 export type Products = {
   products: Product[];
   totalCount: number;
@@ -159,24 +183,6 @@ export declare type WishlistItem = {
 
 export declare type Wishlist = {
   wishlistItems?: WishlistItem[];
-};
-
-export type User = {
-  password: string;
-  id?: number;
-  name: string;
-  street?: string;
-  street2?: string;
-  city?: string;
-  country?: Country;
-  state?: State;
-  zip?: string;
-  email: string;
-  phone?: string;
-  isCompany?: boolean;
-  contacts?: Partner[];
-  signupToken?: string;
-  signupValid?: string;
 };
 
 export interface AgnosticFacet {

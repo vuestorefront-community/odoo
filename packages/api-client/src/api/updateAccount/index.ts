@@ -3,14 +3,14 @@
 import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlUpdateAccountParams } from '../../index';
+import { GraphQlUpdateAccountParams, UpdateAccountResult } from '../../index';
 import mutation from './updateAccountMutation';
 
 export default async function updateAccount(
   context: Context,
   params: GraphQlUpdateAccountParams,
   customQuery?: CustomQuery
-): Promise<FetchResult> {
+): Promise<FetchResult<UpdateAccountResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   const response = await apolloClient.mutate({
@@ -19,6 +19,6 @@ export default async function updateAccount(
     fetchPolicy: 'no-cache'
   });
 
-  return response.data;
+  return response;
 
 }
