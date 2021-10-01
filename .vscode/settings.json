@@ -3,5 +3,8 @@
   "vetur.format.defaultFormatter.html": "prettier",
   "vetur.format.defaultFormatter.js": "prettier-eslint",
   "vetur.validation.interpolation": true,
-  "editor.defaultFormatter": "octref.vetur"
+  "editor.defaultFormatter": "octref.vetur",
+  "search.exclude": {
+    "**/docs/**": true,
+  },
 }
