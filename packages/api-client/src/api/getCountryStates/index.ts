@@ -2,7 +2,7 @@
 import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlGetCountryParams } from '../../types';
+import { GraphQlGetCountryParams } from '../../index';
 import query from './getCountryStatesQuery';
 
 export default async function getCountryStates(

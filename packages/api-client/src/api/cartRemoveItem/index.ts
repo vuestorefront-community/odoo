@@ -3,7 +3,7 @@
 import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlCartRemoveItemParams } from '../../types';
+import { GraphQlCartRemoveItemParams } from '../../index';
 import mutation from './cartRemoveItemMutation';
 
 export default async function cartRemoveItem(

@@ -2,7 +2,7 @@
 import { Context, CustomQuery } from '@vue-storefront/core';
 import mutation from './billingAddAddressQuery';
 import ApolloClient from 'apollo-client';
-import { Address, DefaultGraphQlMutationResponse } from '../../types';
+import { Address, DefaultGraphQlMutationResponse } from '../../index';
 import { FetchResult } from 'apollo-link';
 
 export default async function billingAddAddress(

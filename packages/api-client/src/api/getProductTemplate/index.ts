@@ -2,7 +2,7 @@
 import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import query from './getProductTemplateQuery';
-import { GraphQlGetProductTemplateParams, Product } from '../../types';
+import { GraphQlGetProductTemplateParams, Product } from '../../index';
 import { FetchResult } from 'apollo-link/lib/types';
 export default async function getProductTemplates(
   context: Context,

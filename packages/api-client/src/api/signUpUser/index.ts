@@ -2,8 +2,7 @@
 import { Context, CustomQuery } from '@vue-storefront/core';
 import mutation from './signUpUserMutation';
 import ApolloClient from 'apollo-client';
-import { User } from '@vue-storefront/odoo-api/src/types';
-import { DefaultGraphQlMutationResponse } from '../../types';
+import { DefaultGraphQlMutationResponse, User } from '../../index';
 import { FetchResult } from 'apollo-link/lib/types';
 
 export default async function signUpUser(

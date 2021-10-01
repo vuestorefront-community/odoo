@@ -4,7 +4,7 @@ import ApolloClient from 'apollo-client';
 import mutation from './cartAddItemMutation';
 import { Context, CustomQuery } from '@vue-storefront/core';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlCartAddItemParams } from '../../types';
+import { GraphQlCartAddItemParams } from '../../index';
 
 export default async function cartAddItem(
   context: Context,

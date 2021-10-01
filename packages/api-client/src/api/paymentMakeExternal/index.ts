@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context, CustomQuery } from '@vue-storefront/core';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlMakePaymentParams } from '../../types';
+import { GraphQlMakePaymentParams } from '../../index';
 import mutation from './paymentMakeExternalMutation';
 import ApolloClient from 'apollo-client';
 

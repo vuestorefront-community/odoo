@@ -97,9 +97,23 @@ export type GraphQlGetCategoryParams = {
   sort?: CategorySortInput;
 };
 
-export type CategoryResult = {
+export type ProductResult = {
+  products: Products
+};
+
+export type Products = {
+  products: Product[];
+  totalCount: number;
+  attributes: Attribute[];
+}
+
+export type Categories = {
   categories: Category[];
   totalCount: number;
+}
+
+export type CategoryResult = {
+  categories: Categories;
 };
 
 export type ProductImage = {
@@ -136,12 +150,6 @@ export type Product = {
   attributeValues: Attribute[];
   productTemplate?: Product;
   categories: Category[];
-};
-
-export type ProductResult = {
-  products: Product[];
-  totalCount: number;
-  attributes: Attribute[];
 };
 
 export declare type WishlistItem = {
@@ -381,10 +389,10 @@ export type GraphQlUpdateAccountParams = {
 };
 
 export type GraphQlGetProductParams = {
-  filter: ProductFilterInput;
+  filter?: ProductFilterInput;
   currentPage: number;
   pageSize: number;
-  search: string;
+  search?: string;
   sort: ProductSortInput;
 };
 

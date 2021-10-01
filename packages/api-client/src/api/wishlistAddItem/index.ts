@@ -4,7 +4,7 @@ import ApolloClient from 'apollo-client';
 import mutation from './wishlistAddItemMutation';
 import { Context, CustomQuery } from '@vue-storefront/core';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlWishlistAddItemParams } from '../../types';
+import { GraphQlWishlistAddItemParams } from '../../index';
 
 export default async function wishlistAddItem(
   context: Context,
