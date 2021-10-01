@@ -3,7 +3,7 @@ import { Context, CustomQuery } from '@vue-storefront/core';
 import query from './wishlistLoadQuery';
 import ApolloClient from 'apollo-client';
 import { FetchResult } from 'apollo-link/lib/types';
-import { Wishlist } from '../../types';
+import { Wishlist } from '../../index';
 
 export default async function wishlistLoad(
   context: Context,

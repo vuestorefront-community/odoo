@@ -2,7 +2,7 @@
 import { Context, CustomQuery } from '@vue-storefront/core';
 import query from './cartLoadQuery';
 import ApolloClient from 'apollo-client';
-import { Cart } from '../../types';
+import { Cart } from '../../index';
 import { FetchResult } from 'apollo-link/lib/types';
 
 export default async function cartLoad(

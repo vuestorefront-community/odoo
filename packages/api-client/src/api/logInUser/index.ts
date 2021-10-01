@@ -4,7 +4,7 @@ import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import mutation from './logInMutation';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlLoginParams } from '../../types';
+import { GraphQlLoginParams } from '../../index';
 
 export default async function logInUser(
   context: Context,

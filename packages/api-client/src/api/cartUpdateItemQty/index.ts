@@ -4,7 +4,7 @@ import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import mutation from './cartUpdateItemQtyMutation';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlCartUpdateItemQtyParams } from '../../types';
+import { GraphQlCartUpdateItemQtyParams } from '../../index';
 
 export default async function cartUpdateItemQty(
   context: Context,

@@ -5,7 +5,7 @@ import ApolloClient from 'apollo-client';
 import {
   DefaultGraphQlMutationResponse,
   GraphQlSendResetPasswordParams
-} from '../../types';
+} from '../../index';
 import { FetchResult } from 'apollo-link/lib/types';
 
 export default async function sendResetPassword(

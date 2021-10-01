@@ -3,7 +3,7 @@
 import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlUpdateAccountParams } from '../../types';
+import { GraphQlUpdateAccountParams } from '../../index';
 import mutation from './updateAccountMutation';
 
 export default async function updateAccount(

@@ -2,8 +2,8 @@
 import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import query from './getCategoryQuery';
-import { CategoryResult, GraphQlGetCategoryParams } from '../../types';
-import { FetchResult } from 'apollo-link/lib/types';
+import { CategoryResult, GraphQlGetCategoryParams } from '../../index';
+import { FetchResult } from 'apollo-link';
 
 export default async function getCategory(
   context: Context,
@@ -18,5 +18,5 @@ export default async function getCategory(
     variables: params
   });
 
-  return response.data;
+  return response;
 }

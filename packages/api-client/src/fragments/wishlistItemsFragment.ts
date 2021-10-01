@@ -8,6 +8,8 @@ wishlistItems {
       image
       price
       isInWishlist
+      firstVariant
+      slug
     }
   }
 `;

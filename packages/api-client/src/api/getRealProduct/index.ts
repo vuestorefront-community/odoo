@@ -5,7 +5,7 @@ import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import query from './getRealProductQuery';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlGetProductVariantParams } from '../../types';
+import { GraphQlGetProductVariantParams } from '../../index';
 
 export default async function getRealProduct(
   context: Context,

@@ -2,7 +2,7 @@
 import { Context, CustomQuery } from '@vue-storefront/core';
 import mutation from './shippingUpdateAddressMutation';
 import ApolloClient from 'apollo-client';
-import { GraphQlUpdateAddressParams, DefaultGraphQlMutationResponse } from '../../types';
+import { GraphQlUpdateAddressParams, DefaultGraphQlMutationResponse } from '../../index';
 import { FetchResult } from 'apollo-link/lib/types';
 
 export default async function shippingUpdateAddress(
