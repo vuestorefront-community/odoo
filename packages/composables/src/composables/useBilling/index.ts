@@ -4,7 +4,7 @@ import { Context, useBillingFactory, UseBillingParams } from '@vue-storefront/co
 import { Address, GraphQlUpdateAddressParams } from '@vue-storefront/odoo-api/src/types';
 import useCart from '../useCart';
 
-const factoryParams: UseBillingParams<Address, GraphQlUpdateAddressParams> = {
+const factoryParams: UseBillingParams<any, any> = {
   provide() {
     return {
       useCart: useCart()
@@ -20,8 +20,8 @@ const factoryParams: UseBillingParams<Address, GraphQlUpdateAddressParams> = {
 
     const billingAddress = {
       ...address,
-      country: { id: String(address.country.id) },
-      state: { id: String(address.state.id) }
+      country: { id: String(address?.country?.id || null) },
+      state: { id: String(address?.state?.id || null) }
     };
 
     return billingAddress;
@@ -36,16 +36,21 @@ const factoryParams: UseBillingParams<Address, GraphQlUpdateAddressParams> = {
       phone: billingDetails.phone,
       name: billingDetails.name,
       city: billingDetails.city,
-      countryId: billingDetails.country.id,
-      stateId: billingDetails.state.id
+      countryId: parseInt(billingDetails.country.id),
+      stateId: parseInt(billingDetails.state.id)
     };
 
-    const address = await context.$odoo.api.billingUpdateAddress(params);
+    try {
+      const { updateAddress } = await context.$odoo.api.billingUpdateAddress(params);
 
-    context.useCart.cart.value.order.partnerInvoice = address.updateAddress;
+      context.useCart.cart.value.order.partnerInvoice = updateAddress;
 
-    return address.updateAddress;
+      return updateAddress;
+    } catch (err) {
+      throw new Error(err.map((e) => e.message).join(','));
+    }
+
   }
 };
 
-export default useBillingFactory<Address, GraphQlUpdateAddressParams>(factoryParams);
+export default useBillingFactory<any, any>(factoryParams);
