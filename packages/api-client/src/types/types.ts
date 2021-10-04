@@ -210,6 +210,16 @@ export type Country = {
   code?: string;
   name?: string;
 };
+
+export type AgnosticUser = {
+  password: string;
+  email: string;
+  name: string;
+  is_admin: boolean;
+  uid: number;
+  username: string;
+};
+
 export type Partner = {
   id?: number;
   name: string;
@@ -224,6 +234,7 @@ export type Partner = {
   isCompany?: boolean;
   isDefault?: boolean;
   contacts?: Partner[];
+  password?: string;
 };
 
 export type ProductVariant = {
