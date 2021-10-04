@@ -6,7 +6,7 @@ import {
   getUserLastName,
   getAgnosticUserFromUser
 } from '../../../../src/composables/getters/userGetters';
-import { mockedUser} from '../__mocks__/mockedUser';
+import { mockedUser } from '../__mocks__/mockedUser';
 
 it('get first name', () => {
   expect(getUserFirstName(mockedUser)).toStrictEqual('C3po');
