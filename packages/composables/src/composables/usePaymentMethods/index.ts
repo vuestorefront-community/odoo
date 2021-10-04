@@ -16,9 +16,9 @@ const useShipping = (): any => {
       return shippingMethods;
     }
 
-    const response = await context.$odoo.api.shippingGetDeliveryMethods();
+    const { data } = await context.$odoo.api.shippingGetDeliveryMethods();
 
-    shippingMethods.value = response.deliveryMethods.map((method) => ({
+    shippingMethods.value = data.deliveryMethods.map((method) => ({
       ...method,
       id: String(method.id)
     }));

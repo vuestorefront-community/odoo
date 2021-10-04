@@ -4,7 +4,7 @@ import {
   usePaymentProviderFactory,
   UsePaymentProviderParams
 } from '../../factories/usePaymentProviderFactory';
-import { PaymentProvider, PaymentMethod, GraphQlMakePaymentParams } from '@vue-storefront/odoo-api';
+import { PaymentProvider, PaymentMethod } from '@vue-storefront/odoo-api';
 
 const factoryParams: UsePaymentProviderParams<PaymentProvider, any> = {
 
@@ -15,8 +15,8 @@ const factoryParams: UsePaymentProviderParams<PaymentProvider, any> = {
   },
   getPaymentExternal: async (context: Context, params): Promise<string> => {
 
-    const { makePayment } = await context.$odoo.api.paymentMakeExternal(params);
-    return makePayment.form;
+    const { data } = await context.$odoo.api.paymentMakeExternal(params);
+    return data?.makePayment.form;
   }
 };
 

@@ -29,11 +29,7 @@ const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, a
   },
 
   register: async (context: Context, user) => {
-    const agonisticUser = getAgnosticUserFromUser(user);
-
-    const { data, errors } = await context.$odoo.api.signUpUser(
-      agonisticUser
-    );
+    const { data, errors } = await context.$odoo.api.signUpUser(user);
 
     if (errors) {
       throw new Error(errors.map((e) => e.message).join(','));
