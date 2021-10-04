@@ -41,11 +41,11 @@ const factoryParams: UseBillingParams<any, any> = {
     };
 
     try {
-      const { updateAddress } = await context.$odoo.api.billingUpdateAddress(params);
+      const { data } = await context.$odoo.api.billingUpdateAddress(params);
 
-      context.useCart.cart.value.order.partnerInvoice = updateAddress;
+      context.useCart.cart.value.order.partnerInvoice = data.updateAddress;
 
-      return updateAddress;
+      return data.updateAddress;
     } catch (err) {
       throw new Error(err.map((e) => e.message).join(','));
     }
