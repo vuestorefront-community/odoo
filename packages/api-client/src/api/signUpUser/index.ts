@@ -2,12 +2,12 @@
 import { Context, CustomQuery } from '@vue-storefront/core';
 import mutation from './signUpUserMutation';
 import ApolloClient from 'apollo-client';
-import { RegisterResult, User } from '../../index';
+import { RegisterResult, Partner } from '../../index';
 import { FetchResult } from 'apollo-link/lib/types';
 
 export default async function signUpUser(
   context: Context,
-  params: User,
+  params: Partner,
   customQuery?: CustomQuery
 ): Promise<FetchResult<RegisterResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
