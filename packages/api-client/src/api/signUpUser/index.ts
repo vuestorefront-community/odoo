@@ -19,7 +19,7 @@ export default async function signUpUser(
       fetchPolicy: 'no-cache'
     });
 
-    return response.data;
+    return response;
   } catch (error) {
     if (error.graphQLErrors) {
       return {

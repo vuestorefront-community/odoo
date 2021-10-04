@@ -18,5 +18,5 @@ export default async function cartUpdateItemQty(
     variables: params
   });
 
-  return response.data;
+  return response;
 }

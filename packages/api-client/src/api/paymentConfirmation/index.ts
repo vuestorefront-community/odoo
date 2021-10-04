@@ -15,5 +15,5 @@ export default async function paymentConfirmation(
     query
   });
 
-  return response.data;
+  return response;
 }

@@ -17,5 +17,5 @@ export default async function shippingUpdateAddress(
     variables: shippingAdress
   });
 
-  return response.data;
+  return response;
 }

@@ -17,5 +17,5 @@ export default async function getCountryStates(
     variables: params
   });
 
-  return response.data;
+  return response;
 }
