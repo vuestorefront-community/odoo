@@ -1,6 +1,6 @@
 import { CustomQuery } from '@vue-storefront/core';
 import { FetchResult } from 'apollo-link';
-import { Address, Cart, CategoryResult, DefaultGraphQlMutationResponse, GraphQlAddAddressParams, GraphQlCartAddItemParams, GraphQlCartRemoveItemParams, GraphQlCartUpdateItemQtyParams, GraphQlGetCategoryParams, GraphQlGetCountryParams, GraphQlGetProductParams, GraphQlGetProductTemplateParams, GraphQlGetProductVariantParams, GraphQlLoginParams, GraphQlMakePaymentParams, GraphQlResetPasswordParams, GraphQlSendResetPasswordParams, GraphQlUpdateAccountParams, GraphQlUpdateAddressParams, GraphQlWishlistAddItemParams, GraphQlWishlistRemoveItemParams, LoadUserResult, LoginResult, Partner, ProductResult, ProductVariantResult, RegisterResult, SingleProductResult, Wishlist } from './types';
+import { Address, BillingUpdateAddressResult, CartAddItemResult, CartLoadResult, CartRemoveItemResult, CategoryResult, DefaultGraphQlMutationResponse, GraphQlAddAddressParams, GraphQlCartAddItemParams, GraphQlCartRemoveItemParams, GraphQlCartUpdateItemQtyParams, GraphQlGetCategoryParams, GraphQlGetCountryParams, GraphQlGetProductParams, GraphQlGetProductTemplateParams, GraphQlGetProductVariantParams, GraphQlLoginParams, GraphQlMakePaymentParams, GraphQlResetPasswordParams, GraphQlSendResetPasswordParams, GraphQlUpdateAccountParams, GraphQlUpdateAddressParams, GraphQlWishlistAddItemParams, GraphQlWishlistRemoveItemParams, LoadUserResult, LoginResult, Partner, ProductResult, ProductVariantResult, RegisterResult, SingleProductResult, Wishlist, ShippingAddAddresResponse, ShippingUpdateAddressResponse } from './types';
 
 export interface OdooApiMethods {
   getCategory(params: GraphQlGetCategoryParams, customQuery?: CustomQuery): Promise<FetchResult<CategoryResult>>;
@@ -16,9 +16,9 @@ export interface OdooApiMethods {
   sendResetPassword(params: GraphQlSendResetPasswordParams, customQuery?: CustomQuery): Promise<FetchResult<DefaultGraphQlMutationResponse>>;
   changePassword(params: GraphQlResetPasswordParams, customQuery?: CustomQuery): Promise<FetchResult<DefaultGraphQlMutationResponse>>;
 
-  cartLoad(params: Record<string, string>, customQuery?: CustomQuery): Promise<FetchResult<Cart>>;
-  cartAddItem(params: GraphQlCartAddItemParams, customQuery?: CustomQuery): Promise<FetchResult>;
-  cartRemoveItem(params: GraphQlCartRemoveItemParams, customQuery?: CustomQuery): Promise<FetchResult>;
+  cartLoad(customQuery?: CustomQuery): Promise<FetchResult<CartLoadResult>>;
+  cartAddItem(params: GraphQlCartAddItemParams, customQuery?: CustomQuery): Promise<FetchResult<CartAddItemResult>>;
+  cartRemoveItem(params: GraphQlCartRemoveItemParams, customQuery?: CustomQuery): Promise<FetchResult<CartRemoveItemResult>>;
   cartUpdateItemQty(params: GraphQlCartUpdateItemQtyParams, customQuery?: CustomQuery): Promise<FetchResult>;
 
   wishlistLoad (params: Record<string, string>, customQuery?: CustomQuery): Promise<FetchResult<Wishlist>>;
@@ -28,12 +28,12 @@ export interface OdooApiMethods {
   getCountries(params: Record<string, string>, customQuery?: CustomQuery): Promise<FetchResult>;
   getCountryStates(params: GraphQlGetCountryParams, customQuery?: CustomQuery): Promise<FetchResult>;
 
-  shippingAddAdress(shippingAdress: GraphQlAddAddressParams, customQuery?: CustomQuery): Promise<FetchResult<DefaultGraphQlMutationResponse>>;
-  shippingUpdateAddress(shippingAdress: GraphQlUpdateAddressParams, customQuery?: CustomQuery): Promise<FetchResult>;
+  shippingAddAdress(shippingAdress: GraphQlAddAddressParams, customQuery?: CustomQuery): Promise<FetchResult<ShippingAddAddresResponse>>;
+  shippingUpdateAddress(shippingAdress: GraphQlUpdateAddressParams, customQuery?: CustomQuery): Promise<FetchResult<ShippingUpdateAddressResponse>>;
   shippingGetDeliveryMethods(params: Record<string, string>, customQuery?: CustomQuery): Promise<FetchResult<CategoryResult>>;
 
   billingAddAddress(shippingAdress: Address, customQuery?: CustomQuery): Promise<FetchResult<DefaultGraphQlMutationResponse>>;
-  billingUpdateAddress(shippingAdress: GraphQlUpdateAddressParams, customQuery?: CustomQuery): Promise<FetchResult<DefaultGraphQlMutationResponse>>;
+  billingUpdateAddress(shippingAdress: GraphQlUpdateAddressParams, customQuery?: CustomQuery): Promise<FetchResult<BillingUpdateAddressResult>>;
 
   paymentLoadProviders(customQuery?: CustomQuery): Promise<FetchResult>;
   paymentMakeExternal(params: GraphQlMakePaymentParams, customQuery?: CustomQuery): Promise<FetchResult>;

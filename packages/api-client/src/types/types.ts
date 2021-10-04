@@ -97,8 +97,32 @@ export type GraphQlGetCategoryParams = {
   sort?: CategorySortInput;
 };
 
+export type CartRemoveItemResult = {
+  cartRemoveItem: Cart
+};
+
+export type ShippingUpdateAddressResponse = {
+  updateAddress: Cart
+};
+
+export type ShippingAddAddresResponse = {
+  updateAddress: Cart
+};
+
+export type CartUpdateItemQtyResponse = {
+  cartUpdateItem: Cart
+};
+
 export type ProductResult = {
   products: Products
+};
+
+export type CartAddItemResult = {
+  cartAddItem: Cart
+};
+
+export type CartLoadResult = {
+  cart: Cart
 };
 
 export type LoadUserResult = {
@@ -111,6 +135,10 @@ export type LoginResult = {
 
 export type RegisterResult = {
   register: Partner
+};
+
+export type BillingUpdateAddressResult = {
+  updateAddress: Partner
 };
 
 export type UpdateAccountResult = {
@@ -218,6 +246,13 @@ export type AgnosticUser = {
   is_admin: boolean;
   uid: number;
   username: string;
+  street: string;
+  street2?: string;
+  city: string;
+  state: State;
+  zip: string;
+  country: Country;
+  phone: string;
 };
 
 export type Partner = {
