@@ -15,5 +15,5 @@ export default async function paymentLoadProviders(
     query
   });
 
-  return response.data;
+  return response;
 }

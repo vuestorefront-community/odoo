@@ -17,5 +17,5 @@ export default async function cartRemoveItem(
     variables: params
   });
 
-  return response.data;
+  return response;
 }

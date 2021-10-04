@@ -22,6 +22,12 @@ export declare type Currency = {
 
 export declare type Address = Partner;
 
+export declare type DeliveryMethod = {
+  id: number
+  name: string
+  price: number
+}
+
 export declare type PaymentIcon = {
   id: number;
   name: string;
@@ -101,12 +107,28 @@ export type CartRemoveItemResult = {
   cartRemoveItem: Cart
 };
 
+export type PaymentMakeExternalResult = {
+  cartRemoveItem: Cart
+};
+
 export type ShippingUpdateAddressResponse = {
-  updateAddress: Cart
+  updateAddress: Partner
+};
+
+export type WishlistLoadResponse = {
+  wishlistItems: Wishlist
+};
+
+export type WishlistAddItemResponse = {
+  wishlistAddItem: Wishlist
+};
+
+export type WishlistRemoveItemResponse = {
+  wishlistRemoveItem: Wishlist
 };
 
 export type ShippingAddAddresResponse = {
-  updateAddress: Cart
+  updateAddress: Partner
 };
 
 export type CartUpdateItemQtyResponse = {
@@ -166,6 +188,10 @@ export type Categories = {
 
 export type CategoryResult = {
   categories: Categories;
+};
+
+export type ShippingGetDeliveryMethodsResult = {
+  deliveryMethods: DeliveryMethod[];
 };
 
 export type ProductImage = {
@@ -246,13 +272,13 @@ export type AgnosticUser = {
   is_admin: boolean;
   uid: number;
   username: string;
-  street: string;
+  street?: string;
   street2?: string;
-  city: string;
-  state: State;
-  zip: string;
-  country: Country;
-  phone: string;
+  city?: string;
+  state?: State;
+  zip?: string;
+  country?: Country;
+  phone?: string;
 };
 
 export type Partner = {

@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context, CustomQuery } from '@vue-storefront/core';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlMakePaymentParams } from '../../index';
+import { GraphQlMakePaymentParams, PaymentMakeExternalResult } from '../../index';
 import mutation from './paymentMakeExternalMutation';
 import ApolloClient from 'apollo-client';
 
@@ -10,7 +10,7 @@ export default async function paymentMakeExternalMutation(
   context: Context,
   params: GraphQlMakePaymentParams,
   customQuery?: CustomQuery
-): Promise<FetchResult> {
+): Promise<FetchResult<PaymentMakeExternalResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   const response = await apolloClient.mutate({
@@ -18,5 +18,5 @@ export default async function paymentMakeExternalMutation(
     variables: params
   });
 
-  return response.data;
+  return response;
 }
