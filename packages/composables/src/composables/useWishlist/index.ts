@@ -16,9 +16,9 @@ import {
 
 const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
   load: async (context: Context) => {
-    const wishlist = await context.$odoo.api.wishlistLoad();
+    const { data } = await context.$odoo.api.wishlistLoad();
 
-    return wishlist.wishlistItems;
+    return data.wishlistItems;
   },
 
   addItem: async (context: Context, { currentWishlist, product }) => {
@@ -27,11 +27,11 @@ const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
         productId: product.firstVariant
       };
 
-      const wishlist = await context.$odoo.api.wishlistAddItem(
+      const { data } = await context.$odoo.api.wishlistAddItem(
         addWishlistItemParams
       );
 
-      return wishlist.wishlistAddItem;
+      return data.wishlistAddItem;
     }
 
     return currentWishlist;
@@ -49,11 +49,11 @@ const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
       wishId: wishlistItem.id
     };
 
-    const wishlist = await context.$odoo.api.wishlistRemoveItem(
+    const { data } = await context.$odoo.api.wishlistRemoveItem(
       removeItemParams
     );
 
-    return wishlist.wishlistRemoveItem;
+    return data.wishlistRemoveItem;
   },
 
   isInWishlist: (context: Context, { currentWishlist, product }) => {
