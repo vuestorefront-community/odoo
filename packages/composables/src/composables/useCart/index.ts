@@ -17,9 +17,9 @@ import {
 
 const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
   load: async (context: Context) => {
-    const cart = await context.$odoo.api.cartLoad();
+    const { data } = await context.$odoo.api.cartLoad();
 
-    return cart.cart;
+    return data.cart;
   },
 
   addItem: async (
@@ -35,12 +35,12 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
         productId,
         quantity
       };
-      const cart = await context.$odoo.api.cartAddItem(
+      const { data } = await context.$odoo.api.cartAddItem(
         addItemParams,
         customQuery
       );
 
-      return cart.cartAddItem;
+      return data.cartAddItem;
     }
 
     return currentCart;
@@ -53,12 +53,12 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
     const addItemParams: GraphQlCartRemoveItemParams = {
       lineId: product.id
     };
-    const cart = await context.$odoo.api.cartRemoveItem(
+    const { data } = await context.$odoo.api.cartRemoveItem(
       addItemParams,
       customQuery
     );
 
-    return cart.cartRemoveItem;
+    return data.cartRemoveItem;
   },
 
   updateItemQty: async (
@@ -70,12 +70,12 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
       quantity
     };
 
-    const cart = await context.$odoo.api.cartUpdateItemQty(
+    const { data } = await context.$odoo.api.cartUpdateItemQty(
       updateItemParams,
       customQuery
     );
 
-    return cart.cartUpdateItem;
+    return data.cartUpdateItem;
   },
 
   clear: async (context: Context, { currentCart }) => {

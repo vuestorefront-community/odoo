@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-prototype-builtins */
 import { Context, useShippingFactory, UseShippingParams } from '@vue-storefront/core';
-import { Address, GraphQlUpdateAddressParams } from '@vue-storefront/odoo-api';
+import { GraphQlUpdateAddressParams, Partner } from '@vue-storefront/odoo-api';
 import useCart from '../useCart';
 
-const factoryParams: UseShippingParams<Address, GraphQlUpdateAddressParams> = {
+const factoryParams: UseShippingParams<Partner, GraphQlUpdateAddressParams> = {
   provide() {
     return {
       useCart: useCart()
@@ -40,13 +40,13 @@ const factoryParams: UseShippingParams<Address, GraphQlUpdateAddressParams> = {
       stateId: shippingDetails.state.id
     };
 
-    const address = await context.$odoo.api.shippingUpdateAddress(params);
+    const { data } = await context.$odoo.api.shippingUpdateAddress(params);
 
-    context.useCart.cart.value.order.partnerShipping = address.updateAddress;
+    context.useCart.cart.value.order.partnerShipping = data.updateAddress;
 
-    return address.updateAddress;
+    return data.updateAddress;
   }
 };
 
-export default useShippingFactory<Address, GraphQlUpdateAddressParams>(factoryParams);
+export default useShippingFactory<Partner, GraphQlUpdateAddressParams>(factoryParams);
 
