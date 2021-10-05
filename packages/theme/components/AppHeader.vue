@@ -9,10 +9,7 @@
     >
       <!-- TODO: add mobile view buttons after SFUI team PR -->
       <template #logo>
-        <nuxt-link
-          :to="localePath('/')"
-          class="sf-header__logo"
-        >
+        <nuxt-link :to="localePath('/')" class="sf-header__logo">
           <SfImage
             src="/icons/logo.svg"
             alt="Vue Storefront Next"
@@ -41,10 +38,7 @@
             class="sf-button--pure sf-header__action"
             @click="handleAccountClick"
           >
-            <SfIcon
-              :icon="accountIcon"
-              size="1.25rem"
-            />
+            <SfIcon :icon="accountIcon" size="1.25rem" />
           </SfButton>
           <SfButton
             class="sf-button--pure sf-header__action"
@@ -60,17 +54,13 @@
             class="sf-button--pure sf-header__action"
             @click="toggleCartSidebar"
           >
-
-            <SfIcon
-              class="sf-header__icon "
-              icon="empty_cart"
-              size="1.25rem"
-            />
+            <SfIcon class="sf-header__icon" icon="empty_cart" size="1.25rem" />
 
             <SfBadge
               v-if="cartTotalItems"
               class="sf-badge--number cart-badge"
-            >{{ cartTotalItems }}</SfBadge>
+              >{{ cartTotalItems }}</SfBadge
+            >
           </SfButton>
         </div>
       </template>
@@ -94,11 +84,7 @@
               @click="closeOrFocusSearchBar"
             >
               <span class="sf-search-bar__icon">
-                <SfIcon
-                  color="var(--c-text)"
-                  size="18px"
-                  icon="cross"
-                />
+                <SfIcon color="var(--c-text)" size="18px" icon="cross" />
               </span>
             </SfButton>
             <SfButton
@@ -109,11 +95,7 @@
               "
             >
               <span class="sf-search-bar__icon">
-                <SfIcon
-                  color="var(--c-text)"
-                  size="20px"
-                  icon="search"
-                />
+                <SfIcon color="var(--c-text)" size="20px" icon="search" />
               </span>
             </SfButton>
           </template>
@@ -172,20 +154,27 @@ export default {
     SfBadge
   },
   directives: { clickOutside },
-  setup (props, { root }) {
+  setup(props, { root }) {
     const searchBarRef = ref(null);
     const term = ref(null);
     const formatedResult = ref(null);
     const isSearchOpen = ref(false);
 
     const { changeSearchTerm } = useUiHelpers();
-    const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal } = useUiState();
+    const {
+      toggleCartSidebar,
+      toggleWishlistSidebar,
+      toggleLoginModal
+    } = useUiState();
 
     const { load: loadUser, isAuthenticated } = useUser();
     const { load: loadCart, cart } = useCart();
     const { load: loadWishlist, wishlist } = useWishlist();
     const { search: searchProductApi, result } = useFacet('AppHeader:Search');
-    const { categories: topCategories, search: searchTopCategoryApi } = useCategory('AppHeader:TopCategories');
+    const {
+      categories: topCategories,
+      search: searchTopCategoryApi
+    } = useCategory('AppHeader:TopCategories');
 
     const isMobile = computed(() => mapMobileObserver().isMobile.get());
 
@@ -220,10 +209,8 @@ export default {
       formatedResult.value = {
         products: result?.value?.data?.products,
         categories: result?.value?.data?.categories
-          .filter(category => category.childs === null)
-          .map((category) =>
-            categoryGetters.getTree(category)
-          )
+          .filter((category) => category.childs === null)
+          .map((category) => categoryGetters.getTree(category))
       };
     }, 100);
     const closeOrFocusSearchBar = () => {
@@ -258,7 +245,7 @@ export default {
 
     onSSR(async () => {
       await Promise.all([
-        searchTopCategoryApi({ filter: { parent: true }}),
+        searchTopCategoryApi({ filter: { parent: true } }),
         loadUser(),
         loadWishlist(),
         loadCart()
@@ -266,7 +253,9 @@ export default {
     });
 
     return {
-      wishlistHasItens: computed(() => wishlist.value?.wishlistItems.length > 0),
+      wishlistHasItens: computed(
+        () => wishlist.value?.wishlistItems.length > 0
+      ),
       topCategories,
       accountIcon,
       closeOrFocusSearchBar,

@@ -48,10 +48,14 @@ export default {
   router: {
     middleware: ['checkout']
   },
+  pwa: {
+    icon: false
+  },
   loading: { color: '#fff' },
   plugins: [],
   buildModules: [
     // to core
+    '@nuxtjs/pwa',
     '@nuxtjs/web-vitals',
     '@nuxtjs/tailwindcss',
     '@nuxt/typescript-build',
@@ -99,7 +103,7 @@ export default {
     theme
   },
   modules: [
-    '@nuxtjs/amp',
+    '@nuxtjs/pwa',
     'nuxt-precompress',
     '@vue-storefront/middleware/nuxt',
     'nuxt-i18n',
