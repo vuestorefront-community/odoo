@@ -90,6 +90,10 @@ export type CategorySortInput = {
   id: SortEnum;
 };
 
+export type PaymentForm = {
+  form: string
+}
+
 export type ProductSortInput = {
   id?: SortEnum;
   price?: SortEnum;
@@ -107,8 +111,24 @@ export type CartRemoveItemResult = {
   cartRemoveItem: Cart
 };
 
+export type PaymentLoadProvidersResult = {
+  paymentAcquirers: PaymentProvider[]
+};
+
+export type CountryStatesResult = {
+  country: Country
+};
+
+export type Countries = {
+  countries: Country[];
+}
+
+export type CountriesResult = {
+  countries: Countries
+};
+
 export type PaymentMakeExternalResult = {
-  cartRemoveItem: Cart
+  makePayment: PaymentForm
 };
 
 export type ShippingUpdateAddressResponse = {
@@ -263,6 +283,7 @@ export type Country = {
   id: number;
   code?: string;
   name?: string;
+  states?: State[];
 };
 
 export type AgnosticUser = {
