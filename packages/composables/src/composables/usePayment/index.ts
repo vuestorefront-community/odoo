@@ -14,16 +14,16 @@ const factoryParams: UsePaymentFactoryParams<PaymentProvider, Order> = {
 
   getPaymentProviderList: async (context: Context): Promise<PaymentProvider[]> => {
 
-    const { paymentAcquirers }: { paymentAcquirers: PaymentProvider[] } = await context.$odoo.api.paymentLoadProviders();
+    const { data } = await context.$odoo.api.paymentLoadProviders();
 
-    return paymentAcquirers;
+    return data.paymentAcquirers;
   },
   getPaymentConfirmation: async (context: Context): Promise<Order> => {
-    const { paymentConfirmation } = await context.$odoo.api.paymentConfirmation();
+    const { data } = await context.$odoo.api.paymentConfirmation();
 
-    context.useCart.cart.value = paymentConfirmation;
+    context.useCart.cart.value = data.paymentConfirmation;
 
-    return paymentConfirmation;
+    return data.paymentConfirmation;
   }
 
 };

@@ -6,7 +6,7 @@ const params: UseCategoryFactoryParams<Category, GraphQlGetCategoryParams> = {
 
     const { data } = await context.$odoo.api.getCategory(params);
 
-    return data.categories.categories;
+    return data?.categories?.categories;
   }
 };
 

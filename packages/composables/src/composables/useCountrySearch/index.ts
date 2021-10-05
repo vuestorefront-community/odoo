@@ -15,11 +15,9 @@ const useCountrySearch = (): any => {
   const resetCountryErrors = () => (errors.value = { graphQLErrors: [] });
 
   const search = async () => {
-    const response = await context.$odoo.api.getCountries().catch((error) => {
-      errors.value = error;
-    });
+    const { data } = await context.$odoo.api.getCountries();
 
-    countries.value = response.countries.countries;
+    countries.value = data.countries.countries;
   };
 
   const searchCountryStates = async (countryId) => {
@@ -29,13 +27,9 @@ const useCountrySearch = (): any => {
       id: parseInt(countryId)
     };
 
-    const { country } = await context.$odoo.api
-      .getCountryStates(params)
-      .catch((error) => {
-        errors.value = error;
-      });
+    const { data } = await context.$odoo.api.getCountryStates(params);
 
-    countryStates.value = country.states;
+    countryStates.value = data.country.states;
   };
 
   return {

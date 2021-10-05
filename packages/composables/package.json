@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@vue-storefront/core": "2.4.0",
-    "@vue-storefront/odoo-api": "0.0.1"
+    "@vue-storefront/odoo-api": "1.0.0-beta.1"
   },
   "peerDependencies": {
     "@vue/composition-api": "1.0.0-beta.21"
