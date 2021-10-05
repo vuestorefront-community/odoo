@@ -38,7 +38,7 @@ const useUiHelpers = (): any => {
       currentPage: page,
       filter: {
         categoryId,
-        attributeValueId: filters.map((item) => parseInt(item))
+        attributeValueId: filters
       }
     };
   };
