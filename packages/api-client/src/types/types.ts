@@ -172,7 +172,7 @@ export type LoadUserResult = {
 };
 
 export type LoginResult = {
-  login: Partner
+  login: LoadUserResult
 };
 
 export type RegisterResult = {
