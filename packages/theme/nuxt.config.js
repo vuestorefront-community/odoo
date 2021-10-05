@@ -49,7 +49,11 @@ export default {
     middleware: ['checkout']
   },
   pwa: {
-    icon: false
+    manifest: {
+      name: 'VSF Odoo ',
+      lang: 'en',
+      useWebmanifestExtension: false
+    }
   },
   loading: { color: '#fff' },
   plugins: [],
