@@ -12,22 +12,11 @@ export default async function logInUser(
   customQuery?: CustomQuery
 ): Promise<FetchResult<LoginResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
+  //
+  return await apolloClient.mutate({
+    mutation,
+    variables: params,
+    fetchPolicy: 'no-cache'
+  });
 
-  try {
-    const response = await apolloClient.mutate({
-      mutation,
-      variables: params,
-      fetchPolicy: 'no-cache'
-    });
-
-    return response;
-  } catch (error) {
-    if (error.graphQLErrors) {
-      return {
-        errors: error.graphQLErrors,
-        data: null
-      };
-    }
-    throw error.networkError?.result || error;
-  }
 }
