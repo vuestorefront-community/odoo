@@ -27,7 +27,7 @@
             :regular="$n(productGetters.getPrice(product).regular, 'currency')"
             :special="
               productGetters.getPrice(product).special &&
-                $n(productGetters.getPrice(product).special, 'currency')
+              $n(productGetters.getPrice(product).special, 'currency')
             "
           />
           <div>
@@ -311,7 +311,7 @@ export default {
         mobile: { url: img.small },
         desktop: { url: img.normal },
         big: { url: img.big },
-        alt: product.value.name
+        alt: product.value.name || 'alt'
       }))
     );
 

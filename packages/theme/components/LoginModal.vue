@@ -240,8 +240,8 @@ export default {
       }
     });
 
-    const handleForm = (fn) => async () => {
-      await fn({ user: form.value });
+    const handleForm = (fn, params) => async () => {
+      await fn({ user: params });
 
       if (error.value.login) {
         send({ message: error?.value?.login?.message, type: 'danger' });
@@ -275,9 +275,17 @@ export default {
       isLogin.value = true;
     };
 
-    const handleRegister = async () => handleForm(register)();
-    const handleLogin = async () => handleForm(login)();
-    const handlePasswordRecovery = async () => handleForm(sendResetPassword)();
+    const handleRegister = async () => handleForm(register, form.value)();
+    const handleLogin = async () =>
+      handleForm(login, {
+        username: form.value.email,
+        password: form.value.password
+      })();
+
+    const handlePasswordRecovery = async () =>
+      handleForm(sendResetPassword, {
+        email: form.value.email
+      })();
 
     return {
       form,

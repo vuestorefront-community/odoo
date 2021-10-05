@@ -12,7 +12,7 @@ export default {
       return this.$slots?.default;
     } catch (e) {
       throw new Error(
-        'AbstractPaymentObserver must have  one payment provider.'
+        'AbstractPaymentObserver must have one payment provider.'
       );
     }
   },

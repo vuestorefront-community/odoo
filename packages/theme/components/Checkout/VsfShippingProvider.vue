@@ -25,7 +25,7 @@
 <script>
 import { SfButton, SfRadio } from '@storefront-ui/vue';
 import { ref, onMounted, watch } from '@vue/composition-api';
-import { usePaymentMethods } from '@vue-storefront/odoo';
+import { useShippingMethods } from '@vue-storefront/odoo';
 
 export default {
   name: 'VsfShippingProvider',
@@ -41,7 +41,7 @@ export default {
   },
   setup(props, context) {
     const selectedMethod = ref(null);
-    const { searchShippingMethods, shippingMethods } = usePaymentMethods();
+    const { searchShippingMethods, shippingMethods } = useShippingMethods();
     const selectMethod = (method) => {
       selectedMethod.value = method;
       context.emit('selectedMethod', method);
