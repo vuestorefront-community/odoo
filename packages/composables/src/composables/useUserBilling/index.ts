@@ -4,22 +4,22 @@ import {
   useUserBillingFactory,
   UseUserBillingFactoryParams
 } from '@vue-storefront/core';
+import { GraphQlAddAddressParams } from '@vue-storefront/odoo-api';
 
 const params: UseUserBillingFactoryParams<any, any> = {
   addAddress: async (context: Context, { address }) => {
-    const shippingAdress = {
+
+    const params: GraphQlAddAddressParams = {
       street: address.streetName,
-      houseNumber: '',
-      zipCode: address.postalCode,
+      zip: address.postalCode,
       phone: address.phone,
-      firstName: address.firstName,
-      lastName: '',
+      name: address.firstName,
       city: address.city,
       countryId: Number.parseInt(address.country),
       stateId: Number.parseInt(address.state)
     };
 
-    await context.$odoo.api.billingAddAddress(shippingAdress);
+    await context.$odoo.api.billingAddAddress(params);
 
     return address;
   },
