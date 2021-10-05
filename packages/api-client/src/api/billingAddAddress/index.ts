@@ -2,12 +2,12 @@
 import { Context, CustomQuery } from '@vue-storefront/core';
 import mutation from './billingAddAddressQuery';
 import ApolloClient from 'apollo-client';
-import { Address, DefaultGraphQlMutationResponse } from '../../index';
+import { GraphQlAddAddressParams, DefaultGraphQlMutationResponse } from '../../index';
 import { FetchResult } from 'apollo-link';
 
 export default async function billingAddAddress(
   context: Context,
-  shippingAdress: Address,
+  shippingAdress: GraphQlAddAddressParams,
   customQuery?: CustomQuery
 ): Promise<FetchResult<DefaultGraphQlMutationResponse>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
