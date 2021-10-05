@@ -81,7 +81,7 @@ export type CategoryFilterInput = {
 
 export type ProductFilterInput = {
   categoryId?: number[];
-  attributeId?: number[];
+  attributeValueId?: number[];
   minPrice?: number;
   maxPrice?: number;
 };
