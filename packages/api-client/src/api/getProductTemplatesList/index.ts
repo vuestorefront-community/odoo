@@ -4,7 +4,7 @@ import ApolloClient from 'apollo-client';
 import query from './getProductTemplateListQuery';
 import { GraphQlGetProductParams, ProductResult } from '../../index';
 import { FetchResult } from 'apollo-link/lib/types';
-export default async function getProductTemplates(
+export default async function getProductTemplatesList(
   context: Context,
   params: GraphQlGetProductParams,
   customQuery?: CustomQuery
