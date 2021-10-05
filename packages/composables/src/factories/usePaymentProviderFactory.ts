@@ -8,9 +8,9 @@ export interface usePaymentProviderErrors {
   getPaymentExternal: Error;
 }
 
-export interface UsePaymentProvider< PAYMENT_PROVIDER, PAYMENT_METHOD, API extends PlatformApi = any> extends Composable<API> {
+export interface UsePaymentProvider< PAYMENT_PROVIDER, PAYMENT_METHOD, PAYMENT_METHOD_PARAMS, API extends PlatformApi = any> extends Composable<API> {
   getPaymentMethods(cart: PAYMENT_PROVIDER): PAYMENT_METHOD[];
-  getPaymentExternal(params: { customQuery?: CustomQuery }): Promise<string>;
+  getPaymentExternal(params: { params: PAYMENT_METHOD_PARAMS, customQuery?: CustomQuery }): Promise<string>;
 
   paymentExternalResponse: Ref<any>;
 
@@ -18,17 +18,17 @@ export interface UsePaymentProvider< PAYMENT_PROVIDER, PAYMENT_METHOD, API exten
   loading: ComputedProperty<boolean>;
 }
 
-export interface UsePaymentProviderParams< PAYMENT_PROVIDER, PAYMENT_METHOD, API extends PlatformApi = any> extends FactoryParams<API> {
+export interface UsePaymentProviderParams< PAYMENT_PROVIDER, PAYMENT_METHOD, PAYMENT_METHOD_PARAMS, API extends PlatformApi = any> extends FactoryParams<API> {
 
   getPaymentMethods: (context: Context, params: { customQuery?: any; }) => PAYMENT_METHOD[];
 
-  getPaymentExternal: (context: Context, params: { customQuery?: CustomQuery; }) => Promise<string>;
+  getPaymentExternal: (context: Context, params: { params: PAYMENT_METHOD_PARAMS, customQuery?: CustomQuery; }) => Promise<string>;
 }
 
-export const usePaymentProviderFactory = <PAYMENT_PROVIDER, PAYMENT_METHOD, API extends PlatformApi = any>(
-  factoryParams: UsePaymentProviderParams<PAYMENT_PROVIDER, PAYMENT_METHOD, API>
+export const usePaymentProviderFactory = <PAYMENT_PROVIDER, PAYMENT_METHOD, PAYMENT_METHOD_PARAMS, API extends PlatformApi = any>(
+  factoryParams: UsePaymentProviderParams<PAYMENT_PROVIDER, PAYMENT_METHOD, PAYMENT_METHOD_PARAMS, API>
 
-) => function UsePaymentProvider(provider: PaymentProvider): UsePaymentProvider<PAYMENT_PROVIDER, PAYMENT_METHOD, API> {
+) => function UsePaymentProvider(provider: PaymentProvider): UsePaymentProvider<PAYMENT_PROVIDER, PAYMENT_METHOD, PAYMENT_METHOD_PARAMS, API> {
     const _factoryParams = configureFactoryParams(factoryParams);
     const ssrKey = provider.id || 'usePaymentProvider';
 
@@ -44,7 +44,7 @@ export const usePaymentProviderFactory = <PAYMENT_PROVIDER, PAYMENT_METHOD, API 
           paymentAcquireId: provider.id
         };
 
-        const response = await _factoryParams.getPaymentExternal(params);
+        const response = await _factoryParams.getPaymentExternal({ params });
 
         paymentExternalResponse.value = response;
 
