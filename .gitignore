@@ -29,3 +29,7 @@ coverage
 .DS_STORE
 
 !scripts/lib
+
+# service workers
+sw.*
+
