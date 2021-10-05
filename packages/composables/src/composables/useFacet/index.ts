@@ -18,7 +18,7 @@ const factoryParams = {
       sort: params.input.sort as ProductSortInput,
       filter: {
         categoryId: params?.input?.filter?.categoryId,
-        attributeId: params.input?.filters?.attributeValueId.map(id => parseInt(id))
+        attributeValueId: params.input?.filter?.attributeValueId?.map(id => parseInt(id))
       }
 
     };

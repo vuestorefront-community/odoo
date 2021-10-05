@@ -8,9 +8,7 @@ const params: UseProductFactoryParams<Product, ProductsSearchParams> = {
       id: params.id
     };
 
-    const { data } = await context.$odoo.api.getProductTemplate(
-      graphQlParams
-    );
+    const { data } = await context.$odoo.api.getProductTemplate(graphQlParams);
 
     return data.product;
   }
