@@ -2,14 +2,14 @@
 import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import { FetchResult } from 'apollo-link/lib/types';
-import { GraphQlGetCountryParams } from '../../index';
+import { GraphQlGetCountryParams, CountryStatesResult } from '../../index';
 import query from './getCountryStatesQuery';
 
 export default async function getCountryStates(
   context: Context,
   params: GraphQlGetCountryParams,
   customQuery?: CustomQuery
-): Promise<FetchResult> {
+): Promise<FetchResult<CountryStatesResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   const response = await apolloClient.query({
