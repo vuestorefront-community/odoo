@@ -4,13 +4,15 @@ import {
   useForgotPasswordFactory,
   UseForgotPasswordFactoryParams
 } from '@vue-storefront/core';
+import { GraphQlSendResetPasswordParams } from '@vue-storefront/odoo-api';
 
 const factoryParams: UseForgotPasswordFactoryParams<any> = {
   resetPassword: async (context: Context, { email, customQuery }) => {
-    const { data } = await context.$odoo.api.sendResetPassword(
-      email,
-      customQuery
-    );
+    const params : GraphQlSendResetPasswordParams = {
+      email: email
+    };
+
+    const { data } = await context.$odoo.api.sendResetPassword(params);
 
     return data;
   },
