@@ -11,7 +11,7 @@ const usePassword = (): any => {
 
   const resetPasswordErrors = () => (errors.value = { graphQLErrors: [] });
 
-  const sendResetPassword = async ({ user }) => {
+  const sendResetPassword = async (user) => {
     const response = await context.$odoo.api
       .sendResetPassword(user)
       .catch((error) => {
