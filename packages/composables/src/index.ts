@@ -20,6 +20,6 @@ export { default as useProductVariant } from './composables/useProductVariant';
 export { default as useForgotPassword } from './composables/useForgotPassword';
 export { default as usePayment } from './composables/usePayment';
 export { default as useAdyenExternalPaymentProvider } from './composables/useAdyenExternalPaymentProvider';
-export { default as usePaymentMethods } from './composables/usePaymentMethods';
+export { default as useShippingMethods } from './composables/useShippingMethods';
 
 export * from './composables/getters';
