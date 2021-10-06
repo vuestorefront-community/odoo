@@ -19,11 +19,27 @@ class VSFAdyenController(AdyenController):
         # Confirm payment transaction
         super(VSFAdyenController, self).adyen_return(**post)
 
+        tx_ids_list = request.session.get("__payment_tx_ids__", [])
+
+        # Condition to verify if the Session have Transactions Associated
+        if not tx_ids_list and post.get('merchantReference'):
+            transaction_reference = post['merchantReference']
+
+            payment_transaction = request.env['payment.transaction'].sudo().search([
+                ('reference', 'like', str(transaction_reference))
+            ])
+
+            request.session["__payment_tx_ids__"] = [payment_transaction.id]
+
         # Confirm sale order
         PaymentProcessing().payment_status_poll()
 
         # Redirect to VSF
         vsf_payment_return_url = request.env['ir.config_parameter'].sudo().get_param('vsf_payment_return_url', '')
+
+        # Clear the payment_tx_ids
+        request.session["__payment_tx_ids__"] = []
+
         return werkzeug.utils.redirect(vsf_payment_return_url)
 
 
