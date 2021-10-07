@@ -4,17 +4,10 @@ import {
   useUserShippingFactory,
   UseUserShippingFactoryParams
 } from '@vue-storefront/core';
-import { Address, GraphQlAddAddressParams } from '@vue-storefront/odoo-api';
-import useCart from '../useCart';
+import { Partner, GraphQlAddAddressParams, GraphQlDeleteAddressParams, GraphQlUpdateAddressParams } from '@vue-storefront/odoo-api';
 
-const params: UseUserShippingFactoryParams<any, any> = {
-  provide() {
-    return {
-      useCart: useCart()
-    };
-  },
-
-  addAddress: async (context: Context, { address }) => {
+const params: UseUserShippingFactoryParams<Partner[], any> = {
+  addAddress: async (context: Context, { address, shipping }) => {
     const params: GraphQlAddAddressParams = {
       street: address.street,
       zip: address.zip,
@@ -25,42 +18,50 @@ const params: UseUserShippingFactoryParams<any, any> = {
       stateId: Number.parseInt(address.state.id)
     };
 
-    await context.$odoo.api.shippingAddAdress(params);
+    const { data } = await context.$odoo.api.shippingAddAdress(params);
 
-    return address;
+    return [...shipping, data.addAddress];
   },
 
-  deleteAddress: async (context: Context, params?) => {
-    console.log('Mocked: deleteAddress', params);
+  deleteAddress: async (context: Context, { address, shipping}) => {
+    const deleteParams : GraphQlDeleteAddressParams = {
+      id: address.id
+    };
+    await context.$odoo.api.deleteAddress(deleteParams);
 
-    return {} as Address;
+    return shipping.filter(item => item.id !== address.id);
   },
 
-  updateAddress: async (context: Context, params?) => {
-    console.log('Mocked: updateAddress', params);
+  updateAddress: async (context: Context, { address, shipping }) => {
 
-    return {} as Address;
+    const params: GraphQlUpdateAddressParams = {
+      id: address.id,
+      street: address.street,
+      zip: address.zip,
+      phone: address.phone,
+      name: address.name,
+      city: address.city,
+      countryId: Number.parseInt(address.country.id),
+      stateId: Number.parseInt(address.state.id)
+    };
+    const { data } = await context.$odoo.api.shippingUpdateAddress(params);
+
+    const newList = [...shipping];
+    const index = newList.findIndex((item) => item.id === data.updateAddress.id);
+    newList[index] = data.updateAddress;
+
+    return newList;
   },
 
   load: async (context: Context, params?) => {
-    if (!context.useCart.cart) {
-      await context.useCart.load();
-    }
+    const { data } = await context.$odoo.api.shippingGetAddress();
 
-    const address = context.useCart?.cart?.value?.order?.partnerShipping || {};
-
-    const shippingAdress = {
-      ...address,
-      country: { id: String(address.country.id) },
-      state: { id: String(address.state.id) }
-    };
-
-    return shippingAdress;
+    return data.addresses;
   },
 
-  setDefaultAddress: async (context: Context, params?) => {
-    return {} as Address;
+  setDefaultAddress: async (context: Context, { shipping }) => {
+    return [...shipping];
   }
 };
 
-export default useUserShippingFactory<any, any>(params);
+export default useUserShippingFactory<Partner[], Partner>(params);
