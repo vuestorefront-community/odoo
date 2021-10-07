@@ -159,6 +159,10 @@ export type ShippingAddAddresResponse = {
   addAddress: Partner
 };
 
+export type BillingAddAddresResponse = {
+  addAddress: Partner
+};
+
 export type CartUpdateItemQtyResponse = {
   cartUpdateItem: Cart
 };

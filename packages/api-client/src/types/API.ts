@@ -8,7 +8,7 @@ import {
   GraphQlWishlistAddItemParams, GraphQlWishlistRemoveItemParams, LoadUserResult, LoginResult, Partner, ProductResult, ProductVariantResult,
   RegisterResult, ShippingAddAddresResponse, ShippingUpdateAddressResponse, SingleProductResult, WishlistLoadResponse, WishlistAddItemResponse,
   WishlistRemoveItemResponse, ShippingGetDeliveryMethodsResult, PaymentMakeExternalResult, CountryStatesResult, CountriesResult,
-  PaymentLoadProvidersResult, BillingGetAddressResult, GraphQlDeleteAddressParams, ShippingGetAddresessResult
+  PaymentLoadProvidersResult, BillingGetAddressResult, GraphQlDeleteAddressParams, ShippingGetAddresessResult, BillingAddAddresResponse
 } from './types';
 
 export interface OdooApiMethods {
@@ -42,7 +42,7 @@ export interface OdooApiMethods {
   shippingGetDeliveryMethods(customQuery?: CustomQuery): Promise<FetchResult<ShippingGetDeliveryMethodsResult>>;
   shippingGetAddress(customQuery?: CustomQuery): Promise<FetchResult<ShippingGetAddresessResult>>;
 
-  billingAddAddress(shippingAdress: GraphQlAddAddressParams, customQuery?: CustomQuery): Promise<FetchResult<DefaultGraphQlMutationResponse>>;
+  billingAddAddress(shippingAdress: GraphQlAddAddressParams, customQuery?: CustomQuery): Promise<FetchResult<BillingAddAddresResponse>>;
   billingUpdateAddress(shippingAdress: GraphQlUpdateAddressParams, customQuery?: CustomQuery): Promise<FetchResult<BillingUpdateAddressResult>>;
   billingGetAddress(customQuery?: CustomQuery): Promise<FetchResult<BillingGetAddressResult>>;
 
