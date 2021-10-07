@@ -193,7 +193,7 @@ export default defineComponent({
       searchCountryStates,
       countries,
       countryStates
-    } = useCountrySearch('my-account-shipping');
+    } = useCountrySearch('my-account-billing');
 
     const form = reactive({
       name: props.address.name,
@@ -215,7 +215,6 @@ export default defineComponent({
     };
     onBeforeMount(async () => {
       await search();
-      console.log(form);
       if (form?.country?.id && form.country.id !== 'null') {
         await searchCountryStates(form.country.id);
       }
