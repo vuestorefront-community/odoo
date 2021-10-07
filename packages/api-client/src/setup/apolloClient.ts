@@ -39,7 +39,8 @@ const createOddoLink = (settings: Config): any => {
     credentials: 'include',
     fetch,
     headers: {
-      Cookie: settings.auth
+      Cookie: settings.auth,
+      'resquest-host': settings['resquest-host']
     }
   });
 
