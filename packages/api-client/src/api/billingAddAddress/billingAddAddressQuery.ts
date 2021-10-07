@@ -1,29 +1,22 @@
 import gql from 'graphql-tag';
 
 export default gql`
-mutation AddBillingAddress(
-    $city: String!,
-    $countryId: Int!,
-    $firstName: String!,
-    $houseNumber: String!,
-    $lastName: String!,
-    $phone: String!,
-    $stateId: Int!,
-    $street: String!,
-    $zipCode: String!
-  ) {
-    addBillingAddress(
-    city: $city,
-    countryId: $countryId,
-    firstName: $firstName,
-    houseNumber: $houseNumber,
-    lastName: $lastName,
-    phone: $phone,
-    stateId: $stateId,
-    street: $street,
-    zipCode: $zipCode
-    ) {
-      ok
+mutation addAddress($name: String!, $city: String!, $countryId: Int!, $phone: String!, $stateId: Int!, $street: String!, $zip: String!) {
+  addAddress(type: Billing, address: {name: $name, city: $city, countryId: $countryId, phone: $phone, stateId: $stateId, street: $street, zip: $zip}) {
+    id
+    name 
+    street
+    street2
+    city
+    state
+    {
+      id
     }
+    country
+    {
+      id
+    }
+    email
+    phone
   }
-`;
+}`;
