@@ -13,7 +13,10 @@ const cookieExtension: ApiClientExtension = {
         ...configuration,
         auth: req.headers.cookie
       }),
-      beforeCall: ({ configuration, callName, args }) => args,
+      beforeCall: ({ configuration, callName, args }) => {
+        res.setHeader('host', req.headers.host);
+        return args;
+      },
       afterCall: ({ configuration, callName, response }) => {
 
         if (response.data.cookie) {
