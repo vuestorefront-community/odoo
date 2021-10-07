@@ -45,7 +45,7 @@ const params: UseUserBillingFactoryParams<Partner[], any> = {
       countryId: Number.parseInt(address.country.id),
       stateId: Number.parseInt(address.state.id)
     };
-    const { data } = await context.$odoo.api.shippingUpdateAddress(params);
+    const { data } = await context.$odoo.api.billingUpdateAddress(params);
 
     const newList = [...billing];
     const index = newList.findIndex((item) => item.id === data.updateAddress.id);
