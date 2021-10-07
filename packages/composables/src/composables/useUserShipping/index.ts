@@ -8,6 +8,7 @@ import { Partner, GraphQlAddAddressParams, GraphQlDeleteAddressParams, GraphQlUp
 
 const params: UseUserShippingFactoryParams<Partner[], any> = {
   addAddress: async (context: Context, { address, shipping }) => {
+
     const params: GraphQlAddAddressParams = {
       street: address.street,
       zip: address.zip,
@@ -23,7 +24,7 @@ const params: UseUserShippingFactoryParams<Partner[], any> = {
     return [...shipping, data.addAddress];
   },
 
-  deleteAddress: async (context: Context, { address, shipping}) => {
+  deleteAddress: async (context: Context, { address, shipping }) => {
     const deleteParams : GraphQlDeleteAddressParams = {
       id: address.id
     };

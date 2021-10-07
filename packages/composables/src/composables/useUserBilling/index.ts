@@ -4,38 +4,61 @@ import {
   useUserBillingFactory,
   UseUserBillingFactoryParams
 } from '@vue-storefront/core';
-import { GraphQlAddAddressParams } from '@vue-storefront/odoo-api';
+import { GraphQlAddAddressParams, GraphQlDeleteAddressParams, GraphQlUpdateAddressParams, Partner } from '@vue-storefront/odoo-api';
 
-const params: UseUserBillingFactoryParams<any, any> = {
-  addAddress: async (context: Context, { address }) => {
+const params: UseUserBillingFactoryParams<Partner[], any> = {
+  addAddress: async (context: Context, { address, billing }) => {
 
     const params: GraphQlAddAddressParams = {
-      street: address.streetName,
-      zip: address.postalCode,
+      street: address.street,
+      zip: address.zip,
       phone: address.phone,
-      name: address.firstName,
+      name: address.name,
       city: address.city,
-      countryId: Number.parseInt(address.country),
-      stateId: Number.parseInt(address.state)
+      countryId: Number.parseInt(address.country.id),
+      stateId: Number.parseInt(address.state.id)
     };
 
-    await context.$odoo.api.billingAddAddress(params);
+    const { data } = await context.$odoo.api.billingAddAddress(params);
 
-    return address;
+    return [...billing, data.addAddress];
   },
 
-  deleteAddress: async (context: Context, params?) => {
-    return Promise.resolve([]);
+  deleteAddress: async (context: Context, { address, billing }) => {
+    const deleteParams : GraphQlDeleteAddressParams = {
+      id: address.id
+    };
+    await context.$odoo.api.deleteAddress(deleteParams);
+
+    return billing.filter(item => item.id !== address.id);
   },
 
-  updateAddress: async (context: Context, params?) => {
-    return Promise.resolve([]);
+  updateAddress: async (context: Context, { address, billing }) => {
+
+    const params: GraphQlUpdateAddressParams = {
+      id: address.id,
+      street: address.street,
+      zip: address.zip,
+      phone: address.phone,
+      name: address.name,
+      city: address.city,
+      countryId: Number.parseInt(address.country.id),
+      stateId: Number.parseInt(address.state.id)
+    };
+    const { data } = await context.$odoo.api.shippingUpdateAddress(params);
+
+    const newList = [...billing];
+    const index = newList.findIndex((item) => item.id === data.updateAddress.id);
+    newList[index] = data.updateAddress;
+
+    return newList;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, params?) => {
-    console.log('Mocked: load');
-    return Promise.resolve([]);
+    const { data } = await context.$odoo.api.billingGetAddress();
+
+    return data.addresses;
   },
 
   setDefaultAddress: async (context: Context, params?) => {
@@ -43,4 +66,4 @@ const params: UseUserBillingFactoryParams<any, any> = {
   }
 };
 
-export default useUserBillingFactory<any, any>(params);
+export default useUserBillingFactory<Partner[], any>(params);
