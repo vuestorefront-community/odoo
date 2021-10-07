@@ -111,6 +111,14 @@ export type CartRemoveItemResult = {
   cartRemoveItem: Cart
 };
 
+export type BillingGetAddressResult = {
+  addresses: Partner[]
+};
+
+export type GraphQlDeleteAddressParams = {
+  id: number;
+};
+
 export type PaymentLoadProvidersResult = {
   paymentAcquirers: PaymentProvider[]
 };
@@ -148,7 +156,7 @@ export type WishlistRemoveItemResponse = {
 };
 
 export type ShippingAddAddresResponse = {
-  updateAddress: Partner
+  addAddress: Partner
 };
 
 export type CartUpdateItemQtyResponse = {
@@ -212,6 +220,10 @@ export type CategoryResult = {
 
 export type ShippingGetDeliveryMethodsResult = {
   deliveryMethods: DeliveryMethod[];
+};
+
+export type ShippingGetAddresessResult = {
+  addresses: Partner[];
 };
 
 export type ProductImage = {
