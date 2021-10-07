@@ -2,6 +2,8 @@
 # Copyright 2021 ODOOGAP/PROMPTEQUATION LDA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
+import logging
+import datetime
 import werkzeug
 from odoo import http
 from odoo.addons.graphql_base import GraphQLControllerMixin
@@ -10,6 +12,8 @@ from odoo.addons.payment_adyen.controllers.main import AdyenController
 from odoo.http import request
 
 from ..schema import schema
+
+_logger = logging.getLogger(__name__)
 
 
 class VSFAdyenController(AdyenController):
@@ -65,4 +69,49 @@ class GraphQLController(http.Controller, GraphQLControllerMixin):
     # (such as origin restrictions) to this route.
     @http.route("/graphql/vsf", auth="public", csrf=False)
     def graphql(self, **kwargs):
+        # Start time to check the domain
+        start_time = datetime.datetime.now()
+        request_host = False
+
+        # Trying get the http_request_host if exists
+        try:
+            request_host = request.httprequest.headers.environ['HTTP_RESQUEST_HOST']
+
+        except:
+            pass
+
+        if request_host:
+
+            domain = 'https://%s' % request_host
+
+            # Query used to get the code of the default_language_id of website
+            query = """
+                SELECT code 
+                FROM res_lang
+                WHERE id IN (SELECT default_lang_id
+                FROM website
+                WHERE domain = %s)
+            """
+
+            request.env.cr.execute(query, [domain])
+            query_result = request.env.cr.fetchone()
+
+            if query_result:
+                lang = query_result[0]
+
+                # Updating the context language according to the vsf domain verifying that domain in the website
+                context = dict(request.context)
+                context.update({'lang': lang})
+                request.context = context
+
+        # Finish time to check the domain
+        finish_time = datetime.datetime.now()
+        diff = finish_time - start_time
+
+        # Get Time in Milliseconds
+        ms = int(diff.total_seconds() * 1000)
+
+        _logger.info('--------------------------- TIME SPEND IN MILLISECONDS -----------------------')
+        _logger.info('%s ms' % str(ms))
+
         return self._handle_graphql_request(schema)
