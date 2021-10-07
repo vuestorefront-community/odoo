@@ -1,4 +1,4 @@
-import { Wishlist} from '@vue-storefront/odoo-api/src/types/types';
+import { Wishlist} from '@vue-storefront/odoo-api';
 import { mockedProducts } from './mockedProducts';
 export const mockedWishlist: Wishlist = {
   wishlistItems: [

@@ -1,4 +1,4 @@
-import { Category } from '@vue-storefront/odoo-api/src/types/types';
+import { Category } from '@vue-storefront/odoo-api';
 
 export const mockedCategories: Category[] = [
   {

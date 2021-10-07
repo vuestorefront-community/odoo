@@ -7,7 +7,7 @@ const context = {
   $odoo: {
     api: {
       getCategory: jest.fn(() => ({
-        categories: { categories: mockedCategories }
+        data: { categories: { categories: mockedCategories } }
       }))
     }
   }
@@ -24,7 +24,7 @@ describe('useCategory', () => {
 
   it('search categories', async () => {
     const categories = await categorySearch(context, {});
-
+    //
     expect(categories).toStrictEqual(mockedCategories);
   });
 });

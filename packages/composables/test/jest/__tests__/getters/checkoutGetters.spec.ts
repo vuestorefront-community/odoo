@@ -1,4 +1,4 @@
-import { ShippingMethod } from '@vue-storefront/odoo-api/src/types/types';
+import { ShippingMethod } from '@vue-storefront/odoo-api';
 import checkoutGetters from '../../../../src/composables/getters/checkoutGetters';
 
 const shippingMethod: ShippingMethod = {

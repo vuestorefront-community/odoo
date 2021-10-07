@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { Order } from '@vue-storefront/odoo-api/src/types/types';
+import { Order } from '@vue-storefront/odoo-api';
 import useCart from '../../../src/composables/useCart';
 import { mockedCart } from './__mocks__/mockedCart';
 const { load, addItem, removeItem, updateItemQty, isInCart } = useCart() as any;
@@ -7,10 +7,10 @@ const { load, addItem, removeItem, updateItemQty, isInCart } = useCart() as any;
 const context = {
   $odoo: {
     api: {
-      cartLoad: jest.fn(() => ({ cart: mockedCart })),
-      cartAddItem: jest.fn(() => mockedCart),
-      cartRemoveItem: jest.fn(() => ({})),
-      cartUpdateItemQty: jest.fn(() => ({}))
+      cartLoad: jest.fn(() => ({ data: {cart: mockedCart }})),
+      cartAddItem: jest.fn(() => ({ data: { mockedCart: mockedCart } })),
+      cartRemoveItem: jest.fn(() => ({ data: { cartRemoveItem: mockedCart }})),
+      cartUpdateItemQty: jest.fn(() => ({ data: { cartUpdateItem: mockedCart }}))
     }
   }
 };
@@ -31,9 +31,7 @@ describe('useCart', () => {
   });
 
   it('load empty cart', async () => {
-    context.$odoo.api.cartLoad = jest.fn(() => ({
-      cart: { order: {} as Order }
-    }));
+    context.$odoo.api.cartLoad = jest.fn(() => ({ data: { cart: { order: {} as Order }} }));
 
     const cart = await load(context, {});
 
@@ -92,7 +90,7 @@ describe('useCart', () => {
     expect(context.$odoo.api.cartRemoveItem).toBeCalledWith({ lineId: 10 }, {});
   });
 
-  it('remove item from cart with saleOrder product', async () => {
+  it('update item in cart ', async () => {
     await updateItemQty(context, {
       product: { id: 11 },
       quantity: 12,
