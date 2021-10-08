@@ -12,7 +12,17 @@
 
     <record id="vsf_payment_return_url" model="ir.config_parameter">
         <field name="key">vsf_payment_return_url</field>
-        <field name="value">/checkout/payment</field>
+        <field name="value">https://vsf.labs.odoogap.com/checkout/thank-you</field>
+    </record>
+
+    <record id="vsf_cache_invalidation_key" model="ir.config_parameter">
+        <field name="key">vsf_cache_invalidation_key</field>
+        <field name="value">0ead60c3-d118-40be-9519-d531462ddc60</field>
+    </record>
+
+    <record id="vsf_cache_invalidation_url" model="ir.config_parameter">
+        <field name="key">vsf_cache_invalidation_url</field>
+        <field name="value">https://vsf.labs.odoogap.com/cache-invalidate</field>
     </record>
 
 </odoo>
