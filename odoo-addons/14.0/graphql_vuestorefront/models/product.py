@@ -25,7 +25,7 @@ class ProductTemplate(models.Model):
         tags = tags_list
 
         # Make the GET request to the /cache-invalidate
-        res = requests.get(url, params={'key': key, 'tag': tags})
+        requests.get(url, params={'key': key, 'tag': tags})
 
     def write(self, vals):
         res = super(ProductTemplate, self).write(vals)
@@ -57,7 +57,7 @@ class ProductPublicCategory(models.Model):
         tags = tags_list
 
         # Make the GET request to the /cache-invalidate
-        res = requests.get(url, params={'key': key, 'tag': tags})
+        requests.get(url, params={'key': key, 'tag': tags})
 
     def write(self, vals):
         res = super(ProductPublicCategory, self).write(vals)
