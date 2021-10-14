@@ -1,4 +1,6 @@
-![Vue Storefront](docs/odoo_readme.png)
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/1626923/137323036-91d4262b-74dd-40c3-83da-a405a75de5c8.jpg" alt="Vue Storefront" />
+</div>
 
 ## Vue Storefront 2 integration with Odoo (beta)
 
