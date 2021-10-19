@@ -162,7 +162,7 @@
               :max-rating="5"
               :score-rating="productGetters.getAverageRating(product)"
               :show-add-to-cart-button="true"
-              :isOnWishlist="isInWishlist({ product })"
+              :isInWishlist="isInWishlist({ product })"
               :isAddedToCart="isInCart({ product })"
               :link="
                 localePath(
@@ -204,7 +204,7 @@
               "
               :max-rating="5"
               :score-rating="3"
-              :isOnWishlist="isInWishlist({ product })"
+              :isInWishlist="isInWishlist({ product })"
               class="products__product-card-horizontal"
               @click:wishlist="addItemToWishlist({ product })"
               @click:add-to-cart="

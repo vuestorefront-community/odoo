@@ -11,12 +11,13 @@
 A **WishlistItem** in odoo
 ```ts
 export declare type WishlistItem = {
-  product: Product
-  id: number
-  price: number
+  product: Product;
+  id: number;
 }
 
-export declare type Wishlist = WishlistItem[];
+export declare type Wishlist = {
+  wishlistItems?: WishlistItem[];
+};
 ```
 
 ## Example

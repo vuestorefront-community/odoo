@@ -40,7 +40,7 @@ Wishlist
 
 Checkout
 - [x] get shipping methods
-- [ ] get payment methods (depends on integration)
+- [x] get payment methods (depends on integration)
 - [ ] place order
 - [ ] i18n
 

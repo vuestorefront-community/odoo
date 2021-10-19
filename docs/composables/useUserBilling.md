@@ -4,19 +4,23 @@
 - Add billing address to current cart
 
 ## API
-An **Address** in odoo
+An **Address** (Partner) in odoo
 ```ts
 type Address = {
-  city: string
-  countryId: number
-  deliveryMethodId: number
-  firstName: string
-  houseNumber: string
-  lastName: string
-  phone: string
-  stateId: number
-  street: string
-  zipCode: string
+  id?: number;
+  name: string;
+  street: string;
+  street2?: string;
+  city: string;
+  state: State;
+  zip: string;
+  country: Country;
+  email?: string;
+  phone: string;
+  isCompany?: boolean;
+  isDefault?: boolean;
+  contacts?: Partner[];
+  password?: string;
 }
 
 ```

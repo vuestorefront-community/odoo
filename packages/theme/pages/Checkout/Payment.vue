@@ -101,7 +101,7 @@
           :selected="String(selectedProvider.id)"
           name="shippingMethod"
           class="form__radio shipping"
-          @input="selectProvider(provider)"
+          @change="selectProvider(provider)"
         >
           <div class="shipping__label">
             {{ provider.name }}

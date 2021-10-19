@@ -17,7 +17,7 @@
       :selected="selectedMethod"
       name="shippingMethod"
       class="form__radio shipping"
-      @input="selectMethod(method.value)"
+      @change="selectMethod(method.value)"
     >
       <div class="shipping__label">
         {{ method.label }}

@@ -16,10 +16,12 @@ A **Category** in odoo can have a parent.
 
 ```ts
 type Category = {
-  id: number
-  name: string
-  slug: string
-  parent: Category[]
+  id: number;
+  name: string;
+  slug: string;
+  parent?: Category;
+  childs?: Category[];
+  products?: Product[];
 }
 ```
 
