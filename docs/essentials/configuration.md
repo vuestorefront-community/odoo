@@ -2,7 +2,6 @@
 
 ## Middleware
 Odoo use graphql and jsonrpc calls 
-- odooBaseUrl for **json rpc**
 - graphqlBaseUrl for **graphql**
 
 
@@ -10,7 +9,6 @@ Odoo use graphql and jsonrpc calls
 // packages/theme/middleware.config.js
 
 const odooBaseUrl = process.env.BASE_URL;
-const database = process.env.DATABASE;
 const graphqlBaseUrl = `${odooBaseUrl}graphql/vsf`;
 
 module.exports = {
@@ -19,8 +17,7 @@ module.exports = {
       location: '@vue-storefront/odoo-api/server',
       configuration: {
         odooBaseUrl,
-        graphqlBaseUrl,
-        database
+        graphqlBaseUrl
       }
 
     }
@@ -37,6 +34,5 @@ This environment variables must be configured in .env files (.env_production for
 //.env file on root of packages/theme
 
 BASE_URL=https://vsf.odoo.com/
-DATABASE=database_name_01 // This database name will be temporary until we convert odoo o full graphql
 
 ```
