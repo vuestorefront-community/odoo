@@ -87,7 +87,7 @@
                 :name="radio.label"
                 :value="item.value"
                 :label="item.label"
-                @input="updateFilter({ [radio.label]: item.value })"
+                @change="updateFilter({ [radio.label]: item.value })"
               />
             </template>
           </div>
