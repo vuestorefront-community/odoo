@@ -8,38 +8,40 @@
 * checking if product is already added to the cart.
 
 ## API
-A **Cart** in odoo is a **SaleOrder** type.
+A **Cart** in odoo is a **Order** type.
 
 ```ts
-type SaleOrder = {
-    id: number;
-    name: string;
-    origin: string;
-    clientOrderRef: string;
-    state: string;
-    dateOrder: Date;
-    validityDate: Date;
-    shippingMethod: ShippingMethod;
-    orderLine: SaleOrderLine[];
-    invoiceStatus: string;
-    amountUntaxed: number;
-    amountTax: number;
-    amountTotal: number;
-    currencyRate: string;
-    partnerInvoice: Partner;
-    partnerShipping: Partner;
+type Order = {
+  id: number;
+  name: string;
+  partner?: Partner;
+  partnerShipping?: Partner;
+  partnerInvoice?: Partner;
+  dateOrder?: Date;
+  amountUntaxed: number;
+  amountTax: number;
+  amountTotal: number;
+  amountDelivery: number;
+  currency: Currency;
+  orderLines?: OrderLine[];
+  stage: OrderStage;
+  orderUrl: string;
+  transactions: PaymentTransaction[];
 }
 ```
 
 Each **orderLine** represents a list of **N** product variant.
 
 ```ts
-type SaleOrderLine = {
-    id: number;
-    name: string;
-    product: Product;
-    productUomQty: number;
-    priceTotal: number;
+type OrderLine = {
+  id: number;
+  name?: string;
+  product?: Product;
+  quantity?: number;
+  priceTotal?: number;
+  priceUnit?: number;
+  priceSubtotal?: number;
+  priceTax?: number;
 }
 ```
 

@@ -7,20 +7,32 @@
 
 ```ts
 type Product = {
-  id: number
-  description: string
-  categoriesRef: string[]
-  defaultCode: string
-  name: string
-  slug: string
-  sku: string
-  image: string
-  price: number
-  listPrice: number
-  realProduct: any
-  firstVariantId: number // attribute from graphql
-  first_variant_id: number // attribute from jsonrpc
-  attributes: Attribute[]
+  id: number;
+  description?: string;
+  name?: string;
+  displayName?: string;
+  slug?: string;
+  isInStock?: boolean;
+  qty: number;
+  sku: string;
+  image: string;
+  variantImage: string;
+  smallImage: string;
+  mediaGallery: ProductImage[];
+  price: number;
+  weight: number;
+  priceAfterDiscount: number;
+  hasDiscountedPrice: number;
+  listPrice: number;
+  realProduct?: ProductVariant;
+  firstVariant: number;
+  currency: Currency;
+  isInWishlist: boolean;
+  alternativeProducts?: Product[];
+  accessoryProducts?: Product[];
+  attributeValues: Attribute[];
+  productTemplate?: Product;
+  categories: Category[];
 }
 ```
 

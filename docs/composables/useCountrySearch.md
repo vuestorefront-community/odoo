@@ -12,9 +12,10 @@ A **Country** in odoo.
 
 ```ts
 type Country = {
-  id: number
-  code: string
-  name: string
+  id: number;
+  code?: string;
+  name?: string;
+  states?: State[];
 }
 ```
 
