@@ -3590,21 +3590,22 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@storefront-ui/shared@0.10.8":
-  version "0.10.8"
-  resolved "https://registry.yarnpkg.com/@storefront-ui/shared/-/shared-0.10.8.tgz#1717f528a073dcebbd6115f587c3cf57a94ee86a"
-  integrity sha512-lRVqxs5QAOtXV129uNDSn0BYvjix0VXNZu2ChnQAu8jNKC/Q10cN1XrDiOEiL8hDpx7py+6DUka1WZ5K8dn+jQ==
+"@storefront-ui/shared@0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@storefront-ui/shared/-/shared-0.11.0.tgz#bd30c8853734444acd896faffe682c52db41250d"
+  integrity sha512-C1YPF9Ds5717MMoLhpCx8VfTAGgkpfjqwa5/Enzn6HAAuGn6tWavRTK4vDV1rZkRonTcVCFHwLO49MT37S0/Sg==
 
-"@storefront-ui/vue@0.10.8":
-  version "0.10.8"
-  resolved "https://registry.yarnpkg.com/@storefront-ui/vue/-/vue-0.10.8.tgz#9d3e999a4beb2188cca397dcb7cc7b3d5d9a6207"
-  integrity sha512-+ePyaXITmGxWfDs4capCoTQoq76a38Q4UA9PEYgcBiCPeSOBXtAQ6NGOKooTK27y4m+2NLOyeh+kdsPSXlFVYg==
+"@storefront-ui/vue@0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@storefront-ui/vue/-/vue-0.11.0.tgz#e197f41fbb9a931cf78d3e9a60a1de94d8bb5b23"
+  integrity sha512-ciBZkR1zIjRZBGxiZPb3RYi9I3iXZNcFwXpU1Ug9qIHsypjrGOrM6lWfSm/LbBSrpxrP0DQ6ok/PKNJeWumvyg==
   dependencies:
     "@glidejs/glide" "^3.3.0"
-    "@storefront-ui/shared" "0.10.8"
+    "@storefront-ui/shared" "0.11.0"
     body-scroll-lock "^3.0.1"
     cloudinary-build-url "^0.1.1"
     core-js "^3.6.5"
+    glob "^7.1.4"
     hammerjs "^2.0.8"
     leaflet "^1.5.1"
     nouislider "^15.2.0"
@@ -4260,6 +4261,29 @@
     consola "^2.10.1"
     lodash "^4.17.15"
     nuxt-purgecss "^1.0.0"
+
+"@vue-storefront/odoo-api@1.0.0-beta.2":
+  version "1.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@vue-storefront/odoo-api/-/odoo-api-1.0.0-beta.2.tgz#a9da3281b46c156c024abd24ad2293197c264f31"
+  integrity sha512-qYqo0zFxt3c0HlYGvo54yl2D2aY42ioX7Lgv8MPGpUUcJ/4LzsW0N1fpOhdiynBOjP8xNDMVbUTlJM2ws1xoLA==
+  dependencies:
+    "@vue-storefront/core" "2.4.0"
+    apollo-cache-inmemory "^1.6.6"
+    apollo-client "^2.6.10"
+    apollo-link "^1.2.14"
+    apollo-link-error "^1.1.13"
+    apollo-link-http "^1.5.17"
+    graphql "^15.5.0"
+    graphql-tag "^2.12.4"
+    isomorphic-fetch "^3.0.0"
+
+"@vue-storefront/odoo@1.0.0-beta.2":
+  version "1.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@vue-storefront/odoo/-/odoo-1.0.0-beta.2.tgz#ae6113a15cb8934de9be0de93bc23e76fba0879d"
+  integrity sha512-j22PRRXTiJP9dbRe1jAexDU85xbeEzN7T1InSzsWdU30efiVbI02ildJ4I6bhb1DdqUQ/Pjdd0meAiAMgLGknw==
+  dependencies:
+    "@vue-storefront/core" "2.4.0"
+    "@vue-storefront/odoo-api" "1.0.0-beta.2"
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
   version "1.2.1"
