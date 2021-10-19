@@ -49,6 +49,7 @@ module.exports = {
           ['/', 'Introduction'],
           '/essentials/configuration',
           '/essentials/feature_list',
+          '/essentials/payment',
           '/essentials/maintainers'
         ]
       },
