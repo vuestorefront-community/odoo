@@ -65,7 +65,8 @@ class GraphQLController(http.Controller, GraphQLControllerMixin):
                     WHERE id IN (
                         SELECT default_lang_id
                         FROM website
-                        WHERE domain = %s)
+                        WHERE domain = %s
+                    )
                 """
             params = (domain,)
 
