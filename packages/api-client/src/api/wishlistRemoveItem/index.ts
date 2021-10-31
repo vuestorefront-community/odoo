@@ -13,9 +13,13 @@ export default async function wishlistRemoveItem(
 ): Promise<FetchResult<WishlistRemoveItemResponse>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
+  const { wishlistRemoveItem } = context.extendQuery(
+    customQuery, { wishlistRemoveItem: { mutation, variables: params } }
+  );
+
   const response = await apolloClient.mutate({
-    mutation,
-    variables: params
+    mutation: wishlistRemoveItem.mutation,
+    variables: wishlistRemoveItem.params
   });
 
   return response;

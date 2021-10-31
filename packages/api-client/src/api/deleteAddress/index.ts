@@ -12,8 +12,12 @@ export default async function deleteAddress(
 ): Promise<FetchResult<void>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
+  const { deleteAddress } = context.extendQuery(
+    customQuery, { deleteAddress: { mutation, variables: params } }
+  );
+
   return await apolloClient.mutate({
-    mutation,
-    variables: params
+    mutation: deleteAddress.mutation,
+    variables: deleteAddress.params
   });
 }

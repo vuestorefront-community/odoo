@@ -13,9 +13,13 @@ export default async function wishlistAddItem(
 ): Promise<FetchResult<WishlistAddItemResponse>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
+  const { wishlistAddItem } = context.extendQuery(
+    customQuery, { wishlistAddItem: { mutation, variables: params } }
+  );
+
   const response = await apolloClient.mutate({
-    mutation,
-    variables: params
+    mutation: wishlistAddItem.mutation,
+    variables: wishlistAddItem.params
   });
 
   return response;

@@ -12,9 +12,13 @@ export default async function signUpUser(
 ): Promise<FetchResult<RegisterResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
+  const { signUpUser } = context.extendQuery(
+    customQuery, { signUpUser: { mutation, variables: params } }
+  );
+
   return await apolloClient.mutate({
-    mutation,
-    variables: params,
+    mutation: signUpUser.mutation,
+    variables: signUpUser.params,
     fetchPolicy: 'no-cache'
   });
 }

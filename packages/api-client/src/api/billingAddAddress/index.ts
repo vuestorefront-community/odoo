@@ -7,13 +7,17 @@ import { FetchResult } from 'apollo-link';
 
 export default async function billingAddAddress(
   context: Context,
-  shippingAdress: GraphQlAddAddressParams,
+  params: GraphQlAddAddressParams,
   customQuery?: CustomQuery
 ): Promise<FetchResult<BillingAddAddresResponse>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
+  const { billingAddAddress } = context.extendQuery(
+    customQuery, { billingAddAddress: { mutation, variables: params } }
+  );
+
   return await apolloClient.mutate({
-    mutation,
-    variables: shippingAdress
+    mutation: billingAddAddress.mutation,
+    variables: billingAddAddress.shippingAdress
   });
 }

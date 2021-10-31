@@ -13,9 +13,13 @@ export default async function updateAccount(
 ): Promise<FetchResult<UpdateAccountResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
+  const { updateAccount } = context.extendQuery(
+    customQuery, { updateAccount: { mutation, variables: params } }
+  );
+
   const response = await apolloClient.mutate({
-    mutation,
-    variables: params,
+    mutation: updateAccount.mutation,
+    variables: updateAccount.params,
     fetchPolicy: 'no-cache'
   });
 

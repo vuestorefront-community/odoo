@@ -12,10 +12,14 @@ export default async function logInUser(
   customQuery?: CustomQuery
 ): Promise<FetchResult<LoginResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
-  //
+
+  const { logInUser } = context.extendQuery(
+    customQuery, { logInUser: { mutation, variables: params } }
+  );
+
   return await apolloClient.mutate({
-    mutation,
-    variables: params,
+    mutation: logInUser.mutation,
+    variables: logInUser.params,
     fetchPolicy: 'no-cache'
   });
 
