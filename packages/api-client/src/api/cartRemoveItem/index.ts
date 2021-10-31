@@ -12,9 +12,14 @@ export default async function cartRemoveItem(
   customQuery?: CustomQuery
 ): Promise<FetchResult<CartRemoveItemResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
+
+  const { cartRemoveItem } = context.extendQuery(
+    customQuery, { cartRemoveItem: { mutation, variables: params } }
+  );
+
   const response = await apolloClient.mutate({
-    mutation,
-    variables: params
+    mutation: cartRemoveItem.mutation,
+    variables: cartRemoveItem.params
   });
 
   return response;

@@ -14,10 +14,14 @@ export default async function getRealProduct(
 ): Promise<FetchResult<ProductVariantResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
+  const { getRealProduct } = context.extendQuery(
+    customQuery, { getRealProduct: { query, variables: params } }
+  );
+
   try {
     const response = await apolloClient.query({
-      query,
-      variables: params,
+      query: getRealProduct.query,
+      variables: getRealProduct.params,
       fetchPolicy: 'no-cache'
     });
 

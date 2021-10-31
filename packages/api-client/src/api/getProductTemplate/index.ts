@@ -11,9 +11,13 @@ export default async function getProductTemplate(
 ): Promise<FetchResult<SingleProductResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
+  const { getProductTemplate } = context.extendQuery(
+    customQuery, { getProductTemplate: { query, variables: params } }
+  );
+
   const response = await apolloClient.query({
-    query,
-    variables: params
+    query: getProductTemplate.query,
+    variables: getProductTemplate.params
   });
 
   return response;

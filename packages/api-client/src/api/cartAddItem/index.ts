@@ -12,9 +12,14 @@ export default async function cartAddItem(
   customQuery?: CustomQuery
 ): Promise<FetchResult<CartAddItemResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
+
+  const { cartAddItems } = context.extendQuery(
+    customQuery, { cartAddItems: { mutation, variables: params } }
+  );
+
   const response = await apolloClient.mutate({
-    mutation,
-    variables: params
+    mutation: cartAddItems.mutation,
+    variables: cartAddItems.params
   });
 
   return response;

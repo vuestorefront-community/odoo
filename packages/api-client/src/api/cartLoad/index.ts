@@ -11,9 +11,13 @@ export default async function cartLoad(
 ): Promise<FetchResult<CartLoadResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
+  const { cart } = context.extendQuery(
+    customQuery, { cart: { query, variables: {} } }
+  );
+
   const response = await apolloClient.query({
     fetchPolicy: 'no-cache',
-    query
+    query: cart.query
   });
 
   return response;
