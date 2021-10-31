@@ -12,7 +12,7 @@ const factoryParams: UseForgotPasswordFactoryParams<any> = {
       email: email
     };
 
-    const { data } = await context.$odoo.api.sendResetPassword(params);
+    const { data } = await context.$odoo.api.sendResetPassword(params, customQuery);
 
     return data;
   },

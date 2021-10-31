@@ -13,7 +13,7 @@ const factoryParams: UseBillingParams<any, any> = {
 
   load: async (context: Context, { customQuery }) => {
     if (!context.useCart.cart) {
-      await context.useCart.load();
+      await context.useCart.load({ customQuery });
     }
 
     const address = context.useCart?.cart?.value?.order?.partnerInvoice || {};
@@ -27,7 +27,7 @@ const factoryParams: UseBillingParams<any, any> = {
     return billingAddress;
   },
 
-  save: async (context: Context, { billingDetails }) => {
+  save: async (context: Context, { billingDetails, customQuery }) => {
 
     const params: GraphQlUpdateAddressParams = {
       id: billingDetails.id,
@@ -41,7 +41,7 @@ const factoryParams: UseBillingParams<any, any> = {
     };
 
     try {
-      const { data } = await context.$odoo.api.billingUpdateAddress(params);
+      const { data } = await context.$odoo.api.billingUpdateAddress(params, customQuery);
 
       context.useCart.cart.value.order.partnerInvoice = data.updateAddress;
 
