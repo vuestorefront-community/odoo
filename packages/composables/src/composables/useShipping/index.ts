@@ -13,7 +13,7 @@ const factoryParams: UseShippingParams<Partner, GraphQlUpdateAddressParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, { customQuery }) => {
     if (!context.useCart.cart) {
-      await context.useCart.load();
+      await context.useCart.load(customQuery);
     }
 
     const address = context.useCart?.cart?.value?.order?.partnerShipping || {};
@@ -27,7 +27,7 @@ const factoryParams: UseShippingParams<Partner, GraphQlUpdateAddressParams> = {
     return shippingAdress;
   },
 
-  save: async (context: Context, { shippingDetails }) => {
+  save: async (context: Context, { shippingDetails, customQuery }) => {
 
     const params: GraphQlUpdateAddressParams = {
       id: shippingDetails.id,
@@ -40,7 +40,7 @@ const factoryParams: UseShippingParams<Partner, GraphQlUpdateAddressParams> = {
       stateId: shippingDetails.state.id
     };
 
-    const { data } = await context.$odoo.api.shippingUpdateAddress(params);
+    const { data } = await context.$odoo.api.shippingUpdateAddress(params, customQuery);
 
     context.useCart.cart.value.order.partnerShipping = data.updateAddress;
 

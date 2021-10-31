@@ -17,16 +17,9 @@ const factoryParams: UseForgotPasswordFactoryParams<any> = {
     return data;
   },
 
-  setNewPassword: async (
-    context: Context,
-    { tokenValue, newPassword, customQuery }
-  ) => {
+  setNewPassword: async (context: Context, { tokenValue, newPassword, customQuery }) => {
     await context.$odoo.api.changePassword(
-      {
-        token: tokenValue,
-        newPassword
-      },
-      customQuery
+      { token: tokenValue, newPassword }, customQuery
     );
     return {};
   }

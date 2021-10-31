@@ -13,7 +13,7 @@ const factoryParams: UseBillingParams<any, any> = {
 
   load: async (context: Context, { customQuery }) => {
     if (!context.useCart.cart) {
-      await context.useCart.load({ customQuery });
+      await context.useCart.load(customQuery);
     }
 
     const address = context.useCart?.cart?.value?.order?.partnerInvoice || {};

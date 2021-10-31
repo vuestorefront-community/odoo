@@ -19,21 +19,23 @@ const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, a
     await context.$odoo.api.logOutUser();
   },
 
-  updateUser: async (context: Context, { currentUser, updatedUserData }) => {
+  updateUser: async (context: Context, { currentUser, updatedUserData, customQuery }) => {
 
     const params: GraphQlUpdateAccountParams = {
       id: currentUser.id,
       name: updatedUserData.name,
       email: updatedUserData.email
     };
-    const { data } = await context.$odoo.api.updateAccount(params);
+    const { data } = await context.$odoo.api.updateAccount(params, customQuery);
 
     return data.updateMyAccount;
   },
 
-  register: async (context: Context, params) => {
+  register: async (context: Context, params?: Partner & { customQuery }) => {
+    const { customQuery } = params;
+
     try {
-      const { data } = await context.$odoo.api.signUpUser(params);
+      const { data } = await context.$odoo.api.signUpUser(params, customQuery);
 
       context.$odoo.config.app.$cookies.set('odoo-user', data.register);
 
@@ -47,13 +49,15 @@ const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, a
 
   },
   logIn: async (context: Context, params) => {
+    const { customQuery } = params;
+
     const loginParams : GraphQlLoginParams = {
       email: params.username,
       password: params.password
     };
 
     try {
-      const { data } = await context.$odoo.api.logInUser(loginParams);
+      const { data } = await context.$odoo.api.logInUser(loginParams, customQuery);
 
       context.$odoo.config.app.$cookies.set('odoo-user', data.login.partner);
 
