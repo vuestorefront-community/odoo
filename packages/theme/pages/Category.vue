@@ -412,7 +412,6 @@ import { useUiHelpers, useUiState } from '~/composables';
 import { onSSR } from '@vue-storefront/core';
 import LazyHydrate from 'vue-lazy-hydration';
 
-// TODO(addToCart qty, horizontal): https://github.com/vuestorefront/storefront-ui/issues/1606
 export default {
   name: 'Category',
   transition: 'fade',
@@ -480,7 +479,11 @@ export default {
     );
 
     onSSR(async () => {
-      await search(th.getFacetsFromURL());
+      const params = {
+        ...th.getFacetsFromURL()
+      };
+
+      await search(params);
 
       addTags([
         {

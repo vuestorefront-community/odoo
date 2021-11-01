@@ -252,6 +252,7 @@ import {
 } from '@vue-storefront/odoo';
 
 import { onSSR } from '@vue-storefront/core';
+
 import MobileStoreBanner from '~/components/MobileStoreBanner.vue';
 import LazyHydrate from 'vue-lazy-hydration';
 export default {

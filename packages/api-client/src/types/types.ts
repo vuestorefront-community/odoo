@@ -523,4 +523,22 @@ export type ParamsFromUrl = {
   search: string;
   categorySlug?: string;
   sort: ProductSortInput;
+  customQueryProducts: any;
+  customQueryCategories: any;
 };
+
+export interface AgnosticFacetSearchParams {
+    categorySlug?: string;
+    rootCatSlug?: string;
+    term?: string;
+    page?: number;
+    itemsPerPage?: number;
+    sort?: string;
+    filters?: Record<string, string[]>;
+    metadata?: any;
+    [x: string]: any;
+}
+export interface SearchResultParams<S> {
+    data: S;
+    input: AgnosticFacetSearchParams;
+}

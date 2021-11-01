@@ -19,7 +19,7 @@ const useShippingProviderFactoryParams: UseShippingProviderParams<
 > = {
   load: async (context: Context, { customQuery, state }) => {
     if (!context.cart.cart?.value?.shippingInfo) {
-      await context.cart.load({ customQuery });
+      await context.cart.load(customQuery);
     }
     return {
       ...state.value,
@@ -27,20 +27,10 @@ const useShippingProviderFactoryParams: UseShippingProviderParams<
     };
   },
   save: async (context: Context, { shippingMethod, customQuery, state }) => {
-    const cartResponse = await context.$ct.api.updateCart(
-      {
-        id: context.cart.cart.value.id,
-        version: context.cart.cart.value.version,
-        actions: []
-      },
-      customQuery
-    );
-    context.cart.setCart(cartResponse.data.cart);
 
     return {
-      ...state.value,
-      response: context.cart.cart.value.shippingInfo
-    };
+
+    } as any;
   }
 };
 

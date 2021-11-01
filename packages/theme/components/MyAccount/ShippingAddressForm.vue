@@ -215,7 +215,6 @@ export default defineComponent({
     };
     onBeforeMount(async () => {
       await search();
-      console.log(form);
       if (form?.country?.id && form.country.id !== 'null') {
         await searchCountryStates(form.country.id);
       }

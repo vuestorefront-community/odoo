@@ -240,8 +240,8 @@ export default {
       }
     });
 
-    const handleForm = (fn, params) => async () => {
-      await fn({ user: params });
+    const handleForm = (fn, params, customQuery) => async () => {
+      await fn({ user: params, customQuery });
 
       if (error.value.login) {
         send({ message: error?.value?.login?.message, type: 'danger' });
@@ -276,6 +276,7 @@ export default {
     };
 
     const handleRegister = async () => handleForm(register, form.value)();
+
     const handleLogin = async () =>
       handleForm(login, {
         username: form.value.email,

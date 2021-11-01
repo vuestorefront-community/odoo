@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import gql from 'graphql-tag';
 import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import query from './getProductTemplateQuery';
@@ -11,9 +12,13 @@ export default async function getProductTemplate(
 ): Promise<FetchResult<SingleProductResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
+  const { getProductTemplate } = context.extendQuery(
+    customQuery, { getProductTemplate: { query, variables: params } }
+  );
+
   const response = await apolloClient.query({
-    query,
-    variables: params
+    query: gql`${getProductTemplate.query}`,
+    variables: getProductTemplate.variables
   });
 
   return response;

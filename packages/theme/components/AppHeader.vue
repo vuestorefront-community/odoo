@@ -245,7 +245,9 @@ export default {
 
     onSSR(async () => {
       await Promise.all([
-        searchTopCategoryApi({ filter: { parent: true } }),
+        searchTopCategoryApi({
+          filter: { parent: true }
+        }),
         loadUser(),
         loadWishlist(),
         loadCart()
