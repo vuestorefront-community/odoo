@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 
 import { Context, useUserFactory, UseUserFactoryParams} from '@vue-storefront/core';
-import { Partner, GraphQlUpdateAccountParams, GraphQlLoginParams } from '@vue-storefront/odoo-api';
+import { Partner, GraphQlUpdateAccountParams, GraphQlLoginParams, AgnosticUser } from '@vue-storefront/odoo-api';
 import { getAgnosticUserFromUser} from '../getters/userGetters';
 const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, any> = {
   load: async (context: Context) => {
@@ -48,7 +48,7 @@ const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, a
     }
 
   },
-  logIn: async (context: Context, params) => {
+  logIn: async (context: Context, params: AgnosticUser & { customQuery }) => {
     const { customQuery } = params;
 
     const loginParams : GraphQlLoginParams = {
