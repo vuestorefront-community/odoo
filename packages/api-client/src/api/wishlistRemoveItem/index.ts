@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import gql from 'graphql-tag';
 import ApolloClient from 'apollo-client';
 import mutation from './wishlistRemoveItemMutation';
 import { Context, CustomQuery } from '@vue-storefront/core';
@@ -18,8 +19,8 @@ export default async function wishlistRemoveItem(
   );
 
   const response = await apolloClient.mutate({
-    mutation: wishlistRemoveItem.mutation,
-    variables: wishlistRemoveItem.params
+    mutation: gql`${wishlistRemoveItem.mutation}`,
+    variables: wishlistRemoveItem.variables
   });
 
   return response;

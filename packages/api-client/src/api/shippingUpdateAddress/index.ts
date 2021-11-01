@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import gql from 'graphql-tag';
 import { Context, CustomQuery } from '@vue-storefront/core';
 import mutation from './shippingUpdateAddressMutation';
 import ApolloClient from 'apollo-client';
@@ -17,7 +18,7 @@ export default async function shippingUpdateAddress(
   );
 
   const response = await apolloClient.mutate({
-    mutation: shippingUpdateAddress.mutation,
+    mutation: gql`${shippingUpdateAddress.mutation}`,
     variables: shippingUpdateAddress.variables
   });
 

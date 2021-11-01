@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import gql from 'graphql-tag';
 import { Context, CustomQuery } from '@vue-storefront/core';
 import mutation from './signUpUserMutation';
 import ApolloClient from 'apollo-client';
@@ -17,8 +18,8 @@ export default async function signUpUser(
   );
 
   return await apolloClient.mutate({
-    mutation: signUpUser.mutation,
-    variables: signUpUser.params,
+    mutation: gql`${signUpUser.mutation}`,
+    variables: signUpUser.variables,
     fetchPolicy: 'no-cache'
   });
 }

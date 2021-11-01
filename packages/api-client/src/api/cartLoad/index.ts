@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import gql from 'graphql-tag';
 import { Context, CustomQuery } from '@vue-storefront/core';
 import query from './cartLoadQuery';
 import ApolloClient from 'apollo-client';
@@ -17,7 +18,7 @@ export default async function cartLoad(
 
   const response = await apolloClient.query({
     fetchPolicy: 'no-cache',
-    query: cart.query
+    query: gql`${cart.query}`
   });
 
   return response;

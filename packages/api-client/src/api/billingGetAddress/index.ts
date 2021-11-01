@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import gql from 'graphql-tag';
 import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import { FetchResult } from 'apollo-link/lib/types';
@@ -10,5 +11,11 @@ export default async function billingGetAddress(
 ): Promise<FetchResult<BillingGetAddressResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
-  return await apolloClient.query({ query });
+  const { billingGetAddress } = context.extendQuery(
+    customQuery, { billingGetAddress: { query } }
+  );
+
+  return await apolloClient.query({
+    query: gql`${billingGetAddress.query}`
+  });
 }

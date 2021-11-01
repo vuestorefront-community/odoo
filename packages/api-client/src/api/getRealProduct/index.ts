@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable camelcase */
-
+import gql from 'graphql-tag';
 import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import query from './getRealProductQuery';
@@ -18,21 +18,11 @@ export default async function getRealProduct(
     customQuery, { getRealProduct: { query, variables: params } }
   );
 
-  try {
-    const response = await apolloClient.query({
-      query: getRealProduct.query,
-      variables: getRealProduct.params,
-      fetchPolicy: 'no-cache'
-    });
+  const response = await apolloClient.query({
+    query: gql`${getRealProduct.query}`,
+    variables: getRealProduct.variables,
+    fetchPolicy: 'no-cache'
+  });
 
-    return response;
-  } catch (error) {
-    if (error.graphQLErrors) {
-      return {
-        errors: error.graphQLErrors,
-        data: null
-      };
-    }
-    throw error.networkError?.result || error;
-  }
+  return response;
 }

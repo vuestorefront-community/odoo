@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import gql from 'graphql-tag';
 import ApolloClient from 'apollo-client';
 import mutation from './cartAddItemMutation';
 import { Context, CustomQuery } from '@vue-storefront/core';
@@ -18,8 +19,8 @@ export default async function cartAddItem(
   );
 
   const response = await apolloClient.mutate({
-    mutation: cartAddItems.mutation,
-    variables: cartAddItems.params
+    mutation: gql`${cartAddItems.mutation}`,
+    variables: cartAddItems.variables
   });
 
   return response;

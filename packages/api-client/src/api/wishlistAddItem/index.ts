@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import gql from 'graphql-tag';
 import ApolloClient from 'apollo-client';
 import mutation from './wishlistAddItemMutation';
 import { Context, CustomQuery } from '@vue-storefront/core';
@@ -18,8 +19,8 @@ export default async function wishlistAddItem(
   );
 
   const response = await apolloClient.mutate({
-    mutation: wishlistAddItem.mutation,
-    variables: wishlistAddItem.params
+    mutation: gql`${wishlistAddItem.mutation}`,
+    variables: wishlistAddItem.variables
   });
 
   return response;

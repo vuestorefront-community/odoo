@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import gql from 'graphql-tag';
 import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import query from './getCategoryQuery';
@@ -12,10 +13,14 @@ export default async function getCategory(
 ): Promise<FetchResult<CategoryResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
+  const { getCategory } = context.extendQuery(
+    customQuery, { getCategory: { query, variables: params } }
+  );
+
   const response = await apolloClient.query({
-    query,
-    fetchPolicy: 'no-cache',
-    variables: params
+    query: gql`${getCategory.query}`,
+    variables: getCategory.variables,
+    fetchPolicy: 'no-cache'
   });
 
   return response;

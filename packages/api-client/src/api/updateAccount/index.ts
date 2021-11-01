@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import gql from 'graphql-tag';
 import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import { FetchResult } from 'apollo-link/lib/types';
@@ -18,8 +19,8 @@ export default async function updateAccount(
   );
 
   const response = await apolloClient.mutate({
-    mutation: updateAccount.mutation,
-    variables: updateAccount.params,
+    mutation: gql`${updateAccount.mutation}`,
+    variables: updateAccount.variables,
     fetchPolicy: 'no-cache'
   });
 
