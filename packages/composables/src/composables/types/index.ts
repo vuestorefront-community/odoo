@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FacetSearchResult } from '@vue-storefront/core';
 import {
   Attribute,
@@ -61,3 +62,4 @@ export interface FacetResultsData {
 }
 
 export type SearchData = FacetSearchResult<FacetResultsData>;
+

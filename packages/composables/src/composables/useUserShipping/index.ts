@@ -7,7 +7,7 @@ import {
 import { Partner, GraphQlAddAddressParams, GraphQlDeleteAddressParams, GraphQlUpdateAddressParams } from '@vue-storefront/odoo-api';
 
 const params: UseUserShippingFactoryParams<Partner[], any> = {
-  addAddress: async (context: Context, { address, shipping }) => {
+  addAddress: async (context: Context, { address, shipping, customQuery }) => {
 
     const params: GraphQlAddAddressParams = {
       street: address.street,
@@ -19,21 +19,21 @@ const params: UseUserShippingFactoryParams<Partner[], any> = {
       stateId: Number.parseInt(address.state.id)
     };
 
-    const { data } = await context.$odoo.api.shippingAddAdress(params);
+    const { data } = await context.$odoo.api.shippingAddAdress(params, customQuery);
 
     return [...shipping, data.addAddress];
   },
 
-  deleteAddress: async (context: Context, { address, shipping }) => {
+  deleteAddress: async (context: Context, { address, shipping, customQuery }) => {
     const deleteParams : GraphQlDeleteAddressParams = {
       id: address.id
     };
-    await context.$odoo.api.deleteAddress(deleteParams);
+    await context.$odoo.api.deleteAddress(deleteParams, customQuery);
 
     return shipping.filter(item => item.id !== address.id);
   },
 
-  updateAddress: async (context: Context, { address, shipping }) => {
+  updateAddress: async (context: Context, { address, shipping, customQuery }) => {
 
     const params: GraphQlUpdateAddressParams = {
       id: address.id,
@@ -45,7 +45,7 @@ const params: UseUserShippingFactoryParams<Partner[], any> = {
       countryId: Number.parseInt(address.country.id),
       stateId: Number.parseInt(address.state.id)
     };
-    const { data } = await context.$odoo.api.shippingUpdateAddress(params);
+    const { data } = await context.$odoo.api.shippingUpdateAddress(params, customQuery);
 
     const newList = [...shipping];
     const index = newList.findIndex((item) => item.id === data.updateAddress.id);

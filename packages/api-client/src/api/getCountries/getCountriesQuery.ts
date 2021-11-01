@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export default gql`
   query {
-    countries {
+    countries(pageSize:250) {
       countries {
         id
         name

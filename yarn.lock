@@ -4262,29 +4262,6 @@
     lodash "^4.17.15"
     nuxt-purgecss "^1.0.0"
 
-"@vue-storefront/odoo-api@1.0.0-beta.2":
-  version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@vue-storefront/odoo-api/-/odoo-api-1.0.0-beta.2.tgz#a9da3281b46c156c024abd24ad2293197c264f31"
-  integrity sha512-qYqo0zFxt3c0HlYGvo54yl2D2aY42ioX7Lgv8MPGpUUcJ/4LzsW0N1fpOhdiynBOjP8xNDMVbUTlJM2ws1xoLA==
-  dependencies:
-    "@vue-storefront/core" "2.4.0"
-    apollo-cache-inmemory "^1.6.6"
-    apollo-client "^2.6.10"
-    apollo-link "^1.2.14"
-    apollo-link-error "^1.1.13"
-    apollo-link-http "^1.5.17"
-    graphql "^15.5.0"
-    graphql-tag "^2.12.4"
-    isomorphic-fetch "^3.0.0"
-
-"@vue-storefront/odoo@1.0.0-beta.2":
-  version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@vue-storefront/odoo/-/odoo-1.0.0-beta.2.tgz#ae6113a15cb8934de9be0de93bc23e76fba0879d"
-  integrity sha512-j22PRRXTiJP9dbRe1jAexDU85xbeEzN7T1InSzsWdU30efiVbI02ildJ4I6bhb1DdqUQ/Pjdd0meAiAMgLGknw==
-  dependencies:
-    "@vue-storefront/core" "2.4.0"
-    "@vue-storefront/odoo-api" "1.0.0-beta.2"
-
 "@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@vue/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-1.2.1.tgz#31624a7a505fb14da1d58023725a4c5f270e6a81"

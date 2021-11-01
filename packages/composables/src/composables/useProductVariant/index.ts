@@ -14,7 +14,7 @@ const useProductVariant = (queryParams: Record<string, string>): any => {
 
   const resetPasswordErrors = () => (errors.value = []);
 
-  const searchRealProduct = async ({ productTemplateId, combinationIds }) => {
+  const searchRealProduct = async ({ productTemplateId, combinationIds, customQuery }) => {
     const params: GraphQlGetProductVariantParams = {
       combinationId: combinationIds.map((id) => parseInt(id)),
       productTemplateId
@@ -22,7 +22,7 @@ const useProductVariant = (queryParams: Record<string, string>): any => {
 
     if (combinationIds.length === 0) return;
 
-    const { data } = await context.$odoo.api.getRealProduct(params);
+    const { data } = await context.$odoo.api.getRealProduct(params, customQuery);
 
     realProduct.value = data.productVariant;
   };
