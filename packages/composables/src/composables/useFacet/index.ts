@@ -5,6 +5,7 @@ import { FacetResultsData } from '../types';
 const factoryParams = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   search: async (context: Context, params: SearchResultParams<ParamsFromUrl>): Promise<FacetResultsData> => {
+    const { customQueryProducts, customQueryCategories } = params.input;
     const categoryParams: GraphQlGetCategoryParams = {
       pageSize: 100,
       search: params.input.search,
@@ -20,12 +21,11 @@ const factoryParams = {
         categoryId: params?.input?.filter?.categoryId,
         attributeValueId: params.input?.filter?.attributeValueId?.map(id => parseInt(id))
       }
-
     };
 
-    const { data } = await context.$odoo.api.getCategory(categoryParams, params?.customQuery);
+    const { data } = await context.$odoo.api.getCategory(categoryParams, customQueryCategories);
 
-    const { data: productData } = await context.$odoo.api.getProductTemplatesList(productParams);
+    const { data: productData } = await context.$odoo.api.getProductTemplatesList(productParams, customQueryProducts);
 
     return {
       categories: data.categories.categories,

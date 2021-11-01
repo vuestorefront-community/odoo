@@ -14,7 +14,7 @@ const useProductVariant = (queryParams: Record<string, string>): any => {
 
   const resetPasswordErrors = () => (errors.value = []);
 
-  const searchRealProduct = async ({ productTemplateId, combinationIds }, customQuery) => {
+  const searchRealProduct = async ({ productTemplateId, combinationIds, customQuery }) => {
     const params: GraphQlGetProductVariantParams = {
       combinationId: combinationIds.map((id) => parseInt(id)),
       productTemplateId
