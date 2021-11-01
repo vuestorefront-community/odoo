@@ -523,6 +523,8 @@ export type ParamsFromUrl = {
   search: string;
   categorySlug?: string;
   sort: ProductSortInput;
+  customQueryProducts: any;
+  customQueryCategories: any;
 };
 
 export interface AgnosticFacetSearchParams {
@@ -539,5 +541,4 @@ export interface AgnosticFacetSearchParams {
 export interface SearchResultParams<S> {
     data: S;
     input: AgnosticFacetSearchParams;
-    customQuery: any
 }
