@@ -56,7 +56,9 @@ If you have any questions about this integration we will be happy to answer them
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://www.promptequation.com/"><img src="https://avatars.githubusercontent.com/u/21957046?v=4?s=80" width="80px;" alt=""/><br /><sub><b>cpintofonseca</b></sub></a><br /><a href="https://github.com/vuestorefront/odoo/commits?author=cpintofonseca" title="Code">💻</a></td>
+    <td align="center"><a href="http://www.promptequation.com/"><img src="https://avatars.githubusercontent.com/u/7774534?v=4?s=80" width="80px;" alt=""/><br /><sub><b>LMuniz</b></sub></a><br />
+    <a href="https://github.com/vuestorefront/odoo/commits?author=LeoMunizOdoo " title="Code">💻</a></td>
+    <td align="center"><a href="http://www.promptequation.com/"><img src="https://avatars.githubusercontent.com/u/21957046?v=4?s=80" width="80px;" alt=""/><br /><sub><b>cpintofonseca</b></sub></a><br />    <a href="https://github.com/vuestorefront/odoo/commits?author=cpintofonseca" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/SDMonteiro"><img src="https://avatars.githubusercontent.com/u/68434298?v=4?s=80" width="80px;" alt=""/><br /><sub><b>SDMonteiro</b></sub></a><br /><a href="https://github.com/vuestorefront/odoo/commits?author=SDMonteiro" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/brunoodoogap"><img src="https://avatars.githubusercontent.com/u/84967663?v=4?s=80" width="80px;" alt=""/><br /><sub><b>brunoodoogap</b></sub></a><br /><a href="https://github.com/vuestorefront/odoo/commits?author=brunoodoogap" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/dduarte-odoogap"><img src="https://avatars.githubusercontent.com/u/18329970?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Diogo Duarte</b></sub></a><br /><a href="https://github.com/vuestorefront/odoo/commits?author=dduarte-odoogap" title="Code">💻</a></td>
