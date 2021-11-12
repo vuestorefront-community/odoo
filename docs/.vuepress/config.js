@@ -1,31 +1,29 @@
 const { description } = require('../../package')
 
 module.exports = {
-  /**
-   * Ref：https://v1.vuepress.vuejs.org/config/#title
-   */
   title: null,
-  /**
-   * Ref：https://v1.vuepress.vuejs.org/config/#description
-   */
+  base: '/',
   description: description,
-
-  /**
-   * Extra tags to be injected to the page HTML `<head>`
-   *
-   * ref：https://v1.vuepress.vuejs.org/config/#head
-   */
   head: [
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
   ],
-
-  /**
-   * Theme configuration, here is the default theme configuration for VuePress.
-   *
-   * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
-   */
+  configureWebpack: (config) => {
+    config.module.rules = config.module.rules.map(rule => ({
+      ...rule,
+      use: rule.use && rule.use.map(useRule => ({
+        ...useRule,
+        options: useRule.loader === 'url-loader' ?
+          /**
+            Hack for loading images properly.
+            ref: https://github.com/vuejs/vue-loader/issues/1612#issuecomment-559366730
+           */
+          {  ...useRule.options, esModule: false } :
+          useRule.options
+      }))
+    }))
+  },
   themeConfig: {
     logo: '/assets/logo.png',
     repo: '',
