@@ -37,7 +37,9 @@ module.exports = {
         link: 'https://vsf.labs.odoogap.com/',
       },
       { text: 'Vue Storefront', link: 'https://vuestorefront.io/' },
-      { text: 'Core Documentation', link: 'https://docs.vuestorefront.io/v2/' }
+      { text: 'GitHub', link: '<% YOUR REPOSITORY URL %>'},
+      { text: 'Core Documentation', link: 'https://docs.vuestorefront.io/v2/' },
+      { text: 'Roadmap', link: '<% YOUR ROADMAP URL %>'}
     ],
     sidebar: [
       {
@@ -78,4 +80,5 @@ module.exports = {
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
   ]
+  
 }
