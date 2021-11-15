@@ -1,22 +1,21 @@
 /* istanbul ignore file */
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {
   Context,
+  CustomQuery,
   useUserOrderFactory,
   UseUserOrderFactoryParams
 } from '@vue-storefront/core';
-import { OrdersResponse, OrderSearchParams } from '../types';
+import { GraphQlOrdersParams, Order } from '@vue-storefront/odoo-api';
 
-const params: UseUserOrderFactoryParams<OrdersResponse, OrderSearchParams> = {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  searchOrders: async (context: Context, params: OrderSearchParams): Promise<OrdersResponse> => {
-    console.log('Mocked: searchOrders');
+const params: UseUserOrderFactoryParams<Order[], GraphQlOrdersParams> = {
+  searchOrders: async (context: Context, params: GraphQlOrdersParams & { customQuery?: CustomQuery })=> {
 
-    return {
-      data: [],
-      total: 0
-    };
+    const { data } = await context.$odoo.api.ordersGet(params, params?.customQuery);
+    console.log(data?.orders?.orders);
+
+    return data?.orders?.orders || [];
   }
 };
 
-export default useUserOrderFactory<OrdersResponse, OrderSearchParams>(params);
+export default useUserOrderFactory<Order[], GraphQlOrdersParams>(params);
