@@ -142,12 +142,16 @@ export type CountriesResult = {
   countries: Countries
 };
 
-export type OrdersResponse = {
-  orders: Order[]
-};
-
 export type PaymentMakeExternalResult = {
   makePayment: PaymentForm
+};
+
+export type Orders = {
+  orders: Order[];
+}
+
+export type OrdersResponse = {
+  orders: Orders
 };
 
 export type ShippingUpdateAddressResponse = {
@@ -503,6 +507,7 @@ export type GraphQlOrdersParams = {
   currentPage: number;
   pageSize: number;
   sort: OrderSortInput
+  [x: string]: any;
 };
 
 export type GraphQlGetCountryParams = {
