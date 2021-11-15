@@ -37,3 +37,5 @@ export { default as deleteAddress } from './deleteAddress';
 export { default as paymentLoadProviders } from './paymentLoadProviders';
 export { default as paymentMakeExternal } from './paymentMakeExternal';
 export { default as paymentConfirmation } from './paymentConfirmation';
+
+export { default as ordersGet } from './ordersGet';

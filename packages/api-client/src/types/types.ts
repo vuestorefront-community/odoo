@@ -79,6 +79,13 @@ export type CategoryFilterInput = {
   parent: boolean;
 };
 
+export type OrderSortInput = {
+  id: SortEnum
+  dateOrder: SortEnum
+  name: SortEnum
+  state: SortEnum
+};
+
 export type ProductFilterInput = {
   categoryId?: number[];
   attributeValueId?: number[];
@@ -133,6 +140,10 @@ export type Countries = {
 
 export type CountriesResult = {
   countries: Countries
+};
+
+export type OrdersResponse = {
+  orders: Order[]
 };
 
 export type PaymentMakeExternalResult = {
@@ -486,6 +497,12 @@ export type CountryFiltersInput = {
 
 export type GraphQlMakePaymentParams = {
   paymentAcquireId: number;
+};
+
+export type GraphQlOrdersParams = {
+  currentPage: number;
+  pageSize: number;
+  sort: OrderSortInput
 };
 
 export type GraphQlGetCountryParams = {
