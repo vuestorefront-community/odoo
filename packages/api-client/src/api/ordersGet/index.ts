@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import { FetchResult } from 'apollo-link/lib/types';
-import query from './ordersGet';
+import query from './ordersGetQuery';
 import { GraphQlOrdersParams, OrdersResponse } from '../../index';
 export default async function ordersGet(
   context: Context,

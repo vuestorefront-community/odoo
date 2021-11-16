@@ -37,9 +37,8 @@ module.exports = {
         link: 'https://vsf.labs.odoogap.com/',
       },
       { text: 'Vue Storefront', link: 'https://vuestorefront.io/' },
-      { text: 'GitHub', link: '<% YOUR REPOSITORY URL %>'},
+      { text: 'GitHub', link: 'https://github.com/vuestorefront/odoo'},
       { text: 'Core Documentation', link: 'https://docs.vuestorefront.io/v2/' },
-      { text: 'Roadmap', link: '<% YOUR ROADMAP URL %>'}
     ],
     sidebar: [
       {
