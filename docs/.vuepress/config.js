@@ -68,6 +68,7 @@ module.exports = {
           ['/composables/useUser', 'useUser'],
           ['/composables/useUserBilling', 'useUserBilling'],
           ['/composables/useWishlist', 'useWishlist'],
+          ['/composables/customQueries', 'customQueries'],
         ]
       }
     ],
