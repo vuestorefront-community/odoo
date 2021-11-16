@@ -37,12 +37,6 @@ class ProductTemplate(models.Model):
         return super(ProductTemplate, self).unlink()
 
 
-class ProductProduct(models.Model):
-    _inherit = 'product.product'
-
-    lst_price = fields.Float(store=True)
-
-
 class ProductPublicCategory(models.Model):
     _inherit = 'product.public.category'
 

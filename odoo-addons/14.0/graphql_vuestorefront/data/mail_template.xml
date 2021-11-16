@@ -4,7 +4,7 @@
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 -->
 <odoo>
-    <data noupdate="0">
+    <data noupdate="1">
         <!-- Email template for reset password -->
         <record id="website_reset_password_email" model="mail.template">
             <field name="name">Website Reset Password</field>
