@@ -8,6 +8,12 @@
     "lib"
   ],
   "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./lib",
+    "sourceMap": true,
+    "importHelpers": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
     "resolveJsonModule": true,
     "paths": {
