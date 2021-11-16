@@ -12,7 +12,6 @@ const params: UseUserOrderFactoryParams<Order[], GraphQlOrdersParams> = {
   searchOrders: async (context: Context, params: GraphQlOrdersParams & { customQuery?: CustomQuery })=> {
 
     const { data } = await context.$odoo.api.ordersGet(params, params?.customQuery);
-    console.log(data?.orders?.orders);
 
     return data?.orders?.orders || [];
   }

@@ -7,9 +7,9 @@ import { Order, OrderLine } from '@vue-storefront/odoo-api';
 
 export const getDate = (order: Order): string => order?.dateOrder?.toString() || '-';
 
-export const getId = (order: Order): string => order?.id.toString();
+export const getId = (order: Order): string => order?.id?.toString() || '';
 
-export const getStatus = (order: Order): string => order?.stage.toString() || 'Failed';
+export const getStatus = (order: Order): string => order?.stage?.toString() || 'Failed';
 
 export const getPrice = (order: Order): number | null => order?.amountTotal || 0;
 
@@ -25,7 +25,7 @@ export const getItemPrice = (item: Order): number => 0;
 
 export const getFormattedPrice = (price: number) => String(price);
 
-export const getOrdersTotal = (orders: any) => 0;
+export const getOrdersTotal = (orders: any) => orders?.length || 0;
 
 const orderGetters: UserOrderGetters<Order, OrderLine> = {
   getDate,
