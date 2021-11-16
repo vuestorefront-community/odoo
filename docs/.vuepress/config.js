@@ -55,7 +55,7 @@ module.exports = {
       },
       {
         title: 'Composables',
-        collapsable: false,
+        collapsable: true,
         children: [
           ['/composables/useCart', 'useCart'],
           ['/composables/useCategory', 'useCategory'],
@@ -71,7 +71,14 @@ module.exports = {
           ['/composables/useOrder', 'useOrder'],
           ['/composables/customQueries', 'customQueries'],
         ]
-      }
+      },
+      {
+        title: 'Api',
+        collapsable: true,
+        children: [
+          ['/api/list', 'List'],
+        ]
+      },
     ],
   },
 
