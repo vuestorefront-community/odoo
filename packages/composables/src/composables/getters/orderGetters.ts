@@ -1,33 +1,33 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* istanbul ignore file */
 
 import { UserOrderGetters } from '@vue-storefront/core';
-import { Order, OrderItem } from '../types';
+import { Order, OrderLine } from '@vue-storefront/odoo-api';
 
-export const getDate = (order: any): string => order?.date || '123';
+export const getDate = (order: Order): string => order?.dateOrder?.toString() || '-';
 
-export const getId = (order: any): string =>
-  order?.id || Math.floor(Math.random() * 100);
+export const getId = (order: Order): string => order?.id?.toString() || '';
 
-export const getStatus = (order: any): string => order?.status || 'Failed';
+export const getStatus = (order: Order): string => order?.stage?.toString() || 'Failed';
 
-export const getPrice = (order: any): number | null => order?.price || 0;
+export const getPrice = (order: Order): number | null => order?.amountTotal || 0;
 
-export const getItems = (order: any): any[] => order?.items || [];
+export const getItems = (order: Order): OrderLine[] => order?.orderLines || [];
 
-export const getItemSku = (item: any): string => item?.sku || 0;
+export const getItemSku = (item: Order): string => item?.name || '';
 
-export const getItemName = (item: any): string => item?.name || 0;
+export const getItemName = (item: Order): string => item?.name || '';
 
-export const getItemQty = (item: any): number => item?.qty || 0;
+export const getItemQty = (item: Order): number => item?.orderLines?.length || 0;
 
-export const getItemPrice = (item: any): number => item?.price?.current || 0;
+export const getItemPrice = (item: Order): number => 0;
 
 export const getFormattedPrice = (price: number) => String(price);
 
-export const getOrdersTotal = (orders: any) => orders.total;
+export const getOrdersTotal = (orders: any) => orders?.length || 0;
 
-const orderGetters: UserOrderGetters<Order, OrderItem> = {
+const orderGetters: UserOrderGetters<Order, OrderLine> = {
   getDate,
   getId,
   getStatus,

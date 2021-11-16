@@ -1,16 +1,13 @@
-import { CustomQuery } from '@vue-storefront/core';
-import { FetchResult } from 'apollo-link';
-import {
-  BillingUpdateAddressResult, CartAddItemResult, CartLoadResult, CartRemoveItemResult, CategoryResult, DefaultGraphQlMutationResponse,
-  GraphQlAddAddressParams, GraphQlCartAddItemParams, GraphQlCartRemoveItemParams, GraphQlCartUpdateItemQtyParams, GraphQlGetCategoryParams,
-  GraphQlGetCountryParams, GraphQlGetProductParams, GraphQlGetProductTemplateParams, GraphQlGetProductVariantParams, GraphQlLoginParams,
-  GraphQlMakePaymentParams, GraphQlResetPasswordParams, GraphQlSendResetPasswordParams, GraphQlUpdateAccountParams, GraphQlUpdateAddressParams,
-  GraphQlWishlistAddItemParams, GraphQlWishlistRemoveItemParams, LoadUserResult, LoginResult, Partner, ProductResult, ProductVariantResult,
-  RegisterResult, ShippingAddAddresResponse, ShippingUpdateAddressResponse, SingleProductResult, WishlistLoadResponse, WishlistAddItemResponse,
-  WishlistRemoveItemResponse, ShippingGetDeliveryMethodsResult, PaymentMakeExternalResult, CountryStatesResult, CountriesResult,
-  PaymentLoadProvidersResult, BillingGetAddressResult, GraphQlDeleteAddressParams, ShippingGetAddresessResult, BillingAddAddresResponse,
-  OrdersResponse, GraphQlOrdersParams
-} from './types';
+# API
+
+## Method List
+All Odoo current API methods.
+<br>
+The name of the methods can be used to implement custom queries.
+
+
+```ts
+// packages/theme/middleware.config.js
 
 export interface OdooApiMethods {
   getCategory(params: GraphQlGetCategoryParams, customQuery?: CustomQuery): Promise<FetchResult<CategoryResult>>;
@@ -55,3 +52,6 @@ export interface OdooApiMethods {
 
   ordersGet(params: GraphQlOrdersParams, customQuery?: CustomQuery): Promise<FetchResult<OrdersResponse>>;
 }
+
+
+```

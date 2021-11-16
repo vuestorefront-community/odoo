@@ -3,7 +3,6 @@
 
 import { Context, useUserFactory, UseUserFactoryParams} from '@vue-storefront/core';
 import { Partner, GraphQlUpdateAccountParams, GraphQlLoginParams, AgnosticUser } from '@vue-storefront/odoo-api';
-import { getAgnosticUserFromUser} from '../getters/userGetters';
 const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, any> = {
   load: async (context: Context) => {
     const user = context.$odoo.config.app.$cookies.get('odoo-user');

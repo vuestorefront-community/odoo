@@ -47,7 +47,7 @@ export type ProductsResponse = {
 export type OrderSearchParams = Record<string, any>;
 
 export type OrdersResponse = {
-  data: any[];
+  results: any[];
   total: number;
 };
 
