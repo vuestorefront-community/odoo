@@ -5,6 +5,8 @@ order {
   amountTotal
   amountTax
   amountDelivery
+  dateOrder
+  orderUrl
   stage
   orderLines {
     id
