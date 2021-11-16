@@ -4,12 +4,12 @@ import { Context, CustomQuery } from '@vue-storefront/core';
 import ApolloClient from 'apollo-client';
 import { FetchResult } from 'apollo-link/lib/types';
 import query from './ordersGet';
-import { GraphQlOrdersParams } from '../../index';
+import { GraphQlOrdersParams, OrdersResponse } from '../../index';
 export default async function ordersGet(
   context: Context,
   params: GraphQlOrdersParams,
   customQuery?: CustomQuery
-): Promise<FetchResult> {
+): Promise<FetchResult<OrdersResponse>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   const { ordersGet } = context.extendQuery(
@@ -17,8 +17,9 @@ export default async function ordersGet(
   );
 
   return await apolloClient.query({
+    query: gql`${ordersGet.query}`,
     variables: ordersGet.variables,
-    query: gql`${ordersGet.query}`
+    fetchPolicy: 'no-cache'
   });
 
 }
