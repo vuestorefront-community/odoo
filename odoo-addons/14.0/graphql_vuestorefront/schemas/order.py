@@ -70,7 +70,7 @@ class OrderQuery(graphene.ObjectType):
         order = get_document_with_check_access(SaleOrder, [('id', '=', id)], error_msg=error_msg)
         if not order:
             raise GraphQLError(_(error_msg))
-        return order
+        return order.sudo()
 
     @staticmethod
     def resolve_orders(self, info, current_page, page_size, sort):
@@ -93,7 +93,7 @@ class OrderQuery(graphene.ObjectType):
         orders = get_document_with_check_access(SaleOrder, domain, sort_order, page_size, offset,
                                                 error_msg='Sale Order does not exist.')
         total_count = get_document_count_with_check_access(SaleOrder, domain)
-        return OrderList(orders=orders, total_count=total_count)
+        return OrderList(orders=orders.sudo(), total_count=total_count)
 
     @staticmethod
     def resolve_delivery_methods(self, info):
