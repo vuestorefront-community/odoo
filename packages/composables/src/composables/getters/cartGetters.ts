@@ -79,6 +79,10 @@ export const getCartOrderNumber = (cart: Cart): string => cart.order.name;
 
 export const getCartState = (cart: Cart): OrderStage => cart.order.stage;
 
+const getCartAmountTax = (cart: Cart): number => {
+  return cart?.order?.amountTax || 0;
+};
+
 const cartGetters: CartGetters<Cart, LineItem> = {
   getTotals: getCartTotals,
   getShippingPrice: getCartShippingPrice,
@@ -94,7 +98,8 @@ const cartGetters: CartGetters<Cart, LineItem> = {
   getCoupons,
   getDiscounts,
   getOrderNumber: getCartOrderNumber,
-  getStage: getCartState
+  getStage: getCartState,
+  getAmountTax: getCartAmountTax
 };
 
 export default cartGetters;
