@@ -7,11 +7,11 @@ export enum SortEnum {
 }
 
 export enum OrderStage {
-  Quotation,
-  QuotationSent,
-  SalesOrder,
-  Locked,
-  Cancelled
+  Quotation = 'Quotation',
+  QuotationSent = 'QuotationSent',
+  SalesOrder = 'SalesOrder',
+  Locked = 'Locked',
+  Cancelled = 'Cancelled'
 }
 
 export declare type Currency = {
