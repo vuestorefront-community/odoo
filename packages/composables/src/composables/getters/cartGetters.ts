@@ -64,7 +64,7 @@ export const getCartTotals = (cart: Cart): AgnosticTotals => {
 };
 
 export const getCartShippingPrice = (cart: Cart): number =>
-  cart.order.amountDelivery;
+  cart?.order?.amountDelivery || 0;
 
 export const getCartTotalItems = (cart: Cart): number =>
   cart?.order?.orderLines?.length || 0;
