@@ -46,6 +46,7 @@ export const usePaymentFactory = < PAYMENT_PROVIDER, PAYMENT_RESPONSE, API exten
 
       const getPaymentProviderList = async (params): Promise<PAYMENT_PROVIDER[]> => {
         try {
+          loading.value = true;
           const response = await _factoryParams.getPaymentProviderList(params);
 
           providerList.value = response;
@@ -54,18 +55,23 @@ export const usePaymentFactory = < PAYMENT_PROVIDER, PAYMENT_RESPONSE, API exten
         } catch (err) {
           error.value.getPaymentProviderList = err;
           Logger.error(`UsePayment/${id}/getPaymentProviderList`, err);
+        } finally {
+          loading.value = false;
         }
       };
 
       const getPaymentConfirmation = async (): Promise<PAYMENT_RESPONSE> => {
 
         try {
+          loading.value = true;
           const response = await _factoryParams.getPaymentConfirmation();
 
           return response;
         } catch (err) {
           error.value.getPaymentConfirmation = err;
           Logger.error(`UsePayment/${id}/getPaymentConfirmation`, err);
+        } finally {
+          loading.value = false;
         }
       };
 
