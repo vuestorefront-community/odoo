@@ -1,2 +1,0 @@
-graphene
-graphql-server-core
