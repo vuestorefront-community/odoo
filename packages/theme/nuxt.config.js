@@ -57,6 +57,10 @@ export default {
   },
   loading: { color: '#fff' },
   plugins: [],
+  serverMiddleware: [
+    // Server-side redirects
+    '~/serverMiddleware/redirects',
+  ],
   buildModules: [
     // to core
     '@nuxtjs/pwa',
