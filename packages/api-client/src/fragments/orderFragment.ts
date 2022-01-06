@@ -8,6 +8,19 @@ order {
   dateOrder
   orderUrl
   stage
+  websiteOrderLine {
+    id
+    name
+    product {
+      id
+      name
+      image
+      image
+      displayName
+    }
+    quantity
+    priceTotal
+  }
   orderLines {
     id
     name
