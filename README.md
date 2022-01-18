@@ -14,11 +14,11 @@ Check our [demo](https://vsf.labs.odoogap.com/) server (it's a dev server so cou
 
 
 ```sh
-1. git clone https://github.com/vuestorefront/odoo.git
+1. git clone https://github.com/vuestorefront-community/odoo
 2. yarn install
 3. yarn build # (optional) Verify if everything works properly by building all three projects
 4. yarn dev
-5. If you want to use your own Odoo server you will need to add the folder odoo-addons to your server
+5. If you want to use your own Odoo server you will need to add the [odoo-addons](https://github.com/vuestorefront/odoo) repository to your server
 ```
 
 Want to contribute? Ping us on `odoo` channel on [our Discord](https://discord.vuestorefront.io) or email us at info (at) odoogap.com!
@@ -26,7 +26,6 @@ Want to contribute? Ping us on `odoo` channel on [our Discord](https://discord.v
 
 ## Directory structure
 
-* **odoo-addons** - modules you need for Odoo;
 * **packages/api-client** - communicates with a backend;
 * **packages/composables** - exposes composable functions used to retrieve data using `api-client` and to map them to universal data formats using `getters`;
 * **packages/theme** - `nuxt` project that glues everything together. It extends our core theme and uses `composables` to retrieve data.
@@ -35,7 +34,7 @@ Want to contribute? Ping us on `odoo` channel on [our Discord](https://discord.v
 
 - [Vue Storefront Documentation](https://docs.vuestorefront.io/v2/)
 - [Odoo integration Documentation](https://docs.vuestorefront.io/odoo)
-- [Odoo integration Documentation](https://github.com/vuestorefront/odoo)
+- [Odoo Backend Modules](https://github.com/vuestorefront/odoo)
 
 ## Support
 
