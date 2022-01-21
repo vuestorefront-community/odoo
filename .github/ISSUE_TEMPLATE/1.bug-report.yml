@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report, please make sure to [search for existing issues](https://github.com/vuestorefront-community/<% REPOSITORY %>/issues) before filing a new one!
+        Thanks for taking the time to fill out this bug report, please make sure to [search for existing issues](https://github.com/vuestorefront-community/odoo/issues) before filing a new one!
   - type: textarea
     id: whattoexpect
     attributes:
@@ -73,7 +73,7 @@ body:
     id: terms
     attributes:
       label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/vuestorefront-community/<% REPOSITORY %>/blob/master/CODE_OF_CONDUCT.md)
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/vuestorefront-community/odoo/blob/master/CODE_OF_CONDUCT.md)
       options:
         - label: I agree to follow this project's Code of Conduct
           required: true
