@@ -1,10 +1,11 @@
 const { description } = require('../../package')
 
 module.exports = {
-  title: null,
+  title: 'Vue Storefront 2 for Odoo',
   base: '/',
   description: description,
   head: [
+    ['link', { rel: 'icon', href: '/favicon.png' }],
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
@@ -24,20 +25,32 @@ module.exports = {
       }))
     }))
   },
+  plugins: [
+    '@vuepress/plugin-back-to-top',
+    [
+      '@vuepress/plugin-medium-zoom',
+      {
+        // This selector excludes images from the "Integrations" page
+        selector: 'main :not(.tile-image) > img'
+      }
+    ],
+    '@vuepress/active-header-links',
+    '@vuepress/search'
+  ],
   themeConfig: {
-    logo: '/assets/logo.png',
-    repo: '',
-    editLinks: false,
-    docsDir: '',
-    editLinkText: '',
-    lastUpdated: false,
+    repo: 'https://github.com/vuestorefront-community/odoo/',
+    editLinks: true,
+    docsDir: 'docs',
+    docsBranch: 'develop',
+    editLinkText: 'Edit this page',
+    logo: 'https://user-images.githubusercontent.com/1626923/137092657-fb398d20-b592-4661-a1f9-4135db0b61d5.png',
     nav: [
       {
         text: 'Demo',
         link: 'https://vsf.labs.odoogap.com/',
       },
       { text: 'Vue Storefront', link: 'https://vuestorefront.io/' },
-      { text: 'GitHub', link: 'https://github.com/vuestorefront/odoo'},
+      { text: 'GitHub', link: 'https://github.com/vuestorefront-community/odoo'},
       { text: 'Core Documentation', link: 'https://docs.vuestorefront.io/v2/' },
     ],
     sidebar: [
@@ -72,21 +85,11 @@ module.exports = {
         ]
       },
       {
-        title: 'Api',
-        collapsable: true,
+        title: 'Reference',
         children: [
-          ['/api/list', 'List'],
+          ['/api-reference/', 'API Reference'],
         ]
       },
     ],
   },
-
-  /**
-   * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
-   */
-  plugins: [
-    '@vuepress/plugin-back-to-top',
-    '@vuepress/plugin-medium-zoom',
-  ]
-  
 }
