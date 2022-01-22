@@ -27,10 +27,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vuestorefront/vue-storefront.git"
+    "url": "git+https://github.com/vuestorefront-community/vue-storefront.git"
   },
   "bugs": {
-    "url": "https://github.com/vuestorefront/vue-storefront/issues"
+    "url": "https://github.com/vuestorefront-community/vue-storefront/issues"
   },
-  "homepage": "https://github.com/vuestorefront/vue-storefront#readme"
+  "homepage": "https://github.com/vuestorefront-community/vue-storefront#readme"
 }
