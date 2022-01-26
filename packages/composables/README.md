@@ -14,11 +14,11 @@ Check our [demo](https://vsf.labs.odoogap.com/) server (it's a dev server so cou
 
 
 ```sh
-1. git clone https://github.com/vuestorefront-community/odoo.git
+1. git clone https://github.com/vuestorefront-community/odoo
 2. yarn install
 3. yarn build # (optional) Verify if everything works properly by building all three projects
 4. yarn dev
-5. If you want to use your own Odoo server you will need to add the folder odoo-addons to your server
+5. If you want to use your own Odoo server you will need to add the [odoo-addons](https://github.com/vuestorefront-community/odoo) repository to your server
 ```
 
 Want to contribute? Ping us on `odoo` channel on [our Discord](https://discord.vuestorefront.io) or email us at info (at) odoogap.com!
@@ -26,7 +26,6 @@ Want to contribute? Ping us on `odoo` channel on [our Discord](https://discord.v
 
 ## Directory structure
 
-* **odoo-addons** - modules you need for Odoo;
 * **packages/api-client** - communicates with a backend;
 * **packages/composables** - exposes composable functions used to retrieve data using `api-client` and to map them to universal data formats using `getters`;
 * **packages/theme** - `nuxt` project that glues everything together. It extends our core theme and uses `composables` to retrieve data.
@@ -35,7 +34,7 @@ Want to contribute? Ping us on `odoo` channel on [our Discord](https://discord.v
 
 - [Vue Storefront Documentation](https://docs.vuestorefront.io/v2/)
 - [Odoo integration Documentation](https://docs.vuestorefront.io/odoo)
-- [Odoo integration Documentation](https://github.com/vuestorefront-community/odoo)
+- [Odoo Backend Modules](https://github.com/vuestorefront-community/odoo)
 
 ## Support
 
@@ -58,7 +57,9 @@ If you have any questions about this integration we will be happy to answer them
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://www.promptequation.com/"><img src="https://avatars.githubusercontent.com/u/21957046?v=4?s=80" width="80px;" alt=""/><br /><sub><b>cpintofonseca</b></sub></a><br /><a href="https://github.com/vuestorefront-community/odoo/commits?author=cpintofonseca" title="Code">💻</a></td>
+    <td align="center"><a href="http://www.promptequation.com/"><img src="https://avatars.githubusercontent.com/u/7774534?v=4?s=80" width="80px;" alt=""/><br /><sub><b>LMuniz</b></sub></a><br />
+    <a href="https://github.com/vuestorefront-community/odoo/commits?author=LeoMunizOdoo " title="Code">💻</a></td>
+    <td align="center"><a href="http://www.promptequation.com/"><img src="https://avatars.githubusercontent.com/u/21957046?v=4?s=80" width="80px;" alt=""/><br /><sub><b>cpintofonseca</b></sub></a><br />    <a href="https://github.com/vuestorefront-community/odoo/commits?author=cpintofonseca" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/SDMonteiro"><img src="https://avatars.githubusercontent.com/u/68434298?v=4?s=80" width="80px;" alt=""/><br /><sub><b>SDMonteiro</b></sub></a><br /><a href="https://github.com/vuestorefront-community/odoo/commits?author=SDMonteiro" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/brunoodoogap"><img src="https://avatars.githubusercontent.com/u/84967663?v=4?s=80" width="80px;" alt=""/><br /><sub><b>brunoodoogap</b></sub></a><br /><a href="https://github.com/vuestorefront-community/odoo/commits?author=brunoodoogap" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/dduarte-odoogap"><img src="https://avatars.githubusercontent.com/u/18329970?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Diogo Duarte</b></sub></a><br /><a href="https://github.com/vuestorefront-community/odoo/commits?author=dduarte-odoogap" title="Code">💻</a></td>
