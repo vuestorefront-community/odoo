@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ref } from '@vue/composition-api';
+import { ref } from '@nuxtjs/composition-api';
 import { useVSFContext } from '@vue-storefront/core';
 import { Context } from '@vue-storefront/core';
 import { GraphQlGetCountryParams } from '@vue-storefront/odoo-api';

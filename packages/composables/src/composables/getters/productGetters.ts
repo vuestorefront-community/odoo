@@ -10,12 +10,8 @@ import {
   ProductVariant,
   Attribute
 } from '@vue-storefront/odoo-api';
-import { getCurrentInstance } from '@vue/composition-api';
 
-const getInstance = () => {
-  const vm = getCurrentInstance();
-  return vm.$root as any;
-};
+import { useContext } from '@nuxtjs/composition-api';
 
 type ProductFilters = any;
 
@@ -41,7 +37,7 @@ export const getProductGallery = (
 ): AgnosticMediaGalleryItem[] => {
   const images: AgnosticMediaGalleryItem[] = [];
 
-  const { $config } = getInstance();
+  const { $config } = useContext();
   const normal = `${$config.baseURL}${product?.realProduct?.product?.image?.replace('/', '') || product?.image?.replace('/', '') || ''}`;
   const big = normal;
 
@@ -55,7 +51,7 @@ export const getProductGallery = (
 };
 
 export const getProductCoverImage = (product: Product): string => {
-  const { $config } = getInstance();
+  const { $config } = useContext();
 
   return `${$config.baseURL}${product.image?.replace('/', '')}`;
 };

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context, FactoryParams, PlatformApi, Composable, CustomQuery,
   configureFactoryParams, sharedRef, ComputedProperty, Logger} from '@vue-storefront/core';
-import { computed, Ref } from '@vue/composition-api';
+import { computed, Ref } from '@nuxtjs/composition-api';
 
 export interface UsePaymentErrors {
    getPaymentProviderList: Error;

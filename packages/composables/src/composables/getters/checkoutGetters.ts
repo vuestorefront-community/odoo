@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CheckoutGetters } from '@vue-storefront/core';
 import { Cart, ShippingMethod } from '@vue-storefront/odoo-api';
 
 export const getShippingMethodId = (shippingMethod: ShippingMethod): string =>
@@ -18,7 +17,7 @@ export const getShippingMethodPrice = (
 
 export const getFormattedPrice = (price: number): string => String(price);
 
-const checkoutGetters: CheckoutGetters<ShippingMethod> = {
+const checkoutGetters = {
   getShippingMethodId,
   getShippingMethodName,
   getShippingMethodDescription,

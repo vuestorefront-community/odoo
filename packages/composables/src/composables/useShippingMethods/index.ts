@@ -1,6 +1,6 @@
 /* eslint-disable no-prototype-builtins */
 import { Context, useVSFContext } from '@vue-storefront/core';
-import { ref } from '@vue/composition-api';
+import { ref } from '@nuxtjs/composition-api';
 
 const useShipping = (): any => {
   const context: Context = useVSFContext();
