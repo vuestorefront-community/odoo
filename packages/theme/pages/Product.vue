@@ -318,7 +318,7 @@ export default {
 
     onSSR(async () => {
       await searchRealProduct({
-        productTemplateId: id,
+        productTemplateId: parseInt(id),
         combinationIds: Object.values(root.$route.query)
       });
       await search({ id: parseInt(id) });
