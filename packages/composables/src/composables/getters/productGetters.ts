@@ -10,11 +10,14 @@ import {
   ProductVariant,
   Attribute
 } from '@vue-storefront/odoo-api';
+import { getCurrentInstance } from '@vue/composition-api';
+
+const getInstance = () => {
+  const vm = getCurrentInstance();
+  return vm.$root as any;
+};
 
 type ProductFilters = any;
-
-// TODO: Add interfaces for some of the methods in core
-// Product
 
 export const getProductName = (product: Product): string =>
   product?.name || 'Product\'s name';
@@ -38,16 +41,24 @@ export const getProductGallery = (
 ): AgnosticMediaGalleryItem[] => {
   const images: AgnosticMediaGalleryItem[] = [];
 
+  const { $config } = getInstance();
+  const normal = `${$config.baseURL}${product?.realProduct?.product.image.replace('/', '') || product?.image.replace('/', '') }`;
+  const big = normal;
+
   images.push({
-    small: product?.smallImage || '',
-    big: product?.realProduct?.product.image || product?.image || '',
-    normal: product?.realProduct?.product.image || product?.image || ''
+    small: `${$config.baseURL}${product?.smallImage?.replace('/', '')}`,
+    big,
+    normal
   });
 
   return images;
 };
 
-export const getProductCoverImage = (product: Product): string => product.image;
+export const getProductCoverImage = (product: Product): string => {
+  const { $config } = getInstance();
+
+  return `${$config.baseURL}${product.image?.replace('/', '')}`;
+};
 
 export const getProductSku = (product: Product): string => product.sku;
 

@@ -14,6 +14,12 @@ import {
   LineItem,
   OrderStage
 } from '@vue-storefront/odoo-api';
+import { getCurrentInstance } from '@vue/composition-api';
+
+const getInstance = () => {
+  const vm = getCurrentInstance();
+  return vm.$root as any;
+};
 
 function roundDecimal(num) {
   const m = Number((Math.abs(num) * 100).toPrecision(15));
@@ -31,8 +37,11 @@ export const getCartItems = (cart: Cart): OrderLine[] => {
 export const getCartItemName = (orderLine: OrderLine): string =>
   orderLine?.product.displayName || 'Product\'s name';
 
-export const getCartItemImage = (orderLine: OrderLine): string =>
-  orderLine?.product?.image;
+export const getCartItemImage = (orderLine: OrderLine): string => {
+  const { $config } = getInstance();
+
+  `${$config.baseURL}${orderLine?.product?.image?.replace('/', '')}`;
+};
 
 export const getCartItemPrice = (orderLine: OrderLine): AgnosticPrice => {
   return {
