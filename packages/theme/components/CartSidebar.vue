@@ -29,7 +29,7 @@
                 "
                 :special-price="
                   cartGetters.getItemPrice(product).special &&
-                    $n(cartGetters.getItemPrice(product).special, 'currency')
+                  $n(cartGetters.getItemPrice(product).special, 'currency')
                 "
                 :stock="99999"
                 :qty="cartGetters.getItemQty(product)"
@@ -40,11 +40,10 @@
                 <template #configuration>
                   <div class="collected-product__properties">
                     <SfProperty
-                      v-for="(attribute,
-                      key) in cartGetters.getItemAttributes(product, [
-                        'color',
-                        'size'
-                      ])"
+                      v-for="(attribute, key) in cartGetters.getItemAttributes(
+                        product,
+                        ['color', 'size']
+                      )"
                       :key="key"
                       :name="key"
                       :value="attribute"
@@ -77,7 +76,10 @@
           <div v-if="totalItems">
             <SfProperty
               name="Total price"
-              class="sf-property--full-width sf-property--large my-cart__total-price"
+              class="
+                sf-property--full-width sf-property--large
+                my-cart__total-price
+              "
             >
               <template #value>
                 <SfPrice :regular="$n(totals.subtotal, 'currency')" />
@@ -115,7 +117,7 @@ import {
   SfCollectedProduct,
   SfImage
 } from '@storefront-ui/vue';
-import { computed } from '@vue/composition-api';
+import { computed } from '@nuxtjs/composition-api';
 import { useCart, useUser, cartGetters } from '@vue-storefront/odoo';
 import { useUiState } from '~/composables';
 import { onSSR } from '@vue-storefront/core';

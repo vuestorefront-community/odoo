@@ -1,19 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable camelcase */
-import { getCurrentInstance } from '@vue/composition-api';
+import { useRoute, useRouter } from '@nuxtjs/composition-api';
 import { Category } from '@vue-storefront/odoo-api/server';
-const getInstance = () => {
-  const vm = getCurrentInstance();
-  return vm.$root as any;
-};
 
 const queryParamsNotFilters = ['page', 'sort', 'itemsPerPage'];
 
 const useUiHelpers = (): any => {
-  const instance = getInstance();
+  const route = useRoute();
+  const router = useRouter();
+  const { params, query } = route.value;
 
   const getFacetsFromURL = () => {
-    const { params, query } = instance.$router.history.current;
+
     let filters: string[] = [];
     if (query) {
       Object.keys(query).forEach((filterKey) => {
@@ -44,7 +42,8 @@ const useUiHelpers = (): any => {
   };
 
   const getCatLink = (category: Category): string => {
-    const { params, query } = instance.$router.history.current;
+    const { params, query } = route.value;
+
     const sort = query.sort ? `?sort=${query.sort}` : '';
 
     return `/c/${params.slug_1}/${category.slug}/${category.id}${sort}`;
@@ -57,12 +56,10 @@ const useUiHelpers = (): any => {
   };
 
   const changeSorting = (sort: string) => {
-    const { query } = instance.$router.history.current;
-    instance.$router.push({ query: { ...query, sort } });
+    router.push({ query: { ...query, sort } });
   };
 
   const facetsFromUrlToFilter = () => {
-    const { query } = instance.$router.history.current;
     const formatedFilters = [];
     Object.keys(query).forEach((label) => {
       if (queryParamsNotFilters.includes(label)) return;
@@ -92,13 +89,12 @@ const useUiHelpers = (): any => {
       formatedFilters[element.filterName] = element.id;
     });
 
-    instance.$router.push({ query: formatedFilters });
+    router.push({ query: formatedFilters });
   };
 
   const changeItemsPerPage = (itemsPerPage) => {
-    const { query } = instance.$router.history.current;
     delete query.page;
-    instance.$router.push({ query: { ...query, itemsPerPage } });
+    router.push({ query: { ...query, itemsPerPage } });
   };
 
   const changeSearchTerm = (term: string) => term;

@@ -24,7 +24,7 @@
 
 <script>
 import { SfButton, SfRadio } from '@storefront-ui/vue';
-import { ref, onMounted, watch } from '@vue/composition-api';
+import { ref, onMounted, watch } from '@nuxtjs/composition-api';
 import { useShippingMethods } from '@vue-storefront/odoo';
 
 export default {

@@ -12,7 +12,7 @@
 <script>
 /* eslint-disable camelcase */
 
-import { onMounted, ref } from '@vue/composition-api';
+import { onMounted, ref } from '@nuxtjs/composition-api';
 import { useAdyenExternalPaymentProvider } from '@vue-storefront/odoo';
 
 export default {
