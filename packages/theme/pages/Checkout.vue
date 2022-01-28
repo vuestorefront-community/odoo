@@ -26,7 +26,7 @@
 <script>
 import { SfSteps, SfButton } from '@storefront-ui/vue';
 import CartPreview from '~/components/Checkout/CartPreview';
-import { computed } from '@vue/composition-api';
+import { computed } from '@nuxtjs/composition-api';
 const STEPS = {
   shipping: 'Shipping',
   billing: 'Billing',

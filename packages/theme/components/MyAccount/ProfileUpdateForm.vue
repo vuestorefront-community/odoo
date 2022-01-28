@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { ref } from '@vue/composition-api';
+import { ref } from '@nuxtjs/composition-api';
 import { useUiNotification } from '~/composables';
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import { useUser, userGetters } from '@vue-storefront/odoo';

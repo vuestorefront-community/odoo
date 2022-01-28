@@ -399,7 +399,7 @@ import {
   SfProperty,
   SfImage
 } from '@storefront-ui/vue';
-import { ref, computed, onMounted } from '@vue/composition-api';
+import { ref, computed, onMounted } from '@nuxtjs/composition-api';
 import {
   useCart,
   useWishlist,

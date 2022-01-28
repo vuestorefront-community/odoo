@@ -154,9 +154,13 @@
 import { SfInput, SfButton, SfSelect, SfCheckbox } from '@storefront-ui/vue';
 import { useCountrySearch } from '@vue-storefront/odoo';
 import { required, min, digits } from 'vee-validate/dist/rules';
-import { watch } from '@vue/composition-api';
+import { watch } from '@nuxtjs/composition-api';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
-import { reactive, onBeforeMount, defineComponent } from '@vue/composition-api';
+import {
+  reactive,
+  onBeforeMount,
+  defineComponent
+} from '@nuxtjs/composition-api';
 extend('required', { ...required, message: 'This field is required' });
 extend('min', {
   ...min,

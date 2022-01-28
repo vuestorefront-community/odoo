@@ -63,11 +63,24 @@ export default {
   ],
   buildModules: [
     // to core
+    '@nuxtjs/composition-api/module',
     '@nuxtjs/pwa',
     '@nuxtjs/web-vitals',
     '@nuxtjs/tailwindcss',
     '@nuxt/typescript-build',
     '@nuxtjs/style-resources',
+    [
+      '@vue-storefront/nuxt-theme',
+      {
+        generate: {
+          replace: {
+            apiClient: '@vue-storefront/odoo-api',
+            composables: '@vue-storefront/odoo'
+          }
+        }
+      }
+    ],
+    ['@vue-storefront/odoo/nuxt', {}],
     [
       '@vue-storefront/nuxt',
       {
@@ -88,24 +101,8 @@ export default {
           prod: ['@vue-storefront/odoo', '@vue-storefront/core']
         }
       }
-    ],
-    // @core-development-only-start
-    [
-      '@vue-storefront/nuxt-theme',
-      {
-        generate: {
-          replace: {
-            apiClient: '@vue-storefront/odoo-api',
-            composables: '@vue-storefront/odoo'
-          }
-        }
-      }
-    ],
-    // @core-development-only-end
-    /* project-only-start
-    ['@vue-storefront/nuxt-theme'],
-    project-only-end */
-    ['@vue-storefront/odoo/nuxt', {}]
+    ]
+
   ],
   publicRuntimeConfig: {
     theme,
@@ -115,7 +112,6 @@ export default {
     '@nuxtjs/pwa',
     'nuxt-precompress',
     '@vue-storefront/middleware/nuxt',
-    'nuxt-i18n',
     'cookie-universal-nuxt',
     'vue-scrollto/nuxt',
     [
@@ -139,7 +135,10 @@ export default {
           }
         ]
       }
-    ]
+    ],
+    ['nuxt-i18n', {
+      baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+    }]
   ],
   nuxtPrecompress: {
     enabled: true,
@@ -225,9 +224,7 @@ export default {
         }
       }
     },
-    detectBrowserLanguage: {
-      cookieKey: 'vsf-locale'
-    }
+    detectBrowserLanguage: false
   },
   styleResources: {
     scss: [
