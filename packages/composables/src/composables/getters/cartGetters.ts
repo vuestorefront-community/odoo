@@ -40,7 +40,7 @@ export const getCartItemName = (orderLine: OrderLine): string =>
 export const getCartItemImage = (orderLine: OrderLine): string => {
   const { $config } = getInstance();
 
-  `${$config.baseURL}${orderLine?.product?.image?.replace('/', '')}`;
+  return `${$config.baseURL}${orderLine?.product?.image?.replace('/', '')}`;
 };
 
 export const getCartItemPrice = (orderLine: OrderLine): AgnosticPrice => {

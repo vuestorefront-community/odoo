@@ -42,11 +42,11 @@ export const getProductGallery = (
   const images: AgnosticMediaGalleryItem[] = [];
 
   const { $config } = getInstance();
-  const normal = `${$config.baseURL}${product?.realProduct?.product.image.replace('/', '') || product?.image.replace('/', '') }`;
+  const normal = `${$config.baseURL}${product?.realProduct?.product?.image?.replace('/', '') || product?.image?.replace('/', '') || ''}`;
   const big = normal;
 
   images.push({
-    small: `${$config.baseURL}${product?.smallImage?.replace('/', '')}`,
+    small: `${$config.baseURL}${product?.smallImage?.replace('/', '') || ''}`,
     big,
     normal
   });
