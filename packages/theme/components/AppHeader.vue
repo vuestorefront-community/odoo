@@ -4,7 +4,6 @@
       class="sf-header--has-mobile-search"
       :class="{
         'header-on-top': isSearchOpen,
-        'sf-header--multiline': topCategories.length > 7,
       }"
     >
       <!-- TODO: add mobile view buttons after SFUI team PR -->
@@ -20,7 +19,7 @@
       <template #navigation>
         <div class="grid grid-cols-6 auto-cols-min">
           <SfHeaderNavigationItem
-            v-for="(category, index) in topCategories"
+            v-for="(category, index) in filteredTopCategories"
             :key="index"
             data-cy="app-header-top-categories"
             class="nav-item"
@@ -229,6 +228,12 @@ export default {
       toggleLoginModal();
     };
 
+    const filteredTopCategories = computed(() =>
+      topCategories.value.filter(
+        (cat) => cat.name === 'WOMEN' || cat.name === 'MEN'
+      )
+    );
+
     watch(
       () => term.value,
       (newVal, oldVal) => {
@@ -258,7 +263,7 @@ export default {
       wishlistHasItens: computed(
         () => wishlist.value?.wishlistItems.length > 0
       ),
-      topCategories,
+      filteredTopCategories,
       accountIcon,
       closeOrFocusSearchBar,
       cartTotalItems,
