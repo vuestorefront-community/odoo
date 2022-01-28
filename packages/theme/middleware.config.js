@@ -1,4 +1,4 @@
-const odooBaseUrl = process.env.BASE_URL;
+const odooBaseUrl = process.env.BASE_URL || 'https://vsfdemo.labs.odoogap.com';
 const graphqlBaseUrl = `${odooBaseUrl}graphql/vsf`;
 
 module.exports = {

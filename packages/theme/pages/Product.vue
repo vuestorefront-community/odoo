@@ -321,7 +321,7 @@ export default {
         productTemplateId: id,
         combinationIds: Object.values(root.$route.query)
       });
-      await search({ id });
+      await search({ id: parseInt(id) });
       addTags([{ prefix: CacheTagPrefix.Product, value: id }]);
       // await searchRelatedProducts({ catId: [categories.value[0]], limit: 8 });
       // await searchReviews({ productId: id });
