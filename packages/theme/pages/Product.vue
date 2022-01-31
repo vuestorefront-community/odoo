@@ -259,23 +259,21 @@ export default {
   name: 'Product',
   transition: 'fade',
   setup(props, { root }) {
+    const { $config } = root;
     const qty = ref(1);
     const { id } = root.$route.params;
     const { query } = root.$route;
     const { size, color } = root.$route.query;
     const configuration = reactive({ size, color });
-    const { products, search, loading: productloading } = useProduct(
-      `products-${id}`
-    );
     const {
-      searchRealProduct,
-      productVariants,
-      realProduct,
-      elementNames
-    } = useProductVariant(query);
-    const { products: relatedProducts, loading: relatedLoading } = useProduct(
-      'relatedProducts'
-    );
+      products,
+      search,
+      loading: productloading
+    } = useProduct(`products-${id}`);
+    const { searchRealProduct, productVariants, realProduct, elementNames } =
+      useProductVariant(query);
+    const { products: relatedProducts, loading: relatedLoading } =
+      useProduct('relatedProducts');
     const { addItem, loading } = useCart();
     const { addTags } = useCache();
 
@@ -309,9 +307,9 @@ export default {
 
     const productGallery = computed(() =>
       productGetters.getGallery(product.value).map((img) => ({
-        mobile: { url: img.small },
-        desktop: { url: img.normal },
-        big: { url: img.big },
+        mobile: { url: `${$config.baseURL}${img.small.replace('/', '')}` },
+        desktop: { url: `${$config.baseURL}${img.normal.replace('/', '')}` },
+        big: { url: `${$config.baseURL}${img.big.replace('/', '')}` },
         alt: product.value.name || 'alt'
       }))
     );

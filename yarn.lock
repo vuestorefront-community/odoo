@@ -3391,18 +3391,18 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@storefront-ui/shared@0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@storefront-ui/shared/-/shared-0.11.0.tgz#bd30c8853734444acd896faffe682c52db41250d"
-  integrity sha512-C1YPF9Ds5717MMoLhpCx8VfTAGgkpfjqwa5/Enzn6HAAuGn6tWavRTK4vDV1rZkRonTcVCFHwLO49MT37S0/Sg==
+"@storefront-ui/shared@0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@storefront-ui/shared/-/shared-0.12.0.tgz#798c10997050b85119b5956bd21a9774b397d37e"
+  integrity sha512-dOcHDOInp+1jOpfT15SrTMGYeu7hCbj35heUedCwP5ONcCF6Alo/jmF3xEp7Ned/ZAUDhjLrjDG4Q75qsX5UGA==
 
-"@storefront-ui/vue@0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@storefront-ui/vue/-/vue-0.11.0.tgz#e197f41fbb9a931cf78d3e9a60a1de94d8bb5b23"
-  integrity sha512-ciBZkR1zIjRZBGxiZPb3RYi9I3iXZNcFwXpU1Ug9qIHsypjrGOrM6lWfSm/LbBSrpxrP0DQ6ok/PKNJeWumvyg==
+"@storefront-ui/vue@0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@storefront-ui/vue/-/vue-0.12.0.tgz#6e58fc74cbf71bc0068ff78a41343b2531218d33"
+  integrity sha512-5EB3vJhyeduy304sNmFmpQk+ZuBveg1XstxOWmvNb9C3OLsTO7aeMyrpDbPmnTTxpuOhpqeKblL08wsqEw9sGg==
   dependencies:
     "@glidejs/glide" "^3.3.0"
-    "@storefront-ui/shared" "0.11.0"
+    "@storefront-ui/shared" "0.12.0"
     body-scroll-lock "^3.0.1"
     cloudinary-build-url "^0.1.1"
     core-js "^3.6.5"
@@ -5694,9 +5694,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001228, caniuse-lite@^1.0.30001286, caniuse-lite@^1.0.30001297:
-  version "1.0.30001303"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001303.tgz#9b168e4f43ccfc372b86f4bc5a551d9b909c95c9"
-  integrity sha512-/Mqc1oESndUNszJP0kx0UaQU9kEv9nNtJ7Kn8AdA0mNnH8eR1cj0kG+NbNuC1Wq/b21eA8prhKRA3bbkjONegQ==
+  version "1.0.30001304"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001304.tgz#38af55ed3fc8220cb13e35e6e7309c8c65a05559"
+  integrity sha512-bdsfZd6K6ap87AGqSHJP/s1V+U6Z5lyrcbBu3ovbCCf8cSYpwTtGrCBObMpJqwxfTbLW6YTIdbb1jEeTelcpYQ==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -16653,9 +16653,9 @@ ua-parser-js@^0.7.28, ua-parser-js@^0.7.30:
   integrity sha512-qLK/Xe9E2uzmYI3qLeOmI0tEOt+TBBQyUIAh4aAgU05FVYzeZrKUdkAZfBNVGRaHVgV0TDkdEngJSw/SyQchkQ==
 
 ufo@^0.7.4, ufo@^0.7.5, ufo@^0.7.7, ufo@^0.7.9:
-  version "0.7.9"
-  resolved "https://registry.yarnpkg.com/ufo/-/ufo-0.7.9.tgz#0268e3734b413c9ed6f3510201f42372821b875c"
-  integrity sha512-6t9LrLk3FhqTS+GW3IqlITtfRB5JAVr5MMNjpBECfK827W+Vh5Ilw/LhTcHWrt6b3hkeBvcbjx4Ti7QVFzmcww==
+  version "0.7.10"
+  resolved "https://registry.yarnpkg.com/ufo/-/ufo-0.7.10.tgz#278942c326e3da344b6b97637ed7f322e817261e"
+  integrity sha512-YTnDRlE1cIofRqOFN8ioAbz9qenDvkgVMSn0cnxvIDjM9sfEOMKB0ybMr+otSlCXMfQ/X35haYRoI7Nua82RrA==
 
 uglify-js@^3.1.4, uglify-js@^3.5.1:
   version "3.15.0"

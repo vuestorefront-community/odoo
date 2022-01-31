@@ -20,7 +20,7 @@
     "@nuxtjs/amp": "^0.5.4",
     "@nuxtjs/composition-api": "0.31.0",
     "@nuxtjs/style-resources": "1.1.0",
-    "@storefront-ui/vue": "0.11.0",
+    "@storefront-ui/vue": "0.12.0",
     "@vue-storefront/cache": "^2.5.4",
     "@vue-storefront/middleware": "2.5.4",
     "@vue-storefront/nuxt": "2.5.4",
