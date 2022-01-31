@@ -24,7 +24,7 @@ const useProductVariant = (queryParams: Record<string, string>): any => {
 
     const { data } = await context.$odoo.api.getRealProduct(params, customQuery);
 
-    realProduct.value = data.productVariant;
+    realProduct.value = data?.productVariant;
   };
 
   return {
