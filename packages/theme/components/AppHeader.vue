@@ -10,6 +10,8 @@
       <template #logo>
         <nuxt-link :to="localePath('/')" class="sf-header__logo">
           <SfImage
+            :width="35"
+            :height="35"
             src="/icons/logo.svg"
             alt="Vue Storefront Next"
             class="sf-header__logo-image"
@@ -160,20 +162,15 @@ export default {
     const isSearchOpen = ref(false);
 
     const { changeSearchTerm } = useUiHelpers();
-    const {
-      toggleCartSidebar,
-      toggleWishlistSidebar,
-      toggleLoginModal
-    } = useUiState();
+    const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal } =
+      useUiState();
 
     const { load: loadUser, isAuthenticated } = useUser();
     const { load: loadCart, cart } = useCart();
     const { load: loadWishlist, wishlist } = useWishlist();
     const { search: searchProductApi, result } = useFacet('AppHeader:Search');
-    const {
-      categories: topCategories,
-      search: searchTopCategoryApi
-    } = useCategory('AppHeader:TopCategories');
+    const { categories: topCategories, search: searchTopCategoryApi } =
+      useCategory('AppHeader:TopCategories');
 
     const isMobile = computed(() => mapMobileObserver().isMobile.get());
 

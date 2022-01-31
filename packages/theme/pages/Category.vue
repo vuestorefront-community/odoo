@@ -150,8 +150,10 @@
               v-for="(product, i) in products"
               :key="product.id"
               :style="{ '--index': i }"
+              :imageWidth="33"
+              :imageHeight="22"
               :title="productGetters.getName(product)"
-              :image="productGetters.getCoverImage(product)"
+              :src="productGetters.getCoverImage(product)"
               :regular-price="
                 $n(productGetters.getPrice(product).regular, 'currency')
               "
@@ -279,6 +281,8 @@
         </div>
         <div v-else key="no-results" class="before-results">
           <SfImage
+            :width="256"
+            :height="176"
             src="/error/error.svg"
             class="before-results__picture"
             alt="error"

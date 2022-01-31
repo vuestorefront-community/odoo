@@ -57,6 +57,8 @@
         <div v-else key="empty-cart" class="empty-cart">
           <div class="empty-cart__banner">
             <SfImage
+              :width="256"
+              :height="176"
               alt="Empty bag"
               class="empty-cart__image"
               src="/icons/empty-cart.svg"
