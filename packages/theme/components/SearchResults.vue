@@ -59,6 +59,10 @@
                   :regular-price="
                     $n(productGetters.getPrice(product).regular, 'currency')
                   "
+                  :imageWidth="216"
+                  :imageHeight="288"
+                  :nuxtImgConfig="{ fit: 'cover' }"
+                  image-tag="nuxt-img"
                   :score-rating="productGetters.getAverageRating(product)"
                   :reviews-count="7"
                   :image="productGetters.getCoverImage(product)"
@@ -75,6 +79,10 @@
                 v-for="(product, index) in products"
                 :key="index"
                 class="result-card"
+                :imageWidth="216"
+                :imageHeight="288"
+                :nuxtImgConfig="{ fit: 'cover' }"
+                image-tag="nuxt-img"
                 :regular-price="
                   $n(productGetters.getPrice(product).regular, 'currency')
                 "
@@ -99,6 +107,8 @@
         </div>
         <div v-else key="no-results" class="before-results">
           <SfImage
+            :width="256"
+            :height="176"
             src="/error/error.svg"
             class="before-results__picture"
             alt="error"
@@ -132,7 +142,7 @@ import {
   SfButton,
   SfImage
 } from '@storefront-ui/vue';
-import { ref, watch, computed } from '@vue/composition-api';
+import { ref, watch, computed } from '@nuxtjs/composition-api';
 import {
   productGetters,
   categoryGetters,

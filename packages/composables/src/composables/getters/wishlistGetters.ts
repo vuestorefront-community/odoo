@@ -11,6 +11,8 @@ import {
   WishlistItem
 } from '@vue-storefront/odoo-api';
 
+import { useContext } from '@nuxtjs/composition-api';
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getWishlistItems = (wishlist: Wishlist): WishlistItem[] => {
   return wishlist.wishlistItems;
@@ -20,8 +22,11 @@ export const getWishlistItemName = (wishlistItem: WishlistItem): string =>
   wishlistItem?.product?.name || 'Product\'s name';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getWishlistItemImage = (wishlistItem: WishlistItem): string =>
-  wishlistItem?.product?.image || 'image';
+export const getWishlistItemImage = (wishlistItem: WishlistItem): string => {
+  const { $config } = useContext();
+
+  return `${$config.baseURL}${wishlistItem?.product?.image?.replace('/', '')}`;
+};
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getWishlistItemPrice = (

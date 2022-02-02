@@ -60,7 +60,8 @@
       <SfButton
         class="promo-code__button"
         @click="() => applyCoupon({ couponCode: promoCode })"
-      >{{ $t('Apply') }}</SfButton>
+        >{{ $t('Apply') }}</SfButton
+      >
     </div>
     <div class="highlighted">
       <SfCharacteristic
@@ -84,7 +85,7 @@ import {
   SfInput,
   SfCircleIcon
 } from '@storefront-ui/vue';
-import { computed, ref } from '@vue/composition-api';
+import { computed, ref } from '@nuxtjs/composition-api';
 import { useCart, checkoutGetters, cartGetters } from '@vue-storefront/odoo';
 
 export default {
@@ -98,7 +99,7 @@ export default {
     SfInput,
     SfCircleIcon
   },
-  setup () {
+  setup() {
     const { cart, removeItem, updateItemQty, applyCoupon } = useCart();
     const listIsHidden = ref(false);
     const promoCode = ref('');
@@ -107,7 +108,9 @@ export default {
     const totalItems = computed(() => cartGetters.getTotalItems(cart.value));
     const totals = computed(() => cartGetters.getTotals(cart.value));
     const discounts = computed(() => cartGetters.getDiscounts(cart.value));
-    const shippingMethodPrice = computed(() => checkoutGetters.getShippingMethodPrice(cart.value));
+    const shippingMethodPrice = computed(() =>
+      checkoutGetters.getShippingMethodPrice(cart.value)
+    );
 
     return {
       shippingMethodPrice,

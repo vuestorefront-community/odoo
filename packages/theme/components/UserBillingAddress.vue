@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { toRef, computed } from '@vue/composition-api';
+import { toRef, computed } from '@nuxtjs/composition-api';
 import { userBillingGetters } from '@vue-storefront/odoo';
 export default {
   name: 'UserBillingAddress',

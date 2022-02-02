@@ -26,6 +26,8 @@
       >
         <SfTableData class="table__image">
           <SfImage
+            :width="256"
+            :height="176"
             :src="cartGetters.getItemImage(product)"
             :alt="cartGetters.getItemName(product)"
           />
@@ -195,7 +197,7 @@ import {
 import { onSSR } from '@vue-storefront/core';
 import { useUiHelpers } from '~/composables';
 
-import { ref, computed } from '@vue/composition-api';
+import { ref, computed } from '@nuxtjs/composition-api';
 import {
   useMakeOrder,
   useCart,

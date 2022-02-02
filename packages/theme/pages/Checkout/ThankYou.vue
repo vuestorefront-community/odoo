@@ -96,7 +96,7 @@
 
 <script>
 import { SfHeading, SfButton, SfCallToAction } from '@storefront-ui/vue';
-import { ref, onMounted } from '@vue/composition-api';
+import { ref, onMounted } from '@nuxtjs/composition-api';
 import { usePayment, useCart, cartGetters } from '@vue-storefront/odoo';
 export default {
   components: {

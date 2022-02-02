@@ -1,3 +1,3 @@
-.topbar {
-  z-index: 1 !important;
+.sf-sidebar__aside {
+  z-index: var(--sidebar-z-index, 2);
 }

@@ -80,6 +80,8 @@
         <div v-else class="empty-wishlist" key="empty-wishlist">
           <div class="empty-wishlist__banner">
             <SfImage
+              :width="256"
+              :height="176"
               src="/icons/empty-cart.svg"
               alt="Empty bag"
               class="empty-wishlist__icon"
@@ -115,7 +117,7 @@ import {
   SfCollectedProduct,
   SfImage
 } from '@storefront-ui/vue';
-import { computed } from '@vue/composition-api';
+import { computed } from '@nuxtjs/composition-api';
 import {
   useWishlist,
   useUser,

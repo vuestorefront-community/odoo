@@ -15,6 +15,8 @@ import {
   OrderStage
 } from '@vue-storefront/odoo-api';
 
+import { useContext } from '@nuxtjs/composition-api';
+
 function roundDecimal(num) {
   const m = Number((Math.abs(num) * 100).toPrecision(15));
   return (Math.round(m) / 100) * Math.sign(num);
@@ -31,8 +33,11 @@ export const getCartItems = (cart: Cart): OrderLine[] => {
 export const getCartItemName = (orderLine: OrderLine): string =>
   orderLine?.product.displayName || 'Product\'s name';
 
-export const getCartItemImage = (orderLine: OrderLine): string =>
-  orderLine?.product?.image;
+export const getCartItemImage = (orderLine: OrderLine): string => {
+  const { $config } = useContext();
+
+  return `${$config.baseURL}${orderLine?.product?.image?.replace('/', '')}`;
+};
 
 export const getCartItemPrice = (orderLine: OrderLine): AgnosticPrice => {
   return {

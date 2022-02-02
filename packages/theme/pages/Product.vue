@@ -6,7 +6,16 @@
     />
     <div class="product">
       <LazyHydrate when-idle>
-        <SfGallery :images="productGallery" class="product__gallery" />
+        <SfGallery
+          :images="productGallery"
+          :imageWidth="422"
+          :imageHeight="644"
+          class="product__gallery"
+          :nuxtImgConfig="{ fit: 'cover' }"
+          :thumb-nuxt-img-config="{ fit: 'cover' }"
+          image-tag="nuxt-img"
+          thumb-image-tag="nuxt-img"
+        />
       </LazyHydrate>
       <div class="product__info">
         <div class="product__header">
@@ -239,7 +248,7 @@ import {
 
 import InstagramFeed from '~/components/InstagramFeed.vue';
 import RelatedProducts from '~/components/RelatedProducts.vue';
-import { ref, computed, reactive } from '@vue/composition-api';
+import { ref, computed, reactive } from '@nuxtjs/composition-api';
 import { useCache, CacheTagPrefix } from '@vue-storefront/cache';
 import {
   useProduct,
@@ -264,18 +273,15 @@ export default {
     const { query } = root.$route;
     const { size, color } = root.$route.query;
     const configuration = reactive({ size, color });
-    const { products, search, loading: productloading } = useProduct(
-      `products-${id}`
-    );
     const {
-      searchRealProduct,
-      productVariants,
-      realProduct,
-      elementNames
-    } = useProductVariant(query);
-    const { products: relatedProducts, loading: relatedLoading } = useProduct(
-      'relatedProducts'
-    );
+      products,
+      search,
+      loading: productloading
+    } = useProduct(`products-${id}`);
+    const { searchRealProduct, productVariants, realProduct, elementNames } =
+      useProductVariant(query);
+    const { products: relatedProducts, loading: relatedLoading } =
+      useProduct('relatedProducts');
     const { addItem, loading } = useCart();
     const { addTags } = useCache();
 
@@ -318,10 +324,10 @@ export default {
 
     onSSR(async () => {
       await searchRealProduct({
-        productTemplateId: id,
+        productTemplateId: parseInt(id),
         combinationIds: Object.values(root.$route.query)
       });
-      await search({ id });
+      await search({ id: parseInt(id) });
       addTags([{ prefix: CacheTagPrefix.Product, value: id }]);
       // await searchRelatedProducts({ catId: [categories.value[0]], limit: 8 });
       // await searchReviews({ productId: id });

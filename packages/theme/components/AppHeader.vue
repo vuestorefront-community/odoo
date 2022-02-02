@@ -4,13 +4,14 @@
       class="sf-header--has-mobile-search"
       :class="{
         'header-on-top': isSearchOpen,
-        'sf-header--multiline': topCategories.length > 7,
       }"
     >
       <!-- TODO: add mobile view buttons after SFUI team PR -->
       <template #logo>
         <nuxt-link :to="localePath('/')" class="sf-header__logo">
           <SfImage
+            :width="35"
+            :height="35"
             src="/icons/logo.svg"
             alt="Vue Storefront Next"
             class="sf-header__logo-image"
@@ -18,16 +19,14 @@
         </nuxt-link>
       </template>
       <template #navigation>
-        <div class="grid grid-cols-6 auto-cols-min">
-          <SfHeaderNavigationItem
-            v-for="(category, index) in topCategories"
-            :key="index"
-            data-cy="app-header-top-categories"
-            class="nav-item"
-            :label="category.name"
-            :link="localePath(`/c/${category.slug}/${category.id}`)"
-          />
-        </div>
+        <SfHeaderNavigationItem
+          v-for="(category, index) in filteredTopCategories"
+          :key="index"
+          data-cy="app-header-top-categories"
+          class="nav-item"
+          :label="category.name"
+          :link="localePath(`/c/${category.slug}/${category.id}`)"
+        />
       </template>
       <template #aside>
         <LocaleSelector class="smartphone-only" />
@@ -133,7 +132,7 @@ import {
   useFacet
 } from '@vue-storefront/odoo';
 import { clickOutside } from '@storefront-ui/vue/src/utilities/directives/click-outside/click-outside-directive.js';
-import { computed, ref, watch } from '@vue/composition-api';
+import { computed, ref, watch } from '@nuxtjs/composition-api';
 import { onSSR } from '@vue-storefront/core';
 import { useUiHelpers } from '~/composables';
 import LocaleSelector from './LocaleSelector';
@@ -161,20 +160,15 @@ export default {
     const isSearchOpen = ref(false);
 
     const { changeSearchTerm } = useUiHelpers();
-    const {
-      toggleCartSidebar,
-      toggleWishlistSidebar,
-      toggleLoginModal
-    } = useUiState();
+    const { toggleCartSidebar, toggleWishlistSidebar, toggleLoginModal } =
+      useUiState();
 
     const { load: loadUser, isAuthenticated } = useUser();
     const { load: loadCart, cart } = useCart();
     const { load: loadWishlist, wishlist } = useWishlist();
     const { search: searchProductApi, result } = useFacet('AppHeader:Search');
-    const {
-      categories: topCategories,
-      search: searchTopCategoryApi
-    } = useCategory('AppHeader:TopCategories');
+    const { categories: topCategories, search: searchTopCategoryApi } =
+      useCategory('AppHeader:TopCategories');
 
     const isMobile = computed(() => mapMobileObserver().isMobile.get());
 
@@ -229,6 +223,12 @@ export default {
       toggleLoginModal();
     };
 
+    const filteredTopCategories = computed(() =>
+      topCategories.value.filter(
+        (cat) => cat.name === 'WOMEN' || cat.name === 'MEN'
+      )
+    );
+
     watch(
       () => term.value,
       (newVal, oldVal) => {
@@ -258,7 +258,7 @@ export default {
       wishlistHasItens: computed(
         () => wishlist.value?.wishlistItems.length > 0
       ),
-      topCategories,
+      filteredTopCategories,
       accountIcon,
       closeOrFocusSearchBar,
       cartTotalItems,

@@ -283,6 +283,7 @@ export type Product = {
 
 export declare type WishlistItem = {
   product: Product;
+  variant: Product;
   id: number;
 };
 
@@ -418,6 +419,7 @@ export type Pagination = {
 
 export type CategoryFilter = Record<string, unknown>;
 export type LineItem = Record<string, unknown>;
+export declare type Store = Record<string, any>
 
 export type DefaultGraphQlMutationResponse = {
   ok: boolean;
@@ -565,3 +567,4 @@ export interface SearchResultParams<S> {
     data: S;
     input: AgnosticFacetSearchParams;
 }
+

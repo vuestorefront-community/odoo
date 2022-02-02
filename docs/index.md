@@ -13,4 +13,3 @@ This integration is being developed and maintained by [ODOOGAP / PROMPTEQUATION]
 
 Check our [demo](https://vsf.labs.odoogap.com/) server (it's a dev server so could be down sometimes)
 
-You will need the backend Odoo modules installed on your instance from: https://github.com/odoogap/vuestorefront.git

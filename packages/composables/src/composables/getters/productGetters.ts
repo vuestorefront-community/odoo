@@ -11,10 +11,9 @@ import {
   Attribute
 } from '@vue-storefront/odoo-api';
 
-type ProductFilters = any;
+import { useContext } from '@nuxtjs/composition-api';
 
-// TODO: Add interfaces for some of the methods in core
-// Product
+type ProductFilters = any;
 
 export const getProductName = (product: Product): string =>
   product?.name || 'Product\'s name';
@@ -38,16 +37,24 @@ export const getProductGallery = (
 ): AgnosticMediaGalleryItem[] => {
   const images: AgnosticMediaGalleryItem[] = [];
 
+  const { $config } = useContext();
+  const normal = `${$config.baseURL}${product?.realProduct?.product?.image?.replace('/', '') || product?.image?.replace('/', '') || ''}`;
+  const big = normal;
+
   images.push({
-    small: product?.smallImage || '',
-    big: product?.realProduct?.product.image || product?.image || '',
-    normal: product?.realProduct?.product.image || product?.image || ''
+    small: `${$config.baseURL}${product?.smallImage?.replace('/', '') || ''}`,
+    big,
+    normal
   });
 
   return images;
 };
 
-export const getProductCoverImage = (product: Product): string => product.image;
+export const getProductCoverImage = (product: Product): string => {
+  const { $config } = useContext();
+
+  return `${$config.baseURL}${product.image?.replace('/', '')}`;
+};
 
 export const getProductSku = (product: Product): string => product.sku;
 
