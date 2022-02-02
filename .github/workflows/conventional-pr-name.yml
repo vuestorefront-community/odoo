@@ -10,5 +10,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install Dependencies
-        run: npm ci @commitlint/config-conventional
+        run: yarn
       - uses: JulienKode/pull-request-name-linter-action@v0.1.2
