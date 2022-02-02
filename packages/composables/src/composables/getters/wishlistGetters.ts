@@ -26,7 +26,6 @@ export const getWishlistItemImage = (wishlistItem: WishlistItem): string => {
   const { $config } = useContext();
 
   return `${$config.baseURL}${wishlistItem?.product?.image?.replace('/', '')}`;
-
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
