@@ -64,6 +64,7 @@ export default {
   buildModules: [
     // to core
     '@nuxtjs/composition-api/module',
+    '@nuxt/image',
     '@nuxtjs/pwa',
     '@nuxtjs/web-vitals',
     '@nuxtjs/tailwindcss',
@@ -111,6 +112,7 @@ export default {
   modules: [
     '@nuxtjs/pwa',
     'nuxt-precompress',
+    '@nuxt/image',
     '@vue-storefront/middleware/nuxt',
     'cookie-universal-nuxt',
     'vue-scrollto/nuxt',
