@@ -19,16 +19,14 @@
         </nuxt-link>
       </template>
       <template #navigation>
-        <div class="grid grid-cols-6 auto-cols-min">
-          <SfHeaderNavigationItem
-            v-for="(category, index) in filteredTopCategories"
-            :key="index"
-            data-cy="app-header-top-categories"
-            class="nav-item"
-            :label="category.name"
-            :link="localePath(`/c/${category.slug}/${category.id}`)"
-          />
-        </div>
+        <SfHeaderNavigationItem
+          v-for="(category, index) in filteredTopCategories"
+          :key="index"
+          data-cy="app-header-top-categories"
+          class="nav-item"
+          :label="category.name"
+          :link="localePath(`/c/${category.slug}/${category.id}`)"
+        />
       </template>
       <template #aside>
         <LocaleSelector class="smartphone-only" />

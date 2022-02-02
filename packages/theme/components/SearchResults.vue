@@ -59,6 +59,10 @@
                   :regular-price="
                     $n(productGetters.getPrice(product).regular, 'currency')
                   "
+                  :imageWidth="216"
+                  :imageHeight="288"
+                  :nuxtImgConfig="{ fit: 'cover' }"
+                  image-tag="nuxt-img"
                   :score-rating="productGetters.getAverageRating(product)"
                   :reviews-count="7"
                   :image="productGetters.getCoverImage(product)"
@@ -75,6 +79,10 @@
                 v-for="(product, index) in products"
                 :key="index"
                 class="result-card"
+                :imageWidth="216"
+                :imageHeight="288"
+                :nuxtImgConfig="{ fit: 'cover' }"
+                image-tag="nuxt-img"
                 :regular-price="
                   $n(productGetters.getPrice(product).regular, 'currency')
                 "

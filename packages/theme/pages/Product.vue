@@ -6,7 +6,16 @@
     />
     <div class="product">
       <LazyHydrate when-idle>
-        <SfGallery :images="productGallery" class="product__gallery" />
+        <SfGallery
+          :images="productGallery"
+          :imageWidth="422"
+          :imageHeight="644"
+          class="product__gallery"
+          :nuxtImgConfig="{ fit: 'cover' }"
+          :thumb-nuxt-img-config="{ fit: 'cover' }"
+          image-tag="nuxt-img"
+          thumb-image-tag="nuxt-img"
+        />
       </LazyHydrate>
       <div class="product__info">
         <div class="product__header">
@@ -259,7 +268,6 @@ export default {
   name: 'Product',
   transition: 'fade',
   setup(props, { root }) {
-    const { $config } = root;
     const qty = ref(1);
     const { id } = root.$route.params;
     const { query } = root.$route;
@@ -307,9 +315,9 @@ export default {
 
     const productGallery = computed(() =>
       productGetters.getGallery(product.value).map((img) => ({
-        mobile: { url: `${$config.baseURL}${img.small.replace('/', '')}` },
-        desktop: { url: `${$config.baseURL}${img.normal.replace('/', '')}` },
-        big: { url: `${$config.baseURL}${img.big.replace('/', '')}` },
+        mobile: { url: img.small },
+        desktop: { url: img.normal },
+        big: { url: img.big },
         alt: product.value.name || 'alt'
       }))
     );
