@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable camelcase */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 
 import { useRoute, useRouter } from '@nuxtjs/composition-api';
 import { Category } from '@vue-storefront/odoo-api/server';
@@ -20,7 +21,7 @@ const useUiHelpers = (): any => {
         if (!queryParamsNotFilters.includes(filterKey)) {
           console.log(query);
 
-          // filters.push(query[filterKey]);
+          filters.push(query[filterKey]);
         }
       });
 
@@ -28,9 +29,9 @@ const useUiHelpers = (): any => {
     }
 
     const pageSize = 10;
-    // query.itemsPerPage ? parseInt(query.itemsPerPage) : 10;
+    query.itemsPerPage ? parseInt(query.itemsPerPage) : 10;
     const sort = '1' as any;
-    // query?.sort?.split(',') || [];
+    query?.sort?.split(',') || [];
     const page = query?.page || 1;
     const categoryId = parseInt(params.slug_3) || parseInt(params.slug_2);
 

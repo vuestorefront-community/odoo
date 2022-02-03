@@ -40,8 +40,8 @@
                 "
                 :stock="99999"
                 :link="localePath(getLocalPathFromWishListItem(product))"
-                image-width="180"
-                image-height="200"
+                :image-width="180"
+                :image-height="200"
                 @click:remove="removeItem({ product })"
                 class="collected-product"
               >
