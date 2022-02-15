@@ -56,7 +56,7 @@ export default {
     }
   },
   loading: { color: '#fff' },
-  plugins: [],
+  plugins: ['~/plugins/getImage.ts'],
   serverMiddleware: [
     // Server-side redirects
     '~/serverMiddleware/redirects'

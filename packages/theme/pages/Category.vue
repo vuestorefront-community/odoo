@@ -153,7 +153,7 @@
               :imageWidth="216"
               :imageHeight="288"
               :title="productGetters.getName(product)"
-              :image="productGetters.getCoverImage(product)"
+              :image="$image(productGetters.getCoverImage(product))"
               :nuxtImgConfig="{ fit: 'cover' }"
               image-tag="nuxt-img"
               :regular-price="
@@ -202,7 +202,7 @@
               image-tag="nuxt-img"
               :title="productGetters.getName(product)"
               :description="productGetters.getDescription(product)"
-              :image="productGetters.getCoverImage(product)"
+              :image="$image(productGetters.getCoverImage(product))"
               :regular-price="
                 $n(productGetters.getPrice(product).regular, 'currency')
               "

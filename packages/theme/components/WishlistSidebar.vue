@@ -29,7 +29,7 @@
               <SfCollectedProduct
                 v-for="product in products"
                 :key="wishlistGetters.getItemSku(product)"
-                :image="wishlistGetters.getItemImage(product)"
+                :image="$image(wishlistGetters.getItemImage(product))"
                 :title="wishlistGetters.getItemName(product)"
                 :regular-price="
                   $n(wishlistGetters.getItemPrice(product).regular, 'currency')
