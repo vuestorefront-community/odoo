@@ -34,7 +34,8 @@ const getGrouped = (
       id: String(value.search),
       value: value.id,
       label: value.name,
-      metadata: value.search
+      metadata: value.search,
+      htmlColor: value.htmlColor
     }))
   }));
 
