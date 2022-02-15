@@ -25,6 +25,7 @@ export const attributesFormatedForCategory = [
     id: '2',
     label: 'Color',
     count: 0,
+    type: 'color',
     options: [
       { type: '', id: '2-3', value: 3, label: 'White', metadata: '2-3' },
       { type: '', id: '2-4', value: 4, label: 'Black', metadata: '2-4' },
@@ -35,6 +36,7 @@ export const attributesFormatedForCategory = [
     id: '4',
     label: 'Size',
     count: 0,
+    type: 'select',
     options: [
       { type: '', id: '4-8', value: 8, label: 'One Size', metadata: '4-8' },
       { type: '', id: '4-9', value: 9, label: '5', metadata: '4-9' },
@@ -71,6 +73,7 @@ export const attributesFormatedForCategory = [
     id: '5',
     label: 'Material',
     count: 0,
+    type: 'radio',
     options: [
       { type: '', id: '5-37', value: 37, label: 'Cotton', metadata: '5-37' }
     ]

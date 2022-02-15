@@ -27,6 +27,7 @@ const getGrouped = (
   const formatedAttribute = searchData?.data?.attributes.map((attribute) => ({
     id: String(attribute.id),
     label: attribute.name,
+    type: attribute.displayType,
     count: 0,
     options: attribute.values.map((value) => ({
       type: '',

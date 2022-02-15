@@ -315,9 +315,9 @@ export default {
 
     const productGallery = computed(() =>
       productGetters.getGallery(product.value).map((img) => ({
-        mobile: { url: img.small },
-        desktop: { url: img.normal },
-        big: { url: img.big },
+        mobile: { url: root.$image(img.small) },
+        desktop: { url: root.$image(img.normal) },
+        big: { url: root.$image(img.big) },
         alt: product.value.name || 'alt'
       }))
     );
