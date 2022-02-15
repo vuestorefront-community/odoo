@@ -23,9 +23,7 @@ export const getWishlistItemName = (wishlistItem: WishlistItem): string =>
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getWishlistItemImage = (wishlistItem: WishlistItem): string => {
-  const { $config } = useContext();
-
-  return `${$config.baseURL}${wishlistItem?.product?.image?.replace('/', '')}`;
+  return wishlistItem?.product?.image || '';
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
