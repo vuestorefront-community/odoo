@@ -39,7 +39,7 @@ export const getProductGallery = (
   const big = normal;
 
   images.push({
-    small: `${product?.smallImage?.replace('/', '') || ''}`,
+    small: `${product?.smallImage || ''}`,
     big,
     normal
   });
