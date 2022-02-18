@@ -22,5 +22,6 @@ export { default as usePayment } from './composables/usePayment';
 export { default as useAdyenExternalPaymentProvider } from './composables/useAdyenExternalPaymentProvider';
 export { default as useShippingMethods } from './composables/useShippingMethods';
 export { default as useStore } from './composables/useStore';
+export { default as useNewsLetter } from './composables/useNewsLetter';
 
 export * from './composables/getters';
