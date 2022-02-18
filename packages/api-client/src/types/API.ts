@@ -53,5 +53,7 @@ export interface OdooApiMethods {
   paymentMakeExternal(params: GraphQlMakePaymentParams, customQuery?: CustomQuery): Promise<FetchResult<PaymentMakeExternalResult>>;
   paymentConfirmation(customQuery?: CustomQuery): Promise<FetchResult>;
 
+  subscribeNewsLetter(customQuery?: CustomQuery): Promise<FetchResult>;
+
   ordersGet(params: GraphQlOrdersParams, customQuery?: CustomQuery): Promise<FetchResult<OrdersResponse>>;
 }

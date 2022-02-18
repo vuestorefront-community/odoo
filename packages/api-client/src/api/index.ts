@@ -38,4 +38,6 @@ export { default as paymentLoadProviders } from './paymentLoadProviders';
 export { default as paymentMakeExternal } from './paymentMakeExternal';
 export { default as paymentConfirmation } from './paymentConfirmation';
 
+export { default as subscribeNewsLetter } from './subscribeNewsLetter';
+
 export { default as ordersGet } from './ordersGet';
