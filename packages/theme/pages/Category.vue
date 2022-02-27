@@ -97,6 +97,7 @@
       <div class="sidebar desktop-only">
         <SfLoader :class="{ loading }" :loading="loading">
           <SfAccordion
+            :multiple="true"
             :open="currentCategoryNameForAccordion"
             showChevron
             transition="sf-expand"
@@ -132,6 +133,17 @@
                   </SfListItem>
                 </SfList>
               </template>
+            </SfAccordionItem>
+            <SfAccordionItem header="Extra">
+              <SfList>
+                <SfListItem>
+                  <SfCheckbox
+                    label="Generic"
+                    v-model="generic"
+                    name="generic"
+                  />
+                </SfListItem>
+              </SfList>
             </SfAccordionItem>
           </SfAccordion>
         </SfLoader>
@@ -372,6 +384,7 @@
             </SfAccordionItem>
           </div>
         </SfAccordion>
+
         <template #content-bottom>
           <div class="filters__buttons">
             <SfButton class="sf-button--full-width" @click="applyFilters">{{
@@ -404,6 +417,7 @@ import {
   SfAccordion,
   SfSelect,
   SfBreadcrumbs,
+  SfCheckbox,
   SfLoader,
   SfColor,
   SfProperty,
@@ -428,6 +442,7 @@ export default {
   setup(props, { root }) {
     const th = useUiHelpers();
     const selectedFilters = ref([]);
+    const generic = ref('');
 
     const { addTags } = useCache();
     const uiState = useUiState();
@@ -553,6 +568,7 @@ export default {
       currentRootCategory,
       currentCategory,
       th,
+      generic,
       products,
       categoryTree,
       loading,
@@ -586,6 +602,7 @@ export default {
     SfProductCard,
     SfProductCardHorizontal,
     SfPagination,
+    SfCheckbox,
     SfMenuItem,
     SfAccordion,
     SfSelect,
