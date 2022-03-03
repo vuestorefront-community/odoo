@@ -19,8 +19,6 @@ const useUiHelpers = (): any => {
     if (query) {
       Object.keys(query).forEach((filterKey) => {
         if (!queryParamsNotFilters.includes(filterKey)) {
-          console.log(query);
-
           filters.push(query[filterKey]);
         }
       });
