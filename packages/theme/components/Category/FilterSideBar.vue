@@ -229,9 +229,12 @@ export default defineComponent({
       const selectedValue = selectedFilters.value.find(
         (item) => item?.filterName === 'price'
       );
-      console.log(selectedValue);
+
       if (selectedValue) {
-        price.value = [selectedValue?.id?.split('-')];
+        const splitedPriceFromUrl = selectedValue?.id?.split('-');
+
+        price.value = [splitedPriceFromUrl];
+        config.start = splitedPriceFromUrl.map((item) => parseInt(item));
       }
     };
 
