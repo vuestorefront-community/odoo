@@ -46,7 +46,6 @@ export const useNewsletterFactory = <NEWSLETTER, SEND_NEWSLETTER_PARAMS, API ext
       try {
         loading.value = true;
         error.value.sendSubscription = null;
-        console.log(await _factoryParams.sendSubscription(params));
 
         return await _factoryParams.sendSubscription(params);
       } catch (err) {
