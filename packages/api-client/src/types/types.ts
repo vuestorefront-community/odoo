@@ -558,13 +558,13 @@ export interface AgnosticFacetSearchParams {
     term?: string;
     page?: number;
     itemsPerPage?: number;
-    sort?: string;
+    sort?: string | string[];
     filters?: Record<string, string[]>;
     metadata?: any;
     [x: string]: any;
 }
 export interface SearchResultParams<S> {
-    data: S;
+    data?: S;
     input: AgnosticFacetSearchParams;
 }
 
