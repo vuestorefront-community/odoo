@@ -67,6 +67,10 @@
           <SfProductCard
             :title="product.title"
             :image="product.image"
+            :imageWidth="216"
+            :imageHeight="288"
+            :nuxtImgConfig="{ fit: 'cover' }"
+            image-tag="nuxt-img"
             :regular-price="product.price.regular"
             :max-rating="product.rating.max"
             :score-rating="product.rating.score"
@@ -285,8 +289,9 @@ export default {
       }
     ];
 
-    const onSubscribe = (emailAddress) => {
-      const data = sendSubscription({ email: emailAddress });
+    const onSubscribe = async (emailAddress) => {
+      const data = await sendSubscription({ email: emailAddress });
+
       if (data.subscribed) {
         send({
           message: 'Subscribe successfull!',

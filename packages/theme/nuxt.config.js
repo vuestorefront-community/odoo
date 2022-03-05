@@ -7,6 +7,9 @@ export default {
     port: 3000,
     host: '0.0.0.0'
   },
+  components: [
+    '~/components/'
+  ],
   css: ['@/assets/styles.scss'],
   head: {
     title: 'Vue Storefront',
