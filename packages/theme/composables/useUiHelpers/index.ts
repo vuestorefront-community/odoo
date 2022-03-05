@@ -69,8 +69,7 @@ const useUiHelpers = (): any => {
     Object.keys(query).forEach((label) => {
       if (queryParamsNotFilters.includes(label)) return;
 
-      const valueList = [];
-      // query[label].split(',');
+      const valueList = query[label].split(',');
 
       valueList.forEach((value) => {
         const item = {
@@ -106,7 +105,11 @@ const useUiHelpers = (): any => {
   const changeSearchTerm = (term: string) => term;
 
   const isFacetColor = (facet): boolean => {
-    return facet.display_type === 'color';
+    return facet.type === 'color';
+  };
+
+  const isFacetPrice = (facet): boolean => {
+    return facet.type === 'price';
   };
 
   const isFacetCheckbox = (facet): boolean => {
@@ -140,6 +143,7 @@ const useUiHelpers = (): any => {
     changeItemsPerPage,
     changeSearchTerm,
     isFacetColor,
+    isFacetPrice,
     isFacetCheckbox,
     facetsFromUrlToFilter,
     getComponentProviderByName

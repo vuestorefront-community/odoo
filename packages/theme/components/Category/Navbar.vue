@@ -85,7 +85,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script >
 import { computed, useRoute } from '@nuxtjs/composition-api';
 import { facetGetters } from '@vue-storefront/odoo';
 import { defineComponent } from '@vue/composition-api';
@@ -119,7 +119,7 @@ export default defineComponent({
     const { changeSorting } = useUiHelpers();
 
     const sortBy = computed(() =>
-      facetGetters.getSortOptions({ input: { sort: query?.sort } } || '')
+      facetGetters.getSortOptions({ input: { sort: query?.sort } })
     );
 
     const pagination = computed(() =>

@@ -6,8 +6,23 @@
     @close="toggleFilterSidebar"
   >
     <div class="filters desktop-only">
-      <SfRange :value="[20, 600]" :disabled="false" :config="config" />
       <div v-for="(facet, i) in facets" :key="i">
+        <template v-if="isFacetPrice(facet)">
+          <SfHeading
+            :level="4"
+            :title="facet.label"
+            class="filters__title sf-heading--left"
+          />
+
+          <SfRange
+            :value="[20, 600]"
+            :disabled="false"
+            :config="config"
+            v-model="price"
+            @change="selectPrice"
+          />
+        </template>
+
         <template v-if="facetHasMoreThanOneOption(facet)">
           <SfHeading
             :level="4"
@@ -16,7 +31,7 @@
             :key="`filter-title-${facet.value}`"
           />
           <div
-            v-if="isFacetColor(facet)"
+            v-if="isFacetColor(facet, facet.options)"
             class="filters__colors"
             :key="`${facet.value}-colors`"
           >
@@ -24,9 +39,9 @@
               v-for="option in facet.options"
               :key="`${facet.id}-${option.value}`"
               :data-cy="`category-filter_color_${option.value}`"
-              :color="option.value"
+              :color="option.htmlColor"
               :selected="isFilterSelected(facet, option)"
-              class="filters__color"
+              class="filters__color tw-mr-3"
               @click="() => selectFilter(facet, option)"
             />
           </div>
@@ -127,10 +142,11 @@ export default defineComponent({
   },
   setup(props) {
     const selectedFilters = ref([]);
+    const price = ref([]);
     const config = reactive({
-      start: [40, 200],
-      range: { min: 20, max: 600 },
-      step: 1,
+      start: [40, 700],
+      range: { min: 20, max: 2000 },
+      step: 10,
       connect: true,
       direction: 'ltr',
       orientation: 'horizontal',
@@ -139,7 +155,7 @@ export default defineComponent({
       keyboardSupport: true
     });
 
-    const { changeFilters, isFacetColor, facetsFromUrlToFilter } =
+    const { changeFilters, isFacetColor, isFacetPrice, facetsFromUrlToFilter } =
       useUiHelpers();
     const { toggleFilterSidebar, isFilterSidebarOpen } = useUiState();
 
@@ -163,6 +179,25 @@ export default defineComponent({
     const facetHasMoreThanOneOption = (facet) =>
       facet?.options?.length > 1 || false;
 
+    const selectPrice = (values) => {
+      const newValue = `${values[0]}-${values[1]}`;
+      price.value = values;
+      const selectedValue = selectedFilters.value.find(
+        (item) => item?.filterName === 'price'
+      );
+
+      if (selectedValue) {
+        selectedValue.id = newValue;
+        return;
+      }
+
+      selectedFilters.value.push({
+        label: 'Price',
+        filterName: 'price',
+        id: newValue
+      });
+    };
+
     const selectFilter = (facet, option) => {
       const alreadySelectedIndex = selectedFilters.value.findIndex(
         (filter) => String(filter.id) === String(option.value)
@@ -181,21 +216,41 @@ export default defineComponent({
       selectedFilters.value.splice(alreadySelectedIndex, 1);
     };
 
-    const facets = computed(() =>
-      facetGetters.getGrouped(props.facetsList, ['color', 'size'])
-    );
+    const facets = computed(() => [
+      {
+        id: null,
+        label: 'Price',
+        type: 'price'
+      },
+      ...facetGetters.getGrouped(props.facetsList, ['color', 'size'])
+    ]);
+
+    const setPrice = () => {
+      const selectedValue = selectedFilters.value.find(
+        (item) => item?.filterName === 'price'
+      );
+      console.log(selectedValue);
+      if (selectedValue) {
+        price.value = [selectedValue?.id?.split('-')];
+      }
+    };
 
     onMounted(() => {
       selectedFilters.value = facetsFromUrlToFilter();
+      setPrice();
     });
 
     return {
+      price,
+      selectPrice,
       facetHasMoreThanOneOption,
       isFilterSidebarOpen,
       facets,
       config,
       toggleFilterSidebar,
       isFacetColor,
+      selectedFilters,
+      isFacetPrice,
       selectFilter,
       isFilterSelected,
       clearFilters,
@@ -212,6 +267,10 @@ export default defineComponent({
     --sidebar-content-padding: 0 var(--spacer-xl);
     --sidebar-bottom-padding: 0 var(--spacer-xl);
   }
+}
+
+.sf-range {
+  width: 80%;
 }
 
 .filters {

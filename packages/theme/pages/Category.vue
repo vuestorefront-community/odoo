@@ -249,6 +249,7 @@ import {
   SfProductCardHorizontal,
   SfPagination,
   SfAccordion,
+  SfCheckbox,
   SfSelect,
   SfProperty,
   SfBreadcrumbs,
@@ -382,6 +383,7 @@ export default {
     SfHeading,
     SfAccordion,
     SfBreadcrumbs,
+    SfCheckbox,
     SfLoader,
     LazyHydrate,
     SfImage
