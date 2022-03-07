@@ -15,17 +15,29 @@
           :title="$t('Subscribe to newsletter')"
           class="modal__title desktop-only"
         />
-        <form @submit.prevent="$emit('email-submitted', emailAddress)">
-          <SfInput
-            type="email"
-            :label="$t('Email address')"
-            v-model="emailAddress"
-            class="modal__input"
-          />
-          <SfButton class="modal__button" type="submit">
-            {{ $t('I confirm subscription') }}
-          </SfButton>
-        </form>
+        <ValidationObserver v-slot="{ handleSubmit, invalid }" key="log-in">
+          <form @submit.prevent="$emit('email-submitted', emailAddress)">
+            <ValidationProvider rules="required|email" v-slot="{ errors }">
+              <SfInput
+                type="email"
+                :label="$t('Email address')"
+                :valid="!errors[0]"
+                :errorMessage="errors[0]"
+                v-model="emailAddress"
+                class="modal__input"
+              />
+            </ValidationProvider>
+
+            <SfButton
+              class="modal__button"
+              type="submit"
+              :disabled="loading || invalid"
+            >
+              {{ $t('I confirm subscription') }}
+            </SfButton>
+          </form>
+        </ValidationObserver>
+
         <SfHeading
           :description="$t('You can unsubscribe at any time')"
           :level="3"
@@ -46,10 +58,13 @@ import {
 } from '@storefront-ui/vue';
 import { ref } from '@nuxtjs/composition-api';
 import { useUiState } from '~/composables';
+import { ValidationProvider, ValidationObserver } from 'vee-validate';
 
 export default {
   name: 'NewsletterModal',
   components: {
+    ValidationProvider,
+    ValidationObserver,
     SfModal,
     SfHeading,
     SfInput,
