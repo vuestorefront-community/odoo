@@ -6,9 +6,10 @@
     >
       <SfImage
         :height="20"
-        :src="addBasePath(`/icons/langs/${locale}.webp`)"
         :width="20"
+        :src="addBasePath(`/icons/langs/${locale}.webp`)"
         alt="Flag"
+        class="language__flag"
       />
     </SfButton>
     <SfBottomModal
@@ -107,7 +108,6 @@ export default {
     }
   }
   &__lang {
-    width: 20px;
     --button-box-shadow: none;
     background: none;
     padding: 0 5px;

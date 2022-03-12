@@ -62,6 +62,12 @@ import { ValidationProvider, ValidationObserver } from 'vee-validate';
 
 export default {
   name: 'NewsletterModal',
+  props: {
+    loading: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: {
     ValidationProvider,
     ValidationObserver,
