@@ -25,7 +25,9 @@ export default `
     name
     displayType
     priceExtra
-    attributeName
+    attribute {
+      name
+    }
     search
   }
 `;
