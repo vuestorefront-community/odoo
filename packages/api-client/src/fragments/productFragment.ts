@@ -26,6 +26,7 @@ export default `
     displayType
     priceExtra
     attribute {
+      id
       name
     }
     search
