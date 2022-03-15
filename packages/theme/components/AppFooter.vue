@@ -28,7 +28,7 @@
         </SfListItem>
       </SfList>
     </SfFooterColumn>
-    <SfFooterColumn title="Social">
+    <SfFooterColumn title="Social" class="desktop-only">
       <div class="footer__socials">
         <SfImage
           class="footer__social-image"
@@ -41,22 +41,172 @@
         />
       </div>
     </SfFooterColumn>
+
+    <SfFooterColumn title="Language" class="desktop-only">
+      <LocaleSelector />
+    </SfFooterColumn>
+
+    <SfFooterColumn class="desktop-only">
+      <template>
+        <ValidationObserver v-slot="{ handleSubmit }" key="log-in">
+          <form
+            @submit.prevent="handleSubmit(onSubscribe)"
+            style="display: flex; height: 46px"
+          >
+            <ValidationProvider rules="required|email" v-slot="{ errors }">
+              <SfInput
+                class="sf-input--outline"
+                type="text"
+                :valid="!errors[0]"
+                v-model="emailAddress"
+                :errorMessage="errors[0]"
+                placeholder="Type your email address"
+                style="
+                  width: 242px;
+                  max-height: 46px;
+                  font-size: 16px;
+                  color: #43464e;
+                  background-color: #f1f2f3;
+                  --input-border-color: #f1f2f3;
+                "
+              />
+            </ValidationProvider>
+            <SfButton style="width: 116px" type="submit" :disabled="loading"
+              >Subscribe</SfButton
+            >
+          </form>
+        </ValidationObserver>
+      </template>
+    </SfFooterColumn>
+    <div class="sf-footer-column smartphone-only">
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          jusify-content: space-around;
+          align-items: center;
+          width: 100%;
+        "
+      >
+        <div
+          class="sf-footer-column__title"
+          style="align-self: flex-start; width: auto"
+        >
+          Social
+        </div>
+        <div
+          style="
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 32px;
+          "
+        >
+          <SfImage
+            v-for="picture in social"
+            :key="picture"
+            :src="addBasePath('/icons/' + picture + '.svg')"
+            :alt="picture"
+            :width="32"
+            :height="32"
+          />
+        </div>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 38px;
+          "
+        >
+          <SfInput
+            class="sf-input--outline"
+            type="text"
+            placeholder="Type your email address"
+            style="
+              width: 242px;
+              min-height: auto;
+              height: 32px;
+              font-size: 16px;
+              color: #43464e;
+              background-color: #f1f2f3;
+              --input-border-color: #f1f2f3;
+            "
+          />
+          <SfButton style="width: 116px; height: 32px">Subscribe</SfButton>
+        </div>
+        <SfLink link="#">
+          <SfImage
+            src="/icons/logo.svg"
+            alt="logo"
+            :width="20"
+            :height="20"
+            class="sf-footer__bottom-logo"
+            style="margin-bottom: 38px"
+          />
+        </SfLink>
+      </div>
+    </div>
   </SfFooter>
 </template>
 
 <script>
-import { SfFooter, SfList, SfImage, SfMenuItem } from '@storefront-ui/vue';
+import {
+  SfFooter,
+  SfList,
+  SfImage,
+  SfMenuItem,
+  SfInput,
+  SfButton,
+  SfLink
+} from '@storefront-ui/vue';
+import { ref } from '@nuxtjs/composition-api';
 import { addBasePath } from '@vue-storefront/core';
+import { useNewsLetter } from '@vue-storefront/odoo';
+import LocaleSelector from '~/components/LocaleSelector';
+import { ValidationProvider, ValidationObserver } from 'vee-validate';
+import { useUiNotification } from '~/composables';
 
 export default {
   components: {
+    ValidationProvider,
+    ValidationObserver,
+    SfLink,
     SfFooter,
+    LocaleSelector,
     SfList,
     SfImage,
-    SfMenuItem
+    SfMenuItem,
+    SfInput,
+    SfButton
   },
   setup() {
+    const { sendSubscription, loading } = useNewsLetter();
+    const emailAddress = ref('');
+    const { send } = useUiNotification();
+
+    const onSubscribe = async (emailAddress) => {
+      const data = await sendSubscription({ email: emailAddress });
+
+      if (data?.subscribed) {
+        send({
+          message: 'Subscribe successfull!',
+          type: 'success'
+        });
+      }
+      if (!data?.subscribed) {
+        send({
+          message: 'Something wrong!',
+          type: 'danger'
+        });
+      }
+    };
+
     return {
+      onSubscribe,
+      emailAddress,
+      sendSubscription,
+      loading,
       addBasePath
     };
   },

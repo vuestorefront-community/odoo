@@ -24,22 +24,33 @@ const getGrouped = (
 ): AgnosticGroupedFacet[] => {
   if (!searchData?.data?.attributes) return [];
 
-  const formatedAttribute = searchData?.data?.attributes.map((attribute) => ({
-    id: String(attribute.id),
-    label: attribute.name,
-    type: attribute.displayType,
-    count: 0,
-    options: attribute.values.map((value) => ({
-      type: '',
-      id: String(value.search),
-      value: value.id,
-      label: value.name,
-      metadata: value.search,
-      htmlColor: value.htmlColor
-    }))
-  }));
+  const data = [];
 
-  return formatedAttribute;
+  searchData.data.attributes.forEach(item => {
+    const current = data.find(itemData => itemData.type === item.displayType);
+
+    if (!current) {
+      data.push({
+        id: String(item.attribute.id),
+        label: item.attribute?.name,
+        type: item.displayType,
+        count: 0,
+        options: []
+      });
+    }
+
+    data.find(itemData => itemData.type === item.displayType).options.push({
+      type: '',
+      id: String(item.search),
+      value: item.id,
+      label: item.name,
+      metadata: item.search,
+      htmlColor: item.htmlColor
+    });
+
+  });
+
+  return data;
 };
 
 const getSortOptions = (searchData: SearchData): AgnosticSort => ({

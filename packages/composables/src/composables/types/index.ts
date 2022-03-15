@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { FacetSearchResult } from '@vue-storefront/core';
 import {
+  AttributeValue,
   Attribute,
   Category,
   Product
@@ -58,7 +59,7 @@ export interface FacetResultsData {
   totalProducts: number;
   perPageOptions: number;
   itemsPerPage: number;
-  attributes: Attribute[];
+  attributes: AttributeValue[];
 }
 
 export type SearchData = FacetSearchResult<FacetResultsData>;

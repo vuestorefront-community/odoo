@@ -8,7 +8,8 @@ import {
 import {
   Product,
   ProductVariant,
-  Attribute
+  Attribute,
+  AttributeValue
 } from '@vue-storefront/odoo-api';
 
 type ProductFilters = any;
@@ -16,7 +17,7 @@ type ProductFilters = any;
 export const getProductName = (product: Product): string =>
   product?.name || 'Product\'s name';
 
-export const getProductProperties = (product: Product): Attribute[] =>
+export const getProductProperties = (product: Product): AttributeValue[] =>
   product?.attributeValues || [];
 
 export const getProductCode = (product: Product): string => product?.sku || '';
@@ -73,15 +74,15 @@ export const getProductAttributes = (
   const groupedByName = {};
 
   product?.attributeValues?.forEach((option) => {
-    groupedByName[option.attributeName] = {
+    groupedByName[option.attribute.name] = {
       type: option.displayType,
       variantId: option.id,
-      label: option.attributeName,
+      label: option.attribute.name,
       values: []
     };
   });
   product?.attributeValues?.forEach((option) => {
-    groupedByName[option.attributeName].values.push({
+    groupedByName[option.attribute.name].values.push({
       value: String(option.id),
       label: option.name
     });
@@ -92,13 +93,13 @@ export const getProductAttributes = (
       attributes[option.displayType] = [];
     }
     if (
-      groupedByName[option.attributeName].type === option.displayType &&
+      groupedByName[option.attribute.name].type === option.displayType &&
       !attributes[option.displayType].some(
         (item) =>
-          item.variantId === groupedByName[option.attributeName].variantId
+          item.variantId === groupedByName[option.attribute.name].variantId
       )
     ) {
-      attributes[option.displayType].push(groupedByName[option.attributeName]);
+      attributes[option.displayType].push(groupedByName[option.attribute.name]);
     }
   });
 

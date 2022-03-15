@@ -5,6 +5,10 @@ export enum SortEnum {
   ASC,
   DESC
 }
+export enum FilterVisibility {
+  Visible = 'Visible',
+  Hidden = 'Hidden'
+}
 
 export enum OrderStage {
   Quotation = 'Quotation',
@@ -47,22 +51,22 @@ export declare type PaymentMethod = {
   name: string;
 };
 
-export type AttributeValueList = {
+export type AttributeValue = {
   id: number;
   name: string;
+  displayType: string;
   htmlColor?: string;
   search: string;
-  attributeId?: number;
+  priceExtra?: number;
+  attribute?: Attribute,
 };
 
 export type Attribute = {
   id: number;
-  name: string;
-  displayType: string;
-  priceExtra?: number;
-  attributeName?: string;
-  search?: string;
-  values?: AttributeValueList[];
+  name?: string;
+  displayType?: string;
+  filterVisibility?: FilterVisibility
+  values?: AttributeValue[]
 };
 
 export type Category = {
@@ -225,7 +229,7 @@ export type SingleProductResult = {
 export type Products = {
   products: Product[];
   totalCount: number;
-  attributes: Attribute[];
+  attributeValues: AttributeValue[];
 }
 
 export type Categories = {
@@ -276,7 +280,7 @@ export type Product = {
   isInWishlist: boolean;
   alternativeProducts?: Product[];
   accessoryProducts?: Product[];
-  attributeValues: Attribute[];
+  attributeValues: AttributeValue[];
   productTemplate?: Product;
   categories: Category[];
 };

@@ -105,7 +105,7 @@
     </LazyHydrate>
 
     <LazyHydrate when-visible>
-      <NewsletterModal @email-submitted="onSubscribe" />
+      <NewsletterModal @email-submitted="onSubscribe" :loading="loading" />
     </LazyHydrate>
 
     <LazyHydrate when-visible>
@@ -161,7 +161,7 @@ export default {
   },
   setup() {
     const { $config } = useContext();
-    const { sendSubscription } = useNewsLetter();
+    const { sendSubscription, loading } = useNewsLetter();
     const { toggleNewsletterModal } = useUiState();
     const { send } = useUiNotification();
 
@@ -318,7 +318,8 @@ export default {
       addBasePath,
       banners,
       heroes,
-      products
+      products,
+      loading
     };
   }
 };

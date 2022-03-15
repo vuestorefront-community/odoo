@@ -16,17 +16,18 @@ export default gql`
       sort: $sort
     ) {
       totalCount
-      attributes {
+      attributeValues {
         id
         name
         displayType
-        values {
+        name
+        htmlColor
+        search
+        attribute{
           id
           name
-          htmlColor
-          search
-          attributeId
         }
+        
       }
       products {
         ${productFragment}

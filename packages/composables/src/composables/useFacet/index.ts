@@ -33,7 +33,7 @@ const factoryParams = {
     return {
       categories: data.categories.categories,
       products: productData.products.products,
-      attributes: productData.products.attributes,
+      attributes: productData.products.attributeValues,
       itemsPerPage: 1,
       facets: {},
       perPageOptions: 20,
