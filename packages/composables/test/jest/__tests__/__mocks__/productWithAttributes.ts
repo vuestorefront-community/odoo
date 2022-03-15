@@ -28,7 +28,10 @@ export const productWithAttributes: Product = {
       name: '36',
       displayType: 'select',
       priceExtra: 0,
-      attributeName: 'Size',
+      attribute: {
+        id: 0,
+        name: 'Size'
+      },
       search: '4-160'
     },
     {
@@ -36,7 +39,10 @@ export const productWithAttributes: Product = {
       name: '40',
       displayType: 'select',
       priceExtra: 0,
-      attributeName: 'Size',
+      attribute: {
+        id: 0,
+        name: 'Size'
+      },
       search: '4-161'
     },
     {
@@ -44,7 +50,10 @@ export const productWithAttributes: Product = {
       name: 'Cotton',
       displayType: 'radio',
       priceExtra: 0,
-      attributeName: 'Material',
+      attribute: {
+        id: 0,
+        name: 'Material'
+      },
       search: '5-159'
     }
   ]
