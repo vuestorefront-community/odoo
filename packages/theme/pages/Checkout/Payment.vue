@@ -28,7 +28,7 @@
           <SfImage
             :width="256"
             :height="176"
-            :src="cartGetters.getItemImage(product)"
+            :src="$image(cartGetters.getItemImage(product))"
             :alt="cartGetters.getItemName(product)"
           />
         </SfTableData>
