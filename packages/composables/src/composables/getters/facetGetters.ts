@@ -92,7 +92,7 @@ const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
 };
 
 const getProducts = (searchData: SearchData): Product[] => {
-  if (!searchData?.data.products || searchData?.data.products.length === 0) {
+  if (!searchData?.data?.products || searchData?.data?.products?.length === 0) {
     return [];
   }
 
