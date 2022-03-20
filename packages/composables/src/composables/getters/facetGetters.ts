@@ -27,20 +27,20 @@ const getGrouped = (
   const data = [];
 
   searchData.data.attributes.forEach(item => {
-    const current = data.find(itemData => itemData.type === item.displayType);
+    const current = data.find(itemData => itemData.atributeName === item.attribute?.name);
 
     if (!current) {
       data.push({
         id: String(item.attribute.id),
         label: item.attribute?.name,
+        atributeName: item.attribute?.name,
         type: item.displayType,
         count: 0,
         options: []
       });
     }
 
-    data.find(itemData => itemData.type === item.displayType).options.push({
-      type: '',
+    data.find(itemData => itemData.atributeName === item.attribute?.name).options.push({
       id: String(item.search),
       value: item.id,
       label: item.name,
