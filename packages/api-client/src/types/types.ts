@@ -93,6 +93,7 @@ export type OrderSortInput = {
 export type ProductFilterInput = {
   categoryId?: number[];
   attributeValueId?: number[];
+  attribValues?: string[];
   minPrice?: number;
   maxPrice?: number;
 };
@@ -567,6 +568,7 @@ export interface AgnosticFacetSearchParams {
     sort?: string | string[];
     filters?: Record<string, string[]>;
     metadata?: any;
+    fetchCategory?: boolean;
     [x: string]: any;
 }
 export interface SearchResultParams<S> {
