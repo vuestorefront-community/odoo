@@ -21,17 +21,21 @@ const factoryParams = {
       filter: {
         categoryId: params?.input?.filter?.categoryId,
         attributeValueId: params.input?.filter?.attributeValueId?.map(id => parseInt(id)),
+        attribValues: params.input?.filter?.attribValues?.map(id => id),
         minPrice: parseInt(params?.input?.minPrice),
         maxPrice: parseInt(params?.input?.maxPrice)
       }
     };
 
-    const { data } = await context.$odoo.api.getCategory(categoryParams, customQueryCategories);
+    let categoryResponse = null;
+    if (params.input.fetchCategory) {
+      categoryResponse = await context.$odoo.api.getCategory(categoryParams, customQueryCategories);
+    }
 
     const { data: productData } = await context.$odoo.api.getProductTemplatesList(productParams, customQueryProducts);
 
     return {
-      categories: data.categories.categories,
+      categories: categoryResponse?.data?.categories?.categories || null,
       products: productData.products.products,
       attributes: productData.products.attributeValues,
       itemsPerPage: 1,

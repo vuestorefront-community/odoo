@@ -43,6 +43,7 @@ const useUiHelpers = (): any => {
       currentPage: page,
       minPrice: price?.[0] || null,
       maxPrice: price?.[1] || null,
+      fetchCategory: true,
       filter: {
         categoryId,
         attributeValueId: filters
