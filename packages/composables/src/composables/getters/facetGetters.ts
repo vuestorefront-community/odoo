@@ -102,14 +102,14 @@ const getProducts = (searchData: SearchData): Product[] => {
 };
 
 const getPagination = (searchData: SearchData): AgnosticPagination => {
-  const itemsPerPage = searchData.input?.pageSize || 10;
+  const itemsPerPage = searchData.input?.pageSize || 12;
 
   return {
     currentPage: 1,
     totalPages: Math.ceil(searchData.data?.totalProducts / itemsPerPage) || 1,
     totalItems: searchData.data?.totalProducts,
     itemsPerPage,
-    pageOptions: [5, 10, 15, 20]
+    pageOptions: [5, 12, 15, 20]
   };
 };
 
