@@ -15,9 +15,10 @@ const factoryParams = {
 
     const productParams: GraphQlGetProductParams = {
       pageSize: params.input.pageSize,
-      currentPage: parseInt(params.input.currentPage),
+      currentPage: parseInt(params.input.currentPage) || 1,
       search: params.input.search,
       sort: params.input.sort as ProductSortInput,
+
       filter: {
         categoryId: params?.input?.filter?.categoryId,
         attributeValueId: params.input?.filter?.attributeValueId?.map(id => parseInt(id)),
