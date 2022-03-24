@@ -91,6 +91,8 @@ const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
   return CategoryGetters.getTree(parentCategory);
 };
 
+const getCategory = (searchData: SearchData): Category[] => searchData?.data?.categories || [];
+
 const getProducts = (searchData: SearchData): Product[] => {
   if (!searchData?.data?.products || searchData?.data?.products?.length === 0) {
     return [];
