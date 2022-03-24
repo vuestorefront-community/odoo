@@ -239,7 +239,7 @@
   </div>
 </template>
 
-<script>
+<script >
 import {
   SfButton,
   SfList,
@@ -256,20 +256,26 @@ import {
   SfLoader,
   SfImage
 } from '@storefront-ui/vue';
-import { ref, computed, onMounted } from '@nuxtjs/composition-api';
+import {
+  ref,
+  computed,
+  onMounted,
+  defineComponent
+} from '@nuxtjs/composition-api';
 import {
   useCart,
   useWishlist,
   productGetters,
   useFacet,
-  facetGetters
+  facetGetters,
+  useMultipleProduct
 } from '@vue-storefront/odoo';
 import { useCache, CacheTagPrefix } from '@vue-storefront/cache';
 import { useUiHelpers, useUiState } from '~/composables';
 import { onSSR } from '@vue-storefront/core';
 import LazyHydrate from 'vue-lazy-hydration';
 
-export default {
+export default defineComponent({
   name: 'Category',
   transition: 'fade',
   setup(props, { root }) {
@@ -279,6 +285,7 @@ export default {
     const { addTags } = useCache();
     const uiState = useUiState();
     const { addItem: addItemToCart, isInCart } = useCart();
+    const { addMultipleProductsToCart } = useMultipleProduct();
     const {
       addItem: addItemToWishlist,
       removeItem: removeItemFromWishList,
@@ -334,6 +341,7 @@ export default {
       const params = {
         ...th.getFacetsFromURL()
       };
+      await addMultipleProductsToCart({ products: [{ id: 78, quantity: 2 }] });
 
       await search(params);
 
@@ -388,164 +396,9 @@ export default {
     LazyHydrate,
     SfImage
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>
-#category {
-  box-sizing: border-box;
-  @include for-desktop {
-    max-width: 1240px;
-    margin: 0 auto;
-  }
-}
-.main {
-  &.section {
-    padding: var(--spacer-xs);
-    @include for-desktop {
-      padding: 0;
-    }
-  }
-}
-.breadcrumbs {
-  margin: var(--spacer-base) auto var(--spacer-lg);
-  text-transform: capitalize;
-}
-
-.sort-by {
-  flex: unset;
-  width: 11.875rem;
-}
-.main {
-  display: flex;
-}
-
-.sidebar {
-  flex: 0 0 15%;
-  padding: var(--spacer-sm);
-  border: 1px solid var(--c-light);
-  border-width: 0 1px 0 0;
-}
-.list {
-  --menu-item-font-size: var(--font-size--sm);
-  &__item {
-    &:not(:last-of-type) {
-      --list-item-margin: 0 0 var(--spacer-sm) 0;
-    }
-
-    .nuxt-link-exact-active {
-      text-decoration: underline;
-    }
-  }
-}
-.products {
-  box-sizing: border-box;
-  flex: 1;
-  margin: 0;
-  &__grid {
-    justify-content: space-between;
-    @include for-desktop {
-      justify-content: flex-start;
-    }
-  }
-  &__grid,
-  &__list {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  &__product-card {
-    --product-card-title-margin: var(--spacer-base) 0 0 0;
-    --product-card-title-font-weight: var(--font-weight--medium);
-    --product-card-title-margin: var(--spacer-xs) 0 0 0;
-    flex: 1 1 50%;
-    @include for-desktop {
-      --product-card-title-font-weight: var(--font-weight--normal);
-      --product-card-add-button-bottom: var(--spacer-base);
-      --product-card-title-margin: var(--spacer-sm) 0 0 0;
-    }
-  }
-  &__product-card-horizontal {
-    flex: 0 0 100%;
-  }
-  &__slide-enter {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  &__slide-enter-active {
-    transition: all 0.2s ease;
-    transition-delay: calc(0.1s * var(--index));
-  }
-  @include for-desktop {
-    &__grid {
-      margin: var(--spacer-sm) 0 0 var(--spacer-sm);
-    }
-    &__pagination {
-      display: flex;
-      justify-content: flex-start;
-      margin: var(--spacer-xl) 0 0 0;
-    }
-    &__product-card-horizontal {
-      margin: var(--spacer-lg) 0;
-    }
-    &__product-card {
-      flex: 1 1 25%;
-    }
-    &__list {
-      margin: 0 0 0 var(--spacer-sm);
-    }
-  }
-  &__show-on-page {
-    display: flex;
-    justify-content: flex-end;
-    align-items: baseline;
-    &__label {
-      font-family: var(--font-family--secondary);
-      font-size: var(--font-size--sm);
-    }
-  }
-}
-.loading {
-  margin: var(--spacer-3xl) auto;
-  @include for-desktop {
-    margin-top: 6.25rem;
-  }
-}
-::v-deep .sf-sidebar__aside {
-  --sidebar-z-index: 3;
-}
-
-.before-results {
-  box-sizing: border-box;
-  padding: var(--spacer-lg) var(--spacer-sm) var(--spacer-2xl);
-  width: 100%;
-  text-align: center;
-  @include for-desktop {
-    padding: 0;
-  }
-  &__picture {
-    --image-width: 230px;
-    margin-top: var(--spacer-2xl);
-    @include for-desktop {
-      --image-width: 18.75rem;
-      margin-top: var(--spacer-base);
-    }
-  }
-  &__paragraph {
-    font-family: var(--font-family--primary);
-    font-weight: var(--font-weight--normal);
-    font-size: var(--font-size--base);
-    color: var(--c-text-muted);
-    margin: 0;
-    @include for-desktop {
-      font-size: var(--font-size--lg);
-    }
-    &:first-of-type {
-      margin: var(--spacer-xl) auto var(--spacer-xs);
-    }
-  }
-  &__button {
-    margin: var(--spacer-xl) auto;
-    width: 100%;
-  }
-}
+@import '~/assets/css/category.scss';
 </style>
