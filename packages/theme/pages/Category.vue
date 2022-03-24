@@ -48,17 +48,6 @@
                 </SfList>
               </template>
             </SfAccordionItem>
-            <SfAccordionItem header="Extra">
-              <SfList>
-                <SfListItem>
-                  <SfCheckbox
-                    label="Generic"
-                    v-model="generic"
-                    name="generic"
-                  />
-                </SfListItem>
-              </SfList>
-            </SfAccordionItem>
           </SfAccordion>
         </SfLoader>
       </div>
@@ -267,8 +256,7 @@ import {
   useWishlist,
   productGetters,
   useFacet,
-  facetGetters,
-  useMultipleProduct
+  facetGetters
 } from '@vue-storefront/odoo';
 import { useCache, CacheTagPrefix } from '@vue-storefront/cache';
 import { useUiHelpers, useUiState } from '~/composables';
@@ -285,7 +273,6 @@ export default defineComponent({
     const { addTags } = useCache();
     const uiState = useUiState();
     const { addItem: addItemToCart, isInCart } = useCart();
-    const { addMultipleProductsToCart } = useMultipleProduct();
     const {
       addItem: addItemToWishlist,
       removeItem: removeItemFromWishList,
@@ -341,7 +328,6 @@ export default defineComponent({
       const params = {
         ...th.getFacetsFromURL()
       };
-      await addMultipleProductsToCart({ products: [{ id: 78, quantity: 2 }] });
 
       await search(params);
 
