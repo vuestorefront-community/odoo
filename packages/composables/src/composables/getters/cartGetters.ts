@@ -52,8 +52,8 @@ export const getCartItemAttributes = (
   return attributesList;
 };
 
-export const getCartItemSku = (product: Product): string =>
-  product?.sku || String(product?.id) || 'some-sku';
+export const getCartItemSku = (orderLine: OrderLine): string =>
+  orderLine?.product?.sku || String(orderLine?.product?.id) || 'some-sku';
 
 export const getCartTotals = (cart: Cart): AgnosticTotals => {
   return {
