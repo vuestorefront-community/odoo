@@ -3,7 +3,7 @@
     <SfSidebar
       :visible="isMobileMenuOpen"
       :button="false"
-      title="Menu"
+      :title="currentParentMenu"
       @close="backMenu"
       class="sidebar sf-sidebar--right"
     >
@@ -14,7 +14,7 @@
           data-cy="app-header-top-categories"
           class="nav-item"
           :label="category.name"
-          @click="openChilds"
+          @click="openChilds(category.name)"
         />
       </template>
 
@@ -94,6 +94,7 @@ export default defineComponent({
   },
   setup() {
     const isChildsOpened = ref(false);
+    const currentParentMenu = ref('Menu');
     const router = useRouter();
     const { getCatLink, getFacetsFromURL } = useUiHelpers();
     const { isMobileMenuOpen, toggleMobileMenu } = useUiState();
@@ -114,7 +115,8 @@ export default defineComponent({
       )
     );
 
-    const openChilds = async () => {
+    const openChilds = async (menuName) => {
+      currentParentMenu.value = menuName;
       const params = { ...getFacetsFromURL() };
       await search(params);
       isChildsOpened.value = true;
@@ -124,6 +126,7 @@ export default defineComponent({
       if (!isChildsOpened.value) {
         toggleMobileMenu();
       }
+      currentParentMenu.value = 'Menu';
       isChildsOpened.value = false;
     };
 
@@ -135,6 +138,7 @@ export default defineComponent({
     onSSR(async () => {});
 
     return {
+      currentParentMenu,
       goToSubCategory,
       backMenu,
       isChildsOpened,
