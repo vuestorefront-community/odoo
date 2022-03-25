@@ -11,9 +11,11 @@ export { default as loadUser } from './loadUser';
 export { default as sendResetPassword } from './sendResetPassword';
 export { default as changePassword } from './changePassword';
 
+export { default as cartAddMultipleItems } from './cartAddMultipleItems';
+export { default as cartRemoveMultipleItems } from './cartRemoveMultipleItems';
+
 export { default as cartLoad } from './cartLoad';
 export { default as cartAddItem } from './cartAddItem';
-export { default as cartAddMulipleItems } from './cartAddMulipleItems';
 export { default as cartRemoveItem } from './cartRemoveItem';
 export { default as cartUpdateItemQty } from './cartUpdateItemQty';
 

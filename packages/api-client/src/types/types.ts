@@ -199,6 +199,10 @@ export type cartAddMultipleItemsResult = {
   cartAddMultipleItems: Cart
 };
 
+export type cartRemoveMultipleItemsResult = {
+  cartRemoveMultipleItems: Cart
+};
+
 export type CartLoadResult = {
   cart: Cart
 };
@@ -547,6 +551,10 @@ export type GraphQlGetProductParams = {
 
 export type GraphQlAddMultipleProductsParams = {
   products: GraphQlProductParam[];
+}
+
+export type GraphQlRemoveMultipleProductsParams = {
+  products: number[];
 }
 
 export type GraphQlProductParam = {
