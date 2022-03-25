@@ -39,20 +39,27 @@ it('get cart item quantity', () => {
 });
 
 it('get cart item sku', () => {
-  const categoryTree = cartGetters.getItemSku({
-    sku: 'sky_001'
+  const itemSku = cartGetters.getItemSku({
+    id: 123,
+    product: {
+      id: 321,
+      sku: 'sky_001'
+    }
   });
 
-  expect(categoryTree).toStrictEqual('sky_001');
+  expect(itemSku).toStrictEqual('sky_001');
 });
 
 it('get cart item sku without sky', () => {
   const categoryTree = cartGetters.getItemSku({
-    sku: null,
-    id: 123
+    id: 123,
+    product: {
+      id: 321,
+      sku: null
+    }
   });
 
-  expect(categoryTree).toStrictEqual('123');
+  expect(categoryTree).toStrictEqual('321');
 });
 
 it('get cart totals', () => {

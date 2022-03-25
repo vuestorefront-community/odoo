@@ -5,23 +5,27 @@ import { Composable, ComputedProperty, PlatformApi } from '@vue-storefront/core/
 
 export interface UseMultipleProductErrors {
   addMultipleProductsToCart: Error;
+  removeMultipleProductsFromCart: Error;
 }
 
-export interface UseMultipleProduct<ADD_MULTIPLE_PRODUCTS_PARAMS, API extends PlatformApi = any> extends Composable<API> {
+export interface UseMultipleProduct<ADD_MULTIPLE_PRODUCTS_PARAMS, REMOVE_MULTIPLE_PRODUCTS_PARAMS, API extends PlatformApi = any> extends Composable<API> {
     error: ComputedProperty<UseMultipleProductErrors>;
     loading: ComputedProperty<boolean>;
     addMultipleProductsToCart: (params: ComposableFunctionArgs<ADD_MULTIPLE_PRODUCTS_PARAMS>) => Promise<void>;
+    removeMultipleProductsFromCart: (params: ComposableFunctionArgs<REMOVE_MULTIPLE_PRODUCTS_PARAMS>) => Promise<void>;
   }
 
-export interface UseMultipleProductFactoryParams<PRODUCT, ADD_MULTIPLE_PRODUCTS_PARAMS, CART, API extends PlatformApi = any> extends FactoryParams<API> {
+export interface UseMultipleProductFactoryParams<PRODUCT, ADD_MULTIPLE_PRODUCTS_PARAMS, REMOVE_MULTIPLE_PRODUCTS_PARAMS, CART, API extends PlatformApi = any> extends FactoryParams<API> {
   addMultipleProductsToCart: (context: Context, params: ComposableFunctionArgs<ADD_MULTIPLE_PRODUCTS_PARAMS>) => Promise<CART>;
+  removeMultipleProductsFromCart: (context: Context, params: ComposableFunctionArgs<REMOVE_MULTIPLE_PRODUCTS_PARAMS>) => Promise<CART>;
 }
 
-export const useMultipleProductFactory = <PRODUCT, ADD_MULTIPLE_PRODUCTS_PARAMS, API extends PlatformApi = any>(
-  factoryParams: UseMultipleProductFactoryParams<PRODUCT, ADD_MULTIPLE_PRODUCTS_PARAMS, API>
-) => function UseMultipleProduct(): UseMultipleProduct<ADD_MULTIPLE_PRODUCTS_PARAMS, API> {
+export const useMultipleProductFactory = <PRODUCT, ADD_MULTIPLE_PRODUCTS_PARAMS, REMOVE_MULTIPLE_PRODUCTS_PARAMS, API extends PlatformApi = any>(
+  factoryParams: UseMultipleProductFactoryParams<PRODUCT, ADD_MULTIPLE_PRODUCTS_PARAMS, REMOVE_MULTIPLE_PRODUCTS_PARAMS, API>
+) => function UseMultipleProduct(): UseMultipleProduct<ADD_MULTIPLE_PRODUCTS_PARAMS, REMOVE_MULTIPLE_PRODUCTS_PARAMS, API> {
     const errorsFactory = (): UseMultipleProductErrors => ({
-      addMultipleProductsToCart: null
+      addMultipleProductsToCart: null,
+      removeMultipleProductsFromCart: null
     });
 
     const loading: Ref<boolean> = sharedRef(false, 'useMultipleProduct-loading');
@@ -49,9 +53,27 @@ export const useMultipleProductFactory = <PRODUCT, ADD_MULTIPLE_PRODUCTS_PARAMS,
       }
     };
 
+    const removeMultipleProductsFromCart = async (params: ComposableFunctionArgs<REMOVE_MULTIPLE_PRODUCTS_PARAMS>) => {
+      Logger.debug('useMultipleProduct.removeMultipleProductsToCart', params);
+      resetErrorValue();
+
+      try {
+        loading.value = true;
+        error.value.removeMultipleProductsFromCart = null;
+
+        return await _factoryParams.removeMultipleProductsFromCart(params);
+      } catch (err) {
+        error.value.removeMultipleProductsFromCart = err;
+        Logger.error('useMultipleProduct/removeMultipleProductsToCart', err);
+      } finally {
+        loading.value = false;
+      }
+    };
+
     return {
       error: computed(() => error.value),
       loading: computed(() => loading.value),
-      addMultipleProductsToCart
+      addMultipleProductsToCart,
+      removeMultipleProductsFromCart
     };
   };

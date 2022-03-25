@@ -199,6 +199,10 @@ export type cartAddMultipleItemsResult = {
   cartAddMultipleItems: Cart
 };
 
+export type cartRemoveMultipleItemsResult = {
+  cartRemoveMultipleItems: Cart
+};
+
 export type CartLoadResult = {
   cart: Cart
 };
@@ -268,26 +272,26 @@ export type Product = {
   displayName?: string;
   slug?: string;
   isInStock?: boolean;
-  qty: number;
-  sku: string;
-  image: string;
-  variantImage: string;
-  smallImage: string;
-  mediaGallery: ProductImage[];
-  price: number;
-  weight: number;
-  priceAfterDiscount: number;
-  hasDiscountedPrice: number;
-  listPrice: number;
+  qty?: number;
+  sku?: string;
+  image?: string;
+  variantImage?: string;
+  smallImage?: string;
+  mediaGallery?: ProductImage[];
+  price?: number;
+  weight?: number;
+  priceAfterDiscount?: number;
+  hasDiscountedPrice?: number;
+  listPrice?: number;
   realProduct?: ProductVariant;
-  firstVariant: number;
-  currency: Currency;
-  isInWishlist: boolean;
+  firstVariant?: number;
+  currency?: Currency;
+  isInWishlist?: boolean;
   alternativeProducts?: Product[];
   accessoryProducts?: Product[];
-  attributeValues: AttributeValue[];
+  attributeValues?: AttributeValue[];
   productTemplate?: Product;
-  categories: Category[];
+  categories?: Category[];
 };
 
 export declare type WishlistItem = {
@@ -547,6 +551,10 @@ export type GraphQlGetProductParams = {
 
 export type GraphQlAddMultipleProductsParams = {
   products: GraphQlProductParam[];
+}
+
+export type GraphQlRemoveMultipleProductsParams = {
+  products: number[];
 }
 
 export type GraphQlProductParam = {
