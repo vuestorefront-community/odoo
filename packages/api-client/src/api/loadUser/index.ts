@@ -18,6 +18,7 @@ export default async function loadUser(
   return await apolloClient.query({
     query: gql`${loadUser.query}`,
     variables: loadUser.variables,
+    errorPolicy: 'all',
     fetchPolicy: 'no-cache'
   });
 
