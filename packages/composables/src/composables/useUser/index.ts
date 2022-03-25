@@ -3,6 +3,13 @@
 
 import { Context, useUserFactory, UseUserFactoryParams} from '@vue-storefront/core';
 import { Partner, GraphQlUpdateAccountParams, GraphQlLoginParams, AgnosticUser } from '@vue-storefront/odoo-api';
+
+const throwErrors = (errors) => {
+  if (errors) {
+    throw new Error(errors.map(error => error.message).join(',') || 'Some error');
+  }
+};
+
 const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, any> = {
   load: async (context: Context) => {
     const user = context.$odoo.config.app.$cookies.get('odoo-user');
@@ -25,7 +32,9 @@ const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, a
       name: updatedUserData.name,
       email: updatedUserData.email
     };
-    const { data } = await context.$odoo.api.updateAccount(params, customQuery);
+    const { data, errors } = await context.$odoo.api.updateAccount(params, customQuery);
+
+    throwErrors(errors);
 
     return data.updateMyAccount;
   },
@@ -33,18 +42,13 @@ const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, a
   register: async (context: Context, params?: Partner & { customQuery }) => {
     const { customQuery } = params;
 
-    try {
-      const { data } = await context.$odoo.api.signUpUser(params, customQuery);
+    const { data, errors } = await context.$odoo.api.signUpUser(params, customQuery);
 
-      context.$odoo.config.app.$cookies.set('odoo-user', data.register);
+    throwErrors(errors);
 
-      return data.register;
-    } catch (error) {
-      if (error.response) {
-        throw new Error(error.response?.data?.graphQLErrors
-          .map((e) => e.message).join(',') || 'Some error');
-      }
-    }
+    context.$odoo.config.app.$cookies.set('odoo-user', data.register);
+
+    return data.register;
 
   },
   logIn: async (context: Context, params: AgnosticUser & { customQuery }) => {
@@ -55,18 +59,13 @@ const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, a
       password: params.password
     };
 
-    try {
-      const { data } = await context.$odoo.api.logInUser(loginParams, customQuery);
+    const { data, errors } = await context.$odoo.api.logInUser(loginParams, customQuery);
 
-      context.$odoo.config.app.$cookies.set('odoo-user', data.login.partner);
+    throwErrors(errors);
 
-      return data.login.partner;
-    } catch (error) {
-      if (error.response) {
-        throw new Error(error.response?.data?.graphQLErrors
-          .map((e) => e.message).join(',') || 'Some error');
-      }
-    }
+    context.$odoo.config.app.$cookies.set('odoo-user', data.login.partner);
+    return data.login.partner;
+
   },
 
   changePassword: async (
