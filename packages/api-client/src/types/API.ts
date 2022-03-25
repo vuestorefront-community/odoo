@@ -9,7 +9,7 @@ import {
   RegisterResult, ShippingAddAddresResponse, ShippingUpdateAddressResponse, SingleProductResult, WishlistLoadResponse, WishlistAddItemResponse,
   WishlistRemoveItemResponse, ShippingGetDeliveryMethodsResult, PaymentMakeExternalResult, CountryStatesResult, CountriesResult,
   PaymentLoadProvidersResult, BillingGetAddressResult, GraphQlDeleteAddressParams, ShippingGetAddresessResult, BillingAddAddresResponse,
-  OrdersResponse, GraphQlOrdersParams
+  OrdersResponse, GraphQlOrdersParams, GraphQlAddMultipleProductsParams, cartAddMultipleItemsResult
 } from './types';
 
 export interface OdooApiMethods {
@@ -28,6 +28,7 @@ export interface OdooApiMethods {
 
   cartLoad(customQuery?: CustomQuery): Promise<FetchResult<CartLoadResult>>;
   cartAddItem(params: GraphQlCartAddItemParams, customQuery?: CustomQuery): Promise<FetchResult<CartAddItemResult>>;
+  cartAddMulipleItems(params: GraphQlAddMultipleProductsParams, customQuery?: CustomQuery): Promise<FetchResult<cartAddMultipleItemsResult>>;
   cartRemoveItem(params: GraphQlCartRemoveItemParams, customQuery?: CustomQuery): Promise<FetchResult<CartRemoveItemResult>>;
   cartUpdateItemQty(params: GraphQlCartUpdateItemQtyParams, customQuery?: CustomQuery): Promise<FetchResult>;
 

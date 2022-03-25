@@ -120,6 +120,8 @@
           "
         >
           <SfInput
+            id="email-smartphone"
+            name="email-smartphone"
             class="sf-input--outline"
             type="text"
             placeholder="Type your email address"

@@ -195,6 +195,10 @@ export type CartAddItemResult = {
   cartAddItem: Cart
 };
 
+export type cartAddMultipleItemsResult = {
+  cartAddMultipleItems: Cart
+};
+
 export type CartLoadResult = {
   cart: Cart
 };
@@ -539,6 +543,15 @@ export type GraphQlGetProductParams = {
   pageSize: number;
   search?: string;
   sort: ProductSortInput;
+};
+
+export type GraphQlAddMultipleProductsParams = {
+  products: GraphQlProductParam[];
+}
+
+export type GraphQlProductParam = {
+  id: number;
+  quantity: number;
 };
 
 export type ParamsFromUrlFilterInput = {

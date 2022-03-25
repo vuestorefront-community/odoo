@@ -6,6 +6,7 @@ export { default as useContent } from './composables/useContent';
 export { default as useFacet } from './composables/useFacet';
 export { default as useMakeOrder } from './composables/useMakeOrder';
 export { default as useProduct } from './composables/useProduct';
+export { default as useMultipleProduct } from './composables/useMultipleProduct';
 export { default as useReview } from './composables/useReview';
 export { default as useShipping } from './composables/useShipping';
 export { useShippingProvider } from './composables/useShippingProvider';
@@ -25,3 +26,4 @@ export { default as useStore } from './composables/useStore';
 export { default as useNewsLetter } from './composables/useNewsLetter';
 
 export * from './composables/getters';
+export * from './factories';

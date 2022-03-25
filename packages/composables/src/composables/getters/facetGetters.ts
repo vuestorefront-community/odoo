@@ -91,6 +91,8 @@ const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
   return CategoryGetters.getTree(parentCategory);
 };
 
+const getCategory = (searchData: SearchData): Category[] => searchData?.data?.categories || [];
+
 const getProducts = (searchData: SearchData): Product[] => {
   if (!searchData?.data?.products || searchData?.data?.products?.length === 0) {
     return [];
@@ -100,14 +102,14 @@ const getProducts = (searchData: SearchData): Product[] => {
 };
 
 const getPagination = (searchData: SearchData): AgnosticPagination => {
-  const itemsPerPage = searchData.input?.pageSize || 10;
+  const itemsPerPage = searchData.input?.pageSize || 12;
 
   return {
     currentPage: 1,
     totalPages: Math.ceil(searchData.data?.totalProducts / itemsPerPage) || 1,
     totalItems: searchData.data?.totalProducts,
     itemsPerPage,
-    pageOptions: [5, 10, 15, 20]
+    pageOptions: [5, 12, 15, 20]
   };
 };
 

@@ -21,6 +21,7 @@ export default async function logInUser(
   return await apolloClient.mutate({
     mutation: gql`${logInUser.mutation}`,
     variables: logInUser.variables,
+    errorPolicy: 'all',
     fetchPolicy: 'no-cache'
   });
 

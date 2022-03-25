@@ -51,7 +51,7 @@ it('get default pagination', () => {
 
   expect(pagination.totalPages).toEqual(1);
   expect(pagination.totalItems).toEqual(1);
-  expect(pagination.itemsPerPage).toEqual(10);
+  expect(pagination.itemsPerPage).toEqual(12);
 });
 it('get custom pagination', () => {
   const pagination = facetGetters.getPagination(searchData);

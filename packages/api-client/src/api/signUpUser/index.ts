@@ -20,6 +20,7 @@ export default async function signUpUser(
   return await apolloClient.mutate({
     mutation: gql`${signUpUser.mutation}`,
     variables: signUpUser.variables,
+    errorPolicy: 'all',
     fetchPolicy: 'no-cache'
   });
 }

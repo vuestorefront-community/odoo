@@ -13,6 +13,7 @@ export default async function logOutUser(
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   const response = await apolloClient.mutate({
+    errorPolicy: 'all',
     mutation
   });
 
