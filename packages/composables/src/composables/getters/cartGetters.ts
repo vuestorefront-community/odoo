@@ -11,11 +11,8 @@ import {
   Product,
   OrderLine,
   Cart,
-  LineItem,
   OrderStage
 } from '@vue-storefront/odoo-api';
-
-import { useContext } from '@nuxtjs/composition-api';
 
 function roundDecimal(num) {
   const m = Number((Math.abs(num) * 100).toPrecision(15));
@@ -86,7 +83,7 @@ const getCartAmountTax = (cart: Cart): number => {
   return cart?.order?.amountTax || 0;
 };
 
-const cartGetters: CartGetters<Cart, LineItem> = {
+const cartGetters: CartGetters<Cart, OrderLine> = {
   getTotals: getCartTotals,
   getShippingPrice: getCartShippingPrice,
   getItems: getCartItems,
