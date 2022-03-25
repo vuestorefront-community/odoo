@@ -554,7 +554,7 @@ export type GraphQlAddMultipleProductsParams = {
 }
 
 export type GraphQlRemoveMultipleProductsParams = {
-  products: number[];
+  lineIds: number[];
 }
 
 export type GraphQlProductParam = {
