@@ -288,10 +288,14 @@ export type Product = {
   currency?: Currency;
   isInWishlist?: boolean;
   alternativeProducts?: Product[];
+  productVariants?: Product[]
   accessoryProducts?: Product[];
   attributeValues?: AttributeValue[];
   productTemplate?: Product;
   categories?: Category[];
+  seoTitle?: string;
+  seoDescription?: string;
+  imageWebp?: string;
 };
 
 export declare type WishlistItem = {
