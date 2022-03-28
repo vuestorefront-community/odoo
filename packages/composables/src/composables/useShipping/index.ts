@@ -4,6 +4,17 @@ import { Context, useShippingFactory, UseShippingParams } from '@vue-storefront/
 import { GraphQlUpdateAddressParams, Partner } from '@vue-storefront/odoo-api';
 import useCart from '../useCart';
 
+const throwErrors = (errors) => {
+  if (errors.response.data?.networkError) {
+    const errorList = errors.response.data?.networkError?.result?.errors || [];
+    throw new Error(errorList.map(error => error.message).join(',') || 'Some error');
+  }
+  if (errors.response.data?.graphQLErrors) {
+    const errorList = errors.response.data?.graphQLErrors || [];
+    throw new Error(errorList.map(error => error.message).join(',') || 'Some error');
+  }
+};
+
 const factoryParams: UseShippingParams<Partner, GraphQlUpdateAddressParams> = {
   provide() {
     return {
@@ -27,24 +38,25 @@ const factoryParams: UseShippingParams<Partner, GraphQlUpdateAddressParams> = {
     return shippingAdress;
   },
 
-  save: async (context: Context, { shippingDetails, customQuery }) => {
+  save: async (context: Context, { params, customQuery }) => {
+    if (params.id) {
+      try {
+        const { data } = await context.$odoo.api.shippingUpdateAddress(params, customQuery);
 
-    const params: GraphQlUpdateAddressParams = {
-      id: shippingDetails.id,
-      street: shippingDetails.street,
-      zip: shippingDetails.zip,
-      phone: shippingDetails.phone,
-      name: shippingDetails.name,
-      city: shippingDetails.city,
-      countryId: shippingDetails.country.id,
-      stateId: shippingDetails.state.id
-    };
+        context.useCart.cart.value.order.partnerShipping = data.updateAddress;
+        return data.updateAddress;
+      } catch (errors) {
+        throwErrors(errors);
+      }
+    }
 
-    const { data } = await context.$odoo.api.shippingUpdateAddress(params, customQuery);
+    const { data, errors } = await context.$odoo.api.shippingAddAdress(params, customQuery);
 
-    context.useCart.cart.value.order.partnerShipping = data.updateAddress;
+    throwErrors(errors);
 
-    return data.updateAddress;
+    context.useCart.cart.value.order.partnerShipping = data.addAddress;
+    return data.addAddress;
+
   }
 };
 
