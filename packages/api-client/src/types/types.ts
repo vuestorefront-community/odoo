@@ -238,6 +238,8 @@ export type SingleProductResult = {
 export type Products = {
   products: Product[];
   totalCount: number;
+  minPrice: number;
+  maxPrice: number;
   attributeValues: AttributeValue[];
 }
 
