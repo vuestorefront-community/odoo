@@ -36,6 +36,8 @@ const factoryParams = {
     const { data: productData } = await context.$odoo.api.getProductTemplatesList(productParams, customQueryProducts);
 
     return {
+      minPrice: productData?.products?.minPrice || 0,
+      maxPrice: productData?.products?.maxPrice || 10000,
       categories: categoryResponse?.data?.categories?.categories || null,
       products: productData.products.products,
       attributes: productData.products.attributeValues,
