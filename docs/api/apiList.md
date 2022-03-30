@@ -23,6 +23,9 @@ export interface OdooApiMethods {
   sendResetPassword(params: GraphQlSendResetPasswordParams, customQuery?: CustomQuery): Promise<FetchResult<DefaultGraphQlMutationResponse>>;
   changePassword(params: GraphQlResetPasswordParams, customQuery?: CustomQuery): Promise<FetchResult<DefaultGraphQlMutationResponse>>;
 
+  cartAddMultipleItems(params: GraphQlAddMultipleProductsParams, customQuery?: CustomQuery): Promise<FetchResult<cartAddMultipleItemsResult>>;
+  cartRemoveMultipleItems(params: GraphQlRemoveMultipleProductsParams, customQuery?: CustomQuery): Promise<FetchResult<cartRemoveMultipleItemsResult>>;
+
   cartLoad(customQuery?: CustomQuery): Promise<FetchResult<CartLoadResult>>;
   cartAddItem(params: GraphQlCartAddItemParams, customQuery?: CustomQuery): Promise<FetchResult<CartAddItemResult>>;
   cartRemoveItem(params: GraphQlCartRemoveItemParams, customQuery?: CustomQuery): Promise<FetchResult<CartRemoveItemResult>>;
@@ -49,6 +52,8 @@ export interface OdooApiMethods {
   paymentLoadProviders(customQuery?: CustomQuery): Promise<FetchResult<PaymentLoadProvidersResult>>;
   paymentMakeExternal(params: GraphQlMakePaymentParams, customQuery?: CustomQuery): Promise<FetchResult<PaymentMakeExternalResult>>;
   paymentConfirmation(customQuery?: CustomQuery): Promise<FetchResult>;
+
+  subscribeNewsLetter(customQuery?: CustomQuery): Promise<FetchResult>;
 
   ordersGet(params: GraphQlOrdersParams, customQuery?: CustomQuery): Promise<FetchResult<OrdersResponse>>;
 }

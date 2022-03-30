@@ -60,7 +60,7 @@ module.exports = {
         children: [
           ['/', 'Introduction'],
           '/essentials/configuration',
-          '/essentials/feature_list',
+          '/essentials/customQueries',
           '/essentials/payment',
           '/essentials/maintainers'
         ]
@@ -85,9 +85,18 @@ module.exports = {
         ]
       },
       {
+        title: 'Tips',
+        collapsable: true,
+        children: [
+          ['/tips/customTypes', 'Custom types'],
+          ['/tips/i18n', 'i18n'],
+        ]
+      },{
         title: 'Reference',
         children: [
-          ['/api-reference/', 'API Reference'],
+          ['/api/featureList', 'Feature List'],
+          ['/api/apiList', 'Api List'],
+          
         ]
       },
     ],

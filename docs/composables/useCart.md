@@ -24,6 +24,7 @@ type Order = {
   amountDelivery: number;
   currency: Currency;
   orderLines?: OrderLine[];
+  websiteOrderLine?: OrderLine[];
   stage: OrderStage;
   orderUrl: string;
   transactions: PaymentTransaction[];
