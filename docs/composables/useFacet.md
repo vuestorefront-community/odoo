@@ -9,10 +9,15 @@
 
 ```ts
 type FacetSearchResult = {
-  categories: Category[]
-  products: Product[]
-  attributes: Attribute[]
-  totalProducts: number
+  minPrice: number;
+  maxPrice: number;
+  products: Product[];
+  categories: Category[];
+  facets: Record<string, string>;
+  totalProducts: number;
+  perPageOptions: number;
+  itemsPerPage: number;
+  attributes: AttributeValue[];
 }
 ```
 

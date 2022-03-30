@@ -5,9 +5,17 @@ From [VSF2 docs](https://docs.vuestorefront.io/v2/advanced/extending-graphql-que
 we can use custom query on existing APIS.
 Most of the apis use 'customQuery' index.
 ### Use Cart
+``` ts
+  const { load: loadCart, cart } = useCart();
 
+  await loadCart({ customQuery: { cartLoad: 'customCartLoad' } });
+```
 ### Use Category
+``` ts
+  const { categories, search: searchCategories } = useCategory();
 
+  await loadCart({ pageSize: 100, customQuery: { getCategory: 'customGetCategory' } });
+```
 ### Use CountrySearch
 
 ### Use Facet

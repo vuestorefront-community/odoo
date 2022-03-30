@@ -6,7 +6,7 @@ Want to try out the integration on your local machine? Check out our explanatory
 <iframe width="100%" height="669" src="https://www.youtube.com/watch?v=FQMcbncdX_g&t=179s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
 
 ## Middleware
-Odoo use graphql and jsonrpc calls 
+Odoo use graphql
 - graphqlBaseUrl for **graphql**
 
 
@@ -51,3 +51,32 @@ export REDIS_HOST=<redis_host>
 export REDIS_PORT=<redis_port>
 # export REDIS_PASSWORD=<redis_password>
 ```
+
+### Image handle
+Always use the **getImage** method!
+
+#### WHY ? 
+- He is build to fetch from correct baseURL (CDN for production / odoo others)
+- He is already injected in vue
+
+#### HOW ?
+
+```ts
+   // from template
+   $image(productGetters.getCoverImage(product))
+   $image( image url )
+
+   // from setup
+   { url: root.$image(img.small) }
+
+
+```
+
+#### Assets
+The assets folder on build stagging / prod will be sent to CDN with some hash.
+
+To nuxt compile the assets links with the rigth use require.
+
+```ts
+  :placeholder="require('~/assets/images/product/product_placeholder.png')"
+```  
