@@ -1,5 +1,10 @@
 # Configuration
 
+## Testing it yourself
+
+Want to try out the integration on your local machine? Check out our explanatory video below:
+<iframe width="100%" height="669" src="https://www.youtube.com/watch?v=FQMcbncdX_g&t=179s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+
 ## Middleware
 Odoo use graphql and jsonrpc calls 
 - graphqlBaseUrl for **graphql**

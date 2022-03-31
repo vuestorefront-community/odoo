@@ -22,6 +22,7 @@ Cart
 - [x] clear cart
 - [ ] add promo coupon
 - [ ] remove promo coupon
+- [x] detailed cart view
 
 User
 
