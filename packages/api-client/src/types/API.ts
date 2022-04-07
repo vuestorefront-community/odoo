@@ -10,7 +10,7 @@ import {
   WishlistRemoveItemResponse, ShippingGetDeliveryMethodsResult, PaymentMakeExternalResult, CountryStatesResult, CountriesResult,
   PaymentLoadProvidersResult, BillingGetAddressResult, GraphQlDeleteAddressParams, ShippingGetAddresessResult, BillingAddAddresResponse,
   OrdersResponse, GraphQlOrdersParams, GraphQlAddMultipleProductsParams, cartAddMultipleItemsResult, GraphQlRemoveMultipleProductsParams,
-  cartRemoveMultipleItemsResult
+  cartRemoveMultipleItemsResult, ApplyCouponResult
 } from './types';
 
 export interface OdooApiMethods {
@@ -58,6 +58,8 @@ export interface OdooApiMethods {
   paymentConfirmation(customQuery?: CustomQuery): Promise<FetchResult>;
 
   subscribeNewsLetter(customQuery?: CustomQuery): Promise<FetchResult>;
+
+  applyCoupon(customQuery?: CustomQuery): Promise<FetchResult<ApplyCouponResult>>;
 
   ordersGet(params: GraphQlOrdersParams, customQuery?: CustomQuery): Promise<FetchResult<OrdersResponse>>;
 }
