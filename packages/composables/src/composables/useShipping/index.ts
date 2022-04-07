@@ -5,11 +5,11 @@ import { GraphQlUpdateAddressParams, Partner } from '@vue-storefront/odoo-api';
 import useCart from '../useCart';
 
 const throwErrors = (errors) => {
-  if (errors.response.data?.networkError) {
+  if (errors?.response.data?.networkError) {
     const errorList = errors.response.data?.networkError?.result?.errors || [];
     throw new Error(errorList.map(error => error.message).join(',') || 'Some error');
   }
-  if (errors.response.data?.graphQLErrors) {
+  if (errors?.response.data?.graphQLErrors) {
     const errorList = errors.response.data?.graphQLErrors || [];
     throw new Error(errorList.map(error => error.message).join(',') || 'Some error');
   }
