@@ -4,7 +4,18 @@ import { Context, useBillingFactory, UseBillingParams } from '@vue-storefront/co
 import { Address, GraphQlUpdateAddressParams } from '@vue-storefront/odoo-api';
 import useCart from '../useCart';
 
-const factoryParams: UseBillingParams<any, any> = {
+const throwErrors = (errors) => {
+  if (errors?.response.data?.networkError) {
+    const errorList = errors.response.data?.networkError?.result?.errors || [];
+    throw new Error(errorList.map(error => error.message).join(',') || 'Some error');
+  }
+  if (errors?.response.data?.graphQLErrors) {
+    const errorList = errors.response.data?.graphQLErrors || [];
+    throw new Error(errorList.map(error => error.message).join(',') || 'Some error');
+  }
+};
+
+const factoryParams: UseBillingParams<any, GraphQlUpdateAddressParams> = {
   provide() {
     return {
       useCart: useCart()
@@ -29,28 +40,28 @@ const factoryParams: UseBillingParams<any, any> = {
 
   save: async (context: Context, { billingDetails, customQuery }) => {
 
-    const params: GraphQlUpdateAddressParams = {
-      id: billingDetails.id,
-      street: billingDetails.street,
-      zip: billingDetails.zip,
-      phone: billingDetails.phone,
-      name: billingDetails.name,
-      city: billingDetails.city,
-      countryId: parseInt(billingDetails.country.id),
-      stateId: parseInt(billingDetails.state.id)
-    };
+    if (billingDetails.id) {
 
-    try {
-      const { data } = await context.$odoo.api.billingUpdateAddress(params, customQuery);
+      try {
+        const { data } = await context.$odoo.api.billingUpdateAddress(billingDetails, customQuery);
 
-      context.useCart.cart.value.order.partnerInvoice = data.updateAddress;
+        context.useCart.cart.value.order.partnerInvoice = data.updateAddress;
 
-      return data.updateAddress;
-    } catch (err) {
-      throw new Error(err.map((e) => e.message).join(','));
+        return data.updateAddress;
+      } catch (errors) {
+        throwErrors(errors);
+      }
     }
+
+    const { data, errors } = await context.$odoo.api.billingAddAddress(billingDetails, customQuery);
+
+    throwErrors(errors);
+
+    context.useCart.cart.value.order.partnerShipping = data.addAddress;
+
+    return data.addAddress;
 
   }
 };
 
-export default useBillingFactory<any, any>(factoryParams);
+export default useBillingFactory<any, GraphQlUpdateAddressParams>(factoryParams);
