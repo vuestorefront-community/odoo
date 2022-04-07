@@ -22,6 +22,9 @@ Cart
 - [x] clear cart
 - [ ] add promo coupon
 - [ ] remove promo coupon
+- [x] detailed cart view
+- [x] add multiple items to cart
+- [x] remove multiple items from cart
 
 User
 
@@ -45,9 +48,15 @@ Checkout
 - [x] get payment methods (depends on integration)
 - [x] place order
 - [x] i18n
+- [x] get and display countries
+- [x] get and display country states
 
 Others
 - [ ] change currency
 - [ ] change locale
 - [ ] change language
 - [x] import redirect from Odoo
+- [x] get and display countries
+- [x] get and display country states
+- [x] load user
+- [x] subscribe to newsletter
