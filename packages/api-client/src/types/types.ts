@@ -123,6 +123,14 @@ export type CartRemoveItemResult = {
   cartRemoveItem: Cart
 };
 
+export type ApplyCoupon = {
+  applied: boolean
+}
+
+export type ApplyCouponResult = {
+  applyCoupon: ApplyCoupon
+};
+
 export type BillingGetAddressResult = {
   addresses: Partner[]
 };
@@ -502,6 +510,10 @@ export type GraphQlUpdateAddressParams = {
   phone: string
   email?: string
 };
+
+export type GraphQlApplyCouponParams = {
+  promo: string
+}
 
 export type GraphQlCartUpdateItemQtyParams = {
   lineId: number;

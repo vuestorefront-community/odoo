@@ -43,4 +43,6 @@ export { default as paymentConfirmation } from './paymentConfirmation';
 
 export { default as subscribeNewsLetter } from './subscribeNewsLetter';
 
+export { default as applyCoupon } from './applyCoupon';
+
 export { default as ordersGet } from './ordersGet';
