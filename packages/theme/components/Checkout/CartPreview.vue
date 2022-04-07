@@ -57,11 +57,9 @@
         :label="$t('Enter promo code')"
         class="sf-input--filled promo-code__input"
       />
-      <SfButton
-        class="promo-code__button"
-        @click="() => applyCoupon({ couponCode: promoCode })"
-        >{{ $t('Apply') }}</SfButton
-      >
+      <SfButton class="promo-code__button" @click="handleApplyCoupon()">{{
+        $t('Apply')
+      }}</SfButton>
     </div>
     <div class="highlighted">
       <SfCharacteristic
@@ -112,6 +110,10 @@ export default {
       checkoutGetters.getShippingMethodPrice(cart.value)
     );
 
+    const handleApplyCoupon = async () => {
+      await applyCoupon({ couponCode: promoCode.value });
+    };
+
     return {
       shippingMethodPrice,
       discounts,
@@ -125,7 +127,7 @@ export default {
       updateItemQty,
       checkoutGetters,
       cartGetters,
-      applyCoupon,
+      handleApplyCoupon,
       characteristics: [
         {
           title: 'Safety',

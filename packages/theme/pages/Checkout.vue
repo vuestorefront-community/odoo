@@ -46,6 +46,7 @@ export default {
     const currentStepIndex = computed(() =>
       Object.keys(STEPS).findIndex((s) => s === currentStep.value)
     );
+
     const isThankYou = computed(() => currentStep.value === 'thank-you');
     const handleStepClick = (stepIndex) => {
       const key = Object.keys(STEPS)[stepIndex];
