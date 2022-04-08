@@ -31,8 +31,8 @@ const factoryParams: UseShippingParams<Partner, GraphQlUpdateAddressParams> = {
 
     const shippingAdress = {
       ...address,
-      country: { id: String(address.country.id) },
-      state: { id: String(address.state.id) }
+      country: { id: String(address?.country?.id) },
+      state: { id: String(address?.state?.id) }
     };
 
     return shippingAdress;
