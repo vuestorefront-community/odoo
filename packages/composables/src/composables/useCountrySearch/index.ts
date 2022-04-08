@@ -29,7 +29,7 @@ const useCountrySearch = (): any => {
 
     const { data } = await context.$odoo.api.getCountryStates(params);
 
-    countryStates.value = data.country.states;
+    countryStates.value = data?.country?.states || [];
   };
 
   return {
