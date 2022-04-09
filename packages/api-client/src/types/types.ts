@@ -499,15 +499,15 @@ export type GraphQlAddAddressParams = {
 };
 
 export type GraphQlUpdateAddressParams = {
-  id: number;
-  name: string
-  street: string
+  id?: number;
+  name?: string
+  street?: string
   street2?: string
-  zip: string
-  city: string
-  stateId: number
-  countryId: number
-  phone: string
+  zip?: string
+  city?: string
+  stateId?: number
+  countryId?: number
+  phone?: string
   email?: string
 };
 
