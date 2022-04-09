@@ -487,14 +487,14 @@ export type GraphQlCartAddItemParams = {
 };
 
 export type GraphQlAddAddressParams = {
-  name: string
-  street: string
+  name?: string
+  street?: string
   street2?: string
-  zip: string
-  city: string
-  stateId: number
-  countryId: number
-  phone: string
+  zip?: string
+  city?: string
+  stateId?: number
+  countryId?: number
+  phone?: string
   email?: string
 };
 
