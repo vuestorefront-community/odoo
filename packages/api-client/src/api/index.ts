@@ -43,6 +43,7 @@ export { default as paymentMakeExternal } from './paymentMakeExternal';
 export { default as paymentConfirmation } from './paymentConfirmation';
 
 export { default as subscribeNewsLetter } from './subscribeNewsLetter';
+export { default as setShippingMethod } from './setShippingMethod';
 
 export { default as applyCoupon } from './applyCoupon';
 

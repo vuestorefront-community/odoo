@@ -441,6 +441,7 @@ export type Order = {
   stage: OrderStage;
   orderUrl: string;
   transactions: PaymentTransaction[];
+  shippingMethod: ShippingMethod;
 };
 
 export type Cart = {
@@ -511,6 +512,14 @@ export type GraphQlSetDefaultAddressParams = {
   id?: number;
   type?: AddressType;
 };
+
+export type GraphQlSetShippingMethodParams = {
+  shippingMethodId: number;
+}
+
+export type GraphQlSetShippingMethodResponse = {
+  setShippingMethod: Cart
+}
 
 export type GraphQlUpdateAddressParams = {
   id?: number;
