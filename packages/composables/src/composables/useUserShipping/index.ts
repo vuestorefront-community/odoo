@@ -4,8 +4,8 @@ import {
   useUserShippingFactory,
   UseUserShippingFactoryParams
 } from '@vue-storefront/core';
-import { Partner, GraphQlAddAddressParams, GraphQlDeleteAddressParams, GraphQlUpdateAddressParams } from '@vue-storefront/odoo-api';
-
+import { Partner, GraphQlAddAddressParams, GraphQlDeleteAddressParams, GraphQlUpdateAddressParams, AddressType } from '@vue-storefront/odoo-api';
+import { throwErrors } from '@vue-storefront/odoo/src/helpers/graphqlError';
 const params: UseUserShippingFactoryParams<Partner[], any> = {
   addAddress: async (context: Context, { address, shipping, customQuery }) => {
 
@@ -60,8 +60,17 @@ const params: UseUserShippingFactoryParams<Partner[], any> = {
     return data.addresses;
   },
 
-  setDefaultAddress: async (context: Context, { shipping }) => {
-    return [...shipping];
+  setDefaultAddress: async (context: Context, { address, shipping }) => {
+
+    const { data, errors } = await context.$odoo.api.setDefaultAddress({ id: address.id, type: AddressType.Shipping });
+
+    throwErrors(errors);
+
+    const newList = [...shipping];
+    const index = newList.findIndex((item) => item.id === data.selectAddress.id);
+    newList[index] = data.selectAddress;
+
+    return newList;
   }
 };
 

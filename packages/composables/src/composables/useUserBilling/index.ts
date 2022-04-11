@@ -4,7 +4,8 @@ import {
   useUserBillingFactory,
   UseUserBillingFactoryParams
 } from '@vue-storefront/core';
-import { GraphQlAddAddressParams, GraphQlDeleteAddressParams, GraphQlUpdateAddressParams, Partner } from '@vue-storefront/odoo-api';
+import { GraphQlAddAddressParams, GraphQlDeleteAddressParams, GraphQlUpdateAddressParams, Partner, AddressType } from '@vue-storefront/odoo-api';
+import { throwErrors } from '@vue-storefront/odoo/src/helpers/graphqlError';
 
 const params: UseUserBillingFactoryParams<Partner[], any> = {
   addAddress: async (context: Context, { address, billing, customQuery }) => {
@@ -61,8 +62,17 @@ const params: UseUserBillingFactoryParams<Partner[], any> = {
     return data.addresses;
   },
 
-  setDefaultAddress: async (context: Context, params?) => {
-    return Promise.resolve([]);
+  setDefaultAddress: async (context: Context, { address, billing }) => {
+
+    const { data, errors } = await context.$odoo.api.setDefaultAddress({ id: address.id, type: AddressType.Billing });
+
+    throwErrors(errors);
+
+    const newList = [...billing];
+    const index = newList.findIndex((item) => item.id === data.selectAddress.id);
+    newList[index] = data.selectAddress;
+
+    return newList;
   }
 };
 
