@@ -10,6 +10,11 @@ export enum FilterVisibility {
   Hidden = 'Hidden'
 }
 
+export enum AddressType {
+  Shipping = 'Shipping',
+  Billing = 'Billing'
+}
+
 export enum OrderStage {
   Quotation = 'Quotation',
   QuotationSent = 'QuotationSent',
@@ -169,6 +174,10 @@ export type OrdersResponse = {
 
 export type ShippingUpdateAddressResponse = {
   updateAddress: Partner
+};
+
+export type SetDefaultAddressResponse = {
+  selectAddress: Partner
 };
 
 export type WishlistLoadResponse = {
@@ -496,6 +505,11 @@ export type GraphQlAddAddressParams = {
   countryId?: number
   phone?: string
   email?: string
+};
+
+export type GraphQlSetDefaultAddressParams = {
+  id?: number;
+  type?: AddressType;
 };
 
 export type GraphQlUpdateAddressParams = {
