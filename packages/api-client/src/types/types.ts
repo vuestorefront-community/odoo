@@ -343,9 +343,9 @@ export type State = {
   name?: string;
 };
 export type ShippingMethod = {
-  id: number;
-  name: string;
-  price: number;
+  id?: number;
+  name?: string;
+  price?: number;
 };
 export type Country = {
   id: number;
@@ -372,15 +372,15 @@ export type AgnosticUser = {
 
 export type Partner = {
   id?: number;
-  name: string;
-  street: string;
+  name?: string;
+  street?: string;
   street2?: string;
-  city: string;
-  state: State;
-  zip: string;
-  country: Country;
+  city?: string;
+  state?: State;
+  zip?: string;
+  country?: Country;
   email?: string;
-  phone: string;
+  phone?: string;
   isCompany?: boolean;
   isDefault?: boolean;
   contacts?: Partner[];
