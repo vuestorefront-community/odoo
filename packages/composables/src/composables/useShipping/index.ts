@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-prototype-builtins */
 import { Context, useShippingFactory, UseShippingParams } from '@vue-storefront/core';
-import { GraphQlUpdateAddressParams, Partner } from '@vue-storefront/odoo-api';
+import { GraphQlAddAddressParams, GraphQlUpdateAddressParams, Partner } from '@vue-storefront/odoo-api';
 import useCart from '../useCart';
 
 const throwErrors = (errors) => {
@@ -15,13 +15,12 @@ const throwErrors = (errors) => {
   }
 };
 
-const factoryParams: UseShippingParams<Partner, GraphQlUpdateAddressParams> = {
+const factoryParams: UseShippingParams<Partner, GraphQlUpdateAddressParams | GraphQlAddAddressParams> = {
   provide() {
     return {
       useCart: useCart()
     };
   },
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, { customQuery }) => {
     if (!context.useCart.cart) {
       await context.useCart.load(customQuery);
@@ -39,7 +38,8 @@ const factoryParams: UseShippingParams<Partner, GraphQlUpdateAddressParams> = {
   },
 
   save: async (context: Context, { params, customQuery }) => {
-    if (params.id) {
+
+    if ('id' in params && params.id) {
       try {
         const { data } = await context.$odoo.api.shippingUpdateAddress(params, customQuery);
 
@@ -60,5 +60,5 @@ const factoryParams: UseShippingParams<Partner, GraphQlUpdateAddressParams> = {
   }
 };
 
-export default useShippingFactory<Partner, GraphQlUpdateAddressParams>(factoryParams);
+export default useShippingFactory<Partner, GraphQlAddAddressParams | GraphQlUpdateAddressParams>(factoryParams);
 
