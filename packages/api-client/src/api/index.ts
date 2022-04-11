@@ -26,6 +26,7 @@ export { default as wishlistRemoveItem } from './wishlistRemoveItem';
 export { default as getCountries } from './getCountries';
 export { default as getCountryStates } from './getCountryStates';
 
+export { default as setDefaultAddress } from './setDefaultAddress';
 export { default as shippingAddAdress } from './shippingAddAddress';
 export { default as shippingUpdateAddress } from './shippingUpdateAddress';
 export { default as shippingGetDeliveryMethods } from './shippingGetDeliveryMethods';
