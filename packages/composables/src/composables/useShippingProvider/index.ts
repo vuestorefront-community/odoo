@@ -1,42 +1,41 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  useShippingProviderFactory,
-  UseShippingProviderParams,
-  Context
-} from '@vue-storefront/core';
-import {
-  ShippingInfo,
-  ShippingMethod
-} from '@vue-storefront/odoo-api';
+import { useShippingProviderFactory, UseShippingProviderParams, Context} from '@vue-storefront/core';
+import { ShippingInfo, ShippingMethod } from '@vue-storefront/odoo-api';
+import { throwErrors } from '@vue-storefront/odoo/src/helpers/graphqlError';
+import useCart from '../useCart';
 
 interface ShippingProviderState {
   response: ShippingInfo;
 }
 
-const useShippingProviderFactoryParams: UseShippingProviderParams<
-  ShippingProviderState,
-  ShippingMethod
-> = {
-  load: async (context: Context, { customQuery, state }) => {
-    if (!context.cart.cart?.value?.shippingInfo) {
-      await context.cart.load(customQuery);
-    }
+const useShippingProviderFactoryParams: UseShippingProviderParams<ShippingMethod[], ShippingMethod> = {
+  provide() {
     return {
-      ...state.value,
-      response: context.cart.cart.value.shippingInfo
+      useCart: useCart()
     };
+  },
+  load: async (context: Context, { customQuery, state }) => {
+
+    const { data, errors } = await context.$odoo.api.shippingGetDeliveryMethods(customQuery);
+
+    state.value = data.deliveryMethods;
+
+    throwErrors(errors);
+
+    return data.deliveryMethods;
   },
   save: async (context: Context, { shippingMethod, customQuery, state }) => {
 
-    return {
+    const { data, errors } = await context.$odoo.api.setShippingMethod({ shippingMethodId: shippingMethod.id}, customQuery);
 
-    } as any;
+    context.useCart.cart.value.order.shippingMethod = data.setShippingMethod?.order?.shippingMethod;
+
+    throwErrors(errors);
+
+    return [data.setShippingMethod?.order?.shippingMethod];
   }
 };
 
-const useShippingProvider = useShippingProviderFactory<
-  ShippingProviderState,
-  ShippingMethod
->(useShippingProviderFactoryParams);
+const useShippingProvider = useShippingProviderFactory<ShippingMethod[], ShippingMethod>(useShippingProviderFactoryParams);
 
 export { useShippingProvider, useShippingProviderFactoryParams };
