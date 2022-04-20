@@ -19,13 +19,7 @@ const factoryParams = {
       search: params.input.search,
       sort: params.input.sort as ProductSortInput,
 
-      filter: {
-        categoryId: params?.input?.filter?.categoryId,
-        attributeValueId: params.input?.filter?.attributeValueId?.map(id => parseInt(id)),
-        attribValues: params.input?.filter?.attribValues?.map(id => id),
-        minPrice: parseInt(params?.input?.minPrice),
-        maxPrice: parseInt(params?.input?.maxPrice)
-      }
+      filter: params?.input?.filter
     };
 
     let categoryResponse = null;
