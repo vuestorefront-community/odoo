@@ -2,7 +2,14 @@
   <img src="https://user-images.githubusercontent.com/1626923/137323036-91d4262b-74dd-40c3-83da-a405a75de5c8.jpg" alt="Vue Storefront" />
 </div>
 
-## Vue Storefront 2 integration with Odoo (beta)
+### Stay connected
+
+[![GitHub Repo stars](https://img.shields.io/github/stars/vuestorefront/vue-storefront?style=social)](https://github.com/vuestorefront/vue-storefront)
+[![Twitter Follow](https://img.shields.io/twitter/follow/vuestorefront?style=social)](https://twitter.com/vuestorefront)
+[![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCkm1F3Cglty3CE1QwKQUhhg?style=social)](https://www.youtube.com/c/VueStorefront)
+[![Discord](https://img.shields.io/discord/770285988244750366?label=join%20discord&logo=Discord&logoColor=white)](https://discord.vuestorefront.io)
+
+## Vue Storefront 2 integration with Odoo
 
 This project is a Odoo integration with [Vue Storefront 2](https://github.com/vuestorefront-community/vue-storefront/).
 This integration is being developed and maintained by [ODOOGAP / PROMPTEQUATION](https://www.odoogap.com/) ❤️
