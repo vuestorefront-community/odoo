@@ -19,7 +19,8 @@ export default async function shippingAddAdress(
 
   const response = await apolloClient.mutate({
     mutation: gql`${shippingAddAdress.mutation}`,
-    variables: shippingAddAdress.variables
+    variables: shippingAddAdress.variables,
+    errorPolicy: 'all'
   });
 
   return response;

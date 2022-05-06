@@ -11,9 +11,11 @@ export { default as loadUser } from './loadUser';
 export { default as sendResetPassword } from './sendResetPassword';
 export { default as changePassword } from './changePassword';
 
+export { default as cartAddMultipleItems } from './cartAddMultipleItems';
+export { default as cartRemoveMultipleItems } from './cartRemoveMultipleItems';
+
 export { default as cartLoad } from './cartLoad';
 export { default as cartAddItem } from './cartAddItem';
-export { default as cartAddMulipleItems } from './cartAddMulipleItems';
 export { default as cartRemoveItem } from './cartRemoveItem';
 export { default as cartUpdateItemQty } from './cartUpdateItemQty';
 
@@ -24,6 +26,7 @@ export { default as wishlistRemoveItem } from './wishlistRemoveItem';
 export { default as getCountries } from './getCountries';
 export { default as getCountryStates } from './getCountryStates';
 
+export { default as setDefaultAddress } from './setDefaultAddress';
 export { default as shippingAddAdress } from './shippingAddAddress';
 export { default as shippingUpdateAddress } from './shippingUpdateAddress';
 export { default as shippingGetDeliveryMethods } from './shippingGetDeliveryMethods';
@@ -40,5 +43,8 @@ export { default as paymentMakeExternal } from './paymentMakeExternal';
 export { default as paymentConfirmation } from './paymentConfirmation';
 
 export { default as subscribeNewsLetter } from './subscribeNewsLetter';
+export { default as setShippingMethod } from './setShippingMethod';
+
+export { default as applyCoupon } from './applyCoupon';
 
 export { default as ordersGet } from './ordersGet';

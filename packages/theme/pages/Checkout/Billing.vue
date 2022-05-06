@@ -212,12 +212,8 @@ export default {
     ValidationObserver
   },
   setup(props, { root }) {
-    const {
-      search,
-      searchCountryStates,
-      countries,
-      countryStates
-    } = useCountrySearch();
+    const { search, searchCountryStates, countries, countryStates } =
+      useCountrySearch();
     const { load: loadBillingAddress, billing, save, error } = useBilling();
 
     const { use } = useShippingAsBillingAddress();
@@ -248,7 +244,7 @@ export default {
     };
 
     const handleFormSubmit = async () => {
-      await save({ billingDetails: form.value });
+      await save({ params: form.value });
       isFormSubmitted.value = true;
 
       if (!error.save) {

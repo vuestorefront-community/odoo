@@ -53,6 +53,8 @@ export type OrdersResponse = {
 };
 
 export interface FacetResultsData {
+  minPrice: number;
+  maxPrice: number;
   products: Product[];
   categories: Category[];
   facets: Record<string, string>;

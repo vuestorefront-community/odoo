@@ -19,13 +19,7 @@ const factoryParams = {
       search: params.input.search,
       sort: params.input.sort as ProductSortInput,
 
-      filter: {
-        categoryId: params?.input?.filter?.categoryId,
-        attributeValueId: params.input?.filter?.attributeValueId?.map(id => parseInt(id)),
-        attribValues: params.input?.filter?.attribValues?.map(id => id),
-        minPrice: parseInt(params?.input?.minPrice),
-        maxPrice: parseInt(params?.input?.maxPrice)
-      }
+      filter: params?.input?.filter
     };
 
     let categoryResponse = null;
@@ -36,6 +30,8 @@ const factoryParams = {
     const { data: productData } = await context.$odoo.api.getProductTemplatesList(productParams, customQueryProducts);
 
     return {
+      minPrice: productData?.products?.minPrice || 0,
+      maxPrice: productData?.products?.maxPrice || 10000,
       categories: categoryResponse?.data?.categories?.categories || null,
       products: productData.products.products,
       attributes: productData.products.attributeValues,

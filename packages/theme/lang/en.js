@@ -147,5 +147,8 @@ export default {
   'Sorry, we didnt find what youre looking for': 'Sorry, we didn\'t find what you\'re looking for.',
   'Enter your email to receive instructions on how to reset your password': 'Enter your email to receive instructions on how to reset your password',
   'Enter your email to receive instructions on how to reset your password': 'Enter your email to receive instructions on how to reset your password',
+  'Billing': 'Billing',
+  'Billing': 'Billing',
+  'Shipping Details': 'Shipping Details',
 
 };

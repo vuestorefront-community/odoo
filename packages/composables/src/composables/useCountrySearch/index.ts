@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ref } from '@nuxtjs/composition-api';
+import { ref, ssrRef } from '@nuxtjs/composition-api';
 import { useVSFContext } from '@vue-storefront/core';
 import { Context } from '@vue-storefront/core';
 import { GraphQlGetCountryParams } from '@vue-storefront/odoo-api';
 
-const useCountrySearch = (): any => {
+const useCountrySearch = (newKey: string): any => {
+  const key = 'country' || newKey;
   const context: Context = useVSFContext();
 
   const errors = ref({ graphQLErrors: [] });
 
-  const countries = ref([]);
-  const countryStates = ref([]);
+  const countries = ssrRef([], key);
+  const countryStates = ssrRef([], key);
 
   const resetCountryErrors = () => (errors.value = { graphQLErrors: [] });
 
@@ -29,7 +30,7 @@ const useCountrySearch = (): any => {
 
     const { data } = await context.$odoo.api.getCountryStates(params);
 
-    countryStates.value = data.country.states;
+    countryStates.value = data?.country?.states || [];
   };
 
   return {

@@ -1,16 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-prototype-builtins */
 import { Context, useShippingFactory, UseShippingParams } from '@vue-storefront/core';
-import { GraphQlUpdateAddressParams, Partner } from '@vue-storefront/odoo-api';
+import { GraphQlAddAddressParams, GraphQlUpdateAddressParams, Partner } from '@vue-storefront/odoo-api';
 import useCart from '../useCart';
 
-const factoryParams: UseShippingParams<Partner, GraphQlUpdateAddressParams> = {
+const throwErrors = (errors) => {
+  if (errors?.response.data?.networkError) {
+    const errorList = errors.response.data?.networkError?.result?.errors || [];
+    throw new Error(errorList.map(error => error.message).join(',') || 'Some error');
+  }
+  if (errors?.response.data?.graphQLErrors) {
+    const errorList = errors.response.data?.graphQLErrors || [];
+    throw new Error(errorList.map(error => error.message).join(',') || 'Some error');
+  }
+};
+
+const factoryParams: UseShippingParams<Partner, GraphQlUpdateAddressParams | GraphQlAddAddressParams> = {
   provide() {
     return {
       useCart: useCart()
     };
   },
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, { customQuery }) => {
     if (!context.useCart.cart) {
       await context.useCart.load(customQuery);
@@ -20,33 +30,35 @@ const factoryParams: UseShippingParams<Partner, GraphQlUpdateAddressParams> = {
 
     const shippingAdress = {
       ...address,
-      country: { id: String(address.country.id) },
-      state: { id: String(address.state.id) }
+      country: { id: String(address?.country?.id) },
+      state: { id: String(address?.state?.id) }
     };
 
     return shippingAdress;
   },
 
-  save: async (context: Context, { shippingDetails, customQuery }) => {
+  save: async (context: Context, { params, customQuery }) => {
 
-    const params: GraphQlUpdateAddressParams = {
-      id: shippingDetails.id,
-      street: shippingDetails.street,
-      zip: shippingDetails.zip,
-      phone: shippingDetails.phone,
-      name: shippingDetails.name,
-      city: shippingDetails.city,
-      countryId: shippingDetails.country.id,
-      stateId: shippingDetails.state.id
-    };
+    if ('id' in params && params.id) {
+      try {
+        const { data } = await context.$odoo.api.shippingUpdateAddress(params, customQuery);
 
-    const { data } = await context.$odoo.api.shippingUpdateAddress(params, customQuery);
+        context.useCart.cart.value.order.partnerShipping = data.updateAddress;
+        return data.updateAddress;
+      } catch (errors) {
+        throwErrors(errors);
+      }
+    }
 
-    context.useCart.cart.value.order.partnerShipping = data.updateAddress;
+    const { data, errors } = await context.$odoo.api.shippingAddAdress(params, customQuery);
 
-    return data.updateAddress;
+    throwErrors(errors);
+
+    context.useCart.cart.value.order.partnerShipping = data.addAddress;
+    return data.addAddress;
+
   }
 };
 
-export default useShippingFactory<Partner, GraphQlUpdateAddressParams>(factoryParams);
+export default useShippingFactory<Partner, GraphQlAddAddressParams | GraphQlUpdateAddressParams>(factoryParams);
 

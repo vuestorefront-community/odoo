@@ -13,26 +13,30 @@ type Product = {
   displayName?: string;
   slug?: string;
   isInStock?: boolean;
-  qty: number;
-  sku: string;
-  image: string;
-  variantImage: string;
-  smallImage: string;
-  mediaGallery: ProductImage[];
-  price: number;
-  weight: number;
-  priceAfterDiscount: number;
-  hasDiscountedPrice: number;
-  listPrice: number;
+  qty?: number;
+  sku?: string;
+  image?: string;
+  variantImage?: string;
+  smallImage?: string;
+  mediaGallery?: ProductImage[];
+  price?: number;
+  weight?: number;
+  priceAfterDiscount?: number;
+  hasDiscountedPrice?: number;
+  listPrice?: number;
   realProduct?: ProductVariant;
-  firstVariant: number;
-  currency: Currency;
-  isInWishlist: boolean;
+  firstVariant?: number;
+  currency?: Currency;
+  isInWishlist?: boolean;
   alternativeProducts?: Product[];
+  productVariants?: Product[]
   accessoryProducts?: Product[];
-  attributeValues: Attribute[];
+  attributeValues?: AttributeValue[];
   productTemplate?: Product;
-  categories: Category[];
+  categories?: Category[];
+  seoTitle?: string;
+  seoDescription?: string;
+  imageWebp?: string;
 }
 ```
 

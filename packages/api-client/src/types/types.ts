@@ -10,6 +10,11 @@ export enum FilterVisibility {
   Hidden = 'Hidden'
 }
 
+export enum AddressType {
+  Shipping = 'Shipping',
+  Billing = 'Billing'
+}
+
 export enum OrderStage {
   Quotation = 'Quotation',
   QuotationSent = 'QuotationSent',
@@ -123,6 +128,14 @@ export type CartRemoveItemResult = {
   cartRemoveItem: Cart
 };
 
+export type ApplyCoupon = {
+  applied: boolean
+}
+
+export type ApplyCouponResult = {
+  applyCoupon: ApplyCoupon
+};
+
 export type BillingGetAddressResult = {
   addresses: Partner[]
 };
@@ -163,6 +176,10 @@ export type ShippingUpdateAddressResponse = {
   updateAddress: Partner
 };
 
+export type SetDefaultAddressResponse = {
+  selectAddress: Partner
+};
+
 export type WishlistLoadResponse = {
   wishlistItems: Wishlist
 };
@@ -197,6 +214,10 @@ export type CartAddItemResult = {
 
 export type cartAddMultipleItemsResult = {
   cartAddMultipleItems: Cart
+};
+
+export type cartRemoveMultipleItemsResult = {
+  cartRemoveMultipleItems: Cart
 };
 
 export type CartLoadResult = {
@@ -234,6 +255,8 @@ export type SingleProductResult = {
 export type Products = {
   products: Product[];
   totalCount: number;
+  minPrice: number;
+  maxPrice: number;
   attributeValues: AttributeValue[];
 }
 
@@ -268,26 +291,30 @@ export type Product = {
   displayName?: string;
   slug?: string;
   isInStock?: boolean;
-  qty: number;
-  sku: string;
-  image: string;
-  variantImage: string;
-  smallImage: string;
-  mediaGallery: ProductImage[];
-  price: number;
-  weight: number;
-  priceAfterDiscount: number;
-  hasDiscountedPrice: number;
-  listPrice: number;
+  qty?: number;
+  sku?: string;
+  image?: string;
+  variantImage?: string;
+  smallImage?: string;
+  mediaGallery?: ProductImage[];
+  price?: number;
+  weight?: number;
+  priceAfterDiscount?: number;
+  hasDiscountedPrice?: number;
+  listPrice?: number;
   realProduct?: ProductVariant;
-  firstVariant: number;
-  currency: Currency;
-  isInWishlist: boolean;
+  firstVariant?: number;
+  currency?: Currency;
+  isInWishlist?: boolean;
   alternativeProducts?: Product[];
+  productVariants?: Product[]
   accessoryProducts?: Product[];
-  attributeValues: AttributeValue[];
+  attributeValues?: AttributeValue[];
   productTemplate?: Product;
-  categories: Category[];
+  categories?: Category[];
+  seoTitle?: string;
+  seoDescription?: string;
+  imageWebp?: string;
 };
 
 export declare type WishlistItem = {
@@ -316,9 +343,9 @@ export type State = {
   name?: string;
 };
 export type ShippingMethod = {
-  id: number;
-  name: string;
-  price: number;
+  id?: number;
+  name?: string;
+  price?: number;
 };
 export type Country = {
   id: number;
@@ -345,15 +372,15 @@ export type AgnosticUser = {
 
 export type Partner = {
   id?: number;
-  name: string;
-  street: string;
+  name?: string;
+  street?: string;
   street2?: string;
-  city: string;
-  state: State;
-  zip: string;
-  country: Country;
+  city?: string;
+  state?: State;
+  zip?: string;
+  country?: Country;
   email?: string;
-  phone: string;
+  phone?: string;
   isCompany?: boolean;
   isDefault?: boolean;
   contacts?: Partner[];
@@ -414,6 +441,7 @@ export type Order = {
   stage: OrderStage;
   orderUrl: string;
   transactions: PaymentTransaction[];
+  shippingMethod: ShippingMethod;
 };
 
 export type Cart = {
@@ -469,29 +497,46 @@ export type GraphQlCartAddItemParams = {
 };
 
 export type GraphQlAddAddressParams = {
-  name: string
-  street: string
+  name?: string
+  street?: string
   street2?: string
-  zip: string
-  city: string
-  stateId: number
-  countryId: number
-  phone: string
+  zip?: string
+  city?: string
+  stateId?: number
+  countryId?: number
+  phone?: string
   email?: string
 };
 
+export type GraphQlSetDefaultAddressParams = {
+  id?: number;
+  type?: AddressType;
+};
+
+export type GraphQlSetShippingMethodParams = {
+  shippingMethodId: number;
+}
+
+export type GraphQlSetShippingMethodResponse = {
+  setShippingMethod: Cart
+}
+
 export type GraphQlUpdateAddressParams = {
-  id: number;
-  name: string
-  street: string
+  id?: number;
+  name?: string
+  street?: string
   street2?: string
-  zip: string
-  city: string
-  stateId: number
-  countryId: number
-  phone: string
+  zip?: string
+  city?: string
+  stateId?: number
+  countryId?: number
+  phone?: string
   email?: string
 };
+
+export type GraphQlApplyCouponParams = {
+  promo: string
+}
 
 export type GraphQlCartUpdateItemQtyParams = {
   lineId: number;
@@ -547,6 +592,10 @@ export type GraphQlGetProductParams = {
 
 export type GraphQlAddMultipleProductsParams = {
   products: GraphQlProductParam[];
+}
+
+export type GraphQlRemoveMultipleProductsParams = {
+  lineIds: number[];
 }
 
 export type GraphQlProductParam = {

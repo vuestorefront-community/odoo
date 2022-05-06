@@ -41,12 +41,12 @@ const useUiHelpers = (): any => {
       pageSize,
       categorySlug: params.slug_1,
       currentPage: page,
-      minPrice: price?.[0] || null,
-      maxPrice: price?.[1] || null,
+      minPrice: parseInt(price?.[0]) || null,
+      maxPrice: parseInt(price?.[1]) || null,
       fetchCategory: true,
       filter: {
         categoryId,
-        attributeValueId: filters
+        attributeValueId: filters?.map(id => parseInt(id))
       }
     };
   };

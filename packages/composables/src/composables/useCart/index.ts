@@ -11,6 +11,7 @@ import {
   GraphQlCartAddItemParams,
   GraphQlCartRemoveItemParams,
   GraphQlCartUpdateItemQtyParams,
+  GraphQlApplyCouponParams,
   OrderLine,
   Product
 } from '@vue-storefront/odoo-api';
@@ -83,12 +84,21 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
     return currentCart;
   },
 
-  applyCoupon: async (
-    context: Context,
-    { currentCart, couponCode, customQuery }
-  ) => {
-    console.log('Mocked: applyCoupon');
-    return { updatedCart: currentCart, updatedCoupon: {} };
+  applyCoupon: async (context: Context, { currentCart, couponCode, customQuery }) => {
+
+    const params : GraphQlApplyCouponParams = { promo: couponCode };
+
+    const { data, errors } = await context.$odoo.api.applyCoupon(params, customQuery);
+
+    if (data.applyCoupon?.applied) {
+      const { data: cartData } = await context.$odoo.api.cartLoad(customQuery);
+      return {
+        updatedCart: cartData.cart,
+        updatedCoupon: { applied: data.applyCoupon?.applied }
+      };
+    }
+
+    return { updatedCart: currentCart, updatedCoupon: { applied: data.applyCoupon?.applied } };
   },
 
   removeCoupon: async (
