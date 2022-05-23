@@ -48,6 +48,7 @@ export declare type ShippingInfo = Record<string, string>;
 export declare type PaymentProvider = {
   id: number;
   name: string;
+  provider: string;
   component: string;
   paymentIcons?: PaymentIcon[];
 };
