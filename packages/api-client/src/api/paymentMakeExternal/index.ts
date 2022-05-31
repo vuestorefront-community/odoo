@@ -1,5 +1,6 @@
-/* eslint-disable camelcase */
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import gql from 'graphql-tag';
 import { Context, CustomQuery } from '@vue-storefront/core';
 import { FetchResult } from 'apollo-link/lib/types';
 import { GraphQlMakePaymentParams, PaymentMakeExternalResult } from '../../index';
@@ -13,9 +14,14 @@ export default async function paymentMakeExternalMutation(
 ): Promise<FetchResult<PaymentMakeExternalResult>> {
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
+  const { paymentMakeExternalMutation } = context.extendQuery(
+    customQuery, { paymentMakeExternalMutation: { mutation, variables: params } }
+  );
+
   const response = await apolloClient.mutate({
-    mutation,
-    variables: params
+    mutation: gql`${paymentMakeExternalMutation.mutation}`,
+    variables: paymentMakeExternalMutation.variables,
+    errorPolicy: 'all'
   });
 
   return response;
