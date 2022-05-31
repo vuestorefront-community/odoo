@@ -18,7 +18,8 @@ export default async function getProductTemplate(
 
   const response = await apolloClient.query({
     query: gql`${getProductTemplate.query}`,
-    variables: getProductTemplate.variables
+    variables: getProductTemplate.variables,
+    errorPolicy: 'all'
   });
 
   return response;
