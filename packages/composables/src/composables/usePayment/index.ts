@@ -12,14 +12,17 @@ const factoryParams: UsePaymentFactoryParams<PaymentProvider, Order> = {
     };
   },
 
-  getPaymentProviderList: async (context: Context): Promise<PaymentProvider[]> => {
+  getPaymentProviderList: async (context: Context, params: any): Promise<PaymentProvider[]> => {
+    const { customQuery } = params;
 
-    const { data } = await context.$odoo.api.paymentLoadProviders();
+    const { data } = await context.$odoo.api.paymentLoadProviders(params, customQuery);
 
     return data.paymentAcquirers;
   },
-  getPaymentConfirmation: async (context: Context): Promise<Order> => {
-    const { data } = await context.$odoo.api.paymentConfirmation();
+  getPaymentConfirmation: async (context: Context, params: any): Promise<Order> => {
+    const { customQuery } = params;
+
+    const { data } = await context.$odoo.api.paymentConfirmation(params, customQuery);
 
     context.useCart.cart.value = data.paymentConfirmation;
 
