@@ -17,7 +17,7 @@ export interface UsePayment<PAYMENT_PROVIDER, PAYMENT_RESPONSE, API extends Plat
     providerList: PAYMENT_PROVIDER
   ): Promise<PAYMENT_PROVIDER[]>;
 
-  getPaymentConfirmation(): Promise<PAYMENT_RESPONSE>;
+  getPaymentConfirmation(params: { customQuery?: CustomQuery; }): Promise<PAYMENT_RESPONSE>;
 }
 
 export interface UsePaymentFactoryParams< PAYMENT_PROVIDER, PAYMENT_RESPONSE, API extends PlatformApi = any> extends FactoryParams<API> {
@@ -60,11 +60,11 @@ export const usePaymentFactory = < PAYMENT_PROVIDER, PAYMENT_RESPONSE, API exten
         }
       };
 
-      const getPaymentConfirmation = async (): Promise<PAYMENT_RESPONSE> => {
+      const getPaymentConfirmation = async (params): Promise<PAYMENT_RESPONSE> => {
 
         try {
           loading.value = true;
-          const response = await _factoryParams.getPaymentConfirmation();
+          const response = await _factoryParams.getPaymentConfirmation(params);
 
           return response;
         } catch (err) {
