@@ -38,11 +38,10 @@ export default {
   const { search, searchCountryStates, countries, countryStates } = useCountrySearch();
 
     onSSR(async () => {
-      await search({});
+      await search();
     });
 
-     watch(
-      () => form.value.country,
+     watch(() => form.value.country,
       async () => {
         await searchCountryStates(form.value.country);
       }
