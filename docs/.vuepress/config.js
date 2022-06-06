@@ -71,6 +71,7 @@ module.exports = {
         children: [
           ['/', 'Introduction'],
           '/essentials/configuration',
+          '/essentials/imageHandle',
           '/essentials/customQueries',
           '/essentials/customApis',
           '/essentials/payment',
