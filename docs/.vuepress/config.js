@@ -72,6 +72,7 @@ module.exports = {
           ['/', 'Introduction'],
           '/essentials/configuration',
           '/essentials/customQueries',
+          '/essentials/customApis',
           '/essentials/payment',
           '/essentials/maintainers'
         ]
