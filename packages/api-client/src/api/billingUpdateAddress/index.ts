@@ -19,7 +19,8 @@ export default async function billingUpdateAddress(
 
   const response = await apolloClient.mutate({
     mutation: gql`${billingAddress.mutation}`,
-    variables: billingAddress.variables
+    variables: billingAddress.variables,
+    errorPolicy: 'all'
   });
 
   return response;

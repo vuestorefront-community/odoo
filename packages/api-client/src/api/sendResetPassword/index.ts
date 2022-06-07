@@ -17,7 +17,8 @@ export default async function sendResetPassword(
 
   const response = await apolloClient.mutate({
     mutation,
-    variables: params
+    variables: params,
+    errorPolicy: 'all'
   });
 
   return response;

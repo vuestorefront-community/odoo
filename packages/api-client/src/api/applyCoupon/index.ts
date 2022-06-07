@@ -19,7 +19,8 @@ export default async function applyCoupon(
 
   const response = await apolloClient.mutate({
     mutation: gql`${applyCoupon.mutation}`,
-    variables: applyCoupon.variables
+    variables: applyCoupon.variables,
+    errorPolicy: 'all'
   });
 
   return response;

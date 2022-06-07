@@ -13,7 +13,8 @@ export default async function wishlistLoad(
 
   const response = await apolloClient.query({
     fetchPolicy: 'no-cache',
-    query
+    query,
+    errorPolicy: 'all'
   });
 
   return response;

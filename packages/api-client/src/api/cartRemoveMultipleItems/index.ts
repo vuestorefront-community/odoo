@@ -20,7 +20,8 @@ export default async function cartRemoveMultipleItems(
 
   const response = await apolloClient.mutate({
     mutation: gql`${cartRemoveMultipleItems.mutation}`,
-    variables: cartRemoveMultipleItems.variables
+    variables: cartRemoveMultipleItems.variables,
+    errorPolicy: 'all'
   });
 
   return response;
