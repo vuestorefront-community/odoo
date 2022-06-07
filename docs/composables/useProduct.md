@@ -1,12 +1,12 @@
 # UseProduct Composable
 **UseProduct** composable can be used to:
 
-- Search published products, related products
+- Search products by id
 
 ## API
 
 ```ts
-type Product = {
+export type Product = {
   id: number;
   description?: string;
   name?: string;
@@ -37,7 +37,7 @@ type Product = {
   seoTitle?: string;
   seoDescription?: string;
   imageWebp?: string;
-}
+};
 ```
 
 
@@ -48,14 +48,17 @@ import { onSSR } from '@vue-storefront/core'
 
 export default {
   setup () {
-    const { products, search } = useProduct('products');
+    const { products, search } = useProduct('products'); // or pass an id to be unique
 
     onSSR(async () => {
-      await search({ id });
+      await search({ 
+        id,
+        customQuery: { getProductTemplate: 'customGetProductQuery' }
+      });
     });
 
     return {
-      product
+      products: computed(() => products.value)
     }
   }
 }
