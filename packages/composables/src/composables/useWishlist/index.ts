@@ -50,7 +50,7 @@ const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
     };
 
     const { data } = await context.$odoo.api.wishlistRemoveItem(
-      removeItemParams
+      removeItemParams, customQuery
     );
 
     return data.wishlistRemoveItem;
