@@ -13,10 +13,20 @@ import { onSSR } from '@vue-storefront/core'
 
 export default {
   setup () {
-     const { sendResetPassword, errorPassword, resetPasswordErrors } = usePassword();
+     const { sendResetPassword, errorPassword, resetPassword } = usePassword();
+
+     const handleSendResetPassword = async (email) => {
+       await sendResetPassword({ email })
+     }
+
+     // Usually token will be redirected from user email in query param
+     // New password from input
+     const handleResetPassword = async () => {
+       await resetPassword({ password: newPassword, token })
+     }
 
     return {
-      sendResetPassword, 
+      handleSendResetPassword, 
       errorPassword, 
       resetPasswordErrors
     }
