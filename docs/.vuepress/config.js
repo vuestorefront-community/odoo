@@ -71,11 +71,17 @@ module.exports = {
         children: [
           ['/', 'Introduction'],
           '/essentials/configuration',
-          '/essentials/imageHandle',
-          '/essentials/customQueries',
-          '/essentials/customApis',
-          '/essentials/payment',
           '/essentials/maintainers'
+        ]
+      },
+      {
+        title: 'Guides',
+        collapsable: false,
+        children: [
+          '/guides/imageHandle',
+          '/guides/customQueries',
+          '/guides/customApis',
+          '/guides/payment'
         ]
       },
       {
@@ -84,16 +90,16 @@ module.exports = {
         children: [
           ['/composables/useCart', 'useCart'],
           ['/composables/useCategory', 'useCategory'],
-          ['/composables/useCountrySearch', 'useCountrySearch'],
           ['/composables/useFacet', 'useFacet'],
-          ['/composables/usePassword', 'usePassword'],
           ['/composables/useProduct', 'useProduct'],
-          ['/composables/useProductVariant', 'useProductVariant'],
           ['/composables/useShipping', 'useShipping'],
           ['/composables/useUser', 'useUser'],
           ['/composables/useUserBilling', 'useUserBilling'],
           ['/composables/useWishlist', 'useWishlist'],
           ['/composables/useOrder', 'useOrder'],
+          ['/composables/usePassword', 'usePassword'],
+          ['/composables/useProductVariant', 'useProductVariant'],
+          ['/composables/useCountrySearch', 'useCountrySearch'],
           ['/composables/customQueries', 'customQueries'],
         ]
       },

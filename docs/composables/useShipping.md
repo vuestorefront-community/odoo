@@ -1,6 +1,9 @@
 # UseShipping Composable
-**UseShipping** composable can be used to:
 
+::: tip Base  (Methods, Interfaces, Properties)
+[VSF useShipping](https://docs.vuestorefront.io/v2/reference/api/core.useshipping.html)
+:::
+## Features
 - Search available shipping methods
 - Load the shipping method and shipping address choosed for **current cart**
 - Save the shippingAddress ( update if has an id in params / add if doesn't have id)

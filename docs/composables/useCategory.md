@@ -1,9 +1,9 @@
 # UseCategory Composable
 
-### Base Methods, Interfaces, Properties  [VSF useCategory](https://docs.vuestorefront.io/v2/reference/api/core.usecategory.html)
+::: tip Base  (Methods, Interfaces, Properties)
+[VSF useCategory](https://docs.vuestorefront.io/v2/reference/api/core.usecategory.html)
+:::
 ## Features
-**UseCart** composable can be used to:
-
 * search a list of categories.
 
 ## API

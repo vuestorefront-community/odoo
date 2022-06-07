@@ -5,7 +5,7 @@ Following the [Registering an extension](https://docs.vuestorefront.io/v2/integr
 , to create new apis client (doesn't exist in odoo )we must register a new extension.
 
 
-
+#### <span style="color:#E38748; font-weight: 400;">Import the customApi file to middleware</span>
 ```js
 // middleware.config.js
 const apis = require('./custom-api/api');
@@ -32,6 +32,8 @@ module.exports = {
 
 ```
 
+
+#### <span style="color:#E38748; font-weight: 400;">Create your index file to organize your api modules</span>
 ```js
 // custom-api/api/index.js
 
@@ -45,9 +47,9 @@ module.exports = {
 
 ```
 
+#### <span style="color:#E38748; font-weight: 400;">Create each of your api module</span>
 ```js
 // custom-api/api/createTelegramNotification.js
-
 const gql = require('graphql-tag');
 
 const createTelegramNotification = async (context, params) => {

@@ -2,12 +2,11 @@
 # Image handle
 Always use the **getImage** method!
 
-### WHY ? 
+### Why ? 
 - He is build to fetch from correct baseURL (CDN for production / odoo others)
 - He is already injected in vue
 
-### HOW ?
-
+### How ?
 ```ts
    // from template
    $image(productGetters.getCoverImage(product))

@@ -1,6 +1,9 @@
 # UseProduct Composable
-**UseProduct** composable can be used to:
 
+::: tip Base  (Methods, Interfaces, Properties)
+[VSF useProduct](https://docs.vuestorefront.io/v2/reference/api/core.useproduct.html)
+:::
+## Features
 - Search products by id
 
 ## API
