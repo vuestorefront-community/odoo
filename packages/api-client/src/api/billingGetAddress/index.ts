@@ -16,6 +16,7 @@ export default async function billingGetAddress(
   );
 
   return await apolloClient.query({
-    query: gql`${billingGetAddress.query}`
+    query: gql`${billingGetAddress.query}`,
+    errorPolicy: 'all'
   });
 }

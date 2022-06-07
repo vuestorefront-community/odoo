@@ -22,7 +22,8 @@ export default async function changePassword(
 
   const response = await apolloClient.mutate({
     mutation: gql`${changePassword.mutation}`,
-    variables: changePassword.variables
+    variables: changePassword.variables,
+    errorPolicy: 'all'
   });
 
   return response;

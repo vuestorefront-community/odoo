@@ -15,7 +15,8 @@ export default async function getAddresses(
   );
 
   return await apolloClient.query({
-    query: gql`${getAddresses.query}`
+    query: gql`${getAddresses.query}`,
+    errorPolicy: 'all'
   });
 
 }

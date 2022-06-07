@@ -21,7 +21,8 @@ export default async function getRealProduct(
   const response = await apolloClient.query({
     query: gql`${getRealProduct.query}`,
     variables: getRealProduct.variables,
-    fetchPolicy: 'no-cache'
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all'
   });
 
   return response;

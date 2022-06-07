@@ -20,7 +20,8 @@ export default async function wishlistAddItem(
 
   const response = await apolloClient.mutate({
     mutation: gql`${wishlistAddItem.mutation}`,
-    variables: wishlistAddItem.variables
+    variables: wishlistAddItem.variables,
+    errorPolicy: 'all'
   });
 
   return response;

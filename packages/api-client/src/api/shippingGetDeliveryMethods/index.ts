@@ -12,7 +12,8 @@ export default async function shippingGetDeliveryMethods(
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   const response = await apolloClient.query({
-    query
+    query,
+    errorPolicy: 'all'
   });
 
   return response;

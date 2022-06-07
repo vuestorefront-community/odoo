@@ -19,6 +19,7 @@ export default async function deleteAddress(
 
   return await apolloClient.mutate({
     mutation: gql`${deleteAddress.mutation}`,
-    variables: deleteAddress.variables
+    variables: deleteAddress.variables,
+    errorPolicy: 'all'
   });
 }
