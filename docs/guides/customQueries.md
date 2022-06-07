@@ -7,7 +7,7 @@ Following the [Extending GraphQL Queries](https://docs.vuestorefront.io/v2/compo
 
 
 
-#### <span style="color:#4f56d6">Import the customQueries file to middleware</span>
+#### <span style="color:#E38748; font-weight: 400;">Import the customQueries file to middleware</span>
 
 ```js
 // middleware.config.js
@@ -28,7 +28,7 @@ module.exports = {
 
 ```
 
-#### <span style="color:#4f56d6">Custom queries file must follow</span>
+#### <span style="color:#E38748; font-weight: 400;">Custom queries file must follow</span>
 
 ```js
 // custom-project-api/customQueries.js
@@ -49,4 +49,9 @@ module.exports = {
 
 ```
 
-#### <span style="color:#4f56d6">Reload application and pass the custom query on the composable search method</span>
+
+::: danger Don't forget to reload the application
+
+The application does not reload automatically after saving the changes in Server Middleware. Due to this, you have to restart the application manually. We are working on enabling Hot Reloading in future updates.
+
+:::

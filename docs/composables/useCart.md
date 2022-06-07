@@ -1,9 +1,9 @@
 # UseCart Composable
 
-### Base Methods, Interfaces, Properties  [VSF useCart](https://docs.vuestorefront.io/v2/reference/api/core.usecart.html)
+::: tip Base  (Methods, Interfaces, Properties)
+[VSF usecart](https://docs.vuestorefront.io/v2/reference/api/core.usecart.html)
+:::
 ## Features
-**UseCart** composable can be used to:
-
 * load cart information.
 * add, update and remove items in the cart.
 * checking if product is already added to the cart.

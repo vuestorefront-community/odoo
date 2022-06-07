@@ -1,6 +1,9 @@
 # UseFacet Composable
-**UseFacet** composable can be used to:
 
+::: tip Base  (Methods, Interfaces, Properties)
+[VSF useFacet](https://docs.vuestorefront.io/v2/reference/api/core.usefacet.html)
+:::
+## Features
 - search product list with **pagination** and **attributes**
 - search categories
 - both will be filtered by the uiHelper
