@@ -18,6 +18,14 @@ type ProductVariant = {
 
 ```
 
+```ts
+// searchRealProduct input
+type GraphQlGetProductVariantParams = {
+  productTemplateId: number;
+  combinationId: string[];
+};
+```
+
 ## Example
 
 ```ts
@@ -26,28 +34,21 @@ import { onSSR } from '@vue-storefront/core'
 
 export default {
   setup () {
-    const {
-      searchVariants,
-      searchRealProduct,
-      productVariants,
-      realProduct,
-      elementNames,
-    } = useProductVariant();
+    const { searchRealProduct, realProduct } = useProductVariant();
 
 
     onSSR(async () => {
-      await searchVariants({ productId: id });
       await searchRealProduct({
         productId: id,
-        combinationIds: [1,2,3] // list of variant combination ids,
+        combinationIds: [1,2,3], // list of variant combination ids,
+        customQuery: { getRealProduct: 'customRealProductQuery' }
       });
       await search({ id });
 
     });
 
     return {
-      realProduct, // the product to add on cart
-      productVariants // the variants to create a form
+      realProduct
     }
   }
 }
