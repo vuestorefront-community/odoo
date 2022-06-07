@@ -65,7 +65,7 @@ module.exports = {
       },
       {
         title: 'Guides',
-        collapsable: false,
+        collapsable: true,
         children: [
           '/guides/imageHandle',
           '/guides/customQueries',
