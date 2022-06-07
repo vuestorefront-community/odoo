@@ -23,13 +23,11 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
     return data.cart;
   },
 
-  addItem: async (
-    context: Context,
-    { currentCart, product, quantity, customQuery }
-  ) => {
+  addItem: async (context: Context, { currentCart, product, quantity, customQuery }) => {
+
     if (!params.isInCart(context, { currentCart, product })) {
       const productId = product.realProduct
-        ? product.realProduct.product.id
+        ? product.realProduct?.product?.id
         : product.firstVariant;
 
       const addItemParams: GraphQlCartAddItemParams = {
@@ -41,16 +39,13 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
         customQuery
       );
 
-      return data.cartAddItem;
+      return data?.cartAddItem;
     }
 
     return currentCart;
   },
 
-  removeItem: async (
-    context: Context,
-    { currentCart, product, customQuery }
-  ) => {
+  removeItem: async (context: Context, { currentCart, product, customQuery }) => {
     const addItemParams: GraphQlCartRemoveItemParams = {
       lineId: product.id
     };
@@ -59,13 +54,10 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
       customQuery
     );
 
-    return data.cartRemoveItem;
+    return data?.cartRemoveItem;
   },
 
-  updateItemQty: async (
-    context: Context,
-    { currentCart, product: orderLine, quantity, customQuery }
-  ) => {
+  updateItemQty: async (context: Context, { currentCart, product: orderLine, quantity, customQuery }) => {
     const updateItemParams: GraphQlCartUpdateItemQtyParams = {
       lineId: orderLine.id,
       quantity
@@ -76,7 +68,7 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
       customQuery
     );
 
-    return data.cartUpdateItem;
+    return data?.cartUpdateItem;
   },
 
   clear: async (context: Context, { currentCart }) => {
