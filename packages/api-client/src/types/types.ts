@@ -402,6 +402,7 @@ export type ProductVariant = {
 export type OrderLine = {
   id: number;
   name?: string;
+  imageFilename?: string;
   product?: Product;
   quantity?: number;
   priceTotal?: number;
