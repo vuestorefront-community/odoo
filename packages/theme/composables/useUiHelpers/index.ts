@@ -30,8 +30,7 @@ const useUiHelpers = (): any => {
 
     const pageSize = 12;
     query.itemsPerPage ? parseInt(query.itemsPerPage) : 10;
-    const sort = '1' as any;
-    query?.sort?.split(',') || [];
+    const sort = query?.sort?.split(',') || [];
     const page = query?.page || 1;
     const categoryId = parseInt(params.slug_3) || parseInt(params.slug_2);
 
@@ -41,10 +40,10 @@ const useUiHelpers = (): any => {
       pageSize,
       categorySlug: params.slug_1,
       currentPage: page,
-      minPrice: parseInt(price?.[0]) || null,
-      maxPrice: parseInt(price?.[1]) || null,
       fetchCategory: true,
       filter: {
+        minPrice: parseInt(price?.[0]) || null,
+        maxPrice: parseInt(price?.[1]) || null,
         categoryId,
         attributeValueId: filters?.map(id => parseInt(id))
       }
