@@ -292,6 +292,7 @@ export type Product = {
   displayName?: string;
   slug?: string;
   isInStock?: boolean;
+  imageFilename?: string;
   qty?: number;
   sku?: string;
   image?: string;
@@ -402,7 +403,6 @@ export type ProductVariant = {
 export type OrderLine = {
   id: number;
   name?: string;
-  imageFilename?: string;
   product?: Product;
   quantity?: number;
   priceTotal?: number;
