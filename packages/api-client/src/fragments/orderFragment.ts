@@ -15,7 +15,7 @@ order {
       id
       name
       image
-      image
+      imageFilename
       displayName
     }
     quantity
@@ -28,7 +28,7 @@ order {
       id
       name
       image
-      image
+      imageFilename
       displayName
     }
     quantity

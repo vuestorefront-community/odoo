@@ -1,6 +1,6 @@
 {
   "name": "@vue-storefront/odoo-api",
-  "version": "1.4.0-rc.22",
+  "version": "1.4.0-rc.23",
   "private": false,
   "sideEffects": false,
   "server": "server/index.js",

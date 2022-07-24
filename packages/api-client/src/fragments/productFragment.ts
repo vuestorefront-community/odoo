@@ -6,6 +6,7 @@ export default `
   name
   description
   image
+  imageFilename
   slug
   sku
   isInWishlist
