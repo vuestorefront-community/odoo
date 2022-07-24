@@ -1,36 +1,21 @@
 <template>
   <div>
-    <SfHeading
-      :level="3"
-      title="Payment"
-      class="sf-heading--left sf-heading--no-underline title"
-    />
+    <SfHeading :level="3" title="Payment" class="sf-heading--left sf-heading--no-underline title" />
     <SfTable class="sf-table--bordered table desktop-only">
       <SfTableHeading class="table__row">
         <SfTableHeader class="table__header table__image">{{
-          $t('Item')
+            $t('Item')
         }}</SfTableHeader>
-        <SfTableHeader
-          v-for="tableHeader in tableHeaders"
-          :key="tableHeader"
-          class="table__header"
-          :class="{ table__description: tableHeader === 'Description' }"
-        >
+        <SfTableHeader v-for="tableHeader in tableHeaders" :key="tableHeader" class="table__header"
+          :class="{ table__description: tableHeader === 'Description' }">
           {{ tableHeader }}
         </SfTableHeader>
       </SfTableHeading>
-      <SfTableRow
-        v-for="(product, index) in products"
-        :key="index"
-        class="table__row"
-      >
+      <SfTableRow v-for="(product, index) in products" :key="index" class="table__row">
         <SfTableData class="table__image">
-          <SfImage
-            :width="256"
-            :height="176"
-            :src="$image(cartGetters.getItemImage(product))"
-            :alt="cartGetters.getItemName(product)"
-          />
+          <SfImage :width="256" :height="176"
+            :src="$image(cartGetters.getItemImage(product), 256, 176, cartGetters.getItemImageFilename(product))"
+            :alt="cartGetters.getItemName(product)" />
         </SfTableData>
         <SfTableData class="table__data table__description table__data">
           <div class="product-title">
@@ -38,73 +23,46 @@
           </div>
           <div class="product-sku">{{ cartGetters.getItemSku(product) }}</div>
         </SfTableData>
-        <SfTableData
-          class="table__data"
-          v-for="(value, key) in cartGetters.getItemAttributes(product, [
-            'size',
-            'color',
-          ])"
-          :key="key"
-        >
+        <SfTableData class="table__data" v-for="(value, key) in cartGetters.getItemAttributes(product, [
+          'size',
+          'color',
+        ])" :key="key">
           {{ value }}
         </SfTableData>
         <SfTableData class="table__data">{{
-          cartGetters.getItemQty(product)
+            cartGetters.getItemQty(product)
         }}</SfTableData>
         <SfTableData class="table__data price">
-          <SfPrice
-            :regular="$n(cartGetters.getItemPrice(product).regular, 'currency')"
-            :special="
-              cartGetters.getItemPrice(product).special &&
-              $n(cartGetters.getItemPrice(product).special, 'currency')
-            "
-            class="product-price"
-          />
+          <SfPrice :regular="$n(cartGetters.getItemPrice(product).regular, 'currency')" :special="
+            cartGetters.getItemPrice(product).special &&
+            $n(cartGetters.getItemPrice(product).special, 'currency')
+          " class="product-price" />
         </SfTableData>
       </SfTableRow>
     </SfTable>
     <div class="summary">
       <div class="summary__group">
         <div class="summary__total">
-          <SfProperty
-            name="Subtotal"
-            :value="
-              $n(
-                totals.special > 0 ? totals.special : totals.subtotal,
-                'currency'
-              )
-            "
-            class="sf-property--full-width property"
-          />
+          <SfProperty name="Subtotal" :value="
+            $n(
+              totals.special > 0 ? totals.special : totals.subtotal,
+              'currency'
+            )
+          " class="sf-property--full-width property" />
         </div>
 
         <SfDivider />
 
-        <SfProperty
-          name="Total price"
-          :value="$n(totals.total, 'currency')"
-          class="
+        <SfProperty name="Total price" :value="$n(totals.total, 'currency')" class="
             sf-property--full-width sf-property--large
             summary__property-total
-          "
-        />
+          " />
 
-        <SfHeading
-          :level="3"
-          title="Choose payment provider"
-          class="sf-heading--left sf-heading--no-underline title"
-        />
+        <SfHeading :level="3" title="Choose payment provider" class="sf-heading--left sf-heading--no-underline title" />
 
-        <SfRadio
-          v-for="provider in providerList"
-          :key="provider.id"
-          :label="provider.name"
-          :value="String(provider.id)"
-          :selected="String(selectedProvider.id)"
-          name="shippingMethod"
-          class="form__radio shipping"
-          @change="selectProvider(provider)"
-        >
+        <SfRadio v-for="provider in providerList" :key="provider.id" :label="provider.name" :value="String(provider.id)"
+          :selected="String(selectedProvider.id)" name="shippingMethod" class="form__radio shipping"
+          @change="selectProvider(provider)">
           <div class="shipping__label">
             {{ provider.name }}
           </div>
@@ -115,13 +73,9 @@
         </SfRadio>
 
         <abstract-payment-observer v-if="selectedProvider.name">
-          <component
-            class="py-8"
-            @isPaymentReady="isPaymentReady = arguments[0]"
-            @providerPaymentHandler="providerPaymentHandler = arguments[0]"
-            :provider="selectedProvider"
-            :is="getComponentProviderByName(selectedProvider.name)"
-          />
+          <component class="py-8" @isPaymentReady="isPaymentReady = arguments[0]"
+            @providerPaymentHandler="providerPaymentHandler = arguments[0]" :provider="selectedProvider"
+            :is="getComponentProviderByName(selectedProvider.name)" />
         </abstract-payment-observer>
 
         <!-- <SfAccordion
@@ -143,12 +97,7 @@
           v-else
         /> -->
 
-        <SfCheckbox
-          v-e2e="'terms'"
-          v-model="terms"
-          name="terms"
-          class="summary__terms"
-        >
+        <SfCheckbox v-e2e="'terms'" v-model="terms" name="terms" class="summary__terms">
           <template #label>
             <div class="sf-checkbox__label">
               {{ $t('I agree to') }}
@@ -158,19 +107,12 @@
         </SfCheckbox>
 
         <div class="summary__action">
-          <SfButton
-            type="button"
-            class="sf-button color-secondary summary__back-button"
-            @click="$router.push('/checkout/billing')"
-          >
+          <SfButton type="button" class="sf-button color-secondary summary__back-button"
+            @click="$router.push('/checkout/billing')">
             {{ $t('Go back') }}
           </SfButton>
-          <SfButton
-            v-e2e="'make-an-order'"
-            :disabled="loading || !isPaymentReady || !terms"
-            class="summary__action-button"
-            @click="providerPaymentHandler"
-          >
+          <SfButton v-e2e="'make-an-order'" :disabled="loading || !isPaymentReady || !terms"
+            class="summary__action-button" @click="providerPaymentHandler">
             {{ $t('Make an order') }}
           </SfButton>
         </div>
@@ -232,7 +174,7 @@ export default {
     AbstractPaymentObserver: () =>
       import('~/components/Checkout/AbstractPaymentObserver')
   },
-  setup(props, context) {
+  setup (props, context) {
     const { cart, load, setCart } = useCart();
     const { providerList, getPaymentProviderList } = usePayment();
     const { order, make, loading } = useMakeOrder();
@@ -264,7 +206,7 @@ export default {
       setCart(null);
     };
 
-    const providerPaymentHandler = () => {};
+    const providerPaymentHandler = () => { };
 
     const providerListHasMoreThanOne = computed(
       () => providerList.value.length > 1
@@ -294,25 +236,32 @@ export default {
 .title {
   margin: var(--spacer-xl) 0 var(--spacer-base) 0;
 }
+
 .table {
   margin: 0 0 var(--spacer-base) 0;
+
   &__row {
     justify-content: space-between;
   }
+
   @include for-desktop {
     &__header {
       text-align: center;
+
       &:last-child {
         text-align: right;
       }
     }
+
     &__data {
       text-align: center;
     }
+
     &__description {
       text-align: left;
       flex: 0 0 12rem;
     }
+
     &__image {
       --image-width: 5.125rem;
       text-align: left;
@@ -320,87 +269,110 @@ export default {
     }
   }
 }
+
 .product-sku {
   color: var(--c-text-muted);
   font-size: var(--font-size--sm);
 }
+
 .price {
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
 }
+
 .product-price {
   --price-font-size: var(--font-size--base);
 }
+
 .summary {
   &__terms {
     margin: var(--spacer-base) 0 0 0;
   }
+
   &__total {
     margin: 0 0 var(--spacer-sm) 0;
     flex: 0 0 16.875rem;
   }
+
   &__action {
     @include for-desktop {
       display: flex;
       margin: var(--spacer-xl) 0 0 0;
     }
   }
+
   &__action-button {
     margin: 0;
     width: 100%;
     margin: var(--spacer-sm) 0 0 0;
+
     @include for-desktop {
       margin: 0 var(--spacer-xl) 0 0;
       width: auto;
     }
+
     &--secondary {
       @include for-desktop {
         text-align: right;
       }
     }
   }
+
   &__back-button {
     margin: var(--spacer-xl) 0 0 0;
     width: 100%;
+
     @include for-desktop {
       margin: 0 var(--spacer-xl) 0 0;
       width: auto;
     }
+
     color: var(--c-white);
+
     &:hover {
       color: var(--c-white);
     }
   }
+
   &__property-total {
     margin: var(--spacer-xl) 0 0 0;
   }
 }
+
 .property {
   margin: 0 0 var(--spacer-sm) 0;
+
   &__name {
     color: var(--c-text-muted);
   }
 }
+
 .accordion {
   margin: 0 0 var(--spacer-xl) 0;
+
   &__item {
     display: flex;
     align-items: flex-start;
   }
+
   &__content {
     flex: 1;
   }
+
   &__edit {
     flex: unset;
   }
 }
+
 .content {
   margin: 0 0 var(--spacer-xl) 0;
   color: var(--c-text);
+
   &:last-child {
     margin: 0;
   }
+
   &__label {
     font-weight: var(--font-weight--normal);
   }
