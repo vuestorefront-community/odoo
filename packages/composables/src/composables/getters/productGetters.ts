@@ -53,6 +53,11 @@ export const getProductCoverImage = (product: Product): string => {
   return product?.image || '';
 };
 
+export const getProductImageFilename = (product: Product): string => {
+
+  return product?.imageFilename || '';
+};
+
 export const getProductSku = (product: Product): string => product.sku;
 
 export const getProductFiltered = (
@@ -133,6 +138,7 @@ const productGetters: ProductGetters<
   getPrice: getProductPrice,
   getGallery: getProductGallery,
   getCoverImage: getProductCoverImage,
+  getImageFilename: getProductImageFilename,
   getFiltered: getProductFiltered,
   getAttributes: getProductAttributes,
   getDescription: getProductDescription,
