@@ -2,3 +2,7 @@
 	path = theme
 	url = https://github.com/vuestorefront-community/template-odoo
 	branch = develop
+[submodule "packages/theme"]
+	path = packages/theme
+	url = https://github.com/vuestorefront-community/template-odoo
+	branch = develop
