@@ -9,7 +9,6 @@ export default `
   slug
   sku
   isInWishlist
-  status
   categories {
     id
     name
