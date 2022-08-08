@@ -27,6 +27,10 @@ export const getWishlistItemImage = (wishlistItem: WishlistItem): string => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const getWishlistItemImageFilename = (wishlistItem: WishlistItem): string => {
+  return wishlistItem?.product?.imageFilename || '';
+};
+
 export const getWishlistItemPrice = (
   wishlistItem: WishlistItem
 ): AgnosticPrice => {
@@ -82,6 +86,7 @@ const wishlistGetters: WishlistGetters<Wishlist, WishlistItem> = {
   getItemAttributes: getWishlistItemAttributes,
   getItemSku: getWishlistItemSku,
   getTotalItems: getWishlistTotalItems,
+  getItemImageFilename: getWishlistItemImageFilename,
   getFormattedPrice
 };
 
