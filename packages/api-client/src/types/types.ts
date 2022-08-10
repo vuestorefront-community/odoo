@@ -122,6 +122,14 @@ export type GraphQlGetCategoryParams = {
   id: number;
 };
 
+export type GraphQlGetCategoriesParams = {
+  filter: CategoryFilterInput;
+  currentPage?: number;
+  pageSize?: number;
+  search?: string;
+  sort?: CategorySortInput;
+};
+
 export type CartRemoveItemResult = {
   cartRemoveItem: Cart
 };
@@ -264,6 +272,10 @@ export type Categories = {
 }
 
 export type CategoryResult = {
+  category: Category;
+};
+
+export type CategoriesResult = {
   categories: Categories;
 };
 
@@ -623,6 +635,7 @@ export type ParamsFromUrl = {
 export interface AgnosticFacetSearchParams {
     categorySlug?: string;
     categoryParams?: any;
+    productParams?: any;
     rootCatSlug?: string;
     term?: string;
     page?: number;

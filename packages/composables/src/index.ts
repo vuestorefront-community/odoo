@@ -2,6 +2,7 @@ export { default as useBilling } from './composables/useBilling';
 export { default as useShippingAsBillingAddress } from './composables/useShippingAsBillingAddress';
 export { default as useCart } from './composables/useCart';
 export { default as useCategory } from './composables/useCategory';
+export { default as useCategories } from './composables/useCategories';
 export { default as useContent } from './composables/useContent';
 export { default as useFacet } from './composables/useFacet';
 export { default as useMakeOrder } from './composables/useMakeOrder';

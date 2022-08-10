@@ -4557,30 +4557,6 @@
     lodash "^4.17.15"
     nuxt-purgecss "^1.0.0"
 
-"@vue-storefront/odoo-api@1.4.0-rc.23":
-  version "1.4.0-rc.23"
-  resolved "https://registry.yarnpkg.com/@vue-storefront/odoo-api/-/odoo-api-1.4.0-rc.23.tgz#b76bc87d2b63b78a87283be668892e884423dd03"
-  integrity sha512-74SuOTJsmo+zC52wqxq5v+zJSew7sl6RMLzs/14bQTaeePYOxP4DHqqBMoKBGoLw3cnJa4gFWYYjaNwx7Kf+HQ==
-  dependencies:
-    "@vue-storefront/core" "2.5.6"
-    apollo-cache-inmemory "^1.6.6"
-    apollo-client "^2.6.10"
-    apollo-link "^1.2.14"
-    apollo-link-error "^1.1.13"
-    apollo-link-http "^1.5.17"
-    graphql "^15.5.0"
-    graphql-tag "^2.12.4"
-    isomorphic-fetch "^3.0.0"
-
-"@vue-storefront/odoo@1.4.0-rc.23":
-  version "1.4.0-rc.23"
-  resolved "https://registry.yarnpkg.com/@vue-storefront/odoo/-/odoo-1.4.0-rc.23.tgz#dc8d025d4d3b3578be939445ff2be862bd9512b4"
-  integrity sha512-4LjGur8ctlwLyFSahBT8xaP7PLxSnHNOY6XmsC+S8ftx1iwTczsDYBumFSORVFuNcHdKL/zK1ZSlvAK01L8aEg==
-  dependencies:
-    "@nuxtjs/composition-api" "0.31.0"
-    "@vue-storefront/core" "2.5.6"
-    "@vue-storefront/odoo-api" "1.4.0-rc.23"
-
 "@vue-storefront/redis-cache@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@vue-storefront/redis-cache/-/redis-cache-1.0.1.tgz#3e044b03a813ac4270b1fa1b6a39b4d2bcda3db1"
