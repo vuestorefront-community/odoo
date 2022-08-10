@@ -56,6 +56,7 @@ export interface FacetResultsData {
   minPrice: number;
   maxPrice: number;
   products: Product[];
+  category: Category;
   categories: Category[];
   facets: Record<string, string>;
   totalProducts: number;

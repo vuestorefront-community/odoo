@@ -74,24 +74,21 @@ const getSortOptions = (searchData: SearchData): AgnosticSort => ({
 });
 
 const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
-  if (
-    !searchData?.data?.categories ||
-    searchData?.data?.categories.length === 0
-  ) {
+  if (!searchData?.data?.category) {
     return { items: [], label: '', isCurrent: false };
   }
 
-  const categories = searchData.data.categories;
-  let parentCategory: Category = categories[0];
+  const category = searchData.data.category;
+  let parentCategory: Category = category;
 
-  if (!categories[0]?.childs && categories[0]?.parent) {
-    parentCategory = categories[0]?.parent?.parent;
+  if (!category?.childs && category?.parent) {
+    parentCategory = category?.parent?.parent;
   }
 
   return CategoryGetters.getTree(parentCategory);
 };
 
-const getCategory = (searchData: SearchData): Category[] => searchData?.data?.categories || [];
+const getCategory = (searchData: SearchData): Category => searchData?.data?.category;
 
 const getProducts = (searchData: SearchData): Product[] => {
   if (!searchData?.data?.products || searchData?.data?.products?.length === 0) {
@@ -114,18 +111,15 @@ const getPagination = (searchData: SearchData): AgnosticPagination => {
 };
 
 const getBreadcrumbsByProduct = (product: Product): AgnosticBreadcrumb[] => {
-  const category = product.categories?.find((cat) => cat.name !== 'All');
+  const category = product.categories?.filter((cat) => cat?.name !== 'All');
   const breadcrumbs = [{ text: 'Home', link: '/' }];
 
   if (!category) {
     return [];
   }
-  const topCategoryParent =
-    category.parent === null ? category.id : category.parent?.parent?.id;
-  const splited = category.slug?.split('-');
   breadcrumbs.push({
-    text: splited[0],
-    link: `/c/${splited[0]}/${topCategoryParent}`
+    text: category[0]?.name,
+    link: category[0]?.slug
   });
 
   return breadcrumbs || [];
@@ -135,8 +129,8 @@ const getBreadcrumbs = ({ input }: SearchData): AgnosticBreadcrumb[] => {
   const breadcrumbs = [{ text: 'Home', link: '/' }];
 
   breadcrumbs.push({
-    text: input.currentRootCategory.name,
-    link: `/c/${input.currentRootCategory.slug}/${input.currentRootCategory.id}`
+    text: input.currentRootCategory?.name,
+    link: input.currentRootCategory?.slug
   });
 
   if (input.params.slug_2 && !isNumeric(input.params.slug_2)) {
