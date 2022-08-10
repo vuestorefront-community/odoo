@@ -10,7 +10,7 @@ const factoryParams = {
     const categoryParams: GraphQlGetCategoryParams = {
       pageSize: 100,
       search: params.input.search,
-      filter: { parent: false, id: params?.input?.filter?.categoryId || null }
+      filter: params?.input?.filter
     };
 
     const productParams: GraphQlGetProductParams = {
