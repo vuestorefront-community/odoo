@@ -59,7 +59,7 @@ export interface OdooApiMethods {
 
   deleteAddress(params: GraphQlDeleteAddressParams, customQuery?: CustomQuery): Promise<FetchResult<void>>;
 
-  paymentLoadProviders(customQuery?: CustomQuery): Promise<FetchResult<PaymentLoadProvidersResult>>;
+  paymentLoadProviders(params: any, customQuery?: CustomQuery): Promise<FetchResult<PaymentLoadProvidersResult>>;
   paymentMakeExternal(params: GraphQlMakePaymentParams, customQuery?: CustomQuery): Promise<FetchResult<PaymentMakeExternalResult>>;
   paymentConfirmation(customQuery?: CustomQuery): Promise<FetchResult>;
 
