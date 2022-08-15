@@ -17,13 +17,13 @@ export interface UsePayment<PAYMENT_PROVIDER, PAYMENT_RESPONSE, API extends Plat
     providerList: PAYMENT_PROVIDER
   ): Promise<PAYMENT_PROVIDER[]>;
 
-  getPaymentConfirmation(params: { customQuery?: CustomQuery; }): Promise<PAYMENT_RESPONSE>;
+  getPaymentConfirmation(params: any & { customQuery?: CustomQuery }): Promise<PAYMENT_RESPONSE>;
 }
 
 export interface UsePaymentFactoryParams< PAYMENT_PROVIDER, PAYMENT_RESPONSE, API extends PlatformApi = any> extends FactoryParams<API> {
 
-  getPaymentProviderList: (context: Context, params: { customQuery?: CustomQuery; }) => Promise<PAYMENT_PROVIDER[]>;
-  getPaymentConfirmation: (context: Context, params: { customQuery?: CustomQuery; }) => Promise<PAYMENT_RESPONSE>;
+  getPaymentProviderList: (context: Context, params: any & { customQuery?: CustomQuery }) => Promise<PAYMENT_PROVIDER[]>;
+  getPaymentConfirmation: (context: Context, params: any & { customQuery?: CustomQuery }) => Promise<PAYMENT_RESPONSE>;
 }
 
 export const usePaymentFactory = < PAYMENT_PROVIDER, PAYMENT_RESPONSE, API extends PlatformApi = any>(
