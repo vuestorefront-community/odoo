@@ -51,4 +51,6 @@ export { default as applyCoupon } from './applyCoupon';
 export { default as ordersGet } from './ordersGet';
 
 export { default as getMailingLists } from './getMailingLists';
+export { default as getMailingContacts } from './getMailingContacts';
+export { default as addMultipleMailings } from './addMultipleMailings';
 

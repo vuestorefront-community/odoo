@@ -17,7 +17,9 @@ import {
   MailingListsResult,
   MailingContactsResult,
   GraphqlMailingContactsParams,
-  GraphqlMailingListsParams
+  GraphqlMailingListsParams,
+  GraphQlAddMultipleMailings,
+  addMultipleMailingsResult
 } from './types';
 
 export interface OdooApiMethods {
@@ -75,4 +77,5 @@ export interface OdooApiMethods {
 
   getMailingContacts(params: GraphqlMailingContactsParams, customQuery?: CustomQuery): Promise<FetchResult<MailingContactsResult>>;
   getMailingLists(params: GraphqlMailingListsParams, customQuery?: CustomQuery): Promise<FetchResult<MailingListsResult>>;
+  addMultipleMailings(params: GraphQlAddMultipleMailings, customQuery?: CustomQuery): Promise<FetchResult<addMultipleMailingsResult>>;
 }
