@@ -254,6 +254,14 @@ export type ProductVariantResult = {
   productVariant: ProductVariant
 };
 
+export type MailingListsResult = {
+  mailingLists: MailingItem[]
+};
+
+export type MailingContactsResult = {
+  mailingContacts: MailingItem[]
+};
+
 export type SingleProductResult = {
   product: Product
 };
@@ -332,6 +340,25 @@ export declare type WishlistItem = {
   product: Product;
   variant: Product;
   id: number;
+};
+
+export declare type MailingItem = {
+  id: number;
+  name: string;
+};
+
+export declare type MailingContactSubscription = {
+  id: number;
+  mailingList: MailingItem[]
+  optOut: boolean
+}
+
+export declare type MailingContact = {
+  id: number;
+  name: string;
+  email: string;
+  companyName: string;
+  subscriptionList: MailingContactSubscription[]
 };
 
 export declare type Wishlist = {
@@ -500,6 +527,22 @@ export type GraphQlWishlistRemoveItemParams = {
 export type GraphQlGetProductVariantParams = {
   productTemplateId: number;
   combinationId: string[];
+};
+
+export type GraphqlMailingListsParams = {
+  filter?: any;
+  currentPage: number;
+  pageSize: number;
+  search?: string;
+  sort: any;
+};
+
+export type GraphqlMailingContactsParams = {
+  filter?: any;
+  currentPage: number;
+  pageSize: number;
+  search?: string;
+  sort: any;
 };
 
 export type GraphQlCartAddItemParams = {

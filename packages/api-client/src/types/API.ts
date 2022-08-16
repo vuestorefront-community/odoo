@@ -13,7 +13,11 @@ import {
   cartRemoveMultipleItemsResult, ApplyCouponResult, GraphQlSetDefaultAddressParams, SetDefaultAddressResponse, GraphQlSetShippingMethodParams,
   GraphQlSetShippingMethodResponse,
   CategoriesResult,
-  GraphQlGetCategoriesParams
+  GraphQlGetCategoriesParams,
+  MailingListsResult,
+  MailingContactsResult,
+  GraphqlMailingContactsParams,
+  GraphqlMailingListsParams
 } from './types';
 
 export interface OdooApiMethods {
@@ -68,4 +72,7 @@ export interface OdooApiMethods {
   applyCoupon(customQuery?: CustomQuery): Promise<FetchResult<ApplyCouponResult>>;
 
   ordersGet(params: GraphQlOrdersParams, customQuery?: CustomQuery): Promise<FetchResult<OrdersResponse>>;
+
+  getMailingContacts(params: GraphqlMailingContactsParams, customQuery?: CustomQuery): Promise<FetchResult<MailingContactsResult>>;
+  getMailingLists(params: GraphqlMailingListsParams, customQuery?: CustomQuery): Promise<FetchResult<MailingListsResult>>;
 }

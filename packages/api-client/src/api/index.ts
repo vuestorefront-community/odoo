@@ -49,3 +49,6 @@ export { default as setShippingMethod } from './setShippingMethod';
 export { default as applyCoupon } from './applyCoupon';
 
 export { default as ordersGet } from './ordersGet';
+
+export { default as getMailingLists } from './getMailingLists';
+
