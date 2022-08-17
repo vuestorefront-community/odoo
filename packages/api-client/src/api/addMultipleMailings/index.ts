@@ -15,7 +15,7 @@ export default async function addMultipleMailings(
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   const { addMultipleMailings } = context.extendQuery(
-    customQuery, { paymentMakeExternalMutation: { mutation, variables: params } }
+    customQuery, { addMultipleMailings: { mutation, variables: params } }
   );
 
   const response = await apolloClient.mutate({

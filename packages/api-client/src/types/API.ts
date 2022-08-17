@@ -75,7 +75,7 @@ export interface OdooApiMethods {
 
   ordersGet(params: GraphQlOrdersParams, customQuery?: CustomQuery): Promise<FetchResult<OrdersResponse>>;
 
-  getMailingContacts(params: GraphqlMailingContactsParams, customQuery?: CustomQuery): Promise<FetchResult<MailingContactsResult>>;
-  getMailingLists(params: GraphqlMailingListsParams, customQuery?: CustomQuery): Promise<FetchResult<MailingListsResult>>;
+  getMailingContacts(params?: GraphqlMailingContactsParams, customQuery?: CustomQuery): Promise<FetchResult<MailingContactsResult>>;
+  getMailingLists(params?: GraphqlMailingListsParams, customQuery?: CustomQuery): Promise<FetchResult<MailingListsResult>>;
   addMultipleMailings(params: GraphQlAddMultipleMailings, customQuery?: CustomQuery): Promise<FetchResult<addMultipleMailingsResult>>;
 }

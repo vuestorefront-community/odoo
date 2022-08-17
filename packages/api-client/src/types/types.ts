@@ -170,6 +170,10 @@ export type PaymentMakeExternalResult = {
   makePayment: PaymentForm
 };
 
+export type addMultipleMailingsResult = {
+  userAddMultipleMailing: MailingContact
+};
+
 export type Orders = {
   orders: Order[];
 }
@@ -255,11 +259,15 @@ export type ProductVariantResult = {
 };
 
 export type MailingListsResult = {
-  mailingLists: MailingItem[]
+  mailingLists: {
+    mailingLists: MailingItem[]
+  }
 };
 
 export type MailingContactsResult = {
-  mailingContacts: MailingItem[]
+  mailingContacts: {
+    mailingContacts: MailingItem[]
+  }
 };
 
 export type SingleProductResult = {
@@ -612,6 +620,15 @@ export type CountryFiltersInput = {
 
 export type GraphQlMakePaymentParams = {
   paymentAcquireId: number;
+};
+
+export type GraphqlMailingInput = {
+  mailinglistId: number;
+  optout: boolean
+};
+
+export type GraphQlAddMultipleMailings = {
+  mailings: GraphqlMailingInput[];
 };
 
 export type GraphQlOrdersParams = {
