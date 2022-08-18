@@ -7,10 +7,10 @@ import { Context } from '@vue-storefront/core';
 const usePassword = (): any => {
   const context: Context = useVSFContext();
 
-  const errors = ref({});
+  const errors = ref(null);
   const loading = sharedRef(false, 'usePasswordLoading');
 
-  const resetPasswordErrors = () => (errors.value = { graphQLErrors: [] });
+  const resetPasswordErrors = () => (errors.value = null);
 
   const sendResetPassword = async (user) => {
     const response = await context.$odoo.api
@@ -40,8 +40,8 @@ const usePassword = (): any => {
     try {
       const { data, errors: apiError } = await context.$odoo.api.updatePassword({ currentPassword, newPassword });
 
-      if (data) {
-        return data;
+      if (data.updatePassword) {
+        return data.updatePassword;
       }
 
       errors.value = apiError;
