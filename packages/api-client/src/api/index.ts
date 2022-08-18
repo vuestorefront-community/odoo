@@ -54,3 +54,5 @@ export { default as getMailingLists } from './getMailingLists';
 export { default as getMailingContacts } from './getMailingContacts';
 export { default as addMultipleMailings } from './addMultipleMailings';
 
+export { default as updatePassword } from './updatePassword';
+

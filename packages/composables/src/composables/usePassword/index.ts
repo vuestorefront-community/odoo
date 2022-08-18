@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* istanbul ignore file */
 import { ref } from '@nuxtjs/composition-api';
-import { useVSFContext } from '@vue-storefront/core';
+import { useVSFContext, sharedRef } from '@vue-storefront/core';
 import { Context } from '@vue-storefront/core';
 
 const usePassword = (): any => {
   const context: Context = useVSFContext();
 
   const errors = ref({});
-  const loading = ref(false);
+  const loading = sharedRef(false, 'usePasswordLoading');
 
   const resetPasswordErrors = () => (errors.value = { graphQLErrors: [] });
 
@@ -32,18 +32,20 @@ const usePassword = (): any => {
     return response;
   };
 
-  const updatePassword = async ({ currentPassword, newPassword }) => {
+  const updatePassword = async (currentPassword, newPassword) => {
     resetPasswordErrors();
 
     loading.value = true;
+
     try {
-      const response = await context.$odoo.api.updatePassword(currentPassword, newPassword);
-      const { data } = response;
+      const { data, errors: apiError } = await context.$odoo.api.updatePassword({ currentPassword, newPassword });
+
       if (data) {
         return data;
-      } else {
-        errors.value = response.errors;
       }
+
+      errors.value = apiError;
+
     } catch (error) {
       errors.value = error;
     } finally {
@@ -51,7 +53,7 @@ const usePassword = (): any => {
     }
   };
 
-  return { resetPassword, sendResetPassword, resetPasswordErrors, errors, updatePassword };
+  return { resetPassword, sendResetPassword, resetPasswordErrors, errors, updatePassword, loading };
 };
 
 export default usePassword;
