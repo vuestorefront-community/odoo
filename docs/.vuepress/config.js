@@ -3,7 +3,7 @@ const GTM_TAG = 'GTM-WMDC3CP';
 
 module.exports = {
   title: 'Vue Storefront 2 for Odoo',
-  base: '/',
+  base: '/odoo/',
   description: description,
   head: [
     ['link', { rel: 'icon', href: '/favicon.png' }],
@@ -36,6 +36,7 @@ module.exports = {
     }))
   },
   plugins: [
+    '@kawarimidoll/tailwind',
     '@vuepress/plugin-back-to-top',
     [
       '@vuepress/plugin-medium-zoom',
@@ -70,6 +71,8 @@ module.exports = {
         collapsable: false,
         children: [
           ['/', 'Introduction'],
+          '/essentials/features',
+          '/essentials/ecosystem',
           '/essentials/configuration',
           '/essentials/maintainers'
         ]
