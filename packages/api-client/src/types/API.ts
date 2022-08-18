@@ -19,7 +19,9 @@ import {
   GraphqlMailingContactsParams,
   GraphqlMailingListsParams,
   GraphQlAddMultipleMailings,
-  addMultipleMailingsResult
+  addMultipleMailingsResult,
+  GraphQlUpdatePasswordParams,
+  UpdatePasswordResult
 } from './types';
 
 export interface OdooApiMethods {
@@ -72,6 +74,8 @@ export interface OdooApiMethods {
   subscribeNewsLetter(customQuery?: CustomQuery): Promise<FetchResult>;
 
   applyCoupon(customQuery?: CustomQuery): Promise<FetchResult<ApplyCouponResult>>;
+
+  updatePassword(params: GraphQlUpdatePasswordParams, customQuery?: CustomQuery): Promise<FetchResult<UpdatePasswordResult>>;
 
   ordersGet(params: GraphQlOrdersParams, customQuery?: CustomQuery): Promise<FetchResult<OrdersResponse>>;
 

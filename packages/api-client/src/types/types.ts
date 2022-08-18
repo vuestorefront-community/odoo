@@ -170,6 +170,13 @@ export type PaymentMakeExternalResult = {
   makePayment: PaymentForm
 };
 
+export type UpdatePasswordResult = {
+  id: number;
+  name: string;
+  email: string;
+  partner: Partner;
+};
+
 export type addMultipleMailingsResult = {
   userAddMultipleMailing: MailingContact
 };
@@ -620,6 +627,11 @@ export type CountryFiltersInput = {
 
 export type GraphQlMakePaymentParams = {
   paymentAcquireId: number;
+};
+
+export type GraphQlUpdatePasswordParams = {
+  currentPassword: string;
+  newPassword: string;
 };
 
 export type GraphqlMailingInput = {
