@@ -171,10 +171,12 @@ export type PaymentMakeExternalResult = {
 };
 
 export type UpdatePasswordResult = {
-  id: number;
-  name: string;
-  email: string;
-  partner: Partner;
+  updatePassword: {
+    id: number;
+    name: string;
+    email: string;
+    partner: Partner;
+  }
 };
 
 export type addMultipleMailingsResult = {
