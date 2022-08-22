@@ -21,7 +21,8 @@ import {
   GraphQlAddMultipleMailings,
   addMultipleMailingsResult,
   GraphQlUpdatePasswordParams,
-  UpdatePasswordResult
+  UpdatePasswordResult,
+  DeleteAddressResult
 } from './types';
 
 export interface OdooApiMethods {
@@ -65,7 +66,7 @@ export interface OdooApiMethods {
   billingUpdateAddress(shippingAdress: GraphQlUpdateAddressParams, customQuery?: CustomQuery): Promise<FetchResult<BillingUpdateAddressResult>>;
   billingGetAddress(customQuery?: CustomQuery): Promise<FetchResult<BillingGetAddressResult>>;
 
-  deleteAddress(params: GraphQlDeleteAddressParams, customQuery?: CustomQuery): Promise<FetchResult<void>>;
+  deleteAddress(params: GraphQlDeleteAddressParams, customQuery?: CustomQuery): Promise<FetchResult<DeleteAddressResult>>;
 
   paymentLoadProviders(params: any, customQuery?: CustomQuery): Promise<FetchResult<PaymentLoadProvidersResult>>;
   paymentMakeExternal(params: GraphQlMakePaymentParams, customQuery?: CustomQuery): Promise<FetchResult<PaymentMakeExternalResult>>;

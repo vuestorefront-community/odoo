@@ -1,6 +1,30 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable camelcase */
 
+export enum ButtonType {
+  Primary = 'Primary',
+  Secondary = 'Secondary',
+  Tertiary = 'Tertiary',
+  Danger = 'Danger',
+}
+
+export enum ButtonShape {
+  Round = 'Round',
+  Rectangle = 'Rectangle',
+}
+
+export enum ButtonSize {
+  Small = 'Small',
+  Medium = 'Medium',
+  Large = 'Large',
+  Max = 'Max',
+}
+export enum ButtonColor {
+  Green = 'Green',
+  Black = 'Black',
+  Grey = 'Grey',
+}
+
 export enum SortEnum {
   ASC,
   DESC
@@ -152,6 +176,12 @@ export type GraphQlDeleteAddressParams = {
 
 export type PaymentLoadProvidersResult = {
   paymentAcquirers: PaymentProvider[]
+};
+
+export type DeleteAddressResult = {
+  deleteAddress: {
+    result: boolean;
+  }
 };
 
 export type CountryStatesResult = {
