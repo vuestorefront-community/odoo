@@ -36,7 +36,7 @@ module.exports = {
     }))
   },
   plugins: [
-    '@kawarimidoll/tailwind',
+    ['@kawarimidoll/tailwind', { prefix: 'tw-' }],
     '@vuepress/plugin-back-to-top',
     [
       '@vuepress/plugin-medium-zoom',
