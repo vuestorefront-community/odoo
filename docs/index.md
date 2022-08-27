@@ -9,7 +9,7 @@ This is the documentation for Vue Storefront integration with Odoo.
 
 This Open Source integration is currently a work in progress and evolution and we are happy to accept any type of colaborations. 
 
-This integration is being developed and maintained by [ODOOGAP / PROMPTEQUATION](https://www.odoogap.com/) ❤️
+This integration is being developed and maintained by [ERPGAP / PROMPTEQUATION](https://www.erpgap.com/) ❤️
 
 # What is Odoo?
 Odoo is a suite of business management software tools including, for example, CRM, e-commerce, billing, accounting, manufacturing, warehouse, project management, and inventory management. The Community version is a libre software, licensed under the GNU LGPLv3. The Enterprise version has proprietary extra features and services. The source code for the framework and core ERP modules is curated by the Belgium-based Odoo S.A. Odoo is available for both on-premise and ready to use SaaS environment. 
