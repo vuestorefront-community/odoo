@@ -9,6 +9,7 @@ export default `
   imageFilename
   slug
   sku
+  jsonLd
   isInWishlist
   categories {
     id

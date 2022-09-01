@@ -213,6 +213,36 @@ export type addMultipleMailingsResult = {
   userAddMultipleMailing: MailingContact
 };
 
+export type adyenPaymentMethodsResult = {
+  adyenPaymentMethods: {
+    adyenPaymentMethods: any;
+  }
+};
+
+export type adyenPaymentDetailsResult = {
+  adyenPaymentDetails: {
+    adyenPaymentDetails: any;
+  }
+};
+
+export type adyenOpenTransactionResult = {
+  adyenTransaction: {
+    transaction: any;
+  }
+};
+
+export type adyenMakeDirectPaymentResult = {
+  adyenPayments: {
+    adyenPayments: any;
+  }
+};
+
+export type adyenAcquirerInfoResult = {
+  adyenAcquirerInfo: {
+    adyenAcquirerInfo: any
+  }
+};
+
 export type Orders = {
   orders: Order[];
 }
@@ -364,6 +394,7 @@ export type Product = {
   smallImage?: string;
   mediaGallery?: ProductImage[];
   price?: number;
+  jsonLd?: any;
   weight?: number;
   priceAfterDiscount?: number;
   hasDiscountedPrice?: number;
@@ -673,6 +704,32 @@ export type GraphqlMailingInput = {
 
 export type GraphQlAddMultipleMailings = {
   mailings: GraphqlMailingInput[];
+};
+
+export type GraphQlAdyenPaymentMethods = {
+  acquirerId: number;
+};
+
+export type GraphQlAdyenPaymentDetails = {
+  acquirerId: number;
+  reference: string;
+  details: any;
+};
+
+export type GraphQlAdyenOpenTransaction = {
+  acquirerId: number;
+};
+
+export type GraphQlAdyenMakeDirectPayment = {
+  acquirerId: number,
+  reference: string,
+  token: string,
+  browserInfo: any,
+  paymentMethod: any
+};
+
+export type GraphQlAdyenAcquirerInfo = {
+  acquirerId: number;
 };
 
 export type GraphQlOrdersParams = {

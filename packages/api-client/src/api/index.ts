@@ -56,3 +56,9 @@ export { default as addMultipleMailings } from './addMultipleMailings';
 
 export { default as updatePassword } from './updatePassword';
 
+export { default as adyenAcquirerInfo } from './adyenAcquirerInfo';
+export { default as adyenMakeDirectPayment } from './adyenMakeDirectPayment';
+export { default as adyenOpenTransaction } from './adyenOpenTransaction';
+export { default as adyenPaymentDetails } from './adyenPaymentDetails';
+export { default as adyenPaymentMethods } from './adyenPaymentMethods';
+

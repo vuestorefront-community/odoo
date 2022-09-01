@@ -11,18 +11,9 @@ import {
   PaymentLoadProvidersResult, BillingGetAddressResult, GraphQlDeleteAddressParams, ShippingGetAddresessResult, BillingAddAddresResponse,
   OrdersResponse, GraphQlOrdersParams, GraphQlAddMultipleProductsParams, cartAddMultipleItemsResult, GraphQlRemoveMultipleProductsParams,
   cartRemoveMultipleItemsResult, ApplyCouponResult, GraphQlSetDefaultAddressParams, SetDefaultAddressResponse, GraphQlSetShippingMethodParams,
-  GraphQlSetShippingMethodResponse,
-  CategoriesResult,
-  GraphQlGetCategoriesParams,
-  MailingListsResult,
-  MailingContactsResult,
-  GraphqlMailingContactsParams,
-  GraphqlMailingListsParams,
-  GraphQlAddMultipleMailings,
-  addMultipleMailingsResult,
-  GraphQlUpdatePasswordParams,
-  UpdatePasswordResult,
-  DeleteAddressResult
+  GraphQlSetShippingMethodResponse, CategoriesResult, GraphQlGetCategoriesParams, MailingListsResult, MailingContactsResult,
+  GraphqlMailingContactsParams, GraphqlMailingListsParams, GraphQlAddMultipleMailings, addMultipleMailingsResult, GraphQlUpdatePasswordParams,
+  UpdatePasswordResult, DeleteAddressResult, GraphQlAdyenAcquirerInfo, adyenAcquirerInfoResult, GraphQlAdyenMakeDirectPayment, adyenMakeDirectPaymentResult, GraphQlAdyenOpenTransaction, adyenOpenTransactionResult, GraphQlAdyenPaymentDetails, adyenPaymentDetailsResult, GraphQlAdyenPaymentMethods, adyenPaymentMethodsResult
 } from './types';
 
 export interface OdooApiMethods {
@@ -83,4 +74,10 @@ export interface OdooApiMethods {
   getMailingContacts(params?: GraphqlMailingContactsParams, customQuery?: CustomQuery): Promise<FetchResult<MailingContactsResult>>;
   getMailingLists(params?: GraphqlMailingListsParams, customQuery?: CustomQuery): Promise<FetchResult<MailingListsResult>>;
   addMultipleMailings(params: GraphQlAddMultipleMailings, customQuery?: CustomQuery): Promise<FetchResult<addMultipleMailingsResult>>;
+
+  adyenAcquirerInfo(params: GraphQlAdyenAcquirerInfo, customQuery?: CustomQuery): Promise<FetchResult<adyenAcquirerInfoResult>>;
+  adyenMakeDirectPayment(params: GraphQlAdyenMakeDirectPayment, customQuery?: CustomQuery): Promise<FetchResult<adyenMakeDirectPaymentResult>>;
+  adyenOpenTransaction(params: GraphQlAdyenOpenTransaction, customQuery?: CustomQuery): Promise<FetchResult<adyenOpenTransactionResult>>;
+  adyenPaymentDetails(params: GraphQlAdyenPaymentDetails, customQuery?: CustomQuery): Promise<FetchResult<adyenPaymentDetailsResult>>;
+  adyenPaymentMethods(params: GraphQlAdyenPaymentMethods, customQuery?: CustomQuery): Promise<FetchResult<adyenPaymentMethodsResult>>;
 }
