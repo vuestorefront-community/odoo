@@ -1,15 +1,10 @@
 # UseCategory Composable
 
-
+::: tip Base  (Methods, Interfaces, Properties)
+[VSF useCategory](https://docs.vuestorefront.io/v2/reference/api/core.usecategory.html)
+:::
 ## Features
-**UseCart** composable can be used to:
-
 * search a list of categories.
-    * the search method accpetsa single params Object.
-        ```ts
-         term: string // name of category to filter
-         topCategory: boolean 
-        ```
 
 ## API
 A **Category** in odoo can have a parent.
@@ -25,6 +20,33 @@ type Category = {
 }
 ```
 
+## Params 
+The base Graphql params is
+
+```ts
+export type GraphQlGetCategoryParams = {
+  filter: CategoryFilterInput;
+  currentPage?: number;
+  pageSize?: number;
+  search?: string;
+  sort?: CategorySortInput;
+};
+
+export type CategoryFilterInput = {
+  id: number;
+  parent: boolean; 
+};
+
+export type CategorySortInput = {
+  id: SortEnum;
+};
+
+export enum SortEnum {
+  ASC,
+  DESC
+}
+```
+
 ## Example
 
 ```ts
@@ -33,10 +55,14 @@ import { onSSR } from '@vue-storefront/core'
 
 export default {
   setup () {
-    const { categories: topCategories, search, loading } = useCategory();
+    const { search, categories } = useCategory();
 
     onSSR(async () => {
-      await search({ topCategory: true});
+      await search({
+        filter: { parent: true }, // Optional filter
+        pageSize: 12, // Optional filter
+        customQuery: { getCategory: 'customGetCategoryQuery' } // Optional custom query
+      });
     });
 
     return {

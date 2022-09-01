@@ -1,4 +1,5 @@
 export { default as getCategory } from './getCategory';
+export { default as getCategories } from './getCategories';
 export { default as getProductTemplatesList } from './getProductTemplatesList';
 export { default as getProductTemplate } from './getProductTemplate';
 export { default as getRealProduct } from './getRealProduct';
@@ -48,3 +49,16 @@ export { default as setShippingMethod } from './setShippingMethod';
 export { default as applyCoupon } from './applyCoupon';
 
 export { default as ordersGet } from './ordersGet';
+
+export { default as getMailingLists } from './getMailingLists';
+export { default as getMailingContacts } from './getMailingContacts';
+export { default as addMultipleMailings } from './addMultipleMailings';
+
+export { default as updatePassword } from './updatePassword';
+
+export { default as adyenAcquirerInfo } from './adyenAcquirerInfo';
+export { default as adyenMakeDirectPayment } from './adyenMakeDirectPayment';
+export { default as adyenOpenTransaction } from './adyenOpenTransaction';
+export { default as adyenPaymentDetails } from './adyenPaymentDetails';
+export { default as adyenPaymentMethods } from './adyenPaymentMethods';
+

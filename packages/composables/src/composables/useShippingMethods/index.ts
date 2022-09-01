@@ -1,5 +1,5 @@
 /* eslint-disable no-prototype-builtins */
-import { Context, useVSFContext } from '@vue-storefront/core';
+import { Context, useVSFContext, sharedRef } from '@vue-storefront/core';
 import { ref } from '@nuxtjs/composition-api';
 
 const useShipping = (): any => {
@@ -7,11 +7,12 @@ const useShipping = (): any => {
 
   const errors = ref({ graphQLErrors: [] });
 
-  const shippingMethods = ref([]);
+  const shippingMethods = sharedRef([], 'shippingMethods');
 
   const resetCountryErrors = () => (errors.value = { graphQLErrors: [] });
 
   const searchShippingMethods = async () => {
+
     if (shippingMethods.value.length > 0) {
       return shippingMethods;
     }

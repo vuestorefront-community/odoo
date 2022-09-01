@@ -43,11 +43,14 @@ export default gql`
       orderLines {
         id
         name
+        priceUnit
+        quantity
         product {
           id
           name
           image
           image
+          slug
           displayName
         }
       }

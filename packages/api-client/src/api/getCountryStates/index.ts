@@ -14,7 +14,8 @@ export default async function getCountryStates(
 
   const response = await apolloClient.query({
     query,
-    variables: params
+    variables: params,
+    errorPolicy: 'all'
   });
 
   return response;

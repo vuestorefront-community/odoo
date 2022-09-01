@@ -2,4 +2,4 @@
 
 Maintainers
 
- - PROMPTEQUATION / ODOOGAP
+ - PROMPTEQUATION / ERPGAP (former ODOOGAP)

@@ -1,9 +1,11 @@
 # Custom types
 If the project need a custom type, try to extend the base type.
 
-### Odoo Convetion
-- <span style="color:#4f56d6"> projectName + type</span>
+::: tip Odoo Convetion 
+projectName + type - camelCase
+:::
 
+## Example 
 
 ```js
 import { Product, Category } from '@vue-storefront/odoo-api';

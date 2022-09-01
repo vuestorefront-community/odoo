@@ -4,6 +4,7 @@ export default gql`
     paymentAcquirers {
       id
       name
+      provider
       paymentIcons {
         id
         name

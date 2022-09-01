@@ -52,7 +52,7 @@ export REDIS_PORT=<redis_port>
 # export REDIS_PASSWORD=<redis_password>
 ```
 
-## Image handle
+### Image handle
 Always use the **getImage** method!
 
 #### WHY ? 

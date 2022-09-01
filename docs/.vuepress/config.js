@@ -3,7 +3,7 @@ const GTM_TAG = 'GTM-WMDC3CP';
 
 module.exports = {
   title: 'Vue Storefront 2 for Odoo',
-  base: '/',
+  base: '/odoo/',
   description: description,
   head: [
     ['link', { rel: 'icon', href: '/favicon.png' }],
@@ -36,6 +36,7 @@ module.exports = {
     }))
   },
   plugins: [
+    ['@kawarimidoll/tailwind', { prefix: 'tw-' }],
     '@vuepress/plugin-back-to-top',
     [
       '@vuepress/plugin-medium-zoom',
@@ -70,10 +71,20 @@ module.exports = {
         collapsable: false,
         children: [
           ['/', 'Introduction'],
+          '/essentials/features',
+          '/essentials/ecosystem',
           '/essentials/configuration',
-          '/essentials/customQueries',
-          '/essentials/payment',
           '/essentials/maintainers'
+        ]
+      },
+      {
+        title: 'Guides',
+        collapsable: true,
+        children: [
+          '/guides/imageHandle',
+          '/guides/customQueries',
+          '/guides/customApis',
+          '/guides/payment'
         ]
       },
       {
@@ -82,16 +93,16 @@ module.exports = {
         children: [
           ['/composables/useCart', 'useCart'],
           ['/composables/useCategory', 'useCategory'],
-          ['/composables/useCountrySearch', 'useCountrySearch'],
           ['/composables/useFacet', 'useFacet'],
-          ['/composables/usePassword', 'usePassword'],
           ['/composables/useProduct', 'useProduct'],
-          ['/composables/useProductVariant', 'useProductVariant'],
           ['/composables/useShipping', 'useShipping'],
           ['/composables/useUser', 'useUser'],
           ['/composables/useUserBilling', 'useUserBilling'],
           ['/composables/useWishlist', 'useWishlist'],
           ['/composables/useOrder', 'useOrder'],
+          ['/composables/usePassword', 'usePassword'],
+          ['/composables/useProductVariant', 'useProductVariant'],
+          ['/composables/useCountrySearch', 'useCountrySearch'],
           ['/composables/customQueries', 'customQueries'],
         ]
       },

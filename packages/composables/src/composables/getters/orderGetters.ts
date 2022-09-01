@@ -17,11 +17,11 @@ export const getItems = (order: Order): OrderLine[] => order?.orderLines || [];
 
 export const getItemSku = (item: Order): string => item?.name || '';
 
-export const getItemName = (item: Order): string => item?.name || '';
+export const getItemName = (item: OrderLine): string => item?.name || '';
 
-export const getItemQty = (item: Order): number => item?.orderLines?.length || 0;
+export const getItemQty = (item: OrderLine): number => item?.quantity || 0;
 
-export const getItemPrice = (item: Order): number => 0;
+export const getItemPrice = (item: OrderLine): number => item.priceUnit;
 
 export const getFormattedPrice = (price: number) => String(price);
 

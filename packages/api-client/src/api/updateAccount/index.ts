@@ -21,7 +21,8 @@ export default async function updateAccount(
   const response = await apolloClient.mutate({
     mutation: gql`${updateAccount.mutation}`,
     variables: updateAccount.variables,
-    fetchPolicy: 'no-cache'
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all'
   });
 
   return response;

@@ -6,10 +6,11 @@ export default `
   name
   description
   image
+  imageFilename
   slug
   sku
+  jsonLd
   isInWishlist
-  status
   categories {
     id
     name

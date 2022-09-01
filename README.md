@@ -22,6 +22,8 @@ Check our [demo](https://vsf.labs.odoogap.com/) server (it's a dev server so cou
 
 ```sh
 1. git clone https://github.com/vuestorefront-community/odoo
+2. git submodule init
+3. git submodule update # now you fetched the theme submodule from template-odoo
 2. yarn install
 3. yarn build # (optional) Verify if everything works properly by building all three projects
 4. yarn dev

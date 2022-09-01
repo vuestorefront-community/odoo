@@ -18,7 +18,8 @@ export default async function cartLoad(
 
   const response = await apolloClient.query({
     fetchPolicy: 'no-cache',
-    query: gql`${cartLoad.query}`
+    query: gql`${cartLoad.query}`,
+    errorPolicy: 'all'
   });
 
   return response;

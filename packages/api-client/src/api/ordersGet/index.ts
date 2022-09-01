@@ -19,7 +19,8 @@ export default async function ordersGet(
   return await apolloClient.query({
     query: gql`${ordersGet.query}`,
     variables: ordersGet.variables,
-    fetchPolicy: 'no-cache'
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all'
   });
 
 }

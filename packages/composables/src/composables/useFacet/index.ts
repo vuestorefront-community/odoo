@@ -1,5 +1,5 @@
 import { Context, useFacetFactory } from '@vue-storefront/core';
-import { GraphQlGetCategoryParams, SearchResultParams, GraphQlGetProductParams, ParamsFromUrl, ProductSortInput} from '@vue-storefront/odoo-api/src/types/types';
+import { ParamsFromUrl, SearchResultParams } from '@vue-storefront/odoo-api/src/types/types';
 import { FacetResultsData } from '../types';
 
 const factoryParams = {
@@ -7,32 +7,23 @@ const factoryParams = {
   search: async (context: Context, params: SearchResultParams<ParamsFromUrl>): Promise<FacetResultsData> => {
 
     const { customQueryProducts, customQueryCategories } = params.input;
-    const categoryParams: GraphQlGetCategoryParams = {
-      pageSize: 100,
-      search: params.input.search,
-      filter: { parent: false, id: params?.input?.filter?.categoryId || null }
-    };
-
-    const productParams: GraphQlGetProductParams = {
-      pageSize: params.input.pageSize,
-      currentPage: parseInt(params.input.currentPage) || 1,
-      search: params.input.search,
-      sort: params.input.sort as ProductSortInput,
-
-      filter: params?.input?.filter
-    };
 
     let categoryResponse = null;
+    let categoriesResponse = null;
     if (params.input.fetchCategory) {
-      categoryResponse = await context.$odoo.api.getCategory(categoryParams, customQueryCategories);
+      categoryResponse = await context.$odoo.api.getCategory(params.input.categoryParams, customQueryCategories);
+    }
+    if (params.input.fetchCategories) {
+      categoriesResponse = await context.$odoo.api.getCategories(params.input.categoryParams, customQueryCategories);
     }
 
-    const { data: productData } = await context.$odoo.api.getProductTemplatesList(productParams, customQueryProducts);
+    const { data: productData } = await context.$odoo.api.getProductTemplatesList(params.input.productParams, customQueryProducts);
 
     return {
       minPrice: productData?.products?.minPrice || 0,
       maxPrice: productData?.products?.maxPrice || 10000,
-      categories: categoryResponse?.data?.categories?.categories || null,
+      category: categoryResponse?.data?.category || {},
+      categories: categoriesResponse?.data?.categories?.categories || [],
       products: productData.products.products,
       attributes: productData.products.attributeValues,
       itemsPerPage: 1,

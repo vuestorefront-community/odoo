@@ -19,7 +19,8 @@ export default async function subscribeNewsLetter(
 
   const response = await apolloClient.mutate({
     mutation: gql`${subscribeNewsLetter.mutation}`,
-    variables: subscribeNewsLetter.variables
+    variables: subscribeNewsLetter.variables,
+    errorPolicy: 'all'
   });
 
   return response;

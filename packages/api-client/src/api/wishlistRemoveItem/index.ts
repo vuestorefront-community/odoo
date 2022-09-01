@@ -20,7 +20,8 @@ export default async function wishlistRemoveItem(
 
   const response = await apolloClient.mutate({
     mutation: gql`${wishlistRemoveItem.mutation}`,
-    variables: wishlistRemoveItem.variables
+    variables: wishlistRemoveItem.variables,
+    errorPolicy: 'all'
   });
 
   return response;

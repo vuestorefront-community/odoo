@@ -1,6 +1,30 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable camelcase */
 
+export enum ButtonType {
+  Primary = 'Primary',
+  Secondary = 'Secondary',
+  Tertiary = 'Tertiary',
+  Danger = 'Danger',
+}
+
+export enum ButtonShape {
+  Round = 'Round',
+  Rectangle = 'Rectangle',
+}
+
+export enum ButtonSize {
+  Small = 'Small',
+  Medium = 'Medium',
+  Large = 'Large',
+  Max = 'Max',
+}
+export enum ButtonColor {
+  Green = 'Green',
+  Black = 'Black',
+  Grey = 'Grey',
+}
+
 export enum SortEnum {
   ASC,
   DESC
@@ -48,6 +72,7 @@ export declare type ShippingInfo = Record<string, string>;
 export declare type PaymentProvider = {
   id: number;
   name: string;
+  provider: string;
   component: string;
   paymentIcons?: PaymentIcon[];
 };
@@ -117,6 +142,11 @@ export type ProductSortInput = {
 };
 
 export type GraphQlGetCategoryParams = {
+  slug: string;
+  id: number;
+};
+
+export type GraphQlGetCategoriesParams = {
   filter: CategoryFilterInput;
   currentPage?: number;
   pageSize?: number;
@@ -148,6 +178,12 @@ export type PaymentLoadProvidersResult = {
   paymentAcquirers: PaymentProvider[]
 };
 
+export type DeleteAddressResult = {
+  deleteAddress: {
+    result: boolean;
+  }
+};
+
 export type CountryStatesResult = {
   country: Country
 };
@@ -162,6 +198,49 @@ export type CountriesResult = {
 
 export type PaymentMakeExternalResult = {
   makePayment: PaymentForm
+};
+
+export type UpdatePasswordResult = {
+  updatePassword: {
+    id: number;
+    name: string;
+    email: string;
+    partner: Partner;
+  }
+};
+
+export type addMultipleMailingsResult = {
+  userAddMultipleMailing: MailingContact
+};
+
+export type adyenPaymentMethodsResult = {
+  adyenPaymentMethods: {
+    adyenPaymentMethods: any;
+  }
+};
+
+export type adyenPaymentDetailsResult = {
+  adyenPaymentDetails: {
+    adyenPaymentDetails: any;
+  }
+};
+
+export type adyenOpenTransactionResult = {
+  adyenTransaction: {
+    transaction: any;
+  }
+};
+
+export type adyenMakeDirectPaymentResult = {
+  adyenPayments: {
+    adyenPayments: any;
+  }
+};
+
+export type adyenAcquirerInfoResult = {
+  adyenAcquirerInfo: {
+    adyenAcquirerInfo: any
+  }
 };
 
 export type Orders = {
@@ -248,6 +327,18 @@ export type ProductVariantResult = {
   productVariant: ProductVariant
 };
 
+export type MailingListsResult = {
+  mailingLists: {
+    mailingLists: MailingItem[]
+  }
+};
+
+export type MailingContactsResult = {
+  mailingContacts: {
+    mailingContacts: MailingItem[]
+  }
+};
+
 export type SingleProductResult = {
   product: Product
 };
@@ -266,6 +357,10 @@ export type Categories = {
 }
 
 export type CategoryResult = {
+  category: Category;
+};
+
+export type CategoriesResult = {
   categories: Categories;
 };
 
@@ -291,6 +386,7 @@ export type Product = {
   displayName?: string;
   slug?: string;
   isInStock?: boolean;
+  imageFilename?: string;
   qty?: number;
   sku?: string;
   image?: string;
@@ -298,6 +394,7 @@ export type Product = {
   smallImage?: string;
   mediaGallery?: ProductImage[];
   price?: number;
+  jsonLd?: any;
   weight?: number;
   priceAfterDiscount?: number;
   hasDiscountedPrice?: number;
@@ -321,6 +418,25 @@ export declare type WishlistItem = {
   product: Product;
   variant: Product;
   id: number;
+};
+
+export declare type MailingItem = {
+  id: number;
+  name: string;
+};
+
+export declare type MailingContactSubscription = {
+  id: number;
+  mailingList: MailingItem[]
+  optOut: boolean
+}
+
+export declare type MailingContact = {
+  id: number;
+  name: string;
+  email: string;
+  companyName: string;
+  subscriptionList: MailingContactSubscription[]
 };
 
 export declare type Wishlist = {
@@ -491,6 +607,22 @@ export type GraphQlGetProductVariantParams = {
   combinationId: string[];
 };
 
+export type GraphqlMailingListsParams = {
+  filter?: any;
+  currentPage: number;
+  pageSize: number;
+  search?: string;
+  sort: any;
+};
+
+export type GraphqlMailingContactsParams = {
+  filter?: any;
+  currentPage: number;
+  pageSize: number;
+  search?: string;
+  sort: any;
+};
+
 export type GraphQlCartAddItemParams = {
   productId: number;
   quantity: number;
@@ -560,6 +692,46 @@ export type GraphQlMakePaymentParams = {
   paymentAcquireId: number;
 };
 
+export type GraphQlUpdatePasswordParams = {
+  currentPassword: string;
+  newPassword: string;
+};
+
+export type GraphqlMailingInput = {
+  mailinglistId: number;
+  optout: boolean
+};
+
+export type GraphQlAddMultipleMailings = {
+  mailings: GraphqlMailingInput[];
+};
+
+export type GraphQlAdyenPaymentMethods = {
+  acquirerId: number;
+};
+
+export type GraphQlAdyenPaymentDetails = {
+  acquirerId: number;
+  reference: string;
+  details: any;
+};
+
+export type GraphQlAdyenOpenTransaction = {
+  acquirerId: number;
+};
+
+export type GraphQlAdyenMakeDirectPayment = {
+  acquirerId: number,
+  reference: string,
+  token: string,
+  browserInfo: any,
+  paymentMethod: any
+};
+
+export type GraphQlAdyenAcquirerInfo = {
+  acquirerId: number;
+};
+
 export type GraphQlOrdersParams = {
   currentPage: number;
   pageSize: number;
@@ -623,6 +795,8 @@ export type ParamsFromUrl = {
 
 export interface AgnosticFacetSearchParams {
     categorySlug?: string;
+    categoryParams?: any;
+    productParams?: any;
     rootCatSlug?: string;
     term?: string;
     page?: number;
