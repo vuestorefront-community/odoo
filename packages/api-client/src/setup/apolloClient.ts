@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 /* eslint-disable camelcase */
 import { createHttpLink } from 'apollo-link-http';
 import { ApolloLink } from 'apollo-link';
@@ -40,7 +41,10 @@ const createOddoLink = (settings: Config): any => {
     fetch,
     headers: {
       Cookie: settings.auth,
-      'resquest-host': settings['resquest-host']
+      'resquest-host': settings['resquest-host'],
+      'X-Real-IP': settings['client-ip'],
+      'REMOTE_ADDR': settings['client-ip']
+
     }
   });
 
