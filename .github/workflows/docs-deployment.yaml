@@ -62,7 +62,7 @@ jobs:
           tag: "${{ steps.get_version.outputs.VERSION }}"
           image: "registry.storefrontcloud.io/docs-storefrontcloud-io/v2-odoo"
           path: "/odoo"
-          port": "80"
+          port: "80"
           has-base-path: false
       - name: Update deployment status (success)
         if: success()
