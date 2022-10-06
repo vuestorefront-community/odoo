@@ -3,9 +3,11 @@
 ## Testing it yourself
 
 Want to try out the integration on your local machine? Check out our explanatory video below:
-<iframe width="100%" height="669" src="https://www.youtube.com/watch?v=FQMcbncdX_g&t=179s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cBn5_dCSCIM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Middleware
+
 Odoo use graphql
 - graphqlBaseUrl for **graphql**
 
@@ -35,7 +37,6 @@ module.exports = {
 This environment variables must be used for deployment or used on a dot env file
 
 ```bash
-
 # Base Url should target the Odoo server
 export BASE_URL=https://vsf.odoo.com/
 
@@ -53,9 +54,11 @@ export REDIS_PORT=<redis_port>
 ```
 
 ### Image handle
+
 Always use the **getImage** method!
 
 #### WHY ? 
+
 - He is build to fetch from correct baseURL (CDN for production / odoo others)
 - He is already injected in vue
 
@@ -73,6 +76,7 @@ Always use the **getImage** method!
 ```
 
 #### Assets
+
 The assets folder on build stagging / prod will be sent to CDN with some hash.
 
 To nuxt compile the assets links with the rigth use require.
@@ -80,3 +84,7 @@ To nuxt compile the assets links with the rigth use require.
 ```ts
   :placeholder="require('~/assets/images/product/product_placeholder.png')"
 ```  
+
+#### Routes
+
+The connector will take the website_slug calculated field for the product data and will add that to a customRoutes/products.json file that should be included on the build. This mechanism is also used for categories slug and redirects. For this purpose you will find the commands: "update:routes" and "update:redirects".
