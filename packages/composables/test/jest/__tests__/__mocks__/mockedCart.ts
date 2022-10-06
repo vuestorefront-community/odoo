@@ -167,6 +167,11 @@ export const mockedCart: Cart = {
       state: {
         id: 548
       }
+    },
+    shippingMethod: {
+      id: 1,
+      price: 10,
+      name: 'Feet'
     }
   }
 };

@@ -8,6 +8,9 @@ const context = {
     api: {
       getCategory: jest.fn(() => ({
         data: { categories: { categories: mockedCategories } }
+      })),
+      getCategories: jest.fn(() => ({
+        data: { categories: { categories: mockedCategories } }
       }))
     }
   }

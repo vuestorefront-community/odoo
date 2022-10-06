@@ -36,7 +36,7 @@ export const attributesFormatedForCategory =
         value: 9,
         label: '5',
         metadata: '4-9',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -44,7 +44,7 @@ export const attributesFormatedForCategory =
         value: 10,
         label: '6',
         metadata: '4-10',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -52,7 +52,7 @@ export const attributesFormatedForCategory =
         value: 11,
         label: '7',
         metadata: '4-11',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -60,7 +60,7 @@ export const attributesFormatedForCategory =
         value: 12,
         label: '8',
         metadata: '4-12',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -68,7 +68,7 @@ export const attributesFormatedForCategory =
         value: 13,
         label: '9',
         metadata: '4-13',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -76,7 +76,7 @@ export const attributesFormatedForCategory =
         value: 14,
         label: '10',
         metadata: '4-14',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -84,7 +84,7 @@ export const attributesFormatedForCategory =
         value: 17,
         label: '13',
         metadata: '4-17',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -92,7 +92,7 @@ export const attributesFormatedForCategory =
         value: 18,
         label: '34',
         metadata: '4-18',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -100,7 +100,7 @@ export const attributesFormatedForCategory =
         value: 19,
         label: '35',
         metadata: '4-19',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -108,7 +108,7 @@ export const attributesFormatedForCategory =
         value: 20,
         label: '36',
         metadata: '4-20',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -116,7 +116,7 @@ export const attributesFormatedForCategory =
         value: 21,
         label: '37',
         metadata: '4-21',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -124,7 +124,7 @@ export const attributesFormatedForCategory =
         value: 22,
         label: '38',
         metadata: '4-22',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -132,7 +132,7 @@ export const attributesFormatedForCategory =
         value: 24,
         label: '40',
         metadata: '4-24',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -140,7 +140,7 @@ export const attributesFormatedForCategory =
         value: 25,
         label: '41',
         metadata: '4-25',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -148,7 +148,7 @@ export const attributesFormatedForCategory =
         value: 26,
         label: '42',
         metadata: '4-26',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -156,7 +156,7 @@ export const attributesFormatedForCategory =
         value: 27,
         label: '43',
         metadata: '4-27',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -164,7 +164,7 @@ export const attributesFormatedForCategory =
         value: 29,
         label: '45',
         metadata: '4-29',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -172,7 +172,7 @@ export const attributesFormatedForCategory =
         value: 30,
         label: '46',
         metadata: '4-30',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -180,7 +180,7 @@ export const attributesFormatedForCategory =
         value: 31,
         label: '47',
         metadata: '4-31',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -188,7 +188,7 @@ export const attributesFormatedForCategory =
         value: 32,
         label: '48',
         metadata: '4-32',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -196,7 +196,7 @@ export const attributesFormatedForCategory =
         value: 33,
         label: '49',
         metadata: '4-33',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -204,7 +204,7 @@ export const attributesFormatedForCategory =
         value: 34,
         label: '50',
         metadata: '4-34',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -212,7 +212,7 @@ export const attributesFormatedForCategory =
         value: 35,
         label: '51',
         metadata: '4-35',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -220,7 +220,7 @@ export const attributesFormatedForCategory =
         value: 36,
         label: '52',
         metadata: '4-36',
-        htmlColor: null
+        htmlColor: ''
       }
     ]
   },
@@ -237,7 +237,7 @@ export const attributesFormatedForCategory =
         value: 37,
         label: 'Cotton',
         metadata: '5-37',
-        htmlColor: null
+        htmlColor: ''
       },
       {
 
@@ -245,7 +245,7 @@ export const attributesFormatedForCategory =
         value: 38,
         label: 'Leather',
         metadata: '5-38',
-        htmlColor: null
+        htmlColor: ''
       }
     ]
   },

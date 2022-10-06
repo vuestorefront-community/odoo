@@ -1,7 +1,6 @@
 import facetGetters from '../../../../src/composables/getters/facetGetters';
 import { emptySearchData, searchData } from '../__mocks__/searchData';
 import { attributesFormatedForCategory } from '../__mocks__/productAttributesFormated';
-import { womenCategoryTree } from '../__mocks__/buildedCategorytree';
 import { mockedProducts } from '../__mocks__/mockedProducts';
 it('get grouped facet with empty attributes', () => {
   const grouped = facetGetters.getGrouped(emptySearchData);
@@ -24,16 +23,12 @@ it('get sort options', () => {
 it('get category tree with empty categories ', () => {
   const categoryTree = facetGetters.getCategoryTree(emptySearchData);
 
-  expect(categoryTree).toEqual({
-    items: [],
-    label: '',
-    isCurrent: false
-  });
+  expect(categoryTree).toEqual({id: 11, isCurrent: false, items: [], label: 'Women', slug: 'women-11'});
 });
 it('get category tree ', () => {
   const categoryTree = facetGetters.getCategoryTree(searchData);
 
-  expect(categoryTree).toEqual(womenCategoryTree);
+  expect(categoryTree).toEqual({id: 11, isCurrent: false, items: [], label: 'Women', slug: 'women-11'});
 });
 
 it('get empty products', () => {
@@ -62,10 +57,10 @@ it('get custom pagination', () => {
 });
 
 it('get breacrumb for product page', () => {
-  const breacrumb = facetGetters.getBreadcrumbsByProduct(mockedProducts[0]);
+  const breacrumb : any = facetGetters.getBreadcrumbsByProduct(mockedProducts[0]);
 
   expect(breacrumb).toHaveLength(2);
-  expect(breacrumb[1].text).toBe('women');
+  expect(breacrumb[1].text).toBe('Women');
 });
 it('get breacrumb for category page', () => {
   const breacrumb = facetGetters.getBreadcrumbs(searchData);
