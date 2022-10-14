@@ -159,7 +159,7 @@ export type CartRemoveItemResult = {
 };
 
 export type ApplyCoupon = {
-  applied: boolean
+  error: boolean
 }
 
 export type ApplyCouponResult = {
