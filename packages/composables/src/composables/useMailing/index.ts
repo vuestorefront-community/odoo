@@ -55,8 +55,6 @@ const useMailing = (): any => {
       const response = await context.$odoo.api.addMultipleMailings({ mailings });
       const { data } = response;
 
-      console.log(response);
-
       if (data) {
         return data;
       } else {
