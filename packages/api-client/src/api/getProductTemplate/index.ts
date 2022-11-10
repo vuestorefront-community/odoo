@@ -5,7 +5,6 @@ import ApolloClient from 'apollo-client';
 import query from './getProductTemplateQuery';
 import { GraphQlGetProductTemplateParams, SingleProductResult } from '../../index';
 import { FetchResult } from 'apollo-link/lib/types';
-import Redis from 'redis-tag-cache';
 
 export default async function getProductTemplate(
   context: Context,
