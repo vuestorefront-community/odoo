@@ -5,12 +5,21 @@ import ApolloClient from 'apollo-client';
 import query from './getProductTemplateQuery';
 import { GraphQlGetProductTemplateParams, SingleProductResult } from '../../index';
 import { FetchResult } from 'apollo-link/lib/types';
+import Redis from 'redis-tag-cache';
+
 export default async function getProductTemplate(
   context: Context,
   params: GraphQlGetProductTemplateParams,
-  customQuery?: CustomQuery
+  customQuery?: CustomQuery,
+  cacheKey?: string
 ): Promise<FetchResult<SingleProductResult>> {
+  const redisClient = (process as any).redisTagClient;
   const apolloClient = context.client.apollo as ApolloClient<any>;
+
+  let cachedProduct = null;
+  if (cacheKey && (cachedProduct = await redisClient.get(cacheKey))) {
+    return cachedProduct;
+  }
 
   const { getProductTemplate } = context.extendQuery(
     customQuery, { getProductTemplate: { query, variables: params } }
@@ -21,6 +30,14 @@ export default async function getProductTemplate(
     variables: getProductTemplate.variables,
     errorPolicy: 'all'
   });
+
+  if (cacheKey) {
+    redisClient.set(
+      cacheKey,
+      response,
+      [`API-P${response.data.product.id}`]
+    );
+  }
 
   return response;
 }

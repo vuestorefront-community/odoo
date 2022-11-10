@@ -596,6 +596,8 @@ export type GraphQlWishlistAddItemParams = {
 
 export type GraphQlGetProductTemplateParams = {
   id: number;
+  slug: string;
+  cacheKey: string;
 };
 
 export type GraphQlWishlistRemoveItemParams = {
