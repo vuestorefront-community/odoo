@@ -9,7 +9,8 @@ export default async function getProductTemplatesList(
   context: Context,
   params: GraphQlGetProductParams,
   customQuery?: CustomQuery,
-  cacheKey?: string
+  cacheKey?: string,
+  categoryIdForCache?: string
 ): Promise<FetchResult<ProductResult>> {
   const redisClient = (process as any).redisTagClient;
   const apolloClient = context.client.apollo as ApolloClient<any>;
@@ -33,7 +34,7 @@ export default async function getProductTemplatesList(
     redisClient.set(
       cacheKey,
       response,
-      [`API-P${response.data.products?.products?.[0]?.categories?.[0].id}`]
+      [`API-C${categoryIdForCache}-products`]
     );
   }
 
