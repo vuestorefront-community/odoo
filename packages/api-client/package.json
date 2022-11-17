@@ -25,7 +25,8 @@
     "apollo-link-http": "^1.5.17",
     "graphql": "^15.5.0",
     "graphql-tag": "^2.12.4",
-    "isomorphic-fetch": "^3.0.0"
+    "isomorphic-fetch": "^3.0.0",
+    "redis-tag-cache": "^1.2.1"
   },
   "devDependencies": {
     "@rollup/plugin-graphql": "^1.0.0",
