@@ -30,7 +30,7 @@ export default async function getProductTemplatesList(
     errorPolicy: 'all'
   });
 
-  if (cacheKey && response.data.products) {
+  if (cacheKey && redisClient && response.data?.products) {
     redisClient.set(
       cacheKey,
       response,

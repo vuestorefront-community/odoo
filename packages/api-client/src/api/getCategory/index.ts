@@ -31,7 +31,7 @@ export default async function getCategory(
     fetchPolicy: 'no-cache'
   });
 
-  if (cacheKey) {
+  if (cacheKey && redisClient) {
     redisClient.set(
       cacheKey,
       response,
