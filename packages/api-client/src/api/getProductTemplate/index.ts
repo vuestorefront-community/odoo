@@ -12,11 +12,11 @@ export default async function getProductTemplate(
   customQuery?: CustomQuery,
   cacheKey?: string
 ): Promise<FetchResult<SingleProductResult>> {
-  const redisClient = (process as any).redisTagClient;
+  const redisClient = context.client.redisTagClient;
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   let cachedProduct = null;
-  if (cacheKey && (cachedProduct = await redisClient.get(cacheKey))) {
+  if (cacheKey && redisClient && (cachedProduct = await redisClient.get(cacheKey))) {
     return cachedProduct;
   }
 

@@ -12,11 +12,11 @@ export default async function getCategory(
   customQuery?: CustomQuery,
   cacheKey?: string
 ): Promise<FetchResult<CategoryResult>> {
-  const redisClient = (process as any).redisTagClient;
+  const redisClient = context.client.redisTagClient;
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   let cachedCategory = null;
-  if (cacheKey && (cachedCategory = await redisClient.get(cacheKey))) {
+  if (cacheKey && redisClient && (cachedCategory = await redisClient.get(cacheKey))) {
     return cachedCategory;
   }
 

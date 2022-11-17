@@ -12,11 +12,11 @@ export default async function getProductTemplatesList(
   cacheKey?: string,
   categoryIdForCache?: string
 ): Promise<FetchResult<ProductResult>> {
-  const redisClient = (process as any).redisTagClient;
+  const redisClient = context.client.redisTagClient;
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
   let cachedProducts = null;
-  if (cacheKey && (cachedProducts = await redisClient.get(cacheKey))) {
+  if (cacheKey && redisClient && (cachedProducts = await redisClient.get(cacheKey))) {
     return cachedProducts;
   }
 

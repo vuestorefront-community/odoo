@@ -4,6 +4,8 @@ import ApolloClient from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Config, ClientInstance } from './config';
 import { Logger } from 'winston';
+import Redis from 'redis-tag-cache';
+
 const onCreate = (settings: Config): { config: Config; client: ClientInstance } => {
   const logger : Logger = (process as any).winstonLog;
 
@@ -21,10 +23,21 @@ const onCreate = (settings: Config): { config: Config; client: ClientInstance } 
     cache: new InMemoryCache(),
     ...settings
   });
+  let redisTagClient = null;
+
+  if (settings.redisClient) {
+    redisTagClient = new Redis({
+      host: process.env.REDIS_HOST,
+      port: process.env.REDIS_PORT,
+      password: process.env.REDIS_PASSWORD,
+      db: process.env.REDIS_DATABASE
+    });
+  }
 
   return {
     config,
     client: {
+      redisTagClient,
       apollo: apolloClient
     }
   };
