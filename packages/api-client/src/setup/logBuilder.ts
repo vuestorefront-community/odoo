@@ -23,9 +23,12 @@ export default ({ label, message, locations, path, operation }: LooseObject) : v
   const log : LooseObject = {
     label,
     message: message,
-    location: locations.map(item => `line: ${item.line} | column: ${item.column}`).join(' '),
     path: path
   };
+
+  if (locations) {
+    log.location = locations?.map(item => `line: ${item.line} | column: ${item.column}`).join(' ');
+  }
 
   if (process.env.NODE_LOG_LEVEL === 'TRACE') {
     log.query = getGqlString(operation.query);
