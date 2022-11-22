@@ -30,6 +30,7 @@ export default async function getProductTemplatesList(
     errorPolicy: 'all'
   });
 
+  delete response?.data?.cookie;
   if (cacheKey && redisClient && response.data?.products) {
     redisClient.set(
       cacheKey,

@@ -31,6 +31,7 @@ export default async function getCategory(
     fetchPolicy: 'no-cache'
   });
 
+  delete response?.data?.cookie;
   if (cacheKey && redisClient) {
     redisClient.set(
       cacheKey,
