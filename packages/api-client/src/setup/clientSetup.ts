@@ -26,11 +26,18 @@ const onCreate = (settings: Config): { config: Config; client: ClientInstance } 
   let redisTagClient = null;
 
   if (settings.redisClient) {
-    redisTagClient = new Redis({
+    const options = {
       host: process.env.REDIS_HOST,
       port: process.env.REDIS_PORT,
-      password: process.env.REDIS_PASSWORD,
-      db: process.env.REDIS_DATABASE
+      password: process.env.REDIS_PASSWORD || null,
+      db: process.env.REDIS_DATABASE || 0
+    };
+    redisTagClient = new Redis(options);
+
+    logger.info({
+      label: '[REDIS CACHE API]',
+      message: 'Bootstrap a connection to cache apis on redis with params:',
+      params: options
     });
   }
 
