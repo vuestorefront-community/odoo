@@ -34,11 +34,6 @@ const onCreate = (settings: Config): { config: Config; client: ClientInstance } 
     };
     redisTagClient = new Redis(options);
 
-    logger.info({
-      label: '[REDIS CACHE API]',
-      message: 'Bootstrap a connection to cache apis on redis with params:',
-      params: options
-    });
   }
 
   return {
