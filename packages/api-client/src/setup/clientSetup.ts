@@ -32,8 +32,8 @@ const onCreate = (settings: Config): { config: Config; client: ClientInstance } 
       password: process.env.REDIS_PASSWORD || null,
       db: process.env.REDIS_DATABASE || 0
     };
-    redisTagClient = new Redis(options);
 
+    redisTagClient = new Redis({ redis: options });
   }
 
   return {
