@@ -33,7 +33,13 @@ const onCreate = (settings: Config): { config: Config; client: ClientInstance } 
       db: process.env.REDIS_DATABASE || 0
     };
 
-    redisTagClient = new Redis({ redis: options });
+    if ((process as any).superRedis) {
+      redisTagClient = (process as any).superRedis;
+    } else {
+      (process as any).superRedis = new Redis({ redis: options });
+      redisTagClient = (process as any).superRedis;
+    }
+
   }
 
   return {
