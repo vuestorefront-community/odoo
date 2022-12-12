@@ -5,6 +5,7 @@ import ApolloClient from 'apollo-client';
 import query from './getProductTemplateQuery';
 import { GraphQlGetProductTemplateParams, SingleProductResult } from '../../index';
 import { FetchResult } from 'apollo-link/lib/types';
+import { randomIntegerBetween } from '../../';
 
 export default async function getProductTemplate(
   context: Context,
@@ -35,7 +36,8 @@ export default async function getProductTemplate(
     redisClient.set(
       cacheKey,
       response,
-      [`API-P${response.data.product.id}`]
+      [`API-P${response.data.product.id}`],
+      process.env.REDIS_TTL_CACHE_MAXIMUM ? randomIntegerBetween(Number(process.env.REDIS_TTL_CACHE_MINIMUM), Number(process.env.REDIS_TTL_CACHE_MAXIMUM)) : 86400
     );
   }
 

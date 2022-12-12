@@ -5,6 +5,7 @@ import ApolloClient from 'apollo-client';
 import query from './getCategoryQuery';
 import { CategoryResult, GraphQlGetCategoryParams } from '../../index';
 import { FetchResult } from 'apollo-link';
+import { randomIntegerBetween } from '../../';
 
 export default async function getCategory(
   context: Context,
@@ -36,7 +37,8 @@ export default async function getCategory(
     redisClient.set(
       cacheKey,
       response,
-      [`API-C${response.data.category.id}`]
+      [`API-C${response.data.category.id}`],
+      process.env.REDIS_TTL_CACHE_MAXIMUM ? randomIntegerBetween(Number(process.env.REDIS_TTL_CACHE_MINIMUM), Number(process.env.REDIS_TTL_CACHE_MAXIMUM)) : 86400
     );
   }
 
