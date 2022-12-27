@@ -41,7 +41,7 @@ const createOddoLink = (settings: Config): any => {
     headers: {
       Cookie: settings.auth,
       'resquest-host': settings['resquest-host'],
-      'REAL-IP': settings['client-ip']
+      'REAL-IP': settings['real-ip']
 
     }
   });
