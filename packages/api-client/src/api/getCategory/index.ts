@@ -33,7 +33,7 @@ export default async function getCategory(
   });
 
   delete response?.data?.cookie;
-  if (cacheKey && redisClient) {
+  if (cacheKey && redisClient && response.data?.category) {
     redisClient.set(
       cacheKey,
       response,

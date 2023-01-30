@@ -32,7 +32,7 @@ export default async function getProductTemplatesList(
   });
 
   delete response?.data?.cookie;
-  if (cacheKey && redisClient && response.data?.products) {
+  if (cacheKey && redisClient && response.data?.products && categoryIdForCache) {
     redisClient.set(
       cacheKey,
       response,
