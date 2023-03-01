@@ -5035,6 +5035,11 @@
     lodash-es "^4.17.15"
     vue "^2.6.11"
 
+"@vue-storefront/http-cache@^2.7.5":
+  version "2.7.5"
+  resolved "https://registry.yarnpkg.com/@vue-storefront/http-cache/-/http-cache-2.7.5.tgz#bc8dadeeea6de519f05761f4bdb86d7ae1f491ea"
+  integrity sha512-sfmnYyFnS2KfsNw267IzbphPQafyl01+/aHVl2oiFftahTH+l4WRVTgALzXkp1rsgjLqlVctahkrYA6YQzWOGQ==
+
 "@vue-storefront/middleware@2.7.5":
   version "2.7.5"
   resolved "https://registry.yarnpkg.com/@vue-storefront/middleware/-/middleware-2.7.5.tgz#b4654a7a08264973347153daa3d11345d35233bb"
