@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 /* eslint-disable quote-props */
 /* eslint-disable camelcase */
 import { createHttpLink } from 'apollo-link-http';
@@ -5,21 +6,19 @@ import { ApolloLink } from 'apollo-link';
 import { Config } from './config';
 import { onError } from 'apollo-link-error';
 import fetch from 'isomorphic-fetch';
+import logBuilder from './logBuilder';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const createOddoLink = (settings: Config): any => {
-  const errorLink = onError(({ graphQLErrors, networkError }) => {
-    if (graphQLErrors)
-      graphQLErrors.map(({ message, locations, path }) =>
-        console.warn(
-          `%c [GraphQL error]: Message: ${message}, Location: ${locations.map(
-            (item) => `line: ${item.line} | column: ${item.column}`
-          )}).join(' '), Path: ${path}`,
-          'background: #222; color: #FFA07A'
-        )
-      );
 
-    if (networkError) console.warn(`[Network error]: ${networkError}`);
+  const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
+    if (graphQLErrors) {
+      graphQLErrors.map((error) => logBuilder({label: '[GRAPHQL ERROR]', ...error, operation }));
+    }
+
+    if (networkError) {
+      logBuilder({ label: '[NETWORK ERROR]', message: networkError });
+    }
   });
 
   const afterwareLink = new ApolloLink((operation, forward) => {
@@ -42,8 +41,7 @@ const createOddoLink = (settings: Config): any => {
     headers: {
       Cookie: settings.auth,
       'resquest-host': settings['resquest-host'],
-      'X-Real-IP': settings['client-ip'],
-      'REMOTE_ADDR': settings['client-ip']
+      'REAL-IP': settings['real-ip']
 
     }
   });

@@ -30,3 +30,5 @@ export { default as useMailing } from './composables/useMailing';
 
 export * from './composables/getters';
 export * from './factories';
+export * from './nuxtHooks';
+export * from './helpers';

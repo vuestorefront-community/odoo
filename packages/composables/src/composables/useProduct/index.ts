@@ -6,7 +6,7 @@ const params: UseProductFactoryParams<Product, GraphQlGetProductTemplateParams> 
 
     const { customQuery } = params;
 
-    const { data } = await context.$odoo.api.getProductTemplate(params, customQuery);
+    const { data } = await context.$odoo.api.getProductTemplate(params, customQuery, params.cacheKey);
 
     return data.product;
   }

@@ -23,6 +23,7 @@ export interface Config<T = any> {
   graphqlBaseUrl: string;
   odooBaseUrl: string;
   cookies: CookiesConfig;
+  redisClient: boolean;
   client?: ApolloClient<T>;
   api: ApiConfig;
   customOptions?: ApolloClientOptions<any>;

@@ -17,10 +17,10 @@ import {
 } from './types';
 
 export interface OdooApiMethods {
-  getCategory(params: GraphQlGetCategoryParams, customQuery?: CustomQuery): Promise<FetchResult<CategoryResult>>;
+  getCategory(params: GraphQlGetCategoryParams, customQuery?: CustomQuery, cacheKey?: string): Promise<FetchResult<CategoryResult>>;
   getCategories(params: GraphQlGetCategoriesParams, customQuery?: CustomQuery): Promise<FetchResult<CategoriesResult>>;
-  getProductTemplatesList(params: GraphQlGetProductParams, customQuery?: CustomQuery): Promise<FetchResult<ProductResult>>;
-  getProductTemplate(params: GraphQlGetProductTemplateParams, customQuery?: CustomQuery): Promise<FetchResult<SingleProductResult>>;
+  getProductTemplatesList(params: GraphQlGetProductParams, customQuery?: CustomQuery, cacheKey?: string, categoryIdForCache?: string): Promise<FetchResult<ProductResult>>;
+  getProductTemplate(params: GraphQlGetProductTemplateParams, customQuery?: CustomQuery, cacheKey?: string): Promise<FetchResult<SingleProductResult>>;
   getRealProduct(params: GraphQlGetProductVariantParams, customQuery?: CustomQuery): Promise<FetchResult<ProductVariantResult>>;
 
   updateAccount(params: GraphQlUpdateAccountParams, customQuery?: CustomQuery): Promise<FetchResult>;

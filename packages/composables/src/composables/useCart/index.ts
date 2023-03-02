@@ -82,15 +82,15 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
 
     const { data, errors } = await context.$odoo.api.applyCoupon(params, customQuery);
 
-    if (data.applyCoupon?.applied) {
+    if (data.applyCoupon?.error) {
       const { data: cartData } = await context.$odoo.api.cartLoad(customQuery);
       return {
         updatedCart: cartData.cart,
-        updatedCoupon: { applied: data.applyCoupon?.applied }
+        updatedCoupon: { applied: data.applyCoupon?.error }
       };
     }
 
-    return { updatedCart: currentCart, updatedCoupon: { applied: data.applyCoupon?.applied } };
+    return { updatedCart: currentCart, updatedCoupon: { applied: data.applyCoupon?.error } };
   },
 
   removeCoupon: async (
