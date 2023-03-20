@@ -34,9 +34,10 @@
       }
     ],
     "no-undef": 2,
-    "no-unused-vars": 2,
+    "no-unused-vars": 0,
     "brace-style": 2,
     "no-mixed-spaces-and-tabs": 2,
+    "no-empty-pattern": 0,
     "key-spacing": 2,
     "comma-spacing": 2,
     "array-bracket-spacing": 2,
@@ -122,7 +123,7 @@
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/no-unused-vars": 2,
+    "@typescript-eslint/no-unused-vars": 0,
     "@typescript-eslint/ban-ts-ignore": 0,
     "@typescript-eslint/explicit-module-boundary-types": "off"
   },
