@@ -18,6 +18,8 @@ const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
   load: async (context: Context) => {
     const { data } = await context.$odoo.api.wishlistLoad();
 
+    context.$odoo.config.app.$cookies.set('wishlist-size', data?.wishlistItems.wishlistItems?.length || 0);
+
     return data.wishlistItems;
   },
 
@@ -31,6 +33,7 @@ const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
         addWishlistItemParams, customQuery
       );
 
+      context.$odoo.config.app.$cookies.set('wishlist-size', data?.wishlistAddItem.wishlistItems?.length || 0);
       return data.wishlistAddItem;
     }
 
@@ -52,6 +55,8 @@ const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
     const { data } = await context.$odoo.api.wishlistRemoveItem(
       removeItemParams, customQuery
     );
+
+    context.$odoo.config.app.$cookies.set('wishlist-size', data?.wishlistRemoveItem.wishlistItems?.length || 0);
 
     return data.wishlistRemoveItem;
   },
