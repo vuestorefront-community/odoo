@@ -17,6 +17,9 @@ const params: UseMultipleProductFactoryParams<Product, GraphQlAddMultipleProduct
     const { data } = await context.$odoo.api.cartAddMultipleItems(params, customQuery);
 
     context.useCart.setCart(data.cartAddMultipleItems);
+
+    context.$odoo.config.app.$cookies.set('cart-size', data?.cartAddMultipleItems?.order?.orderLines?.length || 0);
+
     return data.cartAddMultipleItems;
   },
 
@@ -27,6 +30,9 @@ const params: UseMultipleProductFactoryParams<Product, GraphQlAddMultipleProduct
     const { data } = await context.$odoo.api.cartRemoveMultipleItems(params, customQuery);
 
     context.useCart.setCart(data.cartRemoveMultipleItems);
+
+    context.$odoo.config.app.$cookies.set('cart-size', data?.cartRemoveMultipleItems?.order?.orderLines?.length || 0);
+
     return data.cartRemoveMultipleItems;
   }
 };

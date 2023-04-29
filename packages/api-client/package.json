@@ -1,6 +1,6 @@
 {
   "name": "@odoogap/odoo-api",
-  "version": "1.5.2-rc.4",
+  "version": "1.5.2-rc.3",
   "private": false,
   "sideEffects": false,
   "server": "server/index.js",
