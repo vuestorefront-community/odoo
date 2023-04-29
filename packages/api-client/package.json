@@ -1,5 +1,5 @@
 {
-  "name": "@odoogap/odoo-api",
+  "name": "@vuestorefront/odoo-api",
   "version": "1.5.2-rc.3",
   "private": false,
   "sideEffects": false,
