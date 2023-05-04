@@ -29,11 +29,12 @@ export default async function getCategories(
   const response = await apolloClient.query({
     query: gql`${getCategories.query}`,
     variables: getCategories.variables,
-    errorPolicy: 'all'
+    errorPolicy: 'all',
+    fetchPolicy: 'no-cache'
   });
 
   delete response?.data?.cookie;
-  if (redisClient && response.data?.categories) {
+  if (redisClient && response.data?.categories?.categories) {
     redisClient.set(
       cacheKey,
       response,
