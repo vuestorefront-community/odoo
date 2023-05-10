@@ -6,6 +6,13 @@ const { load, addItem, removeItem, updateItemQty, isInCart } = useCart() as any;
 
 const context = {
   $odoo: {
+    config: {
+      app: {
+        $cookies: {
+          set: jest.fn()
+        }
+      }
+    },
     api: {
       cartLoad: jest.fn(() => ({ data: {cart: mockedCart }})),
       cartAddItem: jest.fn(() => ({ data: { mockedCart: mockedCart } })),
