@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Context,
+  CustomQuery,
   useUserShippingFactory,
   UseUserShippingFactoryParams
 } from '@vue-storefront/core';
@@ -35,8 +36,8 @@ const params: UseUserShippingFactoryParams<Partner[], any> = {
   },
 
   // @TODO add custom query
-  load: async (context: Context, params?) => {
-    const { data } = await context.$odoo.api.shippingGetAddress();
+  load: async (context: Context, params?: any & { customQuery?: CustomQuery }) => {
+    const { data } = await context.$odoo.api.shippingGetAddress(params.customQuery);
 
     return data.addresses;
   },

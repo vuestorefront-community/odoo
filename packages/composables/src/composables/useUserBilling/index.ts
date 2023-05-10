@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Context,
+  CustomQuery,
   useUserBillingFactory,
   UseUserBillingFactoryParams
 } from '@vue-storefront/core';
@@ -37,8 +38,8 @@ const params: UseUserBillingFactoryParams<Partner[], any> = {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   // @TODO add custom query
-  load: async (context: Context, params?) => {
-    const { data } = await context.$odoo.api.billingGetAddress();
+  load: async (context: Context, params?: any & { customQuery?: CustomQuery }) => {
+    const { data } = await context.$odoo.api.billingGetAddress(params.customQuery);
 
     return data.addresses;
   },
