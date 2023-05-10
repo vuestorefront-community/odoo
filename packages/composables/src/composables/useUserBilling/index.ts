@@ -10,17 +10,7 @@ import { throwErrors } from '@vue-storefront/odoo/src/helpers/graphqlError';
 const params: UseUserBillingFactoryParams<Partner[], any> = {
   addAddress: async (context: Context, { address, billing, customQuery }) => {
 
-    const params: GraphQlAddAddressParams = {
-      street: address.street,
-      zip: address.zip,
-      phone: address.phone,
-      name: address.name,
-      city: address.city,
-      countryId: Number.parseInt(address.country.id),
-      stateId: Number.parseInt(address.state.id)
-    };
-
-    const { data } = await context.$odoo.api.billingAddAddress(params, customQuery);
+    const { data } = await context.$odoo.api.billingAddAddress(address, customQuery);
 
     return [...billing, data.addAddress];
   },
@@ -36,17 +26,7 @@ const params: UseUserBillingFactoryParams<Partner[], any> = {
 
   updateAddress: async (context: Context, { address, billing, customQuery }) => {
 
-    const params: GraphQlUpdateAddressParams = {
-      id: address.id,
-      street: address.street,
-      zip: address.zip,
-      phone: address.phone,
-      name: address.name,
-      city: address.city,
-      countryId: Number.parseInt(address.country.id),
-      stateId: Number.parseInt(address.state.id)
-    };
-    const { data } = await context.$odoo.api.billingUpdateAddress(params, customQuery);
+    const { data } = await context.$odoo.api.billingUpdateAddress(address, customQuery);
 
     const newList = [...billing];
     const index = newList.findIndex((item) => item.id === data.updateAddress.id);
@@ -56,6 +36,7 @@ const params: UseUserBillingFactoryParams<Partner[], any> = {
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // @TODO add custom query
   load: async (context: Context, params?) => {
     const { data } = await context.$odoo.api.billingGetAddress();
 
