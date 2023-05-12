@@ -13,11 +13,11 @@ const factoryParams = {
     let categoryIdForProductCache = null;
     if (params.input.fetchCategory) {
       categoryResponse = await context.$odoo.api.getCategory(params.input.categoryParams, customQueryCategories, params.input.categoryParams?.cacheKey);
-      categoryIdForProductCache = categoryResponse.data?.category.id;
+      categoryIdForProductCache = categoryResponse.data?.category?.id;
     }
     if (params.input.fetchCategories) {
       categoriesResponse = await context.$odoo.api.getCategories(params.input.categoryParams, customQueryCategories, params.input.categoryParams?.cacheKey);
-      categoryIdForProductCache = categoriesResponse?.data?.categories?.categories?.[0].id;
+      categoryIdForProductCache = categoriesResponse?.data?.categories?.categories?.[0]?.id;
     }
 
     const { data: productData } = await context.$odoo.api.getProductTemplatesList(params.input.productParams, customQueryProducts, params.input.productParams?.cacheKey, categoryIdForProductCache);

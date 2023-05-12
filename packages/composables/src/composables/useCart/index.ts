@@ -19,7 +19,9 @@ import {
 const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
   load: async (context: Context, { customQuery }) => {
     const { data } = await context.$odoo.api.cartLoad(customQuery);
-    context.$odoo.config.app.$cookies.set('cart-size', data?.cart?.order?.orderLines?.length || 0);
+
+    const cookieIndex = context?.$odoo?.config?.app?.$config?.cart?.cookieIndex || 'orderLines';
+    context.$odoo.config.app.$cookies.set('cart-size', data?.cart?.order?.[cookieIndex]?.length || 0);
 
     return data.cart;
   },
@@ -39,7 +41,9 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
         addItemParams,
         customQuery
       );
-      context.$odoo.config.app.$cookies.set('cart-size', data?.cartAddItem?.order?.orderLines?.length || 0);
+
+      const cookieIndex = context?.$odoo?.config?.app?.$config?.cart?.cookieIndex || 'orderLines';
+      context.$odoo.config.app.$cookies.set('cart-size', data?.cartAddItem?.order?.[cookieIndex]?.length || 0);
 
       return data?.cartAddItem;
     }
@@ -55,7 +59,9 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
       addItemParams,
       customQuery
     );
-    context.$odoo.config.app.$cookies.set('cart-size', data?.cartRemoveItem?.order?.orderLines?.length || 0);
+    const cookieIndex = context?.$odoo?.config?.app?.$config?.cart?.cookieIndex || 'orderLines';
+    context.$odoo.config.app.$cookies.set('cart-size', data?.cartRemoveItem?.order?.[cookieIndex]?.length || 0);
+
     return data?.cartRemoveItem;
   },
 
@@ -70,7 +76,9 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
       customQuery
     );
 
-    context.$odoo.config.app.$cookies.set('cart-size', data?.cartUpdateItem?.order?.orderLines?.length || 0);
+    const cookieIndex = context?.$odoo?.config?.app?.$config?.cart?.cookieIndex || 'orderLines';
+    context.$odoo.config.app.$cookies.set('cart-size', data?.cartUpdateItem?.order?.[cookieIndex]?.length || 0);
+
     return data?.cartUpdateItem;
   },
 

@@ -18,7 +18,8 @@ const params: UseMultipleProductFactoryParams<Product, GraphQlAddMultipleProduct
 
     context.useCart.setCart(data.cartAddMultipleItems);
 
-    context.$odoo.config.app.$cookies.set('cart-size', data?.cartAddMultipleItems?.order?.orderLines?.length || 0);
+    const cookieIndex = context?.$odoo?.config?.app?.$config?.cart?.cookieIndex || 'orderLines';
+    context.$odoo.config.app.$cookies.set('cart-size', data?.cartAddMultipleItems?.order?.[cookieIndex]?.length || 0);
 
     return data.cartAddMultipleItems;
   },
@@ -31,7 +32,8 @@ const params: UseMultipleProductFactoryParams<Product, GraphQlAddMultipleProduct
 
     context.useCart.setCart(data.cartRemoveMultipleItems);
 
-    context.$odoo.config.app.$cookies.set('cart-size', data?.cartRemoveMultipleItems?.order?.orderLines?.length || 0);
+    const cookieIndex = context?.$odoo?.config?.app?.$config?.cart?.cookieIndex || 'orderLines';
+    context.$odoo.config.app.$cookies.set('cart-size', data?.cartRemoveMultipleItems?.order?.[cookieIndex]?.length || 0);
 
     return data.cartRemoveMultipleItems;
   }
