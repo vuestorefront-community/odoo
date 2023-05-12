@@ -3,6 +3,10 @@ import { Product, GraphQlAddMultipleProductsParams, GraphQlRemoveMultipleProduct
 import { useMultipleProductFactory, UseMultipleProductFactoryParams } from '../../factories/useMultipleProductFactory';
 import useCart from '../useCart';
 
+const resolvePath = (object, path, defaultValue) => path
+  .split('.')
+  .reduce((o, p) => o ? o[p] : defaultValue, object);
+
 const params: UseMultipleProductFactoryParams<Product, GraphQlAddMultipleProductsParams, GraphQlRemoveMultipleProductsParams, Cart> = {
   provide() {
     return {
@@ -18,8 +22,8 @@ const params: UseMultipleProductFactoryParams<Product, GraphQlAddMultipleProduct
 
     context.useCart.setCart(data.cartAddMultipleItems);
 
-    const cookieIndex = context?.$odoo?.config?.app?.$config?.cart?.cookieIndex || 'orderLines';
-    context.$odoo.config.app.$cookies.set('cart-size', data?.cartAddMultipleItems?.order?.[cookieIndex]?.length || 0);
+    const cookieIndex = context?.$odoo?.config?.app?.$config?.cart?.cookieIndex || 'orderLines.length';
+    context.$odoo.config.app.$cookies.set('cart-size', resolvePath(data?.cartAddMultipleItems?.order, cookieIndex, 0) || 0);
 
     return data.cartAddMultipleItems;
   },
@@ -32,8 +36,8 @@ const params: UseMultipleProductFactoryParams<Product, GraphQlAddMultipleProduct
 
     context.useCart.setCart(data.cartRemoveMultipleItems);
 
-    const cookieIndex = context?.$odoo?.config?.app?.$config?.cart?.cookieIndex || 'orderLines';
-    context.$odoo.config.app.$cookies.set('cart-size', data?.cartRemoveMultipleItems?.order?.[cookieIndex]?.length || 0);
+    const cookieIndex = context?.$odoo?.config?.app?.$config?.cart?.cookieIndex || 'orderLines.length';
+    context.$odoo.config.app.$cookies.set('cart-size', resolvePath(data?.cartRemoveMultipleItems?.order, cookieIndex, 0) || 0);
 
     return data.cartRemoveMultipleItems;
   }
