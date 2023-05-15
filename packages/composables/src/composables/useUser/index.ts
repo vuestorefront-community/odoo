@@ -13,11 +13,14 @@ const throwErrors = (errors) => {
 const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, any> = {
   load: async (context: Context) => {
     const user = context.$odoo.config.app.$cookies.get('odoo-user');
-    if (user) {
+    if (!user) {
       const { data, errors } = await context.$odoo.api.loadUser();
+      context.$odoo.config.app.$cookies.set('odoo-user', data?.partner, { sameSite: true });
+
       return data?.partner;
     }
-    return null;
+
+    return user;
   },
 
   logOut: async (context: Context) => {
@@ -46,7 +49,7 @@ const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, a
 
     throwErrors(errors);
 
-    context.$odoo.config.app.$cookies.set('odoo-user', data.register);
+    context.$odoo.config.app.$cookies.set('odoo-user', data.register, { sameSite: true });
 
     return data?.register;
 
@@ -63,7 +66,7 @@ const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, a
 
     throwErrors(errors);
 
-    context.$odoo.config.app.$cookies.set('odoo-user', data?.login?.partner);
+    context.$odoo.config.app.$cookies.set('odoo-user', data?.login?.partner, { sameSite: true });
     return data?.login?.partner;
 
   },
