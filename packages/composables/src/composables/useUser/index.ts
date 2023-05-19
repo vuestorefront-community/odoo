@@ -11,8 +11,9 @@ const throwErrors = (errors) => {
 };
 
 const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, any> = {
-  load: async (context: Context) => {
+  load: async (context: Context, params: any) => {
     const user = context.$odoo.config.app.$cookies.get('odoo-user');
+
     if (!user) {
       const { data, errors } = await context.$odoo.api.loadUser();
       context.$odoo.config.app.$cookies.set('odoo-user', data?.partner, { sameSite: true });
