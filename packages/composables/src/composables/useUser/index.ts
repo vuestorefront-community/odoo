@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* istanbul ignore file */
 
-import { Context, useUserFactory, UseUserFactoryParams} from '@vue-storefront/core';
+import { Context, useUserFactory, UseUserFactoryParams, CustomQuery} from '@vue-storefront/core';
 import { Partner, GraphQlUpdateAccountParams, GraphQlLoginParams, AgnosticUser } from '@vue-storefront/odoo-api';
 
 const throwErrors = (errors) => {
@@ -11,11 +11,11 @@ const throwErrors = (errors) => {
 };
 
 const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, any> = {
-  load: async (context: Context, params: any) => {
+  load: async (context: Context, { customQuery }: { customQuery: CustomQuery}) => {
     const user = context.$odoo.config.app.$cookies.get('odoo-user');
 
     if (!user) {
-      const { data, errors } = await context.$odoo.api.loadUser();
+      const { data, errors } = await context.$odoo.api.loadUser(customQuery);
       context.$odoo.config.app.$cookies.set('odoo-user', data?.partner, { sameSite: true });
 
       return data?.partner;
