@@ -7,6 +7,7 @@ export default `
   description
   image
   imageFilename
+  combinationInfo
   slug
   sku
   jsonLd

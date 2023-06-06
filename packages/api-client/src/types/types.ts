@@ -379,6 +379,23 @@ export type ProductImage = {
   video: string;
 };
 
+export interface CombinationInfo {
+  product_id?: number;
+  product_template_id?: number;
+  display_name?: string;
+  display_image?: true;
+  price?: number;
+  list_price?: number;
+  has_discounted_price?: boolean;
+  reduced_price?: boolean;
+  discount?: number;
+  discount_perc?: number;
+  grade_name?: string;
+  grade_description?: string;
+  slug?: string;
+  stock_qty?: number;
+}
+
 export type Product = {
   id: number;
   description?: string;
@@ -387,6 +404,7 @@ export type Product = {
   slug?: string;
   isInStock?: boolean;
   imageFilename?: string;
+  combinationInfo?: CombinationInfo;
   qty?: number;
   sku?: string;
   image?: string;
