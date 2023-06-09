@@ -26,7 +26,7 @@ const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
   addItem: async (context: Context, { currentWishlist, product, customQuery }) => {
     if (!params.isInWishlist(context, { currentWishlist, product })) {
       const addWishlistItemParams: GraphQlWishlistAddItemParams = {
-        productId: product.firstVariant
+        productId: product.firstVariant.id
       };
 
       const { data } = await context.$odoo.api.wishlistAddItem(
@@ -42,7 +42,7 @@ const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
 
   removeItem: async (context: Context, { currentWishlist, product, customQuery }) => {
     const productIdToCompare =
-      product.product.firstVariant || product.product.id;
+      product.product.firstVariant.id || product.product.id;
 
     const wishlistItem = currentWishlist.wishlistItems.find(
       (item) => item.product.id == productIdToCompare
@@ -63,7 +63,7 @@ const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
 
   isInWishlist: (context: Context, { currentWishlist, product }) => {
     return currentWishlist?.wishlistItems.some(
-      (item) => item.product.id == product.firstVariant
+      (item) => item.product.id == product.firstVariant.id
     );
   },
 

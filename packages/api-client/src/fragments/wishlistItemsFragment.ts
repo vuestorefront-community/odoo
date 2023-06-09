@@ -9,7 +9,10 @@ wishlistItems {
       price
       imageFilename
       isInWishlist
-      firstVariant
+      firstVariant{
+        id
+        combinationInfoVariant
+      }
       slug
     }
   }
