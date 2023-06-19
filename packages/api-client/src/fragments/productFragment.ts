@@ -1,12 +1,16 @@
 export default `
   id
-  firstVariant
+  firstVariant{
+    id
+    combinationInfoVariant
+  }
   smallImage
   price
   name
   description
   image
   imageFilename
+  combinationInfo
   slug
   sku
   jsonLd

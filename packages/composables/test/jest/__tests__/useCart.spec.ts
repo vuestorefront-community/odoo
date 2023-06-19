@@ -6,6 +6,13 @@ const { load, addItem, removeItem, updateItemQty, isInCart } = useCart() as any;
 
 const context = {
   $odoo: {
+    config: {
+      app: {
+        $cookies: {
+          set: jest.fn()
+        }
+      }
+    },
     api: {
       cartLoad: jest.fn(() => ({ data: {cart: mockedCart }})),
       cartAddItem: jest.fn(() => ({ data: { mockedCart: mockedCart } })),
@@ -56,7 +63,7 @@ describe('useCart', () => {
 
   it('add to cart first variant item from category', async () => {
     const product = {
-      firstVariant: 5
+      firstVariant: { id: 5 }
     };
     await addItem(context, { product, quantity: 2, customQuery: {} });
 
@@ -71,7 +78,7 @@ describe('useCart', () => {
 
   it('dont add to cart item already in cart', async () => {
     const product = {
-      firstVariant: 108
+      firstVariant: { id: 108 }
     };
     await addItem(context, {
       currentCart: mockedCart,
@@ -105,7 +112,7 @@ describe('useCart', () => {
 
   it('checks if item from category is in cart', async () => {
     const product = {
-      firstVariant: 107
+      firstVariant: { id: 107 }
     };
     const inCart = await isInCart(context, {
       currentCart: mockedCart,

@@ -3,7 +3,7 @@ import { Product, ProductImage } from '@vue-storefront/odoo-api';
 export const mockedProducts: Product[] = [
   {
     id: 36,
-    firstVariant: 53,
+    firstVariant: { id: 53 },
     smallImage:
       'https://vsfdemo.labs.odoogap.com/web/image/product.template/36/image_128',
     price: 281.25,
@@ -57,7 +57,7 @@ export const mockedProducts: Product[] = [
   },
   {
     id: 54,
-    firstVariant: 107,
+    firstVariant: { id: 107 },
     smallImage:
       'https://vsfdemo.labs.odoogap.com/web/image/product.template/54/image_128',
     price: 186.25,

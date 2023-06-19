@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* istanbul ignore file */
+const resolvePath = (object, path, defaultValue) => path
+  .split('.')
+  .reduce((o, p) => o ? o[p] : defaultValue, object);
 
 import {
   Context,
@@ -20,6 +23,9 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
   load: async (context: Context, { customQuery }) => {
     const { data } = await context.$odoo.api.cartLoad(customQuery);
 
+    const cookieIndex = context?.$odoo?.config?.app?.$config?.cart?.cookieIndex || 'orderLines.length';
+    context.$odoo.config.app.$cookies.set('cart-size', resolvePath(data?.cart?.order, cookieIndex, 0) || 0);
+
     return data.cart;
   },
 
@@ -28,7 +34,7 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
     if (!params.isInCart(context, { currentCart, product })) {
       const productId = product.realProduct
         ? product.realProduct?.product?.id
-        : product.firstVariant;
+        : product.firstVariant.id;
 
       const addItemParams: GraphQlCartAddItemParams = {
         productId,
@@ -38,6 +44,9 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
         addItemParams,
         customQuery
       );
+
+      const cookieIndex = context?.$odoo?.config?.app?.$config?.cart?.cookieIndex || 'orderLines.length';
+      context.$odoo.config.app.$cookies.set('cart-size', resolvePath(data?.cartAddItem?.order, cookieIndex, 0) || 0);
 
       return data?.cartAddItem;
     }
@@ -53,6 +62,8 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
       addItemParams,
       customQuery
     );
+    const cookieIndex = context?.$odoo?.config?.app?.$config?.cart?.cookieIndex || 'orderLines.length';
+    context.$odoo.config.app.$cookies.set('cart-size', resolvePath(data?.cartRemoveItem?.order, cookieIndex, 0) || 0);
 
     return data?.cartRemoveItem;
   },
@@ -67,6 +78,9 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
       updateItemParams,
       customQuery
     );
+
+    const cookieIndex = context?.$odoo?.config?.app?.$config?.cart?.cookieIndex || 'orderLines.length';
+    context.$odoo.config.app.$cookies.set('cart-size', resolvePath(data?.cartUpdateItem?.order, cookieIndex, 0) || 0);
 
     return data?.cartUpdateItem;
   },
@@ -104,7 +118,7 @@ const params: UseCartFactoryParams<Cart, OrderLine, Product> = {
   isInCart: (context: Context, { currentCart, product }) => {
     const productId = product.realProduct
       ? product.realProduct.product.id
-      : product.firstVariant;
+      : product.firstVariant.id;
 
     return (
       currentCart?.order?.orderLines?.some(

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Context,
+  CustomQuery,
   useUserShippingFactory,
   UseUserShippingFactoryParams
 } from '@vue-storefront/core';
@@ -9,17 +10,7 @@ import { throwErrors } from '@vue-storefront/odoo/src/helpers/graphqlError';
 const params: UseUserShippingFactoryParams<Partner[], any> = {
   addAddress: async (context: Context, { address, shipping, customQuery }) => {
 
-    const params: GraphQlAddAddressParams = {
-      street: address.street,
-      zip: address.zip,
-      phone: address.phone,
-      name: address.name,
-      city: address.city,
-      countryId: Number.parseInt(address.country.id),
-      stateId: Number.parseInt(address.state.id)
-    };
-
-    const { data } = await context.$odoo.api.shippingAddAdress(params, customQuery);
+    const { data } = await context.$odoo.api.shippingAddAdress(address, customQuery);
 
     return [...shipping, data.addAddress];
   },
@@ -35,17 +26,7 @@ const params: UseUserShippingFactoryParams<Partner[], any> = {
 
   updateAddress: async (context: Context, { address, shipping, customQuery }) => {
 
-    const params: GraphQlUpdateAddressParams = {
-      id: address.id,
-      street: address.street,
-      zip: address.zip,
-      phone: address.phone,
-      name: address.name,
-      city: address.city,
-      countryId: Number.parseInt(address.country.id),
-      stateId: Number.parseInt(address.state.id)
-    };
-    const { data } = await context.$odoo.api.shippingUpdateAddress(params, customQuery);
+    const { data } = await context.$odoo.api.shippingUpdateAddress(address, customQuery);
 
     const newList = [...shipping];
     const index = newList.findIndex((item) => item.id === data.updateAddress.id);
@@ -54,8 +35,9 @@ const params: UseUserShippingFactoryParams<Partner[], any> = {
     return newList;
   },
 
-  load: async (context: Context, params?) => {
-    const { data } = await context.$odoo.api.shippingGetAddress();
+  // @TODO add custom query
+  load: async (context: Context, params?: any & { customQuery?: CustomQuery }) => {
+    const { data } = await context.$odoo.api.shippingGetAddress(params.customQuery);
 
     return data.addresses;
   },

@@ -26,8 +26,8 @@ export const getProductSlug = (product: Product): string => product?.slug || '';
 
 export const getProductPrice = (product: Product): AgnosticPrice => {
   return {
-    regular: product?.listPrice || product?.price,
-    special: product?.listPrice || product?.price
+    regular: product?.combinationInfo?.list_price || product?.combinationInfo?.list_price,
+    special: product?.combinationInfo?.price || product?.combinationInfo?.price
   };
 };
 

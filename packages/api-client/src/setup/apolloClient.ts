@@ -38,6 +38,7 @@ const createOddoLink = (settings: Config): any => {
     uri: settings.graphqlBaseUrl,
     credentials: 'include',
     fetch,
+    fetchOptions: settings.fetchOptions,
     headers: {
       Cookie: settings.auth,
       'resquest-host': settings['resquest-host'],

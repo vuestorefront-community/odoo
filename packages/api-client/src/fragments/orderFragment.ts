@@ -17,6 +17,7 @@ order {
       image
       imageFilename
       displayName
+      combinationInfo
     }
     quantity
     priceTotal
@@ -30,6 +31,7 @@ order {
       image
       imageFilename
       displayName
+      combinationInfo
     }
     quantity
     priceTotal

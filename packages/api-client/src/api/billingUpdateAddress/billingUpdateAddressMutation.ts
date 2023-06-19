@@ -17,5 +17,6 @@ mutation updateAddress($id: Int!, $name: String!, $city: String!, $countryId: In
     }
     email
     phone
+    zip
   }
 }`;

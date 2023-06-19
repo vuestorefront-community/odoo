@@ -36,8 +36,8 @@ export const getCartItemImage = (orderLine: OrderLine): string => {
 
 export const getCartItemPrice = (orderLine: OrderLine): AgnosticPrice => {
   return {
-    regular: orderLine?.priceTotal || 12,
-    special: orderLine?.priceTotal || 10
+    regular: orderLine?.product?.combinationInfo?.list_price || 0,
+    special: orderLine?.product?.combinationInfo?.price || 0
   };
 };
 

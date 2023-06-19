@@ -7,6 +7,7 @@ mutation updateAddress($id: Int!, $name: String!, $city: String!, $countryId: In
     street
     street2
     city
+    zip
     state
     {
       id

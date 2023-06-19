@@ -14,7 +14,7 @@ export const productWithAttributes: Product = {
   priceAfterDiscount: 0,
   hasDiscountedPrice: 0,
   listPrice: 0,
-  firstVariant: 0,
+  firstVariant: { id: 0 },
   currency: { id: 0 },
   isInWishlist: false,
   categories: [{} as Category],
