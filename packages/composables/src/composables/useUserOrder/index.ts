@@ -9,7 +9,7 @@ import {
 import { GraphQlOrdersParams, Order } from '@vue-storefront/odoo-api/src/types';
 
 const params: UseUserOrderFactoryParams<Order[], GraphQlOrdersParams> = {
-  searchOrders: async (context: Context, params: GraphQlOrdersParams & { customQuery?: CustomQuery })=> {
+  searchOrders: async (context: Context, params: GraphQlOrdersParams & { customQuery?: CustomQuery }) => {
 
     const { data } = await context.$odoo.api.ordersGet(params, params?.customQuery);
 
