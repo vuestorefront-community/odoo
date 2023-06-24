@@ -530,6 +530,7 @@ export type ProductVariant = {
   listPrice: string;
   hasDiscountedPrice: boolean;
   isCombinationPossible: boolean;
+  variantAttributeValues: AttributeValue[];
 };
 
 export type OrderLine = {
