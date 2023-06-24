@@ -3,6 +3,15 @@ export default `
   firstVariant{
     id
     combinationInfoVariant
+    slug
+    variantAttributeValues{
+      id
+      name
+      attribute{
+        id
+        name
+      }
+    }
   }
   smallImage
   price

@@ -1,6 +1,6 @@
 {
   "name": "@vue-storefront/odoo",
-  "version": "1.5.2",
+  "version": "1.5.3-rc.1",
   "private": false,
   "sideEffects": false,
   "main": "lib/index.cjs.js",
@@ -19,7 +19,7 @@
   "dependencies": {
     "@nuxtjs/composition-api": "0.31.0",
     "@vue-storefront/core": "2.7.5",
-    "@vue-storefront/odoo-api": "1.5.2",
+    "@vue-storefront/odoo-api": "1.5.3-rc.1",
     "winston": "^3.8.2"
   },
   "peerDependencies": {
