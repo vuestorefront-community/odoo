@@ -59,12 +59,7 @@ const factoryParams: UseUserFactoryParams<Partner, GraphQlUpdateAccountParams, a
   logIn: async (context: Context, params: AgnosticUser & { customQuery }) => {
     const { customQuery } = params;
 
-    const loginParams : GraphQlLoginParams = {
-      email: params.username,
-      password: params.password
-    };
-
-    const { data, errors } = await context.$odoo.api.logInUser(loginParams, customQuery);
+    const { data, errors } = await context.$odoo.api.logInUser(params, customQuery);
 
     throwErrors(errors);
 
