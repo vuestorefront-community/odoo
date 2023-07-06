@@ -38,7 +38,7 @@ const params: UseUserBillingFactoryParams<Partner[], any> = {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   // @TODO add custom query
-  load: async (context: Context, params?: any) => {
+  load: async (context: Context, params?: any & { customQuery?: CustomQuery }) => {
     const { customQuery } = params;
 
     const { data } = await context.$odoo.api.billingGetAddress(customQuery);

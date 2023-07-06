@@ -36,7 +36,7 @@ const params: UseUserShippingFactoryParams<Partner[], any> = {
   },
 
   // @TODO add custom query
-  load: async (context: Context, params?: any) => {
+  load: async (context: Context, params?: any & { customQuery?: CustomQuery }) => {
     const { customQuery } = params;
 
     const { data } = await context.$odoo.api.shippingGetAddress(customQuery);
