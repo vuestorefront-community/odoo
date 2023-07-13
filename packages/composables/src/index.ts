@@ -27,6 +27,7 @@ export { default as useShippingMethods } from './composables/useShippingMethods'
 export { default as useStore } from './composables/useStore';
 export { default as useNewsLetter } from './composables/useNewsLetter';
 export { default as useMailing } from './composables/useMailing';
+export { default as useCartRedis } from './composables/useCartRedis';
 
 export * from './composables/getters';
 export * from './factories';
