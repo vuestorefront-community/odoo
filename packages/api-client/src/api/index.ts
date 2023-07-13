@@ -56,6 +56,8 @@ export { default as addMultipleMailings } from './addMultipleMailings';
 
 export { default as updatePassword } from './updatePassword';
 
+export * from './cartRedis';
+
 export { default as adyenAcquirerInfo } from './adyenAcquirerInfo';
 export { default as adyenMakeDirectPayment } from './adyenMakeDirectPayment';
 export { default as adyenOpenTransaction } from './adyenOpenTransaction';
