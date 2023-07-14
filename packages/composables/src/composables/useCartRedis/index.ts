@@ -17,17 +17,18 @@ interface IUseCartRedis<ProductType> {
 }
 
 const useCartRedis = <ProductType>(): IUseCartRedis<ProductType> => {
-  const context: Context = useVSFContext();
-  const sessionId = context.$odoo.config.app.$cookies.get('connect.sid');
-  const cart: Ref<IRedisCart<ProductType>> = ssrRef<IRedisCart<ProductType>>({}, sessionId);
+  const { $odoo } = useVSFContext();
+  // const sessionId = $odoo.config.app.$cookies.get('connect.sid');
+  const cart: Ref<IRedisCart<ProductType>> = ref({ items: [] });
 
   const load = async () => {
-    const data = context.$odoo.api.cartLoadRedis();
+    const { data } = await $odoo.api.redisLoadCart();
+    cart.value = data;
 
   };
 
   const addItem = async (product: ProductType) => {
-    const data = context.$odoo.api.cartAddItemRedis(product);
+    await $odoo.api.redisAddItemToCart(product);
   };
 
   const removeItem = async () => {

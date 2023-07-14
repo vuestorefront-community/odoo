@@ -28,7 +28,7 @@ export const getCartItems = (cart: Cart): OrderLine[] => {
 };
 
 export const getCartItemName = (orderLine: OrderLine): string =>
-  orderLine?.product.displayName || 'Product\'s name';
+  orderLine?.product.name || 'Product\'s name';
 
 export const getCartItemImage = (orderLine: OrderLine): string => {
   return orderLine?.product?.image || '';
