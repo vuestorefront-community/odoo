@@ -13,7 +13,8 @@ import {
   cartRemoveMultipleItemsResult, ApplyCouponResult, GraphQlSetDefaultAddressParams, SetDefaultAddressResponse, GraphQlSetShippingMethodParams,
   GraphQlSetShippingMethodResponse, CategoriesResult, GraphQlGetCategoriesParams, MailingListsResult, MailingContactsResult,
   GraphqlMailingContactsParams, GraphqlMailingListsParams, GraphQlAddMultipleMailings, addMultipleMailingsResult, GraphQlUpdatePasswordParams,
-  UpdatePasswordResult, DeleteAddressResult, GraphQlAdyenAcquirerInfo, adyenAcquirerInfoResult, GraphQlAdyenMakeDirectPayment, adyenMakeDirectPaymentResult, GraphQlAdyenOpenTransaction, adyenOpenTransactionResult, GraphQlAdyenPaymentDetails, adyenPaymentDetailsResult, GraphQlAdyenPaymentMethods, adyenPaymentMethodsResult
+  UpdatePasswordResult, DeleteAddressResult, GraphQlAdyenAcquirerInfo, adyenAcquirerInfoResult, GraphQlAdyenMakeDirectPayment, adyenMakeDirectPaymentResult, GraphQlAdyenOpenTransaction, adyenOpenTransactionResult, GraphQlAdyenPaymentDetails, adyenPaymentDetailsResult, GraphQlAdyenPaymentMethods, adyenPaymentMethodsResult,
+  IRedisCart
 } from './types';
 
 export interface OdooApiMethods {
@@ -39,8 +40,11 @@ export interface OdooApiMethods {
   cartRemoveItem(params: GraphQlCartRemoveItemParams, customQuery?: CustomQuery): Promise<FetchResult<CartRemoveItemResult>>;
   cartUpdateItemQty(params: GraphQlCartUpdateItemQtyParams, customQuery?: CustomQuery): Promise<FetchResult>;
 
-  redisAddItemToCart(product: any): Promise<FetchResult>;
-  redisLoadCart(): Promise<FetchResult>;
+  redisAddItemToCart<ProductType>(product: any, quantity?: number): Promise<FetchResult<IRedisCart<ProductType>>>;
+  redisLoadCart<ProductType>(): Promise<FetchResult<IRedisCart<ProductType>>>;
+  redisUpdateItemQty<ProductType>(orderId: number, quantity?: number): Promise<FetchResult<IRedisCart<ProductType>>>;
+  redisRemoveItem<ProductType>(orderId: number): Promise<FetchResult<IRedisCart<ProductType>>>;
+  redisCreateCart(): Promise<FetchResult>;
 
   wishlistLoad (customQuery?: CustomQuery): Promise<FetchResult<WishlistLoadResponse>>;
   wishlistAddItem (params: GraphQlWishlistAddItemParams, customQuery?: CustomQuery): Promise<FetchResult<WishlistAddItemResponse>>;

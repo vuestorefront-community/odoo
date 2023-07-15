@@ -833,3 +833,13 @@ export interface SearchResultParams<S> {
     input: AgnosticFacetSearchParams;
 }
 
+export interface IRedisOrderLine<ProductType> {
+  product: ProductType;
+  quantity: number;
+  id: number;
+}
+export interface IRedisCart<ProductType> {
+  orderLines?: IRedisOrderLine<ProductType>[];
+  totalItemsInCart?: number;
+  totalItemsInCartWithQuantity?: number;
+}

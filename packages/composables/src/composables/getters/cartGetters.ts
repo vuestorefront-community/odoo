@@ -66,6 +66,9 @@ export const getCartTotals = (cart: Cart): AgnosticTotals => {
 export const getItemImageFilename = (orderLine: OrderLine): string =>
   orderLine?.product?.imageFilename || 'Product filename';
 
+export const getSlug = (orderLine: OrderLine): string =>
+  orderLine?.product?.slug || '/';
+
 export const getCartShippingPrice = (cart: Cart): number =>
   cart?.order?.amountDelivery || 0;
 
@@ -103,7 +106,8 @@ const cartGetters: CartGetters<Cart, OrderLine> = {
   getDiscounts,
   getOrderNumber: getCartOrderNumber,
   getStage: getCartState,
-  getAmountTax: getCartAmountTax
+  getAmountTax: getCartAmountTax,
+  getSlug
 };
 
 export default cartGetters;
