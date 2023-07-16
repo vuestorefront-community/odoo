@@ -10,38 +10,57 @@ interface IUseCartRedis<ProductType extends { id?: number }> {
   isInCart: (product: ProductType, quantity?: number) => boolean;
   createCart: () => void;
 
-  totalItemsInCart?: Ref<number>;
-  totalItemsInCartWithQuantity?: Ref<number>;
+  loading: Ref<boolean>;
+  amountTotal: Ref<number>;
+  totalItemsInCart: Ref<number>;
+  totalItemsInCartWithQuantity: Ref<number>;
   cart: Ref<IRedisCart<ProductType>>
 }
 
 const useCartRedis = <ProductType extends { id?: number }>(): IUseCartRedis<ProductType> => {
   const { $odoo } = useVSFContext();
-  const sessionId = $odoo.config.app.$cookies?.get('connect.sid');
   const cart: Ref<IRedisCart<ProductType>> = sharedRef({
     orderLines: [],
     totalItemsInCart: 0,
     totalItemsInCartWithQuantity: 0
-  }, sessionId);
+  }, 'vsf-odoo-cart');
+
+  const loading: Ref<boolean> = sharedRef(false, 'cart-loading');
 
   const load = async () => {
+    loading.value = true;
+
     const { data } = await $odoo.api.redisLoadCart();
     cart.value = data as IRedisCart<ProductType>;
+
+    loading.value = false;
   };
 
   const addItem = async (product: ProductType, quantity = 1) => {
+    loading.value = true;
+
     const { data } = await $odoo.api.redisAddItemToCart(product, quantity);
     cart.value = data as IRedisCart<ProductType>;
+
+    loading.value = false;
   };
 
   const updateItemQty = async (orderId: number, quantity = 1) => {
+    loading.value = true;
+
     const { data } = await $odoo.api.redisUpdateItemQty(orderId, quantity);
     cart.value = data as IRedisCart<ProductType>;
+
+    loading.value = false;
   };
 
   const removeItem = async (orderId: number) => {
+    loading.value = true;
+
     const { data } = await $odoo.api.redisRemoveItem(orderId);
     cart.value = data as IRedisCart<ProductType>;
+
+    loading.value = false;
   };
 
   const createCart = async () => {
@@ -62,6 +81,8 @@ const useCartRedis = <ProductType extends { id?: number }>(): IUseCartRedis<Prod
 
   const totalItemsInCartWithQuantity = computed(() => cart.value?.totalItemsInCartWithQuantity || 0);
 
+  const amountTotal = computed(() => cart.value?.amountTotal || 0);
+
   return {
     load,
     addItem,
@@ -69,7 +90,9 @@ const useCartRedis = <ProductType extends { id?: number }>(): IUseCartRedis<Prod
     updateItemQty,
     isInCart,
     createCart,
+    loading,
 
+    amountTotal,
     totalItemsInCart,
     totalItemsInCartWithQuantity,
     cart
