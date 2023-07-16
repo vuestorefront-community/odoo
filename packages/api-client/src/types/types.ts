@@ -840,6 +840,7 @@ export interface IRedisOrderLine<ProductType> {
 }
 export interface IRedisCart<ProductType> {
   orderLines?: IRedisOrderLine<ProductType>[];
+  amountTotal?: number;
   totalItemsInCart?: number;
   totalItemsInCartWithQuantity?: number;
 }

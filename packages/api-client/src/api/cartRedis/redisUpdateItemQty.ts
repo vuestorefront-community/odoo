@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Context } from '@vue-storefront/core';
 import { Logger } from 'winston';
+import { populateCartRedis } from './helper';
 
 export default async function redisUpdateItemQty(context: Context, orderId: number, quantity: 1): Promise<any> {
   const logger : Logger = (process as any).winstonLog;
@@ -14,8 +15,9 @@ export default async function redisUpdateItemQty(context: Context, orderId: numb
 
   if (previousAddedItem) {
     previousAddedItem.quantity = quantity;
-    context.req.session.cart.totalItemsInCart = context.req.session.cart.orderLines.length;
-    context.req.session.cart.totalItemsInCartWithQuantity = context.req.session.cart.orderLines.reduce((acc, item) => acc + item.quantity, 0);
+
+    populateCartRedis(context.req.session.cart);
+
     return { data: context.req.session.cart };
   }
 
