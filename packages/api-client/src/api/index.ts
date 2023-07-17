@@ -60,7 +60,7 @@ export { default as redisAddItemToCart } from './cartRedis/redisAddItemToCart';
 export { default as redisLoadCart } from './cartRedis/redisLoadCart';
 export { default as redisUpdateItemQty } from './cartRedis/redisUpdateItemQty';
 export { default as redisRemoveItem } from './cartRedis/redisRemoveItem';
-export { default as redisCreateCart } from './cartRedis/redisCreateCart';
+export { default as redisSyncCartToOdoo } from './cartRedis/redisSyncCartToOdoo';
 
 export { default as adyenAcquirerInfo } from './adyenAcquirerInfo';
 export { default as adyenMakeDirectPayment } from './adyenMakeDirectPayment';

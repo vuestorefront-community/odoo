@@ -2,8 +2,9 @@
 import { Context } from '@vue-storefront/core';
 import { Logger } from 'winston';
 import { populateCartRedis } from './helper';
+import cartUpdateItemQty from '../cartUpdateItemQty';
 
-export default async function redisUpdateItemQty(context: Context, orderId: number, quantity: 1): Promise<any> {
+export default async function redisUpdateItemQty(context: Context, orderId: number, quantity: 1, odooOrderLineId?: number): Promise<any> {
   const logger : Logger = (process as any).winstonLog;
 
   if (!orderId) {
@@ -17,6 +18,10 @@ export default async function redisUpdateItemQty(context: Context, orderId: numb
     previousAddedItem.quantity = quantity;
 
     populateCartRedis(context.req.session.cart);
+
+    if (odooOrderLineId) {
+      await cartUpdateItemQty(context, { lineId: odooOrderLineId, quantity });
+    }
 
     return { data: context.req.session.cart };
   }

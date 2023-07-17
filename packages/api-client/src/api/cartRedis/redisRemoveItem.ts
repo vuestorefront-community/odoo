@@ -2,8 +2,9 @@
 import { Context } from '@vue-storefront/core';
 import { Logger } from 'winston';
 import { populateCartRedis } from './helper';
+import cartRemoveItem from '../cartRemoveItem';
 
-export default async function redisRemoveItem(context: Context, orderId: number): Promise<any> {
+export default async function redisRemoveItem(context: Context, orderId: number, odooOrderLineId?: number): Promise<any> {
   const logger : Logger = (process as any).winstonLog;
 
   if (!orderId) {
@@ -21,6 +22,9 @@ export default async function redisRemoveItem(context: Context, orderId: number)
     });
 
     populateCartRedis(context.req.session.cart);
+    if (odooOrderLineId) {
+      await cartRemoveItem(context, { lineId: odooOrderLineId });
+    }
 
     return { data: context.req.session.cart };
   }

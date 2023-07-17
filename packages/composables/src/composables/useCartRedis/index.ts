@@ -2,13 +2,14 @@
 import { Ref, computed, ref, ssrRef } from '@nuxtjs/composition-api';
 import { useVSFContext, sharedRef } from '@vue-storefront/core';
 import { IRedisCart } from '@vue-storefront/odoo-api';
+import useCart from '../useCart';
 interface IUseCartRedis<ProductType extends { id?: number }> {
   load: () => void;
   addItem: (product: ProductType) => void;
   removeItem: (orderId: number) => void;
   updateItemQty: (orderId: number, quantity?: number) => void;
   isInCart: (product: ProductType, quantity?: number) => boolean;
-  createCart: () => void;
+  syncCartRedisToOdoo: () => void;
 
   loading: Ref<boolean>;
   amountTotal: Ref<number>;
@@ -17,8 +18,10 @@ interface IUseCartRedis<ProductType extends { id?: number }> {
   cart: Ref<IRedisCart<ProductType>>
 }
 
-const useCartRedis = <ProductType extends { id?: number }>(): IUseCartRedis<ProductType> => {
+const useCartRedis = <ProductType extends { id?: number }>(customQueryLoadOdooCart?: string): IUseCartRedis<ProductType> => {
   const { $odoo } = useVSFContext();
+  const { cart: odooCart, load: loadCartOdoo, setCart } = useCart();
+
   const cart: Ref<IRedisCart<ProductType>> = sharedRef({
     orderLines: [],
     totalItemsInCart: 0,
@@ -45,26 +48,50 @@ const useCartRedis = <ProductType extends { id?: number }>(): IUseCartRedis<Prod
     loading.value = false;
   };
 
-  const updateItemQty = async (orderId: number, quantity = 1) => {
+  const updateItemQty = async (orderId: number, quantity = 1, productIdForOdooCartUpdate?: number) => {
     loading.value = true;
+    let odooOrderLineId = null;
 
-    const { data } = await $odoo.api.redisUpdateItemQty(orderId, quantity);
+    console.log(productIdForOdooCartUpdate);
+
+    if (productIdForOdooCartUpdate) {
+      odooOrderLineId = odooCart.value.order?.orderLines?.find(orderLine => orderLine.product.id === productIdForOdooCartUpdate).id;
+    }
+
+    const { data } = await $odoo.api.redisUpdateItemQty(orderId, quantity, odooOrderLineId);
+
+    if (productIdForOdooCartUpdate) {
+      setCart(null);
+      await loadCartOdoo({ customQuery: { cartLoad: customQueryLoadOdooCart}});
+    }
+
     cart.value = data as IRedisCart<ProductType>;
 
     loading.value = false;
   };
 
-  const removeItem = async (orderId: number) => {
+  const removeItem = async (orderId: number, productIdForOdooCartUpdate?: number) => {
     loading.value = true;
+    let odooOrderLineId = null;
 
-    const { data } = await $odoo.api.redisRemoveItem(orderId);
+    if (productIdForOdooCartUpdate) {
+      odooOrderLineId = odooCart.value.order?.orderLines?.find(orderLine => orderLine.product.id === productIdForOdooCartUpdate).id;
+    }
+
+    const { data } = await $odoo.api.redisRemoveItem(orderId, odooOrderLineId);
+
+    if (productIdForOdooCartUpdate) {
+      setCart(null);
+      await loadCartOdoo({ customQuery: { cartLoad: customQueryLoadOdooCart}});
+    }
+
     cart.value = data as IRedisCart<ProductType>;
 
     loading.value = false;
   };
 
-  const createCart = async () => {
-    await $odoo.api.redisCreateCart();
+  const syncCartRedisToOdoo = async () => {
+    await $odoo.api.redisSyncCartToOdoo();
   };
 
   const clear = async () => { };
@@ -89,9 +116,9 @@ const useCartRedis = <ProductType extends { id?: number }>(): IUseCartRedis<Prod
     removeItem,
     updateItemQty,
     isInCart,
-    createCart,
-    loading,
+    syncCartRedisToOdoo,
 
+    loading,
     amountTotal,
     totalItemsInCart,
     totalItemsInCartWithQuantity,
