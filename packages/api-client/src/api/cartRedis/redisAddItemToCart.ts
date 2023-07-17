@@ -2,9 +2,9 @@
 import { Context } from '@vue-storefront/core';
 import { populateCartRedis } from './helper';
 
-export default async function redisAddItemToCart(context: Context, product: any, quantity = 1): Promise<any> {
+export default async function redisAddItemToCart(context: Context, product: any, quantity = 1, updateOdoo?: boolean): Promise<any> {
   if (!context.req.session?.cart) {
-    context.req.session. cart = {
+    context.req.session.cart = {
       orderLines: []
     };
   }

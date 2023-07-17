@@ -40,11 +40,11 @@ export interface OdooApiMethods {
   cartRemoveItem(params: GraphQlCartRemoveItemParams, customQuery?: CustomQuery): Promise<FetchResult<CartRemoveItemResult>>;
   cartUpdateItemQty(params: GraphQlCartUpdateItemQtyParams, customQuery?: CustomQuery): Promise<FetchResult>;
 
-  redisAddItemToCart<ProductType>(product: any, quantity?: number): Promise<FetchResult<IRedisCart<ProductType>>>;
+  redisAddItemToCart<ProductType>(product: any, quantity?: number, updateOdoo?: boolean): Promise<FetchResult<IRedisCart<ProductType>>>;
   redisLoadCart<ProductType>(): Promise<FetchResult<IRedisCart<ProductType>>>;
-  redisUpdateItemQty<ProductType>(orderId: number, quantity?: number): Promise<FetchResult<IRedisCart<ProductType>>>;
-  redisRemoveItem<ProductType>(orderId: number): Promise<FetchResult<IRedisCart<ProductType>>>;
-  redisCreateCart(): Promise<FetchResult>;
+  redisUpdateItemQty<ProductType>(orderId: number, quantity?: number, odooOrderId?: number): Promise<FetchResult<IRedisCart<ProductType>>>;
+  redisRemoveItem<ProductType>(orderId: number, odooOrderId?: number): Promise<FetchResult<IRedisCart<ProductType>>>;
+  redisSyncCartToOdoo(): Promise<FetchResult>;
 
   wishlistLoad (customQuery?: CustomQuery): Promise<FetchResult<WishlistLoadResponse>>;
   wishlistAddItem (params: GraphQlWishlistAddItemParams, customQuery?: CustomQuery): Promise<FetchResult<WishlistAddItemResponse>>;
