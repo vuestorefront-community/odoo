@@ -10,15 +10,16 @@ import { randomIntegerBetween } from '../../';
 export default async function getCategories(
   context: Context,
   params: GraphQlGetCategoriesParams,
-  customQuery?: CustomQuery
+  customQuery?: CustomQuery,
+  cacheKey?: string
 ): Promise<FetchResult<CategoriesResult>> {
   const redisClient = context.client.redisTagClient;
   const apolloClient = context.client.apollo as ApolloClient<any>;
 
-  const cacheKey = 'API-C-ALL-CATEGORIES';
+  const compiledCacheKey = cacheKey || 'API-C-ALL-CATEGORIES';
   let cachedCategories = null;
 
-  if (redisClient && (cachedCategories = await redisClient.get(cacheKey))) {
+  if (redisClient && (cachedCategories = await redisClient.get(compiledCacheKey))) {
     return cachedCategories;
   }
 
@@ -36,9 +37,9 @@ export default async function getCategories(
   delete response?.data?.cookie;
   if (redisClient && response.data?.categories?.categories) {
     redisClient.set(
-      cacheKey,
+      compiledCacheKey,
       response,
-      [cacheKey],
+      [compiledCacheKey],
       { timeout: process.env.REDIS_TTL_CACHE_MAXIMUM ? randomIntegerBetween(Number(process.env.REDIS_TTL_CACHE_MINIMUM), Number(process.env.REDIS_TTL_CACHE_MAXIMUM)) : 86400 }
     );
   }
