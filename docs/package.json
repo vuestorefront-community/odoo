@@ -1,10 +1,14 @@
 {
   "name": "vsf-integration-docs",
   "version": "0.0.1",
-  "description": "Documentation for __replace_me__ integration for Vue Storefront",
+  "description": "Documentation for odoo integration for Vue Storefront",
   "main": "index.js",
+  "authors": {
+    "name": "Ivan Ferreira",
+    "email": "iferreira@odoogap.com"
+  },
   "license": "MIT",
-  "repository": "https://github.com/vuestorefront/__replace_me__/docs",
+  "repository": "https://github.com/vuestorefront-community/odoo",
   "scripts": {
     "dev": "vuepress dev",
     "build": "vuepress build",
