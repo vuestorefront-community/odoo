@@ -1,0 +1,20 @@
+{
+  "name": "@vue-storefront/integration-odoo-demo",
+  "private": true,
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=16.x"
+  },
+  "scripts": {
+    "middleware": "node middleware.js"
+  },
+  "dependencies": {
+    "@vue-storefront/middleware": "3.0.0-rc.2",
+    "@vue-storefront/integration-odoo-api": "*",
+    "cors": "^2.8.5"
+  },
+  "files": [
+    "lib/**/*",
+    "server/**/*"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "@vue-storefront/integration-odoo-api",
+  "version": "0.1.0",
+  "sideEffects": false,
+  "server": "server/index.js",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.es.js",
+  "types": "lib/index.d.ts",
+  "license": "VSFEL",
+  "engines": {
+    "node": ">=16.x"
+  },
+  "scripts": {
+    "build": "rimraf lib server && rollup -c",
+    "dev": "rollup -c -w",
+    "test": "cross-env APP_ENV=test jest",
+    "prepublish": "yarn build",
+    "codegen": "yarn graphql-codegen"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.7.16",
+    "@vue-storefront/middleware": "3.0.0-rc.2",
+    "axios": "^0.21.1",
+    "consola": "^3.0.0",
+    "cross-fetch": "^4.0.0",
+    "graphql": "^16.7.1",
+    "winston": "^3.9.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^4.0.1",
+    "@graphql-codegen/client-preset": "^4.0.1",
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "jsdom": "^17.0.0",
+    "typescript": "^5.1.6"
+  },
+  "files": [
+    "lib/**/*",
+    "server/**/*"
+  ]
+}
