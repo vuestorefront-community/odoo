@@ -2,13 +2,6 @@
 
 In this session we show all env variables that are used by template_odoo and vsf_docker projects.
 
-## .Env file
-dsf
-
-## Export command
-
-aaa
-
 ## Template Odoo
 |       Env        |                                  Default                                   |                                                                     Description                                                                      |
 | :--------------: | :----------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: |
