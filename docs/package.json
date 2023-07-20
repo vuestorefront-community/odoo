@@ -28,6 +28,7 @@
     "vuepress": "^1.8.2",
     "vuepress-plugin-mermaidjs": "^1.9.1"
   },  
+  "author": "VSF",
   "dependencies": {
     "sass-loader": "^8.0.2",
     "vue-multiselect": "^2.1.6",
