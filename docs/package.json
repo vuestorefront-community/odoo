@@ -12,10 +12,10 @@
   "scripts": {
     "dev": "vuepress dev",
     "build": "vuepress build",
-    "api-extract": "yarn api-ref && yarn comp-ref && yarn ref-md",
+    "api-extract": "cd ../ && yarn build && cd docs/ && yarn api-ref && yarn sdk-ref && yarn ref-md",
     "api-ref": "cd ../packages/api-client && api-extractor run --local",
-    "comp-ref": "cd ../packages/composables && api-extractor run --local",
-    "ref-md": "api-documenter markdown --i api-reference --o api-reference"
+    "sdk-ref": "cd ../packages/sdk && api-extractor run --local",
+    "ref-md": "api-documenter markdown --i reference/api --o reference/api"
   },
   "devDependencies": {
     "@microsoft/api-documenter": "^7.13.30",
