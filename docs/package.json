@@ -2,7 +2,7 @@
   "name": "vuestorefront-odoo-api-docs",
   "version": "2.0.0",
   "private": true,
-  "description": "This project is a Odoo integration documentation",
+  "description": "VSF + Odoo integration doc",
   "main": "index.js",
   "authors": {
     "name": "Ivan Ferreira",
