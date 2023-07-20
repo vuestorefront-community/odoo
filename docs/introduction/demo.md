@@ -2,7 +2,7 @@
 
 This documentation is about Odoo integration with Vue Storefront 2. This integration has been developed and maintained by ODOOGAP / PROMPTEQUATION ❤️
 
-Before anything, you should take a look in our live demo: https://vsf.labs.odoogap.com/ _it's a dev server so could be down sometimes_ :man_shrugging:
+Before anything, you should take a look in our live [demo](https://vsf.labs.odoogap.com). _it's a dev server so could be down sometimes_ :man_shrugging:
 
 ::: warning
 We need to make clear that this hole documentation is about **vsf + odoo - front end**, not about odoo back end. So, take a look in following explanations to better understand how it works.
