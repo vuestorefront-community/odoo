@@ -13,11 +13,11 @@ RUN yarn install
 # Build docs
 RUN cd docs \
   && yarn install \
-  && sed -i "s/base: '\/',/base: '\/integration-boilerplate\/',/g" ./.vuepress/config.js \
+  && sed -i "s/base: '\/',/base: '\/odoo\/',/g" ./.vuepress/config.js \
   && cat ./.vuepress/config.js \
   && yarn api-extract \
   && yarn build
 
 FROM nginx
 
-COPY --from=build /var/www/docs/.vuepress/dist /usr/share/nginx/html/integration-boilerplate
+COPY --from=build /var/www/docs/.vuepress/dist /usr/share/nginx/html/odoo
