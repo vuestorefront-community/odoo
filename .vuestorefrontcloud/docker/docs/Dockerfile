@@ -1,15 +1,23 @@
-FROM node:14 AS build
+FROM node:16-alpine AS build
 
 WORKDIR /var/www
 
+RUN apk add --no-cache \
+    yarn
+
 COPY . .
 
+# Run dependencies needed to build API Reference
+RUN yarn install
+
+# Build docs
 RUN cd docs \
-  && npm install \
-  && sed -i "s/base: '\/',/base: '\/odoo\/',/g" ./.vuepress/config.js \
+  && yarn install \
+  && sed -i "s/base: '\/',/base: '\/integration-boilerplate\/',/g" ./.vuepress/config.js \
   && cat ./.vuepress/config.js \
-  && npm run build
+  && yarn api-extract \
+  && yarn build
 
 FROM nginx
 
-COPY --from=build /var/www/docs/.vuepress/dist /usr/share/nginx/html/odoo
+COPY --from=build /var/www/docs/.vuepress/dist /usr/share/nginx/html/integration-boilerplate
