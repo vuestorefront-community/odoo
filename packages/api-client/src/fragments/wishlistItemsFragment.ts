@@ -9,6 +9,14 @@ wishlistItems {
       price
       imageFilename
       isInWishlist
+      variantAttributeValues{
+        id
+        name
+        attribute{
+          id
+          name
+        }
+      }
       firstVariant{
         id
         combinationInfoVariant
