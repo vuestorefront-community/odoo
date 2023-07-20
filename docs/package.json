@@ -1,35 +1,37 @@
 {
-  "name": "vsf-integration-docs",
+  "name": "@vue-storefront/integration-boilerplate-docs",
   "version": "0.0.1",
-  "description": "Documentation for odoo integration for Vue Storefront",
+  "private": true,
+  "description": "Documentation for the new Integration boilerplate",
   "main": "index.js",
-  "authors": {
-    "name": "Ivan Ferreira",
-    "email": "iferreira@odoogap.com"
-  },
-  "license": "MIT",
-  "repository": "https://github.com/vuestorefront-community/odoo",
   "scripts": {
     "dev": "vuepress dev",
-    "build": "vuepress build",
-    "api-extract": "yarn api-ref && yarn comp-ref && yarn ref-md",
+    "build": "NODE_OPTIONS=--max_old_space_size=8192 vuepress build",
+    "api-extract": "cd ../ && yarn build && cd docs/ && yarn api-ref && yarn sdk-ref && yarn ref-md",
     "api-ref": "cd ../packages/api-client && api-extractor run --local",
-    "comp-ref": "cd ../packages/composables && api-extractor run --local",
-    "ref-md": "api-documenter markdown --i api-reference --o api-reference"
+    "sdk-ref": "cd ../packages/sdk && api-extractor run --local",
+    "ref-md": "api-documenter markdown --i reference/api --o reference/api"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "^7.13.65",
-    "@microsoft/api-extractor": "^7.18.17",
-    "@vuepress/plugin-active-header-links": "^1.8.2",
-    "@vuepress/plugin-back-to-top": "^1.8.2",
-    "@vuepress/plugin-medium-zoom": "^1.8.2",
-    "@vuepress/plugin-search": "^1.8.2",
+    "@microsoft/api-documenter": "^7.13.30",
+    "@microsoft/api-extractor": "7.18.1",
+    "concat-md": "^0.3.5",
     "handlebars": "^4.7.7",
-    "typescript": "^4.5.4",
-    "vuepress": "^1.8.2"
+    "typedoc": "^0.20.20",
+    "typedoc-plugin-markdown": "^3.4.5",
+    "typescript": "^3.6.4",
+    "vuepress": "^1.8.2",
+    "vuepress-plugin-mermaidjs": "^1.9.1"
   },
+  "author": "VSF",
   "dependencies": {
     "sass-loader": "^8.0.2",
-    "vue-multiselect": "^2.1.6"
+    "vue-multiselect": "^2.1.6",
+    "vuepress-theme-vsf-docs": "^1.1.0-alpha.8"
+  },
+  "workspaces": {
+    "nohoist": [
+      "typedoc-plugin-markdown"
+    ]
   }
 }
