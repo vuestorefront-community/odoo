@@ -12,10 +12,10 @@
   "scripts": {
     "dev": "vuepress dev",
     "build": "vuepress build",
-    "api-extract": "cd ../ && yarn build && cd docs/ && yarn api-ref && yarn sdk-ref && yarn ref-md",
+    "api-extract": "yarn api-ref && yarn comp-ref && yarn ref-md",
     "api-ref": "cd ../packages/api-client && api-extractor run --local",
-    "sdk-ref": "cd ../packages/sdk && api-extractor run --local",
-    "ref-md": "api-documenter markdown --i reference/api --o reference/api"
+    "comp-ref": "cd ../packages/composables && api-extractor run --local",
+    "ref-md": "api-documenter markdown --i api-reference --o api-reference"
   },
   "devDependencies": {
     "@microsoft/api-documenter": "^7.13.30",
@@ -27,8 +27,7 @@
     "typescript": "^3.6.4",
     "vuepress": "^1.8.2",
     "vuepress-plugin-mermaidjs": "^1.9.1"
-  },
-  "author": "VSF",
+  },  
   "dependencies": {
     "sass-loader": "^8.0.2",
     "vue-multiselect": "^2.1.6",
