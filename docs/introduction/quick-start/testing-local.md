@@ -1,6 +1,6 @@
 # Integration test
 
-_In this section you will find everything you need to build our entire environment to do a deeper test on VSF + ODOO and make sure if our integration is what you has been looking for. We hope it is :innocent:_
+In this section you will find everything you need to build our entire environment to do a deeper test on VSF + ODOO and make sure if our integration is what you has been looking for. We hope it is :innocent:
 
 ## Before you start
 
