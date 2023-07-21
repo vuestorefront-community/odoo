@@ -1,11 +1,11 @@
 {
-  "name": "vuestorefront-odoo-api-docs",
-  "version": "1.4.0",
-  "description": "This project is a Odoo integration documentation",
+  "name": "vsf-integration-docs",
+  "version": "0.0.1",
+  "description": "Documentation for odoo integration for Vue Storefront",
   "main": "index.js",
   "authors": {
-    "name": "Leonardo",
-    "email": "lmuniz@odoogap.com"
+    "name": "Ivan Ferreira",
+    "email": "iferreira@odoogap.com"
   },
   "license": "MIT",
   "repository": "https://github.com/vuestorefront-community/odoo",
@@ -13,22 +13,20 @@
     "dev": "vuepress dev",
     "build": "vuepress build",
     "api-extract": "yarn api-ref && yarn comp-ref && yarn ref-md",
-    "api-ref": "cd ../packages/api-client && npm run build && api-extractor run --local",
-    "comp-ref": "cd ../packages/composables && npm run build && api-extractor run --local",
+    "api-ref": "cd ../packages/api-client && api-extractor run --local",
+    "comp-ref": "cd ../packages/composables && api-extractor run --local",
     "ref-md": "api-documenter markdown --i api-reference --o api-reference"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "^7.13.7",
-    "@microsoft/api-extractor": "^7.18.3",
-    "@kawarimidoll/vuepress-plugin-tailwind": "^2.0.0",
-    "@vue-storefront/commercetools-api": "~1.2.0",
+    "@microsoft/api-documenter": "^7.13.65",
+    "@microsoft/api-extractor": "^7.18.17",
     "@vuepress/plugin-active-header-links": "^1.8.2",
     "@vuepress/plugin-back-to-top": "^1.8.2",
     "@vuepress/plugin-medium-zoom": "^1.8.2",
     "@vuepress/plugin-search": "^1.8.2",
     "handlebars": "^4.7.7",
-    "typescript": "^3.6.4",
-    "vuepress": "^1.2.0"
+    "typescript": "^4.5.4",
+    "vuepress": "^1.8.2"
   },
   "dependencies": {
     "sass-loader": "^8.0.2",
