@@ -1,4 +1,4 @@
-import { exampleEndpoint } from '../../src/api';
+import { getProductTemplate } from '../../src/api';
 import { contextMock } from '../../__mocks__/context.mock';
 import consola from 'consola';
 

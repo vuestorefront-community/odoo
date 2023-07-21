@@ -1,0 +1,25 @@
+name: Install dependencies
+description: Install and cache all project dependencies
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '16'
+
+    - name: Get node modules cache
+      id: yarn-cache
+      uses: actions/cache@v3
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-yarn-new-${{ hashFiles('**/yarn.lock') }}
+
+    - name: Install dependencies
+      shell: bash
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
+      run: | 
+        yarn --frozen-lockfile

@@ -1,0 +1,22 @@
+{
+  "name": "@vue-storefront/integration-odoo-playground",
+  "private": true,
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=16.x"
+  },
+  "scripts": {
+    "s": "nodemon --watch node middleware.js",
+    "dev": "nodemon"
+  },
+  "dependencies": {
+    "@vue-storefront/middleware": "3.0.1",
+    "@vue-storefront/integration-odoo-api": "*",
+    "cors": "^2.8.5",
+    "ts-node-dev": "^2.0.0"
+  },
+  "files": [
+    "lib/**/*",
+    "server/**/*"
+  ]
+}

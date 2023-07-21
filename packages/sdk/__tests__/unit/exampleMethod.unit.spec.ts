@@ -1,9 +1,9 @@
-import { exampleMethod } from '../../src/methods/exampleMethod';
+import { getProductTemplateList } from '../../src/methods/';
 import { client } from '../../src/client';
 
 /** SETUP */
-const API_METHOD_NAME = 'exampleEndpoint';
-const PARAMS_MOCK = { id: 1 };
+const API_METHOD_NAME = 'getProductTemplateList';
+const PARAMS_MOCK = { };
 const RESPONSE_MOCK = { data: "Hello, Vue Storefront Integrator!" };
 const ERROR_MOCK = new Error('error');
 
@@ -21,13 +21,13 @@ describe('[Integration Boilerplate SDK][unit] exampleMethod', () => {
   })
 
   it('makes a single call to API Middleware', async () => {
-    await exampleMethod(PARAMS_MOCK);
+    await getProductTemplateList(PARAMS_MOCK);
 
     expect(client.post).toBeCalledTimes(1);
   });
 
   it('makes a call to API Middleware with the right params', async () => {
-    await exampleMethod(PARAMS_MOCK);
+    await getProductTemplateList(PARAMS_MOCK);
 
     expect(client.post).toBeCalledWith(API_METHOD_NAME, PARAMS_MOCK);
   });
@@ -37,7 +37,7 @@ describe('[Integration Boilerplate SDK][unit] exampleMethod', () => {
     (client.post as jest.Mock).mockRejectedValueOnce(ERROR_MOCK);
 
     try {
-      await exampleMethod(PARAMS_MOCK);
+      await getProductTemplateList(PARAMS_MOCK);
     } catch (err) {
       expect(err).toBe(ERROR_MOCK);
     }

@@ -8,7 +8,6 @@ export const getProductTemplate: Endpoints['getProductTemplate'] = async (contex
   const response = await context.client.query({
     variables,
     errorPolicy: 'all',
-    fetchPolicy: 'no-cache',
     query: gql`
       query ($id: Int, $slug: String, $barcode: String) {
         product(id: $id, slug: $slug, barcode: $barcode) {

@@ -1,7 +1,8 @@
 import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
+import { terser } from 'rollup-plugin-terser';
 
-const extensions = ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts'];
+const extensions = ['.ts', '.js'];
 
 export function generateBaseConfig(pkg) {
   return {
@@ -27,10 +28,11 @@ export function generateBaseConfig(pkg) {
         extensions
       }),
       typescript({
-        useTsconfigDeclarationDir: true,
         // eslint-disable-next-line global-require
-        typescript: require('typescript')
-      })
+        typescript: require('typescript'),
+        objectHashIgnoreUnknownHack: false
+      }),
+      terser()
     ]
   };
 }

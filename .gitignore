@@ -24,6 +24,7 @@ coverage
 
 # Editor directories and files
 .idea
+.vscode
 
 # OS generated files
 .DS_STORE
