@@ -261,13 +261,11 @@ export type Category = {
   parent?: Maybe<Category>;
   products?: Maybe<Array<Product>>;
   slug?: Maybe<Scalars['String']['output']>;
-  vsfPages?: Maybe<Array<WebsitePage>>;
 };
 
 export type CategoryFilterInput = {
   id?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   parent?: InputMaybe<Scalars['Boolean']['input']>;
-  vsfPageUrl?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CategoryList = Categories & {
@@ -863,6 +861,7 @@ export type Order = {
   amountTax?: Maybe<Scalars['Float']['output']>;
   amountTotal?: Maybe<Scalars['Float']['output']>;
   amountUntaxed?: Maybe<Scalars['Float']['output']>;
+  cartQuantity?: Maybe<Scalars['Int']['output']>;
   clientOrderRef?: Maybe<Scalars['String']['output']>;
   coupons?: Maybe<Array<Coupon>>;
   currency?: Maybe<Currency>;
@@ -1514,7 +1513,6 @@ export type WebsiteMenuImage = {
 
 export type WebsitePage = {
   __typename?: 'WebsitePage';
-  categories?: Maybe<Array<Category>>;
   content?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   isPublished?: Maybe<Scalars['Boolean']['output']>;
@@ -1549,6 +1547,7 @@ export type WebsitePages = {
 
 export type WishlistData = WishlistItems & {
   __typename?: 'WishlistData';
+  totalCount: Scalars['Int']['output'];
   wishlistItems?: Maybe<Array<Maybe<WishlistItem>>>;
 };
 
@@ -1560,5 +1559,6 @@ export type WishlistItem = {
 };
 
 export type WishlistItems = {
+  totalCount: Scalars['Int']['output'];
   wishlistItems?: Maybe<Array<Maybe<WishlistItem>>>;
 };

@@ -8,6 +8,7 @@ export const getProductTemplateList: Endpoints['getProductTemplateList'] = async
   const response = await context.client.query<{ products: { products: Product[] } }>({
     variables,
     errorPolicy: 'all',
+    fetchPolicy: 'no-cache',
     query: gql`
       query(
         $filter: ProductFilterInput
