@@ -1,49 +1,21 @@
+
 import { gql } from '@apollo/client';
 import { Product, QueryProductsArgs } from '../../gql/graphql';
-import { Endpoints } from '../../types';
+import { Endpoints, OdooIntegrationContext } from '../../types';
 import { productFragment } from '../fragments/';
+import query from './productsQuery';
+import { CustomQuery } from '@vue-storefront/middleware';
 
-export const getProductTemplateList: Endpoints['getProductTemplateList'] = async (context, variables?: QueryProductsArgs) => {
-  
+export const getProductTemplateList: Endpoints['getProductTemplateList'] = async (context: OdooIntegrationContext, params?: QueryProductsArgs, customQuery?: CustomQuery) => {
+
+  const { getProductTemplateList } = context.extendQuery(
+    customQuery, { getProductTemplateList: { query, variables: params } 
+  })
+
   const response = await context.client.query<{ products: { products: Product[] } }>({
-    variables,
-    errorPolicy: 'all',
-    fetchPolicy: 'no-cache',
-    query: gql`
-      query(
-        $filter: ProductFilterInput
-        $currentPage: Int
-        $pageSize: Int = 5
-        $search: String
-        $sort: ProductSortInput
-      ) {
-        products(
-          filter: $filter
-          currentPage: $currentPage
-          pageSize: $pageSize
-          search: $search
-          sort: $sort
-        ) {
-          totalCount
-          attributeValues {
-            id
-            name
-            displayType
-            name
-            htmlColor
-            search
-            attribute{
-              id
-              name
-            }
-            
-          }
-          products {
-            ${productFragment}
-          }
-        }
-      }`
-    });
+    variables: getProductTemplateList.variables,
+    query: getProductTemplateList.query
+  });
 
     
 

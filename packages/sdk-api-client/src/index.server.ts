@@ -13,9 +13,9 @@ const onCreate = (settings: MiddlewareConfig) => {
   };
 };
 
-const { createApiClient } = apiClientFactory<any, any>({
+const { createApiClient } = apiClientFactory({
   onCreate,
-  api: apiEndpoints,
+  api: apiEndpoints
 });
 
 export { createApiClient };

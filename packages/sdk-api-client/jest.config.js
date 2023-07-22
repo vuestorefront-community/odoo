@@ -1,6 +1,9 @@
 const baseConfig = require('./../../jest.base.config');
 
-const apiClientJestConfig = { ...baseConfig };
+const apiClientJestConfig = { 
+  setupFilesAfterEnv: ['./__mocks__/setupTests.ts'],
+  ...baseConfig 
+};
 
 apiClientJestConfig.collectCoverageFrom = [
   'src/**/*.ts',

@@ -1,0 +1,140 @@
+{
+    "id": 2,
+    "firstVariant": {
+        "id": 52,
+        "combinationInfoVariant": {
+            "product_id": 52,
+            "product_template_id": 39,
+            "display_name": "[578902-00] Leather jacket Bully grey (36)",
+            "display_image": true,
+            "price": 219.28,
+            "list_price": 243.64000000000001,
+            "price_extra": 0,
+            "has_discounted_price": false,
+            "discount": 0,
+            "discount_perc": 0
+        },
+        "slug": "/product/leather-jacket-bully-grey-39",
+        "variantAttributeValues": [
+            {
+                "id": 11,
+                "name": "36",
+                "attribute": {
+                    "id": 5,
+                    "name": "Size",
+                    "__typename": "Attribute"
+                },
+                "__typename": "AttributeValue"
+            },
+            {
+                "id": 305,
+                "name": "Leather",
+                "attribute": {
+                    "id": 6,
+                    "name": "Material",
+                    "__typename": "Attribute"
+                },
+                "__typename": "AttributeValue"
+            }
+        ],
+        "__typename": "Product"
+    },
+    "smallImage": "/web/image/product.template/39/image_128",
+    "price": 372.5,
+    "name": "Leather jacket Bully grey",
+    "description": "The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common \"problem\" areas. Find stunning women's cocktail dresses and party dresses.",
+    "image": "/web/image/product.template/39/image_1920",
+    "imageFilename": "leather-jacket-bully-grey",
+    "combinationInfo": {
+        "product_id": 52,
+        "product_template_id": 39,
+        "display_name": "[578902-00] Leather jacket Bully grey (36)",
+        "display_image": true,
+        "price": 219.28,
+        "list_price": 243.64000000000001,
+        "price_extra": 0,
+        "has_discounted_price": false,
+        "discount": 0,
+        "discount_perc": 0
+    },
+    "slug": "/product/leather-jacket-bully-grey-39",
+    "sku": null,
+    "jsonLd": "{\"@context\": \"https://schema.org/\", \"@type\": \"Product\", \"name\": \"Leather jacket Bully grey\", \"image\": [\"http://vsfdemo15.labs.odoogap.com/web/image/product.product/39/image\"], \"offers\": {\"@type\": \"Offer\", \"url\": \"/product/leather-jacket-bully-grey-39\", \"priceCurrency\": \"USD\", \"price\": 372.5, \"itemCondition\": \"https://schema.org/NewCondition\", \"availability\": \"https://schema.org/InStock\", \"seller\": {\"@type\": \"Organization\", \"name\": \"My Website\"}}, \"description\": \"The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common \\\"problem\\\" areas. Find stunning women's cocktail dresses and party dresses.\"}",
+    "isInWishlist": true,
+    "categories": [
+        {
+            "id": 13,
+            "name": "WOMEN",
+            "slug": "/category/13",
+            "parent": null,
+            "__typename": "Category"
+        },
+        {
+            "id": 19,
+            "name": "All",
+            "slug": "/category/19",
+            "parent": {
+                "parent": {
+                    "id": 13,
+                    "__typename": "Category"
+                },
+                "__typename": "Category"
+            },
+            "__typename": "Category"
+        },
+        {
+            "id": 20,
+            "name": "Jackets",
+            "slug": "/category/20",
+            "parent": {
+                "parent": {
+                    "id": 13,
+                    "__typename": "Category"
+                },
+                "__typename": "Category"
+            },
+            "__typename": "Category"
+        }
+    ],
+    "attributeValues": [
+        {
+            "id": 11,
+            "name": "36",
+            "displayType": "select",
+            "priceExtra": 0,
+            "attribute": {
+                "id": 5,
+                "name": "Size",
+                "__typename": "Attribute"
+            },
+            "search": "5-11",
+            "__typename": "AttributeValue"
+        },
+        {
+            "id": 12,
+            "name": "40",
+            "displayType": "select",
+            "priceExtra": 0,
+            "attribute": {
+                "id": 5,
+                "name": "Size",
+                "__typename": "Attribute"
+            },
+            "search": "5-12",
+            "__typename": "AttributeValue"
+        },
+        {
+            "id": 305,
+            "name": "Leather",
+            "displayType": "radio",
+            "priceExtra": 0,
+            "attribute": {
+                "id": 6,
+                "name": "Material",
+                "__typename": "Attribute"
+            },
+            "search": "6-305",
+            "__typename": "AttributeValue"
+        }
+    ]
+}

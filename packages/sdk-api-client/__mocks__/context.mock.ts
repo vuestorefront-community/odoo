@@ -1,5 +1,30 @@
+import { CustomQuery } from '@vue-storefront/middleware';
+import buildClient from '../src/setup/clientSetup';
+import getFullProduct from '../__mocks__/customQueries/getFullProduct';
+
+
+const apolloClient = buildClient({
+  odooGraphqlUrl: "http://localhost:3000/api/graphql",
+  fetchOptions: {}
+})
+
+const customQueries = {
+  getFullProduct
+}
+
 export const contextMock = {
   config: {} as any,
-  client: jest.fn() as any,
+  client: apolloClient,
   api: jest.fn() as any,
+  extendQuery: (customQuery: any, defaults: any) => {
+    const key = Object.keys(defaults)[0]
+    
+    return {
+      [key]: {
+        query: customQuery ? customQueries[customQuery[key]] : defaults[key].query,
+        variables: defaults[key].variables,
+      }
+    }
+  },
+  customQueries
 };

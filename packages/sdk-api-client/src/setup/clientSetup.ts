@@ -51,6 +51,15 @@ const buildClient = (settings: MiddlewareConfig) => {
   return new ApolloClient({
     link: apolloLink,
     cache: new InMemoryCache(),
+    defaultOptions: {
+      query: {
+        errorPolicy: "all",
+        fetchPolicy: "no-cache",
+      },
+      mutate: {
+        errorPolicy: "all",
+      }
+    }
   });
 };
 
