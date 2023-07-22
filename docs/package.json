@@ -11,7 +11,7 @@
   "repository": "https://github.com/vuestorefront-community/odoo",
   "scripts": {
     "dev": "vuepress dev",
-    "build": "vuepress build",
+    "build": "NODE_OPTIONS=--max_old_space_size=8192 vuepress build",
     "api-extract": "cd ../ && yarn build && cd docs/ && yarn api-ref && yarn sdk-ref && yarn ref-md",
     "api-ref": "cd ../packages/api-client && api-extractor run --local",
     "sdk-ref": "cd ../packages/sdk && api-extractor run --local",
