@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "name": "Restaurant Expenses"
+      },
+      {
+        "id": 2,
+        "name": "Hotel Accommodation"
+      },
+      {
+        "id": 3,
+        "name": "Virtual Interior Design"
+      },
+      {
+        "id": 4,
+        "name": "Virtual Home Staging"
+      }
+]

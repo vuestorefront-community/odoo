@@ -10,7 +10,8 @@
     "test": "lerna run test",
     "codegen": "cd packages/sdk-api-client && yarn codegen",
     "prepare": "husky install",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "lint": "eslint . --ext .ts,.vue"
   },
   "config": {
     "commitizen": {

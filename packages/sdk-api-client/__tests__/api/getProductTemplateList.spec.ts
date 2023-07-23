@@ -1,21 +1,32 @@
-import { getProductTemplate } from '../../src/api';
+import { getProductTemplateList } from '../../src/api';
 import { contextMock } from '../../__mocks__/context.mock';
 
-describe('[Integration ODOO API] getProductTemplateList', () => {
+const obj = { getProductTemplateList }
 
-  it('calls endpoint with id 1', async () => {
-    const response = await getProductTemplate(contextMock, { id: 1 });
+describe('[ODOO-API] getProductTemplateList', () => {
 
-    expect(response.data.product.id).toBe(1);
-    expect(response.data.product).not.toContain('attributeValues');
+  it('calls endpoint with no parameters and receive 4 items', async () => {
+    const response = await getProductTemplateList(contextMock, { });
+
+    expect(response.data.products).toHaveLength(4);
+    expect(response.data.products[0]).toHaveProperty('price');
   });
   
-  it('calls endpoint with id 2 and customQuery', async () => {
-    const response = await getProductTemplate(contextMock, { id: 2 }, { getProductTemplate: 'getFullProduct'});
-    
-    expect(response.data.product.id).toBe(2);
-    expect(response.data.product.attributeValues).toHaveLength(3);
+  it('calls endpoint with customQuery', async () => {
+    const response = await getProductTemplateList(contextMock, { },  { getProductTemplateList: 'customQueryFullProductTemplateListWithoutPrice'});
+
+    expect(response.data.products).toHaveLength(4);
+    expect(response.data.products[0]).not.toHaveProperty('price');
   });
+
+  // it('calls endpoint with parameters', async () => {
+  //   const spy = jest.spyOn(obj, 'getProductTemplate')
+
+  //   await obj.getProductTemplateList(contextMock, { id: 2, barcode: '##', slug: '/product' });
+    
+  //   expect(spy).toBeCalledTimes(1)
+  //   expect(spy).toBeCalledWith(contextMock, { id: 2, barcode: '##', slug: '/product' })
+  // });
 
   
 

@@ -1,6 +1,7 @@
 import { CustomQuery } from '@vue-storefront/middleware';
 import buildClient from '../src/setup/clientSetup';
-import getFullProduct from '../__mocks__/customQueries/getFullProduct';
+import customQueryFullProductTemplate from '../__mocks__/customQueries/customQueryFullProductTemplate';
+import customQueryFullProductTemplateListWithoutPrice from '../__mocks__/customQueries/customQueryFullProductTemplateListWithoutPrice';
 
 
 const apolloClient = buildClient({
@@ -9,7 +10,8 @@ const apolloClient = buildClient({
 })
 
 const customQueries = {
-  getFullProduct
+  customQueryFullProductTemplate,
+  customQueryFullProductTemplateListWithoutPrice
 }
 
 export const contextMock = {

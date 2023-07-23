@@ -1,10 +1,12 @@
 {
+  "[typescript]": {
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+  },
+  "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
-  "vetur.format.defaultFormatter.html": "prettier",
-  "vetur.format.defaultFormatter.js": "prettier-eslint",
-  "vetur.validation.interpolation": true,
-  "editor.defaultFormatter": "octref.vetur",
   "search.exclude": {
     "**/docs/**": true,
+    "**/old-api-client/**": true,
   },
 }
