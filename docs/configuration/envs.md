@@ -9,8 +9,8 @@ In this session we show all env variables that are used by template_odoo and vsf
 |     VSF_SITE_URL     |                          http://localhost:3000/                          |                                                Front end base url should point to the frontend server                                                |
 | ODOO_BACKEND_BASE_URL |                         https://vsf.odoogap.com/                         | Backend base url will point for a private address if required internal access don't need to pass it unless you need a private access to the endpints |
 |   PUBLIC_PATH    |                      https://xyz.cloudfront.cdn.com                      |                                              Public path should be defined on production for CDN access                                              |
-|     VSF_NODE_ENV     |                                   dev                                    |                                      Node enviroment. Should be set to production on production. Default is dev                                      |
-|   VSF_NODE_LOCALE    |                                  en-EN                                   |                                                            Node locale. Default is en-EN                                                             |
+|     NODE_ENV     |                                   dev                                    |                                      Node enviroment. Should be set to production on production. Default is dev                                      |
+|   NODE_LOCALE    |                                  en-EN                                   |                                                            Node locale. Default is en-EN                                                             |
 |       VSF_PORT       |                                   3000                                   |                                                              Node port. Default is 3000                                                              |
 |       VSF_HOST       |                                 0.0.0.0                                  |                                                            Node host. Default is 0.0.0.0                                                             |
 |  REDIS_ENABLED   |                                  false                                   |                                                   Enable or disable redis cache. Default is false                                                    |
@@ -21,11 +21,11 @@ In this session we show all env variables that are used by template_odoo and vsf
 | GOOGLE_TAG_MANAGER_ID |                                   google_container_id               |                                                             This allows you to easily add tracking tags such as Google Analytics                    |
 
 
-## Vuestoryfront Docker
+## Vuestorefront Docker
 
 |       Env        |                                  Value                                   |                                                                     Description                                                                      |
 | :--------------: | :----------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: |
-|     VSF_NODE_ENV     | production |                                                         Node enviroment.  Docker builds the project in production env                                                         |
+|     NODE_ENV     | production |                                                         Node enviroment.  Docker builds the project in production env                                                         |
 |   NODE_LOCALE    |                                  en-EN                                   |                                                            Node locale. Default is en-EN                                                             |
 | ODOO_BACKEND_BASE_URL |                         http://odoo:8069/                        | Odoo local server |
 |   VSF_SITE_URL   |                      http://localhost:3000/com                      |                                              Public path should be defined on production for CDN access                                              |
@@ -43,6 +43,6 @@ In this session we show all env variables that are used by template_odoo and vsf
 
 
 
-::: info
+::: tip
 You can choose to use the .env file or the enviroment variables directly useing **export** command.
 :::
