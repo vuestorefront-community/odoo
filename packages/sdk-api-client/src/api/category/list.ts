@@ -1,19 +1,19 @@
 
 import { gql } from '@apollo/client';
-import { Product, QueryProductsArgs } from '../../gql/graphql';
+import { Category, QueryCategoriesArgs } from '../../gql/graphql';
 import { Endpoints, OdooIntegrationContext } from '../../types';
 import { CustomQuery } from '@vue-storefront/middleware';
-import query from './productListQuery';
+import query from './categoryListQuery';
 
-export const getProductTemplateList: Endpoints['getProductTemplateList'] = async (context: OdooIntegrationContext, params?: QueryProductsArgs, customQuery?: CustomQuery) => {
+export const getCategoryList: Endpoints['getCategoryList'] = async (context: OdooIntegrationContext, params?: QueryCategoriesArgs, customQuery?: CustomQuery) => {
 
-  const { getProductTemplateList } = context.extendQuery(
-    customQuery, { getProductTemplateList: { query, variables: params } 
+  const { getCategoryList } = context.extendQuery(
+    customQuery, { getCategoryList: { query, variables: params } 
   })
 
-  const response = await context.client.query<{ products: { products: Product[] } }>({
-    variables: getProductTemplateList.variables,
-    query: getProductTemplateList.query
+  const response = await context.client.query<{ categories: { categories: Category[] } }>({
+    variables: getCategoryList.variables,
+    query: getCategoryList.query
   });
 
   return response;

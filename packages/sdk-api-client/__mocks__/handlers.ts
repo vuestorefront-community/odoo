@@ -6,7 +6,9 @@ import customQueryProductTemplateWithoutPrice from './data/customQueryProductTem
 import productTemplateList from './data/productTemplateList.json'
 
 import category from './data/category.json'
+import categoryList from './data/categoryList.json'
 import customQueryCategoryWithoutChild from './data/customQueryCategoryWithoutChild.json'
+import customQueryCategoryListWithChilds from './data/customQueryCategoryListWithChilds.json'
 
 export const handlers = [
 
@@ -28,14 +30,14 @@ export const handlers = [
   graphql.query('TemplateProductList', (req, res, ctx) => {
     return res(
       ctx.data({
-        products: productTemplateList
+        products: { products : productTemplateList }
       }),
     )
   }),
   graphql.query('CustomQueryProductTemplateWithoutPrice', (req, res, ctx) => {
       return res(
        ctx.data({ 
-        products: customQueryProductTemplateWithoutPrice
+        products: { products: customQueryProductTemplateWithoutPrice }
       }),
     )
   }),
@@ -52,6 +54,20 @@ export const handlers = [
       return res(
        ctx.data({ 
         category: customQueryCategoryWithoutChild
+      }),
+    )
+  }),
+  graphql.query('CategoryList', (req, res, ctx) => {
+      return res(
+       ctx.data({ 
+        categories: { categories: categoryList }
+      }),
+    )
+  }),
+  graphql.query('CustomQueryCategoryListWithoutChild', (req, res, ctx) => {
+      return res(
+       ctx.data({ 
+        categories: { categories : customQueryCategoryListWithChilds }
       }),
     )
   }),

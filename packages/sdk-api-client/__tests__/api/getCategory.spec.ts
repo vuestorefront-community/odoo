@@ -21,14 +21,14 @@ describe('[ODOO-API] getCategory', () => {
     expect(response.data.category.childs).not.toBeDefined();
   });
 
-  // it('calls endpoint with parameters', async () => {
-  //   const spy = jest.spyOn(obj, 'getProductTemplate')
+  it('calls endpoint with parameters', async () => {
+    const spy = jest.spyOn(obj, 'getCategory')
 
-  //   await obj.getCategory(contextMock, { id: 2, barcode: '##', slug: '/product' });
+    await obj.getCategory(contextMock, { id: 2, slug: '/hats'});
     
-  //   expect(spy).toBeCalledTimes(1)
-  //   expect(spy).toBeCalledWith(contextMock, { id: 2, barcode: '##', slug: '/product' })
-  // });
+    expect(spy).toBeCalledTimes(1)
+    expect(spy).toBeCalledWith(contextMock, { id: 2, slug: '/hats' })
+  });
 
   
 

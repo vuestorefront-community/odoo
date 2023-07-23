@@ -1,6 +1,6 @@
 import { ApolloQueryResult } from '@apollo/client';
 import { OdooIntegrationContext } from '..';
-import { Product, Category, QueryProductArgs, QueryProductsArgs, QueryCategoryArgs } from '../../gql/graphql';
+import { Product, Category, QueryProductArgs, QueryProductsArgs, QueryCategoryArgs, QueryCategoriesArgs } from '../../gql/graphql';
 import { CustomQuery } from '@vue-storefront/middleware';
 /**
  * Definition of all API-client methods available in {@link https://docs.vuestorefront.io/v2/advanced/context.html#context-api | context}.
@@ -15,5 +15,6 @@ export interface Endpoints {
   getProductTemplateList(context: OdooIntegrationContext, variables?: QueryProductsArgs, customQuery?: CustomQuery): Promise<ApolloQueryResult<{ products: { products: Product[] } }>>;
 
   getCategory(context: OdooIntegrationContext, variables?: QueryCategoryArgs, customQuery?: CustomQuery): Promise<ApolloQueryResult<{ category: Category }>>;
+  getCategoryList(context: OdooIntegrationContext, variables?: QueryCategoriesArgs, customQuery?: CustomQuery): Promise<ApolloQueryResult<{ categories: { categories: Category[] } }>>;
 
 }

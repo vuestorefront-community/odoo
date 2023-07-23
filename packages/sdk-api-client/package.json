@@ -14,6 +14,7 @@
     "build": "rimraf lib server && rollup -c",
     "dev": "rollup -c -w",
     "test": "cross-env APP_ENV=test jest",
+    "test:coverage": "jest --coverage --passWithNoTests",
     "prepublish": "yarn build",
     "codegen": "yarn graphql-codegen",
     "lint": "eslint . --ext .ts,.vue"

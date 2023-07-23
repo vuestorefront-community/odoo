@@ -3,6 +3,7 @@ import buildClient from '../src/setup/clientSetup';
 import customQueryFullProductTemplate from '../__mocks__/customQueries/customQueryFullProductTemplate';
 import customQueryFullProductTemplateListWithoutPrice from '../__mocks__/customQueries/customQueryFullProductTemplateListWithoutPrice';
 import customQueryCategoryWithoutChild from '../__mocks__/customQueries/customQueryCategoryWithoutChild';
+import customQueryCategoryListWithoutChild from '../__mocks__/customQueries/customQueryCategoryListWithoutChild';
 
 
 const apolloClient = buildClient({
@@ -10,10 +11,12 @@ const apolloClient = buildClient({
   fetchOptions: {}
 })
 
+// Add custom queries like a real application will do
 const customQueries = {
   customQueryFullProductTemplate,
   customQueryFullProductTemplateListWithoutPrice,
-  customQueryCategoryWithoutChild
+  customQueryCategoryWithoutChild,
+  customQueryCategoryListWithoutChild
 }
 
 export const contextMock = {
