@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 export default gql`
-    query customQueryProductTemplateWithoutPrice {
+    query CustomQueryProductTemplateWithoutPrice {
         products{
             products{
               id

@@ -1,0 +1,13 @@
+{
+    "id": 1,
+    "name": "Desks",
+    "slug": "false",
+    "childs": [
+        {
+            "id": 10,
+            "name": "Components",
+            "slug": "false",
+            "childs": null
+        }
+    ]
+}

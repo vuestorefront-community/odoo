@@ -14,7 +14,7 @@ export const getProductTemplate: Endpoints['getProductTemplate'] = async (contex
     query: getProductTemplate.query,
   });
 
-    
-
   return response;
 };
+
+
