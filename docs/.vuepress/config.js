@@ -1,9 +1,8 @@
 module.exports = {
-  title: 'Vsf Odoo Integration',
-  base: '/vsf-odoo-integration/',
+  title: 'Odoo Doc',
+  base: '/odoo/',
   description: 'Documentation for the VSF + Odoo Integration',
-  head: [['link', { rel: 'icon', href: '/favicon.png' }]],
-  theme: 'vsf-docs',
+  head: [['link', { rel: 'icon', href: '/favicon.png' }]],  
   configureWebpack: (config) => {
     config.module.rules = config.module.rules.map((rule) => ({
       ...rule,
@@ -23,9 +22,11 @@ module.exports = {
     }));
   },
   themeConfig: {
+    logo: 'https://user-images.githubusercontent.com/1626923/137092657-fb398d20-b592-4661-a1f9-4135db0b61d5.png',
     nav: [
       { text: 'Vue Storefront', link: 'https://vuestorefront.io/' },
-      { text: 'Core Documentation', link: 'https://docs.vuestorefront.io/v2/' }
+      { text: 'Core Documentation', link: 'https://docs.vuestorefront.io/v2/' }, 
+      { text: 'Odoo GitHub', link: 'https://github.com/vuestorefront-community/odoo'}
     ],
     sidebar: {
       '/': [
