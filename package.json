@@ -7,6 +7,8 @@
     "dev": "concurrently --names \"Frontend,Middleware\" \"npm run dev:app\" \"npm run dev:middleware\"",
     "dev:app": "cd playground/app && npm run dev",
     "dev:middleware": "cd playground/middleware && npm run dev",
+    "publish:sdk": "node ./scripts/publishApi.js",
+    "publish:sdk-api": "node ./scripts/publishComposable.js",
     "test": "lerna run test",
     "codegen": "cd packages/sdk-api-client && yarn codegen",
     "prepare": "husky install",

@@ -1,5 +1,5 @@
 {
-  "name": "@vue-storefront/integration-odoo-api",
+  "name": "@vue-storefront/odoo-sdk-api-client",
   "version": "0.1.0",
   "sideEffects": false,
   "server": "server/index.js",
