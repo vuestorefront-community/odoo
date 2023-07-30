@@ -4,8 +4,8 @@ import { sdk } from '../../sdk.config';
 
 const products = useState<Product[]>('counter', () => [])
 
-if(products.value.length === 0) {
-    const { data } = await useAsyncData('counter', async() => await sdk.odoo.getProductTemplateList({pageSize: 12, filter: { categoryId: [13] } }));
+if (products.value.length === 0) {
+    const { data } = await useAsyncData('counter', async () => await sdk.odoo.getProductTemplateList({ pageSize: 12, filter: { categoryId: [13] } }));
     products.value = data.value?.data.products?.products || [];
 }
 
@@ -14,12 +14,12 @@ if(products.value.length === 0) {
 </script>
 <template>
     <div>
-        <Breadcrumb class="self-start mb-10"/>
+        <Breadcrumb class="self-start mb-10" />
         <div class="flex flex-row items-stretch ">
-            <CategoryFilterSidebar class="mr-10"/>
+            <CategoryFilterSidebar class="mr-10" />
 
             <div class="flex flex-row flex-wrap justify-between">
-                <ProductCard v-for="product in products" class="mb-4" :product="product"/>
+                <ProductCard v-for="product in products" class="mb-4" :product="product" />
             </div>
         </div>
     </div>

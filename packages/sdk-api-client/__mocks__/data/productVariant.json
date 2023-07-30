@@ -1,0 +1,14 @@
+{
+    "product": {
+        "id": 74,
+        "image": "/web/image/product.product/74/image_1920",
+        "variantPrice": 148.75,
+        "variantPriceAfterDiscount": 148.75,
+        "variantHasDiscountedPrice": false
+    },
+    "productTemplateId": 46,
+    "displayName": "[578902-00] Shirt Himons multi (40)",
+    "price": 148.75,
+    "listPrice": "148.75",
+    "hasDiscountedPrice": false
+}

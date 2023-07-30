@@ -3,7 +3,9 @@ import { graphql } from 'msw'
 import product from './data/productTemplate.json'
 import customQueryFullProductTemplate from './data/customQueryFullProductTemplate.json'
 import customQueryProductTemplateWithoutPrice from './data/customQueryProductTemplateWithoutPrice.json'
+import customQueryProductVariant from './data/customQueryProductVariant.json'
 import productTemplateList from './data/productTemplateList.json'
+import productVariant from './data/productVariant.json'
 
 import category from './data/category.json'
 import categoryList from './data/categoryList.json'
@@ -68,6 +70,20 @@ export const handlers = [
       return res(
        ctx.data({ 
         categories: { categories : customQueryCategoryListWithChilds }
+      }),
+    )
+  }),
+  graphql.query('ProductVariant', (req, res, ctx) => {
+      return res(
+       ctx.data({ 
+        product: productVariant 
+      }),
+    )
+  }),
+  graphql.query('CustomQueryProductVariant', (req, res, ctx) => {
+      return res(
+       ctx.data({ 
+        product: customQueryProductVariant 
       }),
     )
   }),
