@@ -1,11 +1,11 @@
 import { initSDK, buildModule } from '@vue-storefront/sdk';
 import {
-  boilerplateModule,
-  BoilerplateModuleType,
+  OdooModule,
+  OdooModuleType,
 } from '../../packages/sdk/src';
 
 const sdkConfig = {
-  odoo: buildModule<BoilerplateModuleType>(boilerplateModule, {
+  odoo: buildModule<OdooModuleType>(OdooModule, {
     apiUrl: 'http://localhost:8181/odoo',
   }),
 };

@@ -8,9 +8,9 @@ import * as methods from './methods/index';
 type Methods = typeof methods;
 
 /**
- * Initialize the Boilerplate connector.
+ * Initialize the Odoo connector.
  */
-export const boilerplateConnector = (options: Options): Methods => {
+export const odooConnector = (options: Options): Methods => {
   client.defaults.baseURL = options.apiUrl;
 
   return methods;

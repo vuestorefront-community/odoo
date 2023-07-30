@@ -1,6 +1,7 @@
 {
-  "name": "@vue-storefront/odoo-sdk-api-client",
+  "name": "@erpgap/odoo-sdk-api-client",
   "version": "0.1.0",
+  "private": false,
   "sideEffects": false,
   "server": "server/index.js",
   "main": "lib/index.cjs.js",
@@ -42,5 +43,8 @@
   "files": [
     "lib/**/*",
     "server/**/*"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

@@ -2,7 +2,7 @@ import { createServer } from '@vue-storefront/middleware';
 
 const middlewareConfig = {
   integrations: {
-    boilerplate: {
+    odoo: {
       location: '@vue-storefront/integration-odoo-api/server',
       configuration: {},
     },

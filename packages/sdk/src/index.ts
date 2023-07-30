@@ -1,22 +1,22 @@
-import { boilerplateConnector } from './connector';
+import { odooConnector } from './connector';
 import type { Options } from './types';
 import type { Module } from '@vue-storefront/sdk';
 
 /**
  * Boulerplate module type.
  */
-export interface BoilerplateModuleType extends Module {
+export interface OdooModuleType extends Module {
   /**
-   * The connector of the Boilerplate module.
+   * The connector of the Odoo module.
    */
-  connector: ReturnType<typeof boilerplateConnector>;
+  connector: ReturnType<typeof odooConnector>;
 }
 
 /**
- * Boilerplate module.
+ * Odoo module.
  */
-export const boilerplateModule = (options: Options): BoilerplateModuleType => ({
-  connector: boilerplateConnector({
+export const OdooModule = (options: Options): OdooModuleType => ({
+  connector: odooConnector({
     apiUrl: options.apiUrl,
   }),
   utils: {},

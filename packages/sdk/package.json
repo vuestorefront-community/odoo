@@ -1,6 +1,7 @@
 {
-  "name": "@vue-storefront/odoo-sdk",
+  "name": "@erpgap/odoo-sdk",
   "version": "0.1.0",
+  "private": false,
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
   "types": "lib/index.d.ts",
@@ -35,5 +36,8 @@
   },
   "engines": {
     "node": ">=16.x"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
