@@ -1,6 +1,6 @@
 {
   "name": "ecommerce-integration-odoo",
-  "private": true,
+  "private": false,
   "license": "MIT",
   "scripts": {
     "build": "lerna run build",
@@ -70,5 +70,6 @@
       "react": "$react",
       "react-dom": "$react-dom"
     }
-  }
+  },
+  "version": "0.0.0"
 }
