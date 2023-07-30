@@ -2,7 +2,6 @@
 import { gql } from '@apollo/client';
 import { Product, QueryProductsArgs } from '../../gql/graphql';
 import { Endpoints, OdooIntegrationContext } from '../../types';
-import { productFragment } from '../fragments/';
 import query from './productListQuery';
 import { CustomQuery } from '@vue-storefront/middleware';
 

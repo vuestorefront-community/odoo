@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import { Product } from '@vue-storefront/integration-odoo-api';
+import { Product } from '@erpgap/odoo-sdk-api-client';
 import { sdk } from '../../sdk.config';
 
-const products = useState<Product[]>('counter', () => [])
+const products = useState<Product[]>('data', () => [])
 
-if (products.value.length === 0) {
-    const { data } = await useAsyncData('counter', async () => await sdk.odoo.getProductTemplateList({ pageSize: 12, filter: { categoryId: [13] } }));
-    products.value = data.value?.data.products?.products || [];
-}
-
+const { data, status } = await useAsyncData('data', async () => await sdk.odoo.getProductTemplateList({ pageSize: 12, filter: { categoryId: [14] } }));
+products.value = data.value?.data?.products?.products || [];
 
 
 </script>

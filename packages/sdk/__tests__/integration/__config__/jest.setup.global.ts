@@ -3,7 +3,7 @@ import { createServer } from '@vue-storefront/middleware';
 const middlewareConfig = {
   integrations: {
     odoo: {
-      location: '@vue-storefront/integration-odoo-api/server',
+      location: '@erpgap/odoo-sdk-api-client/server',
       configuration: {},
     },
   }

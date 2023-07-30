@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@vue-storefront/middleware": "3.0.1",
-    "@vue-storefront/integration-odoo-api": "*",
+    "@erpgap/odoo-sdk-api-client": "*",
     "cors": "^2.8.5",
     "ts-node-dev": "^2.0.0"
   },
