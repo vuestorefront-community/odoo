@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { sdk } from '../sdk.config';
 
-const { data } = await useAsyncData('ttt', async () => await sdk.odoo.getProductTemplate({ id: 12 }));
+const { data } = await useAsyncData('ttt', async () => await sdk.odoo.getCountries())
 
 </script>
 
 <template>
   <div>
-    <MainBanner/>
-  
+    <MainBanner />
+
   </div>
 </template>
