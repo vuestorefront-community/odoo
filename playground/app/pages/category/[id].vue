@@ -7,7 +7,6 @@ const products = useState<Product[]>('data', () => [])
 const { data, status } = await useAsyncData('data', async () => await sdk.odoo.getProductTemplateList({ pageSize: 12, filter: { categoryId: [14] } }));
 products.value = data.value?.data?.products?.products || [];
 
-
 </script>
 <template>
     <div>

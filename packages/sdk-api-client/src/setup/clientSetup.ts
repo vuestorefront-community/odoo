@@ -32,9 +32,12 @@ const buildClient = (settings: MiddlewareConfig) => {
 
   const afterwareLink = new ApolloLink((operation, forward) => {
     return forward(operation).map((response) => {
+      
       const context = operation.getContext();
+      context.headers = {
+        authorization: '123'
+      }
       const authHeader = context.response.headers.get('set-cookie');
-
       if (response.data) {
         response.data.cookie = authHeader;
       }
@@ -51,6 +54,8 @@ const buildClient = (settings: MiddlewareConfig) => {
   return new ApolloClient({
     link: apolloLink,
     cache: new InMemoryCache(),
+    ssrMode: true,
+    credentials: 'include',
     defaultOptions: {
       query: {
         errorPolicy: "all",

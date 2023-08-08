@@ -1,10 +1,18 @@
 <script lang="ts" setup>
-defineProps({
+import { sdk } from '../sdk.config';
+
+const props = defineProps({
   product: {
     type: Object as PropType<Product>,
     required: true,
   }
 })
+
+const handleAddToCart = async () => {
+  if (props.product?.firstVariant?.id)
+    await sdk.odoo.addToCart({ productId: props.product.firstVariant.id, quantity: 1 });
+}
+
 
 import { SfRating, SfCounter, SfLink, SfButton, SfIconShoppingCart, SfIconFavorite } from '@storefront-ui/vue';
 import { Product } from '@erpgap/odoo-sdk-api-client';
@@ -35,7 +43,7 @@ import { Product } from '@erpgap/odoo-sdk-api-client';
         Lightweight • Non slip • Flexible outsole • Easy to wear on and off
       </p>
       <span class="block pb-2 font-bold typography-text-lg">$2345,99</span>
-      <SfButton type="button" size="sm">
+      <SfButton type="button" size="sm" @click="handleAddToCart">
         <template #prefix>
           <SfIconShoppingCart size="sm" />
         </template>
