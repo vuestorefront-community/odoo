@@ -20,6 +20,7 @@ const cors = require("cors");
     credentials: true,
   });
 
+
   app.listen(port, host, () => {
     console.log(`Middleware started: ${host}:${port}`);
   });

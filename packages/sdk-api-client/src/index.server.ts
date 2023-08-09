@@ -1,6 +1,7 @@
 import buildClient from './setup/clientSetup'
 import { apiClientFactory } from '@vue-storefront/middleware';
 import { MiddlewareConfig } from './index';
+import sessionHeaderExtension from './extensions/sessionHeaderExtension ';
 import * as apiEndpoints from './api';
 
 const onCreate = (settings: MiddlewareConfig) => {
@@ -13,9 +14,13 @@ const onCreate = (settings: MiddlewareConfig) => {
   };
 };
 
+
 const { createApiClient } = apiClientFactory({
   onCreate,
-  api: apiEndpoints
+  api: apiEndpoints,
+  extensions: [
+    sessionHeaderExtension
+  ]
 });
 
 export { createApiClient };

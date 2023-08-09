@@ -22,22 +22,18 @@ const buildClient = (settings: MiddlewareConfig) => {
     credentials: 'include',
     fetch,
     fetchOptions: settings.fetchOptions,
-    // headers: {
-    //   Cookie: settings.auth,
-    //   'resquest-host': settings['resquest-host'],
-    //   'REAL-IP': settings['real-ip']
-
-    // }
+    headers: {
+      Cookie: settings.sessionAuth,
+      'resquest-host': settings.requestHost,
+      'REAL-IP': settings.realIp
+    }
   });
 
   const afterwareLink = new ApolloLink((operation, forward) => {
     return forward(operation).map((response) => {
-      
       const context = operation.getContext();
-      context.headers = {
-        authorization: '123'
-      }
       const authHeader = context.response.headers.get('set-cookie');
+
       if (response.data) {
         response.data.cookie = authHeader;
       }

@@ -4,4 +4,7 @@
 export interface MiddlewareConfig {
   odooGraphqlUrl: string;
   fetchOptions: any;
+  sessionAuth: string,
+  requestHost: string,
+  realIp: string
 }
