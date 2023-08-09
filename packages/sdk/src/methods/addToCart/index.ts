@@ -4,17 +4,17 @@ import { CustomQuery } from '@vue-storefront/middleware';
 import { client } from '../../client';
 
 /**
- * Get a single product template.
+ * Add one product to cart with specified quantity.
  * 
  * @param {MutationCartAddItemArgs} params
- * @returns { order: Order }
+ * @returns { cartAddItem: { order: Order } }
  * @example
  * ```ts
- *  await sdk.odoo.getProductVariant({ id: 13 }))
+ *  await sdk.odoo.addToCart({ productId: props.product.firstVariant.id, quantity: 1 });
  * 
- *  await sdk.odoo.getProductVariant({ slug: "/shirt-13" }))
+ *  await sdk.odoo.addToCart({ productId: Number(product.id), quantity: 1 };
  * 
- *  await sdk.odoo.getProductVariant({ slug: "/shirt-13" }, { getProductVariant: 'customQueryName' }}))
+ *  await sdk.odoo.addToCart({ productId: product.id, quantity: 1 }, { 'addToCart': 'customQuery' });
  * ```
  */
 export async function addToCart(params: MutationCartAddItemArgs, customQuery?: CustomQuery<'addToCart'>) {

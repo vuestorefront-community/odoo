@@ -8,6 +8,7 @@ const apiClientJestConfig = {
 apiClientJestConfig.collectCoverageFrom = [
   'src/**/*.ts',
   '!src/types/**',
+  '!src/extensions/**',
   '!src/gql/**',
   '!src/index.ts'
 ];

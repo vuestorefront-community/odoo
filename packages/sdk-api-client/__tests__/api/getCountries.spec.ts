@@ -8,8 +8,6 @@ describe('[ODOO-API] getCountries', () => {
   it('calls endpoint with id 1', async () => {
     const response = await getCountries(contextMock, { });
 
-    console.log(response.data.countries.countries);
-    
     //expect(response.data.countries).toBe('Andorra2');
     //expect(response.data.product.productTemplateId).toBe(46);
   });
