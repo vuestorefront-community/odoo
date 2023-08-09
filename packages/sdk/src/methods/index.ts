@@ -4,5 +4,6 @@ export * from './getCategoryList';
 export * from './getCategory';
 export * from './getProductVariant';
 export * from './getCountries';
-export * from './addToCart';
+export * from './cartAdd';
+export * from './cartLoad';
 

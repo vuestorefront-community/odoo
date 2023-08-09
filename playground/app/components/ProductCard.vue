@@ -10,7 +10,7 @@ const props = defineProps({
 
 const handleAddToCart = async () => {
   if (props.product?.firstVariant?.id)
-    await sdk.odoo.addToCart({ productId: props.product.firstVariant.id, quantity: 1 }, { 'addToCart': '123' });
+    await sdk.odoo.cartAdd({ productId: props.product.firstVariant.id, quantity: 1 }, { 'cartAdd': '123' });
 }
 
 

@@ -3,6 +3,7 @@ import { OdooIntegrationContext } from '..';
 import { Product, Category, QueryProductArgs, QueryCountriesArgs, QueryProductsArgs, QueryCategoryArgs, QueryCategoriesArgs, QueryProductVariantArgs, ProductVariant, Countries,
   MutationCartAddItemArgs,
   Order,
+  CartData,
  } from '../../gql/graphql';
 import { CustomQuery } from '@vue-storefront/middleware';
 /**
@@ -23,6 +24,7 @@ export interface Endpoints {
 
   getCountries(context: OdooIntegrationContext, params?: QueryCountriesArgs, customQuery?: CustomQuery<'getCountries'>): Promise<ApolloQueryResult<{ countries: Countries }>>;
 
-  addToCart(context: OdooIntegrationContext, params: MutationCartAddItemArgs, customQuery?: CustomQuery<'addToCart'>): Promise<FetchResult<{ cartAddItem: { order: Order } }>>;
+  cartAdd(context: OdooIntegrationContext, params: MutationCartAddItemArgs, customQuery?: CustomQuery<'cartAdd'>): Promise<FetchResult<{ cartAddItem: { order: Order } }>>;
+  cartLoad(context: OdooIntegrationContext, customQuery?: CustomQuery<'cartLoad'>): Promise<ApolloQueryResult<{ cart: CartData }>>;
 
 }
