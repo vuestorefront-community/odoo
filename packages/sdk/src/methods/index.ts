@@ -7,5 +7,6 @@ export * from './getCountries';
 export * from './cartAdd';
 export * from './cartLoad';
 export * from './cartRemove';
+export * from './cartUpdate';
 
 
