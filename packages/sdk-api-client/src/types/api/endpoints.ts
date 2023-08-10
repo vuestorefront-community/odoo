@@ -4,6 +4,7 @@ import { Product, Category, QueryProductArgs, QueryCountryArgs, QueryProductsArg
   MutationCartAddItemArgs,
   Order,
   CartData,
+  MutationCartRemoveItemArgs,
  } from '../../gql/graphql';
 import { CustomQuery } from '@vue-storefront/middleware';
 /**
@@ -22,6 +23,7 @@ export interface Endpoints {
   getCategory(context: OdooIntegrationContext, params: QueryCategoryArgs, customQuery?: CustomQuery<'getCategory'>): Promise<ApolloQueryResult<{ category: Category }>>;
   getCategoryList(context: OdooIntegrationContext, params?: QueryCategoriesArgs, customQuery?: CustomQuery<'getCategoryList'>): Promise<ApolloQueryResult<{ categories: { categories: Category[] } }>>;
   
+  cartRemove(context: OdooIntegrationContext, params: MutationCartRemoveItemArgs, customQuery?: CustomQuery<'cartRemove'>): Promise<FetchResult<{ cartRemoveItem: { order: Order } }>>;
   cartAdd(context: OdooIntegrationContext, params: MutationCartAddItemArgs, customQuery?: CustomQuery<'cartAdd'>): Promise<FetchResult<{ cartAddItem: { order: Order } }>>;
   cartLoad(context: OdooIntegrationContext, customQuery?: CustomQuery<'cartLoad'>): Promise<ApolloQueryResult<{ cart: CartData }>>;
   getCountries(context: OdooIntegrationContext, params?: QueryCountryArgs, customQuery?: CustomQuery<'getCountries'>): Promise<ApolloQueryResult<{ countries: Countries }>>;
