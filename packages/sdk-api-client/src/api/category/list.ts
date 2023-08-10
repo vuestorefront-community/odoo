@@ -1,5 +1,4 @@
 
-import { gql } from '@apollo/client';
 import { Category, QueryCategoriesArgs } from '../../gql/graphql';
 import { Endpoints, OdooIntegrationContext } from '../../types';
 import { CustomQuery } from '@vue-storefront/middleware';

@@ -98,4 +98,11 @@ export const handlers = [
     }),
   )
 }),
+graphql.query('CountryList', (req, res, ctx) => {
+  return res(
+   ctx.data({ 
+    countries: { countries: countries }
+  }),
+)
+}),
 ]
