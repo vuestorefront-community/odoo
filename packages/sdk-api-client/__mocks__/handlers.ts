@@ -93,7 +93,7 @@ export const handlers = [
      ctx.data({ 
       countries: {
         totalCount: 5,
-        coutries: countries
+        countries: countries
       }
     }),
   )
