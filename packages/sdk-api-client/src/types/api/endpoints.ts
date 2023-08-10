@@ -26,6 +26,7 @@ export interface Endpoints {
   cartRemove(context: OdooIntegrationContext, params: MutationCartRemoveItemArgs, customQuery?: CustomQuery<'cartRemove'>): Promise<FetchResult<{ cartRemoveItem: { order: Order } }>>;
   cartAdd(context: OdooIntegrationContext, params: MutationCartAddItemArgs, customQuery?: CustomQuery<'cartAdd'>): Promise<FetchResult<{ cartAddItem: { order: Order } }>>;
   cartLoad(context: OdooIntegrationContext, customQuery?: CustomQuery<'cartLoad'>): Promise<ApolloQueryResult<{ cart: CartData }>>;
+  
   getCountries(context: OdooIntegrationContext, params?: QueryCountryArgs, customQuery?: CustomQuery<'getCountries'>): Promise<ApolloQueryResult<{ countries: Countries }>>;
 
 }

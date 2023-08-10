@@ -2,6 +2,8 @@
 import { OrderLine } from '@erpgap/odoo-sdk-api-client';
 import { sdk } from '../../sdk.config';
 
+const cart = useState<CartData>('cart', () => { })
+
 const props = defineProps({
     orderLine: {
         type: Object as PropType<OrderLine>,
@@ -10,7 +12,9 @@ const props = defineProps({
 })
 
 const handleRemoveFromCart = async () => {
-    await sdk.odoo.cartRemove({ lineId: props.orderLine.id })
+    const { data } = await sdk.odoo.cartRemove({ lineId: props.orderLine.id })
+    cart.value = data?.cartRemoveItem || {}
+
 }
 
 
