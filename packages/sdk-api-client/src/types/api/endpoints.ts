@@ -1,11 +1,13 @@
 import { ApolloQueryResult, FetchResult } from '@apollo/client';
 import { OdooIntegrationContext } from '..';
-import { Product, Category, QueryProductArgs, QueryCountriesArgs, QueryProductsArgs, QueryCategoryArgs, QueryCategoriesArgs, QueryProductVariantArgs, ProductVariant, Countries,
+import { Product, Category, QueryProductArgs, QueryCountriesArgs, QueryProductsArgs, QueryCategoryArgs, QueryCategoriesArgs, QueryProductVariantArgs, ProductVariant, 
   MutationCartAddItemArgs,
   Order,
   CartData,
-  Country,
-  QueryCountryArgs,
+  Country,  
+  QueryCountryArgs, 
+  MailingList,
+  QueryMailingListsArgs
  } from '../../gql/graphql';
 import { CustomQuery } from '@vue-storefront/middleware';
 /**
@@ -29,5 +31,7 @@ export interface Endpoints {
 
   getCountry(context: OdooIntegrationContext, params?: QueryCountryArgs, customQuery?: CustomQuery<'getCountry'>): Promise<ApolloQueryResult<{ country:  Country  }>>;
   getCountryList(context: OdooIntegrationContext, params?: QueryCountriesArgs, customQuery?: CustomQuery<'getCountryList'>): Promise<ApolloQueryResult<{ countries: { countries: Country[] } }>>;
+
+  getMailingLists(context: OdooIntegrationContext, params?: QueryMailingListsArgs, customQuery?: CustomQuery<'getMailingLists'>): Promise<ApolloQueryResult<{ mailingLists: { mailingLists: MailingList[] } }>>;
   
 }

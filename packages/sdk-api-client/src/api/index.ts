@@ -5,5 +5,6 @@ export { getCategoryList } from './category/list';
 export { getProductVariant } from './productVariant/get';
 export { getCountry } from './countries/get'
 export { getCountryList } from './countries/list';
+export { getMailingLists } from './mailingLists/list';
 export { cartAdd } from './cart/add';
 export { cartLoad } from './cart/load';
