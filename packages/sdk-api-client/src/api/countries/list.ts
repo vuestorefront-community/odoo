@@ -1,9 +1,10 @@
-import { Country, QueryCountryArgs } from '../../gql/graphql';
+
+import { Country, QueryCountriesArgs } from '../../gql/graphql';
 import { Endpoints, OdooIntegrationContext } from '../../types';
 import { CustomQuery } from '@vue-storefront/middleware';
-import query from './getCountriesQuery';
+import query from './countryListQuery';
 
-export const getCountryList: Endpoints['getCountryList'] = async (context: OdooIntegrationContext, params?: QueryCountryArgs, customQuery?: CustomQuery) => {
+export const getCountryList: Endpoints['getCountryList'] = async (context: OdooIntegrationContext, params?: QueryCountriesArgs, customQuery?: CustomQuery) => {
 
   const { getCountryList } = context.extendQuery(
     customQuery, { getCountryList: { query, variables: params } 
@@ -16,3 +17,4 @@ export const getCountryList: Endpoints['getCountryList'] = async (context: OdooI
 
   return response;
 };
+  

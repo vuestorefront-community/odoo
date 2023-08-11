@@ -1,17 +1,17 @@
 import { CustomQuery } from '@vue-storefront/middleware';
 import { QueryCountryArgs } from '../../gql/graphql';
 import { Endpoints, OdooIntegrationContext } from '../../types';
-import query from './getCountriesQuery';
+import query from './countryQuery';
 
-export const getCountries: Endpoints['getCountries'] = async (context: OdooIntegrationContext, params: QueryCountryArgs, customQuery?: CustomQuery) => {
+export const getCountry: Endpoints['getCountry'] = async (context: OdooIntegrationContext, params: QueryCountryArgs, customQuery?: CustomQuery) => {
   
-  const { getCountries } = context.extendQuery(
-    customQuery, { getCountries: { query, variables: params } }
+  const { getCountry } = context.extendQuery(
+    customQuery, { getCountry: { query, variables: params } }
   );
 
   const response = await context.client.query({
-    variables: getCountries.variables,
-    query: getCountries.query,
+    variables: getCountry.variables,
+    query: getCountry.query,
   });
 
   return response;

@@ -5,6 +5,8 @@ import customQueryFullProductTemplateListWithoutPrice from '../__mocks__/customQ
 import customQueryCategoryWithoutChild from '../__mocks__/customQueries/customQueryCategoryWithoutChild';
 import customQueryCategoryListWithoutChild from '../__mocks__/customQueries/customQueryCategoryListWithoutChild';
 import customQueryProductVariant from '../__mocks__/customQueries/customQueryProductVariant';
+import customQueryCountryListWithoutState from './customQueries/customQueryCountryListWithoutState';
+
 
 
 const apolloClient = buildClient({
@@ -18,7 +20,8 @@ const customQueries = {
   customQueryFullProductTemplateListWithoutPrice,
   customQueryCategoryWithoutChild,
   customQueryCategoryListWithoutChild,
-  customQueryProductVariant
+  customQueryProductVariant,  
+  customQueryCountryListWithoutState
 }
 
 export const contextMock = {

@@ -1,5 +1,4 @@
 import { gql } from '@apollo/client';
-import { productFragment } from '../fragments/';
 export default gql`
 query CategoryList(
     $search: String

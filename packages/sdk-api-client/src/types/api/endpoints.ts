@@ -1,10 +1,11 @@
 import { ApolloQueryResult, FetchResult } from '@apollo/client';
 import { OdooIntegrationContext } from '..';
-import { Product, Category, QueryProductArgs, QueryCountryArgs, QueryProductsArgs, QueryCategoryArgs, QueryCategoriesArgs, QueryProductVariantArgs, ProductVariant, Countries,
+import { Product, Category, QueryProductArgs, QueryCountriesArgs, QueryProductsArgs, QueryCategoryArgs, QueryCategoriesArgs, QueryProductVariantArgs, ProductVariant, Countries,
   MutationCartAddItemArgs,
   Order,
   CartData,
   Country,
+  QueryCountryArgs,
  } from '../../gql/graphql';
 import { CustomQuery } from '@vue-storefront/middleware';
 /**
@@ -26,6 +27,7 @@ export interface Endpoints {
   cartAdd(context: OdooIntegrationContext, params: MutationCartAddItemArgs, customQuery?: CustomQuery<'cartAdd'>): Promise<FetchResult<{ cartAddItem: { order: Order } }>>;
   cartLoad(context: OdooIntegrationContext, customQuery?: CustomQuery<'cartLoad'>): Promise<ApolloQueryResult<{ cart: CartData }>>;
 
-  getCountries(context: OdooIntegrationContext, params?: QueryCountryArgs, customQuery?: CustomQuery<'getCountries'>): Promise<ApolloQueryResult<{ countries: Countries }>>;
-  getCountryList(context: OdooIntegrationContext, params?: QueryCountryArgs, customQuery?: CustomQuery<'getCountryList'>): Promise<ApolloQueryResult<{ countries: { countries: Country[] } }>>;
+  getCountry(context: OdooIntegrationContext, params?: QueryCountryArgs, customQuery?: CustomQuery<'getCountry'>): Promise<ApolloQueryResult<{ country:  Country  }>>;
+  getCountryList(context: OdooIntegrationContext, params?: QueryCountriesArgs, customQuery?: CustomQuery<'getCountryList'>): Promise<ApolloQueryResult<{ countries: { countries: Country[] } }>>;
+  
 }

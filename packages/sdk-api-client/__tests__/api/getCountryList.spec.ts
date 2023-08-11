@@ -7,24 +7,19 @@ describe('[ODOO-API] getCountryList', () => {
 
   it('calls endpoint', async () => {
     const response = await getCountryList(contextMock, {  });
-    console.log(response)
-   // expect(response.data.categories.categories).toHaveLength(10);
-   // expect(response.data.categories.categories[0].childs).not.toBeDefined()
-  //});
+
+    expect(response.data.countries.countries).toHaveLength(5);
+    expect(response.data.countries.countries[0].states).toBeDefined()
+  });
   
- //it('calls endpoint with customQuery', async () => {
-  //  const response = await getCategoryList(contextMock, { }, { getCategoryList: 'customQueryCategoryListWithoutChild'});
+  it('calls endpoint with parameters', async () => {
+    const spy = jest.spyOn(obj, 'getCountryList')
+
+    await obj.getCountryList(contextMock, { currentPage: 1, filter: { id: 3 }, pageSize: 12, search: '' });
     
- //   expect(response.data.categories.categories[0].childs).toBeDefined()
-  //});
+    expect(spy).toBeCalledTimes(1)
+    expect(spy).toBeCalledWith(contextMock, { currentPage: 1, filter: { id: 3 }, pageSize: 12, search: '' })
+  });
 
- // it('calls endpoint with parameters', async () => {
-  //  const spy = jest.spyOn(obj, 'getCategoryList')
-
-  //  await obj.getCategoryList(contextMock, { currentPage: 1, filter: { id: [3] }, pageSize: 12, search: '' });
-    
-  //  expect(spy).toBeCalledTimes(1)
-  //  expect(spy).toBeCalledWith(contextMock, { currentPage: 1, filter: { id: [3] }, pageSize: 12, search: '' })
- });
-
+  
 });
