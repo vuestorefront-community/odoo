@@ -28,7 +28,7 @@ const actionItems = [
     action: async () => {
       cartDrawerOpen.value = !cartDrawerOpen.value
       const { data } = await sdk.odoo.cartLoad()
-      cart.value = data?.cart
+      cart.value = data?.cart || {}
     }
   },
   {

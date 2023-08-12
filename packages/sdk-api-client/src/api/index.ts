@@ -8,3 +8,5 @@ export { getCountryList } from './countries/list';
 export { getMailingLists } from './mailingLists/list';
 export { cartAdd } from './cart/add';
 export { cartLoad } from './cart/load';
+export { cartRemove } from './cart/remove';
+export { cartUpdate } from './cart/update';

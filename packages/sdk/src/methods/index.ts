@@ -6,4 +6,7 @@ export * from './getProductVariant';
 export * from './getCountryList';
 export * from './cartAdd';
 export * from './cartLoad';
+export * from './cartRemove';
+export * from './cartUpdate';
+
 
