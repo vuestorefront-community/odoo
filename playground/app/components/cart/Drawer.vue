@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { CartData } from '@erpgap/odoo-sdk-api-client';
 import { SfDrawer, SfDrawerPlacement, SfButton, SfIconFavorite, SfIconClose, useTrapFocus } from '@storefront-ui/vue';
 import { ref } from 'vue';
 
@@ -30,7 +31,7 @@ useTrapFocus(drawerRef, { activeState: open });
                 </SfButton>
             </header>
             <div class="p-5 px-10">
-                {{ cart. }}
+                <CartProduct v-for="order in cart?.order?.websiteOrderLine" :orderLine="order" />
             </div>
         </SfDrawer>
     </transition>

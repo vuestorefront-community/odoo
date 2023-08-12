@@ -11,7 +11,11 @@ export default defineNuxtConfig({
       }
       
   },
-
+  runtimeConfig:{
+    public: {
+      odooImageUrl: ''
+    }
+  },
   devtools: {
     enabled: true
   }
