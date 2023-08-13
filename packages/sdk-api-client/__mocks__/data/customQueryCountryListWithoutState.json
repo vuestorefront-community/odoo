@@ -1,0 +1,122 @@
+[
+  {
+    "code": "AD",
+    "id": 1,
+    "imageUrl": "/base/static/img/country_flags/ad.png",
+    "name": "Andorra"
+  },
+  {
+    "code": "AE",
+    "id": 2,
+    "imageUrl": "/base/static/img/country_flags/ae.png",
+    "name": "United Arab Emirates"
+  },
+  {
+    "code": "AF",
+    "id": 3,
+    "imageUrl": "/base/static/img/country_flags/af.png",
+    "name": "Afghanistan"
+  },
+  {
+    "code": "AG",
+    "id": 4,
+    "imageUrl": "/base/static/img/country_flags/ag.png",
+    "name": "Antigua and Barbuda"
+  },
+  {
+    "code": "AI",
+    "id": 5,
+    "imageUrl": "/base/static/img/country_flags/ai.png",
+    "name": "Anguilla"
+  },
+  {
+    "code": "AL",
+    "id": 6,
+    "imageUrl": "/base/static/img/country_flags/al.png",
+    "name": "Albania"
+  },
+  {
+    "code": "AM",
+    "id": 7,
+    "imageUrl": "/base/static/img/country_flags/am.png",
+    "name": "Armenia"
+  },
+  {
+    "code": "AO",
+    "id": 8,
+    "imageUrl": "/base/static/img/country_flags/ao.png",
+    "name": "Angola"
+  },
+  {
+    "code": "AQ",
+    "id": 9,
+    "imageUrl": null,
+    "name": "Antarctica"
+  },
+  {
+    "code": "AR",
+    "id": 10,
+    "imageUrl": "/base/static/img/country_flags/ar.png",
+    "name": "Argentina"
+  },
+  {
+    "code": "AS",
+    "id": 11,
+    "imageUrl": "/base/static/img/country_flags/as.png",
+    "name": "American Samoa"
+  },
+  {
+    "code": "AT",
+    "id": 12,
+    "imageUrl": "/base/static/img/country_flags/at.png",
+    "name": "Austria"
+  },
+  {
+    "code": "AU",
+    "id": 13,
+    "imageUrl": "/base/static/img/country_flags/au.png",
+    "name": "Australia"
+  },
+  {
+    "code": "AW",
+    "id": 14,
+    "imageUrl": "/base/static/img/country_flags/aw.png",
+    "name": "Aruba"
+  },
+  {
+    "code": "AX",
+    "id": 15,
+    "imageUrl": "/base/static/img/country_flags/ax.png",
+    "name": "Åland Islands"
+  },
+  {
+    "code": "AZ",
+    "id": 16,
+    "imageUrl": "/base/static/img/country_flags/az.png",
+    "name": "Azerbaijan"
+  },
+  {
+    "code": "BA",
+    "id": 17,
+    "imageUrl": "/base/static/img/country_flags/ba.png",
+    "name": "Bosnia and Herzegovina"
+  },
+  {
+    "code": "BB",
+    "id": 18,
+    "imageUrl": "/base/static/img/country_flags/bb.png",
+    "name": "Barbados"
+  },
+  {
+    "code": "BD",
+    "id": 19,
+    "imageUrl": "/base/static/img/country_flags/bd.png",
+    "name": "Bangladesh"
+  },
+  {
+    "code": "BE",
+    "id": 20,
+    "imageUrl": "/base/static/img/country_flags/be.png",
+    "name": "Belgium"
+  }
+]

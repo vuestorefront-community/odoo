@@ -1,0 +1,29 @@
+{
+  "code": "AE",
+  "id": 2,
+  "imageUrl": "/base/static/img/country_flags/ae.png",
+  "name": "United Arab Emirates",
+  "states": [
+    {
+      "id": 547
+    },
+    {
+      "id": 546
+    },
+    {
+      "id": 548
+    },
+    {
+      "id": 549
+    },
+    {
+      "id": 550
+    },
+    {
+      "id": 551
+    },
+    {
+      "id": 552
+    }
+  ]
+}

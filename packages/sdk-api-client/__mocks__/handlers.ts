@@ -4,14 +4,16 @@ import product from './data/productTemplate.json'
 import productTemplateList from './data/productTemplateList.json'
 import productVariant from './data/productVariant.json'
 import category from './data/category.json'
-import countries from './data/countries.json'
-
 import categoryList from './data/categoryList.json'
+import country from './data/country.json'
+import countryList from './data/countryList.json'
 import customQueryCategoryWithoutChild from './data/customQueryCategoryWithoutChild.json'
 import customQueryCategoryListWithChilds from './data/customQueryCategoryListWithChilds.json'
 import customQueryFullProductTemplate from './data/customQueryFullProductTemplate.json'
 import customQueryProductTemplateWithoutPrice from './data/customQueryProductTemplateWithoutPrice.json'
 import customQueryProductVariant from './data/customQueryProductVariant.json'
+import customQueryCountryListWithoutState from './data/customQueryCountryListWithoutState.json'
+import mailingLists from './data/mailingLists.json'
 
 export const handlers = [
 
@@ -88,14 +90,36 @@ export const handlers = [
       }),
     )
   }),
-  graphql.query('Countries', (req, res, ctx) => {
+
+  graphql.query('Country', (req, res, ctx) => {
+      return res(
+      ctx.data({ 
+        country: country
+      }),
+    )
+  }),
+
+  graphql.query('CountryList', (req, res, ctx) => {
     return res(
      ctx.data({ 
-      countries: {
-        totalCount: 5,
-        countries: countries
-      }
+      countries: { countries: countryList }
     }),
   )
 }),
+
+graphql.query('CustomQueryCountryListWithoutState', (req, res, ctx) => {
+  return res(
+    ctx.data({ 
+      countries: { countries : customQueryCountryListWithoutState }
+    }),
+  )
+}),
+
+graphql.query('MailingLists', (req, res, ctx) => {
+  return res(
+   ctx.data({ 
+    mailingLists: { mailingLists: mailingLists }
+  }),
+)
+})
 ]
