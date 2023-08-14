@@ -3,6 +3,7 @@ import { OdooIntegrationContext } from '..';
 import { Product, Category, QueryProductArgs, QueryCountriesArgs, QueryProductsArgs, QueryCategoryArgs, QueryCategoriesArgs, QueryProductVariantArgs, ProductVariant, 
   MutationCartAddItemArgs,
   Order,
+  WishlistItem,
   CartData,
   Country,  
   QueryCountryArgs, 
@@ -10,6 +11,10 @@ import { Product, Category, QueryProductArgs, QueryCountriesArgs, QueryProductsA
   QueryMailingListsArgs,
   MutationCartRemoveItemArgs,
   MutationCartUpdateItemArgs,
+  WishlistData,
+  MutationWishlistAddItemArgs,
+  MutationWishlistRemoveItemArgs,  
+  QueryOrdersArgs,
  } from '../../gql/graphql';
 import { CustomQuery } from '@vue-storefront/middleware';
 /**
@@ -33,9 +38,16 @@ export interface Endpoints {
   cartUpdate(context: OdooIntegrationContext, params: MutationCartUpdateItemArgs, customQuery?: CustomQuery<'cartUpdate'>): Promise<FetchResult<{ cartUpdateItem: { order: Order } }>>;
   cartLoad(context: OdooIntegrationContext, customQuery?: CustomQuery<'cartLoad'>): Promise<ApolloQueryResult<{ cart: CartData }>>;
 
+  wishlistRemove(context: OdooIntegrationContext, params: MutationWishlistRemoveItemArgs, customQuery?: CustomQuery<'wishlistRemove'>): Promise<FetchResult<{ wishlistRemoveItem: { wishlistItem: WishlistItem } }>>;
+  wishlistAdd(context: OdooIntegrationContext, params: MutationWishlistAddItemArgs, customQuery?: CustomQuery<'wishlistAdd'>): Promise<FetchResult<{ wishlistAddItem: { wishlistItem: WishlistItem } }>>;
+  wishlistLoad(context: OdooIntegrationContext, customQuery?: CustomQuery<'wishlistLoad'>): Promise<ApolloQueryResult<{ wishlist: WishlistData }>>;
+  
+
   getCountry(context: OdooIntegrationContext, params?: QueryCountryArgs, customQuery?: CustomQuery<'getCountry'>): Promise<ApolloQueryResult<{ country:  Country  }>>;
   getCountryList(context: OdooIntegrationContext, params?: QueryCountriesArgs, customQuery?: CustomQuery<'getCountryList'>): Promise<ApolloQueryResult<{ countries: { countries: Country[] } }>>;
 
   getMailingLists(context: OdooIntegrationContext, params?: QueryMailingListsArgs, customQuery?: CustomQuery<'getMailingLists'>): Promise<ApolloQueryResult<{ mailingLists: { mailingLists: MailingList[] } }>>;
+
+  getOrders(context: OdooIntegrationContext, params?: QueryOrdersArgs, customQuery?: CustomQuery<'getOrders'>): Promise<ApolloQueryResult<{ orders: { orders: Order[] } }>>;
   
 }
