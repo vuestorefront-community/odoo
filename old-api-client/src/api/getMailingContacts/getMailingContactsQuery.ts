@@ -6,7 +6,7 @@ export default gql`
         id
         email
         companyName
-        subscriptionList {
+        subscriptionList {   
           id
           mailingList {
             id

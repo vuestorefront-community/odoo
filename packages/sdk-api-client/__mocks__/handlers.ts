@@ -15,6 +15,7 @@ import customQueryProductVariant from './data/customQueryProductVariant.json'
 import customQueryCountryListWithoutState from './data/customQueryCountryListWithoutState.json'
 import mailingLists from './data/mailingLists.json'
 import orders from './data/orders.json'
+import mailingContacts from './data/mailingContacts.json'
 
 export const handlers = [
 
@@ -128,6 +129,14 @@ graphql.query('Orders', (req, res, ctx) => {
   return res(
   ctx.data({ 
     orders: { orders: orders }
+  }),
+)
+}),
+
+graphql.query('MailingContacts', (req, res, ctx) => {
+  return res(
+  ctx.data({ 
+    mailingContacts: { mailingContacts: mailingContacts }
   }),
 )
 }),

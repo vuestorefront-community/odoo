@@ -15,8 +15,7 @@ describe('[ODOO-API] getOrders', () => {
   
    it('calls endpoint with parameters', async () => {
      const spy = jest.spyOn(obj, 'getOrders')
-     console.log('asdsdsads')
-
+    
      await obj.getOrders(contextMock, { currentPage: 1, filter: { stages: [OrderStage.SalesOrder] }, pageSize: 12 });
     
      expect(spy).toBeCalledTimes(1)
