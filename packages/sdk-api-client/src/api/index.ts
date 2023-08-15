@@ -6,6 +6,8 @@ export { getProductVariant } from './productVariant/get';
 export { getCountry } from './countries/get'
 export { getCountryList } from './countries/list';
 export { getMailingLists } from './mailingLists/list';
+export { getMailingContacts } from './mailingContacts/get';
+export { getOrders } from './order/get';
 export { cartAdd } from './cart/add';
 export { cartLoad } from './cart/load';
 export { cartRemove } from './cart/remove';

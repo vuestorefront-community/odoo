@@ -8,5 +8,9 @@ export * from './cartAdd';
 export * from './cartLoad';
 export * from './cartRemove';
 export * from './cartUpdate';
+export * from './getOrders';
+export * from './getMailingLists';
+export * from './getMailingContacts';
+
 
 
