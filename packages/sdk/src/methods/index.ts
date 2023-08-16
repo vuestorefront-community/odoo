@@ -11,6 +11,8 @@ export * from './cartUpdate';
 export * from './getOrders';
 export * from './getMailingLists';
 export * from './getMailingContacts';
-
+export * from './wishlistAdd';
+export * from './wishlistLoad';
+export * from './wishlistRemove';
 
 

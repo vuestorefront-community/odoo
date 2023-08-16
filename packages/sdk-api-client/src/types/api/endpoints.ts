@@ -40,9 +40,9 @@ export interface Endpoints {
   cartUpdate(context: OdooIntegrationContext, params: MutationCartUpdateItemArgs, customQuery?: CustomQuery<'cartUpdate'>): Promise<FetchResult<{ cartUpdateItem: { order: Order } }>>;
   cartLoad(context: OdooIntegrationContext, customQuery?: CustomQuery<'cartLoad'>): Promise<ApolloQueryResult<{ cart: CartData }>>;
 
-  //wishlistRemove(context: OdooIntegrationContext, params: MutationWishlistRemoveItemArgs, customQuery?: CustomQuery<'wishlistRemove'>): Promise<FetchResult<{ wishlistRemoveItem: { wishlistItem: WishlistItem } }>>;
-  //wishlistAdd(context: OdooIntegrationContext, params: MutationWishlistAddItemArgs, customQuery?: CustomQuery<'wishlistAdd'>): Promise<FetchResult<{ wishlistAddItem: { wishlistItem: WishlistItem } }>>;
-  //wishlistLoad(context: OdooIntegrationContext, customQuery?: CustomQuery<'wishlistLoad'>): Promise<ApolloQueryResult<{ wishlist: WishlistData }>>;
+  wishlistRemove(context: OdooIntegrationContext, params: MutationWishlistRemoveItemArgs, customQuery?: CustomQuery<'wishlistRemove'>): Promise<FetchResult<{ wishlistRemoveItem: { wishlistItem: WishlistItem } }>>;
+  wishlistAdd(context: OdooIntegrationContext, params: MutationWishlistAddItemArgs, customQuery?: CustomQuery<'wishlistAdd'>): Promise<FetchResult<{ wishlistAddItem: { xwishlistItem: WishlistItem } }>>;
+  wishlistLoad(context: OdooIntegrationContext, customQuery?: CustomQuery<'wishlistLoad'>): Promise<ApolloQueryResult<{ wishlist: WishlistData }>>;
   
 
   getCountry(context: OdooIntegrationContext, params?: QueryCountryArgs, customQuery?: CustomQuery<'getCountry'>): Promise<ApolloQueryResult<{ country:  Country  }>>;
