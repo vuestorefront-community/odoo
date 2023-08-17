@@ -15,3 +15,4 @@ export { cartUpdate } from './cart/update';
 export { wishlistAdd } from './wishlist/add';
 export { wishlistLoad } from './wishlist/load';
 export { wishlistRemove } from './wishlist/remove';
+export { getAddress } from './address/get';

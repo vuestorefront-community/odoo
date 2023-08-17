@@ -1,0 +1,23 @@
+[
+    {
+    "id": 672,
+    "name": "home",
+    "city": "Rio de Janeiro",
+    "street": "Rua Pereira de Figueiredo",
+    "street2": null,
+    "state": {
+        "id": 1,
+        "name": "Australian Capital Territory",
+        "code": "ACT"
+    },
+    "zip": "21341030",
+    "email": null,
+    "country": {
+        "id": 1,
+        "name": "Andorra",
+        "code": "AD"
+    },
+    "phone": "987654",
+    "contacts": null
+    }
+]

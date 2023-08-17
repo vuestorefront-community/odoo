@@ -17,6 +17,8 @@ import { Product, Category, QueryProductArgs, QueryCountriesArgs, QueryProductsA
   QueryOrdersArgs,
   QueryMailingContactsArgs,
   MailingContact,
+  AddressFilterInput,
+  AddAddressInput
  } from '../../gql/graphql';
 import { CustomQuery } from '@vue-storefront/middleware';
 /**
@@ -44,6 +46,8 @@ export interface Endpoints {
   wishlistAdd(context: OdooIntegrationContext, params: MutationWishlistAddItemArgs, customQuery?: CustomQuery<'wishlistAdd'>): Promise<FetchResult<{ wishlistAddItem: { xwishlistItem: WishlistItem } }>>;
   wishlistLoad(context: OdooIntegrationContext, customQuery?: CustomQuery<'wishlistLoad'>): Promise<ApolloQueryResult<{ wishlist: WishlistData }>>;
   
+  getAddress(context: OdooIntegrationContext, params?: AddressFilterInput, customQuery?: CustomQuery<'getAddress'>): Promise<ApolloQueryResult<{ addresses: { addresses: AddAddressInput[] } }>>;
+
 
   getCountry(context: OdooIntegrationContext, params?: QueryCountryArgs, customQuery?: CustomQuery<'getCountry'>): Promise<ApolloQueryResult<{ country:  Country  }>>;
   getCountryList(context: OdooIntegrationContext, params?: QueryCountriesArgs, customQuery?: CustomQuery<'getCountryList'>): Promise<ApolloQueryResult<{ countries: { countries: Country[] } }>>;
