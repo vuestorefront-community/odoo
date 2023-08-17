@@ -1,6 +1,6 @@
 {
   "name": "@erpgap/odoo-sdk",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "private": false,
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
@@ -25,9 +25,9 @@
     "axios": "^1.4.0"
   },
   "devDependencies": {
+    "@erpgap/odoo-sdk-api-client": "*",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-replace": "^2.3.3",
-    "@erpgap/odoo-sdk-api-client": "*",
     "@vue-storefront/sdk": "1.0.1",
     "babel-jest": "^29.6.1",
     "msw": "^0.47.3",
