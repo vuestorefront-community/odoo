@@ -16,3 +16,4 @@ export { wishlistAdd } from './wishlist/add';
 export { wishlistLoad } from './wishlist/load';
 export { wishlistRemove } from './wishlist/remove';
 export { getAddress } from './address/get';
+export { addAddress } from './address/add';

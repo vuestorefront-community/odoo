@@ -9,7 +9,7 @@ mutation addAddress($name: String!, $city: String!, $countryId: Int!, $phone: St
     street2
     city
     zip
-    state
+    state 
     {
       id
     }
