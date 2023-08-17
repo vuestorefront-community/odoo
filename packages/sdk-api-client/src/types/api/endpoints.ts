@@ -51,7 +51,7 @@ export interface Endpoints {
   
   getAddress(context: OdooIntegrationContext, params?: AddressFilterInput, customQuery?: CustomQuery<'getAddress'>): Promise<ApolloQueryResult<{ addresses: { addresses: AddAddressInput[] } }>>;
   addAddress(context: OdooIntegrationContext, params: MutationAddAddressArgs, customQuery?: CustomQuery<'addAddress'>): Promise<FetchResult<{ addAddress: { addresses: AddAddressInput }}>>;
-  //addressRemove(context: OdooIntegrationContext, params: DeleteAddressInput, customQuery?: CustomQuery<'addressRemove'>): Promise<FetchResult<{ deleteAddress: { deleteAddress: DeleteAddress } }>>;
+  deleteAddress(context: OdooIntegrationContext, params: DeleteAddressInput, customQuery?: CustomQuery<'deleteAddress'>): Promise<FetchResult<{ deleteAddress: { deleteAddress: DeleteAddress } }>>;
 
   getCountry(context: OdooIntegrationContext, params?: QueryCountryArgs, customQuery?: CustomQuery<'getCountry'>): Promise<ApolloQueryResult<{ country:  Country  }>>;
   getCountryList(context: OdooIntegrationContext, params?: QueryCountriesArgs, customQuery?: CustomQuery<'getCountryList'>): Promise<ApolloQueryResult<{ countries: { countries: Country[] } }>>;

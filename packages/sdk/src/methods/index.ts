@@ -16,5 +16,5 @@ export * from './wishlistLoad';
 export * from './wishlistRemove';
 export * from './addressGet';
 export * from './addressAdd';
-
+export * from './addressRemove';
 
