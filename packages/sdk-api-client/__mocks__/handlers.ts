@@ -16,6 +16,7 @@ import customQueryCountryListWithoutState from './data/customQueryCountryListWit
 import mailingLists from './data/mailingLists.json'
 import orders from './data/orders.json'
 import mailingContacts from './data/mailingContacts.json'
+import addresses from './data/address.json'
 
 export const handlers = [
 
@@ -137,6 +138,14 @@ graphql.query('MailingContacts', (req, res, ctx) => {
   return res(
   ctx.data({ 
     mailingContacts: { mailingContacts: mailingContacts }
+  }),
+)
+}),
+
+graphql.query('Addresses', (req, res, ctx) => {
+  return res(
+  ctx.data({ 
+    addresses: { addresses: addresses  }
   }),
 )
 }),

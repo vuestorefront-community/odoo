@@ -12,3 +12,7 @@ export { cartAdd } from './cart/add';
 export { cartLoad } from './cart/load';
 export { cartRemove } from './cart/remove';
 export { cartUpdate } from './cart/update';
+export { wishlistAdd } from './wishlist/add';
+export { wishlistLoad } from './wishlist/load';
+export { wishlistRemove } from './wishlist/remove';
+export { getAddress } from './address/get';

@@ -1,5 +1,5 @@
 import { FetchResult } from '@apollo/client';
-import { CartData, Order } from '@erpgap/odoo-sdk-api-client';
+import { CartData } from '@erpgap/odoo-sdk-api-client';
 import { CustomQuery } from '@vue-storefront/middleware';
 import { client } from '../../client';
 
