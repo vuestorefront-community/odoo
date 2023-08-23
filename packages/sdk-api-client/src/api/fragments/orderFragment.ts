@@ -3,8 +3,9 @@ order {
   id
   name
   amountTotal
-  amountTax
+  amountTax    
   amountDelivery
+  amountDiscounts
   dateOrder
   orderUrl
   stage
@@ -32,6 +33,12 @@ order {
       imageFilename
       displayName
       combinationInfo
+      attributeValues {
+        id,
+        name,
+        displayType,
+        htmlColor        
+      }
     }
     quantity
     priceTotal
