@@ -1,5 +1,5 @@
 import { CustomQuery } from '@vue-storefront/middleware';
-import { MutationCartAddItemArgs, Order } from '../../gql/graphql';
+import { MutationCartAddItemArgs } from '../../gql/graphql';
 import { Endpoints, OdooIntegrationContext } from '../../types';
 import mutation from './addMutation';
 

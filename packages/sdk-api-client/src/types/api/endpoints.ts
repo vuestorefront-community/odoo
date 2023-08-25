@@ -21,7 +21,9 @@ import { Product, Category, QueryProductArgs, QueryCountriesArgs, QueryProductsA
   AddAddressInput,
   MutationAddAddressArgs,
   DeleteAddressInput,
-  DeleteAddress
+  DeleteAddress,
+  MutationApplyCouponArgs,
+  Coupon
  } from '../../gql/graphql';
 import { CustomQuery } from '@vue-storefront/middleware';
 /**
@@ -44,6 +46,7 @@ export interface Endpoints {
   cartAdd(context: OdooIntegrationContext, params: MutationCartAddItemArgs, customQuery?: CustomQuery<'cartAdd'>): Promise<FetchResult<{ cartAddItem: { order: Order } }>>;
   cartUpdate(context: OdooIntegrationContext, params: MutationCartUpdateItemArgs, customQuery?: CustomQuery<'cartUpdate'>): Promise<FetchResult<{ cartUpdateItem: { order: Order } }>>;
   cartLoad(context: OdooIntegrationContext, customQuery?: CustomQuery<'cartLoad'>): Promise<ApolloQueryResult<{ cart: CartData }>>;
+  cartApplyCoupon(context: OdooIntegrationContext, params: MutationApplyCouponArgs, customQuery?: CustomQuery<'cartApplyCoupon'>): Promise<FetchResult<{ cartApplyCoupon: { coupon: Coupon } }>>;
 
   wishlistRemove(context: OdooIntegrationContext, params: MutationWishlistRemoveItemArgs, customQuery?: CustomQuery<'wishlistRemove'>): Promise<FetchResult<{ wishlistRemoveItem: { wishlistItem: WishlistItem } }>>;
   wishlistAdd(context: OdooIntegrationContext, params: MutationWishlistAddItemArgs, customQuery?: CustomQuery<'wishlistAdd'>): Promise<FetchResult<{ wishlistAddItem: { wishlistItem: WishlistItem } }>>;
