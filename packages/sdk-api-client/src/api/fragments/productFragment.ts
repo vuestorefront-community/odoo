@@ -13,6 +13,17 @@ export default `
       }
     }
   }
+  productVariants{
+    id
+    typeId
+    visibility
+    status
+    name
+    displayName
+    sku
+    barcode
+    description
+  }
   smallImage
   price
   name
