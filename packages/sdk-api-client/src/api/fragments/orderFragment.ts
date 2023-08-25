@@ -9,6 +9,7 @@ order {
   dateOrder
   orderUrl
   stage
+  coupons
   websiteOrderLine {
     id
     name
