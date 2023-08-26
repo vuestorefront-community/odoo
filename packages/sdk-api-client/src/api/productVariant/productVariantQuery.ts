@@ -8,6 +8,17 @@ export default gql`
                 variantPrice
                 variantPriceAfterDiscount
                 variantHasDiscountedPrice
+                alternativeProducts{
+                    id
+                    typeId
+                    visibility
+                    status
+                    name
+                    displayName
+                    sku
+                    barcode
+                    description
+                  }
             }
             productTemplateId
             displayName

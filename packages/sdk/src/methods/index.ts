@@ -8,6 +8,7 @@ export * from './cartAdd';
 export * from './cartLoad';
 export * from './cartRemove';
 export * from './cartUpdate';
+export * from './cartApplyCoupon';
 export * from './getOrders';
 export * from './getMailingLists';
 export * from './getMailingContacts';
@@ -17,4 +18,3 @@ export * from './wishlistRemove';
 export * from './addressGet';
 export * from './addressAdd';
 export * from './addressRemove';
-
