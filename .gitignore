@@ -33,3 +33,4 @@ coverage
 # service workers
 sw.*
 
+build-docs-dd.sh

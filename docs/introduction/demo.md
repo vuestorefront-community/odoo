@@ -1,6 +1,6 @@
 # Demonstration
 
-This documentation is about Odoo integration with Vue Storefront 2. This integration has been developed and maintained by ODOOGAP / PROMPTEQUATION ❤️
+This documentation is about Odoo integration with Vue Storefront 2. This integration has been developed and maintained by ERPGAP / PROMPTEQUATION ❤️
 
 Before anything, you should take a look in our live [demo](https://vsf.labs.odoogap.com). _it's a dev server so could be down sometimes_ :man_shrugging:
 
