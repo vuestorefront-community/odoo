@@ -37,6 +37,7 @@ order {
       imageFilename
       displayName
       combinationInfo
+      slug
       attributeValues {
         id,
         name,
