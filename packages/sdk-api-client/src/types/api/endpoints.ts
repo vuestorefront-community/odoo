@@ -23,7 +23,15 @@ import { Product, Category, QueryProductArgs, QueryCountriesArgs, QueryProductsA
   DeleteAddressInput,
   DeleteAddress,
   MutationApplyCouponArgs,
-  Coupon
+  Coupon,
+  User,
+  Partner,
+  MutationRegisterArgs,
+  MutationLoginArgs,
+  MutationResetPasswordArgs,
+  MutationChangePasswordArgs,
+  UpdateMyAccountParams,
+  MutationUpdatePasswordArgs
  } from '../../gql/graphql';
 import { CustomQuery } from '@vue-storefront/middleware';
 /**
@@ -65,5 +73,12 @@ export interface Endpoints {
 
   getMailingContacts(context: OdooIntegrationContext, params?: QueryMailingContactsArgs, customQuery?: CustomQuery<'getMailingContacts'>): Promise<ApolloQueryResult<{ mailingContacts: { mailingContacts: MailingContact[] } }>>;
   
-  
+  signUpUser(context: OdooIntegrationContext, params: MutationRegisterArgs, customQuery?: CustomQuery<'register'>): Promise<FetchResult<{ user: User}>>;
+  updateMyAccount(context: OdooIntegrationContext, params: UpdateMyAccountParams, customQuery?: CustomQuery<'updateMyAccount'>): Promise<FetchResult<{ partner: Partner}>>;
+  loadUser(context: OdooIntegrationContext, customQuery?: CustomQuery<'loadUser'>): Promise<ApolloQueryResult<{ partner: Partner }>>;
+  logoutUser(context: OdooIntegrationContext, customQuery?: CustomQuery<'logoutUser'>): Promise<FetchResult<{ partner:  Partner }>>;
+  loginUser(context: OdooIntegrationContext, params: MutationLoginArgs, customQuery?: CustomQuery<'loginUser'>): Promise<FetchResult<{ partner: Partner}>>;  
+  sendResetUserPassword(context: OdooIntegrationContext, params: MutationResetPasswordArgs, customQuery?: CustomQuery<'sendResetUserPassword'>): Promise<FetchResult<{ user: User}>>;
+  changePassword(context: OdooIntegrationContext, params: MutationChangePasswordArgs, customQuery?: CustomQuery<'changePassword'>): Promise<FetchResult<{ partner: Partner}>>;
+  updatePassword(context: OdooIntegrationContext, params: MutationUpdatePasswordArgs, customQuery?: CustomQuery<'updatePassword'>): Promise<FetchResult<{ user: User}>>;
 }
