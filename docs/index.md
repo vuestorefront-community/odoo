@@ -1,3 +1,7 @@
+<div align="center">
+<img src="./.vuepress/public/logo.png" alt="Vue Storefront" />
+</div>
+
 <br>
 This is the documentation for Vue Storefront integration with Odoo.
 
