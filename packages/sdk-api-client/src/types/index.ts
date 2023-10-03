@@ -1,4 +1,4 @@
-import { Endpoints } from './api';
+import { Endpoints, QueryMetadataParams } from './api';
 
 /**
  * All available API Endpoints without first argument - `context`, because this prop is set automatically.
@@ -14,6 +14,7 @@ export type ContextualizedEndpoints = {
 
 export type TODO = any;
 
+export { QueryMetadataParams };
 export * from './api';
 export * from './config';
 export * from './context';

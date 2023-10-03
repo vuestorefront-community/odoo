@@ -3,7 +3,7 @@ export { getProductTemplateList } from './productTemplate/list';
 export { getCategory } from './category/get';
 export { getCategoryList } from './category/list';
 export { getProductVariant } from './productVariant/get';
-export { getCountry } from './countries/get'
+export { getCountry } from './countries/get';
 export { getCountryList } from './countries/list';
 export { getMailingLists } from './mailingLists/list';
 export { getMailingContacts } from './mailingContacts/get';
@@ -27,3 +27,4 @@ export { logoutUser } from './user/logout';
 export { sendResetUserPassword } from './user/sendResetUserPassword';
 export { updatePassword } from './user/updatePassword';
 export { changePassword } from './user/changePassword';
+export { query } from './query';

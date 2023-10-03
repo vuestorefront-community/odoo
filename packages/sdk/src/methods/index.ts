@@ -26,3 +26,4 @@ export * from './logoutUser';
 export * from './sendResetUserPassword';
 export * from './updatePassword';
 export * from './changePassword';
+export * from './query';

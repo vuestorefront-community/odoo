@@ -6,6 +6,7 @@ import type { Module } from '@vue-storefront/sdk';
  * Boulerplate module type.
  */
 export interface OdooModuleType extends Module {
+
   /**
    * The connector of the Odoo module.
    */
@@ -17,10 +18,10 @@ export interface OdooModuleType extends Module {
  */
 export const OdooModule = (options: Options): OdooModuleType => ({
   connector: odooConnector({
-    apiUrl: options.apiUrl,
+    apiUrl: options.apiUrl
   }),
   utils: {},
-  subscribers: {},
+  subscribers: {}
 });
 
 export { client } from './client';
