@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import { ProductInput, Product } from '@erpgap/odoo-sdk-api-client';
-import { sdk } from '../sdk.config';
+import { QueryProductVariantArgs, ProductVariantQueryResponse } from '~/graphql'
+import { sdk } from '~/sdk.config';
 
-// const { data } = await sdk.odoo.query<ProductInput, Product>({
-//   query: `query {
-//   product{
-//     id
-//     name
-//   }
-// }`,
-//   cacheKey: ''
-// });
+const { data } = await sdk.odoo.query<QueryProductVariantArgs, ProductVariantQueryResponse>({ queryName: 'productVariantQuery' }, {
+  productTemplateId: 39,
+  combinationId: [12, 305]
+});
+
+console.log(data.productVariant.displayName);
 
 // const { data } = await useAsyncData('ttt', async () => await sdk.odoo.getCountries())
 

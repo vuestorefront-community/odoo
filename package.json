@@ -4,16 +4,10 @@
   "license": "MIT",
   "scripts": {
     "build": "lerna run build",
-    "dev": "concurrently --names \"Frontend,Middleware\" \"npm run dev:app\" \"npm run dev:middleware\"",
+    "dev": "concurrently --names \"Frontend,Server\" \"npm run dev:app\" \"npm run dev:server\"",
     "dev:app": "cd playground/app && npm run dev",
-    "dev:middleware": "cd playground/middleware && npm run dev",
-    "publish:sdk": "node ./scripts/publishApi.js",
-    "publish:sdk-api": "node ./scripts/publishComposable.js",
-    "test": "lerna run test",
-    "codegen": "cd packages/sdk-api-client && yarn codegen",
-    "prepare": "husky install",
-    "commit": "git-cz",
-    "lint": "eslint . --ext .ts,.vue"
+    "dev:server": "cd playground/server && npm run dev",
+    "test": "lerna run test"
   },
   "config": {
     "commitizen": {

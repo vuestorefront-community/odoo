@@ -36,7 +36,7 @@ import { Product, Category, QueryProductArgs, QueryCountriesArgs, QueryProductsA
 import { CustomQuery } from '@vue-storefront/middleware';
 
 export interface QueryMetadataParams {
-  query: string;
+  queryName: string;
   cacheKey?: string
 }
 

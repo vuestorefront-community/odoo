@@ -6,12 +6,10 @@ import customQueryCategoryListWithoutChild from '../__mocks__/customQueries/cust
 import customQueryProductVariant from '../__mocks__/customQueries/customQueryProductVariant';
 import customQueryCountryListWithoutState from './customQueries/customQueryCountryListWithoutState';
 
-
-
 const apolloClient = buildClient({
-  odooGraphqlUrl: "http://localhost:3000/api/graphql",
+  odooGraphqlUrl: 'http://localhost:5000/api/graphql',
   fetchOptions: {}
-})
+});
 
 // Add custom queries like a real application will do
 const customQueries = {
@@ -19,23 +17,23 @@ const customQueries = {
   customQueryFullProductTemplateListWithoutPrice,
   customQueryCategoryWithoutChild,
   customQueryCategoryListWithoutChild,
-  customQueryProductVariant,  
+  customQueryProductVariant,
   customQueryCountryListWithoutState
-}
+};
 
 export const contextMock = {
   config: {} as any,
   client: apolloClient,
   api: jest.fn() as any,
   extendQuery: (customQuery: any, defaults: any) => {
-    const key = Object.keys(defaults)[0]
-    
+    const key = Object.keys(defaults)[0];
+
     return {
       [key]: {
         query: customQuery ? customQueries[customQuery[key]] : defaults[key].query,
-        variables: defaults[key].variables,
+        variables: defaults[key].variables
       }
-    }
+    };
   },
   customQueries
 };

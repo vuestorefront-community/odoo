@@ -7,7 +7,9 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "predev": "yarn codegen",
+    "codegen": "graphql-codegen"
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.6.5",
@@ -18,7 +20,13 @@
     "@nuxtjs/tailwindcss": "^6.6.5",
     "@storefront-ui/typography": "^2.0.0",
     "@storefront-ui/vue": "^2.2.0",
-    "nuxt": "^3.6.0"
+    "nuxt": "^3.6.0",
+    "@graphql-codegen/cli": "^4.0.1",
+    "@graphql-codegen/client-preset": "^4.0.1",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-generic-sdk": "^3.1.0",
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "@typescript-eslint/eslint-plugin": "^6.1.0"
   },
   "resolutions": {
     "consola": "^3.0.0"

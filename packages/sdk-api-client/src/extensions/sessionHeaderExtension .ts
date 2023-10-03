@@ -19,10 +19,10 @@ const sessionHeaderExtension: ApiClientExtension = {
       },
       beforeCall: ({ configuration, callName, args }) => args,
       afterCall: ({ configuration, callName, response }) => {
-        if ((response as any).data.cookie) {
-          res.setHeader('Set-cookie', (response as any).data.cookie);
+        if ((response as any)?.data?.cookie) {
+          res.setHeader('Set-cookie', (response as any)?.data?.cookie);
         }
-        
+
         return response;
       }
 

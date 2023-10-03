@@ -27,17 +27,10 @@
     "axios": "^0.21.1",
     "consola": "^3.0.0",
     "cross-fetch": "^4.0.0",
-    "graphql": "^16.7.1",
     "request-ip": "^3.3.0",
     "winston": "^3.9.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^4.0.1",
-    "@graphql-codegen/client-preset": "^4.0.1",
-    "@graphql-codegen/typescript": "^4.0.1",
-    "@graphql-codegen/typescript-generic-sdk": "^3.1.0",
-    "@graphql-typed-document-node/core": "^3.2.0",
-    "@typescript-eslint/eslint-plugin": "^6.1.0",
     "eslint": "^8.45.0",
     "jsdom": "^17.0.0",
     "typescript": "^5.1.6"
