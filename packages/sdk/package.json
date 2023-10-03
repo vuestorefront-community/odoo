@@ -1,6 +1,6 @@
 {
   "name": "@erpgap/odoo-sdk",
-  "version": "0.1.9",
+  "version": "0.2.1",
   "private": false,
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
