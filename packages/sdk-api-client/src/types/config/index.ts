@@ -9,6 +9,6 @@ export interface MiddlewareConfig {
   sessionAuth?: string,
   requestHost?: string,
   realIp?: string,
-  queries: Record<string, DocumentNode>
+  queries?: Record<string, DocumentNode>
 
 }
