@@ -39,6 +39,9 @@ export interface QueryMetadataParams {
   queryName: string;
   cacheKey?: string
 }
+export interface MutationMetadataParams {
+  mutationName: string;
+}
 
 /**
  * Definition of all API-client methods available in {@link https://docs.vuestorefront.io/v2/advanced/context.html#context-api | context}.
@@ -80,6 +83,7 @@ export interface Endpoints {
   getMailingContacts(context: OdooIntegrationContext, params?: QueryMailingContactsArgs, customQuery?: CustomQuery<'getMailingContacts'>): Promise<ApolloQueryResult<{ mailingContacts: { mailingContacts: MailingContact[] } }>>;
 
   query<ApiParams, ApiResponseType>(context: OdooIntegrationContext, metadata: QueryMetadataParams, params?: ApiParams): Promise<ApolloQueryResult<ApiResponseType>>;
+  mutation<ApiParams, ApiResponseType>(context: OdooIntegrationContext, metadata: MutationMetadataParams, params?: ApiParams): Promise<FetchResult<ApiResponseType>>;
 
   signUpUser(context: OdooIntegrationContext, params: MutationRegisterArgs, customQuery?: CustomQuery<'register'>): Promise<FetchResult<{ user: User}>>;
   updateMyAccount(context: OdooIntegrationContext, params: UpdateMyAccountParams, customQuery?: CustomQuery<'updateMyAccount'>): Promise<FetchResult<{ partner: Partner}>>;

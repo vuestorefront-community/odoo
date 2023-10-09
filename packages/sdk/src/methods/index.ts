@@ -27,3 +27,4 @@ export * from './sendResetUserPassword';
 export * from './updatePassword';
 export * from './changePassword';
 export * from './query';
+export * from './mutation';

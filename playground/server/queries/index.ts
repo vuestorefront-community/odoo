@@ -1,8 +1,15 @@
 import { DocumentNode } from '@apollo/client';
-import productVariantQuery from './productVariantQuery';
+import ProductVariantQuery from './ProductVariantQuery';
 
-const queries : Record<string, DocumentNode> = {
-    productVariantQuery
+enum QueryName {
+    ProductVariantQuery = 'ProductVariantQuery'
+  }
+
+const Queries : Record<QueryName, DocumentNode> = {
+    ProductVariantQuery
 }
 
-export default queries
+export {
+    Queries,
+    QueryName
+}

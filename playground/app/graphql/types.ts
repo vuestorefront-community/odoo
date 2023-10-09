@@ -1,5 +1,11 @@
-import { ProductVariant } from "@erpgap/odoo-sdk-api-client";
+import { Partner, ProductVariant } from "~/graphql";
 
-export type ProductVariantQueryResponse {
+export type ProductVariantQueryResponse = {
     productVariant: ProductVariant
+}
+
+export type LoginMutationResponse  = {
+    login: {
+        partner: Partner
+    }
 }

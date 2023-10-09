@@ -28,3 +28,4 @@ export { sendResetUserPassword } from './user/sendResetUserPassword';
 export { updatePassword } from './user/updatePassword';
 export { changePassword } from './user/changePassword';
 export { query } from './query';
+export { mutation } from './mutation';

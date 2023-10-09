@@ -1,4 +1,3 @@
-import { DocumentNode, gql } from '@apollo/client';
 import { Endpoints, OdooIntegrationContext, QueryMetadataParams } from '../../types';
 
 export const query: Endpoints['query'] = async <ApiParams, ApiResponseType>(context: OdooIntegrationContext, metadata: QueryMetadataParams, params?: ApiParams) => {
