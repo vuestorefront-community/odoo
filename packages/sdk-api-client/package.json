@@ -1,6 +1,6 @@
 {
   "name": "@erpgap/odoo-sdk-api-client",
-  "version": "0.2.5",
+  "version": "0.3.1",
   "private": false,
   "sideEffects": false,
   "server": "server/index.js",
@@ -37,7 +37,8 @@
   },
   "files": [
     "lib/**/*",
-    "server/**/*"
+    "server/**/*",
+    "src/**/*"
   ],
   "publishConfig": {
     "access": "public"

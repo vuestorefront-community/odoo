@@ -1,20 +1,12 @@
 
 import { ApolloClient, ApolloLink, InMemoryCache, createHttpLink } from '@apollo/client';
+import { onError } from "@apollo/client/link/error";
 import { MiddlewareConfig } from '../index';
+import logBuilder from './logBuilder'
 
 import fetch from 'cross-fetch';
 
 const buildClient = (settings: MiddlewareConfig) => {
-
-  // const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
-  //   if (graphQLErrors) {
-  //     graphQLErrors.map((error) => logBuilder({label: '[GRAPHQL ERROR]', ...error, operation }));
-  //   }
-
-  //   if (networkError) {
-  //     logBuilder({ label: '[NETWORK ERROR]', message: networkError });
-  //   }
-  // });
 
 
   const httpLink = createHttpLink({
@@ -43,7 +35,6 @@ const buildClient = (settings: MiddlewareConfig) => {
   });
 
   const apolloLink = ApolloLink.from([
-    //errorLink,
     afterwareLink.concat(httpLink)
   ]);
 
