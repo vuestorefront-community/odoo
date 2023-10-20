@@ -1,0 +1,39 @@
+{
+  "name": "@erp-gap/server",
+  "private": true,
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=16.x"
+  },
+  "scripts": {
+    "dev": "nodemon",
+    "start": "nodemon",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
+  },
+  "dependencies": {
+    "@erpgap/odoo-sdk-api-client": "*",
+    "@vue-storefront/middleware": "3.5.1",
+    "consola": "^3.0.0",
+    "cors": "^2.8.5",
+    "graphql": "^16.8.1",
+    "graphql-codegen": "^0.4.0",
+    "nodemon": "^3.0.0",
+    "ts-node-dev": "^2.0.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/client-preset": "^4.0.1",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-generic-sdk": "^3.1.0",
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "@types/express": "^4.17.13",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "eslint": "^8.50.0",
+    "eslint-plugin-prettier": "5.0.0"
+  },
+  "files": [
+    "lib/**/*",
+    "server/**/*"
+  ]
+}

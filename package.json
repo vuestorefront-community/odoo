@@ -4,9 +4,9 @@
   "license": "MIT",
   "scripts": {
     "build": "lerna run build",
-    "dev": "concurrently --names \"Frontend,Server\" \"npm run dev:app\" \"npm run dev:server\"",
-    "dev:app": "cd playground/app && npm run dev",
-    "dev:server": "cd playground/server && npm run dev",
+    "dev": "concurrently --names \"Frontend\" \"npm run dev:app\"",
+    "dev:app": "cd playground-nuxt/app && npm run dev",
+    "dev:server": "cd playground-nuxt/server && npm run dev",
     "test": "lerna run test"
   },
   "config": {
@@ -50,7 +50,7 @@
   },
   "workspaces": [
     "packages/*",
-    "playground/*"
+    "playground-nuxt/*"
   ],
   "dependencies": {
     "@commitlint/prompt": "^17.6.7",

@@ -1,0 +1,35 @@
+{
+  "name": "nuxt-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "predev": "yarn codegen",
+    "codegen": "graphql-codegen"
+  },
+  "dependencies": {
+    "@erpgap/odoo-sdk-api-client": "*",
+    "@nuxtjs/tailwindcss": "^6.6.5",
+    "clipboard": "^2.0.11",
+    "vue3-json-viewer": "^2.2.2"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^4.0.1",
+    "@graphql-codegen/client-preset": "^4.0.1",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-generic-sdk": "^3.1.0",
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "@nuxtjs/tailwindcss": "^6.6.5",
+    "@storefront-ui/typography": "^2.0.0",
+    "@storefront-ui/vue": "^2.2.0",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "nuxt": "^3.8.0"
+  },
+  "resolutions": {
+    "consola": "^3.0.0"
+  }
+}
