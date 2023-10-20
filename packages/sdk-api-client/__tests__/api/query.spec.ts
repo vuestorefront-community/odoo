@@ -5,6 +5,15 @@ import customQueryCountryListWithoutState from '../../__mocks__/customQueries/cu
 
 describe('[ODOO-API] query', () => {
 
+
+  it('throw exception because query object is not given', async () => {
+    try {
+      await query(contextMock, null as any);
+    }catch(e) {
+      expect(e).toBe('Developer Error: queryName is required')
+    }
+  });
+
   it('throw exception because query name is not given', async () => {
     try {
       await query(contextMock, { queryName: '' });

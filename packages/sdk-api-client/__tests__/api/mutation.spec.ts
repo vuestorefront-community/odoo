@@ -2,9 +2,17 @@ import { mutation } from '../../src/api';
 import { contextMock } from '../../__mocks__/context.mock';
 import FullProduct from '../../__mocks__/customQueries/customQueryFullProductTemplateListWithoutPrice'
 
-describe('[ODOO-API] query', () => {
+describe('[ODOO-API] mutation', () => {
 
-  it('throw exception because query name is not given', async () => {
+  it('throw exception because mutation object is not given', async () => {
+    try {
+      await mutation(contextMock, null as any);
+    }catch(e) {
+      expect(e).toBe('Developer Error: mutationName is required')
+    }
+  });
+
+  it('throw exception because mutation name is not given', async () => {
     try {
       await mutation(contextMock, { mutationName: '' });
     }catch(e) {
@@ -12,7 +20,7 @@ describe('[ODOO-API] query', () => {
     }
   });
 
-  it('throw exception because queries are not configured in middleware', async () => {
+  it('throw exception because mutations are not configured in middleware', async () => {
     try {
       await mutation(contextMock, { mutationName: 'LoginMutation' });
     }catch(e) {
@@ -20,7 +28,7 @@ describe('[ODOO-API] query', () => {
     }
   });
 
-  it('throw exception because queries are not configured in middleware', async () => {
+  it('throw exception because mutations are not configured in middleware', async () => {
     contextMock.config.queries = {
       GetProduct: FullProduct
     }

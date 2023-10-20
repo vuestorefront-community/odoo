@@ -3,7 +3,7 @@ import consola from 'consola';
 
 export const query: Endpoints['query'] = async <ApiParams, ApiResponseType>(context: OdooIntegrationContext, metadata: QueryMetadataParams, params?: ApiParams) => {
 
-  if(!metadata.queryName) {
+  if(!metadata || !metadata.queryName) {
     const msg = 'Developer Error: queryName is required'
     consola.error(msg);
     throw msg;
