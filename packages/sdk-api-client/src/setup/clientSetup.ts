@@ -25,7 +25,7 @@ const buildClient = (settings: MiddlewareConfig) => {
     fetch,
     fetchOptions: settings.fetchOptions,
     headers: {
-      Cookie: settings.sessionAuth,
+      Cookie: `session_id=${settings.sessionAuth}`,  
       'resquest-host': settings.requestHost,
       'REAL-IP': settings.realIp
     }

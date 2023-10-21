@@ -1,12 +1,18 @@
-import { createApiClient } from '@erpgap/odoo-sdk-api-client/server';
+import { createApiClient } from '../../../../packages/sdk-api-client/src/index.server';
+import { MiddlewareConfig } from '../../../../packages/sdk-api-client/src/index';
 import { Queries } from '~/server/queries';
 import { Mutations } from '~/server/mutations';
 
 export default defineEventHandler((event) => {
 
-  event.context.apolloClient = createApiClient({
+  const config : MiddlewareConfig = {
     odooGraphqlUrl: `${process.env.ODOO_BASE_URL}graphql/vsf`,
-    queries: { ...Queries, ...Mutations }
-  });
+    queries: { ...Queries, ...Mutations },
+    realIp: getRequestIP(event),
+    sessionAuth: parseCookies(event).session_id,
+    requestHost: getRequestHost(event)
+  };
+  
+  event.context.apolloClient = createApiClient(config);
 });
 

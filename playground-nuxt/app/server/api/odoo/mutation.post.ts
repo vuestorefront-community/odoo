@@ -5,6 +5,12 @@ export default defineEventHandler(async (event) => {
 
   const api: Endpoints = event.context.apolloClient.api;
 
-  return await api.mutation(body[0], body[1]);
+  const data = await api.mutation(body?.[0], body?.[1]);
+
+  if ((data.data as any)?.cookie) {
+    appendResponseHeader(event, 'Set-cookie', (data.data as any)?.cookie);
+  }
+
+  return data;
 });
 
