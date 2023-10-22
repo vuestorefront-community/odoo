@@ -1,7 +1,7 @@
 import { FetchResult } from '@apollo/client';
 import { MutationMetadataParams } from '@erpgap/odoo-sdk-api-client';
-import { client } from '../../client';
- 
+import { client } from '../../index';
+
 /**
  * Make the query
  *

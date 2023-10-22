@@ -18,17 +18,12 @@ const buildClient = (settings: MiddlewareConfig) => {
     }
   });
 
-
   const httpLink = createHttpLink({
     uri: settings.odooGraphqlUrl,
     credentials: 'include',
     fetch,
     fetchOptions: settings.fetchOptions,
-    headers: {
-      Cookie: `session_id=${settings.sessionAuth}`,  
-      'resquest-host': settings.requestHost,
-      'REAL-IP': settings.realIp
-    }
+    headers: settings.headers
   });
 
   const afterwareLink = new ApolloLink((operation, forward) => {

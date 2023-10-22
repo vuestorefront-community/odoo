@@ -11,6 +11,7 @@ type Methods = typeof methods;
  * Initialize the Odoo connector.
  */
 export const odooConnector = (options: Options): Methods => {
+
   client.defaults.baseURL = options.apiUrl
 
   return methods;

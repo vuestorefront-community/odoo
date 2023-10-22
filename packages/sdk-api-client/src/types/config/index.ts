@@ -6,9 +6,7 @@ import { DocumentNode } from '@apollo/client';
 export interface MiddlewareConfig {
   odooGraphqlUrl: string;
   fetchOptions?: any;
-  sessionAuth?: string,
-  requestHost?: string,
-  realIp?: string,
+  headers?: Record<string, string>
   queries?: Record<string, DocumentNode>
 
 }

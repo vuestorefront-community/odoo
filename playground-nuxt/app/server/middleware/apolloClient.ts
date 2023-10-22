@@ -5,14 +5,20 @@ import { Mutations } from '~/server/mutations';
 
 export default defineEventHandler((event) => {
 
-  const config : MiddlewareConfig = {
-    odooGraphqlUrl: `${process.env.ODOO_BASE_URL}graphql/vsf`,
-    queries: { ...Queries, ...Mutations },
-    realIp: getRequestIP(event),
-    sessionAuth: parseCookies(event).session_id,
-    requestHost: getRequestHost(event)
-  };
+  if(event.method == 'POST') {
+    const config : MiddlewareConfig = {
+      odooGraphqlUrl: `${process.env.ODOO_BASE_URL}graphql/vsf`,
+      queries: { ...Queries, ...Mutations },
+      headers: {
+          Cookie: `session_id=${parseCookies(event).session_id}`,  
+          'resquest-host': getRequestHost(event),
+          'REAL-IP': getRequestIP(event) || ''
+      }
+    };
+    
+    event.context.apolloClient = createApiClient(config);
+  }
+
   
-  event.context.apolloClient = createApiClient(config);
 });
 
