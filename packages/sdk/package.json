@@ -1,5 +1,5 @@
 {
-  "name": "@erpgap/odoo-sdk",
+  "name": "@vue-storefront/odoo-sdk",
   "version": "0.4.8",
   "private": false,
   "main": "lib/index.cjs.js",

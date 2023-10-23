@@ -1,5 +1,5 @@
 {
-  "name": "@erpgap/odoo-sdk-api-client",
+  "name": "@vue-storefront/odoo-sdk-api-client",
   "version": "0.4.2",
   "private": false,
   "sideEffects": false,
