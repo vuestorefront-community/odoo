@@ -1,0 +1,24 @@
+{
+  "name": "@erpgap/odoo-nuxt-layer",
+  "type": "module",
+  "version": "0.0.1",
+  "main": "./nuxt.config.ts",
+  "files": [
+    "server"
+  ],
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "lint": "eslint .",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@erpgap/odoo-sdk-api-client": "*",
+    "@nuxt/eslint-config": "^0.1.1",
+    "eslint": "^8.28.0",
+    "nuxt": "^3.8.0",
+    "typescript": "^4.9.3"
+  }
+}

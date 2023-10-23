@@ -5,22 +5,6 @@ import { MutationName } from '~/server/mutations';
 
 const { $sdk } = useNuxtApp();
 
-const { } = await useFetch('/api/odoo/mutation', {
-  method: 'POST',
-  body: [
-    { mutationName: MutationName.LoginMutation }, {
-      email: "ergap@odoo.com",
-      password: "123"
-    }
-  ]
-})
-// await useFetch('/api/odoo/query', {
-//   method: 'POST',
-//   body: [
-//     { queryName: QueryName.LoadUserQuery }
-//   ]
-// })
-
 onMounted(async () => {
   const data = await $sdk().odoo.mutation<MutationLoginArgs, LoginMutationResponse>({ mutationName: MutationName.LoginMutation }, {
     email: "ergap@odoo.com",
