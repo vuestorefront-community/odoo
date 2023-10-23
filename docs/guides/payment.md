@@ -17,6 +17,4 @@ some lifecycle hooks for the payment
 
 
 ## Adyen external
-Oddo will create a dinamic form 
-We build this form and on click, he send to external adyen new tab
-Our AdyenExternalPaymentProvider handle all this logic using the user session.
+Oddo will create a dinamic form. We build this form and on click, he send to external adyen new tab. Our **AdyenExternalPaymentProvider** handle all this logic using the user session.
