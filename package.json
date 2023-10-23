@@ -7,7 +7,10 @@
     "dev": "concurrently --names \"Frontend\" \"npm run dev:app\"",
     "dev:app": "cd playground-nuxt/app && npm run dev",
     "dev:server": "cd playground-nuxt/server && npm run dev",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "changesets:version": "yarn changeset version && YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install && yarn prepare:docs",
+    "changesets:publish": "yarn build && yarn changeset publish",
+    "prepare:docs": "cd docs && yarn install && yarn api-extract && yarn copy-changelog"
   },
   "config": {
     "commitizen": {
