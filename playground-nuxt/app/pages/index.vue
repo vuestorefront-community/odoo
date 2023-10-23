@@ -5,21 +5,33 @@ import { MutationName } from '~/server/mutations';
 
 const { $sdk } = useNuxtApp();
 
-// await useFetch('/api/odoo/mutation', {
+const { } = await useFetch('/api/odoo/mutation', {
+  method: 'POST',
+  body: [
+    { mutationName: MutationName.LoginMutation }, {
+      email: "ergap@odoo.com",
+      password: "123"
+    }
+  ]
+})
+// await useFetch('/api/odoo/query', {
 //   method: 'POST',
 //   body: [
-//     { mutationName: MutationName.LoginMutation }, {
-//       email: "ergap@odoo.com",
-//       password: "123"
-//     }
+//     { queryName: QueryName.LoadUserQuery }
 //   ]
 // })
-const { data } = await $sdk().odoo.mutation<MutationLoginArgs, LoginMutationResponse>({ mutationName: MutationName.LoginMutation }, {
-  email: "ergap@odoo.com",
-  password: "123"
-});
 
-const { data: asa } = await $sdk().odoo.query<QueryProductVariantArgs, ProductVariantQueryResponse>({ queryName: QueryName.LoadUserQuery }, {});
+onMounted(async () => {
+  const data = await $sdk().odoo.mutation<MutationLoginArgs, LoginMutationResponse>({ mutationName: MutationName.LoginMutation }, {
+    email: "ergap@odoo.com",
+    password: "123"
+  });
+
+  console.log(data);
+
+
+  const { data: asa } = await $sdk().odoo.query<QueryProductVariantArgs, ProductVariantQueryResponse>({ queryName: QueryName.LoadUserQuery }, {});
+})
 
 
 

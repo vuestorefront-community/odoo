@@ -7,8 +7,6 @@ import { client } from '../../client';
  *
  * @example
  */
-export async function query<ApiParams, ApiResponseType>(metadata: QueryMetadataParams, params?: ApiParams): Promise<ApolloQueryResult<ApiResponseType>> {
-  const { data } = await client.post<ApolloQueryResult<ApiResponseType>>('query', [metadata, params]);
-
-  return data;
+export async function query<ApiParams, ApiResponseType>(metadata: QueryMetadataParams, params?: ApiParams): Promise<ApiResponseType> {
+  return await client.post('query', [metadata, params]);
 }

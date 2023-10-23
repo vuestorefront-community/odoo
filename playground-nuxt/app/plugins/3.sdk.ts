@@ -6,7 +6,8 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   
   const sdkConfig = {
     odoo: buildModule<OdooModuleType>(OdooModule, {
-      apiUrl: `${config.public.middlewareUrl}api/odoo/`
+      apiUrl: `${config.public.middlewareUrl}api/odoo/`,
+      ofetch: $fetch
     })
   };
 

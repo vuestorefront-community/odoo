@@ -7,8 +7,6 @@ import { client } from '../../index';
  *
  * @example
  */
-export async function mutation<ApiParams, ApiResponseType>(metadata: MutationMetadataParams, params?: ApiParams): Promise<FetchResult<ApiResponseType>> {
-  const { data } = await client.post<FetchResult<ApiResponseType>>('mutation', [metadata, params]);
-
-  return data;
+export async function mutation<ApiParams, ApiResponseType,>(metadata: MutationMetadataParams, params?: ApiParams): Promise<ApiResponseType> {
+  return await client.post('mutation', [metadata, params]);
 }

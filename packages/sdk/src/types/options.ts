@@ -1,10 +1,10 @@
-/**
- * Options for the SDK module.
- */
+import { AxiosInstance } from "axios";
+import { $Fetch } from "ofetch";
+
+/** Options for the SDK module */
 export interface Options {
-  /**
-   * The API URL of the client-side environment.
-   */
+  /** The API URL of the client-side environment */
   apiUrl: string;
-  fetch?: any;
+  /** Custom fetch instance */
+  ofetch?: $Fetch;
 }
