@@ -1,8 +1,0 @@
-# Overview
-
-## Architecture
-
-## Middleware
-
-## Sdk
-

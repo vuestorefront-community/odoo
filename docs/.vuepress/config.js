@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Odoo Integration',
+  title: 'Vue Storefront 2 for Odoo Integration',
   base: '/odoo/',
   description: 'This project is a Odoo integration documentation',
   head: [['link', { rel: 'icon', href: '/favicon.png' }]],
@@ -33,16 +33,17 @@ module.exports = {
           title: 'Essentials',
           collapsable: false,
           children: [
-            ['/', 'Introduction'],
-
-            '/essentials/maintainers'
+            ['/', 'Introduction']
           ]
         },
         {
           title: 'VSF SDK',
           collapsable: false,
           children: [
-            ['/overview/', 'Overview'],
+            ['/sdk/architecture', 'Architecture'],
+            ['/sdk/bootstrap', 'Getting started'],
+            ['/sdk/middleware', 'Middleware'],
+            ['/sdk/methods', 'Methods'],
           ]
         },
         {
