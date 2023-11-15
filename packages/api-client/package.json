@@ -1,6 +1,6 @@
 {
-  "name": "@vue-storefront/odoo-api",
-  "version": "1.5.3-rc.9",
+  "name": "@erpgap/odoo-api",
+  "version": "1.6.2",
   "private": false,
   "sideEffects": false,
   "server": "server/index.js",
@@ -39,7 +39,8 @@
   "files": [
     "lib/**/*",
     "server/**/*",
-    "types/**/*"
+    "types/**/*",
+    "src/**/*"
   ],
   "publishConfig": {
     "access": "public"
