@@ -6,7 +6,7 @@ import {
   UseUserShippingFactoryParams
 } from '@vue-storefront/core';
 import { Partner, GraphQlAddAddressParams, GraphQlDeleteAddressParams, GraphQlUpdateAddressParams, AddressType } from '@vue-storefront/odoo-api';
-import { throwErrors } from '@vue-storefront/odoo/src/helpers/graphqlError';
+import { throwErrors } from '../../helpers/index';
 const params: UseUserShippingFactoryParams<Partner[], any> = {
   addAddress: async (context: Context, { address, shipping, customQuery }) => {
 

@@ -1,6 +1,6 @@
 {
-  "name": "@vue-storefront/odoo",
-  "version": "1.5.3-rc.9",
+  "name": "@erpgap/odoo",
+  "version": "1.6.2",
   "private": false,
   "sideEffects": false,
   "main": "lib/index.cjs.js",
@@ -17,13 +17,12 @@
     "update:update": "ncu -u"
   },
   "dependencies": {
+    "wrap-ansi": "7.0.0",
     "@nuxtjs/composition-api": "0.31.0",
     "@vue-storefront/core": "2.7.5",
-    "@vue-storefront/odoo-api": "1.5.3-rc.9",
+    "@vue-storefront/odoo-api": "npm:@erpgap/odoo-api@1.6.2",
+    "@erpgap/odoo-api": "1.6.2",
     "winston": "^3.8.2"
-  },
-  "peerDependencies": {
-    "@vue/composition-api": "1.2.5"
   },
   "files": [
     "lib/**/*",

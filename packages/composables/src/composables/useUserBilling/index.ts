@@ -6,8 +6,7 @@ import {
   UseUserBillingFactoryParams
 } from '@vue-storefront/core';
 import { GraphQlAddAddressParams, GraphQlDeleteAddressParams, GraphQlUpdateAddressParams, Partner, AddressType } from '@vue-storefront/odoo-api';
-import { throwErrors } from '@vue-storefront/odoo/src/helpers/graphqlError';
-
+import { throwErrors } from '../../helpers/index';
 const params: UseUserBillingFactoryParams<Partner[], any> = {
   addAddress: async (context: Context, { address, billing, customQuery }) => {
 

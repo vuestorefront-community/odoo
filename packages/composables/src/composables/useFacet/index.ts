@@ -1,5 +1,5 @@
 import { Context, useFacetFactory } from '@vue-storefront/core';
-import { ParamsFromUrl, SearchResultParams } from '@vue-storefront/odoo-api/src/types/types';
+import { ParamsFromUrl, SearchResultParams } from '@vue-storefront/odoo-api';
 import { FacetResultsData } from '../types';
 
 const factoryParams = {

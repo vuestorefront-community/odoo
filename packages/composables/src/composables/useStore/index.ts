@@ -1,4 +1,4 @@
-import { Store } from '@vue-storefront/odoo-api/src';
+import { Store } from '@vue-storefront/odoo-api';
 import { Context, useStoreFactory } from '@vue-storefront/core';
 
 const useStore = useStoreFactory<Store>({

@@ -6,7 +6,7 @@ import {
   useUserOrderFactory,
   UseUserOrderFactoryParams
 } from '@vue-storefront/core';
-import { GraphQlOrdersParams, Order } from '@vue-storefront/odoo-api/src/types';
+import { GraphQlOrdersParams, Order } from '@vue-storefront/odoo-api';
 
 const params: UseUserOrderFactoryParams<Order[], GraphQlOrdersParams> = {
   searchOrders: async (context: Context, params: GraphQlOrdersParams & { customQuery?: CustomQuery }) => {

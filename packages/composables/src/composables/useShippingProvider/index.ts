@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useShippingProviderFactory, UseShippingProviderParams, Context} from '@vue-storefront/core';
 import { ShippingInfo, ShippingMethod } from '@vue-storefront/odoo-api';
-import { throwErrors } from '@vue-storefront/odoo/src/helpers/graphqlError';
+import { throwErrors } from '../../helpers/index';
 import useCart from '../useCart';
 
 interface ShippingProviderState {

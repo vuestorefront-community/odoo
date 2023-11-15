@@ -14,7 +14,7 @@ interface LooseObject {
 }
 
 function getGqlString(doc: DocumentNode) {
-  return doc.loc && doc.loc.source.body?.replaceAll('\n', '');
+  return doc.loc && (doc?.loc?.source?.body?.replaceAll('\n', '') || '');
 }
 
 export default ({ label, message, locations, path, operation }: LooseObject) : void=> {
@@ -31,7 +31,7 @@ export default ({ label, message, locations, path, operation }: LooseObject) : v
   }
 
   if (process.env.NODE_LOG_LEVEL === 'TRACE') {
-    log.query = getGqlString(operation.query);
+    log.query = getGqlString(operation?.query || {});
     log.variables = operation.variables;
   }
 
