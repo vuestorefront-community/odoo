@@ -24,6 +24,7 @@ const onCreate = (settings: Config): { config: Config; client: ClientInstance } 
     ...settings
   });
   let redisTagClient = null;
+  let wareHouseRedisClient = null;
 
   if (settings.redisClient) {
     const options = {
@@ -33,11 +34,22 @@ const onCreate = (settings: Config): { config: Config; client: ClientInstance } 
       db: process.env.REDIS_DATABASE || 0
     };
 
+    const optionsDatabase2 = {
+      host: process.env.REDIS_HOST,
+      port: process.env.REDIS_PORT,
+      password: process.env.REDIS_PASSWORD || null,
+      db: process.env.REDIS_DATABASE_WAREHOUSES || 2
+    };
+
     if ((process as any).superRedis) {
       redisTagClient = (process as any).superRedis;
+      wareHouseRedisClient = (process as any).wareHouseRedis;
     } else {
       (process as any).superRedis = new Redis({ redis: options });
+      (process as any).wareHouseRedis = new Redis({ redis: optionsDatabase2 });
+
       redisTagClient = (process as any).superRedis;
+      wareHouseRedisClient = (process as any).wareHouseRedis;
     }
 
   }
@@ -45,6 +57,7 @@ const onCreate = (settings: Config): { config: Config; client: ClientInstance } 
   return {
     config,
     client: {
+      wareHouseRedisClient,
       redisTagClient,
       apollo: apolloClient
     }

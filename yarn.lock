@@ -2693,10 +2693,10 @@
     lodash-es "^4.17.15"
     vue "^2.6.11"
 
-"@vue-storefront/odoo-api@npm:@erpgap/odoo-api@1.6.2":
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/@erpgap/odoo-api/-/odoo-api-1.6.2.tgz#c723e172787224927399e483bdd390efdef802d5"
-  integrity sha512-H9FqKKJ2UJOAJtRxgtZHafr50PP0IkmrxBOeR7nUQ1pNwhr7A2RkYjOXw01bQeIeSG/UAU2ug7T+2L1CnBEKVQ==
+"@vue-storefront/odoo-api@npm:@erpgap/odoo-api@1.6.5":
+  version "1.6.5"
+  resolved "https://registry.yarnpkg.com/@erpgap/odoo-api/-/odoo-api-1.6.5.tgz#9c571bc34ed9a1fd92a4edc04c67e8076ae3a47a"
+  integrity sha512-jqxjM7bKCJtkGOm+69flU2WyFIdMw77WopseYoWzC8QyAER7afs87rKg2EOBsPTYmUGyYxyHgSCWbKQM2tfLgw==
   dependencies:
     "@vue-storefront/core" "2.7.5"
     apollo-cache-inmemory "^1.6.6"

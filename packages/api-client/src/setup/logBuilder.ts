@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { DocumentNode } from 'apollo-link';
 import { Logger } from 'winston';
+import { print } from 'graphql';
 
 interface LooseObject {
     label?: string,
@@ -14,7 +15,7 @@ interface LooseObject {
 }
 
 function getGqlString(doc: DocumentNode) {
-  return doc.loc && (doc?.loc?.source?.body?.replaceAll('\n', '') || '');
+  return print(doc);
 }
 
 export default ({ label, message, locations, path, operation }: LooseObject) : void=> {
@@ -31,7 +32,7 @@ export default ({ label, message, locations, path, operation }: LooseObject) : v
   }
 
   if (process.env.NODE_LOG_LEVEL === 'TRACE') {
-    log.query = getGqlString(operation?.query || {});
+    log.query = getGqlString(operation.query);
     log.variables = operation.variables;
   }
 
