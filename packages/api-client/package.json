@@ -1,6 +1,6 @@
 {
   "name": "@erpgap/odoo-api",
-  "version": "1.6.8",
+  "version": "1.6.9",
   "private": false,
   "sideEffects": false,
   "server": "server/index.js",

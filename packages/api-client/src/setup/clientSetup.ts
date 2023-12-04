@@ -5,6 +5,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Config, ClientInstance } from './config';
 import { Logger } from 'winston';
 import Redis from 'redis-tag-cache';
+import IoRedis from 'ioredis';
 
 const onCreate = (settings: Config): { config: Config; client: ClientInstance } => {
   const logger : Logger = (process as any).winstonLog;
@@ -36,9 +37,9 @@ const onCreate = (settings: Config): { config: Config; client: ClientInstance } 
 
     const optionsDatabase2 = {
       host: process.env.REDIS_HOST,
-      port: process.env.REDIS_PORT,
+      port: Number(process.env.REDIS_PORT),
       password: process.env.REDIS_PASSWORD || null,
-      db: process.env.REDIS_DATABASE_WAREHOUSES || 2
+      db: Number(process.env.REDIS_WAREHOUSE_DATABASE) || 2
     };
 
     if ((process as any).superRedis) {
@@ -46,7 +47,7 @@ const onCreate = (settings: Config): { config: Config; client: ClientInstance } 
       wareHouseRedisClient = (process as any).wareHouseRedis;
     } else {
       (process as any).superRedis = new Redis({ redis: options });
-      (process as any).wareHouseRedis = new Redis({ redis: optionsDatabase2 });
+      (process as any).wareHouseRedis = new IoRedis(optionsDatabase2);
 
       redisTagClient = (process as any).superRedis;
       wareHouseRedisClient = (process as any).wareHouseRedis;
