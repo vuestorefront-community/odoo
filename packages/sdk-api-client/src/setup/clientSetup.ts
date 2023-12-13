@@ -1,22 +1,10 @@
 
 import { ApolloClient, ApolloLink, InMemoryCache, createHttpLink } from '@apollo/client';
-import { onError } from "@apollo/client/link/error";
 import { MiddlewareConfig } from '../index';
-import consola from 'consola';
 
 import fetch from 'cross-fetch';
 
 const buildClient = (settings: MiddlewareConfig) => {
-
-  const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
-    if (graphQLErrors) {
-      graphQLErrors.map((error) => consola.error({label: '[GRAPHQL ERROR]', ...error, operation }));
-    }
-
-    if (networkError) {
-      consola.error({ label: '[NETWORK ERROR]', message: networkError });
-    }
-  });
 
   const httpLink = createHttpLink({
     uri: settings.odooGraphqlUrl,
@@ -40,7 +28,6 @@ const buildClient = (settings: MiddlewareConfig) => {
   });
 
   const apolloLink = ApolloLink.from([
-    errorLink,
     afterwareLink.concat(httpLink)
   ]);
 
@@ -51,11 +38,11 @@ const buildClient = (settings: MiddlewareConfig) => {
     credentials: 'include',
     defaultOptions: {
       query: {
-        errorPolicy: "all",
-        fetchPolicy: "no-cache",
+        errorPolicy: 'all',
+        fetchPolicy: 'no-cache'
       },
       mutate: {
-        errorPolicy: "all",
+        errorPolicy: 'all'
       }
     }
   });

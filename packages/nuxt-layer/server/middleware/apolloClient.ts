@@ -5,7 +5,6 @@ import { Mutations } from '~/server/mutations';
 export default defineEventHandler((event) => {
 
   const config : MiddlewareConfig = {
-    // https://odoo-cla.ce.promptequation.com/graphql/vsf
     odooGraphqlUrl: `${process.env.ODOO_BASE_URL}graphql/vsf`,
     queries: { ...Queries, ...Mutations },
     headers: {
