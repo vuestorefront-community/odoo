@@ -5,7 +5,6 @@ import sessionHeaderExtension from './extensions/sessionHeaderExtension ';
 import * as apiEndpoints from './api';
 
 const onCreate = (settings: MiddlewareConfig) => {
-
   const client = buildClient(settings);
 
   return {
