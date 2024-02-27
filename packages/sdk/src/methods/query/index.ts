@@ -1,4 +1,3 @@
-import { ApolloQueryResult } from '@apollo/client';
 import { QueryMetadataParams, Endpoints } from '@erpgap/odoo-sdk-api-client';
 import { client } from '../../client';
 
