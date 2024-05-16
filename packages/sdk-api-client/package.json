@@ -1,6 +1,6 @@
 {
   "name": "@erpgap/odoo-sdk-api-client",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": false,
   "sideEffects": false,
   "server": "server/index.js",
@@ -22,11 +22,13 @@
     "lint": "eslint . --ext .ts,.vue"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.16",
+    "@apollo/client": "^3.9.9",
     "@vue-storefront/middleware": "3.5.1",
     "axios": "^0.21.1",
     "consola": "^3.0.0",
     "cross-fetch": "^4.0.0",
+    "https-proxy-agent": "^7.0.4",
+    "node-fetch": "^3.3.2",
     "request-ip": "^3.3.0",
     "winston": "^3.9.0"
   },
