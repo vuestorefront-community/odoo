@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/1626923/137323036-91d4262b-74dd-40c3-83da-a405a75de5c8.jpg" alt="Vue Storefront" />
+  <img src="alokai-odoo.png" alt="Alokai / Odoo SDK" />
 </div>
 
 ### Stay connected
@@ -9,16 +9,14 @@
 [![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCkm1F3Cglty3CE1QwKQUhhg?style=social)](https://www.youtube.com/c/VueStorefront)
 [![Discord](https://img.shields.io/discord/770285988244750366?label=join%20discord&logo=Discord&logoColor=white)](https://discord.vuestorefront.io)
 
-## Vue Storefront 2 integration with Odoo
+## Alokai SDK integration with Odoo
 
-This project is a Odoo integration with [Vue Storefront 2](https://github.com/vuestorefront-community/vue-storefront/).
-This integration is being developed and maintained by [ODOOGAP / PROMPTEQUATION](https://www.odoogap.com/) ❤️
+This project is a Odoo integration with [Alokai](https://github.com/vuestorefront-community/vue-storefront/).
+This integration is being developed and maintained by [ERPGAP / PROMPTEQUATION](https://www.erpgap.com/) ❤️
 
-Check our [demo](https://vsf.labs.odoogap.com/) server (it's a dev server so could be down sometimes)
-
+Check our [demo](https://vsfsdk.labs.odoogap.com/) server (it's a dev server so could be down sometimes)
 
 ## How to start?
-
 
 ```sh
 1. git clone https://github.com/vuestorefront-community/odoo
@@ -32,7 +30,6 @@ Check our [demo](https://vsf.labs.odoogap.com/) server (it's a dev server so cou
 
 Want to contribute? Ping us on `odoo` channel on [our Discord](https://discord.vuestorefront.io) or email us at info (at) odoogap.com!
 
-
 ## Directory structure
 
 * **packages/api-client** - communicates with a backend;
@@ -41,9 +38,9 @@ Want to contribute? Ping us on `odoo` channel on [our Discord](https://discord.v
 
 ## Resources
 
-- [Vue Storefront Documentation](https://docs.vuestorefront.io/v2/)
-- [Odoo integration Documentation](https://docs.vuestorefront.io/odoo)
-- [Odoo Backend Modules](https://github.com/vuestorefront-community/odoo)
+* [Vue Storefront Documentation](https://docs.vuestorefront.io/v2/)
+* [Odoo integration Documentation](https://docs.vuestorefront.io/odoo)
+* [Odoo Backend Modules](https://github.com/vuestorefront-community/odoo)
 
 ## Support
 
@@ -51,13 +48,13 @@ If you have any questions about this integration we will be happy to answer them
 
 ## Credits
 
-### Authors:
+### Authors
 
-- ODOOGAP / PROMPTEQUATION
+* ERPGAP / PROMPTEQUATION
 
 ### Dependency Odoo Modules
 
-- [OCA - Odoo Community Association - Base REST](https://github.com/OCA/rest-framework)
+* [OCA - Odoo Community Association - Base REST](https://github.com/OCA/rest-framework)
 
 ## Contributors ✨
 
