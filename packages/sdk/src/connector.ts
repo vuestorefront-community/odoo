@@ -32,17 +32,17 @@ export const odooConnector = (options: Options): Methods => {
 
   if (options.ofetch) {
     mutation = async <ApiParams, ApiResponseType>(metadata: MutationMetadataParams, params?: ApiParams): Promise<ApiResponseType> => {
-      return await options.ofetch('/api/odoo/mutation', { method: 'POST', body: [metadata, params], cache: 'no-cache', ...options.ofetchOptions });
+      return await options.ofetch('/api/odoo/mutation', { method: 'POST', body: [metadata, params], cache: 'no-cache', watch: false, ...options.ofetchOptions } as any);
     };
 
     query = async <ApiParams, ApiResponseType>(metadata: QueryMetadataParams, params?: ApiParams): Promise<ApiResponseType> =>{
       const cacheKey = metadata.cacheKey || hash({ ...metadata, ...params });
-      return await options.ofetch('/api/odoo/query', { method: 'POST', body: [metadata, params], cache: 'no-cache', key: cacheKey, ...options.ofetchOptions } as any);
+      return await options.ofetch('/api/odoo/query', { method: 'POST', body: [metadata, params], cache: 'no-cache', watch: false, key: cacheKey, ...options.ofetchOptions } as any);
     };
 
     queryNoCache = async <ApiParams, ApiResponseType>(metadata: QueryMetadataParams, params?: ApiParams): Promise<ApiResponseType> =>{
       const cacheKey = metadata.cacheKey || hash({ ...metadata, ...params });
-      return await options.ofetch('/api/odoo/query-no-cache', { method: 'POST', body: [metadata, params], cache: 'no-cache', key: cacheKey, ...options.ofetchOptions } as any);
+      return await options.ofetch('/api/odoo/query-no-cache', { method: 'POST', body: [metadata, params], cache: 'no-cache', watch: false, key: cacheKey, ...options.ofetchOptions } as any);
     };
   }
 
