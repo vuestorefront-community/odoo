@@ -1,0 +1,38 @@
+{
+  "name": "@vue-storefront/__replace_me__-api",
+  "version": "0.0.1",
+  "private": true,
+  "sideEffects": false,
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./server": "./lib/index.server.js",
+    "./package.json": "./package.json"
+  },
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "yarn build:clear && yarn build:package && yarn build:server && yarn build:types",
+    "build:clear": "rimraf lib",
+    "build:package": "node ../../scripts/build --file=src/index.ts",
+    "build:server": "node ../../scripts/build --file=src/index.server.ts",
+    "build:types": "tsc --emitDeclarationOnly",
+    "dev": "concurrently \"yarn build:package --watch\" \"yarn build:server --watch\"",
+    "precommit": "lint-staged",
+    "prepublish": "yarn build",
+    "test": "jest",
+    "update:check": "ncu",
+    "update:update": "ncu -u"
+  },
+  "dependencies": {
+    "@vue-storefront/core": "~2.5.4"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

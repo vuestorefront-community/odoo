@@ -1,0 +1,3 @@
+import "/home/netto/Projetos/odoo/docs/node_modules/.pnpm/@vuepress+highlighter-helper@2.0.0-rc.40_vuepress@2.0.0-rc.14_@vuepress+bundler-vite@2.0.0-rc_u25b2l6ksdgcgwf2wuitfanjcm/node_modules/@vuepress/highlighter-helper/lib/client/styles/base.css"
+import "/home/netto/Projetos/odoo/docs/node_modules/.pnpm/@vuepress+plugin-prismjs@2.0.0-rc.40_vuepress@2.0.0-rc.14_@vuepress+bundler-vite@2.0.0-rc.7_@_u5eleu5zljchrbbpe4wygrxtt4/node_modules/@vuepress/plugin-prismjs/lib/client/styles/nord.css"
+import "/home/netto/Projetos/odoo/docs/node_modules/.pnpm/@vuepress+highlighter-helper@2.0.0-rc.40_vuepress@2.0.0-rc.14_@vuepress+bundler-vite@2.0.0-rc_u25b2l6ksdgcgwf2wuitfanjcm/node_modules/@vuepress/highlighter-helper/lib/client/styles/line-numbers.css"

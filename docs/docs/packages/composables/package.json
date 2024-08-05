@@ -1,0 +1,42 @@
+{
+  "name": "@vue-storefront/__replace_me__",
+  "version": "0.0.1",
+  "private": true,
+  "sideEffects": false,
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./nuxt": "./nuxt/index.js",
+    "./package.json": "./package.json"
+  },
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "yarn build:clear && yarn build:package && yarn build:types",
+    "build:clear": "rimraf lib",
+    "build:package": "node ../../scripts/build --file=src/index.ts",
+    "build:types": "tsc --emitDeclarationOnly",
+    "dev": "yarn build:package --watch",
+    "precommit": "lint-staged",
+    "prepublish": "yarn build",
+    "test": "jest",
+    "update:check": "ncu",
+    "update:update": "ncu -u"
+  },
+  "dependencies": {
+    "@vue-storefront/__replace_me__-api": "0.0.1",
+    "@vue-storefront/core": "~2.5.4"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "rollup-plugin-typescript2": "^0.30.0"
+  },
+  "peerDependencies": {
+    "@nuxtjs/composition-api": "^0.29.3"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
