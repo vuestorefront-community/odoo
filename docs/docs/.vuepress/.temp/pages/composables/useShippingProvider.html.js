@@ -1,5 +1,5 @@
 import comp from "/home/netto/Projetos/odoo/docs/docs/.vuepress/.temp/pages/composables/useShippingProvider.html.vue"
-const data = JSON.parse("{\"path\":\"/composables/useShippingProvider.html\",\"title\":\"UseShippingProvider Composable\",\"lang\":\"en-US\",\"frontmatter\":{},\"headers\":[],\"git\":{\"updatedTime\":null,\"contributors\":[]},\"filePathRelative\":\"composables/useShippingProvider.md\"}")
+const data = JSON.parse("{\"path\":\"/composables/useShippingProvider.html\",\"title\":\"UseShippingProvider Composable\",\"lang\":\"en-US\",\"frontmatter\":{},\"headers\":[],\"git\":{\"updatedTime\":1722880159000,\"contributors\":[{\"name\":\"iferreira\",\"email\":\"iferreira@odoogap.com\",\"commits\":1}]},\"filePathRelative\":\"composables/useShippingProvider.md\"}")
 export { comp, data }
 
 if (import.meta.webpackHot) {

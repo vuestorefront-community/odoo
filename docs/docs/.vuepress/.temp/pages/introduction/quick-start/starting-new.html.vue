@@ -29,7 +29,7 @@
 <code v-pre>docker-compose restart odoo nginx</code></p>
 </div>
 <h2 id="after-installation" tabindex="-1"><a class="header-anchor" href="#after-installation"><span>After installation</span></a></h2>
-<p>Now just open http://localhost:3000 for VSF and http://localhost:8069 for local Odoo (credentials admin/admin)</p>
+<p>Now just open http://localhost:3000 for Alokai and http://localhost:8069 for local Odoo (credentials admin/admin)</p>
 </div></template>
 
 

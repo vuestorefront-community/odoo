@@ -1,26 +1,26 @@
 <template><div><h1 id="demonstration" tabindex="-1"><a class="header-anchor" href="#demonstration"><span>Demonstration</span></a></h1>
-<p>This documentation is about Odoo integration with Vue Storefront 2. This integration has been developed and maintained by ODOOGAP / PROMPTEQUATION ❤️</p>
-<p>Before anything, you should take a look in our live demo: https://vsf.labs.odoogap.com/ <em>it's a dev server so could be down sometimes</em> 🤷‍♂️</p>
+<p>This documentation is about Odoo integration with Alokai. This integration has been developed and maintained by ERPGAP / PromptEQUATION ❤️</p>
+<p>Before anything, you should take a look in our live demo: https://Alokaisdk.labs.odoogap.com/ <em>it's a dev server so could be down sometimes</em> 🤷‍♂️</p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
-<p>We need to make clear that this hole documentation is about <strong>vsf + odoo - front end</strong>, not about odoo back end. So, take a look in following explanations to better understand how it works.</p>
+<p>We need to make clear that this hole documentation is about <strong>Alokai + Odoo - Front End</strong>, not about Odoo Back End. So, take a look in following explanations to better understand how it works.</p>
 </div>
-<h2 id="vsf-community-projects-explanation" tabindex="-1"><a class="header-anchor" href="#vsf-community-projects-explanation"><span>VSF Community Projects explanation</span></a></h2>
-<p>We are VSF integrators, so we make part of vsf open source community. We keep 3 main projects available in Github VSF Community (https://github.com/vuestorefront-community) to keep everyting working:</p>
+<h2 id="alokai-community-projects-explanation" tabindex="-1"><a class="header-anchor" href="#alokai-community-projects-explanation"><span>Alokai Community Projects explanation</span></a></h2>
+<p>We are Alokai partners, so we make part of Alokai open source community. We keep 3 main projects available in Github Alokai Community (https://github.com/vuestorefront-community) to keep everyting working:</p>
 <ul>
 <li>
-<p><strong>VSF-ODOO</strong>: Here is where our developer team works to make everything working with the best performance and user experience as possible. It keeps composable logic, the API connections to ODOO world and a git submodule pointer to template-odoo repository.</p>
+<p><strong>Alokai-ODOO</strong>: Here is where our developer team works to make everything working with the best performance and user experience as possible. It keeps composable logic, the API connections to ODOO world and a git submodule pointer to template-odoo repository.</p>
 </li>
 <li>
-<p><strong>VSF-TEMPLATE-ODOO</strong>: This is the project to start a new vsf-odoo project. It's our main theme. So, if you want to start your own project, you'll need this repository to get start.</p>
+<p><strong>Alokai-TEMPLATE-ODOO</strong>: This is the project to start a new Alokai-odoo project. It's our main theme. So, if you want to start your own project, you'll need this repository to get start.</p>
 </li>
 <li>
-<p><strong>VSF-ODOO-DEMOS</strong>: This is the project that keeps some demonstrations and different themes.</p>
+<p><strong>Alokai-ODOO-DEMOS</strong>: This is the project that keeps some demonstrations and different themes.</p>
 </li>
 </ul>
 <div align="center">
   <img :src="$withBase('/submodule.png')" alt="create_new_project" />
 </div>
-<p>When we start a new project from <strong>VSF_TEMPLATE_ODOO</strong>, the npm package with odoo composables and apis will be injected.</p>
+<p>When we start a new project from <strong>Alokai_TEMPLATE_ODOO</strong>, the npm package with odoo composables and apis will be injected.</p>
 <div align="center">
   <img :src="$withBase('/create_new_project.png')" alt="create_new_project" />
 </div>

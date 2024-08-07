@@ -1,15 +1,17 @@
 <template><div><h1 id="integration-test" tabindex="-1"><a class="header-anchor" href="#integration-test"><span>Integration test</span></a></h1>
-<p><em>In this section you will find everything you need to build our entire environment to do a deeper test on VSF + ODOO and make sure if our integration is what you has been looking for. We hope it is 😇</em></p>
+<p><em>In this section you will find everything you need to build our entire environment to do a deeper test on Alokai + ODOO and make sure if our integration is what you has been looking for. We hope it is 😇</em></p>
 <h2 id="before-you-start" tabindex="-1"><a class="header-anchor" href="#before-you-start"><span>Before you start</span></a></h2>
 <p>Pre-requisites: Docker, Node.js (&gt;=14.19.0), npm or similar and Git.</p>
 <p>Last odoo <strong>version</strong> released: Clone the repo from (https://github.com/odoogap/vuestorefront-docker)</p>
+<h3 id="inside-the-repo" tabindex="-1"><a class="header-anchor" href="#inside-the-repo"><span>Inside the repo</span></a></h3>
 <p>Its really convenient to test all the ecosystem Vuestorefront - Odoo Integration working in your local machine. We have prepared a docker-compose file that will help you to get started in a few minutes.</p>
+<p>Inside the repo downloaded you can find the 17.0 package that contains a startup file <em>startup.sh</em> bash script. It basically detects if <em>mount/extra-addons/graphql_vuestorefront</em> exists or not then its going to clone the odoo alokai modules that you can also find at https://github.com/odoogap/vuestorefront.git</p>
 <h2 id="installation" tabindex="-1"><a class="header-anchor" href="#installation"><span>Installation</span></a></h2>
 <p>First of all we should understand what's inside the docker-compose file. We have 4 services:
 <em>🎯 You can go deeper <RouteLink to="/configuration/docker-compose.html#links">Configuration &gt; docker-compose</RouteLink> .</em></p>
 <ul>
 <li>
-<p><strong>Redis</strong>: Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker. It's used by VSF to store the cache.</p>
+<p><strong>Redis</strong>: Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker. It's used by Alokai to store the cache.</p>
 </li>
 <li>
 <p><strong>db</strong>: PostgreSQL database used by Odoo.</p>
@@ -18,7 +20,7 @@
 <p><strong>odoo</strong>: Odoo service. This is our backend service that you could use to manage your products, orders, etc.</p>
 </li>
 <li>
-<p><strong>vsf</strong>: Here is our front end integrated to Vue Storefront.</p>
+<p><strong>Alokai</strong>: Here is our front end integrated to Alokai Storefront.</p>
 </li>
 </ul>
 <div class="language-bash line-numbers-mode" data-highlighter="prismjs" data-ext="sh" data-title="sh"><pre v-pre><code><span class="line"><span class="token function">docker-compose</span> up <span class="token parameter variable">--build</span> <span class="token parameter variable">-d</span></span>
@@ -27,7 +29,7 @@
 <span class="line"></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>🎯 <em>If you use Docker Desktop on Windows, some .sh files are executed during instalation, so we recommend you to read</em> <a href="https://docs.docker.com/docker-for-windows/wsl/" target="_blank" rel="noopener noreferrer">Docker Desktop Documentation</a> .</p>
 <h2 id="after-installation" tabindex="-1"><a class="header-anchor" href="#after-installation"><span>After installation</span></a></h2>
-<p>Now just open http://localhost:3000 for VSF and http://localhost:8069 for local Odoo (credentials admin/admin)</p>
+<p>Now just open http://localhost:3000 for Alokai and http://localhost:8069 for local Odoo (credentials admin/admin)</p>
 <div class="custom-container warning"><p class="custom-container-title">WARNING</p>
 <p>You might not see the top categories (MEN/WOMEN) until the Odoo server is initialized (database init takes time to install all modules)</p>
 </div>

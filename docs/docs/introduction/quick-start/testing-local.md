@@ -1,6 +1,6 @@
 # Integration test
 
-_In this section you will find everything you need to build our entire environment to do a deeper test on VSF + ODOO and make sure if our integration is what you has been looking for. We hope it is :innocent:_
+_In this section you will find everything you need to build our entire environment to do a deeper test on Alokai + ODOO and make sure if our integration is what you has been looking for. We hope it is :innocent:_
 
 ## Before you start
 
@@ -8,20 +8,24 @@ Pre-requisites: Docker, Node.js (>=14.19.0), npm or similar and Git.
 
 Last odoo **version** released: Clone the repo from (https://github.com/odoogap/vuestorefront-docker)
 
+### Inside the repo
+
 Its really convenient to test all the ecosystem Vuestorefront - Odoo Integration working in your local machine. We have prepared a docker-compose file that will help you to get started in a few minutes.
+
+Inside the repo downloaded you can find the 17.0 package that contains a startup file _startup.sh_ bash script. It basically detects if _mount/extra-addons/graphql_vuestorefront_ exists or not then its going to clone the odoo alokai modules that you can also find at https://github.com/odoogap/vuestorefront.git
 
 ## Installation
 
 First of all we should understand what's inside the docker-compose file. We have 4 services:
 _:dart: You can go deeper [Configuration > docker-compose](/configuration/docker-compose.md#links) ._
 
-- **Redis**: Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker. It's used by VSF to store the cache.
+- **Redis**: Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker. It's used by Alokai to store the cache.
 
 - **db**: PostgreSQL database used by Odoo.
 
 - **odoo**: Odoo service. This is our backend service that you could use to manage your products, orders, etc.
 
-- **vsf**: Here is our front end integrated to Vue Storefront.
+- **Alokai**: Here is our front end integrated to Alokai Storefront.
 
 ```bash
 docker-compose up --build -d
@@ -33,7 +37,7 @@ docker-compose logs -f
 
 ## After installation
 
-Now just open http://localhost:3000 for VSF and http://localhost:8069 for local Odoo (credentials admin/admin)
+Now just open http://localhost:3000 for Alokai and http://localhost:8069 for local Odoo (credentials admin/admin)
 
 ::: warning
 You might not see the top categories (MEN/WOMEN) until the Odoo server is initialized (database init takes time to install all modules)

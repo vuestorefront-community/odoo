@@ -1,5 +1,5 @@
 import comp from "/home/netto/Projetos/odoo/docs/docs/.vuepress/.temp/pages/configuration/routes.html.vue"
-const data = JSON.parse("{\"path\":\"/configuration/routes.html\",\"title\":\"Routes\",\"lang\":\"en-US\",\"frontmatter\":{},\"headers\":[],\"git\":{\"updatedTime\":null,\"contributors\":[]},\"filePathRelative\":\"configuration/routes.md\"}")
+const data = JSON.parse("{\"path\":\"/configuration/routes.html\",\"title\":\"Routes\",\"lang\":\"en-US\",\"frontmatter\":{},\"headers\":[],\"git\":{\"updatedTime\":1722880159000,\"contributors\":[{\"name\":\"iferreira\",\"email\":\"iferreira@odoogap.com\",\"commits\":1}]},\"filePathRelative\":\"configuration/routes.md\"}")
 export { comp, data }
 
 if (import.meta.webpackHot) {

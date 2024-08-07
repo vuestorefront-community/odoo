@@ -1,5 +1,5 @@
 import comp from "/home/netto/Projetos/odoo/docs/docs/.vuepress/.temp/pages/composables/useWishlist.html.vue"
-const data = JSON.parse("{\"path\":\"/composables/useWishlist.html\",\"title\":\"UseWishlist Composable\",\"lang\":\"en-US\",\"frontmatter\":{},\"headers\":[{\"level\":2,\"title\":\"API\",\"slug\":\"api\",\"link\":\"#api\",\"children\":[]},{\"level\":2,\"title\":\"Example\",\"slug\":\"example\",\"link\":\"#example\",\"children\":[]}],\"git\":{\"updatedTime\":null,\"contributors\":[]},\"filePathRelative\":\"composables/useWishlist.md\"}")
+const data = JSON.parse("{\"path\":\"/composables/useWishlist.html\",\"title\":\"UseWishlist Composable\",\"lang\":\"en-US\",\"frontmatter\":{},\"headers\":[{\"level\":2,\"title\":\"API\",\"slug\":\"api\",\"link\":\"#api\",\"children\":[]},{\"level\":2,\"title\":\"Example\",\"slug\":\"example\",\"link\":\"#example\",\"children\":[]}],\"git\":{\"updatedTime\":1722880159000,\"contributors\":[{\"name\":\"iferreira\",\"email\":\"iferreira@odoogap.com\",\"commits\":1}]},\"filePathRelative\":\"composables/useWishlist.md\"}")
 export { comp, data }
 
 if (import.meta.webpackHot) {

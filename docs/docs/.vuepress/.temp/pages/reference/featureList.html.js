@@ -1,5 +1,5 @@
 import comp from "/home/netto/Projetos/odoo/docs/docs/.vuepress/.temp/pages/reference/featureList.html.vue"
-const data = JSON.parse("{\"path\":\"/reference/featureList.html\",\"title\":\"Feature List\",\"lang\":\"en-US\",\"frontmatter\":{},\"headers\":[],\"git\":{\"updatedTime\":null,\"contributors\":[]},\"filePathRelative\":\"reference/featureList.md\"}")
+const data = JSON.parse("{\"path\":\"/reference/featureList.html\",\"title\":\"Feature List\",\"lang\":\"en-US\",\"frontmatter\":{},\"headers\":[],\"git\":{\"updatedTime\":1722880159000,\"contributors\":[{\"name\":\"iferreira\",\"email\":\"iferreira@odoogap.com\",\"commits\":1}]},\"filePathRelative\":\"reference/featureList.md\"}")
 export { comp, data }
 
 if (import.meta.webpackHot) {

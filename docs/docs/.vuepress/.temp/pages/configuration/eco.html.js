@@ -1,5 +1,5 @@
 import comp from "/home/netto/Projetos/odoo/docs/docs/.vuepress/.temp/pages/configuration/eco.html.vue"
-const data = JSON.parse("{\"path\":\"/configuration/eco.html\",\"title\":\"Ecosystem\",\"lang\":\"en-US\",\"frontmatter\":{},\"headers\":[{\"level\":2,\"title\":\"Projects\",\"slug\":\"projects\",\"link\":\"#projects\",\"children\":[]}],\"git\":{\"updatedTime\":null,\"contributors\":[]},\"filePathRelative\":\"configuration/eco.md\"}")
+const data = JSON.parse("{\"path\":\"/configuration/eco.html\",\"title\":\"Ecosystem\",\"lang\":\"en-US\",\"frontmatter\":{},\"headers\":[{\"level\":2,\"title\":\"Projects\",\"slug\":\"projects\",\"link\":\"#projects\",\"children\":[]}],\"git\":{\"updatedTime\":1722880159000,\"contributors\":[{\"name\":\"iferreira\",\"email\":\"iferreira@odoogap.com\",\"commits\":1}]},\"filePathRelative\":\"configuration/eco.md\"}")
 export { comp, data }
 
 if (import.meta.webpackHot) {

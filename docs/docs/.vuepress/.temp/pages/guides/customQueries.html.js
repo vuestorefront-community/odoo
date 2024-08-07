@@ -1,5 +1,5 @@
 import comp from "/home/netto/Projetos/odoo/docs/docs/.vuepress/.temp/pages/guides/customQueries.html.vue"
-const data = JSON.parse("{\"path\":\"/guides/customQueries.html\",\"title\":\"Custom queries\",\"lang\":\"en-US\",\"frontmatter\":{},\"headers\":[{\"level\":2,\"title\":\"Introduction\",\"slug\":\"introduction\",\"link\":\"#introduction\",\"children\":[]}],\"git\":{\"updatedTime\":null,\"contributors\":[]},\"filePathRelative\":\"guides/customQueries.md\"}")
+const data = JSON.parse("{\"path\":\"/guides/customQueries.html\",\"title\":\"Custom queries\",\"lang\":\"en-US\",\"frontmatter\":{},\"headers\":[{\"level\":2,\"title\":\"Introduction\",\"slug\":\"introduction\",\"link\":\"#introduction\",\"children\":[]}],\"git\":{\"updatedTime\":1722880159000,\"contributors\":[{\"name\":\"iferreira\",\"email\":\"iferreira@odoogap.com\",\"commits\":1}]},\"filePathRelative\":\"guides/customQueries.md\"}")
 export { comp, data }
 
 if (import.meta.webpackHot) {

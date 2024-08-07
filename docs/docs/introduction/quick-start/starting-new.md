@@ -31,4 +31,4 @@ You might need to: Type:
 
 ## After installation
 
-Now just open http://localhost:3000 for VSF and http://localhost:8069 for local Odoo (credentials admin/admin)
+Now just open http://localhost:3000 for Alokai and http://localhost:8069 for local Odoo (credentials admin/admin)
