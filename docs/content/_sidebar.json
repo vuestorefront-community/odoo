@@ -31,21 +31,10 @@
   },
 
   {
-    "title": "Storefront UI",
-    "_path": "https://docs.storefrontui.io",
-    "icon": "IconStorefrontUi",
-    "sidebarRoot": true
-  },
-  {
     "sidebarSection": "Community",
     "title": "Contributing",
     "_path": "/contributing",
     "icon": "clarity:group-solid",
     "sidebarRoot": true
-  },
-  {
-    "title": "Enterprise",
-    "_path": "/enterprise",
-    "icon": "clarity:group-solid"
   }
 ]
