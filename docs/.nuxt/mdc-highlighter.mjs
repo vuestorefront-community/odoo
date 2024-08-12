@@ -1,5 +1,5 @@
 import { getMdcConfigs } from '#mdc-configs'
-import { getHighlighterCore, addClassToHast, isSpecialLang, isSpecialTheme } from "shiki/core";
+import { createHighlighterCore, addClassToHast, isSpecialLang, isSpecialTheme } from "shiki/core";
 import {
   transformerNotationDiff,
   transformerNotationErrorLevel,
@@ -17,7 +17,7 @@ export function createShikiHighlighter({
   let shiki;
   let configs;
   async function _getShiki() {
-    const shiki2 = await getHighlighterCore({
+    const shiki2 = await createHighlighterCore({
       langs,
       themes,
       loadWasm: () => import("shiki/wasm")
@@ -47,6 +47,19 @@ export function createShikiHighlighter({
   ];
   const highlighter = async (code, lang, theme, options = {}) => {
     const shiki2 = await getShiki();
+    const codeToHastOptions = {
+      defaultColor: false,
+      meta: {
+        __raw: options.meta
+      }
+    };
+    if (lang === "ts-type" || lang === "typescript-type") {
+      lang = "typescript";
+      codeToHastOptions.grammarContextCode = "let a:";
+    } else if (lang === "vue-html" || lang === "vue-template") {
+      lang = "vue";
+      codeToHastOptions.grammarContextCode = "<template>";
+    }
     const themesObject = typeof theme === "string" ? { default: theme } : theme || {};
     const loadedThemes = shiki2.getLoadedThemes();
     const loadedLanguages = shiki2.getLoadedLanguages();
@@ -54,7 +67,7 @@ export function createShikiHighlighter({
       if (bundledLangs[lang]) {
         await shiki2.loadLanguage(bundledLangs[lang]);
       } else {
-        if (process.dev) {
+        if (import.meta.dev) {
           console.warn(`[@nuxtjs/mdc] Language "${lang}" is not loaded to the Shiki highlighter, fallback to plain text. Add the language to "mdc.highlight.langs" to fix this.`);
         }
         lang = "text";
@@ -65,7 +78,7 @@ export function createShikiHighlighter({
         if (bundledThemes[theme2]) {
           await shiki2.loadTheme(bundledThemes[theme2]);
         } else {
-          if (process.dev) {
+          if (import.meta.dev) {
             console.warn(`[@nuxtjs/mdc] Theme "${theme2}" is not loaded to the Shiki highlighter. Add the theme to "mdc.highlight.themes" to fix this.`);
           }
           themesObject[color] = "none";
@@ -81,11 +94,8 @@ export function createShikiHighlighter({
     }
     const root = shiki2.codeToHast(code.trimEnd(), {
       lang,
+      ...codeToHastOptions,
       themes: themesObject,
-      defaultColor: false,
-      meta: {
-        __raw: options.meta
-      },
       transformers: [
         ...transformers,
         {

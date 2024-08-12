@@ -1,9 +1,9 @@
 {
-  "_hash": "WesFndWYIq",
+  "_hash": "V2jRX0moaJ",
   "project": {
-    "rootDir": "/home/netto/Projetos/odoo/docs"
+    "rootDir": "/home/leonardo/Documents/PROJETOS/odoo/docs"
   },
   "versions": {
-    "nuxt": "3.12.4"
+    "nuxt": "3.8.0"
   }
 }

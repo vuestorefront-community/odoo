@@ -1,9 +1,11 @@
 
-import { updateAppConfig } from '#app/config'
-import { defuFn } from 'defu'
+import { updateAppConfig } from '#app'
+import { defuFn } from '/home/leonardo/Documents/PROJETOS/odoo/node_modules/defu/dist/defu.mjs'
 
 const inlineConfig = {
-  "nuxt": {}
+  "nuxt": {
+    "buildId": "test"
+  }
 }
 
 // Vite - webpack is handled directly in #app/config
@@ -15,4 +17,4 @@ if (import.meta.hot) {
 
 
 
-export default /*@__PURE__*/ defuFn(inlineConfig)
+export default /* #__PURE__ */ defuFn(inlineConfig)
