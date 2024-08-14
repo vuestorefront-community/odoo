@@ -1,0 +1,111 @@
+name: Continous Integration
+
+on:
+  workflow_call:
+    inputs:
+      enterprise:
+        description: 'Flag to use enterprise registry'
+        type: boolean
+        required: false
+        default: false
+
+      node_version:
+        description: 'Node versions to test'
+        type: string
+        required: false
+        default: "['16']"
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  GCP_PROJECT_ID: 81559754996
+  GCP_PROJECT_NAME: sf-artifacts-prod
+
+jobs:
+  run-ci:
+    name: Run CI
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: ${{ fromJson(inputs.node_version) }}
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Expose github environment as shell variables
+        env:
+          SECRETS_CONTEXT: ${{ toJson(secrets) }}
+          VARS_CONTEXT: ${{ toJson(vars) }}
+        run: |
+          # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable
+          # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          to_envs() { jq -r "to_entries[] | \"\(.key)<<$EOF\n\(.value)\n$EOF\n\""; }
+          echo "$SECRETS_CONTEXT" | to_envs >> $GITHUB_ENV
+      - name: Checkout code 🛎️
+        uses: actions/checkout@v3
+
+      - name: Setup node 🏗️
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Get cache 🗄️
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      # IN-3457
+      - id: auth
+        name: Authenticate to Google Cloud
+        if: ${{ inputs.enterprise }}
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: projects/${{ env.GCP_PROJECT_ID }}/locations/global/workloadIdentityPools/sf-artifacts-prod-01/providers/sf-artifacts-prod-01
+          service_account: workload-identity-federation@sf-artifacts-prod.iam.gserviceaccount.com
+          token_format: access_token
+          create_credentials_file: false
+
+      - if: ${{ inputs.enterprise }}
+        run: |
+          npm config set //europe-west1-npm.pkg.dev/${{ env.GCP_PROJECT_NAME }}/npm/:_authToken=${{ steps.auth.outputs.access_token }}
+          npm config set //registrynpm.storefrontcloud.io/:_authToken=${{ secrets.NPM_DEFAULT_ENTERPRISE_TOKEN }}
+
+      - if: ${{ !inputs.enterprise }}
+        run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_RELEASE_TOKEN }}
+
+      - name: Install dependencies
+        shell: bash
+        if: steps.cache.outputs.cache-hit != true
+        run: HUSKY=0 yarn --frozen-lockfile
+
+      - name: Detect circular dependencies 🔄
+        uses: vuestorefront/engineering-toolkit/github-actions/circular-dependencies@main
+        with:
+          filesPath: 'packages/**/*.{ts,vue}'
+
+      - name: Check licenses 🧪
+        uses: vuestorefront/engineering-toolkit/github-actions/check-licenses@main
+        with:
+          projectPath: ${{ github.workspace }}
+
+      - name: Build project
+        run: yarn build
+
+      - name: Run tests
+        run: yarn test
+
+      - name: Upload test coverage
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-${{ runner.os }}-${{ github.event.pull_request.head.sha }}
+          path: |
+            coverage
+            packages/**/coverage
+
+      - name: Lint project
+        run: yarn lint
