@@ -1,0 +1,73 @@
+[
+  {
+    "code": "AD",
+    "id": 1,
+    "imageUrl": "/base/static/img/country_flags/ad.png",
+    "name": "Andorra",
+    "states": null
+  },
+  {
+    "code": "AE",
+    "id": 2,
+    "imageUrl": "/base/static/img/country_flags/ae.png",
+    "name": "United Arab Emirates",
+    "states": [
+      {
+        "id": 547,
+        "name": "Ajman",
+        "code": "AJ"
+      },
+      {
+        "id": 546,
+        "name": "Abu Dhabi",
+        "code": "AZ"
+      },
+      {
+        "id": 548,
+        "name": "Dubai",
+        "code": "DU"
+      },
+      {
+        "id": 549,
+        "name": "Fujairah",
+        "code": "FU"
+      },
+      {
+        "id": 550,
+        "name": "Ras al-Khaimah",
+        "code": "RK"
+      },
+      {
+        "id": 551,
+        "name": "Sharjah",
+        "code": "SH"
+      },
+      {
+        "id": 552,
+        "name": "Umm al-Quwain",
+        "code": "UQ"
+      }
+    ]
+  },
+  {
+    "code": "AF",
+    "id": 3,
+    "imageUrl": "/base/static/img/country_flags/af.png",
+    "name": "Afghanistan",
+    "states": null
+  },
+  {
+    "code": "AG",
+    "id": 4,
+    "imageUrl": "/base/static/img/country_flags/ag.png",
+    "name": "Antigua and Barbuda",
+    "states": null
+  },
+  {
+    "code": "AI",
+    "id": 5,
+    "imageUrl": "/base/static/img/country_flags/ai.png",
+    "name": "Anguilla",
+    "states": null
+  }        
+]

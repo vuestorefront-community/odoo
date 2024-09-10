@@ -1,0 +1,48 @@
+{
+  "name": "@erpgap/odoo-sdk-api-client",
+  "version": "2.0.4",
+  "private": false,
+  "sideEffects": false,
+  "server": "server/index.js",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.es.js",
+  "types": "lib/index.d.ts",
+  "license": "VSFEL",
+  "engines": {
+    "node": ">=16.x"
+  },
+  "scripts": {
+    "build": "rimraf lib server && rollup -c",
+    "dev": "rollup -c -w",
+    "test": "cross-env APP_ENV=test jest",
+    "test:coverage": "jest --coverage --passWithNoTests",
+    "test:watch": "jest --watch",
+    "prepublish": "yarn build",
+    "codegen": "yarn graphql-codegen",
+    "lint": "eslint . --ext .ts,.vue"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.9.9",
+    "@vue-storefront/middleware": "3.5.1",
+    "axios": "^0.21.1",
+    "consola": "^3.0.0",
+    "cross-fetch": "^4.0.0",
+    "https-proxy-agent": "^7.0.4",
+    "node-fetch": "^3.3.2",
+    "request-ip": "^3.3.0",
+    "winston": "^3.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.45.0",
+    "jsdom": "^17.0.0",
+    "typescript": "^5.1.6"
+  },
+  "files": [
+    "lib/**/*",
+    "server/**/*",
+    "src/**/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

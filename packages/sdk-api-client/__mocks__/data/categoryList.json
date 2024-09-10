@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "name": "Desks",
+        "slug": "false"
+    },
+    {
+        "id": 10,
+        "name": "Components",
+        "slug": "false"
+    },
+    {
+        "id": 2,
+        "name": "Furnitures",
+        "slug": "false"
+    },
+    {
+        "id": 3,
+        "name": "Chairs",
+        "slug": "false"
+    },
+    {
+        "id": 4,
+        "name": "Tables",
+        "slug": "false"
+    },
+    {
+        "id": 5,
+        "name": "Sofas",
+        "slug": "false"
+    },
+    {
+        "id": 6,
+        "name": "Beds",
+        "slug": "false"
+    },
+    {
+        "id": 7,
+        "name": "Wardrobes",
+        "slug": "false"
+    },
+    {
+        "id": 8,
+        "name": "Accessories",
+        "slug": "false"
+    },
+    {
+        "id": 9,
+        "name": "Lighting",
+        "slug": "false"
+    }
+]

@@ -1,0 +1,15 @@
+ {
+    "id": 3,
+    "name": "Mitchell Admin",
+    "street": "215 Vine St",
+    "street2": null,
+    "city": "Scranton",
+    "state": {
+        "id": 47
+    },
+    "country": {
+        "id": 233
+    },
+    "email": "admin@yourcompany.example.com",
+    "phone": "+1 555-555-5555"
+}

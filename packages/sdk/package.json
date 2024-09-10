@@ -1,0 +1,44 @@
+{
+  "name": "@erpgap/odoo-sdk",
+  "version": "2.0.4",
+  "private": false,
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.es.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "rimraf lib && rollup -c",
+    "dev": "rimraf lib && rollup -c -w",
+    "lint": "eslint . --ext .ts",
+    "test": "yarn test:unit",
+    "test:unit": "jest ./unit -c ./jest.config.unit.js",
+    "test:integration": "jest ./integration -c ./jest.config.integration.js --runInBand",
+    "test:integration:init": "rm -rf __tests__/integration/__nock-fixtures__ && jest ./integration -c ./jest.config.integration.js --runInBand",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --passWithNoTests",
+    "prepublish": "yarn build"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.7.16",
+    "axios": "^1.4.0",
+    "ofetch": "^1.3.3"
+  },
+  "devDependencies": {
+    "@erpgap/odoo-sdk-api-client": "*",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-replace": "^2.3.3",
+    "@vue-storefront/sdk": "1.1.2",
+    "babel-jest": "^29.6.1",
+    "msw": "^0.47.3",
+    "nock": "^13.2.9",
+    "rollup-plugin-typescript2": "^0.34.1"
+  },
+  "engines": {
+    "node": ">=16.x"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

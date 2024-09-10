@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "email": "admin@yourcompany.example.com",
+        "companyName": null,
+        "subscriptionList": [
+            {
+                "id": 1,
+                "mailingList": {
+                "id": 1,
+                "name": "Newsletter"
+                },
+                "optOut": false
+            }
+        ]
+    }
+]

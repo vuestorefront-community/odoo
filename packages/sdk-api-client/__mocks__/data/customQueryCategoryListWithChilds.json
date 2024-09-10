@@ -1,0 +1,40 @@
+[
+    {
+        "id": 1,
+        "name": "Desks",
+        "slug": "false",
+        "childs": [
+            {
+                "id": 10,
+                "name": "Components"
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Components",
+        "slug": "false",
+        "childs": null
+    },
+    {
+        "id": 2,
+        "name": "Furnitures",
+        "slug": "false",
+        "childs": [
+            {
+                "id": 11,
+                "name": "Chairs"
+            },
+            {
+                "id": 12,
+                "name": "Couches"
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Chairs",
+        "slug": "false",
+        "childs": null
+    }
+]

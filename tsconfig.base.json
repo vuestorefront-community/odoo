@@ -2,20 +2,21 @@
   "compilerOptions": {
     "outDir": "./lib",
     "esModuleInterop": true,
-    "downlevelIteration": true,
-    "target": "es5",
-    "module": "ES2015",
+    "target": "ES2020",
+    "module": "ESNext",
     "moduleResolution": "node",
     "importHelpers": true,
     "noEmitHelpers": true,
     "sourceMap": true,
     "declaration": true,
+    "declarationMap": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "./",
-    "lib": ["es6", "es7", "ES2017", "ES2018", "ES2019", "dom"],
+    "lib": ["ES2020", "dom"],
     "strict": false,
-    "preserveSymlinks": true
+    "preserveSymlinks": true,
+    "resolveJsonModule": true
   },
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.mock.ts"]
 }

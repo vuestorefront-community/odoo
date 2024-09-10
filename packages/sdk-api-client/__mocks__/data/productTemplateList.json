@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Restaurant Expenses",
+        "price": 14
+      },
+      {
+        "id": 2,
+        "name": "Hotel Accommodation",
+        "price": 400
+      },
+      {
+        "id": 3,
+        "name": "Virtual Interior Design",
+        "price": 30.75
+      },
+      {
+        "id": 4,
+        "name": "Virtual Home Staging",
+        "price": 38.25
+      }
+]

@@ -2,73 +2,73 @@
   "name": "ecommerce-integration-odoo",
   "private": true,
   "license": "MIT",
-  "engines": {
-    "node": ">=10.x"
-  },
   "scripts": {
-    "build": "yarn build:api-client && yarn build:composables && yarn build:theme",
-    "build:api-client": "cd packages/api-client && yarn build",
-    "build:composables": "cd packages/composables && yarn build",
-    "build:theme": "cd packages/theme && yarn build",
-    "contributors:add": "all-contributors add",
-    "contributors:generate": "all-contributors generate",
-    "dev": "concurrently \"yarn:dev:*\"",
-    "dev:api-client": "cd packages/api-client && yarn dev",
-    "dev:composables": "cd packages/composables && yarn dev",
-    "dev:theme": "cd packages/theme && yarn dev",
-    "docs:build": "cd docs && yarn build",
-    "docs:dev": "cd docs && yarn dev",
-    "docs:install": "cd docs && yarn",
-    "lint": "eslint . --ext .ts,.vue",
-    "prepare": "[ -d '.husky' ] && (husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks) || true",
-    "publish:api-client": "node ./scripts/publishApi.js",
-    "publish:composables": "node ./scripts/publishComposable.js",
-    "start": "cd packages/theme && yarn start",
-    "test": "yarn test:api-client && yarn test:composables && yarn test:theme",
-    "test:api-client": "cd packages/api-client && yarn test --passWithNoTests",
-    "test:composables": "cd packages/composables && yarn test --passWithNoTests",
-    "test:theme": "cd packages/theme && yarn test --passWithNoTests",
-    "update:check": "ncu && lerna run update:check --stream",
-    "update:update": "ncu -u && lerna run update:update --stream"
+    "build": "lerna run build",
+    "dev": "concurrently --names \"Frontend\" \"npm run dev:app\"",
+    "dev:app": "cd playground-nuxt/app && npm run dev",
+    "dev:server": "cd playground-nuxt/server && npm run dev",
+    "test": "lerna run test",
+    "changesets:version": "yarn changeset version && YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install && yarn prepare:docs",
+    "changesets:publish": "yarn build && yarn changeset publish",
+    "prepare:docs": "cd docs && yarn install && yarn api-extract && yarn copy-changelog",
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/prompt"
+    }
   },
   "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@commitlint/cli": "^13.1.0",
-    "@commitlint/config-conventional": "^13.2.0",
-    "@commitlint/config-lerna-scopes": "^13.1.0",
-    "@rollup/plugin-node-resolve": "^13.0.4",
-    "@types/jest": "^27.0.0",
-    "@types/node": "^16.4.14",
-    "@typescript-eslint/eslint-plugin": "^4.29.1",
-    "@typescript-eslint/parser": "^4.29.1",
-    "@vue/eslint-config-typescript": "^7.0.0",
-    "all-contributors-cli": "^6.20.0",
-    "commitizen": "^4.2.4",
-    "concurrently": "^6.2.1",
-    "eslint": "7.32.0",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.24.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-standard": "^5.0.0",
-    "eslint-plugin-vue": "^7.16.0",
-    "husky": "^7.0.1",
-    "jest": "^27.0.6",
-    "lerna": "^4.0.0",
-    "lint-staged": "^11.1.2",
-    "npm-check-updates": "^11.8.3",
+    "-": "^0.0.1",
+    "@babel/core": "^7.10.5",
+    "@changesets/cli": "^2.26.2",
+    "@commitlint/config-conventional": "^17.6.7",
+    "@loopmode/crosslink": "^0.4.0",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@rollup/plugin-replace": "^2.3.3",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^12.12.14",
+    "@types/supertest": "~2.0.12",
+    "commitizen": "^4.3.0",
+    "concurrently": "^8.0.1",
+    "cross-env": "^6.0.3",
+    "husky": "^8.0.0",
+    "jest": "^27.4.7",
+    "lerna": "^6.5.1",
+    "lint-staged": "^10.0.7",
+    "msw": "^0.49.1",
+    "nodemon": "^2.0.22",
     "rimraf": "^3.0.2",
-    "rollup": "^2.56.2",
+    "rollup": "^2.59.0",
     "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.30.0",
-    "shx": "^0.3.3", 
-    "ts-jest": "^27.0.4",
-    "ts-node": "^10.2.0",
-    "tslib": "^2.3.0",
-    "typescript": "~4.2",
-    "vue-eslint-parser": "^7.10.0"
+    "rollup-plugin-typescript2": "^0.34.1",
+    "supertest": "~6.2.4",
+    "ts-jest": "^27.1.3",
+    "ts-node": "^8.4.1",
+    "tslib": "^2.1.0",
+    "typescript": "^4.2.2",
+    "webpack-bundle-analyzer": "^3.5.2"
+  },
+  "engines": {
+    "node": ">=16.x"
   },
   "workspaces": [
-    "packages/*"
-  ]
+    "packages/*",
+    "playground-nuxt/*"
+  ],
+  "dependencies": {
+    "@commitlint/prompt": "^17.6.7",
+    "@nuxt/devtools": "^0.7.0",
+    "@vue-storefront/cli": "^4.3.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "overrides": {
+    "react-json-view": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
+  },
+  "version": "0.0.0"
 }

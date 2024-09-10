@@ -1,0 +1,74 @@
+{
+  "id": "#",
+  "properties": {
+    "appConfig": {
+      "id": "#appConfig",
+      "properties": {
+        "nuxtIcon": {
+          "title": "Nuxt Icon",
+          "description": "Configure the defaults of Nuxt Icon",
+          "id": "#appConfig/nuxtIcon",
+          "properties": {
+            "size": {
+              "title": "Icon Size",
+              "description": "Set the default icon size. Set to false to disable the sizing of icon in style.",
+              "tags": [
+                "@studioIcon material-symbols:format-size-rounded"
+              ],
+              "tsType": "string | false",
+              "id": "#appConfig/nuxtIcon/size",
+              "default": "1em",
+              "type": "string"
+            },
+            "class": {
+              "title": "CSS Class",
+              "description": "Set the default CSS class",
+              "tags": [
+                "@studioIcon material-symbols:css"
+              ],
+              "id": "#appConfig/nuxtIcon/class",
+              "default": "",
+              "type": "string"
+            },
+            "aliases": {
+              "title": "Icon aliases",
+              "description": "Define Icon aliases to update them easily without code changes.",
+              "tags": [
+                "@studioIcon material-symbols:star-rounded",
+                "@studioInputObjectValueType icon"
+              ],
+              "tsType": "{ [alias: string]: string }",
+              "id": "#appConfig/nuxtIcon/aliases",
+              "default": {},
+              "type": "object"
+            }
+          },
+          "type": "object",
+          "default": {
+            "size": "1em",
+            "class": "",
+            "aliases": {}
+          }
+        }
+      },
+      "type": "object",
+      "default": {
+        "nuxtIcon": {
+          "size": "1em",
+          "class": "",
+          "aliases": {}
+        }
+      }
+    }
+  },
+  "type": "object",
+  "default": {
+    "appConfig": {
+      "nuxtIcon": {
+        "size": "1em",
+        "class": "",
+        "aliases": {}
+      }
+    }
+  }
+}
