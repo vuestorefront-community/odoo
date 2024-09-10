@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 pids
 logs
 node_modules
@@ -11,3 +12,9 @@ dist
 config.local.js
 basement_dist
 .nuxt
+=======
+.vuepress/dist
+.vuepress/public/commercetools
+api.json
+reference
+>>>>>>> origin/main

@@ -4,13 +4,21 @@ on:
   workflow_call:
     inputs:
       enterprise:
+<<<<<<< HEAD
         description: 'Flag to use enterprise registry'
+=======
+        description: "Flag to use enterprise registry"
+>>>>>>> origin/main
         type: boolean
         required: false
         default: false
 
       node_version:
+<<<<<<< HEAD
         description: 'Node versions to test'
+=======
+        description: "Node versions to test"
+>>>>>>> origin/main
         type: string
         required: false
         default: "['16']"
@@ -18,7 +26,11 @@ on:
 defaults:
   run:
     shell: bash
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> origin/main
 env:
   GCP_PROJECT_ID: 81559754996
   GCP_PROJECT_NAME: sf-artifacts-prod
@@ -108,4 +120,8 @@ jobs:
             packages/**/coverage
 
       - name: Lint project
+<<<<<<< HEAD
         run: yarn lint
+=======
+        run: yarn lint
+>>>>>>> origin/main

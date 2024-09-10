@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: VSF Continuous Delivery
 
 on:
@@ -11,3 +12,108 @@ jobs:
     name: "Release NPM Packages"
     uses: vuestorefront/integrations-github-workflows/.github/workflows/continuous-delivery.yml@develop
     secrets: inherit
+=======
+name: Release
+
+on:
+  workflow_call:
+    secrets:
+      NPM_USER:
+        description: "repository NPM_USER secret passed on"
+        required: false
+      NPM_PASS:
+        description: "repository NPM_PASS secret passed on"
+        required: false
+      NPM_EMAIL:
+        description: "repository NPM_EMAIL secret passed on"
+        required: false
+    inputs:
+      enterprise:
+        description: "Flag to use enterprise registry"
+        type: boolean
+        required: false
+        default: false
+
+defaults:
+  run:
+    shell: bash
+    
+env:
+  GCP_PROJECT_ID: 81559754996
+  GCP_PROJECT_NAME: sf-artifacts-prod
+
+jobs:
+  changelog:
+    name: Changelog PR or Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.node-version'
+
+      - if: ${{ inputs.enterprise }}
+        id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: projects/${{ env.GCP_PROJECT_ID }}/locations/global/workloadIdentityPools/sf-artifacts-prod-01/providers/sf-artifacts-prod-01
+          service_account: workload-identity-federation@sf-artifacts-prod.iam.gserviceaccount.com
+          token_format: access_token
+          # The credentials file is created in repo root as an untracked file in Git
+          # Changesets commits all files in the repo root when creating an automated bot PR
+          # This causes plaintext credentials to show up in automated PRs
+          # So let's not create this file at all
+          create_credentials_file: false 
+
+      - if: ${{ inputs.enterprise }}
+        name: Set Artifact Registry & Verdaccio tokens
+        run: |
+          # set token for Artifact Registry
+          npm config set //europe-west1-npm.pkg.dev/${{ env.GCP_PROJECT_NAME }}/npm/:_authToken=${{ steps.auth.outputs.access_token }}
+          # set token for Verdaccio
+          npx npm-cli-login -u ${{ secrets.NPM_USER }} -p ${{ secrets.NPM_PASS }} -e ${{ secrets.NPM_EMAIL }} -r https://registrynpm.storefrontcloud.io
+
+      - if: ${{ !inputs.enterprise }}
+        run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_RELEASE_TOKEN }}
+
+      - name: Install dependencies
+        run: HUSKY=0 yarn --frozen-lockfile
+        
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          commit: "ci: release"
+          title: "ci: release"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - if: ${{ (inputs.enterprise == true) && (steps.changesets.outputs.hasChangesets == 'false') }}
+        name: Publish in Artifact Registry
+        run: |
+         yarn build && \
+         npm config --location project set @vsf-enterprise:registry=https://europe-west1-npm.pkg.dev/${{ env.GCP_PROJECT_NAME }}/npm/ && \
+         yarn changeset publish
+
+      # Remove this step once Verdaccio is removed by the Cloud Team for good.
+      # It's possible to use `continue-on-error: true` here for max futureproofing,
+      # but this also makes publishing failures show as successful despite errors, so I didn't do that
+      - if: ${{ (inputs.enterprise == true) && (steps.changesets.outputs.hasChangesets == 'false') }}
+        name: Publish in Verdaccio
+        run: |
+         npm config --location project set @vsf-enterprise:registry=https://registrynpm.storefrontcloud.io/ && \
+         yarn changeset publish
+
+
+      - if: ${{ (inputs.enterprise == false) && (steps.changesets.outputs.hasChangesets == 'false') }}
+        name: Publish
+        run: yarn build && yarn changeset publish
+>>>>>>> origin/main
