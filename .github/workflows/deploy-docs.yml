@@ -1,0 +1,21 @@
+name: Deploy to Netlify
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/deploy-docs.yml'
+      - 'docs/**/*'
+jobs:
+  curl-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Netlify
+        run: |
+          response=$(curl -o /dev/null -w "%{http_code}" -X POST https://api.netlify.com/build_hooks/${{ secrets.NETLIFY_KEY }}?clear_cache=true)
+          if [ "$response" -ne 200 ]; then
+            echo "Failed with status $response"
+            exit 1
+          fi
