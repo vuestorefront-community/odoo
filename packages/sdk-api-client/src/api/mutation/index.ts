@@ -2,7 +2,7 @@ import { Endpoints, OdooIntegrationContext, MutationMetadataParams } from '../..
 import consola from 'consola';
 
 export const mutation: Endpoints['mutation'] = async <ApiParams, ApiResponseType>(context: OdooIntegrationContext, metadata: MutationMetadataParams, params?: ApiParams) => {
-
+ 
   if(!metadata || !metadata.mutationName) {
     const msg = 'Developer Error: mutationName is required'
     consola.error(msg);

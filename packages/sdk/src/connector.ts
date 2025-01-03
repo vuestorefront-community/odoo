@@ -31,18 +31,18 @@ export const odooConnector = (options: Options): Methods => {
   };
 
   if (options.ofetch) {
-    mutation = async <ApiParams, ApiResponseType>(metadata: MutationMetadataParams, params?: ApiParams): Promise<ApiResponseType> => {
-      return options.ofetch('/api/odoo/mutation', { method: 'POST', body: [metadata, params], cache: 'no-cache', watch: false, ...options.ofetchOptions } as any);
+    mutation = async <ApiParams, ApiResponseType>(metadata: MutationMetadataParams, params?: ApiParams, opt?: { headers: any }): Promise<ApiResponseType> => {
+      return options.ofetch('/api/odoo/mutation', { method: 'POST', body: [metadata, params], cache: 'no-cache', watch: false, ...opt } as any);
     };
 
-    query = async <ApiParams, ApiResponseType>(metadata: QueryMetadataParams, params?: ApiParams): Promise<ApiResponseType> =>{
+    query = async <ApiParams, ApiResponseType>(metadata: QueryMetadataParams, params?: ApiParams, opt?: { headers: any }): Promise<ApiResponseType> =>{
       const cacheKey = metadata.cacheKey || hash({ ...metadata, ...params });
-      return options.ofetch('/api/odoo/query', { method: 'POST', body: [metadata, params], cache: 'no-cache', watch: false, key: cacheKey, ...options.ofetchOptions } as any);
+      return options.ofetch('/api/odoo/query', { method: 'POST', body: [metadata, params], cache: 'no-cache', watch: false, key: cacheKey, ...opt } as any);
     };
 
-    queryNoCache = async <ApiParams, ApiResponseType>(metadata: QueryMetadataParams, params?: ApiParams): Promise<ApiResponseType> =>{
+    queryNoCache = async <ApiParams, ApiResponseType>(metadata: QueryMetadataParams, params?: ApiParams, opt?: { headers: any }): Promise<ApiResponseType> =>{
       const cacheKey = metadata.cacheKey || hash({ ...metadata, ...params });
-      return options.ofetch('/api/odoo/query-no-cache', { method: 'POST', body: [metadata, params], cache: 'no-cache', watch: false, key: cacheKey, ...options.ofetchOptions } as any);
+      return options.ofetch('/api/odoo/query-no-cache', { method: 'POST', body: [metadata, params], cache: 'no-cache', watch: false, key: cacheKey, ...opt } as any);
     };
   }
 
