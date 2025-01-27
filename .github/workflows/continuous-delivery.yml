@@ -100,4 +100,9 @@ jobs:
 
       - if: ${{ (inputs.enterprise == false) && (steps.changesets.outputs.hasChangesets == 'false') }}
         name: Publish
+<<<<<<< HEAD
         run: yarn build && yarn changeset publish
+=======
+        run: yarn build && yarn changeset publish
+        
+>>>>>>> 4ab6f44 (fix: github workflows have bad merges)
