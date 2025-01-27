@@ -107,8 +107,4 @@ jobs:
             packages/**/coverage
 
       - name: Lint project
-<<<<<<< HEAD
         run: yarn lint
-=======
-        run: yarn lint
->>>>>>> origin/main
