@@ -14,7 +14,7 @@
 This project is a Odoo integration with [Alokai](https://github.com/vuestorefront-community/vue-storefront/).
 This integration is being developed and maintained by [ERPGAP / PROMPTEQUATION](https://www.erpgap.com/) ❤️
 
-Check our [demo](https://vsfsdk.labs.odoogap.com/) server (it's a dev server so could be down sometimes)
+Check our [demo](https://alokai.labs.erpgap.com/) server (it's a dev server so could be down sometimes)
 
 ## How to start?
 
