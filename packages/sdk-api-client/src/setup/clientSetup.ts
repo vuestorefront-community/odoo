@@ -5,7 +5,6 @@ import { MiddlewareConfig } from '../index';
 import fetch from 'cross-fetch';
 
 const buildClient = (settings: MiddlewareConfig) => {
-
   const httpLink = createHttpLink({
     uri: settings.odooGraphqlUrl,
     credentials: 'include',
@@ -19,10 +18,11 @@ const buildClient = (settings: MiddlewareConfig) => {
       const context = operation.getContext();
       const authHeader = context.response.headers.get('set-cookie');
 
-      if (response.data) {
+      if (response.data && authHeader) {
         response.data.cookie = authHeader;
+      } else {
+        response.data.cookie = settings.headers.cookie;
       }
-
       return response;
     });
   });
