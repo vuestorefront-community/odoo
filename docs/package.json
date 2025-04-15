@@ -1,6 +1,6 @@
 {
   "name": "vuestorefront-odoo-api-docs",
-  "version": "2.0.0",  
+  "version": "2.0.0",
   "description": "This project is a Odoo integration documentation",
   "main": "index.js",
   "authors": {
@@ -25,12 +25,14 @@
   "devDependencies": {
     "@microsoft/api-documenter": "^7.13.30",
     "@microsoft/api-extractor": "7.18.1",
+    "@nuxt/devtools": "^2.4.0",
+    "nuxt": "^3.14.159",
     "concat-md": "^0.3.5",
     "handlebars": "^4.7.7",
     "typedoc": "^0.20.20",
     "typedoc-plugin-markdown": "^3.4.5",
-    "typescript": "^3.6.4"   
-  },  
+    "typescript": "^3.6.4"
+  },
   "dependencies": {
     "@stackblitz/sdk": "^1.9.0",
     "sf-docs-base": "latest"
